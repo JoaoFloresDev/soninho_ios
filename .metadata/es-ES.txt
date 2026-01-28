@@ -1,0 +1,91 @@
+# Soninho - App Store Metadata (Español - España)
+# ASO Optimizado para búsqueda orgánica
+
+================================================================================
+NOMBRE DE LA APP (30 caracteres max)
+================================================================================
+
+Soninho - Sueño y Alarma
+
+================================================================================
+SUBTÍTULO (30 caracteres max)
+================================================================================
+
+Análisis de Sueño Inteligente
+
+================================================================================
+KEYWORDS (100 caracteres max, separados por coma)
+================================================================================
+
+sueño,dormir,alarma,despertar,sleep,insomnio,relajar,monitorear,calidad,rem,profundo,ligero,siesta
+
+================================================================================
+DESCRIPCIÓN (4000 caracteres max)
+================================================================================
+
+Soninho es tu compañero para noches de sueño reparador y mañanas revitalizantes.
+
+MONITOREA TU SUEÑO CON PRECISIÓN
+Sigue cada fase de tu sueño - ligero, profundo y REM. Entiende exactamente cómo duermes y descubre qué puedes mejorar para despertar con más energía.
+
+ALARMA INTELIGENTE
+Nuestra alarma te despierta en el momento ideal de tu ciclo de sueño. Nada de despertares atontados - te despiertas naturalmente durante la fase ligera, sintiéndote renovado.
+
+ANÁLISIS DETALLADO
+Ve gráficos claros de tu sueño:
+• Duración total del sueño
+• Tiempo en cada fase (ligero, profundo, REM)
+• Hora promedio de acostarse y despertar
+• Puntuación de calidad del sueño
+• Tendencias semanales y mensuales
+
+INTEGRACIÓN CON APPLE HEALTH
+Sincroniza automáticamente tus datos de sueño con la app Salud de Apple. Todos tus datos de salud en un solo lugar.
+
+INSIGHTS PERSONALIZADOS
+Recibe consejos basados en tus patrones de sueño:
+• Identifica tu mejor hora para dormir
+• Descubre cuánto sueño realmente necesitas
+• Entiende qué afecta la calidad de tu descanso
+
+INTERFAZ ELEGANTE
+Diseño oscuro y minimalista que no cansa tus ojos por la noche. Cada detalle pensado para una experiencia relajante.
+
+PRIVACIDAD PRIMERO
+Tus datos de sueño permanecen en tu dispositivo. No recopilamos ni vendemos tu información personal.
+
+PERFECTO PARA QUIEN QUIERE:
+• Dormir mejor
+• Despertar con más energía
+• Entender sus patrones de sueño
+• Crear una rutina de sueño saludable
+• Monitorear la calidad del descanso
+
+Comienza hoy a dormir mejor. Descarga Soninho gratis.
+
+================================================================================
+TEXTO PROMOCIONAL (170 caracteres max)
+================================================================================
+
+Duerme mejor, despierta renovado. Monitorea tu sueño, usa la alarma inteligente y descubre insights sobre tu calidad de descanso.
+
+================================================================================
+WHAT'S NEW (Notas de Actualización)
+================================================================================
+
+• Nuevo diseño dark mode elegante
+• Alarma inteligente que despierta en el momento ideal
+• Gráficos detallados de fases del sueño
+• Integración con Apple Health
+• Soporte para español, inglés y portugués
+
+================================================================================
+DESCRIPCIONES DE SCREENSHOTS (para creación)
+================================================================================
+
+Screenshot 1: "Monitorea cada fase de tu sueño"
+Screenshot 2: "Despierta en el momento perfecto"
+Screenshot 3: "Ve tu puntuación de sueño"
+Screenshot 4: "Gráficos semanales detallados"
+Screenshot 5: "Insights personalizados"
+Screenshot 6: "Sincroniza con Apple Health"

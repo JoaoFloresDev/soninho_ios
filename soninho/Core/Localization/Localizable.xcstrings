@@ -1,0 +1,1196 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "greeting_morning" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good morning" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Bom dia" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buenos días" } }
+      }
+    },
+    "greeting_afternoon" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good afternoon" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Boa tarde" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buenas tardes" } }
+      }
+    },
+    "greeting_evening" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good evening" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Boa noite" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buenas noches" } }
+      }
+    },
+    "greeting_night" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good night" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Boa noite" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buenas noches" } }
+      }
+    },
+    "home_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your Sleep" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Seu Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tu Sueño" } }
+      }
+    },
+    "home_last_night" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Last Night" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Noite Passada" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Anoche" } }
+      }
+    },
+    "home_weekly_average" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weekly Average" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Média Semanal" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Promedio Semanal" } }
+      }
+    },
+    "home_this_week" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This Week" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Esta Semana" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Esta Semana" } }
+      }
+    },
+    "home_see_all" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "See All" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Ver Tudo" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ver Todo" } }
+      }
+    },
+    "home_insights" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Insights" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Insights" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Insights" } }
+      }
+    },
+    "stat_avg_sleep" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Avg. Sleep" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sono Médio" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sueño Prom." } }
+      }
+    },
+    "stat_avg_bedtime" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Avg. Bedtime" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Hora de Dormir" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Hora de Dormir" } }
+      }
+    },
+    "sleep_phase_awake" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Awake" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acordado" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Despierto" } }
+      }
+    },
+    "sleep_phase_light" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Light Sleep" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sono Leve" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sueño Ligero" } }
+      }
+    },
+    "sleep_phase_deep" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deep Sleep" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sono Profundo" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sueño Profundo" } }
+      }
+    },
+    "sleep_phase_rem" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "REM" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "REM" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "REM" } }
+      }
+    },
+    "sleep_quality_excellent" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Excellent" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Excelente" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Excelente" } }
+      }
+    },
+    "sleep_quality_good" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Bom" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Bueno" } }
+      }
+    },
+    "sleep_quality_fair" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fair" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Regular" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Regular" } }
+      }
+    },
+    "sleep_quality_poor" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Poor" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Ruim" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Malo" } }
+      }
+    },
+    "sleep_trend_improving" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Improving" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Melhorando" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mejorando" } }
+      }
+    },
+    "sleep_trend_stable" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Stable" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Estável" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Estable" } }
+      }
+    },
+    "sleep_trend_declining" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Declining" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Piorando" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Empeorando" } }
+      }
+    },
+    "tracker_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep Tracker" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Rastreador de Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Rastreador de Sueño" } }
+      }
+    },
+    "tracker_ready_to_sleep" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Ready to sleep?" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Pronto para dormir?" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¿Listo para dormir?" } }
+      }
+    },
+    "tracker_tracking_sleep" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tracking your sleep..." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Monitorando seu sono..." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Monitoreando tu sueño..." } }
+      }
+    },
+    "tracker_tap_to_start" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tap to start" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Toque para iniciar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Toca para iniciar" } }
+      }
+    },
+    "tracker_start_sleep" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start Sleep" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Iniciar Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Iniciar Sueño" } }
+      }
+    },
+    "tracker_wake_up" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wake Up" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acordar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Despertar" } }
+      }
+    },
+    "tracker_info" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Place your phone near your bed" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Coloque o celular perto da cama" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Coloca tu teléfono cerca de la cama" } }
+      }
+    },
+    "tracker_stop_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "End Sleep Session?" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Finalizar Sessão?" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¿Finalizar Sesión?" } }
+      }
+    },
+    "tracker_stop_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your sleep data will be saved and analyzed." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Seus dados de sono serão salvos e analisados." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tus datos de sueño serán guardados y analizados." } }
+      }
+    },
+    "tracker_stop_save" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save & Wake Up" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Salvar e Acordar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Guardar y Despertar" } }
+      }
+    },
+    "tracker_cancel" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } }
+      }
+    },
+    "tracker_cancel_session" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel Session" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar Sessão" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar Sesión" } }
+      }
+    },
+    "tracker_cancel_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel Session?" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar Sessão?" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¿Cancelar Sesión?" } }
+      }
+    },
+    "tracker_cancel_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This will discard all sleep data from this session." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Isso descartará todos os dados de sono desta sessão." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Esto descartará todos los datos de sueño de esta sesión." } }
+      }
+    },
+    "tracker_discard" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Discard" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Descartar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Descartar" } }
+      }
+    },
+    "tracker_keep_tracking" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Keep Tracking" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Continuar Monitorando" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Seguir Monitoreando" } }
+      }
+    },
+    "alarm_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Smart Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Alarme Inteligente" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma Inteligente" } }
+      }
+    },
+    "alarm_next" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Next Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Próximo Alarme" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Próxima Alarma" } }
+      }
+    },
+    "alarm_no_alarm_set" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No alarm set" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Nenhum alarme definido" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin alarma" } }
+      }
+    },
+    "alarm_smart_enabled" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Smart wake-up enabled" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Despertar inteligente ativado" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Despertar inteligente activado" } }
+      }
+    },
+    "alarm_your_alarms" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your Alarms" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Seus Alarmes" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tus Alarmas" } }
+      }
+    },
+    "alarm_smart_alarm" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Smart Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Alarme Inteligente" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma Inteligente" } }
+      }
+    },
+    "alarm_smart_description" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wake up during light sleep for a better morning" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acorde durante o sono leve para uma manhã melhor" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Despierta durante el sueño ligero para una mejor mañana" } }
+      }
+    },
+    "alarm_wake_window" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wake-up Window" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Janela de Despertar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ventana de Despertar" } }
+      }
+    },
+    "alarm_repeat" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Repeat" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Repetir" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Repetir" } }
+      }
+    },
+    "alarm_sound" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sound" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Som" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sonido" } }
+      }
+    },
+    "alarm_label" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Label" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Rótulo" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Etiqueta" } }
+      }
+    },
+    "alarm_label_placeholder" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Alarm name (optional)" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Nome do alarme (opcional)" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nombre de la alarma (opcional)" } }
+      }
+    },
+    "alarm_add" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Adicionar Alarme" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Añadir Alarma" } }
+      }
+    },
+    "alarm_edit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Editar Alarme" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Editar Alarma" } }
+      }
+    },
+    "alarm_once" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Once" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Uma vez" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Una vez" } }
+      }
+    },
+    "alarm_everyday" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Every day" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Todos os dias" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Todos los días" } }
+      }
+    },
+    "alarm_weekdays" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weekdays" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Dias úteis" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Días laborables" } }
+      }
+    },
+    "alarm_weekends" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weekends" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Fins de semana" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Fines de semana" } }
+      }
+    },
+    "alarm_smart_window %lld" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld min window" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Janela de %lld min" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ventana de %lld min" } }
+      }
+    },
+    "stats_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Statistics" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Estatísticas" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Estadísticas" } }
+      }
+    },
+    "period_week" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Week" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Semana" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Semana" } }
+      }
+    },
+    "period_month" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Month" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Mês" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mes" } }
+      }
+    },
+    "period_year" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Year" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Ano" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Año" } }
+      }
+    },
+    "stats_average_quality" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Average Sleep Quality" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Qualidade Média do Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Calidad Promedio del Sueño" } }
+      }
+    },
+    "stats_avg_duration" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Avg. Duration" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Duração Média" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Duración Prom." } }
+      }
+    },
+    "stats_consistency" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Consistency" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Consistência" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Consistencia" } }
+      }
+    },
+    "stats_sleep_duration" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep Duration" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Duração do Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Duración del Sueño" } }
+      }
+    },
+    "stats_sleep_phases" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep Phases" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Fases do Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Fases del Sueño" } }
+      }
+    },
+    "stats_deep_description" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Body recovery & restoration" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Recuperação e restauração corporal" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Recuperación y restauración corporal" } }
+      }
+    },
+    "stats_light_description" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Transition between stages" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Transição entre estágios" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Transición entre etapas" } }
+      }
+    },
+    "stats_rem_description" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dreams & memory processing" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sonhos e processamento de memória" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sueños y procesamiento de memoria" } }
+      }
+    },
+    "stats_sleep_schedule" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep Schedule" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Horário de Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Horario de Sueño" } }
+      }
+    },
+    "stats_avg_bedtime" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Avg. Bedtime" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Hora Média de Dormir" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Hora Prom. de Dormir" } }
+      }
+    },
+    "stats_avg_wake" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Avg. Wake Time" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Hora Média de Acordar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Hora Prom. de Despertar" } }
+      }
+    },
+    "stats_history" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "History" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Histórico" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Historial" } }
+      }
+    },
+    "settings_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Configurações" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes" } }
+      }
+    },
+    "settings_preferences" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Preferences" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Preferências" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Preferencias" } }
+      }
+    },
+    "settings_language" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Language" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Idioma" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Idioma" } }
+      }
+    },
+    "settings_haptic" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Haptic Feedback" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Feedback Háptico" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Respuesta Háptica" } }
+      }
+    },
+    "settings_notifications" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Notificações" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Notificaciones" } }
+      }
+    },
+    "settings_sleep" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sueño" } }
+      }
+    },
+    "settings_smart_alarm" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Smart Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Alarme Inteligente" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma Inteligente" } }
+      }
+    },
+    "settings_health_app" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Health App" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "App Saúde" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "App Salud" } }
+      }
+    },
+    "settings_support" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Support" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Suporte" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Soporte" } }
+      }
+    },
+    "settings_rate_app" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rate App" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Avaliar App" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Calificar App" } }
+      }
+    },
+    "settings_share_app" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Share App" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Compartilhar App" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Compartir App" } }
+      }
+    },
+    "settings_feedback" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Send Feedback" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Enviar Feedback" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Enviar Comentarios" } }
+      }
+    },
+    "settings_about" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "About" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sobre" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Acerca de" } }
+      }
+    },
+    "settings_privacy" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Privacy Policy" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Política de Privacidade" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Política de Privacidad" } }
+      }
+    },
+    "settings_terms" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Terms of Use" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Termos de Uso" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Términos de Uso" } }
+      }
+    },
+    "settings_version" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Version" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Versão" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Versión" } }
+      }
+    },
+    "settings_reset_data" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reset All Data" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Resetar Todos os Dados" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Restablecer Todos los Datos" } }
+      }
+    },
+    "settings_reset_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reset All Data?" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Resetar Todos os Dados?" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¿Restablecer Todos los Datos?" } }
+      }
+    },
+    "settings_reset_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This will delete all your sleep data and settings. This action cannot be undone." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Isso excluirá todos os seus dados de sono e configurações. Esta ação não pode ser desfeita." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Esto eliminará todos tus datos de sueño y configuraciones. Esta acción no se puede deshacer." } }
+      }
+    },
+    "settings_reset_confirm" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reset" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Resetar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Restablecer" } }
+      }
+    },
+    "settings_premium_active" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Premium Active" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Premium Ativo" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Premium Activo" } }
+      }
+    },
+    "settings_premium_thanks" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Thank you for your support!" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Obrigado pelo seu apoio!" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Gracias por tu apoyo!" } }
+      }
+    },
+    "settings_upgrade_pro" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Upgrade to Pro" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Upgrade para Pro" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Actualizar a Pro" } }
+      }
+    },
+    "settings_upgrade_description" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unlock all features" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Desbloqueie todos os recursos" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Desbloquea todas las funciones" } }
+      }
+    },
+    "settings_health_status" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Status" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Status" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Estado" } }
+      }
+    },
+    "settings_health_connected" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Connected" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Conectado" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Conectado" } }
+      }
+    },
+    "settings_health_not_connected" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not Connected" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Não Conectado" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No Conectado" } }
+      }
+    },
+    "settings_health_connect" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Connect to Health" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Conectar ao Saúde" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Conectar a Salud" } }
+      }
+    },
+    "settings_health_section" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Health App Integration" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Integração com App Saúde" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Integración con App Salud" } }
+      }
+    },
+    "settings_health_footer" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Soninho syncs with the Health app to track and analyze your sleep data." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Soninho sincroniza com o app Saúde para rastrear e analisar seus dados de sono." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Soninho se sincroniza con la app Salud para rastrear y analizar tus datos de sueño." } }
+      }
+    },
+    "tab_home" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Home" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Início" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Inicio" } }
+      }
+    },
+    "tab_sleep" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Dormir" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Dormir" } }
+      }
+    },
+    "tab_alarm" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Alarme" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma" } }
+      }
+    },
+    "tab_stats" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Stats" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Estatísticas" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Estadísticas" } }
+      }
+    },
+    "tab_settings" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes" } }
+      }
+    },
+    "onboarding_skip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Skip" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Pular" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Saltar" } }
+      }
+    },
+    "onboarding_continue" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Continue" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Continuar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Continuar" } }
+      }
+    },
+    "onboarding_get_started" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Get Started" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Começar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Empezar" } }
+      }
+    },
+    "onboarding_title_1" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Track Your Sleep" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Monitore Seu Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Monitorea Tu Sueño" } }
+      }
+    },
+    "onboarding_subtitle_1" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Understand your sleep patterns with detailed analysis of deep, light, and REM sleep stages." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Entenda seus padrões de sono com análise detalhada das fases de sono profundo, leve e REM." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Comprende tus patrones de sueño con análisis detallado de las fases de sueño profundo, ligero y REM." } }
+      }
+    },
+    "onboarding_title_2" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Detailed Statistics" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Estatísticas Detalhadas" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Estadísticas Detalladas" } }
+      }
+    },
+    "onboarding_subtitle_2" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "See your sleep quality trends, average bedtime, and how your sleep improves over time." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Veja tendências de qualidade do sono, horário médio de dormir e como seu sono melhora com o tempo." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ve las tendencias de calidad del sueño, hora promedio de dormir y cómo mejora tu sueño con el tiempo." } }
+      }
+    },
+    "onboarding_title_3" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Smart Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Alarme Inteligente" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma Inteligente" } }
+      }
+    },
+    "onboarding_subtitle_3" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wake up at the optimal moment during light sleep for a refreshed and energized morning." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acorde no momento ideal durante o sono leve para uma manhã revigorada e energizada." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Despierta en el momento óptimo durante el sueño ligero para una mañana fresca y llena de energía." } }
+      }
+    },
+    "onboarding_title_4" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Health Integration" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Integração com Saúde" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Integración con Salud" } }
+      }
+    },
+    "onboarding_subtitle_4" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sync with Apple Health to get a complete picture of your wellness and sleep data." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sincronize com o Apple Saúde para ter uma visão completa do seu bem-estar e dados de sono." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sincroniza con Apple Salud para obtener una imagen completa de tu bienestar y datos de sueño." } }
+      }
+    },
+    "paywall_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unlock Premium" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Desbloqueie o Premium" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Desbloquea Premium" } }
+      }
+    },
+    "paywall_subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Get access to all features and improve your sleep quality." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Tenha acesso a todos os recursos e melhore a qualidade do seu sono." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Obtén acceso a todas las funciones y mejora la calidad de tu sueño." } }
+      }
+    },
+    "paywall_feature_1_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Detailed Sleep Analysis" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Análise Detalhada do Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Análisis Detallado del Sueño" } }
+      }
+    },
+    "paywall_feature_1_desc" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deep insights into all sleep phases" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Insights profundos de todas as fases do sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Información profunda de todas las fases del sueño" } }
+      }
+    },
+    "paywall_feature_2_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Smart Alarm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Alarme Inteligente" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma Inteligente" } }
+      }
+    },
+    "paywall_feature_2_desc" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wake up at the optimal moment" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acorde no momento ideal" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Despierta en el momento óptimo" } }
+      }
+    },
+    "paywall_feature_3_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep Reminders" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Lembretes de Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Recordatorios de Sueño" } }
+      }
+    },
+    "paywall_feature_3_desc" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personalized bedtime notifications" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Notificações personalizadas de hora de dormir" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Notificaciones personalizadas de hora de dormir" } }
+      }
+    },
+    "paywall_feature_4_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Health Integration" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Integração com Saúde" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Integración con Salud" } }
+      }
+    },
+    "paywall_feature_4_desc" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sync with Apple Health" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sincronize com o Apple Saúde" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sincroniza con Apple Salud" } }
+      }
+    },
+    "paywall_feature_5_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unlimited History" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Histórico Ilimitado" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Historial Ilimitado" } }
+      }
+    },
+    "paywall_feature_5_desc" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Access all your sleep data" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acesse todos os seus dados de sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Accede a todos tus datos de sueño" } }
+      }
+    },
+    "paywall_annual_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Annual" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Anual" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Anual" } }
+      }
+    },
+    "paywall_annual_period" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "per year" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "por ano" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "por año" } }
+      }
+    },
+    "paywall_annual_savings" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save 48%" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Economize 48%" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ahorra 48%" } }
+      }
+    },
+    "paywall_monthly_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Monthly" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Mensal" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mensual" } }
+      }
+    },
+    "paywall_monthly_period" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "per month" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "por mês" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "por mes" } }
+      }
+    },
+    "paywall_popular" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "BEST VALUE" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "MELHOR VALOR" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "MEJOR VALOR" } }
+      }
+    },
+    "paywall_subscribe" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subscribe Now" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Assinar Agora" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Suscribirse Ahora" } }
+      }
+    },
+    "paywall_restore" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Restore Purchases" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Restaurar Compras" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Restaurar Compras" } }
+      }
+    },
+    "paywall_info" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Payment will be charged to your Apple ID account. Subscription automatically renews unless canceled 24 hours before the end of the current period." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "O pagamento será cobrado na sua conta Apple ID. A assinatura renova automaticamente a menos que seja cancelada 24 horas antes do fim do período atual." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "El pago se cargará a tu cuenta de Apple ID. La suscripción se renueva automáticamente a menos que se cancele 24 horas antes del final del período actual." } }
+      }
+    },
+    "paywall_success_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Welcome to Premium!" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Bem-vindo ao Premium!" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Bienvenido a Premium!" } }
+      }
+    },
+    "paywall_success_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You now have access to all premium features. Enjoy better sleep!" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Agora você tem acesso a todos os recursos premium. Aproveite um sono melhor!" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ahora tienes acceso a todas las funciones premium. ¡Disfruta de un mejor sueño!" } }
+      }
+    },
+    "empty_no_sleep_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No Sleep Data" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sem Dados de Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin Datos de Sueño" } }
+      }
+    },
+    "empty_no_sleep_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start tracking your sleep to see insights and improve your rest." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Comece a monitorar seu sono para ver insights e melhorar seu descanso." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Comienza a monitorear tu sueño para ver información y mejorar tu descanso." } }
+      }
+    },
+    "empty_start_tracking" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start Tracking" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Iniciar Monitoramento" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Iniciar Monitoreo" } }
+      }
+    },
+    "detail_bedtime" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bedtime" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Hora de Dormir" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Hora de Dormir" } }
+      }
+    },
+    "detail_wake_time" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wake Time" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Hora de Acordar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Hora de Despertar" } }
+      }
+    },
+    "detail_duration" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Duration" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Duração" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Duración" } }
+      }
+    },
+    "detail_sleep_phases" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep Phases" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Fases do Sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Fases del Sueño" } }
+      }
+    },
+    "detail_phase_breakdown" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Phase Breakdown" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Detalhamento de Fases" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Desglose de Fases" } }
+      }
+    },
+    "insight_deep_sleep_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deep Sleep Tip" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Dica de Sono Profundo" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Consejo de Sueño Profundo" } }
+      }
+    },
+    "insight_deep_sleep_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Exercise during the day can increase deep sleep. Try to be active for at least 30 minutes." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Exercícios durante o dia podem aumentar o sono profundo. Tente ser ativo por pelo menos 30 minutos." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "El ejercicio durante el día puede aumentar el sueño profundo. Intenta estar activo durante al menos 30 minutos." } }
+      }
+    },
+    "insight_improve_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Room for Improvement" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Espaço para Melhoria" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Espacio para Mejorar" } }
+      }
+    },
+    "insight_improve_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Try going to bed at the same time each night to improve your sleep consistency." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Tente dormir no mesmo horário todas as noites para melhorar a consistência do sono." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Intenta acostarte a la misma hora cada noche para mejorar la consistencia de tu sueño." } }
+      }
+    },
+    "action_cancel" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } }
+      }
+    },
+    "action_save" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Salvar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Guardar" } }
+      }
+    },
+    "action_done" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Pronto" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Listo" } }
+      }
+    },
+    "action_delete" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Excluir" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Eliminar" } }
+      }
+    },
+    "action_ok" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "OK" } }
+      }
+    },
+    "share_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Check out Soninho - the smart sleep tracker that helps you sleep better!" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Confira Soninho - o rastreador de sono inteligente que te ajuda a dormir melhor!" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Mira Soninho - el rastreador de sueño inteligente que te ayuda a dormir mejor!" } }
+      }
+    },
+    "healthkit_not_available" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "HealthKit is not available on this device" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "HealthKit não está disponível neste dispositivo" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "HealthKit no está disponible en este dispositivo" } }
+      }
+    },
+    "healthkit_not_authorized" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Please authorize access to Health data in Settings" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Por favor, autorize o acesso aos dados de Saúde nos Ajustes" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Por favor, autoriza el acceso a los datos de Salud en Ajustes" } }
+      }
+    },
+    "healthkit_fetch_failed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Failed to fetch health data" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Falha ao buscar dados de saúde" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Error al obtener datos de salud" } }
+      }
+    },
+    "healthkit_save_failed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Failed to save sleep data" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Falha ao salvar dados de sono" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Error al guardar datos de sueño" } }
+      }
+    },
+    "alarm_in_minutes %lld" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "In %lld minutes" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Em %lld minutos" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "En %lld minutos" } }
+      }
+    },
+    "alarm_in_hours_minutes %lld %lld" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "In %lldh %lldm" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Em %lldh %lldm" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "En %lldh %lldm" } }
+      }
+    },
+    "alarm_tomorrow_at %@" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tomorrow at %@" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Amanhã às %@" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mañana a las %@" } }
+      }
+    },
+    "alarm_notification_title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Time to Wake Up!" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Hora de Acordar!" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Hora de Despertar!" } }
+      }
+    },
+    "alarm_notification_body" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good morning! It's time to start your day." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Bom dia! É hora de começar seu dia." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Buenos días! Es hora de empezar tu día." } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
