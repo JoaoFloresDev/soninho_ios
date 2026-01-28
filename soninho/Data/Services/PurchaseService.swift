@@ -128,9 +128,12 @@ final class PurchaseService: ObservableObject {
         Task.detached { [weak self] in
             for await result in Transaction.updates {
                 do {
-                    let transaction = try self?.checkVerified(result)
-                    await self?.updatePurchasedProducts()
-                    await transaction?.finish()
+                    guard let self = self else { return }
+                    let transaction = try await MainActor.run {
+                        try self.checkVerified(result)
+                    }
+                    await self.updatePurchasedProducts()
+                    await transaction.finish()
                 } catch {
                     print("Transaction failed verification: \(error)")
                 }

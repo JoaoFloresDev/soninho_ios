@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 // MARK: - Onboarding Page
 struct OnboardingPage: Identifiable {
