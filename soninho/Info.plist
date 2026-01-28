@@ -6,5 +6,11 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Soninho uses your sleep data to provide detailed sleep analysis and personalized insights to help you sleep better.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Soninho saves your sleep records to Apple Health so you can track your sleep history across all your devices.</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

@@ -47,7 +47,7 @@ struct HomeView: View {
                     }
                 }
                 .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, 100)
+                .padding(.bottom, 16)
             }
             .background(AppColors.background)
             .navigationBarTitleDisplayMode(.inline)
@@ -316,81 +316,11 @@ struct SleepDetailSheet: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 24) {
-                    // Score
-                    SleepScoreRing(score: record.qualityScore, size: 180, lineWidth: 16)
-                        .padding(.top, 20)
-
-                    // Time Info
-                    HStack(spacing: 32) {
-                        VStack(spacing: 4) {
-                            Text(String(localized: "detail_bedtime"))
-                                .font(AppFonts.caption())
-                                .foregroundColor(AppColors.textSecondary)
-                            Text(record.startTime.timeString)
-                                .font(AppFonts.title2())
-                                .foregroundColor(AppColors.textPrimary)
-                        }
-
-                        VStack(spacing: 4) {
-                            Text(String(localized: "detail_wake_time"))
-                                .font(AppFonts.caption())
-                                .foregroundColor(AppColors.textSecondary)
-                            Text(record.endTime.timeString)
-                                .font(AppFonts.title2())
-                                .foregroundColor(AppColors.textPrimary)
-                        }
-
-                        VStack(spacing: 4) {
-                            Text(String(localized: "detail_duration"))
-                                .font(AppFonts.caption())
-                                .foregroundColor(AppColors.textSecondary)
-                            Text(record.durationString)
-                                .font(AppFonts.title2())
-                                .foregroundColor(AppColors.textPrimary)
-                        }
-                    }
+                SleepAnalysisCard(record: record)
                     .padding()
-                    .background(AppColors.surface)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-
-                    // Phase Chart
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(String(localized: "detail_sleep_phases"))
-                            .font(AppFonts.headline())
-                            .foregroundColor(AppColors.textPrimary)
-
-                        SleepPhaseChart(
-                            phases: record.phases,
-                            startTime: record.startTime,
-                            endTime: record.endTime
-                        )
-                    }
-                    .padding()
-                    .background(AppColors.surface)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-
-                    // Phase Distribution
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(String(localized: "detail_phase_breakdown"))
-                            .font(AppFonts.headline())
-                            .foregroundColor(AppColors.textPrimary)
-
-                        SleepPhaseDistribution(
-                            deepSleep: record.deepSleepDuration,
-                            lightSleep: record.lightSleepDuration,
-                            remSleep: record.remSleepDuration,
-                            awakeDuration: record.awakeDuration
-                        )
-                    }
-                    .padding()
-                    .background(AppColors.surface)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                }
-                .padding()
             }
             .background(AppColors.background)
-            .navigationTitle(record.startTime.mediumDateString)
+            .navigationTitle(String(localized: "detail_analysis"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

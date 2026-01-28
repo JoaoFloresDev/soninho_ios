@@ -17,34 +17,37 @@ struct SleepTrackerView: View {
     // MARK: - View Body
     var body: some View {
         NavigationStack {
-            ZStack {
-                // Background
-                backgroundGradient
+            GeometryReader { geometry in
+                ZStack {
+                    // Background
+                    backgroundGradient
 
-                VStack(spacing: 40) {
-                    Spacer()
+                    VStack(spacing: 32) {
+                        Spacer()
 
-                    // Status Message
-                    Text(viewModel.trackingStatusMessage)
-                        .font(AppFonts.headline())
-                        .foregroundColor(AppColors.textSecondary)
+                        // Status Message
+                        Text(viewModel.trackingStatusMessage)
+                            .font(AppFonts.headline())
+                            .foregroundColor(AppColors.textSecondary)
 
-                    // Timer Display
-                    timerDisplay
+                        // Timer Display
+                        timerDisplay
 
-                    // Current Phase (when tracking)
-                    if viewModel.isTracking {
-                        currentPhaseDisplay
+                        // Current Phase (when tracking)
+                        if viewModel.isTracking {
+                            currentPhaseDisplay
+                        }
+
+                        Spacer()
+
+                        // Action Buttons
+                        actionButtons
                     }
-
-                    Spacer()
-
-                    // Action Buttons
-                    actionButtons
-                        .padding(.bottom, 60)
+                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                    .padding(.bottom, geometry.safeAreaInsets.bottom + 100)
                 }
-                .padding(.horizontal, AppSpacing.screenHorizontal)
             }
+            .ignoresSafeArea(edges: .bottom)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -118,7 +121,7 @@ struct SleepTrackerView: View {
             Circle()
                 .fill(AppColors.surface.opacity(0.8))
                 .frame(width: 200, height: 200)
-                .shadow(color: AppColors.primary.opacity(viewModel.isTracking ? 0.3 : 0), radius: 30)
+                .shadow(color: .black.opacity(viewModel.isTracking ? 0.3 : 0), radius: 30)
 
             // Timer text
             VStack(spacing: 8) {
@@ -161,6 +164,35 @@ struct SleepTrackerView: View {
         .animation(.easeInOut, value: viewModel.currentPhase)
     }
 
+    // MARK: - Battery Info Card
+    private var batteryInfoCard: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "battery.100.bolt")
+                .font(.system(size: 24))
+                .foregroundColor(AppColors.warning)
+                .frame(width: 44, height: 44)
+                .background(AppColors.warning.opacity(0.15))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(String(localized: "tracker_battery_info_title"))
+                    .font(AppFonts.subheadline())
+                    .fontWeight(.medium)
+                    .foregroundColor(AppColors.textPrimary)
+
+                Text(String(localized: "tracker_battery_info_message"))
+                    .font(AppFonts.caption())
+                    .foregroundColor(AppColors.textSecondary)
+                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(16)
+        .background(AppColors.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .padding(.bottom, 8)
+    }
+
     // MARK: - Action Buttons
     private var actionButtons: some View {
         VStack(spacing: 16) {
@@ -183,6 +215,9 @@ struct SleepTrackerView: View {
                         .foregroundColor(AppColors.textSecondary)
                 }
             } else {
+                // Battery Info Card
+                batteryInfoCard
+
                 // Start Sleep Button
                 AppButton(
                     title: String(localized: "tracker_start_sleep"),
@@ -191,16 +226,6 @@ struct SleepTrackerView: View {
                 ) {
                     viewModel.startTracking()
                 }
-
-                // Quick Sleep Info
-                HStack(spacing: 4) {
-                    Image(systemName: "info.circle")
-                        .font(.system(size: 12))
-
-                    Text(String(localized: "tracker_info"))
-                        .font(AppFonts.caption())
-                }
-                .foregroundColor(AppColors.textTertiary)
             }
         }
     }

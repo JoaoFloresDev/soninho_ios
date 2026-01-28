@@ -36,6 +36,16 @@ enum TabItem: Int, CaseIterable, Identifiable {
         case .settings: return "gearshape.fill"
         }
     }
+
+    var iconUnselected: String {
+        switch self {
+        case .home: return "house"
+        case .tracker: return "moon.zzz"
+        case .alarm: return "alarm"
+        case .statistics: return "chart.bar"
+        case .settings: return "gearshape"
+        }
+    }
 }
 
 // MARK: - Main Tab View
@@ -43,30 +53,29 @@ struct MainTabView: View {
     // MARK: - Properties
     @State private var selectedTab: TabItem = .home
     @EnvironmentObject private var storageService: StorageService
+    @Namespace private var tabAnimation
 
     // MARK: - View Body
     var body: some View {
-        ZStack(alignment: .bottom) {
+        ZStack {
             // Tab Content
-            TabView(selection: $selectedTab) {
-                HomeView()
-                    .tag(TabItem.home)
-
-                SleepTrackerView()
-                    .tag(TabItem.tracker)
-
-                SmartAlarmView()
-                    .tag(TabItem.alarm)
-
-                StatisticsView()
-                    .tag(TabItem.statistics)
-
-                SettingsView()
-                    .tag(TabItem.settings)
+            Group {
+                switch selectedTab {
+                case .home:
+                    HomeView()
+                case .tracker:
+                    SleepTrackerView()
+                case .alarm:
+                    SmartAlarmView()
+                case .statistics:
+                    StatisticsView()
+                case .settings:
+                    SettingsView()
+                }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-
-            // Custom Tab Bar
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .safeAreaInset(edge: .bottom) {
             customTabBar
         }
         .ignoresSafeArea(.keyboard)
@@ -79,33 +88,82 @@ struct MainTabView: View {
                 tabButton(for: tab)
             }
         }
-        .padding(.horizontal, 8)
-        .padding(.top, 12)
-        .padding(.bottom, 28)
-        .background(
-            AppColors.surface
-                .shadow(color: .black.opacity(0.2), radius: 20, y: -5)
-        )
+        .padding(.horizontal, 6)
+        .padding(.vertical, 8)
+        .background(tabBarBackground)
+        .padding(.horizontal, 24)
+        .padding(.bottom, 16)
     }
 
+    // MARK: - Tab Bar Background
+    private var tabBarBackground: some View {
+        RoundedRectangle(cornerRadius: 28, style: .continuous)
+            .fill(.ultraThinMaterial)
+            .overlay(
+                RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    .stroke(
+                        LinearGradient(
+                            colors: [
+                                Color.white.opacity(0.15),
+                                Color.white.opacity(0.05)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            )
+            .shadow(color: .black.opacity(0.25), radius: 20, y: 10)
+    }
+
+    // MARK: - Tab Button
     private func tabButton(for tab: TabItem) -> some View {
-        Button {
+        let isSelected = selectedTab == tab
+
+        return Button {
             HapticManager.selection()
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
                 selectedTab = tab
             }
         } label: {
-            VStack(spacing: 4) {
-                Image(systemName: tab.icon)
-                    .font(.system(size: 22, weight: selectedTab == tab ? .semibold : .regular))
-                    .foregroundColor(selectedTab == tab ? AppColors.primary : AppColors.textTertiary)
-                    .scaleEffect(selectedTab == tab ? 1.1 : 1.0)
+            VStack(spacing: 6) {
+                ZStack {
+                    // Background indicator
+                    if isSelected {
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .fill(
+                                LinearGradient(
+                                    colors: [
+                                        AppColors.primary.opacity(0.25),
+                                        AppColors.accent.opacity(0.15)
+                                    ],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 52, height: 36)
+                            .matchedGeometryEffect(id: "tabIndicator", in: tabAnimation)
+                    }
 
+                    // Icon
+                    Image(systemName: isSelected ? tab.icon : tab.iconUnselected)
+                        .font(.system(size: 20, weight: isSelected ? .semibold : .regular))
+                        .foregroundStyle(
+                            isSelected
+                                ? AnyShapeStyle(AppColors.sleepGradient)
+                                : AnyShapeStyle(AppColors.textTertiary)
+                        )
+                        .frame(width: 52, height: 36)
+                        .scaleEffect(isSelected ? 1.05 : 1.0)
+                }
+
+                // Label
                 Text(tab.title)
-                    .font(AppFonts.caption2())
-                    .foregroundColor(selectedTab == tab ? AppColors.primary : AppColors.textTertiary)
+                    .font(.system(size: 10, weight: isSelected ? .semibold : .regular))
+                    .foregroundColor(isSelected ? AppColors.primary : AppColors.textTertiary)
             }
             .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }
@@ -115,4 +173,5 @@ struct MainTabView: View {
 #Preview {
     MainTabView()
         .environmentObject(StorageService.shared)
+        .preferredColorScheme(.dark)
 }

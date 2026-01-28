@@ -41,7 +41,7 @@ struct StatisticsView: View {
                 }
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.bottom, 100)
+            .padding(.bottom, 16)
         }
         .background(AppColors.background)
         .navigationTitle(String(localized: "stats_title"))

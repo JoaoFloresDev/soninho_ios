@@ -26,6 +26,32 @@
 - **Architecture**: MVVM
 - **Package Manager**: Swift Package Manager (SPM)
 
+### Info.plist & Entitlements (CRITICAL)
+**ALWAYS update Info.plist when requesting any system permission:**
+
+| Permission | Info.plist Key |
+|------------|----------------|
+| HealthKit Read | `NSHealthShareUsageDescription` |
+| HealthKit Write | `NSHealthUpdateUsageDescription` |
+| Camera | `NSCameraUsageDescription` |
+| Microphone | `NSMicrophoneUsageDescription` |
+| Location (Always) | `NSLocationAlwaysAndWhenInUseUsageDescription` |
+| Location (When in Use) | `NSLocationWhenInUseUsageDescription` |
+| Photos Library | `NSPhotoLibraryUsageDescription` |
+| Contacts | `NSContactsUsageDescription` |
+| Notifications | Handled by system, but configure in entitlements |
+| Face ID | `NSFaceIDUsageDescription` |
+| Motion | `NSMotionUsageDescription` |
+| Speech Recognition | `NSSpeechRecognitionUsageDescription` |
+
+**Also update the `.entitlements` file for:**
+- HealthKit: `com.apple.developer.healthkit`
+- iCloud: `com.apple.developer.icloud-*`
+- Push Notifications: `aps-environment`
+- App Groups: `com.apple.security.application-groups`
+
+**NEVER request permissions without adding the corresponding usage description - the app will CRASH.**
+
 ---
 
 ## CODE STANDARDS (MANDATORY)
@@ -359,11 +385,14 @@ enum AppColors {
 - Always respect safe areas
 - Use `.sheet()` or `.fullScreenCover()` for modals
 
-### Shadows (IMPORTANT)
-- **NEVER use colored shadows** - always use black shadows only
-- Shadows should be subtle and elegant: `.shadow(color: .black.opacity(0.15), radius: 10)`
+### Shadows (CRITICAL - NO EXCEPTIONS)
+- **NEVER use colored shadows** - ALWAYS use `.black` only
+- **FORBIDDEN**: `.shadow(color: AppColors.primary...)`
+- **FORBIDDEN**: `.shadow(color: Color(hex: ...)...)`
+- **CORRECT**: `.shadow(color: .black.opacity(0.15), radius: 10)`
+- Shadows should be subtle and elegant
 - Only use shadows when they add elegance, not on everything
-- Prefer no shadow over colored glow effects
+- Prefer no shadow over any colored glow effect
 
 ---
 

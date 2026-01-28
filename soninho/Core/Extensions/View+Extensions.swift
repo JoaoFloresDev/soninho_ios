@@ -131,24 +131,25 @@ struct ShimmerModifier: ViewModifier {
 // MARK: - Animated Button Modifier
 struct AnimatedButtonModifier: ViewModifier {
     let scale: CGFloat
-    @State private var isPressed = false
 
     func body(content: Content) -> some View {
         content
-            .scaleEffect(isPressed ? scale : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isPressed)
-            .simultaneousGesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { _ in
-                        if !isPressed {
-                            isPressed = true
-                            HapticManager.lightImpact()
-                        }
-                    }
-                    .onEnded { _ in
-                        isPressed = false
-                    }
-            )
+            .buttonStyle(ScaleButtonStyle(scale: scale))
+    }
+}
+
+// MARK: - Scale Button Style
+struct ScaleButtonStyle: ButtonStyle {
+    let scale: CGFloat
+
+    init(scale: CGFloat = 0.95) {
+        self.scale = scale
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? scale : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
     }
 }
 

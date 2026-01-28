@@ -128,7 +128,7 @@ struct OnboardingPageView: View {
                         )
                     )
                     .frame(width: 140, height: 140)
-                    .shadow(color: Color(hex: page.gradient[0]).opacity(0.4), radius: 20)
+                    .shadow(color: .black.opacity(0.3), radius: 20)
 
                 // Icon
                 Image(systemName: page.icon)

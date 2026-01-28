@@ -63,6 +63,17 @@ struct SettingsView: View {
             } message: {
                 Text(String(localized: "settings_reset_message"))
             }
+            .sheet(isPresented: $viewModel.showingLanguagePicker) {
+                LanguagePickerView(
+                    selectedLanguage: viewModel.selectedLanguage,
+                    languages: viewModel.languages,
+                    onSelect: { code in
+                        viewModel.setLanguage(code)
+                        viewModel.showingLanguagePicker = false
+                    }
+                )
+                .presentationDetents([.medium])
+            }
         }
     }
 
@@ -322,6 +333,54 @@ struct HealthKitSettingsView: View {
         .scrollContentBackground(.hidden)
         .background(AppColors.background)
         .navigationTitle(String(localized: "settings_health_app"))
+    }
+}
+
+// MARK: - Language Picker View
+struct LanguagePickerView: View {
+    let selectedLanguage: String
+    let languages: [(String, String)]
+    let onSelect: (String) -> Void
+
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(languages, id: \.0) { code, name in
+                    Button {
+                        onSelect(code)
+                    } label: {
+                        HStack {
+                            Text(name)
+                                .foregroundColor(AppColors.textPrimary)
+
+                            Spacer()
+
+                            if code == selectedLanguage {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(AppColors.primary)
+                                    .fontWeight(.semibold)
+                            }
+                        }
+                    }
+                    .listRowBackground(AppColors.surface)
+                }
+            }
+            .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(AppColors.background)
+            .navigationTitle(String(localized: "settings_language"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(String(localized: "action_done")) {
+                        dismiss()
+                    }
+                    .foregroundColor(AppColors.primary)
+                }
+            }
+        }
     }
 }
 

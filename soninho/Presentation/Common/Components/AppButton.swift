@@ -74,9 +74,9 @@ struct AppButton: View {
                     .stroke(borderColor, lineWidth: style == .outline ? 2 : 0)
             )
         }
+        .buttonStyle(ScaleButtonStyle())
         .disabled(isDisabled || isLoading)
         .opacity(isDisabled ? 0.5 : 1.0)
-        .animatedButton()
     }
 
     // MARK: - Computed Properties
@@ -155,7 +155,7 @@ struct SmallButton: View {
             .background(AppColors.primary.opacity(0.15))
             .clipShape(Capsule())
         }
-        .animatedButton(scale: 0.97)
+        .buttonStyle(ScaleButtonStyle(scale: 0.97))
     }
 }
 
@@ -186,7 +186,7 @@ struct IconButton: View {
                 .background(AppColors.surface)
                 .clipShape(Circle())
         }
-        .animatedButton()
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 

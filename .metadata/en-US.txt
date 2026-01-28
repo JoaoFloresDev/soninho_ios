@@ -1,91 +1,59 @@
-# Soninho - App Store Metadata (English - US)
-# ASO Optimized for organic search
+# SONINHO - App Store Metadata (English - US)
 
-================================================================================
-APP NAME (30 characters max)
-================================================================================
+## App Name (30 characters)
+Soninho - Sleep & Smart Alarm
 
-Soninho - Sleep & Alarm
+## Subtitle (30 characters)
+Track Your Sleep Quality
 
-================================================================================
-SUBTITLE (30 characters max)
-================================================================================
+## Keywords (100 characters)
+sleep,tracker,alarm,smart,wake,health,rem,deep,quality,night,rest,relax,routine,monitor,cycle
 
-Smart Sleep Tracker
+## Description (4000 characters)
+Soninho is your perfect companion for a restorative night of sleep. Designed for those seeking to understand and improve their sleep quality, the app offers intelligent tools that seamlessly integrate with Apple Health.
 
-================================================================================
-KEYWORDS (100 characters max, comma separated)
-================================================================================
-
-sleep,tracker,alarm,wake,insomnia,relax,monitor,quality,rem,deep,light,nap,night,rest,cycle,dream
-
-================================================================================
-DESCRIPTION (4000 characters max)
-================================================================================
-
-Soninho is your companion for restful nights and refreshing mornings.
-
-TRACK YOUR SLEEP WITH PRECISION
-Follow every phase of your sleep - light, deep, and REM. Understand exactly how you sleep and discover what you can improve to wake up with more energy.
+INTELLIGENT SLEEP MONITORING
+Track every phase of your sleep: light, deep, and REM. Soninho analyzes your patterns and shows exactly how much time you spent in each stage, helping identify what can be improved.
 
 SMART ALARM
-Our alarm wakes you at the ideal moment in your sleep cycle. No more groggy awakenings - you wake up naturally during your light sleep phase, feeling refreshed.
+Wake up at the ideal moment. The smart alarm monitors your sleep cycle and wakes you during light sleep, ensuring you wake up more refreshed and energized for the day ahead.
 
-DETAILED ANALYSIS
-See clear graphs of your sleep:
-• Total sleep duration
-• Time in each phase (light, deep, REM)
-• Average bedtime and wake time
-• Sleep quality score
-• Weekly and monthly trends
+DETAILED STATISTICS
+Visualize your sleep history in clear, intuitive charts. Track weekly, monthly, and yearly averages. Discover trends and see how your habits affect the quality of your rest.
 
 APPLE HEALTH INTEGRATION
-Automatically sync your sleep data with the Apple Health app. All your health data in one place.
+Automatically sync with Apple Health. If you use Apple Watch, Soninho leverages the sleep data collected overnight for even more precise analysis.
 
-PERSONALIZED INSIGHTS
-Get tips based on your sleep patterns:
-• Identify your best bedtime
-• Discover how much sleep you really need
-• Understand what affects your rest quality
+KEY FEATURES:
+- Sleep phase monitoring (Light, Deep, REM)
+- Sleep quality score from 0 to 100
+- Smart alarm with wake window
+- Detailed statistics by week, month, and year
+- Intuitive sleep history charts
+- Complete Apple Health integration
+- Elegant dark mode interface
+- Support for English, Portuguese, and Spanish
 
-ELEGANT INTERFACE
-Dark and minimalist design that doesn't strain your eyes at night. Every detail designed for a relaxing experience.
+PREMIUM DESIGN
+Minimalist and elegant interface, designed for nighttime use. The dark theme protects your eyes and creates the perfect environment to relax before sleep.
 
-PRIVACY FIRST
-Your sleep data stays on your device. We don't collect or sell your personal information.
+Start your journey today to better nights and more productive days with Soninho.
 
-PERFECT FOR ANYONE WHO WANTS:
-• Better sleep
-• More energized mornings
-• To understand sleep patterns
-• A healthy sleep routine
-• To monitor rest quality
+## Promotional Text (170 characters)
+Improve your sleep with intelligent monitoring. Track phases, quality, and wake up at the ideal moment with the smart alarm.
 
-Start sleeping better today. Download Soninho for free.
+## Whats New
+- Initial release of Soninho
+- Complete sleep phase monitoring
+- Smart alarm
+- Apple Health integration
+- Detailed statistics
+- Support for 3 languages
 
-================================================================================
-PROMOTIONAL TEXT (170 characters max)
-================================================================================
-
-Sleep better, wake refreshed. Track your sleep, use the smart alarm, and discover insights about your rest quality.
-
-================================================================================
-WHAT'S NEW (Release Notes)
-================================================================================
-
-• New elegant dark mode design
-• Smart alarm that wakes you at the ideal moment
-• Detailed sleep phase graphs
-• Apple Health integration
-• Support for English, Portuguese, and Spanish
-
-================================================================================
-SCREENSHOT DESCRIPTIONS (for creation)
-================================================================================
-
-Screenshot 1: "Track every phase of your sleep"
-Screenshot 2: "Wake up at the perfect moment"
-Screenshot 3: "See your sleep score"
-Screenshot 4: "Detailed weekly graphs"
-Screenshot 5: "Personalized insights"
-Screenshot 6: "Sync with Apple Health"
+## Screenshot Descriptions (6 phrases)
+1. Track every phase of your sleep
+2. See your quality score
+3. Wake up at the ideal moment
+4. Detailed weekly statistics
+5. Integrated with Apple Health
+6. Elegant and intuitive design
