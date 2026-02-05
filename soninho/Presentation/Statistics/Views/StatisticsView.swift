@@ -27,6 +27,9 @@ struct StatisticsView: View {
                     // Overview Card
                     overviewCard
 
+                    // Sleep Goal Progress
+                    sleepGoalSection
+
                     // Sleep Duration Chart
                     durationChartSection
 
@@ -41,7 +44,7 @@ struct StatisticsView: View {
                 }
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.bottom, 16)
+            .padding(.bottom, AppSpacing.tabBarBottomPadding)
         }
         .background(AppColors.background)
         .navigationTitle(String(localized: "stats_title"))
@@ -138,6 +141,75 @@ struct StatisticsView: View {
                 .foregroundColor(AppColors.textPrimary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    // MARK: - Sleep Goal Section
+    private var sleepGoalSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text(String(localized: "stats_sleep_goal"))
+                    .font(AppFonts.headline())
+                    .foregroundColor(AppColors.textPrimary)
+
+                Spacer()
+
+                Text(String(localized: "stats_goal_hours \(Int(viewModel.sleepGoalHours))"))
+                    .font(AppFonts.caption())
+                    .foregroundColor(AppColors.textSecondary)
+            }
+
+            VStack(spacing: 16) {
+                // Progress Ring
+                HStack(spacing: 20) {
+                    // Circular Progress
+                    ZStack {
+                        Circle()
+                            .stroke(AppColors.surfaceTertiary, lineWidth: 8)
+                            .frame(width: 80, height: 80)
+
+                        Circle()
+                            .trim(from: 0, to: viewModel.sleepGoalProgress)
+                            .stroke(
+                                AppColors.success,
+                                style: StrokeStyle(lineWidth: 8, lineCap: .round)
+                            )
+                            .frame(width: 80, height: 80)
+                            .rotationEffect(.degrees(-90))
+
+                        VStack(spacing: 0) {
+                            Text("\(Int(viewModel.sleepGoalProgress * 100))%")
+                                .font(AppFonts.headline())
+                                .foregroundColor(AppColors.textPrimary)
+                        }
+                    }
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(String(localized: "stats_avg_vs_goal"))
+                                .font(AppFonts.caption())
+                                .foregroundColor(AppColors.textSecondary)
+
+                            Text("\(viewModel.averageDuration) / \(Int(viewModel.sleepGoalHours))h")
+                                .font(AppFonts.title3())
+                                .foregroundColor(AppColors.textPrimary)
+                        }
+
+                        HStack(spacing: 4) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(AppColors.success)
+                                .font(.system(size: 14))
+
+                            Text(String(localized: "stats_days_met_goal \(viewModel.daysMetGoal) \(viewModel.totalDaysTracked)"))
+                                .font(AppFonts.caption())
+                                .foregroundColor(AppColors.textSecondary)
+                        }
+                    }
+
+                    Spacer()
+                }
+            }
+            .cardStyle()
+        }
     }
 
     // MARK: - Duration Chart Section

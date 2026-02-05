@@ -24,7 +24,7 @@ struct SmartAlarmView: View {
                     alarmsSection
                 }
                 .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, 16)
+                .padding(.bottom, AppSpacing.tabBarBottomPadding)
             }
             .background(AppColors.background)
             .navigationTitle(String(localized: "alarm_title"))
@@ -125,9 +125,9 @@ struct AlarmCard: View {
     let onDelete: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
-            HStack(spacing: 16) {
-                // Time
+        HStack(spacing: 16) {
+            // Time and Info (tappable)
+            Button(action: onTap) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(alarm.timeString)
                         .font(AppFonts.title())
@@ -156,23 +156,23 @@ struct AlarmCard: View {
                         .foregroundColor(AppColors.accent)
                     }
                 }
-
-                Spacer()
-
-                // Toggle
-                Toggle("", isOn: Binding(
-                    get: { alarm.isEnabled },
-                    set: { _ in onToggle() }
-                ))
-                .labelsHidden()
-                .tint(AppColors.primary)
             }
-            .padding()
-            .background(AppColors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+            .buttonStyle(.plain)
+
+            Spacer()
+
+            // Toggle (separate from tap area)
+            Toggle("", isOn: Binding(
+                get: { alarm.isEnabled },
+                set: { _ in onToggle() }
+            ))
+            .labelsHidden()
+            .tint(AppColors.primary)
         }
-        .buttonStyle(.plain)
-        .swipeActions(edge: .trailing) {
+        .padding()
+        .background(AppColors.surface)
+        .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+        .contextMenu {
             Button(role: .destructive) {
                 onDelete()
             } label: {
@@ -329,6 +329,7 @@ struct AlarmEditSheet: View {
                     }
                 }
                 .padding()
+                .padding(.bottom, 50)
             }
             .background(AppColors.background)
             .navigationTitle(viewModel.selectedAlarm == nil
@@ -338,6 +339,7 @@ struct AlarmEditSheet: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(String(localized: "action_cancel")) {
+                        dismiss()
                         viewModel.cancelEditing()
                     }
                     .foregroundColor(AppColors.textSecondary)
@@ -346,6 +348,7 @@ struct AlarmEditSheet: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(String(localized: "action_save")) {
                         viewModel.saveAlarm()
+                        dismiss()
                     }
                     .fontWeight(.semibold)
                     .foregroundColor(AppColors.primary)

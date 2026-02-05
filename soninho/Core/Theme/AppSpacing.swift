@@ -38,4 +38,8 @@ enum AppSpacing {
     static let iconMedium: CGFloat = 24
     static let iconLarge: CGFloat = 32
     static let iconXLarge: CGFloat = 48
+
+    // MARK: - Tab Bar
+    static let tabBarHeight: CGFloat = 90
+    static let tabBarBottomPadding: CGFloat = 100
 }

@@ -17,37 +17,34 @@ struct SleepTrackerView: View {
     // MARK: - View Body
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
-                ZStack {
-                    // Background
-                    backgroundGradient
+            ZStack {
+                // Background
+                backgroundGradient
 
-                    VStack(spacing: 32) {
-                        Spacer()
+                VStack(spacing: 32) {
+                    Spacer()
 
-                        // Status Message
-                        Text(viewModel.trackingStatusMessage)
-                            .font(AppFonts.headline())
-                            .foregroundColor(AppColors.textSecondary)
+                    // Status Message
+                    Text(viewModel.trackingStatusMessage)
+                        .font(AppFonts.headline())
+                        .foregroundColor(AppColors.textSecondary)
 
-                        // Timer Display
-                        timerDisplay
+                    // Timer Display
+                    timerDisplay
 
-                        // Current Phase (when tracking)
-                        if viewModel.isTracking {
-                            currentPhaseDisplay
-                        }
-
-                        Spacer()
-
-                        // Action Buttons
-                        actionButtons
+                    // Current Phase (when tracking)
+                    if viewModel.isTracking {
+                        currentPhaseDisplay
                     }
-                    .padding(.horizontal, AppSpacing.screenHorizontal)
-                    .padding(.bottom, geometry.safeAreaInsets.bottom + 100)
+
+                    Spacer()
+
+                    // Action Buttons
+                    actionButtons
                 }
+                .padding(.horizontal, AppSpacing.screenHorizontal)
+                .padding(.bottom, AppSpacing.tabBarBottomPadding)
             }
-            .ignoresSafeArea(edges: .bottom)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {

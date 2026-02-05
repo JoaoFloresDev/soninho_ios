@@ -49,6 +49,14 @@ final class HomeViewModel: ObservableObject {
         storageService.loadAlarms().first { $0.isEnabled }
     }
 
+    var currentStreak: Int {
+        storageService.currentStreak
+    }
+
+    var longestStreak: Int {
+        storageService.longestStreak
+    }
+
     // MARK: - Init
     init(
         healthKitService: HealthKitService = .shared,
@@ -74,6 +82,11 @@ final class HomeViewModel: ObservableObject {
 
                 // Cache locally
                 storageService.saveSleepRecords(records)
+
+                // Update streak based on most recent sleep
+                if let mostRecent = records.first {
+                    storageService.updateStreak(for: mostRecent.endTime)
+                }
             } else {
                 // Use cached or sample data
                 let cached = storageService.loadCachedSleepRecords()
@@ -84,6 +97,11 @@ final class HomeViewModel: ObservableObject {
                 }
                 statistics = SleepStatistics(records: weeklyRecords)
                 todaySleep = weeklyRecords.first { $0.endTime.isToday }
+
+                // Update streak for cached data too
+                if let mostRecent = weeklyRecords.first {
+                    storageService.updateStreak(for: mostRecent.endTime)
+                }
             }
         } catch {
             errorMessage = error.localizedDescription

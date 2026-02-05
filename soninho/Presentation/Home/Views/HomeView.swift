@@ -47,7 +47,7 @@ struct HomeView: View {
                     }
                 }
                 .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, 16)
+                .padding(.bottom, AppSpacing.tabBarBottomPadding)
             }
             .background(AppColors.background)
             .navigationBarTitleDisplayMode(.inline)
@@ -163,7 +163,65 @@ struct HomeView: View {
                     iconColor: AppColors.accent
                 )
             }
+
+            // Streak Card
+            if viewModel.currentStreak > 0 {
+                streakCard
+            }
         }
+    }
+
+    // MARK: - Streak Card
+    private var streakCard: some View {
+        HStack(spacing: 16) {
+            // Streak Icon with Fire Animation
+            ZStack {
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: [Color(hex: "FF6B35"), Color(hex: "F7931E")],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: 50, height: 50)
+
+                Image(systemName: "flame.fill")
+                    .font(.system(size: 24))
+                    .foregroundColor(.white)
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(String(localized: "streak_current"))
+                    .font(AppFonts.subheadline())
+                    .foregroundColor(AppColors.textSecondary)
+
+                Text(String(localized: "streak_days \(viewModel.currentStreak)"))
+                    .font(AppFonts.title2())
+                    .fontWeight(.bold)
+                    .foregroundColor(AppColors.textPrimary)
+            }
+
+            Spacer()
+
+            // Longest Streak Badge
+            if viewModel.longestStreak > viewModel.currentStreak {
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text(String(localized: "streak_longest"))
+                        .font(AppFonts.caption2())
+                        .foregroundColor(AppColors.textTertiary)
+
+                    Text("\(viewModel.longestStreak)")
+                        .font(AppFonts.headline())
+                        .foregroundColor(AppColors.accent)
+                }
+            } else if viewModel.currentStreak == viewModel.longestStreak && viewModel.currentStreak > 1 {
+                // Personal best badge
+                Text("🏆")
+                    .font(.system(size: 28))
+            }
+        }
+        .cardStyle()
     }
 
     // MARK: - Weekly Overview Section

@@ -19,6 +19,12 @@ final class SettingsViewModel: ObservableObject {
     @Published var hapticFeedbackEnabled: Bool
     @Published var notificationsEnabled: Bool
     @Published var smartAlarmEnabled: Bool
+    @Published var bedtimeReminderEnabled: Bool {
+        didSet {
+            storageService.bedtimeReminderEnabled = bedtimeReminderEnabled
+            updateBedtimeReminder()
+        }
+    }
     @Published var showingLanguagePicker = false
     @Published var showingResetConfirmation = false
 
@@ -49,6 +55,7 @@ final class SettingsViewModel: ObservableObject {
         self.hapticFeedbackEnabled = storageService.hapticFeedbackEnabled
         self.notificationsEnabled = storageService.notificationsEnabled
         self.smartAlarmEnabled = storageService.smartAlarmEnabled
+        self.bedtimeReminderEnabled = storageService.bedtimeReminderEnabled
     }
 
     // MARK: - Public Methods
@@ -68,6 +75,19 @@ final class SettingsViewModel: ObservableObject {
         HapticManager.selection()
         smartAlarmEnabled.toggle()
         storageService.smartAlarmEnabled = smartAlarmEnabled
+    }
+
+    private func updateBedtimeReminder() {
+        Task {
+            if bedtimeReminderEnabled {
+                await NotificationService.shared.scheduleBedtimeReminder(
+                    bedtime: storageService.defaultBedtime,
+                    minutesBefore: storageService.bedtimeReminderMinutes
+                )
+            } else {
+                await NotificationService.shared.cancelBedtimeReminder()
+            }
+        }
     }
 
     func setLanguage(_ code: String) {

@@ -41,6 +41,7 @@ struct SettingsView: View {
             .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden)
             .background(AppColors.background)
+            .contentMargins(.bottom, AppSpacing.tabBarBottomPadding, for: .scrollContent)
             .navigationTitle(String(localized: "settings_title"))
             .sheet(isPresented: $showingPaywall) {
                 PaywallView()
@@ -190,6 +191,22 @@ struct SettingsView: View {
                 Label(String(localized: "settings_smart_alarm"), systemImage: "brain.head.profile")
             }
             .tint(AppColors.accent)
+            .listRowBackground(AppColors.surface)
+
+            // Bedtime Reminder
+            Toggle(isOn: $viewModel.bedtimeReminderEnabled) {
+                Label(String(localized: "settings_bedtime_reminder"), systemImage: "moon.zzz.fill")
+            }
+            .tint(AppColors.primary)
+            .listRowBackground(AppColors.surface)
+
+            // Sleep Tips
+            NavigationLink {
+                SleepTipsView()
+            } label: {
+                Label(String(localized: "settings_sleep_tips"), systemImage: "lightbulb.fill")
+                    .foregroundColor(AppColors.textPrimary)
+            }
             .listRowBackground(AppColors.surface)
 
             // Health App Integration

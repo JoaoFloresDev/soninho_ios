@@ -25,6 +25,9 @@ enum StorageKeys {
     static let smartAlarmWindow = "smartAlarmWindow"
     static let alarmSound = "alarmSound"
     static let alarmVolume = "alarmVolume"
+    static let bedtimeReminderEnabled = "bedtimeReminderEnabled"
+    static let bedtimeReminderMinutes = "bedtimeReminderMinutes"
+    static let sleepGoalHours = "sleepGoalHours"
 
     // MARK: - Premium
     static let isPremiumUser = "isPremiumUser"

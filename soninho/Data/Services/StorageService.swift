@@ -40,6 +40,18 @@ final class StorageService: ObservableObject {
         didSet { defaults.set(notificationsEnabled, forKey: StorageKeys.notificationsEnabled) }
     }
 
+    @Published var bedtimeReminderEnabled: Bool {
+        didSet { defaults.set(bedtimeReminderEnabled, forKey: StorageKeys.bedtimeReminderEnabled) }
+    }
+
+    @Published var bedtimeReminderMinutes: Int {
+        didSet { defaults.set(bedtimeReminderMinutes, forKey: StorageKeys.bedtimeReminderMinutes) }
+    }
+
+    @Published var sleepGoalHours: Double {
+        didSet { defaults.set(sleepGoalHours, forKey: StorageKeys.sleepGoalHours) }
+    }
+
     // MARK: - Init
     private init() {
         self.hasCompletedOnboarding = defaults.bool(forKey: StorageKeys.hasCompletedOnboarding)
@@ -47,6 +59,9 @@ final class StorageService: ObservableObject {
         self.smartAlarmEnabled = defaults.object(forKey: StorageKeys.smartAlarmEnabled) as? Bool ?? true
         self.hapticFeedbackEnabled = defaults.object(forKey: StorageKeys.hapticFeedbackEnabled) as? Bool ?? true
         self.notificationsEnabled = defaults.object(forKey: StorageKeys.notificationsEnabled) as? Bool ?? true
+        self.bedtimeReminderEnabled = defaults.object(forKey: StorageKeys.bedtimeReminderEnabled) as? Bool ?? false
+        self.bedtimeReminderMinutes = defaults.object(forKey: StorageKeys.bedtimeReminderMinutes) as? Int ?? 30
+        self.sleepGoalHours = defaults.object(forKey: StorageKeys.sleepGoalHours) as? Double ?? 8.0
     }
 
     // MARK: - Alarm Methods
@@ -167,6 +182,49 @@ final class StorageService: ObservableObject {
         set { defaults.set(newValue, forKey: StorageKeys.defaultWakeTime) }
     }
 
+    // MARK: - Streak Tracking
+    var currentStreak: Int {
+        get { defaults.integer(forKey: "currentStreak") }
+        set { defaults.set(newValue, forKey: "currentStreak") }
+    }
+
+    var longestStreak: Int {
+        get { defaults.integer(forKey: "longestStreak") }
+        set { defaults.set(newValue, forKey: "longestStreak") }
+    }
+
+    var lastSleepDate: Date? {
+        get { defaults.object(forKey: "lastSleepDate") as? Date }
+        set { defaults.set(newValue, forKey: "lastSleepDate") }
+    }
+
+    func updateStreak(for sleepDate: Date) {
+        let calendar = Calendar.current
+
+        if let lastDate = lastSleepDate {
+            let daysBetween = calendar.dateComponents([.day], from: lastDate, to: sleepDate).day ?? 0
+
+            if daysBetween == 1 {
+                // Consecutive day - increment streak
+                currentStreak += 1
+            } else if daysBetween > 1 {
+                // Missed a day - reset streak
+                currentStreak = 1
+            }
+            // If daysBetween == 0, same day, don't change streak
+        } else {
+            // First sleep record
+            currentStreak = 1
+        }
+
+        // Update longest streak
+        if currentStreak > longestStreak {
+            longestStreak = currentStreak
+        }
+
+        lastSleepDate = sleepDate
+    }
+
     // MARK: - Reset
     func resetAllData() {
         let domain = Bundle.main.bundleIdentifier!
@@ -179,5 +237,8 @@ final class StorageService: ObservableObject {
         smartAlarmEnabled = true
         hapticFeedbackEnabled = true
         notificationsEnabled = true
+        bedtimeReminderEnabled = false
+        bedtimeReminderMinutes = 30
+        sleepGoalHours = 8.0
     }
 }

@@ -101,6 +101,25 @@ final class StatisticsViewModel: ObservableObject {
         return score
     }
 
+    var sleepGoalHours: Double {
+        storageService.sleepGoalHours
+    }
+
+    var sleepGoalProgress: Double {
+        guard let stats = statistics else { return 0 }
+        let avgHours = stats.averageDuration / 3600
+        return min(avgHours / sleepGoalHours, 1.0)
+    }
+
+    var daysMetGoal: Int {
+        let goalSeconds = sleepGoalHours * 3600
+        return records.filter { $0.totalDuration >= goalSeconds }.count
+    }
+
+    var totalDaysTracked: Int {
+        records.count
+    }
+
     // MARK: - Init
     init(
         healthKitService: HealthKitService = .shared,

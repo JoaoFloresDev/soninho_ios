@@ -14,12 +14,14 @@ import Combine
 final class SmartAlarmViewModel: ObservableObject {
     // MARK: - Dependencies
     private let storageService: StorageService
+    private let notificationService: NotificationService
 
     // MARK: - Published Properties
     @Published var alarms: [AlarmModel] = []
     @Published var selectedAlarm: AlarmModel?
     @Published var isEditing = false
     @Published var showingAddSheet = false
+    @Published private(set) var nextAlarmDate: Date?
 
     // Editing state
     @Published var editingTime = Date()
@@ -39,33 +41,52 @@ final class SmartAlarmViewModel: ObservableObject {
         let now = Date()
         let interval = nextDate.timeIntervalSince(now)
 
-        if interval < 3600 {
+        if interval <= 0 {
+            return String(localized: "alarm_now")
+        } else if interval < 60 {
+            return String(localized: "alarm_less_than_minute")
+        } else if interval < 3600 {
             let minutes = Int(interval / 60)
             return String(localized: "alarm_in_minutes \(minutes)")
         } else if interval < 86400 {
             let hours = Int(interval / 3600)
             let minutes = Int((interval.truncatingRemainder(dividingBy: 3600)) / 60)
+            if minutes == 0 {
+                return String(localized: "alarm_in_hours \(hours)")
+            }
             return String(localized: "alarm_in_hours_minutes \(hours) \(minutes)")
         } else {
-            return String(localized: "alarm_tomorrow_at \(nextDate.timeString)")
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, HH:mm"
+            return formatter.string(from: nextDate)
         }
     }
 
+    var hasEnabledAlarm: Bool {
+        alarms.contains { $0.isEnabled }
+    }
+
     // MARK: - Init
-    init(storageService: StorageService = .shared) {
+    init(
+        storageService: StorageService = .shared,
+        notificationService: NotificationService = .shared
+    ) {
         self.storageService = storageService
+        self.notificationService = notificationService
         loadAlarms()
+        scheduleAllEnabledAlarms()
     }
 
     // MARK: - Public Methods
     func loadAlarms() {
         alarms = storageService.loadAlarms()
         if alarms.isEmpty {
-            // Add a default alarm
-            let defaultAlarm = AlarmModel.sampleAlarm
+            // Add a default alarm for 7:00 AM
+            let defaultAlarm = createDefaultAlarm()
             alarms = [defaultAlarm]
             storageService.saveAlarm(defaultAlarm)
         }
+        updateNextAlarmDate()
     }
 
     func toggleAlarm(_ alarm: AlarmModel) {
@@ -78,10 +99,13 @@ final class SmartAlarmViewModel: ObservableObject {
             alarms[index] = updatedAlarm
         }
 
-        if updatedAlarm.isEnabled {
-            scheduleNotification(for: updatedAlarm)
-        } else {
-            cancelNotification(for: updatedAlarm)
+        Task {
+            if updatedAlarm.isEnabled {
+                await notificationService.scheduleAlarm(updatedAlarm)
+            } else {
+                await notificationService.cancelAlarm(updatedAlarm)
+            }
+            updateNextAlarmDate()
         }
     }
 
@@ -89,7 +113,11 @@ final class SmartAlarmViewModel: ObservableObject {
         HapticManager.mediumImpact()
         storageService.deleteAlarm(alarm)
         alarms.removeAll { $0.id == alarm.id }
-        cancelNotification(for: alarm)
+
+        Task {
+            await notificationService.cancelAlarm(alarm)
+            updateNextAlarmDate()
+        }
     }
 
     func startEditing(_ alarm: AlarmModel) {
@@ -136,8 +164,11 @@ final class SmartAlarmViewModel: ObservableObject {
             alarms.append(alarm)
         }
 
-        if alarm.isEnabled {
-            scheduleNotification(for: alarm)
+        Task {
+            if alarm.isEnabled {
+                await notificationService.scheduleAlarm(alarm)
+            }
+            updateNextAlarmDate()
         }
 
         isEditing = false
@@ -151,56 +182,48 @@ final class SmartAlarmViewModel: ObservableObject {
 
     // MARK: - Notifications
     func requestNotificationPermission() async {
-        let center = UNUserNotificationCenter.current()
-        do {
-            try await center.requestAuthorization(options: [.alert, .sound, .badge])
-        } catch {
-            print("Notification permission error: \(error)")
-        }
+        _ = await notificationService.requestAuthorization()
     }
 
-    private func scheduleNotification(for alarm: AlarmModel) {
-        guard let nextDate = alarm.nextAlarmDate else { return }
-
-        let center = UNUserNotificationCenter.current()
-
-        // Cancel existing
-        center.removePendingNotificationRequests(withIdentifiers: [alarm.id.uuidString])
-
-        // Create content
-        let content = UNMutableNotificationContent()
-        content.title = String(localized: "alarm_notification_title")
-        content.body = alarm.label ?? String(localized: "alarm_notification_body")
-        content.sound = .default
-        content.categoryIdentifier = "ALARM_CATEGORY"
-
-        // If smart alarm, schedule earlier
-        var triggerDate = nextDate
-        if alarm.isSmartAlarm {
-            triggerDate = nextDate.addingTimeInterval(-Double(alarm.smartAlarmWindow * 60))
-        }
-
-        let components = Calendar.current.dateComponents(
-            [.year, .month, .day, .hour, .minute],
-            from: triggerDate
-        )
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-
-        let request = UNNotificationRequest(
-            identifier: alarm.id.uuidString,
-            content: content,
-            trigger: trigger
-        )
-
-        center.add(request) { error in
-            if let error = error {
-                print("Failed to schedule notification: \(error)")
+    func scheduleAllEnabledAlarms() {
+        Task {
+            for alarm in alarms where alarm.isEnabled {
+                await notificationService.scheduleAlarm(alarm)
             }
+            updateNextAlarmDate()
+
+            // Debug: print scheduled notifications
+            await notificationService.printPendingNotifications()
         }
     }
 
-    private func cancelNotification(for alarm: AlarmModel) {
-        let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: [alarm.id.uuidString])
+    // MARK: - Private Methods
+    private func updateNextAlarmDate() {
+        nextAlarmDate = alarms
+            .filter { $0.isEnabled }
+            .compactMap { $0.nextAlarmDate }
+            .min()
+    }
+
+    private func createDefaultAlarm() -> AlarmModel {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        let calendar = Calendar.current
+        let time = calendar.nextDate(
+            after: Date(),
+            matching: components,
+            matchingPolicy: .nextTime
+        ) ?? Date()
+
+        return AlarmModel(
+            time: time,
+            isEnabled: false,
+            isSmartAlarm: true,
+            smartAlarmWindow: 30,
+            sound: .sunrise,
+            repeatDays: [.monday, .tuesday, .wednesday, .thursday, .friday],
+            label: String(localized: "alarm_default_label")
+        )
     }
 }

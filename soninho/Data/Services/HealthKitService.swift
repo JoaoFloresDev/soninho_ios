@@ -128,7 +128,7 @@ final class HealthKitService: ObservableObject {
     }
 
     // MARK: - Process Sleep Samples
-    private func processSleepSamples(_ samples: [HKCategorySample]) -> [SleepRecord] {
+    nonisolated private func processSleepSamples(_ samples: [HKCategorySample]) -> [SleepRecord] {
         // Group samples by sleep session (samples within 1 hour of each other)
         var sessions: [[HKCategorySample]] = []
         var currentSession: [HKCategorySample] = []
@@ -180,7 +180,7 @@ final class HealthKitService: ObservableObject {
         }
     }
 
-    private func convertToPhases(_ samples: [HKCategorySample]) -> [SleepPhaseData] {
+    nonisolated private func convertToPhases(_ samples: [HKCategorySample]) -> [SleepPhaseData] {
         samples.compactMap { sample in
             let phase: SleepPhase
             switch sample.value {
@@ -208,7 +208,7 @@ final class HealthKitService: ObservableObject {
         }
     }
 
-    private func calculateQualityScore(phases: [SleepPhaseData], duration: TimeInterval) -> Int {
+    nonisolated private func calculateQualityScore(phases: [SleepPhaseData], duration: TimeInterval) -> Int {
         var score = 50 // Base score
 
         // Duration score (7-9 hours is ideal)

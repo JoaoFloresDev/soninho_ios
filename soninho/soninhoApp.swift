@@ -6,18 +6,23 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 @main
 struct SoninhoApp: App {
     // MARK: - Properties
     @StateObject private var storageService = StorageService.shared
     @StateObject private var purchaseService = PurchaseService.shared
+    @StateObject private var notificationService = NotificationService.shared
+    @StateObject private var reviewService = ReviewService.shared
     @State private var isOnboardingComplete: Bool
+    @Environment(\.scenePhase) private var scenePhase
 
     // MARK: - Init
     init() {
         _isOnboardingComplete = State(initialValue: StorageService.shared.hasCompletedOnboarding)
         configureAppearance()
+        configureNotifications()
     }
 
     // MARK: - View Body
@@ -28,6 +33,7 @@ struct SoninhoApp: App {
                     MainTabView()
                         .environmentObject(storageService)
                         .environmentObject(purchaseService)
+                        .environmentObject(notificationService)
                 } else {
                     OnboardingView(isOnboardingComplete: $isOnboardingComplete)
                         .environmentObject(storageService)
@@ -37,10 +43,48 @@ struct SoninhoApp: App {
             .onChange(of: isOnboardingComplete) { _, newValue in
                 storageService.hasCompletedOnboarding = newValue
             }
+            .onChange(of: scenePhase) { _, newPhase in
+                handleScenePhaseChange(newPhase)
+            }
+            .onAppear {
+                handleAppLaunch()
+            }
         }
     }
 
-    // MARK: - Private Methods
+    // MARK: - App Lifecycle
+    private func handleAppLaunch() {
+        // Increment app open count
+        reviewService.incrementAppOpenCount()
+
+        // Request review if appropriate (between 5th and 10th launch)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            reviewService.requestReviewIfAppropriate()
+        }
+    }
+
+    private func handleScenePhaseChange(_ phase: ScenePhase) {
+        switch phase {
+        case .active:
+            // App became active
+            Task {
+                await notificationService.checkAuthorizationStatus()
+            }
+        case .inactive:
+            break
+        case .background:
+            break
+        @unknown default:
+            break
+        }
+    }
+
+    // MARK: - Configuration
+    private func configureNotifications() {
+        // Set notification delegate
+        UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
+    }
+
     private func configureAppearance() {
         // Configure navigation bar appearance
         let navigationBarAppearance = UINavigationBarAppearance()
