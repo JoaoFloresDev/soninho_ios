@@ -88,16 +88,21 @@ final class StatisticsViewModel: ObservableObject {
     var consistencyScore: Int {
         guard records.count >= 3 else { return 0 }
 
-        // Calculate based on variance in bedtime and wake time
-        let bedtimes = records.map { $0.startTime.hour * 60 + $0.startTime.minute }
+        // Calculate based on variance in bedtime — handle overnight times
+        // Hours before noon get +24 so 1AM=25, 2AM=26, etc. to average with 22-23 PM
+        let bedtimes = records.map { record -> Int in
+            let hour = record.startTime.hour
+            let adjustedHour = hour < 12 ? hour + 24 : hour
+            return adjustedHour * 60 + record.startTime.minute
+        }
         let avgBedtime = bedtimes.reduce(0, +) / bedtimes.count
 
         let variance = bedtimes.reduce(0) { sum, time in
             sum + abs(time - avgBedtime)
         } / bedtimes.count
 
-        // Lower variance = higher consistency
-        let score = max(0, 100 - (variance * 2))
+        // Lower variance = higher consistency (30 min variance = ~100%, 2h = ~0%)
+        let score = max(0, min(100, 100 - (variance * 100 / 60)))
         return score
     }
 
@@ -120,6 +125,11 @@ final class StatisticsViewModel: ObservableObject {
         records.count
     }
 
+    // MARK: - Private Properties
+    private var hasLoadedOnce = false
+    private var isCurrentlyLoading = false
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: - Init
     init(
         healthKitService: HealthKitService = .shared,
@@ -127,33 +137,31 @@ final class StatisticsViewModel: ObservableObject {
     ) {
         self.healthKitService = healthKitService
         self.storageService = storageService
+        observeNotifications()
     }
 
     // MARK: - Public Methods
+    /// Estatísticas analyzes the nights tracked inside Soninho (the Sleep tab).
+    /// It reads only the local tracker cache — never HealthKit — so this screen
+    /// is purely the app's own sleep analysis.
     func loadData() async {
-        isLoading = true
+        guard !isCurrentlyLoading else { return }
+        isCurrentlyLoading = true
 
-        do {
-            if healthKitService.isAuthorized {
-                records = try await healthKitService.fetchRecentSleepData(days: selectedPeriod.days)
-            } else {
-                records = storageService.loadCachedSleepRecords()
-                    .filter { $0.startTime > Date().addingTimeInterval(-Double(selectedPeriod.days) * 86400) }
-
-                if records.isEmpty {
-                    records = SleepRecord.sampleRecords
-                        .filter { $0.startTime > Date().addingTimeInterval(-Double(selectedPeriod.days) * 86400) }
-                }
-            }
-
-            statistics = SleepStatistics(records: records)
-        } catch {
-            print("Error loading statistics: \(error)")
-            records = SleepRecord.sampleRecords
-            statistics = SleepStatistics(records: records)
+        if !hasLoadedOnce {
+            isLoading = true
         }
 
+        let cutoffDate = Date().addingTimeInterval(-Double(selectedPeriod.days) * 86400)
+
+        records = storageService.loadCachedSleepRecords()
+            .filter { $0.startTime > cutoffDate }
+            .sorted { $0.endTime > $1.endTime }
+
+        statistics = records.isEmpty ? nil : SleepStatistics(records: records)
         isLoading = false
+        hasLoadedOnce = true
+        isCurrentlyLoading = false
     }
 
     func changePeriod(_ period: TimePeriod) {
@@ -161,5 +169,25 @@ final class StatisticsViewModel: ObservableObject {
         Task {
             await loadData()
         }
+    }
+
+    private func observeNotifications() {
+        NotificationCenter.default.publisher(for: StorageService.sleepRecordsDidChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                Task { [weak self] in
+                    await self?.loadData()
+                }
+            }
+            .store(in: &cancellables)
+
+        NotificationCenter.default.publisher(for: .didSwitchToDataTab)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                Task { [weak self] in
+                    await self?.loadData()
+                }
+            }
+            .store(in: &cancellables)
     }
 }

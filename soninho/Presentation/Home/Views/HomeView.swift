@@ -12,8 +12,7 @@ struct HomeView: View {
     // MARK: - Properties
     @StateObject private var viewModel = HomeViewModel()
     @State private var showingPaywall = false
-    @State private var showingSleepDetail = false
-    @State private var selectedRecord: SleepRecord?
+    @AppStorage(StorageKeys.hasStartedFirstSleep) private var hasStartedFirstSleep = false
 
     // MARK: - Environment
     @EnvironmentObject private var storageService: StorageService
@@ -29,9 +28,9 @@ struct HomeView: View {
                     if viewModel.isLoading {
                         loadingSection
                     } else if viewModel.hasSleepData {
-                        // Today's Sleep Summary
+                        // Today's Sleep Analysis (inline)
                         if let todaySleep = viewModel.todaySleep {
-                            todaySleepCard(todaySleep)
+                            SleepAnalysisCard(record: todaySleep)
                         }
 
                         // Quick Stats
@@ -47,10 +46,16 @@ struct HomeView: View {
                     }
                 }
                 .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, AppSpacing.tabBarBottomPadding)
+                .padding(.bottom, AppSpacing.lg)
             }
             .background(AppColors.background)
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(String(localized: "home_title"))
+            .navigationBarTitleDisplayMode(.large)
+            .safeAreaInset(edge: .bottom) {
+                if !hasStartedFirstSleep {
+                    startSleepButton
+                }
+            }
             .refreshable {
                 await viewModel.refresh()
             }
@@ -60,35 +65,40 @@ struct HomeView: View {
             .sheet(isPresented: $showingPaywall) {
                 PaywallView()
             }
-            .sheet(item: $selectedRecord) { record in
-                SleepDetailSheet(record: record)
-            }
         }
     }
 
     // MARK: - Header Section
     private var headerSection: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(viewModel.greeting)
                     .font(AppFonts.subheadline())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
 
-                Text(String(localized: "home_title"))
-                    .font(AppFonts.title())
-                    .foregroundColor(AppColors.textPrimary)
+                // Source badge — this screen reflects Apple Health data.
+                HStack(spacing: 6) {
+                    Image(systemName: "heart.fill")
+                        .font(.system(size: 10, weight: .semibold))
+                    Text(String(localized: "home_source_badge"))
+                        .font(AppFonts.caption())
+                }
+                .foregroundStyle(AppColors.error)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(AppColors.error.opacity(0.15))
+                .clipShape(Capsule())
             }
 
             Spacer()
 
             // Premium Badge or Upgrade Button (only show when purchases enabled)
             if AppConstants.isPurchasesEnabled && !storageService.isPremiumUser {
-                SmallButton(title: "PRO", icon: "crown.fill") {
+                SmallButton(title: String(localized: "badge_pro"), icon: "crown.fill") {
                     showingPaywall = true
                 }
             }
         }
-        .padding(.top, 16)
     }
 
     // MARK: - Loading Section
@@ -100,52 +110,12 @@ struct HomeView: View {
         }
     }
 
-    // MARK: - Today's Sleep Card
-    private func todaySleepCard(_ record: SleepRecord) -> some View {
-        Button {
-            HapticManager.lightImpact()
-            selectedRecord = record
-        } label: {
-            VStack(spacing: 20) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(String(localized: "home_last_night"))
-                            .font(AppFonts.subheadline())
-                            .foregroundColor(AppColors.textSecondary)
-
-                        Text(record.durationString)
-                            .font(AppFonts.title())
-                            .foregroundColor(AppColors.textPrimary)
-
-                        Text("\(record.startTime.timeString) - \(record.endTime.timeString)")
-                            .font(AppFonts.caption())
-                            .foregroundColor(AppColors.textTertiary)
-                    }
-
-                    Spacer()
-
-                    SleepScoreRing(score: record.qualityScore, size: 100, lineWidth: 10)
-                }
-
-                // Phase Distribution
-                SleepPhaseDistribution(
-                    deepSleep: record.deepSleepDuration,
-                    lightSleep: record.lightSleepDuration,
-                    remSleep: record.remSleepDuration,
-                    awakeDuration: record.awakeDuration
-                )
-            }
-            .cardStyle()
-        }
-        .buttonStyle(.plain)
-    }
-
     // MARK: - Quick Stats Section
     private var quickStatsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "home_weekly_average"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             HStack(spacing: 12) {
                 StatCard(
@@ -188,18 +158,18 @@ struct HomeView: View {
 
                 Image(systemName: "flame.fill")
                     .font(.system(size: 24))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
             }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(String(localized: "streak_current"))
                     .font(AppFonts.subheadline())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
 
                 Text(String(localized: "streak_days \(viewModel.currentStreak)"))
                     .font(AppFonts.title2())
                     .fontWeight(.bold)
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
 
             Spacer()
@@ -209,11 +179,11 @@ struct HomeView: View {
                 VStack(alignment: .trailing, spacing: 2) {
                     Text(String(localized: "streak_longest"))
                         .font(AppFonts.caption2())
-                        .foregroundColor(AppColors.textTertiary)
+                        .foregroundStyle(AppColors.textTertiary)
 
                     Text("\(viewModel.longestStreak)")
                         .font(AppFonts.headline())
-                        .foregroundColor(AppColors.accent)
+                        .foregroundStyle(AppColors.accent)
                 }
             } else if viewModel.currentStreak == viewModel.longestStreak && viewModel.currentStreak > 1 {
                 // Personal best badge
@@ -230,7 +200,7 @@ struct HomeView: View {
             HStack {
                 Text(String(localized: "home_this_week"))
                     .font(AppFonts.headline())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Spacer()
 
@@ -239,7 +209,7 @@ struct HomeView: View {
                 } label: {
                     Text(String(localized: "home_see_all"))
                         .font(AppFonts.subheadline())
-                        .foregroundColor(AppColors.primary)
+                        .foregroundStyle(AppColors.primary)
                 }
             }
 
@@ -255,7 +225,7 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "home_insights"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             VStack(spacing: 12) {
                 InsightCard(
@@ -279,13 +249,52 @@ struct HomeView: View {
 
     // MARK: - Empty State Section
     private var emptyStateSection: some View {
-        VStack(spacing: 24) {
-            NoSleepDataView {
-                Task {
-                    await viewModel.requestHealthKitAccess()
-                }
+        EmptyStateView(
+            icon: "heart.text.square.fill",
+            title: String(localized: "home_apple_empty_title"),
+            message: String(localized: "home_apple_empty_message"),
+            actionTitle: viewModel.isHealthKitAvailable ? String(localized: "home_apple_empty_action") : nil,
+            action: viewModel.isHealthKitAvailable ? { Task { await viewModel.requestHealthKitAccess() } } : nil
+        )
+        .frame(minHeight: 460)
+    }
+
+    // MARK: - Start Sleep Button
+    private var startSleepButton: some View {
+        Button {
+            hasStartedFirstSleep = true
+            NotificationCenter.default.post(name: .didRequestSwitchToSleepTab, object: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                NotificationCenter.default.post(name: .didRequestStartSleepTracking, object: nil)
             }
+        } label: {
+            HStack(spacing: 10) {
+                Image(systemName: "moon.zzz.fill")
+                    .font(.system(size: 18, weight: .semibold))
+
+                Text(String(localized: "empty_start_night"))
+                    .font(AppFonts.headline())
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: AppSpacing.buttonHeight)
+            .foregroundStyle(.white)
+            .background(AppColors.primary)
+            .clipShape(RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous))
         }
+        .buttonStyle(.plain)
+        .contentShape(Rectangle())
+        .padding(.horizontal, AppSpacing.screenHorizontal)
+        .padding(.bottom, 8)
+        .background(
+            LinearGradient(
+                colors: [AppColors.background.opacity(0), AppColors.background],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .frame(height: 40)
+            .offset(y: -40),
+            alignment: .top
+        )
     }
 }
 
@@ -294,17 +303,25 @@ struct WeeklyBarChart: View {
     let records: [SleepRecord]
 
     private var last7Days: [Date] {
-        (0..<7).map { Calendar.current.date(byAdding: .day, value: -$0, to: Date())! }.reversed()
+        (0..<7).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: Date()) }.reversed()
     }
 
     var body: some View {
         HStack(alignment: .bottom, spacing: 8) {
             ForEach(last7Days, id: \.self) { date in
-                let record = records.first { Calendar.current.isDate($0.startTime, inSameDayAs: date) }
+                // Match by wake day (endTime) — sleep that ended on this day
+                let record = records.first { Calendar.current.isDate($0.endTime, inSameDayAs: date) }
                 let hours = record?.totalHours ?? 0
                 let maxHours: Double = 10
 
                 VStack(spacing: 4) {
+                    // Hours label
+                    if hours > 0 {
+                        Text(String(format: "%.1f", hours))
+                            .font(.system(size: 9, weight: .medium))
+                            .foregroundStyle(AppColors.textTertiary)
+                    }
+
                     // Bar
                     RoundedRectangle(cornerRadius: 4)
                         .fill(barColor(for: record))
@@ -313,7 +330,7 @@ struct WeeklyBarChart: View {
                     // Day Label
                     Text(date.shortDay)
                         .font(AppFonts.caption2())
-                        .foregroundColor(date.isToday ? AppColors.primary : AppColors.textTertiary)
+                        .foregroundStyle(date.isToday ? AppColors.primary : AppColors.textTertiary)
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -339,7 +356,7 @@ struct InsightCard: View {
         HStack(spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 20))
-                .foregroundColor(color)
+                .foregroundStyle(color)
                 .frame(width: 40, height: 40)
                 .background(color.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -348,11 +365,11 @@ struct InsightCard: View {
                 Text(title)
                     .font(AppFonts.subheadline())
                     .fontWeight(.medium)
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Text(message)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
                     .lineLimit(2)
             }
 
@@ -360,40 +377,8 @@ struct InsightCard: View {
 
             Image(systemName: "chevron.right")
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(AppColors.textTertiary)
+                .foregroundStyle(AppColors.textTertiary)
         }
         .cardStyle()
     }
-}
-
-// MARK: - Sleep Detail Sheet
-struct SleepDetailSheet: View {
-    let record: SleepRecord
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                SleepAnalysisCard(record: record)
-                    .padding()
-            }
-            .background(AppColors.background)
-            .navigationTitle(String(localized: "detail_analysis"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(String(localized: "action_done")) {
-                        dismiss()
-                    }
-                    .foregroundColor(AppColors.primary)
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Preview
-#Preview {
-    HomeView()
-        .environmentObject(StorageService.shared)
 }

@@ -26,6 +26,7 @@ final class HomeViewModel: ObservableObject {
     // MARK: - Computed Properties
     var hasError: Bool { errorMessage != nil }
     var hasSleepData: Bool { !weeklyRecords.isEmpty }
+    var isHealthKitAvailable: Bool { healthKitService.isHealthKitAvailable }
 
     var averageSleepDuration: String {
         guard let stats = statistics else { return "--" }
@@ -65,56 +66,47 @@ final class HomeViewModel: ObservableObject {
         self.healthKitService = healthKitService
         self.storageService = storageService
         updateGreeting()
+        observeNotifications()
     }
 
+    // MARK: - Private Properties
+    private var hasLoadedOnce = false
+    private var isCurrentlyLoading = false
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: - Public Methods
+    /// Resumo shows the user's Apple Health sleep — the nights iPhone/Apple
+    /// Watch/other apps recorded. It reads HealthKit directly and never touches
+    /// the local tracker cache, so this screen is purely "Apple's data".
     func loadData() async {
-        isLoading = true
+        // Prevent re-entrant loads
+        guard !isCurrentlyLoading else { return }
+        isCurrentlyLoading = true
+
+        // Show shimmer only on first load
+        if !hasLoadedOnce {
+            isLoading = true
+        }
         errorMessage = nil
 
-        do {
-            // Try to fetch from HealthKit first
-            if healthKitService.isAuthorized {
-                let records = try await healthKitService.fetchRecentSleepData(days: 14)
-                weeklyRecords = records
-                statistics = SleepStatistics(records: records)
-                todaySleep = records.first { $0.endTime.isToday }
-
-                // Cache locally
-                storageService.saveSleepRecords(records)
-
-                // Update streak based on most recent sleep
-                if let mostRecent = records.first {
-                    storageService.updateStreak(for: mostRecent.endTime)
-                }
-            } else {
-                // Use cached or sample data
-                let cached = storageService.loadCachedSleepRecords()
-                if cached.isEmpty {
-                    weeklyRecords = SleepRecord.sampleRecords
-                } else {
-                    weeklyRecords = cached
-                }
-                statistics = SleepStatistics(records: weeklyRecords)
-                todaySleep = weeklyRecords.first { $0.endTime.isToday }
-
-                // Update streak for cached data too
-                if let mostRecent = weeklyRecords.first {
-                    storageService.updateStreak(for: mostRecent.endTime)
-                }
-            }
-        } catch {
-            errorMessage = error.localizedDescription
-
-            // Fall back to cached data
-            let cached = storageService.loadCachedSleepRecords()
-            if !cached.isEmpty {
-                weeklyRecords = cached
-                statistics = SleepStatistics(records: cached)
+        var appleRecords: [SleepRecord] = []
+        if healthKitService.isHealthKitAvailable {
+            do {
+                appleRecords = try await healthKitService.fetchRecentSleepData(days: 30)
+            } catch {
+                print("HealthKit fetch error: \(error.localizedDescription)")
             }
         }
 
+        appleRecords.sort { $0.endTime > $1.endTime }
+
+        weeklyRecords = appleRecords
+        statistics = appleRecords.isEmpty ? nil : SleepStatistics(records: appleRecords)
+        todaySleep = appleRecords.first { $0.endTime.isToday }
+
         isLoading = false
+        hasLoadedOnce = true
+        isCurrentlyLoading = false
     }
 
     func requestHealthKitAccess() async {
@@ -131,6 +123,18 @@ final class HomeViewModel: ObservableObject {
     }
 
     // MARK: - Private Methods
+    private func observeNotifications() {
+        // Listen for tab switches to Home/Statistics
+        NotificationCenter.default.publisher(for: .didSwitchToDataTab)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                Task { [weak self] in
+                    await self?.loadData()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     private func updateGreeting() {
         let hour = Calendar.current.component(.hour, from: Date())
 

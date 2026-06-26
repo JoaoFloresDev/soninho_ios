@@ -1585,6 +1585,72 @@
         }
       }
     },
+    "home_apple_empty_action" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect Apple Health"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectar Apple Saúde"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectar Apple Salud"
+          }
+        }
+      }
+    },
+    "home_apple_empty_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect Apple Health to see the nights your iPhone or Apple Watch recorded here."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conecte o Apple Saúde pra ver aqui as noites que seu iPhone ou Apple Watch registraram."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conecta Apple Salud para ver aquí las noches que registró tu iPhone o Apple Watch."
+          }
+        }
+      }
+    },
+    "home_apple_empty_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Apple Health data"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem dados no Apple Saúde"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin datos en Apple Salud"
+          }
+        }
+      }
+    },
     "home_insights" : {
       "localizations" : {
         "en" : {
@@ -1670,6 +1736,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ver Tudo"
+          }
+        }
+      }
+    },
+    "home_source_badge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Health"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Saúde"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Salud"
           }
         }
       }
@@ -4833,6 +4921,28 @@
         }
       }
     },
+    "stats_source_badge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your tracking"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seu rastreamento"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu seguimiento"
+          }
+        }
+      }
+    },
     "stats_title" : {
       "localizations" : {
         "en" : {
@@ -4851,6 +4961,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estatísticas"
+          }
+        }
+      }
+    },
+    "stats_tracker_empty_action" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track my night"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rastrear minha noite"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rastrear mi noche"
+          }
+        }
+      }
+    },
+    "stats_tracker_empty_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track a night with Soninho to see your sleep analysis here."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rastreie uma noite com o Soninho pra ver suas análises de sono aqui."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registra una noche con Soninho para ver tu análisis de sueño aquí."
+          }
+        }
+      }
+    },
+    "stats_tracker_empty_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No nights tracked yet"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhuma noite rastreada"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninguna noche registrada"
           }
         }
       }

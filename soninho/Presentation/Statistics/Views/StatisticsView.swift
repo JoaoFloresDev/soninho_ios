@@ -15,41 +15,84 @@ struct StatisticsView: View {
 
     // MARK: - View Body
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Period Picker
-                periodPicker
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Source badge — this screen analyzes Soninho's own tracking.
+                    sourceBadge
 
-                if viewModel.isLoading {
-                    LoadingView()
-                        .frame(height: 400)
-                } else {
-                    // Overview Card
-                    overviewCard
+                    // Period Picker
+                    periodPicker
 
-                    // Sleep Goal Progress
-                    sleepGoalSection
+                    if viewModel.isLoading {
+                        LoadingView()
+                            .frame(height: 400)
+                    } else if viewModel.records.isEmpty {
+                        trackerEmptyState
+                    } else {
+                        // Overview Card
+                        overviewCard
 
-                    // Sleep Duration Chart
-                    durationChartSection
+                        // Sleep Goal Progress
+                        sleepGoalSection
 
-                    // Sleep Phases
-                    phasesSection
+                        // Sleep Duration Chart
+                        durationChartSection
 
-                    // Sleep Schedule
-                    scheduleSection
+                        // Sleep Phases
+                        phasesSection
 
-                    // Sleep History
-                    historySection
+                        // Sleep Schedule
+                        scheduleSection
+
+                        // Sleep History
+                        historySection
+                    }
                 }
+                .padding(.horizontal, AppSpacing.screenHorizontal)
+                .padding(.bottom, AppSpacing.lg)
             }
-            .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.bottom, AppSpacing.tabBarBottomPadding)
+            .background(AppColors.background)
+            .navigationTitle(String(localized: "stats_title"))
+            .navigationBarTitleDisplayMode(.large)
+            .task {
+                await viewModel.loadData()
+            }
         }
-        .background(AppColors.background)
-        .navigationTitle(String(localized: "stats_title"))
-        .task {
-            await viewModel.loadData()
+    }
+
+    // MARK: - Source Badge
+    private var sourceBadge: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "moon.zzz.fill")
+                .font(.system(size: 10, weight: .semibold))
+            Text(String(localized: "stats_source_badge"))
+                .font(AppFonts.caption())
+        }
+        .foregroundStyle(AppColors.accent)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 5)
+        .background(AppColors.accent.opacity(0.15))
+        .clipShape(Capsule())
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    // MARK: - Tracker Empty State
+    private var trackerEmptyState: some View {
+        EmptyStateView(
+            icon: "moon.zzz.fill",
+            title: String(localized: "stats_tracker_empty_title"),
+            message: String(localized: "stats_tracker_empty_message"),
+            actionTitle: String(localized: "stats_tracker_empty_action"),
+            action: { startTracking() }
+        )
+        .frame(minHeight: 440)
+    }
+
+    private func startTracking() {
+        NotificationCenter.default.post(name: .didRequestSwitchToSleepTab, object: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            NotificationCenter.default.post(name: .didRequestStartSleepTracking, object: nil)
         }
     }
 
@@ -74,16 +117,16 @@ struct StatisticsView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(String(localized: "stats_average_quality"))
                         .font(AppFonts.subheadline())
-                        .foregroundColor(AppColors.textSecondary)
+                        .foregroundStyle(AppColors.textSecondary)
 
                     HStack(alignment: .lastTextBaseline, spacing: 4) {
                         Text("\(viewModel.averageQuality)")
                             .font(AppFonts.number(48))
-                            .foregroundColor(SleepQuality(score: viewModel.averageQuality).color)
+                            .foregroundStyle(SleepQuality(score: viewModel.averageQuality).color)
 
-                        Text("/100")
+                        Text(String(localized: "stats_score_max"))
                             .font(AppFonts.headline())
-                            .foregroundColor(AppColors.textTertiary)
+                            .foregroundStyle(AppColors.textTertiary)
                     }
 
                     HStack(spacing: 4) {
@@ -93,7 +136,7 @@ struct StatisticsView: View {
                         Text(viewModel.sleepTrend.localizedDescription)
                             .font(AppFonts.caption())
                     }
-                    .foregroundColor(viewModel.sleepTrend.color)
+                    .foregroundStyle(viewModel.sleepTrend.color)
                 }
 
                 Spacer()
@@ -129,16 +172,16 @@ struct StatisticsView: View {
             HStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 12))
-                    .foregroundColor(color)
+                    .foregroundStyle(color)
 
                 Text(title)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
 
             Text(value)
                 .font(AppFonts.title2())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -149,13 +192,13 @@ struct StatisticsView: View {
             HStack {
                 Text(String(localized: "stats_sleep_goal"))
                     .font(AppFonts.headline())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Spacer()
 
                 Text(String(localized: "stats_goal_hours \(Int(viewModel.sleepGoalHours))"))
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
 
             VStack(spacing: 16) {
@@ -179,7 +222,7 @@ struct StatisticsView: View {
                         VStack(spacing: 0) {
                             Text("\(Int(viewModel.sleepGoalProgress * 100))%")
                                 .font(AppFonts.headline())
-                                .foregroundColor(AppColors.textPrimary)
+                                .foregroundStyle(AppColors.textPrimary)
                         }
                     }
 
@@ -187,21 +230,21 @@ struct StatisticsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(String(localized: "stats_avg_vs_goal"))
                                 .font(AppFonts.caption())
-                                .foregroundColor(AppColors.textSecondary)
+                                .foregroundStyle(AppColors.textSecondary)
 
                             Text("\(viewModel.averageDuration) / \(Int(viewModel.sleepGoalHours))h")
                                 .font(AppFonts.title3())
-                                .foregroundColor(AppColors.textPrimary)
+                                .foregroundStyle(AppColors.textPrimary)
                         }
 
                         HStack(spacing: 4) {
                             Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(AppColors.success)
+                                .foregroundStyle(AppColors.success)
                                 .font(.system(size: 14))
 
                             Text(String(localized: "stats_days_met_goal \(viewModel.daysMetGoal) \(viewModel.totalDaysTracked)"))
                                 .font(AppFonts.caption())
-                                .foregroundColor(AppColors.textSecondary)
+                                .foregroundStyle(AppColors.textSecondary)
                         }
                     }
 
@@ -217,7 +260,7 @@ struct StatisticsView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "stats_sleep_duration"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             if #available(iOS 17.0, *) {
                 sleepDurationChart
@@ -243,7 +286,7 @@ struct StatisticsView: View {
             }
 
             // Goal line
-            RuleMark(y: .value("Goal", 8))
+            RuleMark(y: .value("Goal", viewModel.sleepGoalHours))
                 .foregroundStyle(AppColors.textTertiary)
                 .lineStyle(StrokeStyle(lineWidth: 1, dash: [5, 5]))
         }
@@ -252,7 +295,7 @@ struct StatisticsView: View {
                 AxisValueLabel {
                     Text("\(value.as(Double.self) ?? 0, specifier: "%.0f")h")
                         .font(AppFonts.caption2())
-                        .foregroundColor(AppColors.textSecondary)
+                        .foregroundStyle(AppColors.textSecondary)
                 }
             }
         }
@@ -266,7 +309,7 @@ struct StatisticsView: View {
 
     private var legacyDurationChart: some View {
         HStack(alignment: .bottom, spacing: 8) {
-            ForEach(viewModel.records.prefix(7)) { record in
+            ForEach(viewModel.records.suffix(min(7, viewModel.records.count))) { record in
                 VStack(spacing: 4) {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(record.quality.color)
@@ -274,7 +317,7 @@ struct StatisticsView: View {
 
                     Text(record.startTime.shortDay)
                         .font(AppFonts.caption2())
-                        .foregroundColor(AppColors.textTertiary)
+                        .foregroundStyle(AppColors.textTertiary)
                 }
             }
         }
@@ -287,7 +330,7 @@ struct StatisticsView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "stats_sleep_phases"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             VStack(spacing: 12) {
                 phaseRow(
@@ -316,7 +359,7 @@ struct StatisticsView: View {
         HStack(spacing: 12) {
             Image(systemName: phase.icon)
                 .font(.system(size: 20))
-                .foregroundColor(phase.color)
+                .foregroundStyle(phase.color)
                 .frame(width: 40, height: 40)
                 .background(phase.color.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -324,18 +367,18 @@ struct StatisticsView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(phase.localizedName)
                     .font(AppFonts.body())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Text(description)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
 
             Spacer()
 
             Text(duration)
                 .font(AppFonts.headline())
-                .foregroundColor(phase.color)
+                .foregroundStyle(phase.color)
         }
     }
 
@@ -344,7 +387,7 @@ struct StatisticsView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "stats_sleep_schedule"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             HStack(spacing: 12) {
                 scheduleCard(
@@ -368,16 +411,16 @@ struct StatisticsView: View {
         VStack(alignment: .leading, spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 20))
-                .foregroundColor(color)
+                .foregroundStyle(color)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
 
                 Text(value)
                     .font(AppFonts.title2())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -389,10 +432,15 @@ struct StatisticsView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "stats_history"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
-            ForEach(viewModel.records.prefix(10)) { record in
-                historyRow(record)
+            ForEach(viewModel.records) { record in
+                NavigationLink {
+                    SleepDetailView(record: record)
+                } label: {
+                    historyRow(record)
+                }
+                .buttonStyle(.plain)
             }
         }
     }
@@ -402,11 +450,11 @@ struct StatisticsView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(record.startTime.mediumDateString)
                     .font(AppFonts.body())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Text("\(record.startTime.timeString) - \(record.endTime.timeString)")
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
 
             Spacer()
@@ -414,10 +462,14 @@ struct StatisticsView: View {
             VStack(alignment: .trailing, spacing: 2) {
                 Text(record.durationString)
                     .font(AppFonts.body())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 SleepScoreBadge(score: record.qualityScore)
             }
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(AppColors.textTertiary)
         }
         .padding()
         .background(AppColors.surface)
@@ -425,9 +477,53 @@ struct StatisticsView: View {
     }
 }
 
-// MARK: - Preview
-#Preview {
-    NavigationStack {
-        StatisticsView()
+// MARK: - Sleep Detail View
+struct SleepDetailView: View {
+    // MARK: - Properties
+    let record: SleepRecord
+    @Environment(\.dismiss) private var dismiss
+    @State private var showingDeleteConfirmation = false
+
+    // MARK: - View Body
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                SleepAnalysisCard(record: record)
+
+                // Delete button
+                Button {
+                    showingDeleteConfirmation = true
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "trash")
+                        Text(String(localized: "stats_delete_record"))
+                    }
+                    .font(AppFonts.subheadline())
+                    .foregroundStyle(AppColors.error)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(AppColors.error.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+            }
+            .padding(.horizontal, AppSpacing.screenHorizontal)
+            .padding(.bottom, AppSpacing.lg)
+        }
+        .background(AppColors.background)
+        .navigationTitle(record.startTime.mediumDateString)
+        .navigationBarTitleDisplayMode(.inline)
+        .confirmationDialog(
+            String(localized: "stats_delete_title"),
+            isPresented: $showingDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button(String(localized: "stats_delete_confirm"), role: .destructive) {
+                StorageService.shared.deleteSleepRecord(record)
+                dismiss()
+            }
+            Button(String(localized: "stats_delete_cancel"), role: .cancel) {}
+        } message: {
+            Text(String(localized: "stats_delete_message"))
+        }
     }
 }
