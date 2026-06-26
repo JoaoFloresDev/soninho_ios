@@ -96,10 +96,12 @@ extension MarketingTheme {
         )
     }
 
-    /// Treatment A — deep indigo (#1E1B4B).
+    /// Treatment A — striking vivid violet (#7C3AED). Pops on the App Store
+    /// grid without losing the night/sleep association; white heavy headline
+    /// stays legible thanks to the depth shadow.
     static let soninhoSolidA = soninhoSolid(
-        Color(red: 0.118, green: 0.106, blue: 0.294),
-        glow: Color(red: 0.45, green: 0.40, blue: 0.95).opacity(0.35)
+        Color(red: 0.486, green: 0.227, blue: 0.929),
+        glow: Color(red: 0.75, green: 0.55, blue: 1.00).opacity(0.40)
     )
 
     /// Treatment B — royal violet (#2D0E5F).
