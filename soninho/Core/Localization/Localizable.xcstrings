@@ -4957,19 +4957,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Home"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inicio"
+            "value" : "Summary"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Início"
+            "value" : "Resumo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resumen"
           }
         }
       }

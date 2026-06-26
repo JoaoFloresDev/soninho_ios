@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+// MARK: - Notification Names
+extension Notification.Name {
+    static let didSwitchToDataTab = Notification.Name("didSwitchToDataTab")
+    static let didRequestSwitchToSleepTab = Notification.Name("didRequestSwitchToSleepTab")
+    static let didRequestStartSleepTracking = Notification.Name("didRequestStartSleepTracking")
+}
+
 // MARK: - Tab Item
 enum TabItem: Int, CaseIterable, Identifiable {
     case home
@@ -29,7 +36,7 @@ enum TabItem: Int, CaseIterable, Identifiable {
 
     var icon: String {
         switch self {
-        case .home: return "house.fill"
+        case .home: return "square.grid.2x2.fill"
         case .tracker: return "moon.zzz.fill"
         case .alarm: return "alarm.fill"
         case .statistics: return "chart.bar.fill"
@@ -39,7 +46,7 @@ enum TabItem: Int, CaseIterable, Identifiable {
 
     var iconUnselected: String {
         switch self {
-        case .home: return "house"
+        case .home: return "square.grid.2x2"
         case .tracker: return "moon.zzz"
         case .alarm: return "alarm"
         case .statistics: return "chart.bar"
@@ -53,125 +60,58 @@ struct MainTabView: View {
     // MARK: - Properties
     @State private var selectedTab: TabItem = .home
     @EnvironmentObject private var storageService: StorageService
-    @Namespace private var tabAnimation
+
+    // MARK: - Init
+    init() {
+        // Dark tab bar appearance
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = UIColor(AppColors.surface)
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
 
     // MARK: - View Body
     var body: some View {
-        ZStack {
-            // Tab Content
-            Group {
-                switch selectedTab {
-                case .home:
-                    HomeView()
-                case .tracker:
-                    SleepTrackerView()
-                case .alarm:
-                    SmartAlarmView()
-                case .statistics:
-                    StatisticsView()
-                case .settings:
-                    SettingsView()
+        TabView(selection: $selectedTab) {
+            SleepTrackerView()
+                .tabItem {
+                    Label(TabItem.tracker.title, systemImage: selectedTab == .tracker ? TabItem.tracker.icon : TabItem.tracker.iconUnselected)
                 }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .safeAreaInset(edge: .bottom) {
-            customTabBar
-        }
-        .ignoresSafeArea(.keyboard)
-    }
+                .tag(TabItem.tracker)
 
-    // MARK: - Custom Tab Bar
-    private var customTabBar: some View {
-        HStack(spacing: 0) {
-            ForEach(TabItem.allCases) { tab in
-                tabButton(for: tab)
-            }
-        }
-        .padding(.horizontal, 6)
-        .padding(.vertical, 8)
-        .background(tabBarBackground)
-        .padding(.horizontal, 24)
-        .padding(.bottom, 16)
-    }
-
-    // MARK: - Tab Bar Background
-    private var tabBarBackground: some View {
-        RoundedRectangle(cornerRadius: 28, style: .continuous)
-            .fill(.ultraThinMaterial)
-            .overlay(
-                RoundedRectangle(cornerRadius: 28, style: .continuous)
-                    .stroke(
-                        LinearGradient(
-                            colors: [
-                                Color.white.opacity(0.15),
-                                Color.white.opacity(0.05)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 1
-                    )
-            )
-            .shadow(color: .black.opacity(0.25), radius: 20, y: 10)
-    }
-
-    // MARK: - Tab Button
-    private func tabButton(for tab: TabItem) -> some View {
-        let isSelected = selectedTab == tab
-
-        return Button {
-            HapticManager.selection()
-            withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
-                selectedTab = tab
-            }
-        } label: {
-            VStack(spacing: 6) {
-                ZStack {
-                    // Background indicator
-                    if isSelected {
-                        RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .fill(
-                                LinearGradient(
-                                    colors: [
-                                        AppColors.primary.opacity(0.25),
-                                        AppColors.accent.opacity(0.15)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .frame(width: 52, height: 36)
-                            .matchedGeometryEffect(id: "tabIndicator", in: tabAnimation)
-                    }
-
-                    // Icon
-                    Image(systemName: isSelected ? tab.icon : tab.iconUnselected)
-                        .font(.system(size: 20, weight: isSelected ? .semibold : .regular))
-                        .foregroundStyle(
-                            isSelected
-                                ? AnyShapeStyle(AppColors.sleepGradient)
-                                : AnyShapeStyle(AppColors.textTertiary)
-                        )
-                        .frame(width: 52, height: 36)
-                        .scaleEffect(isSelected ? 1.05 : 1.0)
+            SmartAlarmView()
+                .tabItem {
+                    Label(TabItem.alarm.title, systemImage: selectedTab == .alarm ? TabItem.alarm.icon : TabItem.alarm.iconUnselected)
                 }
+                .tag(TabItem.alarm)
 
-                // Label
-                Text(tab.title)
-                    .font(.system(size: 10, weight: isSelected ? .semibold : .regular))
-                    .foregroundColor(isSelected ? AppColors.primary : AppColors.textTertiary)
-            }
-            .frame(maxWidth: .infinity)
-            .contentShape(Rectangle())
+            HomeView()
+                .tabItem {
+                    Label(TabItem.home.title, systemImage: selectedTab == .home ? TabItem.home.icon : TabItem.home.iconUnselected)
+                }
+                .tag(TabItem.home)
+
+            StatisticsView()
+                .tabItem {
+                    Label(TabItem.statistics.title, systemImage: selectedTab == .statistics ? TabItem.statistics.icon : TabItem.statistics.iconUnselected)
+                }
+                .tag(TabItem.statistics)
+
+            SettingsView()
+                .tabItem {
+                    Label(TabItem.settings.title, systemImage: selectedTab == .settings ? TabItem.settings.icon : TabItem.settings.iconUnselected)
+                }
+                .tag(TabItem.settings)
         }
-        .buttonStyle(.plain)
+        .tint(AppColors.primary)
+        .onChange(of: selectedTab) { _, newTab in
+            if newTab == .home || newTab == .statistics {
+                NotificationCenter.default.post(name: .didSwitchToDataTab, object: nil)
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .didRequestSwitchToSleepTab)) { _ in
+            selectedTab = .tracker
+        }
     }
-}
-
-// MARK: - Preview
-#Preview {
-    MainTabView()
-        .environmentObject(StorageService.shared)
-        .preferredColorScheme(.dark)
 }
