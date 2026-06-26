@@ -92,7 +92,8 @@ extension MarketingTheme {
             headlineDepthShadow: Color.black.opacity(0.35),
             blobBlendMode: .screen,
             vignetteColor: .clear,
-            deviceContactShadow: Color.black.opacity(0.55)
+            deviceContactShadow: Color.black.opacity(0.55),
+            headlineWeight: .black   // SF Pro Display Black (high-conversion ASO)
         )
     }
 
