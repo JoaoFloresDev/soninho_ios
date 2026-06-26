@@ -21,12 +21,12 @@ enum AlarmSound: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .sunrise: return "Sunrise"
-        case .birds: return "Birds"
-        case .ocean: return "Ocean Waves"
-        case .gentle: return "Gentle"
-        case .piano: return "Piano"
-        case .forest: return "Forest"
+        case .sunrise: return String(localized: "sound_sunrise")
+        case .birds: return String(localized: "sound_birds")
+        case .ocean: return String(localized: "sound_ocean")
+        case .gentle: return String(localized: "sound_gentle")
+        case .piano: return String(localized: "sound_piano")
+        case .forest: return String(localized: "sound_forest")
         }
     }
 
@@ -58,6 +58,18 @@ struct AlarmModel: Codable, Identifiable {
     var vibrationEnabled: Bool
     var repeatDays: Set<Weekday>
     var label: String?
+
+    // MARK: - Pacote Despertar
+    /// Mission the user must complete to dismiss the alarm.
+    var mission: WakeMission
+    /// How demanding the mission is.
+    var missionDifficulty: MissionDifficulty
+    /// Ramp volume/vibration up and play a sunrise screen instead of a hard ring.
+    var gradualWakeEnabled: Bool
+    /// Minutes over which the gradual wake ramps to full intensity.
+    var gradualWakeDuration: Int
+    /// After dismissing, require movement to confirm the user actually got up.
+    var antiRelapseEnabled: Bool
 
     // MARK: - Computed Properties
     var timeString: String {
@@ -96,10 +108,8 @@ struct AlarmModel: Codable, Identifiable {
 
         // Repeating alarm
         var nextDate: Date?
-        let currentWeekday = calendar.component(.weekday, from: now)
-
         for dayOffset in 0..<7 {
-            let checkDate = calendar.date(byAdding: .day, value: dayOffset, to: now)!
+            guard let checkDate = calendar.date(byAdding: .day, value: dayOffset, to: now) else { continue }
             let checkWeekday = calendar.component(.weekday, from: checkDate)
 
             if let weekday = Weekday(calendarWeekday: checkWeekday), repeatDays.contains(weekday) {
@@ -128,7 +138,12 @@ struct AlarmModel: Codable, Identifiable {
         volume: Double = 0.7,
         vibrationEnabled: Bool = true,
         repeatDays: Set<Weekday> = [],
-        label: String? = nil
+        label: String? = nil,
+        mission: WakeMission = .none,
+        missionDifficulty: MissionDifficulty = .medium,
+        gradualWakeEnabled: Bool = true,
+        gradualWakeDuration: Int = 2,
+        antiRelapseEnabled: Bool = false
     ) {
         self.id = id
         self.time = time
@@ -140,6 +155,38 @@ struct AlarmModel: Codable, Identifiable {
         self.vibrationEnabled = vibrationEnabled
         self.repeatDays = repeatDays
         self.label = label
+        self.mission = mission
+        self.missionDifficulty = missionDifficulty
+        self.gradualWakeEnabled = gradualWakeEnabled
+        self.gradualWakeDuration = gradualWakeDuration
+        self.antiRelapseEnabled = antiRelapseEnabled
+    }
+
+    // MARK: - Codable (backward compatible)
+    private enum CodingKeys: String, CodingKey {
+        case id, time, isEnabled, isSmartAlarm, smartAlarmWindow, sound, volume
+        case vibrationEnabled, repeatDays, label
+        case mission, missionDifficulty, gradualWakeEnabled, gradualWakeDuration, antiRelapseEnabled
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(UUID.self, forKey: .id)
+        time = try c.decode(Date.self, forKey: .time)
+        isEnabled = try c.decode(Bool.self, forKey: .isEnabled)
+        isSmartAlarm = try c.decode(Bool.self, forKey: .isSmartAlarm)
+        smartAlarmWindow = try c.decode(Int.self, forKey: .smartAlarmWindow)
+        sound = try c.decode(AlarmSound.self, forKey: .sound)
+        volume = try c.decodeIfPresent(Double.self, forKey: .volume) ?? 0.7
+        vibrationEnabled = try c.decodeIfPresent(Bool.self, forKey: .vibrationEnabled) ?? true
+        repeatDays = try c.decode(Set<Weekday>.self, forKey: .repeatDays)
+        label = try c.decodeIfPresent(String.self, forKey: .label)
+        // New Pacote Despertar fields — absent in alarms saved before this update.
+        mission = try c.decodeIfPresent(WakeMission.self, forKey: .mission) ?? .none
+        missionDifficulty = try c.decodeIfPresent(MissionDifficulty.self, forKey: .missionDifficulty) ?? .medium
+        gradualWakeEnabled = try c.decodeIfPresent(Bool.self, forKey: .gradualWakeEnabled) ?? true
+        gradualWakeDuration = try c.decodeIfPresent(Int.self, forKey: .gradualWakeDuration) ?? 2
+        antiRelapseEnabled = try c.decodeIfPresent(Bool.self, forKey: .antiRelapseEnabled) ?? false
     }
 }
 
@@ -193,25 +240,5 @@ enum Weekday: Int, Codable, CaseIterable, Identifiable {
         case .friday: return "F"
         case .saturday: return "S"
         }
-    }
-}
-
-// MARK: - Sample Data
-extension AlarmModel {
-    static var sampleAlarm: AlarmModel {
-        var components = DateComponents()
-        components.hour = 7
-        components.minute = 30
-        let time = Calendar.current.date(from: components) ?? Date()
-
-        return AlarmModel(
-            time: time,
-            isEnabled: true,
-            isSmartAlarm: true,
-            smartAlarmWindow: 30,
-            sound: .sunrise,
-            repeatDays: [.monday, .tuesday, .wednesday, .thursday, .friday],
-            label: "Work"
-        )
     }
 }

@@ -31,6 +31,13 @@ final class SmartAlarmViewModel: ObservableObject {
     @Published var editingRepeatDays: Set<Weekday> = []
     @Published var editingLabel = ""
 
+    // Pacote Despertar editing state
+    @Published var editingMission: WakeMission = .none
+    @Published var editingMissionDifficulty: MissionDifficulty = .medium
+    @Published var editingGradualWake = true
+    @Published var editingGradualDuration = 2
+    @Published var editingAntiRelapse = false
+
     // MARK: - Computed Properties
     var nextAlarmText: String {
         guard let alarm = alarms.first(where: { $0.isEnabled }),
@@ -90,7 +97,6 @@ final class SmartAlarmViewModel: ObservableObject {
     }
 
     func toggleAlarm(_ alarm: AlarmModel) {
-        HapticManager.selection()
         var updatedAlarm = alarm
         updatedAlarm.isEnabled.toggle()
         storageService.saveAlarm(updatedAlarm)
@@ -110,7 +116,6 @@ final class SmartAlarmViewModel: ObservableObject {
     }
 
     func deleteAlarm(_ alarm: AlarmModel) {
-        HapticManager.mediumImpact()
         storageService.deleteAlarm(alarm)
         alarms.removeAll { $0.id == alarm.id }
 
@@ -128,6 +133,11 @@ final class SmartAlarmViewModel: ObservableObject {
         editingSound = alarm.sound
         editingRepeatDays = alarm.repeatDays
         editingLabel = alarm.label ?? ""
+        editingMission = alarm.mission
+        editingMissionDifficulty = alarm.missionDifficulty
+        editingGradualWake = alarm.gradualWakeEnabled
+        editingGradualDuration = alarm.gradualWakeDuration
+        editingAntiRelapse = alarm.antiRelapseEnabled
         isEditing = true
     }
 
@@ -139,11 +149,15 @@ final class SmartAlarmViewModel: ObservableObject {
         editingSound = .sunrise
         editingRepeatDays = []
         editingLabel = ""
+        editingMission = .none
+        editingMissionDifficulty = .medium
+        editingGradualWake = true
+        editingGradualDuration = 2
+        editingAntiRelapse = false
         showingAddSheet = true
     }
 
     func saveAlarm() {
-        HapticManager.success()
 
         let alarm = AlarmModel(
             id: selectedAlarm?.id ?? UUID(),
@@ -153,7 +167,12 @@ final class SmartAlarmViewModel: ObservableObject {
             smartAlarmWindow: editingSmartWindow,
             sound: editingSound,
             repeatDays: editingRepeatDays,
-            label: editingLabel.isEmpty ? nil : editingLabel
+            label: editingLabel.isEmpty ? nil : editingLabel,
+            mission: editingMission,
+            missionDifficulty: editingMissionDifficulty,
+            gradualWakeEnabled: editingGradualWake,
+            gradualWakeDuration: editingGradualDuration,
+            antiRelapseEnabled: editingAntiRelapse
         )
 
         storageService.saveAlarm(alarm)
@@ -222,7 +241,7 @@ final class SmartAlarmViewModel: ObservableObject {
             isSmartAlarm: true,
             smartAlarmWindow: 30,
             sound: .sunrise,
-            repeatDays: [.monday, .tuesday, .wednesday, .thursday, .friday],
+            repeatDays: [],
             label: String(localized: "alarm_default_label")
         )
     }

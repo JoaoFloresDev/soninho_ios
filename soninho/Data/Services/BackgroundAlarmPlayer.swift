@@ -1,0 +1,373 @@
+//
+//  BackgroundAlarmPlayer.swift
+//  soninho
+//
+//  Created by João Flores on 22/02/26.
+//
+
+import Foundation
+import AVFoundation
+import AudioToolbox
+import UIKit
+
+// MARK: - Background Alarm Player
+/// Keeps the app alive in background by playing near-silent audio,
+/// then switches to the real alarm sound when the scheduled time arrives.
+/// This is the standard technique used by professional alarm apps (Sleep Cycle, Alarmy, etc.)
+/// to bypass iOS notification sound limitations.
+@MainActor
+final class BackgroundAlarmPlayer: ObservableObject {
+    // MARK: - Singleton
+    static let shared = BackgroundAlarmPlayer()
+
+    // MARK: - Published Properties
+    @Published private(set) var isBackgroundActive = false
+
+    // MARK: - Private Properties
+    private var silentPlayer: AVAudioPlayer?
+    private var alarmPlayer: AVAudioPlayer?
+    private var alarmCheckTimer: DispatchSourceTimer?
+    private var vibrationTimer: DispatchSourceTimer?
+    private var systemAlarmTimer: DispatchSourceTimer?
+    private let audioSession = AVAudioSession.sharedInstance()
+    private let timerQueue = DispatchQueue(label: "com.gambitstudio.soninho.alarmtimer", qos: .userInteractive)
+    private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
+    private var silentAudioData: Data?
+    private var hasFiredAlarmIds: Set<String> = []
+
+    // MARK: - Init
+    private init() {
+        // Pre-generate silent audio data so it's ready instantly
+        silentAudioData = generateSilentAudioData()
+        // Configure audio session early
+        configureAudioSession()
+    }
+
+    // MARK: - Public Methods
+
+    /// Prepares the audio session. Call on app launch.
+    func prepare() {
+        configureAudioSession()
+        print("[BackgroundAlarm] Audio session prepared")
+    }
+
+    /// Starts background audio to keep the app alive.
+    /// Call this when the app is about to enter background (inactive or background phase).
+    func startBackgroundKeepAlive() {
+        guard !isBackgroundActive else { return }
+
+        // Check if there's an upcoming alarm within the next 12 hours
+        let alarms = StorageService.shared.loadAlarms()
+        let hasUpcomingAlarm = alarms.contains { alarm in
+            guard alarm.isEnabled else { return false }
+            if let nextDate = alarm.nextAlarmDate {
+                return nextDate.timeIntervalSinceNow < 12 * 3600 && nextDate.timeIntervalSinceNow > 0
+            }
+            return !alarm.repeatDays.isEmpty
+        }
+
+        // Also check if sleep tracking is active
+        let isTrackingSleep = MotionSleepMonitor.shared.isMonitoring
+
+        guard hasUpcomingAlarm || isTrackingSleep else {
+            print("[BackgroundAlarm] No upcoming alarms or active tracking, skipping")
+            return
+        }
+
+        // Begin background task for extra safety
+        beginBackgroundTask()
+
+        // Ensure audio session is active
+        configureAudioSession()
+
+        // Start silent audio loop
+        startSilentAudio()
+
+        // Start alarm check timer using GCD (reliable in background)
+        startAlarmCheckTimer()
+
+        isBackgroundActive = true
+        hasFiredAlarmIds = []
+        print("[BackgroundAlarm] Background keep-alive STARTED")
+    }
+
+    /// Stops background audio. Call when app comes to foreground.
+    func stopBackgroundKeepAlive() {
+        stopAlarmCheckTimer()
+        silentPlayer?.stop()
+        silentPlayer = nil
+        isBackgroundActive = false
+        hasFiredAlarmIds = []
+        endBackgroundTask()
+        print("[BackgroundAlarm] Background keep-alive STOPPED")
+    }
+
+    /// Triggers the alarm sound with vibration. When `gradualSeconds > 0`, the
+    /// volume fades in and the vibration ramps up over that window.
+    func triggerAlarm(soundName: String = "sunrise", volume: Float = 1.0, vibrationEnabled: Bool = true, gradualSeconds: TimeInterval = 0) {
+        // Stop silent audio first
+        silentPlayer?.stop()
+        silentPlayer = nil
+
+        // Reconfigure for loud playback (not mixing)
+        do {
+            try audioSession.setCategory(.playback, mode: .default, options: [.duckOthers])
+            try audioSession.setActive(true)
+        } catch {
+            print("[BackgroundAlarm] Audio reconfigure error: \(error)")
+        }
+
+        // Play the selected alarm sound
+        let alarmSound = AlarmSound(rawValue: soundName) ?? .sunrise
+        if let alarmURL = AlarmSoundGenerator.alarmSoundURL(for: alarmSound) {
+            do {
+                alarmPlayer = try AVAudioPlayer(contentsOf: alarmURL)
+                alarmPlayer?.numberOfLoops = -1
+                alarmPlayer?.prepareToPlay()
+                if gradualSeconds > 0 {
+                    alarmPlayer?.volume = max(0.04, volume * 0.06)
+                    alarmPlayer?.play()
+                    alarmPlayer?.setVolume(volume, fadeDuration: gradualSeconds)
+                } else {
+                    alarmPlayer?.volume = volume
+                    alarmPlayer?.play()
+                }
+                print("[BackgroundAlarm] Alarm audio PLAYING (gradual=\(gradualSeconds)s)")
+            } catch {
+                print("[BackgroundAlarm] Failed to play alarm: \(error)")
+                playSystemAlarm()
+            }
+        } else {
+            print("[BackgroundAlarm] No alarm sound file, using system fallback")
+            playSystemAlarm()
+        }
+
+        // Start vibration
+        if vibrationEnabled {
+            startVibrationLoop(gradualSeconds: gradualSeconds)
+        }
+    }
+
+    /// Stops the alarm sound and vibration.
+    func stopAlarm() {
+        alarmPlayer?.stop()
+        alarmPlayer = nil
+        systemAlarmTimer?.cancel()
+        systemAlarmTimer = nil
+        stopVibrationTimer()
+
+        // If still in background mode, restart silent audio for next alarm
+        if isBackgroundActive {
+            configureAudioSession()
+            startSilentAudio()
+        }
+    }
+
+    // MARK: - Audio Session
+
+    private func configureAudioSession() {
+        do {
+            // .playback: audio plays with mute switch ON and screen locked
+            // .mixWithOthers: doesn't interrupt other audio (important for silent background)
+            try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+            try audioSession.setActive(true)
+        } catch {
+            print("[BackgroundAlarm] Audio session error: \(error)")
+        }
+    }
+
+    // MARK: - Silent Audio
+
+    private func startSilentAudio() {
+        silentPlayer?.stop()
+
+        guard let data = silentAudioData else {
+            print("[BackgroundAlarm] No silent audio data!")
+            return
+        }
+
+        do {
+            silentPlayer = try AVAudioPlayer(data: data)
+            silentPlayer?.numberOfLoops = -1 // Loop forever
+            silentPlayer?.volume = 0.01
+            silentPlayer?.prepareToPlay()
+            let success = silentPlayer?.play() ?? false
+            print("[BackgroundAlarm] Silent audio started: \(success)")
+        } catch {
+            print("[BackgroundAlarm] Failed to start silent audio: \(error)")
+        }
+    }
+
+    private func generateSilentAudioData() -> Data {
+        // 1 second of near-silent audio at low sample rate
+        let sampleRate: Double = 8000
+        let numSamples = Int(sampleRate)
+        let numChannels: UInt16 = 1
+        let bitsPerSample: UInt16 = 16
+        let sampleRateInt = UInt32(sampleRate)
+        let byteRate = sampleRateInt * UInt32(numChannels) * UInt32(bitsPerSample / 8)
+        let blockAlign = numChannels * (bitsPerSample / 8)
+        let dataSize = UInt32(numSamples * Int(bitsPerSample / 8))
+        let fileSize = 36 + dataSize
+
+        var data = Data(capacity: Int(44 + dataSize))
+
+        // WAV header
+        data.append(contentsOf: "RIFF".utf8)
+        data.append(contentsOf: withUnsafeBytes(of: fileSize.littleEndian) { Array($0) })
+        data.append(contentsOf: "WAVE".utf8)
+        data.append(contentsOf: "fmt ".utf8)
+        data.append(contentsOf: withUnsafeBytes(of: UInt32(16).littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: numChannels.littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: sampleRateInt.littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: byteRate.littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: blockAlign.littleEndian) { Array($0) })
+        data.append(contentsOf: withUnsafeBytes(of: bitsPerSample.littleEndian) { Array($0) })
+        data.append(contentsOf: "data".utf8)
+        data.append(contentsOf: withUnsafeBytes(of: dataSize.littleEndian) { Array($0) })
+
+        // Near-silent samples (value = 1, barely perceptible)
+        let sampleBytes = withUnsafeBytes(of: Int16(1).littleEndian) { Array($0) }
+        for _ in 0..<numSamples {
+            data.append(contentsOf: sampleBytes)
+        }
+
+        return data
+    }
+
+    // MARK: - GCD Timer (reliable in background)
+
+    private func startAlarmCheckTimer() {
+        stopAlarmCheckTimer()
+
+        let timer = DispatchSource.makeTimerSource(queue: timerQueue)
+        timer.schedule(deadline: .now() + 10, repeating: .seconds(15)) // Check every 15 seconds
+        timer.setEventHandler { [weak self] in
+            Task { @MainActor in
+                self?.checkAlarmTimes()
+            }
+        }
+        timer.resume()
+        alarmCheckTimer = timer
+        print("[BackgroundAlarm] GCD timer started (15s interval)")
+    }
+
+    private func stopAlarmCheckTimer() {
+        alarmCheckTimer?.cancel()
+        alarmCheckTimer = nil
+    }
+
+    // MARK: - Alarm Check
+
+    private func checkAlarmTimes() {
+        let alarms = StorageService.shared.loadAlarms()
+        let now = Date()
+
+        for alarm in alarms where alarm.isEnabled {
+            // Skip if already fired this alarm
+            guard !hasFiredAlarmIds.contains(alarm.id.uuidString) else { continue }
+            guard let nextDate = alarm.nextAlarmDate else { continue }
+
+            let timeUntilAlarm = nextDate.timeIntervalSince(now)
+
+            // Fire if we're within 0 to -90 seconds of the alarm time
+            if timeUntilAlarm <= 0 && timeUntilAlarm > -90 {
+                let isSmartActive = alarm.isSmartAlarm && MotionSleepMonitor.shared.isMonitoring
+
+                if isSmartActive && !MotionSleepMonitor.shared.smartAlarmTriggered {
+                    // Smart alarm will handle it, but fire at hard deadline
+                    if timeUntilAlarm <= 0 && timeUntilAlarm > -10 {
+                        fireAlarm(alarm)
+                    }
+                } else if !isSmartActive {
+                    fireAlarm(alarm)
+                }
+            }
+        }
+    }
+
+    private func fireAlarm(_ alarm: AlarmModel) {
+        hasFiredAlarmIds.insert(alarm.id.uuidString)
+        print("[BackgroundAlarm] FIRING alarm: \(alarm.id) at \(Date())")
+
+        let gradualSeconds: TimeInterval = alarm.gradualWakeEnabled ? TimeInterval(alarm.gradualWakeDuration * 60) : 0
+        triggerAlarm(soundName: alarm.sound.rawValue, volume: Float(alarm.volume), vibrationEnabled: alarm.vibrationEnabled, gradualSeconds: gradualSeconds)
+
+        // Update NotificationService to show alarm UI
+        NotificationService.shared.ringingAlarmId = alarm.id.uuidString
+        NotificationService.shared.ringingAlarmTime = alarm.time
+        NotificationService.shared.isAlarmRinging = true
+    }
+
+    // MARK: - System Alarm Fallback
+
+    private func playSystemAlarm() {
+        AudioServicesPlayAlertSound(SystemSoundID(1304))
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+
+        systemAlarmTimer?.cancel()
+        let repeatTimer = DispatchSource.makeTimerSource(queue: timerQueue)
+        repeatTimer.schedule(deadline: .now() + 2, repeating: .seconds(2))
+        repeatTimer.setEventHandler {
+            AudioServicesPlayAlertSound(SystemSoundID(1304))
+        }
+        repeatTimer.resume()
+        systemAlarmTimer = repeatTimer
+    }
+
+    // MARK: - Vibration
+
+    private func startVibrationLoop(gradualSeconds: TimeInterval = 0) {
+        stopVibrationTimer()
+
+        guard gradualSeconds > 0 else {
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            let timer = DispatchSource.makeTimerSource(queue: timerQueue)
+            timer.schedule(deadline: .now() + 1.5, repeating: .seconds(1))
+            timer.setEventHandler {
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
+            timer.resume()
+            vibrationTimer = timer
+            return
+        }
+
+        // Crescent vibration: pulses tighten from ~5s apart to ~1.2s.
+        let start = Date()
+        var lastFire = Date(timeIntervalSince1970: 0)
+        let timer = DispatchSource.makeTimerSource(queue: timerQueue)
+        timer.schedule(deadline: .now() + 0.4, repeating: .milliseconds(400))
+        timer.setEventHandler {
+            let progress = min(Date().timeIntervalSince(start) / gradualSeconds, 1.0)
+            let period = 5.0 - 3.8 * progress
+            if Date().timeIntervalSince(lastFire) >= period {
+                lastFire = Date()
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
+        }
+        timer.resume()
+        vibrationTimer = timer
+    }
+
+    private func stopVibrationTimer() {
+        vibrationTimer?.cancel()
+        vibrationTimer = nil
+    }
+
+    // MARK: - Background Task
+
+    private func beginBackgroundTask() {
+        endBackgroundTask()
+        backgroundTaskID = UIApplication.shared.beginBackgroundTask { [weak self] in
+            self?.endBackgroundTask()
+        }
+    }
+
+    private func endBackgroundTask() {
+        if backgroundTaskID != .invalid {
+            UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            backgroundTaskID = .invalid
+        }
+    }
+}

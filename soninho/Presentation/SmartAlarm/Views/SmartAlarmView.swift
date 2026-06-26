@@ -24,10 +24,11 @@ struct SmartAlarmView: View {
                     alarmsSection
                 }
                 .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, AppSpacing.tabBarBottomPadding)
+                .padding(.bottom, AppSpacing.lg)
             }
             .background(AppColors.background)
             .navigationTitle(String(localized: "alarm_title"))
+            .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -35,7 +36,7 @@ struct SmartAlarmView: View {
                     } label: {
                         Image(systemName: "plus")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(AppColors.primary)
+                            .foregroundStyle(AppColors.primary)
                     }
                 }
             }
@@ -69,11 +70,11 @@ struct SmartAlarmView: View {
             VStack(spacing: 4) {
                 Text(String(localized: "alarm_next"))
                     .font(AppFonts.subheadline())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
 
                 Text(viewModel.nextAlarmText)
                     .font(AppFonts.title2())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
 
             // Smart Alarm Badge
@@ -85,7 +86,7 @@ struct SmartAlarmView: View {
                     Text(String(localized: "alarm_smart_enabled"))
                         .font(AppFonts.caption())
                 }
-                .foregroundColor(AppColors.accent)
+                .foregroundStyle(AppColors.accent)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
                 .background(AppColors.accent.opacity(0.15))
@@ -103,7 +104,7 @@ struct SmartAlarmView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "alarm_your_alarms"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             ForEach(viewModel.alarms) { alarm in
                 AlarmCard(
@@ -126,42 +127,39 @@ struct AlarmCard: View {
 
     var body: some View {
         HStack(spacing: 16) {
-            // Time and Info (tappable)
-            Button(action: onTap) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(alarm.timeString)
-                        .font(AppFonts.title())
-                        .foregroundColor(alarm.isEnabled ? AppColors.textPrimary : AppColors.textTertiary)
+            // Time and Info
+            VStack(alignment: .leading, spacing: 4) {
+                Text(alarm.timeString)
+                    .font(AppFonts.title())
+                    .foregroundStyle(alarm.isEnabled ? AppColors.textPrimary : AppColors.textTertiary)
 
-                    HStack(spacing: 8) {
-                        if let label = alarm.label {
-                            Text(label)
-                                .font(AppFonts.caption())
-                                .foregroundColor(AppColors.textSecondary)
-                        }
-
-                        Text(alarm.repeatDaysString)
+                HStack(spacing: 8) {
+                    if let label = alarm.label {
+                        Text(label)
                             .font(AppFonts.caption())
-                            .foregroundColor(AppColors.textTertiary)
+                            .foregroundStyle(AppColors.textSecondary)
                     }
 
-                    if alarm.isSmartAlarm {
-                        HStack(spacing: 4) {
-                            Image(systemName: "brain.head.profile")
-                                .font(.system(size: 10))
+                    Text(alarm.repeatDaysString)
+                        .font(AppFonts.caption())
+                        .foregroundStyle(AppColors.textTertiary)
+                }
 
-                            Text(String(localized: "alarm_smart_window \(alarm.smartAlarmWindow)"))
-                                .font(AppFonts.caption2())
-                        }
-                        .foregroundColor(AppColors.accent)
+                if alarm.isSmartAlarm {
+                    HStack(spacing: 4) {
+                        Image(systemName: "brain.head.profile")
+                            .font(.system(size: 10))
+
+                        Text(String(localized: "alarm_smart_window \(alarm.smartAlarmWindow)"))
+                            .font(AppFonts.caption2())
                     }
+                    .foregroundStyle(AppColors.accent)
                 }
             }
-            .buttonStyle(.plain)
 
             Spacer()
 
-            // Toggle (separate from tap area)
+            // Toggle (separate interactive area)
             Toggle("", isOn: Binding(
                 get: { alarm.isEnabled },
                 set: { _ in onToggle() }
@@ -172,6 +170,10 @@ struct AlarmCard: View {
         .padding()
         .background(AppColors.surface)
         .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+        .contentShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+        .onTapGesture {
+            onTap()
+        }
         .contextMenu {
             Button(role: .destructive) {
                 onDelete()
@@ -180,185 +182,4 @@ struct AlarmCard: View {
             }
         }
     }
-}
-
-// MARK: - Alarm Edit Sheet
-struct AlarmEditSheet: View {
-    @ObservedObject var viewModel: SmartAlarmViewModel
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    // Time Picker
-                    DatePicker(
-                        "",
-                        selection: $viewModel.editingTime,
-                        displayedComponents: .hourAndMinute
-                    )
-                    .datePickerStyle(.wheel)
-                    .labelsHidden()
-
-                    // Smart Alarm Toggle
-                    VStack(spacing: 16) {
-                        Toggle(isOn: $viewModel.editingIsSmartAlarm) {
-                            HStack(spacing: 12) {
-                                Image(systemName: "brain.head.profile")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(AppColors.accent)
-
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(String(localized: "alarm_smart_alarm"))
-                                        .font(AppFonts.body())
-                                        .foregroundColor(AppColors.textPrimary)
-
-                                    Text(String(localized: "alarm_smart_description"))
-                                        .font(AppFonts.caption())
-                                        .foregroundColor(AppColors.textSecondary)
-                                }
-                            }
-                        }
-                        .tint(AppColors.accent)
-
-                        if viewModel.editingIsSmartAlarm {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(String(localized: "alarm_wake_window"))
-                                    .font(AppFonts.subheadline())
-                                    .foregroundColor(AppColors.textSecondary)
-
-                                Picker("", selection: $viewModel.editingSmartWindow) {
-                                    Text("15 min").tag(15)
-                                    Text("30 min").tag(30)
-                                    Text("45 min").tag(45)
-                                    Text("60 min").tag(60)
-                                }
-                                .pickerStyle(.segmented)
-                            }
-                        }
-                    }
-                    .cardStyle()
-
-                    // Repeat Days
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(String(localized: "alarm_repeat"))
-                            .font(AppFonts.headline())
-                            .foregroundColor(AppColors.textPrimary)
-
-                        HStack(spacing: 8) {
-                            ForEach(Weekday.allCases) { day in
-                                Button {
-                                    HapticManager.selection()
-                                    if viewModel.editingRepeatDays.contains(day) {
-                                        viewModel.editingRepeatDays.remove(day)
-                                    } else {
-                                        viewModel.editingRepeatDays.insert(day)
-                                    }
-                                } label: {
-                                    Text(day.letter)
-                                        .font(AppFonts.caption())
-                                        .fontWeight(.semibold)
-                                        .frame(width: 36, height: 36)
-                                        .foregroundColor(
-                                            viewModel.editingRepeatDays.contains(day)
-                                                ? .white
-                                                : AppColors.textSecondary
-                                        )
-                                        .background(
-                                            viewModel.editingRepeatDays.contains(day)
-                                                ? AppColors.primary
-                                                : AppColors.surfaceSecondary
-                                        )
-                                        .clipShape(Circle())
-                                }
-                            }
-                        }
-                    }
-
-                    // Sound Picker
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(String(localized: "alarm_sound"))
-                            .font(AppFonts.headline())
-                            .foregroundColor(AppColors.textPrimary)
-
-                        ForEach(AlarmSound.allCases) { sound in
-                            Button {
-                                HapticManager.selection()
-                                viewModel.editingSound = sound
-                            } label: {
-                                HStack(spacing: 12) {
-                                    Image(systemName: sound.icon)
-                                        .font(.system(size: 16))
-                                        .foregroundColor(AppColors.primary)
-                                        .frame(width: 32)
-
-                                    Text(sound.displayName)
-                                        .font(AppFonts.body())
-                                        .foregroundColor(AppColors.textPrimary)
-
-                                    Spacer()
-
-                                    if viewModel.editingSound == sound {
-                                        Image(systemName: "checkmark")
-                                            .font(.system(size: 14, weight: .semibold))
-                                            .foregroundColor(AppColors.primary)
-                                    }
-                                }
-                                .padding()
-                                .background(
-                                    viewModel.editingSound == sound
-                                        ? AppColors.primary.opacity(0.1)
-                                        : AppColors.surface
-                                )
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                            }
-                        }
-                    }
-
-                    // Label
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(String(localized: "alarm_label"))
-                            .font(AppFonts.headline())
-                            .foregroundColor(AppColors.textPrimary)
-
-                        TextField(String(localized: "alarm_label_placeholder"), text: $viewModel.editingLabel)
-                            .textFieldStyle(.plain)
-                            .padding()
-                            .background(AppColors.surface)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                }
-                .padding()
-                .padding(.bottom, 50)
-            }
-            .background(AppColors.background)
-            .navigationTitle(viewModel.selectedAlarm == nil
-                ? String(localized: "alarm_add")
-                : String(localized: "alarm_edit"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(String(localized: "action_cancel")) {
-                        dismiss()
-                        viewModel.cancelEditing()
-                    }
-                    .foregroundColor(AppColors.textSecondary)
-                }
-
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(String(localized: "action_save")) {
-                        viewModel.saveAlarm()
-                        dismiss()
-                    }
-                    .fontWeight(.semibold)
-                    .foregroundColor(AppColors.primary)
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Preview
-#Preview {
-    SmartAlarmView()
 }
