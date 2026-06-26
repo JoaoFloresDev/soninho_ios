@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 // MARK: - Home ViewModel
 @MainActor
@@ -71,6 +72,7 @@ final class HomeViewModel: ObservableObject {
 
     // MARK: - Private Properties
     private var hasLoadedOnce = false
+    private var hasRequestedHealthOnLoad = false
     private var isCurrentlyLoading = false
     private var cancellables = Set<AnyCancellable>()
 
@@ -88,6 +90,13 @@ final class HomeViewModel: ObservableObject {
             isLoading = true
         }
         errorMessage = nil
+
+        // Ask for Apple Health access the first time Resumo opens, so the
+        // permission sheet appears even when onboarding was already completed.
+        if healthKitService.isHealthKitAvailable && !hasRequestedHealthOnLoad {
+            hasRequestedHealthOnLoad = true
+            try? await healthKitService.requestAuthorization()
+        }
 
         var appleRecords: [SleepRecord] = []
         if healthKitService.isHealthKitAvailable {
@@ -113,9 +122,21 @@ final class HomeViewModel: ObservableObject {
         do {
             try await healthKitService.requestAuthorization()
             await loadData()
+            // iOS shows the permission sheet only the first time. If access was
+            // already decided (e.g. denied earlier) it stays silent — send the
+            // user to Settings so they can flip it on manually.
+            if weeklyRecords.isEmpty {
+                openHealthSettings()
+            }
         } catch {
             errorMessage = error.localizedDescription
+            openHealthSettings()
         }
+    }
+
+    func openHealthSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url)
     }
 
     func refresh() async {
