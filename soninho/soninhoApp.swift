@@ -15,6 +15,7 @@ struct SoninhoApp: App {
     @StateObject private var purchaseService = PurchaseService.shared
     @StateObject private var notificationService = NotificationService.shared
     @StateObject private var reviewService = ReviewService.shared
+    @StateObject private var wakeGreeting = WakeGreetingManager.shared
     @State private var isOnboardingComplete: Bool
     @Environment(\.scenePhase) private var scenePhase
 
@@ -52,7 +53,17 @@ struct SoninhoApp: App {
                         .transition(.opacity.combined(with: .scale(scale: 1.05)))
                         .zIndex(100)
                 }
+
+                // Wake-up greeting after a sleep session ends
+                if wakeGreeting.isShowing {
+                    WakeGreetingView(onDismiss: {
+                        withAnimation(.easeInOut(duration: 0.5)) { wakeGreeting.dismiss() }
+                    })
+                    .transition(.opacity)
+                    .zIndex(90)
+                }
             }
+            .animation(.easeInOut(duration: 0.5), value: wakeGreeting.isShowing)
             .animation(.spring(response: 0.4), value: notificationService.isAlarmRinging)
             .preferredColorScheme(.dark)
             .onChange(of: isOnboardingComplete) { _, newValue in

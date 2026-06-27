@@ -131,6 +131,9 @@ final class SleepTrackerViewModel: ObservableObject {
 
         UserDefaults.standard.set(false, forKey: StorageKeys.isCurrentlyTracking)
         UserDefaults.standard.removeObject(forKey: StorageKeys.trackingStartTime)
+
+        // Greet the user — the night is over.
+        WakeGreetingManager.shared.show()
     }
 
     func cancelTracking() {
