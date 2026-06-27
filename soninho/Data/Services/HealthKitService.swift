@@ -26,26 +26,10 @@ final class HealthKitService: ObservableObject {
 
     // MARK: - Health Data Types
     private let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
-    private let heartRateType = HKObjectType.quantityType(forIdentifier: .heartRate)!
-    private let respiratoryRateType = HKObjectType.quantityType(forIdentifier: .respiratoryRate)!
-    private let oxygenSatType = HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!
-    private let restingHeartRateType = HKObjectType.quantityType(forIdentifier: .restingHeartRate)!
-    private let heartRateVariabilityType = HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!
 
-    private var readTypes: Set<HKObjectType> {
-        [
-            sleepType,
-            heartRateType,
-            respiratoryRateType,
-            oxygenSatType,
-            restingHeartRateType,
-            heartRateVariabilityType
-        ]
-    }
-
-    private var writeTypes: Set<HKSampleType> {
-        [sleepType]
-    }
+    // The app only READS sleep — it no longer writes to HealthKit and doesn't
+    // use heart-rate/HRV here, so request the minimal read scope.
+    private var readTypes: Set<HKObjectType> { [sleepType] }
 
     // MARK: - Init
     private init() {
@@ -66,10 +50,10 @@ final class HealthKitService: ObservableObject {
             return
         }
 
-        let writeStatus = healthStore.authorizationStatus(for: sleepType)
-        // Consider authorized if we have write access OR if we've requested authorization before.
-        // Apple intentionally hides read-only authorization — the only way to know is to try fetching.
-        isAuthorized = writeStatus == .sharingAuthorized || hasRequestedAuthorization
+        // Apple intentionally hides read-only authorization, so we can't truly
+        // know if reading is granted — only whether WRITE is. Don't fake it via
+        // a "has requested before" flag (that lies "authorized" forever).
+        isAuthorized = healthStore.authorizationStatus(for: sleepType) == .sharingAuthorized
     }
 
     /// Track whether we've ever gone through the authorization flow
@@ -83,7 +67,7 @@ final class HealthKitService: ObservableObject {
             throw HealthKitError.notAvailable
         }
 
-        try await healthStore.requestAuthorization(toShare: writeTypes, read: readTypes)
+        try await healthStore.requestAuthorization(toShare: [], read: readTypes)
         hasRequestedAuthorization = true
         checkAuthorizationStatus()
     }
@@ -342,83 +326,6 @@ final class HealthKitService: ObservableObject {
 
                 let phases = self?.convertToPhases(sleepSamples) ?? []
                 continuation.resume(returning: phases.isEmpty ? nil : phases)
-            }
-
-            healthStore.execute(query)
-        }
-    }
-
-    // MARK: - Save Sleep Data
-    func saveSleepRecord(_ record: SleepRecord) async throws {
-        guard isAuthorized else {
-            throw HealthKitError.notAuthorized
-        }
-
-        var samples: [HKCategorySample] = []
-
-        for phase in record.phases {
-            let value: Int
-            switch phase.phase {
-            case .awake:
-                value = HKCategoryValueSleepAnalysis.awake.rawValue
-            case .light:
-                value = HKCategoryValueSleepAnalysis.asleepCore.rawValue
-            case .deep:
-                value = HKCategoryValueSleepAnalysis.asleepDeep.rawValue
-            case .rem:
-                value = HKCategoryValueSleepAnalysis.asleepREM.rawValue
-            }
-
-            let sample = HKCategorySample(
-                type: sleepType,
-                value: value,
-                start: phase.startTime,
-                end: phase.endTime
-            )
-            samples.append(sample)
-        }
-
-        try await healthStore.save(samples)
-    }
-
-    // MARK: - Heart Rate Data
-    func fetchHeartRateDuring(start: Date, end: Date) async throws -> [Double] {
-        guard isAuthorized else {
-            throw HealthKitError.notAuthorized
-        }
-
-        let predicate = HKQuery.predicateForSamples(
-            withStart: start,
-            end: end,
-            options: .strictStartDate
-        )
-
-        let sortDescriptor = NSSortDescriptor(
-            key: HKSampleSortIdentifierStartDate,
-            ascending: true
-        )
-
-        return try await withCheckedThrowingContinuation { continuation in
-            let query = HKSampleQuery(
-                sampleType: heartRateType,
-                predicate: predicate,
-                limit: HKObjectQueryNoLimit,
-                sortDescriptors: [sortDescriptor]
-            ) { _, samples, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-
-                guard let samples = samples as? [HKQuantitySample] else {
-                    continuation.resume(returning: [])
-                    return
-                }
-
-                let heartRates = samples.map {
-                    $0.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
-                }
-                continuation.resume(returning: heartRates)
             }
 
             healthStore.execute(query)

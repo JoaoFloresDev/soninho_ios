@@ -3306,6 +3306,28 @@
         }
       }
     },
+    "settings_health_manage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage in Apple Health"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gerenciar no Apple Saúde"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestionar en Apple Salud"
+          }
+        }
+      }
+    },
     "settings_health_not_connected" : {
       "localizations" : {
         "en" : {

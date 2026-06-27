@@ -363,7 +363,23 @@ final class NotificationService: ObservableObject {
 
     /// Fully dismisses the alarm (mission + confirmation cleared).
     func completeAlarm() {
+        disableOneTimeAlarmIfNeeded()
         stopAlarmAudio()
+    }
+
+    /// A one-time alarm (no repeat days) must disappear after it's dismissed.
+    /// Otherwise nextAlarmDate rolls it to tomorrow and it re-arms / can re-ring.
+    /// Pass an explicit id for the notification-action path (where ringingAlarmId
+    /// may be unset); otherwise it uses the currently-ringing alarm. Call BEFORE
+    /// stopAlarmAudio (which clears ringingAlarmId).
+    func disableOneTimeAlarmIfNeeded(id: String? = nil) {
+        guard let alarmId = id ?? ringingAlarmId, let uuid = UUID(uuidString: alarmId) else { return }
+        var alarms = StorageService.shared.loadAlarms()
+        guard let idx = alarms.firstIndex(where: { $0.id == uuid }), alarms[idx].repeatDays.isEmpty else { return }
+        alarms[idx].isEnabled = false
+        let disabled = alarms[idx]
+        StorageService.shared.saveAlarm(disabled)
+        Task { await cancelAlarm(disabled) }
     }
 
     private func playFallbackAlarm() {
@@ -421,9 +437,18 @@ final class NotificationService: ObservableObject {
 
     func snoozeCurrentAlarm() {
         guard let alarmId = ringingAlarmId else { return }
-        let soundName = ringingAlarmSoundName
-        let volume = ringingAlarmVolume
-        let vibration = ringingAlarmVibration
+        // Resolve the configured sound/volume/vibration from storage — the
+        // background fire path doesn't populate the backing fields, so relying
+        // on them would snooze with the wrong (default) sound at full volume.
+        var soundName = ringingAlarmSoundName
+        var volume = ringingAlarmVolume
+        var vibration = ringingAlarmVibration
+        if let uuid = UUID(uuidString: alarmId),
+           let alarm = StorageService.shared.loadAlarms().first(where: { $0.id == uuid }) {
+            soundName = alarm.sound.rawValue
+            volume = Float(alarm.volume)
+            vibration = alarm.vibrationEnabled
+        }
         stopAlarmAudio()
         Task {
             await scheduleSnooze(for: alarmId, soundName: soundName, volume: volume, vibrationEnabled: vibration)
@@ -431,6 +456,7 @@ final class NotificationService: ObservableObject {
     }
 
     func dismissCurrentAlarm() {
+        disableOneTimeAlarmIfNeeded()
         stopAlarmAudio()
     }
 
@@ -592,6 +618,7 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
                 NotificationService.shared.stopAlarmAudio()
                 await NotificationService.shared.scheduleSnooze(for: alarmId, soundName: soundName, volume: Float(volume), vibrationEnabled: vibration)
             case "DISMISS_ACTION", UNNotificationDismissActionIdentifier:
+                NotificationService.shared.disableOneTimeAlarmIfNeeded(id: alarmId)
                 NotificationService.shared.stopAlarmAudio()
             case UNNotificationDefaultActionIdentifier:
                 // User tapped notification — show alarm screen

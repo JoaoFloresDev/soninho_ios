@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 // MARK: - Settings View
 struct SettingsView: View {
@@ -34,46 +35,21 @@ struct SettingsView: View {
 
                 // About Section
                 aboutSection
-
-                // Danger Zone
-                dangerSection
             }
             .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden)
             .background(AppColors.background)
-            .contentMargins(.bottom, AppSpacing.tabBarBottomPadding, for: .scrollContent)
+            .contentMargins(.bottom, AppSpacing.lg, for: .scrollContent)
             .navigationTitle(String(localized: "settings_title"))
+            .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $showingPaywall) {
                 PaywallView()
             }
             .sheet(isPresented: $showingShareSheet) {
                 ShareSheet(items: [
                     String(localized: "share_message"),
-                    URL(string: AppConstants.appStoreURL)!
-                ])
-            }
-            .confirmationDialog(
-                String(localized: "settings_reset_title"),
-                isPresented: $viewModel.showingResetConfirmation,
-                titleVisibility: .visible
-            ) {
-                Button(String(localized: "settings_reset_confirm"), role: .destructive) {
-                    viewModel.resetAllData()
-                }
-                Button(String(localized: "action_cancel"), role: .cancel) {}
-            } message: {
-                Text(String(localized: "settings_reset_message"))
-            }
-            .sheet(isPresented: $viewModel.showingLanguagePicker) {
-                LanguagePickerView(
-                    selectedLanguage: viewModel.selectedLanguage,
-                    languages: viewModel.languages,
-                    onSelect: { code in
-                        viewModel.setLanguage(code)
-                        viewModel.showingLanguagePicker = false
-                    }
-                )
-                .presentationDetents([.medium])
+                    URL(string: AppConstants.appStoreURL) as Any
+                ].compactMap { $0 })
             }
         }
     }
@@ -85,16 +61,16 @@ struct SettingsView: View {
                 HStack(spacing: 12) {
                     Image(systemName: "crown.fill")
                         .font(.system(size: 20))
-                        .foregroundColor(AppColors.accent)
+                        .foregroundStyle(AppColors.accent)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text(String(localized: "settings_premium_active"))
                             .font(AppFonts.body())
-                            .foregroundColor(AppColors.textPrimary)
+                            .foregroundStyle(AppColors.textPrimary)
 
                         Text(String(localized: "settings_premium_thanks"))
                             .font(AppFonts.caption())
-                            .foregroundColor(AppColors.textSecondary)
+                            .foregroundStyle(AppColors.textSecondary)
                     }
                 }
                 .listRowBackground(AppColors.surface)
@@ -116,18 +92,18 @@ struct SettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(String(localized: "settings_upgrade_pro"))
                                 .font(AppFonts.body())
-                                .foregroundColor(AppColors.textPrimary)
+                                .foregroundStyle(AppColors.textPrimary)
 
                             Text(String(localized: "settings_upgrade_description"))
                                 .font(AppFonts.caption())
-                                .foregroundColor(AppColors.textSecondary)
+                                .foregroundStyle(AppColors.textSecondary)
                         }
 
                         Spacer()
 
                         Image(systemName: "chevron.right")
                             .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(AppColors.textTertiary)
+                            .foregroundStyle(AppColors.textTertiary)
                     }
                 }
                 .listRowBackground(AppColors.surface)
@@ -138,36 +114,6 @@ struct SettingsView: View {
     // MARK: - Preferences Section
     private var preferencesSection: some View {
         Section(header: Text(String(localized: "settings_preferences"))) {
-            // Language
-            Button {
-                viewModel.showingLanguagePicker = true
-            } label: {
-                HStack {
-                    Label(String(localized: "settings_language"), systemImage: "globe")
-                        .foregroundColor(AppColors.textPrimary)
-
-                    Spacer()
-
-                    Text(viewModel.languages.first { $0.0 == viewModel.selectedLanguage }?.1 ?? "English")
-                        .foregroundColor(AppColors.textSecondary)
-
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 12, weight: .semibold))
-                        .foregroundColor(AppColors.textTertiary)
-                }
-            }
-            .listRowBackground(AppColors.surface)
-
-            // Haptic Feedback
-            Toggle(isOn: Binding(
-                get: { viewModel.hapticFeedbackEnabled },
-                set: { _ in viewModel.toggleHapticFeedback() }
-            )) {
-                Label(String(localized: "settings_haptic"), systemImage: "iphone.radiowaves.left.and.right")
-            }
-            .tint(AppColors.primary)
-            .listRowBackground(AppColors.surface)
-
             // Notifications
             Toggle(isOn: Binding(
                 get: { viewModel.notificationsEnabled },
@@ -205,7 +151,7 @@ struct SettingsView: View {
                 SleepTipsView()
             } label: {
                 Label(String(localized: "settings_sleep_tips"), systemImage: "lightbulb.fill")
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
             .listRowBackground(AppColors.surface)
 
@@ -214,7 +160,7 @@ struct SettingsView: View {
                 HealthKitSettingsView()
             } label: {
                 Label(String(localized: "settings_health_app"), systemImage: "heart.fill")
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
             .listRowBackground(AppColors.surface)
         }
@@ -228,7 +174,7 @@ struct SettingsView: View {
                 viewModel.requestReview()
             } label: {
                 Label(String(localized: "settings_rate_app"), systemImage: "star.fill")
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
             .listRowBackground(AppColors.surface)
 
@@ -237,7 +183,7 @@ struct SettingsView: View {
                 showingShareSheet = true
             } label: {
                 Label(String(localized: "settings_share_app"), systemImage: "square.and.arrow.up")
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
             .listRowBackground(AppColors.surface)
 
@@ -246,7 +192,7 @@ struct SettingsView: View {
                 viewModel.sendFeedback()
             } label: {
                 Label(String(localized: "settings_feedback"), systemImage: "envelope.fill")
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
             .listRowBackground(AppColors.surface)
         }
@@ -260,45 +206,24 @@ struct SettingsView: View {
                 viewModel.openPrivacyPolicy()
             } label: {
                 Label(String(localized: "settings_privacy"), systemImage: "hand.raised.fill")
-                    .foregroundColor(AppColors.textPrimary)
-            }
-            .listRowBackground(AppColors.surface)
-
-            // Terms of Use
-            Button {
-                viewModel.openTermsOfUse()
-            } label: {
-                Label(String(localized: "settings_terms"), systemImage: "doc.text.fill")
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
             .listRowBackground(AppColors.surface)
 
             // Version
             HStack {
                 Label(String(localized: "settings_version"), systemImage: "info.circle.fill")
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Spacer()
 
                 Text(viewModel.appVersion)
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
             .listRowBackground(AppColors.surface)
         }
     }
 
-    // MARK: - Danger Section
-    private var dangerSection: some View {
-        Section {
-            Button {
-                viewModel.showingResetConfirmation = true
-            } label: {
-                Label(String(localized: "settings_reset_data"), systemImage: "trash.fill")
-                    .foregroundColor(AppColors.error)
-            }
-            .listRowBackground(AppColors.surface)
-        }
-    }
 }
 
 // MARK: - Share Sheet
@@ -314,32 +239,25 @@ struct ShareSheet: UIViewControllerRepresentable {
 
 // MARK: - HealthKit Settings View
 struct HealthKitSettingsView: View {
-    @StateObject private var healthKitService = HealthKitService.shared
-
     var body: some View {
         List {
             Section {
-                HStack {
-                    Text(String(localized: "settings_health_status"))
-                    Spacer()
-                    Text(healthKitService.isAuthorized
-                        ? String(localized: "settings_health_connected")
-                        : String(localized: "settings_health_not_connected"))
-                        .foregroundColor(healthKitService.isAuthorized ? AppColors.success : AppColors.textSecondary)
+                // Apple hides read-only authorization, so we can't honestly show
+                // a "Connected" status. Send the user to manage access directly.
+                Button {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                } label: {
+                    HStack {
+                        Text(String(localized: "settings_health_manage"))
+                            .foregroundStyle(AppColors.primary)
+                        Spacer()
+                        Image(systemName: "arrow.up.forward.app")
+                            .foregroundStyle(AppColors.textTertiary)
+                    }
                 }
                 .listRowBackground(AppColors.surface)
-
-                if !healthKitService.isAuthorized {
-                    Button {
-                        Task {
-                            try? await healthKitService.requestAuthorization()
-                        }
-                    } label: {
-                        Text(String(localized: "settings_health_connect"))
-                            .foregroundColor(AppColors.primary)
-                    }
-                    .listRowBackground(AppColors.surface)
-                }
             } header: {
                 Text(String(localized: "settings_health_section"))
             } footer: {
@@ -351,57 +269,4 @@ struct HealthKitSettingsView: View {
         .background(AppColors.background)
         .navigationTitle(String(localized: "settings_health_app"))
     }
-}
-
-// MARK: - Language Picker View
-struct LanguagePickerView: View {
-    let selectedLanguage: String
-    let languages: [(String, String)]
-    let onSelect: (String) -> Void
-
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        NavigationStack {
-            List {
-                ForEach(languages, id: \.0) { code, name in
-                    Button {
-                        onSelect(code)
-                    } label: {
-                        HStack {
-                            Text(name)
-                                .foregroundColor(AppColors.textPrimary)
-
-                            Spacer()
-
-                            if code == selectedLanguage {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(AppColors.primary)
-                                    .fontWeight(.semibold)
-                            }
-                        }
-                    }
-                    .listRowBackground(AppColors.surface)
-                }
-            }
-            .listStyle(.insetGrouped)
-            .scrollContentBackground(.hidden)
-            .background(AppColors.background)
-            .navigationTitle(String(localized: "settings_language"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(String(localized: "action_done")) {
-                        dismiss()
-                    }
-                    .foregroundColor(AppColors.primary)
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Preview
-#Preview {
-    SettingsView()
 }

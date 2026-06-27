@@ -119,6 +119,9 @@ final class SleepTrackerViewModel: ObservableObject {
         records.insert(record, at: 0)
         storageService.saveSleepRecords(records)
 
+        // Update the tracked-nights streak (was never being called → stuck at 0).
+        storageService.updateStreak(for: record.endTime)
+
         // Reset state
         isTracking = false
         trackingStartTime = nil
