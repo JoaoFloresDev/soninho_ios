@@ -99,11 +99,12 @@ struct AlarmModel: Codable, Identifiable {
         let now = Date()
 
         if repeatDays.isEmpty {
-            // One-time alarm
-            if time > now {
-                return time
-            }
-            return calendar.date(byAdding: .day, value: 1, to: time)
+            // One-time alarm: the next occurrence of this hour:minute from now
+            // (today or tomorrow), regardless of the calendar date stored in
+            // `time` (which can be a placeholder like year 0001 from a picker
+            // that only edits hour/minute).
+            let comps = calendar.dateComponents([.hour, .minute], from: time)
+            return calendar.nextDate(after: now, matching: comps, matchingPolicy: .nextTime)
         }
 
         // Repeating alarm

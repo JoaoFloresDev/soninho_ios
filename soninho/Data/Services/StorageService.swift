@@ -66,7 +66,7 @@ final class StorageService: ObservableObject {
 
     // MARK: - Alarm Methods
     func saveAlarm(_ alarm: AlarmModel) {
-        if let data = try? encoder.encode(alarm) {
+        if (try? encoder.encode(alarm)) != nil {
             var alarms = loadAlarms()
             if let index = alarms.firstIndex(where: { $0.id == alarm.id }) {
                 alarms[index] = alarm
@@ -74,13 +74,13 @@ final class StorageService: ObservableObject {
                 alarms.append(alarm)
             }
             if let alarmsData = try? encoder.encode(alarms) {
-                defaults.set(alarmsData, forKey: "savedAlarms")
+                defaults.set(alarmsData, forKey: StorageKeys.savedAlarms)
             }
         }
     }
 
     func loadAlarms() -> [AlarmModel] {
-        guard let data = defaults.data(forKey: "savedAlarms"),
+        guard let data = defaults.data(forKey: StorageKeys.savedAlarms),
               let alarms = try? decoder.decode([AlarmModel].self, from: data) else {
             return []
         }
@@ -91,23 +91,39 @@ final class StorageService: ObservableObject {
         var alarms = loadAlarms()
         alarms.removeAll { $0.id == alarm.id }
         if let data = try? encoder.encode(alarms) {
-            defaults.set(data, forKey: "savedAlarms")
+            defaults.set(data, forKey: StorageKeys.savedAlarms)
         }
     }
 
     // MARK: - Sleep Records (Local Cache)
-    func saveSleepRecords(_ records: [SleepRecord]) {
-        if let data = try? encoder.encode(records) {
-            defaults.set(data, forKey: "cachedSleepRecords")
+    static let sleepRecordsDidChangeNotification = Notification.Name("sleepRecordsDidChange")
+
+    func saveSleepRecords(_ records: [SleepRecord], notify: Bool = true) {
+        // Prune records older than 90 days to prevent UserDefaults bloat
+        let cutoff = Date().addingTimeInterval(-90 * 86400)
+        let pruned = records.filter { $0.endTime > cutoff }
+
+        if let data = try? encoder.encode(pruned) {
+            defaults.set(data, forKey: StorageKeys.cachedSleepRecords)
+        }
+
+        if notify {
+            NotificationCenter.default.post(name: Self.sleepRecordsDidChangeNotification, object: nil)
         }
     }
 
     func loadCachedSleepRecords() -> [SleepRecord] {
-        guard let data = defaults.data(forKey: "cachedSleepRecords"),
+        guard let data = defaults.data(forKey: StorageKeys.cachedSleepRecords),
               let records = try? decoder.decode([SleepRecord].self, from: data) else {
             return []
         }
         return records
+    }
+
+    func deleteSleepRecord(_ record: SleepRecord) {
+        var records = loadCachedSleepRecords()
+        records.removeAll { $0.id == record.id }
+        saveSleepRecords(records)
     }
 
     // MARK: - Session Tracking
@@ -159,11 +175,9 @@ final class StorageService: ObservableObject {
             if let date = defaults.object(forKey: StorageKeys.defaultBedtime) as? Date {
                 return date
             }
-            // Default: 23:00
-            var components = DateComponents()
-            components.hour = 23
-            components.minute = 0
-            return Calendar.current.date(from: components) ?? Date()
+            // Default: today at 23:00 (must be a real calendar date, not a
+            // year-0001 placeholder, or alarm scheduling breaks).
+            return Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date()) ?? Date()
         }
         set { defaults.set(newValue, forKey: StorageKeys.defaultBedtime) }
     }
@@ -173,36 +187,38 @@ final class StorageService: ObservableObject {
             if let date = defaults.object(forKey: StorageKeys.defaultWakeTime) as? Date {
                 return date
             }
-            // Default: 07:00
-            var components = DateComponents()
-            components.hour = 7
-            components.minute = 0
-            return Calendar.current.date(from: components) ?? Date()
+            // Default: today at 07:00 (real calendar date, not a year-0001
+            // placeholder, or alarm scheduling breaks).
+            return Calendar.current.date(bySettingHour: 7, minute: 0, second: 0, of: Date()) ?? Date()
         }
         set { defaults.set(newValue, forKey: StorageKeys.defaultWakeTime) }
     }
 
     // MARK: - Streak Tracking
     var currentStreak: Int {
-        get { defaults.integer(forKey: "currentStreak") }
-        set { defaults.set(newValue, forKey: "currentStreak") }
+        get { defaults.integer(forKey: StorageKeys.currentStreak) }
+        set { defaults.set(newValue, forKey: StorageKeys.currentStreak) }
     }
 
     var longestStreak: Int {
-        get { defaults.integer(forKey: "longestStreak") }
-        set { defaults.set(newValue, forKey: "longestStreak") }
+        get { defaults.integer(forKey: StorageKeys.longestStreak) }
+        set { defaults.set(newValue, forKey: StorageKeys.longestStreak) }
     }
 
     var lastSleepDate: Date? {
-        get { defaults.object(forKey: "lastSleepDate") as? Date }
-        set { defaults.set(newValue, forKey: "lastSleepDate") }
+        get { defaults.object(forKey: StorageKeys.lastSleepDate) as? Date }
+        set { defaults.set(newValue, forKey: StorageKeys.lastSleepDate) }
     }
 
     func updateStreak(for sleepDate: Date) {
         let calendar = Calendar.current
 
+        // Normalize dates to start of day to avoid timestamp comparison issues
+        let normalizedSleepDate = calendar.startOfDay(for: sleepDate)
+
         if let lastDate = lastSleepDate {
-            let daysBetween = calendar.dateComponents([.day], from: lastDate, to: sleepDate).day ?? 0
+            let normalizedLastDate = calendar.startOfDay(for: lastDate)
+            let daysBetween = calendar.dateComponents([.day], from: normalizedLastDate, to: normalizedSleepDate).day ?? 0
 
             if daysBetween == 1 {
                 // Consecutive day - increment streak
@@ -222,12 +238,12 @@ final class StorageService: ObservableObject {
             longestStreak = currentStreak
         }
 
-        lastSleepDate = sleepDate
+        lastSleepDate = normalizedSleepDate
     }
 
     // MARK: - Reset
     func resetAllData() {
-        let domain = Bundle.main.bundleIdentifier!
+        guard let domain = Bundle.main.bundleIdentifier else { return }
         defaults.removePersistentDomain(forName: domain)
         defaults.synchronize()
 
