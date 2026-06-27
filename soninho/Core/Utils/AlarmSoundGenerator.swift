@@ -21,7 +21,7 @@ enum AlarmSoundGenerator {
 
     /// Generates all alarm sound files on app launch.
     /// Bump when the sound generation changes so cached WAVs are regenerated.
-    private static let soundsVersion = 4
+    private static let soundsVersion = 5
 
     static func generateAlarmSoundsIfNeeded() {
         guard let soundsDir = librarySoundsDirectory() else { return }
@@ -41,17 +41,6 @@ enum AlarmSoundGenerator {
 
             try? FileManager.default.removeItem(at: filePath)
             generateSound(type: sound, to: filePath)
-
-            // TEMP diag: read back the file and report its real peak amplitude.
-            if let data = try? Data(contentsOf: filePath), data.count > 44 {
-                var peak = 0
-                data.dropFirst(44).withUnsafeBytes { (raw: UnsafeRawBufferPointer) in
-                    for v in raw.bindMemory(to: Int16.self) { peak = Swift.max(peak, abs(Int(v))) }
-                }
-                print("[SOUNDDIAG] \(fileName) bytes=\(data.count) peakInt16=\(peak)/32767")
-            } else {
-                print("[SOUNDDIAG] \(fileName) FAILED to write/read")
-            }
         }
 
         UserDefaults.standard.set(soundsVersion, forKey: "alarmSoundsVersion")
@@ -68,16 +57,6 @@ enum AlarmSoundGenerator {
         }
         generateAlarmSoundsIfNeeded()
         return UNNotificationSound(named: UNNotificationSoundName(fileName))
-    }
-
-    /// TEMP diagnostic — confirm the alarm sound file loads.
-    static func logPlaybackDiag() {
-        let s = AVAudioSession.sharedInstance()
-        if let url = alarmSoundURL(for: .sunrise), let p = try? AVAudioPlayer(contentsOf: url) {
-            print("[PLAYDIAG] loaded dur=\(String(format: "%.1f", p.duration))s outVol=\(s.outputVolume)")
-        } else {
-            print("[PLAYDIAG] load FAILED")
-        }
     }
 
     /// Returns the URL of an alarm sound file for AVAudioPlayer playback.
@@ -126,9 +105,108 @@ enum AlarmSoundGenerator {
             generatePiano(&samples)
         case .forest:
             generateForest(&samples)
+        case .chimes:
+            generateChimes(&samples)
+        case .harp:
+            generateHarp(&samples)
+        case .rain:
+            generateRain(&samples)
+        case .marimba:
+            generateMarimba(&samples)
         }
 
         writeWAV(samples: samples, to: url)
+    }
+
+    // MARK: - Deterministic pseudo-random (no Math.random in generators)
+    private static func makeRNG(_ seed: UInt64) -> () -> Float {
+        var state = seed
+        return {
+            state = state &* 6364136223846793005 &+ 1442695040888963407
+            return Float((state >> 33) & 0xFFFF) / 65535.0
+        }
+    }
+
+    // MARK: - Chimes (inharmonic wind-chime bells, pentatonic)
+    private static func generateChimes(_ samples: inout [Float]) {
+        let numSamples = samples.count
+        let notes: [Float] = [523.25, 587.33, 659.25, 783.99, 880.0] // C5 D5 E5 G5 A5
+        let rand = makeRNG(7)
+        var i = 0
+        while i < numSamples {
+            let note = notes[min(notes.count - 1, Int(rand() * Float(notes.count)))]
+            let dur = Int(sampleRate * Double(1.6 + rand() * 1.6))
+            for s in 0..<dur {
+                guard i + s < numSamples else { break }
+                let t = Float(s) / Float(sampleRate)
+                let env = exp(-t * 2.0)
+                let f1 = sin(2.0 * Float.pi * note * t)
+                let f2 = sin(2.0 * Float.pi * note * 2.76 * t) * 0.45 // metallic partial
+                let f3 = sin(2.0 * Float.pi * note * 5.40 * t) * 0.22
+                samples[i + s] += (f1 + f2 + f3) * env * 0.5
+            }
+            i += Int(sampleRate * Double(0.4 + rand() * 0.9))
+        }
+    }
+
+    // MARK: - Harp (gentle ascending plucked arpeggios)
+    private static func generateHarp(_ samples: inout [Float]) {
+        let numSamples = samples.count
+        let notes: [Float] = [261.63, 329.63, 392.0, 523.25, 659.25, 783.99] // C major arpeggio
+        var i = 0
+        var idx = 0
+        while i < numSamples {
+            let note = notes[idx % notes.count]
+            let dur = Int(sampleRate * 0.7)
+            for s in 0..<dur {
+                guard i + s < numSamples else { break }
+                let t = Float(s) / Float(sampleRate)
+                let attack: Float = t < 0.006 ? t / 0.006 : 1.0
+                let env = attack * exp(-t * 3.2)
+                let f1 = sin(2.0 * Float.pi * note * t)
+                let f2 = sin(2.0 * Float.pi * note * 2.0 * t) * 0.3
+                samples[i + s] += (f1 + f2) * env * 0.5
+            }
+            i += Int(sampleRate * 0.2)
+            idx += 1
+        }
+    }
+
+    // MARK: - Rain (soft low-passed noise with gentle swell)
+    private static func generateRain(_ samples: inout [Float]) {
+        let numSamples = samples.count
+        let rand = makeRNG(29)
+        var lp: Float = 0
+        for n in 0..<numSamples {
+            let t = Float(n) / Float(sampleRate)
+            let white = rand() * 2.0 - 1.0
+            lp = lp * 0.95 + white * 0.05 // low-pass → soft rain hiss
+            let swell = 0.55 + 0.45 * sin(2.0 * Float.pi * 0.08 * t)
+            samples[n] += lp * swell * 2.2
+        }
+    }
+
+    // MARK: - Marimba (warm percussive mallet melody, pentatonic)
+    private static func generateMarimba(_ samples: inout [Float]) {
+        let numSamples = samples.count
+        let notes: [Float] = [392.0, 440.0, 523.25, 587.33, 659.25, 587.33, 523.25, 440.0]
+        var i = 0
+        var idx = 0
+        while i < numSamples {
+            let note = notes[idx % notes.count]
+            let dur = Int(sampleRate * 0.5)
+            for s in 0..<dur {
+                guard i + s < numSamples else { break }
+                let t = Float(s) / Float(sampleRate)
+                let attack: Float = t < 0.004 ? t / 0.004 : 1.0
+                let env = attack * exp(-t * 6.0) // short woody decay
+                let f1 = sin(2.0 * Float.pi * note * t)
+                let f4 = sin(2.0 * Float.pi * note * 4.0 * t) * 0.25 // marimba 4th partial
+                samples[i + s] += (f1 + f4) * env * 0.55
+            }
+            i += Int(sampleRate * 0.34)
+            idx += 1
+        }
     }
 
     // MARK: - Sunrise (warm ascending tones)

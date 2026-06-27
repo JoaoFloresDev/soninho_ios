@@ -16,6 +16,10 @@ enum AlarmSound: String, Codable, CaseIterable, Identifiable {
     case gentle = "gentle"
     case piano = "piano"
     case forest = "forest"
+    case chimes = "chimes"
+    case harp = "harp"
+    case rain = "rain"
+    case marimba = "marimba"
 
     var id: String { rawValue }
 
@@ -27,6 +31,10 @@ enum AlarmSound: String, Codable, CaseIterable, Identifiable {
         case .gentle: return String(localized: "sound_gentle")
         case .piano: return String(localized: "sound_piano")
         case .forest: return String(localized: "sound_forest")
+        case .chimes: return String(localized: "sound_chimes")
+        case .harp: return String(localized: "sound_harp")
+        case .rain: return String(localized: "sound_rain")
+        case .marimba: return String(localized: "sound_marimba")
         }
     }
 
@@ -42,6 +50,10 @@ enum AlarmSound: String, Codable, CaseIterable, Identifiable {
         case .gentle: return "waveform"
         case .piano: return "pianokeys"
         case .forest: return "leaf.fill"
+        case .chimes: return "wind.snow"
+        case .harp: return "music.quarternote.3"
+        case .rain: return "cloud.rain.fill"
+        case .marimba: return "music.note"
         }
     }
 }

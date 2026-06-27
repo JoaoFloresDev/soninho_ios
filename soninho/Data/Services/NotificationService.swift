@@ -281,6 +281,9 @@ final class NotificationService: ObservableObject {
         // the alarm from owning the .playback session.
         MotionSleepMonitor.shared.releaseForAlarm()
 
+        // Push the system volume to max so the alarm is as loud as the native one.
+        SystemVolume.setMax()
+
         // Tear down only the audio/vibration — keep ringing identifiers so
         // snooze and re-ring keep working.
         teardownAudio()

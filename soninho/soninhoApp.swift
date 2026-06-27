@@ -69,7 +69,8 @@ struct SoninhoApp: App {
 
     // MARK: - App Lifecycle
     private func handleAppLaunch() {
-        AlarmSoundGenerator.logPlaybackDiag()
+        // Attach the hidden volume control so the alarm can blast at max volume.
+        SystemVolume.prepare()
 
         // Increment app open count
         reviewService.incrementAppOpenCount()

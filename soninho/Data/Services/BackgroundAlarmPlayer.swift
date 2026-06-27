@@ -138,6 +138,10 @@ final class BackgroundAlarmPlayer: ObservableObject {
         // alarm from owning the .playback session (recorder vs player conflict).
         MotionSleepMonitor.shared.releaseForAlarm()
 
+        // Push the system volume to max — a .playback alarm uses the media
+        // volume, so this is what makes it as loud as the native alarm.
+        SystemVolume.setMax()
+
         // Stop silent audio first
         silentPlayer?.stop()
         silentPlayer = nil

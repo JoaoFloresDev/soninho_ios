@@ -13,7 +13,6 @@ struct SettingsView: View {
     // MARK: - Properties
     @StateObject private var viewModel = SettingsViewModel()
     @State private var showingPaywall = false
-    @State private var showingShareSheet = false
 
     // MARK: - View Body
     var body: some View {
@@ -42,12 +41,6 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $showingPaywall) {
                 PaywallView()
-            }
-            .sheet(isPresented: $showingShareSheet) {
-                ShareSheet(items: [
-                    String(localized: "share_message"),
-                    URL(string: AppConstants.appStoreURL) as Any
-                ].compactMap { $0 })
             }
         }
     }
@@ -172,13 +165,13 @@ struct SettingsView: View {
             .listRowBackground(AppColors.surface)
 
             // Share App
-            Button {
-                showingShareSheet = true
-            } label: {
-                Label(String(localized: "settings_share_app"), systemImage: "square.and.arrow.up")
-                    .foregroundStyle(AppColors.textPrimary)
+            if let shareURL = URL(string: AppConstants.appStoreURL) {
+                ShareLink(item: shareURL, message: Text(String(localized: "share_message"))) {
+                    settingsRowLabel("square.and.arrow.up", String(localized: "settings_share_app"))
+                        .foregroundStyle(AppColors.textPrimary)
+                }
+                .listRowBackground(AppColors.surface)
             }
-            .listRowBackground(AppColors.surface)
 
             // Send Feedback
             Button {
@@ -230,17 +223,6 @@ private struct SettingsRowLabelStyle: LabelStyle {
             configuration.title
         }
     }
-}
-
-// MARK: - Share Sheet
-struct ShareSheet: UIViewControllerRepresentable {
-    let items: [Any]
-
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        UIActivityViewController(activityItems: items, applicationActivities: nil)
-    }
-
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
 // MARK: - HealthKit Settings View
