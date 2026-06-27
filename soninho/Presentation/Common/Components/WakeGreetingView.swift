@@ -28,11 +28,13 @@ struct WakeGreetingView: View {
 
     // MARK: - Computed Properties
     private var isMorning: Bool { (5..<12).contains(hour) }
+    /// Daytime — sun shown until 20h; moon only at actual night.
+    private var isDay: Bool { (12..<20).contains(hour) }
 
     private var icon: String {
         if mode == .snooze { return "moon.zzz.fill" }
         if isMorning { return "sunrise.fill" }
-        if (12..<18).contains(hour) { return "sun.max.fill" }
+        if isDay { return "sun.max.fill" }
         return "moon.stars.fill"
     }
 
@@ -56,7 +58,7 @@ struct WakeGreetingView: View {
         if isMorning {
             return [Color(hex: "FFD194"), Color(hex: "F97316"), Color(hex: "4F46E5")]
         }
-        if (12..<18).contains(hour) {
+        if isDay {
             return [Color(hex: "60A5FA"), Color(hex: "4F46E5"), Color(hex: "312E81")]
         }
         return [Color(hex: "312E81"), Color(hex: "4C1D95"), Color(hex: "0B1026")]
