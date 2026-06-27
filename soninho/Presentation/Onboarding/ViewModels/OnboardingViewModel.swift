@@ -71,7 +71,6 @@ final class OnboardingViewModel: ObservableObject {
 
     // MARK: - Public Methods
     func nextPage() {
-        HapticManager.lightImpact()
         if currentPage < pages.count - 1 {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                 currentPage += 1
@@ -80,7 +79,6 @@ final class OnboardingViewModel: ObservableObject {
     }
 
     func previousPage() {
-        HapticManager.lightImpact()
         if currentPage > 0 {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                 currentPage -= 1
@@ -89,14 +87,12 @@ final class OnboardingViewModel: ObservableObject {
     }
 
     func skipToEnd() {
-        HapticManager.lightImpact()
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             currentPage = pages.count - 1
         }
     }
 
     func completeOnboarding() async {
-        HapticManager.success()
 
         // Request HealthKit permission
         isRequestingHealthKit = true

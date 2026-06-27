@@ -47,7 +47,7 @@ struct LoadingView: View {
             if let message = message {
                 Text(message)
                     .font(AppFonts.body())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -99,7 +99,7 @@ struct InlineLoading: View {
     var body: some View {
         Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
             .font(.system(size: 16, weight: .medium))
-            .foregroundColor(AppColors.primary)
+            .foregroundStyle(AppColors.primary)
             .rotationEffect(.degrees(rotation))
             .onAppear {
                 withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
@@ -107,17 +107,4 @@ struct InlineLoading: View {
                 }
             }
     }
-}
-
-// MARK: - Preview
-#Preview {
-    VStack {
-        LoadingView(message: "Loading your sleep data...")
-
-        ShimmerCard()
-            .padding()
-
-        InlineLoading()
-    }
-    .background(AppColors.background)
 }

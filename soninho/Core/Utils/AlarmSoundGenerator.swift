@@ -21,7 +21,7 @@ enum AlarmSoundGenerator {
 
     /// Generates all alarm sound files on app launch.
     /// Bump when the sound generation changes so cached WAVs are regenerated.
-    private static let soundsVersion = 2
+    private static let soundsVersion = 4
 
     static func generateAlarmSoundsIfNeeded() {
         guard let soundsDir = librarySoundsDirectory() else { return }
@@ -41,6 +41,17 @@ enum AlarmSoundGenerator {
 
             try? FileManager.default.removeItem(at: filePath)
             generateSound(type: sound, to: filePath)
+
+            // TEMP diag: read back the file and report its real peak amplitude.
+            if let data = try? Data(contentsOf: filePath), data.count > 44 {
+                var peak = 0
+                data.dropFirst(44).withUnsafeBytes { (raw: UnsafeRawBufferPointer) in
+                    for v in raw.bindMemory(to: Int16.self) { peak = Swift.max(peak, abs(Int(v))) }
+                }
+                print("[SOUNDDIAG] \(fileName) bytes=\(data.count) peakInt16=\(peak)/32767")
+            } else {
+                print("[SOUNDDIAG] \(fileName) FAILED to write/read")
+            }
         }
 
         UserDefaults.standard.set(soundsVersion, forKey: "alarmSoundsVersion")
@@ -57,6 +68,16 @@ enum AlarmSoundGenerator {
         }
         generateAlarmSoundsIfNeeded()
         return UNNotificationSound(named: UNNotificationSoundName(fileName))
+    }
+
+    /// TEMP diagnostic — confirm the alarm sound file loads.
+    static func logPlaybackDiag() {
+        let s = AVAudioSession.sharedInstance()
+        if let url = alarmSoundURL(for: .sunrise), let p = try? AVAudioPlayer(contentsOf: url) {
+            print("[PLAYDIAG] loaded dur=\(String(format: "%.1f", p.duration))s outVol=\(s.outputVolume)")
+        } else {
+            print("[PLAYDIAG] load FAILED")
+        }
     }
 
     /// Returns the URL of an alarm sound file for AVAudioPlayer playback.
@@ -402,16 +423,22 @@ enum AlarmSoundGenerator {
         data.append(contentsOf: "data".utf8)
         data.append(contentsOf: withUnsafeBytes(of: dataSize.littleEndian) { Array($0) })
 
-        // Normalize to a loud target peak so alarms are actually audible — the
-        // generators scale samples conservatively (~0.3 peak), which sounds very
-        // quiet even at full device volume.
-        let peak = samples.reduce(Float(0)) { Swift.max($0, abs($1)) }
-        let gain: Float = peak > 0.0001 ? (0.95 / peak) : 1.0
+        // Normalize, then apply tanh saturation (a soft limiter) to raise the
+        // AVERAGE level — peak alone sounds quiet because the tones have big gaps
+        // and envelopes. Saturation pushes the RMS up so it's perceptibly much
+        // louder at full device volume, the way real alarm tones are loud.
+        let peak: Float = samples.reduce(Float(0)) { Swift.max($0, abs($1)) }
+        let gain: Double = peak > 0.0001 ? (1.0 / Double(peak)) : 1.0
+        let drive: Double = 2.6                // higher = louder/denser
+        let norm: Double = tanh(drive)         // keep the peak near full scale
+        let scale: Double = 0.985
 
         // Convert float samples to 16-bit PCM
         for sample in samples {
-            let clamped = max(-1.0, min(1.0, sample * gain))
-            let int16Value = Int16(clamped * Float(Int16.max))
+            let driven: Double = Double(sample) * gain * drive
+            let shaped: Double = (tanh(driven) / norm) * scale
+            let clamped: Double = max(-1.0, min(1.0, shaped))
+            let int16Value = Int16(clamped * Double(Int16.max))
             data.append(contentsOf: withUnsafeBytes(of: int16Value.littleEndian) { Array($0) })
         }
 

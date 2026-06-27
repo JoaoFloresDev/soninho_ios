@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/soninho.app</string>
+		<key>Architectures</key>
+		<array>
+			<string>arm64</string>
+		</array>
+		<key>CFBundleIdentifier</key>
+		<string>com.gambitstudio.soninho</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0.0</string>
+		<key>CFBundleVersion</key>
+		<string>5</string>
+		<key>SigningIdentity</key>
+		<string>Apple Development: Joao Victor Flores da Costa (2YUQUPP589)</string>
+		<key>Team</key>
+		<string>NZC6LC8NWM</string>
+	</dict>
+	<key>ArchiveVersion</key>
+	<integer>2</integer>
+	<key>CreationDate</key>
+	<date>2026-03-03T16:09:18Z</date>
+	<key>Name</key>
+	<string>soninho</string>
+	<key>SchemeName</key>
+	<string>soninho</string>
+</dict>
+</plist>

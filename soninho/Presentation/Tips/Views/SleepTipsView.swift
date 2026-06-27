@@ -35,7 +35,7 @@ struct SleepTipsView: View {
                 tipsList
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.bottom, AppSpacing.tabBarBottomPadding)
+            .padding(.bottom, AppSpacing.lg)
         }
         .background(AppColors.background)
         .navigationTitle(String(localized: "tips_all_title"))
@@ -48,11 +48,11 @@ struct SleepTipsView: View {
         return VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Image(systemName: "sparkles")
-                    .foregroundColor(AppColors.accent)
+                    .foregroundStyle(AppColors.accent)
                 
                 Text(String(localized: "tips_daily_title"))
                     .font(AppFonts.headline())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
             
             TipCard(tip: dailyTip, isExpanded: true)
@@ -105,14 +105,13 @@ struct TipCard: View {
     
     var body: some View {
         Button {
-            HapticManager.lightImpact()
             showingDetail.toggle()
         } label: {
             HStack(spacing: 16) {
                 // Icon
                 Image(systemName: tip.icon)
                     .font(.system(size: 24))
-                    .foregroundColor(AppColors.primary)
+                    .foregroundStyle(AppColors.primary)
                     .frame(width: 48, height: 48)
                     .background(AppColors.primary.opacity(0.15))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -122,13 +121,13 @@ struct TipCard: View {
                     Text(String(localized: String.LocalizationValue(tip.title)))
                         .font(AppFonts.body())
                         .fontWeight(.medium)
-                        .foregroundColor(AppColors.textPrimary)
+                        .foregroundStyle(AppColors.textPrimary)
                         .multilineTextAlignment(.leading)
                     
                     if isExpanded || showingDetail {
                         Text(String(localized: String.LocalizationValue(tip.description)))
                             .font(AppFonts.caption())
-                            .foregroundColor(AppColors.textSecondary)
+                            .foregroundStyle(AppColors.textSecondary)
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -139,7 +138,7 @@ struct TipCard: View {
                 if !isExpanded {
                     Image(systemName: showingDetail ? "chevron.up" : "chevron.down")
                         .font(.system(size: 12, weight: .semibold))
-                        .foregroundColor(AppColors.textTertiary)
+                        .foregroundStyle(AppColors.textTertiary)
                 }
             }
             .cardStyle()
@@ -160,19 +159,12 @@ struct FilterChip: View {
             Text(title)
                 .font(AppFonts.caption())
                 .fontWeight(isSelected ? .semibold : .regular)
-                .foregroundColor(isSelected ? .white : AppColors.textSecondary)
+                .foregroundStyle(isSelected ? .white : AppColors.textSecondary)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .background(isSelected ? AppColors.primary : AppColors.surface)
                 .clipShape(Capsule())
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - Preview
-#Preview {
-    NavigationStack {
-        SleepTipsView()
     }
 }

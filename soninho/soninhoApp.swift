@@ -69,6 +69,8 @@ struct SoninhoApp: App {
 
     // MARK: - App Lifecycle
     private func handleAppLaunch() {
+        AlarmSoundGenerator.logPlaybackDiag()
+
         // Increment app open count
         reviewService.incrementAppOpenCount()
 
@@ -84,6 +86,7 @@ struct SoninhoApp: App {
     }
 
     private func handleScenePhaseChange(_ phase: ScenePhase) {
+        print("[SCENE] \(phase)")
         switch phase {
         case .active:
             // Stop background keep-alive when app is fully in foreground

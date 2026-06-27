@@ -280,10 +280,7 @@ struct SleepStatistics {
         let hour = (averageMinutes / 60) % 24
         let minute = averageMinutes % 60
 
-        var components = DateComponents()
-        components.hour = hour
-        components.minute = minute
-        return Calendar.current.date(from: components)
+        return Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: Date())
     }
 
     var averageWakeTime: Date? {
@@ -297,10 +294,7 @@ struct SleepStatistics {
         let hour = averageMinutes / 60
         let minute = averageMinutes % 60
 
-        var components = DateComponents()
-        components.hour = hour
-        components.minute = minute
-        return Calendar.current.date(from: components)
+        return Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: Date())
     }
 
     var thisWeekRecords: [SleepRecord] {
@@ -308,12 +302,13 @@ struct SleepStatistics {
     }
 
     var sleepTrend: SleepTrend {
-        guard records.count >= 7 else { return .stable }
+        guard records.count >= 10 else { return .stable }
 
-        let recentRecords = Array(records.prefix(7))
-        let olderRecords = Array(records.dropFirst(7).prefix(7))
+        let half = records.count / 2
+        let recentRecords = Array(records.prefix(half))
+        let olderRecords = Array(records.suffix(records.count - half))
 
-        guard !olderRecords.isEmpty else { return .stable }
+        guard recentRecords.count >= 3, !olderRecords.isEmpty else { return .stable }
 
         let recentAvg = recentRecords.reduce(0) { $0 + $1.qualityScore } / recentRecords.count
         let olderAvg = olderRecords.reduce(0) { $0 + $1.qualityScore } / olderRecords.count
@@ -358,85 +353,5 @@ enum SleepTrend {
         case .stable: return String(localized: "sleep_trend_stable")
         case .declining: return String(localized: "sleep_trend_declining")
         }
-    }
-}
-
-// MARK: - Sample Data
-extension SleepRecord {
-    static var sampleRecords: [SleepRecord] {
-        let calendar = Calendar.current
-        var records: [SleepRecord] = []
-
-        for dayOffset in 0..<14 {
-            let baseDate = calendar.date(byAdding: .day, value: -dayOffset, to: Date())!
-            let bedtime = calendar.date(bySettingHour: 23, minute: Int.random(in: 0...59), second: 0, of: baseDate)!
-            let wakeTime = calendar.date(byAdding: .hour, value: Int.random(in: 6...9), to: bedtime)!
-
-            let phases = generateSamplePhases(from: bedtime, to: wakeTime)
-            let qualityScore = Int.random(in: 55...95)
-
-            let record = SleepRecord(
-                startTime: bedtime,
-                endTime: wakeTime,
-                phases: phases,
-                qualityScore: qualityScore,
-                createdAt: wakeTime
-            )
-            records.append(record)
-        }
-
-        return records.sorted { $0.startTime > $1.startTime }
-    }
-
-    private static func generateSamplePhases(from start: Date, to end: Date) -> [SleepPhaseData] {
-        var phases: [SleepPhaseData] = []
-        var currentTime = start
-        let totalDuration = end.timeIntervalSince(start)
-
-        // Simulate sleep cycles (typically 90 minutes each)
-        let cycleCount = Int(totalDuration / 5400) // 5400 seconds = 90 minutes
-
-        for cycle in 0..<max(cycleCount, 1) {
-            // Light sleep (longer at start)
-            let lightDuration = Double.random(in: 15...25) * 60
-            let lightEnd = currentTime.addingTimeInterval(lightDuration)
-            phases.append(SleepPhaseData(phase: .light, startTime: currentTime, endTime: lightEnd))
-            currentTime = lightEnd
-
-            // Deep sleep (more in first half of night)
-            let deepMultiplier = cycle < cycleCount / 2 ? 1.5 : 0.5
-            let deepDuration = Double.random(in: 15...30) * 60 * deepMultiplier
-            let deepEnd = currentTime.addingTimeInterval(deepDuration)
-            if deepEnd < end {
-                phases.append(SleepPhaseData(phase: .deep, startTime: currentTime, endTime: deepEnd))
-                currentTime = deepEnd
-            }
-
-            // REM sleep (more in second half of night)
-            let remMultiplier = cycle >= cycleCount / 2 ? 1.5 : 0.5
-            let remDuration = Double.random(in: 10...25) * 60 * remMultiplier
-            let remEnd = currentTime.addingTimeInterval(remDuration)
-            if remEnd < end {
-                phases.append(SleepPhaseData(phase: .rem, startTime: currentTime, endTime: remEnd))
-                currentTime = remEnd
-            }
-
-            // Brief awake period
-            if Bool.random() && currentTime < end {
-                let awakeDuration = Double.random(in: 1...5) * 60
-                let awakeEnd = currentTime.addingTimeInterval(awakeDuration)
-                if awakeEnd < end {
-                    phases.append(SleepPhaseData(phase: .awake, startTime: currentTime, endTime: awakeEnd))
-                    currentTime = awakeEnd
-                }
-            }
-        }
-
-        // Fill remaining time with light sleep
-        if currentTime < end {
-            phases.append(SleepPhaseData(phase: .light, startTime: currentTime, endTime: end))
-        }
-
-        return phases
     }
 }

@@ -80,7 +80,7 @@ struct AppIconView: View {
                 ForEach(0..<8, id: \.self) { index in
                     Image(systemName: "star.fill")
                         .font(.system(size: size * starSize(for: index)))
-                        .foregroundColor(.white.opacity(starOpacity(for: index)))
+                        .foregroundStyle(.white.opacity(starOpacity(for: index)))
                         .position(starPosition(for: index, in: geometry.size))
                 }
             }
@@ -154,23 +154,4 @@ enum AppIconGenerator {
             return nil
         }
     }
-}
-
-// MARK: - Preview
-#Preview("App Icon") {
-    AppIconView(size: 512)
-        .clipShape(RoundedRectangle(cornerRadius: 512 * 0.2237))
-}
-
-#Preview("App Icon Dark") {
-    VStack(spacing: 20) {
-        AppIconView(size: 180)
-            .clipShape(RoundedRectangle(cornerRadius: 180 * 0.2237))
-
-        Text("soninho")
-            .font(.caption)
-            .foregroundColor(.secondary)
-    }
-    .padding()
-    .background(Color.black)
 }

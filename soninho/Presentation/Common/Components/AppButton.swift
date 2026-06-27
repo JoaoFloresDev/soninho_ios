@@ -47,7 +47,6 @@ struct AppButton: View {
     var body: some View {
         Button(action: {
             guard !isLoading && !isDisabled else { return }
-            HapticManager.mediumImpact()
             action()
         }) {
             HStack(spacing: 8) {
@@ -66,7 +65,7 @@ struct AppButton: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: AppSpacing.buttonHeight)
-            .foregroundColor(textColor)
+            .foregroundStyle(textColor)
             .background(backgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous))
             .overlay(
@@ -75,6 +74,7 @@ struct AppButton: View {
             )
         }
         .buttonStyle(ScaleButtonStyle())
+        .contentShape(Rectangle())
         .disabled(isDisabled || isLoading)
         .opacity(isDisabled ? 0.5 : 1.0)
     }
@@ -137,7 +137,6 @@ struct SmallButton: View {
     // MARK: - View Body
     var body: some View {
         Button(action: {
-            HapticManager.lightImpact()
             action()
         }) {
             HStack(spacing: 4) {
@@ -151,7 +150,7 @@ struct SmallButton: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .foregroundColor(AppColors.primary)
+            .foregroundStyle(AppColors.primary)
             .background(AppColors.primary.opacity(0.15))
             .clipShape(Capsule())
         }
@@ -176,34 +175,15 @@ struct IconButton: View {
     // MARK: - View Body
     var body: some View {
         Button(action: {
-            HapticManager.lightImpact()
             action()
         }) {
             Image(systemName: icon)
                 .font(.system(size: size * 0.45, weight: .medium))
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
                 .frame(width: size, height: size)
                 .background(AppColors.surface)
                 .clipShape(Circle())
         }
         .buttonStyle(ScaleButtonStyle())
     }
-}
-
-// MARK: - Preview
-#Preview {
-    VStack(spacing: 16) {
-        AppButton(title: "Start Sleep", style: .primary, icon: "moon.fill") {}
-        AppButton(title: "Secondary", style: .secondary) {}
-        AppButton(title: "Outline", style: .outline) {}
-        AppButton(title: "Loading", style: .primary, isLoading: true) {}
-        AppButton(title: "Disabled", style: .primary, isDisabled: true) {}
-
-        HStack {
-            SmallButton(title: "Filter", icon: "line.3.horizontal.decrease") {}
-            IconButton(icon: "gearshape.fill") {}
-        }
-    }
-    .padding()
-    .background(AppColors.background)
 }

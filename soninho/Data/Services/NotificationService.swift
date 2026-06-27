@@ -302,11 +302,11 @@ final class NotificationService: ObservableObject {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.numberOfLoops = -1
                 if gradualSeconds > 0 {
-                    audioPlayer?.volume = max(0.35, volume * 0.4)
+                    audioPlayer?.volume = max(0.4, volume * 0.45)
                     audioPlayer?.play()
-                    audioPlayer?.setVolume(volume, fadeDuration: gradualSeconds)
+                    audioPlayer?.setVolume(1.0, fadeDuration: gradualSeconds)
                 } else {
-                    audioPlayer?.volume = volume
+                    audioPlayer?.volume = 1.0
                     audioPlayer?.play()
                 }
             } catch {
@@ -316,6 +316,8 @@ final class NotificationService: ObservableObject {
         } else {
             playFallbackAlarm()
         }
+
+        print("[FIRE] FG isPlaying=\(audioPlayer?.isPlaying ?? false) vol=\(audioPlayer?.volume ?? -1) grad=\(gradualSeconds) out=\(audioSession.outputVolume) cat=\(audioSession.category.rawValue)")
 
         // Vibration loop
         if vibration {

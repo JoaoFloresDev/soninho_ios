@@ -24,20 +24,12 @@
                                     <constraint firstAttribute="height" constant="100" id="0jh-YY-YYY"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soninho" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Yh-vWs">
-                                <rect key="frame" x="121.66666666666667" y="492" width="150" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1" weight="bold"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YRO-k0-Ptf" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5Bl-XX-XXX"/>
                             <constraint firstItem="YRO-k0-Ptf" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5Bl-YY-YYY"/>
-                            <constraint firstItem="GJd-Yh-vWs" firstAttribute="top" secondItem="YRO-k0-Ptf" secondAttribute="bottom" constant="16" id="GJd-XX-XXX"/>
-                            <constraint firstItem="GJd-Yh-vWs" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="GJd-YY-YYY"/>
                         </constraints>
                     </view>
                 </viewController>

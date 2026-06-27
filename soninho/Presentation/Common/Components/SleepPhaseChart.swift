@@ -22,13 +22,13 @@ struct SleepPhaseChart: View {
             HStack {
                 Text(startTime.timeString)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
 
                 Spacer()
 
                 Text(endTime.timeString)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
 
             // Chart
@@ -69,7 +69,7 @@ struct SleepPhaseChart: View {
                 AxisValueLabel {
                     Text(phase.displayName)
                         .font(AppFonts.caption2())
-                        .foregroundColor(AppColors.textSecondary)
+                        .foregroundStyle(AppColors.textSecondary)
                 }
             }
         }
@@ -115,7 +115,7 @@ struct SleepPhaseChart: View {
 
                     Text(phase.displayName)
                         .font(AppFonts.caption2())
-                        .foregroundColor(AppColors.textSecondary)
+                        .foregroundStyle(AppColors.textSecondary)
                 }
             }
         }
@@ -205,39 +205,19 @@ struct SleepPhaseDistribution: View {
 
                 Text(phase.displayName)
                     .font(AppFonts.caption2())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
 
             Text(duration.hoursMinutesString)
                 .font(AppFonts.footnote())
                 .fontWeight(.medium)
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             Text("\(Int((duration / total) * 100))%")
                 .font(AppFonts.caption2())
-                .foregroundColor(AppColors.textTertiary)
+                .foregroundStyle(AppColors.textTertiary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
-// MARK: - Preview
-#Preview {
-    VStack(spacing: 32) {
-        SleepPhaseChart(
-            phases: SleepRecord.sampleRecords.first?.phases ?? [],
-            startTime: Date().addingTimeInterval(-8 * 3600),
-            endTime: Date()
-        )
-        .padding()
-
-        SleepPhaseDistribution(
-            deepSleep: 1.5 * 3600,
-            lightSleep: 4 * 3600,
-            remSleep: 1.5 * 3600,
-            awakeDuration: 0.5 * 3600
-        )
-        .padding()
-    }
-    .background(AppColors.background)
-}

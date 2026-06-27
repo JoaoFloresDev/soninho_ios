@@ -65,6 +65,7 @@ final class BackgroundAlarmPlayer: ObservableObject {
     /// interruption (call, Siri, another app) can silently kill the silent
     /// keep-alive — without this the app suspends and the alarm never fires.
     private func recoverPlayback() {
+        print("[FIRE] recover bgActive=\(isBackgroundActive) alarmPlayer=\(alarmPlayer != nil)")
         guard isBackgroundActive else { return }
         if alarmPlayer != nil {
             try? audioSession.setActive(true)
@@ -156,11 +157,11 @@ final class BackgroundAlarmPlayer: ObservableObject {
                 alarmPlayer?.numberOfLoops = -1
                 alarmPlayer?.prepareToPlay()
                 if gradualSeconds > 0 {
-                    alarmPlayer?.volume = max(0.35, volume * 0.4)
+                    alarmPlayer?.volume = max(0.4, volume * 0.45)
                     alarmPlayer?.play()
-                    alarmPlayer?.setVolume(volume, fadeDuration: gradualSeconds)
+                    alarmPlayer?.setVolume(1.0, fadeDuration: gradualSeconds)
                 } else {
-                    alarmPlayer?.volume = volume
+                    alarmPlayer?.volume = 1.0
                     alarmPlayer?.play()
                 }
             } catch {
@@ -169,6 +170,8 @@ final class BackgroundAlarmPlayer: ObservableObject {
         } else {
             playSystemAlarm()
         }
+
+        print("[FIRE] BG isPlaying=\(alarmPlayer?.isPlaying ?? false) vol=\(alarmPlayer?.volume ?? -1) grad=\(gradualSeconds) out=\(audioSession.outputVolume) cat=\(audioSession.category.rawValue)")
 
         // Start vibration
         if vibrationEnabled {
@@ -195,10 +198,14 @@ final class BackgroundAlarmPlayer: ObservableObject {
 
     private func configureAudioSession() {
         do {
-            // .playback: audio plays with mute switch ON and screen locked
-            // .mixWithOthers: doesn't interrupt other audio (important for silent background)
-            try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers])
-            try audioSession.setActive(true)
+            // .playback (solo, no .mixWithOthers): owns the audio session so iOS
+            // keeps the app alive in the background. Mixable/ambient audio is
+            // treated as secondary and gets suspended, which froze the alarm
+            // check timer and stopped the alarm from ever firing in background.
+            // Only set the category here; activation happens when we actually
+            // start playing (silent keep-alive or the alarm) so opening the app
+            // doesn't needlessly grab the session from the user's music.
+            try audioSession.setCategory(.playback, mode: .default, options: [])
         } catch {
         }
     }
@@ -213,9 +220,10 @@ final class BackgroundAlarmPlayer: ObservableObject {
         }
 
         do {
+            try audioSession.setActive(true)
             silentPlayer = try AVAudioPlayer(data: data)
             silentPlayer?.numberOfLoops = -1 // Loop forever
-            silentPlayer?.volume = 0.01
+            silentPlayer?.volume = 0.02
             silentPlayer?.prepareToPlay()
             silentPlayer?.play()
         } catch {
@@ -251,10 +259,15 @@ final class BackgroundAlarmPlayer: ObservableObject {
         data.append(contentsOf: "data".utf8)
         data.append(contentsOf: withUnsafeBytes(of: dataSize.littleEndian) { Array($0) })
 
-        // Near-silent samples (value = 1, barely perceptible)
-        let sampleBytes = withUnsafeBytes(of: Int16(1).littleEndian) { Array($0) }
-        for _ in 0..<numSamples {
-            data.append(contentsOf: sampleBytes)
+        // A tiny-amplitude low tone (NOT a constant/zero). iOS suspends an app
+        // that plays true silence ("playing silence"), so the keep-alive needs
+        // real, oscillating audio energy — just far too quiet to hear.
+        let amplitude = 24.0   // out of 32767 → inaudible, but real signal
+        let frequency = 50.0   // low, sub-perceptible tone
+        for i in 0..<numSamples {
+            let t = Double(i) / sampleRate
+            let value = Int16(amplitude * sin(2.0 * Double.pi * frequency * t))
+            data.append(contentsOf: withUnsafeBytes(of: value.littleEndian) { Array($0) })
         }
 
         return data
@@ -289,30 +302,49 @@ final class BackgroundAlarmPlayer: ObservableObject {
         if isBackgroundActive, alarmPlayer == nil, silentPlayer?.isPlaying != true {
             startSilentAudio()
         }
+        print("[HEARTBEAT] bgActive=\(isBackgroundActive) silent=\(silentPlayer?.isPlaying ?? false)")
 
         let alarms = StorageService.shared.loadAlarms()
         let now = Date()
+        let calendar = Calendar.current
 
         for alarm in alarms where alarm.isEnabled {
-            // Skip if already fired this alarm
-            guard !hasFiredAlarmIds.contains(alarm.id.uuidString) else { continue }
-            guard let nextDate = alarm.nextAlarmDate else { continue }
+            // Fire off the MOST RECENT occurrence of the alarm's hour:minute, not
+            // `nextAlarmDate` (which always points to the FUTURE — today before the
+            // time, tomorrow right after — so a repeating alarm never lands in the
+            // catch-up window). Compute today's occurrence and step back a day if
+            // the time hasn't happened yet today.
+            let hm = calendar.dateComponents([.hour, .minute], from: alarm.time)
+            var comps = calendar.dateComponents([.year, .month, .day], from: now)
+            comps.hour = hm.hour
+            comps.minute = hm.minute
+            comps.second = 0
+            guard let todayAtTime = calendar.date(from: comps) else { continue }
+            let recent = now >= todayAtTime
+                ? todayAtTime
+                : (calendar.date(byAdding: .day, value: -1, to: todayAtTime) ?? todayAtTime)
 
-            let timeUntilAlarm = nextDate.timeIntervalSince(now)
+            // Only ring if that occurrence is within the last 90s (catch-up window).
+            let sinceFire = now.timeIntervalSince(recent)
+            guard sinceFire >= 0, sinceFire <= 90 else { continue }
 
-            // Fire if we're within 0 to -90 seconds of the alarm time
-            if timeUntilAlarm <= 0 && timeUntilAlarm > -90 {
-                let isSmartActive = alarm.isSmartAlarm && MotionSleepMonitor.shared.isMonitoring
-
-                if isSmartActive && !MotionSleepMonitor.shared.smartAlarmTriggered {
-                    // Smart alarm will handle it, but fire at hard deadline
-                    if timeUntilAlarm <= 0 && timeUntilAlarm > -10 {
-                        fireAlarm(alarm)
-                    }
-                } else if !isSmartActive {
-                    fireAlarm(alarm)
-                }
+            // For repeating alarms, the occurrence's weekday must be selected.
+            if !alarm.repeatDays.isEmpty {
+                let wd = calendar.component(.weekday, from: recent)
+                guard let weekday = Weekday(calendarWeekday: wd), alarm.repeatDays.contains(weekday) else { continue }
             }
+
+            // Fire once per occurrence (key includes the occurrence timestamp).
+            let fireKey = "\(alarm.id.uuidString)@\(Int(recent.timeIntervalSince1970))"
+            guard !hasFiredAlarmIds.contains(fireKey) else { continue }
+
+            // If a smart alarm already rang early in its light-sleep window, don't
+            // ring again at the hard deadline.
+            let isSmartActive = alarm.isSmartAlarm && MotionSleepMonitor.shared.isMonitoring
+            if isSmartActive && MotionSleepMonitor.shared.smartAlarmTriggered { continue }
+
+            hasFiredAlarmIds.insert(fireKey)
+            fireAlarm(alarm)
         }
     }
 

@@ -1,0 +1,68 @@
+# Slumber - App Store Metadata (English)
+
+## App Name (30 characters max)
+Slumber: Sleep Cycle Tracker
+
+## Subtitle (30 characters max)
+Smart Alarm & Sleep Analysis
+
+## Keywords (100 characters max, comma-separated)
+cant sleep,wake tired,bedtime routine,nap timer,insomnia,rem phases,night owl,hygiene,diary,deep
+
+## Promotional Text (170 characters max)
+Sleep better, wake refreshed. Track your sleep cycles, get smart alarms, and discover what quality rest feels like with detailed phase analysis and personalized insights.
+
+## Description (4000 characters max)
+Discover what happens while you sleep. Slumber is the complete sleep cycle tracker that analyzes your nights, identifies patterns, and helps you sleep better every day.
+
+TRACK YOUR SLEEP WITH PRECISION
+
+Connect with Apple Health and automatically monitor every phase of your sleep cycle: deep sleep, light sleep, REM, and awake periods. Slumber transforms complex health data into a simple, clear sleep quality score so you truly understand how well you are resting each night.
+
+WAKE UP AT THE RIGHT MOMENT
+
+The Smart Alarm is what sets Slumber apart. Instead of jolting you awake at any random moment, it identifies the lightest phase of your sleep within a customizable window of 15 to 60 minutes before your scheduled time. The result: mornings without grogginess, with more energy from the very first minute of your day.
+
+UNDERSTAND YOUR PATTERNS
+
+Track weekly and monthly statistics that reveal how your sleep evolves over time. See your average duration, bedtime, consistency, and trends. Compare periods and identify what works best for your body and your routine.
+
+KEY FEATURES
+
+Sleep Tracking
+- Automatic monitoring via Apple Health integration
+- Detailed sleep phase analysis (Deep, Light, REM, Awake)
+- Quality score based on duration and phase distribution
+- Complete history with daily and weekly charts
+
+Smart Alarm
+- Wake during light sleep for gentler mornings
+- Customizable wake-up window
+- Relaxing alarm sounds to wake naturally
+- Snooze and dismiss with haptic feedback
+
+Statistics & Insights
+- Detailed weekly and monthly reports
+- Average sleep duration and bedtime tracking
+- Consecutive day streak for sleep consistency
+- Sleep goal with progress tracking
+- Personalized sleep tips by category
+
+Health Integration
+- Sync with Apple Health for accurate data
+- Heart rate reading during sleep
+- Automatic sleep record import
+
+DESIGNED FOR BEDTIME
+
+100% dark interface, designed to be easy on your eyes at night. Clean, minimalist design inspired by Apple apps. Every detail was crafted so using the app before bed is comfortable and quick.
+
+PRIVACY FIRST
+
+Your sleep data stays on your device. No account required, no external servers, no personal data collection. Syncs only with Apple Health, which you control.
+
+AVAILABLE IN 3 LANGUAGES
+
+English, Portuguese, and Spanish. Slumber automatically detects your iPhone language or lets you choose manually in settings.
+
+Start understanding and improving your sleep today. Download Slumber and transform your nights.

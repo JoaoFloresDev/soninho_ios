@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter create:*)",
+      "Bash(git add:*)",
+      "Bash(gh repo create:*)",
+      "Bash(brew install:*)",
+      "Bash(gh auth:*)",
+      "Bash(xcodebuild:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nFix build errors: add SwiftUI import and async/await fixes\n\n- Add SwiftUI import to OnboardingViewModel for withAnimation\n- Fix async transaction listener in PurchaseService\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Read(//Users/joaoflores/Library/Developer/Xcode/DerivedData/soninho-gthywrnxbyuwlncgkhahamyqttyn/Logs/Test/**)",
+      "Bash(# Reset simulator to show onboarding xcrun simctl shutdown \"\"32706E45-C102-4BE9-85CD-90A5B5680C68\"\" || true xcrun simctl erase \"\"32706E45-C102-4BE9-85CD-90A5B5680C68\"\" xcrun simctl boot \"\"32706E45-C102-4BE9-85CD-90A5B5680C68\"\" sleep 3 # Run onboarding test xcodebuild test -project soninho.xcodeproj -scheme soninho -destination ''id=32706E45-C102-4BE9-85CD-90A5B5680C68'' -only-testing:soninhoUITests/ScreenshotTests/testCaptureOnboarding 2>&1)",
+      "Bash(grep:*)"
+    ]
+  }
+}

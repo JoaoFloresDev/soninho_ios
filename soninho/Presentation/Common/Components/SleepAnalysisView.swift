@@ -17,8 +17,20 @@ struct SleepAnalysisCard: View {
     // MARK: - Computed Properties
     private var sleepEfficiency: Double {
         let totalTime = record.totalDuration
-        let actualSleep = totalTime - record.awakeDuration
-        return totalTime > 0 ? (actualSleep / totalTime) * 100 : 0
+        guard totalTime > 0 else { return 0 }
+
+        let awakeTime = record.awakeDuration
+
+        // Assume minimum sleep onset latency (~5 min to fall asleep)
+        // and brief micro-awakenings that motion sensors can't detect
+        let sleepOnsetLatency: TimeInterval = 5 * 60
+        let estimatedAwakeTime = max(awakeTime, sleepOnsetLatency)
+
+        let actualSleep = totalTime - estimatedAwakeTime
+        let efficiency = (actualSleep / totalTime) * 100
+
+        // Cap at 97% — perfect 100% efficiency is unrealistic even for ideal sleepers
+        return min(max(efficiency, 0), 97)
     }
 
     private var isOptimalDuration: Bool {
@@ -66,11 +78,11 @@ struct SleepAnalysisCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text(record.startTime.mediumDateString)
                     .font(AppFonts.subheadline())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
 
                 Text(record.durationString)
                     .font(AppFonts.title())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 HStack(spacing: 4) {
                     Image(systemName: "bed.double.fill")
@@ -85,7 +97,7 @@ struct SleepAnalysisCard: View {
                     Text(record.endTime.timeString)
                 }
                 .font(AppFonts.caption())
-                .foregroundColor(AppColors.textTertiary)
+                .foregroundStyle(AppColors.textTertiary)
             }
 
             Spacer()
@@ -97,7 +109,7 @@ struct SleepAnalysisCard: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "analysis_sleep_stages"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             if #available(iOS 17.0, *) {
                 hypnogramChart
@@ -110,33 +122,33 @@ struct SleepAnalysisCard: View {
     // MARK: - Hypnogram Chart (iOS 17+)
     @available(iOS 17.0, *)
     private var hypnogramChart: some View {
-        Chart {
-            ForEach(record.phases) { phase in
+        let dataPoints = hypnogramDataPoints
+        return Chart {
+            ForEach(Array(dataPoints.enumerated()), id: \.offset) { _, point in
                 LineMark(
-                    x: .value("Time", phase.startTime),
-                    y: .value("Stage", stageValue(phase.phase))
+                    x: .value("Time", point.time),
+                    y: .value("Stage", point.stage)
                 )
-                .foregroundStyle(phase.phase.color)
-                .lineStyle(StrokeStyle(lineWidth: 3, lineCap: .round))
                 .interpolationMethod(.stepEnd)
+                .foregroundStyle(AppColors.primary)
+                .lineStyle(StrokeStyle(lineWidth: 2))
 
                 AreaMark(
-                    x: .value("Time", phase.startTime),
-                    yStart: .value("Base", 0),
-                    yEnd: .value("Stage", stageValue(phase.phase))
+                    x: .value("Time", point.time),
+                    y: .value("Stage", point.stage)
                 )
+                .interpolationMethod(.stepEnd)
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [phase.phase.color.opacity(0.3), phase.phase.color.opacity(0.05)],
+                        colors: [AppColors.primary.opacity(0.25), AppColors.primary.opacity(0.02)],
                         startPoint: .top,
                         endPoint: .bottom
                     )
                 )
-                .interpolationMethod(.stepEnd)
             }
         }
         .chartXAxis {
-            AxisMarks(values: .stride(by: .hour, count: 1)) { value in
+            AxisMarks(values: .stride(by: .hour, count: 2)) { value in
                 AxisValueLabel(format: .dateTime.hour(.defaultDigits(amPM: .abbreviated)))
                     .foregroundStyle(AppColors.textTertiary)
                 AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5, dash: [4]))
@@ -148,12 +160,24 @@ struct SleepAnalysisCard: View {
                 AxisValueLabel {
                     Text(stageLabel(value.as(Int.self) ?? 1))
                         .font(.system(size: 10))
-                        .foregroundColor(AppColors.textSecondary)
+                        .foregroundStyle(AppColors.textSecondary)
                 }
             }
         }
         .chartYScale(domain: 0...5)
         .frame(height: 160)
+    }
+
+    // MARK: - Hypnogram Data Points
+    private var hypnogramDataPoints: [(time: Date, stage: Int)] {
+        var points: [(time: Date, stage: Int)] = []
+        for phase in record.phases {
+            points.append((time: phase.startTime, stage: stageValue(phase.phase)))
+        }
+        if let lastPhase = record.phases.last {
+            points.append((time: lastPhase.endTime, stage: stageValue(lastPhase.phase)))
+        }
+        return points
     }
 
     // MARK: - Legacy Hypnogram
@@ -238,7 +262,7 @@ struct SleepAnalysisCard: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "analysis_time_in_stages"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             // Stacked Bar
             GeometryReader { geometry in
@@ -267,7 +291,7 @@ struct SleepAnalysisCard: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(String(localized: "analysis_insights"))
                 .font(AppFonts.headline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             VStack(spacing: 8) {
                 if record.qualityScore >= 85 {
@@ -331,7 +355,7 @@ struct SleepAnalysisCard: View {
         switch value {
         case 1: return String(localized: "stage_deep")
         case 2: return String(localized: "stage_light")
-        case 3: return "REM"
+        case 3: return String(localized: "stage_rem")
         case 4: return String(localized: "stage_awake")
         default: return ""
         }
@@ -351,21 +375,21 @@ struct MetricCard: View {
             HStack(spacing: 6) {
                 Image(systemName: icon)
                     .font(.system(size: 12))
-                    .foregroundColor(color)
+                    .foregroundStyle(color)
 
                 Text(title)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
 
             Text(value)
                 .font(AppFonts.title2())
                 .fontWeight(.bold)
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             Text(subtitle)
                 .font(AppFonts.caption2())
-                .foregroundColor(color)
+                .foregroundStyle(color)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
@@ -395,7 +419,7 @@ struct PhaseDetailRow: View {
             // Phase name
             Text(phase.localizedName)
                 .font(AppFonts.subheadline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
                 .frame(width: 80, alignment: .leading)
 
             // Progress bar
@@ -416,11 +440,11 @@ struct PhaseDetailRow: View {
                 Text(duration.hoursMinutesString)
                     .font(AppFonts.subheadline())
                     .fontWeight(.medium)
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Text(String(format: "%.0f%%", percentage))
                     .font(AppFonts.caption2())
-                    .foregroundColor(isOptimal ? AppColors.success : AppColors.textTertiary)
+                    .foregroundStyle(isOptimal ? AppColors.success : AppColors.textTertiary)
             }
             .frame(width: 60, alignment: .trailing)
         }
@@ -437,14 +461,14 @@ struct InsightRow: View {
         HStack(spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 16))
-                .foregroundColor(color)
+                .foregroundStyle(color)
                 .frame(width: 32, height: 32)
                 .background(color.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
 
             Text(text)
                 .font(AppFonts.subheadline())
-                .foregroundColor(AppColors.textPrimary)
+                .foregroundStyle(AppColors.textPrimary)
 
             Spacer()
         }
@@ -454,11 +478,3 @@ struct InsightRow: View {
     }
 }
 
-// MARK: - Preview
-#Preview {
-    ScrollView {
-        SleepAnalysisCard(record: SleepRecord.sampleRecords.first!)
-            .padding()
-    }
-    .background(AppColors.background)
-}

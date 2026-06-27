@@ -1,0 +1,68 @@
+# Sueñito - Metadatos App Store (Español)
+
+## Nombre de la App (30 caracteres max)
+Sueñito: Monitor de Sueño
+
+## Subtítulo (30 caracteres max)
+Alarma Inteligente y Análisis
+
+## Palabras clave (100 caracteres max, separadas por coma)
+insomnio,despertar cansado,dormir rápido,siesta,rutina nocturna,rem,fases,diario,profundo,descanso
+
+## Texto Promocional (170 caracteres max)
+Duerme mejor y despierta renovado. Monitorea tus ciclos de sueño, usa alarmas inteligentes y descubre insights sobre la calidad de tu descanso con análisis de fases REM.
+
+## Descripción (4000 caracteres max)
+Descubre lo que ocurre mientras duermes. Sueñito es el monitor de sueño completo que analiza tus noches, identifica patrones y te ayuda a dormir mejor cada día.
+
+MONITOREA TU SUEÑO CON PRECISIÓN
+
+Conéctate con Apple Salud y monitorea automáticamente cada fase de tu ciclo de sueño: sueño profundo, sueño ligero, REM y períodos despierto. Sueñito transforma datos complejos de salud en una puntuación de calidad simple y clara, para que entiendas de verdad cómo estás descansando cada noche.
+
+DESPIERTA EN EL MOMENTO CORRECTO
+
+La Alarma Inteligente es lo que distingue a Sueñito. En lugar de despertarte en cualquier momento, identifica la fase más ligera de tu sueño dentro de una ventana personalizable de 15 a 60 minutos antes de tu hora programada. El resultado: mañanas sin esa sensación de cansancio, con más energía desde el primer minuto del día.
+
+COMPRENDE TUS PATRONES
+
+Acompaña estadísticas semanales y mensuales que revelan cómo evoluciona tu sueño a lo largo del tiempo. Mira tu duración promedio, hora de dormir, consistencia y tendencias. Compara períodos e identifica qué funciona mejor para tu cuerpo y tu rutina.
+
+CARACTERÍSTICAS PRINCIPALES
+
+Seguimiento del Sueño
+- Monitoreo automático mediante integración con Apple Salud
+- Análisis detallado de fases del sueño (Profundo, Ligero, REM, Despierto)
+- Puntuación de calidad basada en duración y distribución de fases
+- Historial completo con gráficos diarios y semanales
+
+Alarma Inteligente
+- Despertar durante el sueño ligero para mañanas más suaves
+- Ventana de despertar personalizable
+- Sonidos relajantes para despertar naturalmente
+- Posponer y descartar con retroalimentación háptica
+
+Estadísticas e Insights
+- Informes semanales y mensuales detallados
+- Duración promedio y hora de dormir
+- Racha de días consecutivos durmiendo bien
+- Meta de horas de sueño con seguimiento de progreso
+- Consejos de sueño personalizados por categoría
+
+Integración con Salud
+- Sincronización con Apple Salud para datos precisos
+- Lectura de frecuencia cardíaca durante el sueño
+- Importación automática de registros de sueño
+
+DISEÑADO PARA LA HORA DE DORMIR
+
+Interfaz 100% oscura, diseñada para no irritar tus ojos por la noche. Diseño limpio y minimalista inspirado en las apps de Apple. Cada detalle fue pensado para que usar la app antes de dormir sea cómodo y rápido.
+
+PRIVACIDAD PRIMERO
+
+Tus datos de sueño se quedan en tu dispositivo. Sin cuenta requerida, sin servidores externos, sin recolección de datos personales. Sincronización solo con Apple Salud, que tú controlas.
+
+DISPONIBLE EN 3 IDIOMAS
+
+Español, Inglés y Portugués. Sueñito detecta automáticamente el idioma de tu iPhone o te permite elegir manualmente en configuración.
+
+Comienza hoy a entender y mejorar tu sueño. Descarga Sueñito y transforma tus noches.

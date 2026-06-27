@@ -41,7 +41,7 @@ struct StatCard: View {
             HStack {
                 Image(systemName: icon)
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(iconColor)
+                    .foregroundStyle(iconColor)
                     .frame(width: 32, height: 32)
                     .background(iconColor.opacity(0.15))
                     .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -56,7 +56,7 @@ struct StatCard: View {
                         Text(trend.localizedDescription)
                             .font(AppFonts.caption2())
                     }
-                    .foregroundColor(trend.color)
+                    .foregroundStyle(trend.color)
                 }
             }
 
@@ -64,16 +64,16 @@ struct StatCard: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(value)
                     .font(AppFonts.title2())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Text(title)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
 
                 if let subtitle = subtitle {
                     Text(subtitle)
                         .font(AppFonts.caption2())
-                        .foregroundColor(AppColors.textTertiary)
+                        .foregroundStyle(AppColors.textTertiary)
                 }
             }
         }
@@ -94,7 +94,7 @@ struct HorizontalStatCard: View {
         HStack(spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(iconColor)
+                .foregroundStyle(iconColor)
                 .frame(width: 44, height: 44)
                 .background(iconColor.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -102,11 +102,11 @@ struct HorizontalStatCard: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
 
                 Text(value)
                     .font(AppFonts.headline())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
             }
 
             Spacer()
@@ -129,61 +129,18 @@ struct LargeStatDisplay: View {
             HStack(alignment: .lastTextBaseline, spacing: 4) {
                 Text(value)
                     .font(AppFonts.number(48))
-                    .foregroundColor(color)
+                    .foregroundStyle(color)
 
                 if let unit = unit {
                     Text(unit)
                         .font(AppFonts.title3())
-                        .foregroundColor(AppColors.textSecondary)
+                        .foregroundStyle(AppColors.textSecondary)
                 }
             }
 
             Text(title)
                 .font(AppFonts.subheadline())
-                .foregroundColor(AppColors.textSecondary)
+                .foregroundStyle(AppColors.textSecondary)
         }
     }
-}
-
-// MARK: - Preview
-#Preview {
-    ScrollView {
-        VStack(spacing: 16) {
-            HStack(spacing: 16) {
-                StatCard(
-                    title: "Avg. Sleep",
-                    value: "7h 32m",
-                    subtitle: "Past 7 days",
-                    icon: "moon.fill",
-                    iconColor: AppColors.primary,
-                    trend: .improving
-                )
-
-                StatCard(
-                    title: "Deep Sleep",
-                    value: "1h 45m",
-                    subtitle: "22% of sleep",
-                    icon: "moon.zzz.fill",
-                    iconColor: AppColors.deepSleep
-                )
-            }
-
-            HorizontalStatCard(
-                title: "Average Bedtime",
-                value: "23:15",
-                icon: "bed.double.fill",
-                iconColor: AppColors.accent
-            )
-
-            LargeStatDisplay(
-                title: "Sleep Duration",
-                value: "7",
-                unit: "h 32m",
-                color: AppColors.primary
-            )
-            .padding()
-        }
-        .padding()
-    }
-    .background(AppColors.background)
 }

@@ -2,15 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Soninho uses your sleep data to provide detailed sleep analysis and personalized insights to help you sleep better.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Soninho saves your sleep records to Apple Health so you can track your sleep history across all your devices.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>CFBundleDisplayName</key>
+	<string>Soninho</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Dark</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
+	<key>NSMotionUsageDescription</key>
+	<string>Soninho uses motion sensors to detect your sleep phases and wake you at the optimal moment during light sleep.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Soninho uses the microphone to measure ambient sound levels during sleep to improve sleep phase detection accuracy.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Soninho reads your sleep data from Apple Health to provide detailed sleep analysis and tracking.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Soninho saves your sleep sessions to Apple Health so you can see all your health data in one place.</string>
 </dict>
 </plist>

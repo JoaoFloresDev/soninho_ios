@@ -230,6 +230,7 @@ struct SleepTrackerView: View {
             }
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColors.surface)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
@@ -256,8 +257,11 @@ struct SleepTrackerView: View {
                     .lineLimit(3)
                     .fixedSize(horizontal: false, vertical: true)
             }
+
+            Spacer(minLength: 0)
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColors.surface)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }

@@ -75,11 +75,11 @@ struct SleepScoreRing: View {
                 VStack(spacing: 4) {
                     Text("\(score)")
                         .font(AppFonts.number(size * 0.3))
-                        .foregroundColor(AppColors.textPrimary)
+                        .foregroundStyle(AppColors.textPrimary)
 
                     Text(quality.localizedName)
                         .font(AppFonts.caption())
-                        .foregroundColor(quality.color)
+                        .foregroundStyle(quality.color)
                         .fontWeight(.medium)
                 }
             }
@@ -118,27 +118,8 @@ struct SleepScoreBadge: View {
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
-        .foregroundColor(quality.color)
+        .foregroundStyle(quality.color)
         .background(quality.color.opacity(0.15))
         .clipShape(Capsule())
     }
-}
-
-// MARK: - Preview
-#Preview {
-    VStack(spacing: 32) {
-        SleepScoreRing(score: 92)
-        SleepScoreRing(score: 75)
-        SleepScoreRing(score: 58)
-        SleepScoreRing(score: 35)
-
-        HStack {
-            SleepScoreBadge(score: 92)
-            SleepScoreBadge(score: 75)
-            SleepScoreBadge(score: 58)
-            SleepScoreBadge(score: 35)
-        }
-    }
-    .padding()
-    .background(AppColors.background)
 }

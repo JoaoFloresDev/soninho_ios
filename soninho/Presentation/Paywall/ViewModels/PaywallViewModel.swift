@@ -66,12 +66,10 @@ final class PaywallViewModel: ObservableObject {
 
     // MARK: - Public Methods
     func selectPlan(_ planId: String) {
-        HapticManager.selection()
         selectedPlan = planId
     }
 
     func purchase() async {
-        HapticManager.mediumImpact()
         isPurchasing = true
         errorMessage = nil
 
@@ -86,17 +84,14 @@ final class PaywallViewModel: ObservableObject {
             // For demo, just mark as premium
             storageService.isPremiumUser = true
             purchaseSuccess = true
-            HapticManager.success()
         } catch {
             errorMessage = error.localizedDescription
-            HapticManager.error()
         }
 
         isPurchasing = false
     }
 
     func restorePurchases() async {
-        HapticManager.mediumImpact()
         isLoading = true
         errorMessage = nil
 
@@ -109,7 +104,6 @@ final class PaywallViewModel: ObservableObject {
             // Check if user has active subscription
             // For demo:
             // storageService.isPremiumUser = true
-            HapticManager.success()
         } catch {
             errorMessage = error.localizedDescription
         }

@@ -83,11 +83,11 @@ struct PaywallView: View {
             VStack(spacing: 8) {
                 Text(String(localized: "paywall_title"))
                     .font(AppFonts.title())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
 
                 Text(String(localized: "paywall_subtitle"))
                     .font(AppFonts.body())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
                     .multilineTextAlignment(.center)
             }
         }
@@ -101,7 +101,7 @@ struct PaywallView: View {
                 HStack(spacing: 12) {
                     Image(systemName: feature.icon)
                         .font(.system(size: 18))
-                        .foregroundColor(AppColors.accent)
+                        .foregroundStyle(AppColors.accent)
                         .frame(width: 36, height: 36)
                         .background(AppColors.accent.opacity(0.15))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -109,18 +109,18 @@ struct PaywallView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(String(localized: String.LocalizationValue(feature.title)))
                             .font(AppFonts.body())
-                            .foregroundColor(AppColors.textPrimary)
+                            .foregroundStyle(AppColors.textPrimary)
 
                         Text(String(localized: String.LocalizationValue(feature.description)))
                             .font(AppFonts.caption())
-                            .foregroundColor(AppColors.textSecondary)
+                            .foregroundStyle(AppColors.textSecondary)
                     }
 
                     Spacer()
 
                     Image(systemName: "checkmark")
                         .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(AppColors.success)
+                        .foregroundStyle(AppColors.success)
                 }
             }
         }
@@ -158,7 +158,7 @@ struct PaywallView: View {
             if let error = viewModel.errorMessage {
                 Text(error)
                     .font(AppFonts.caption())
-                    .foregroundColor(AppColors.error)
+                    .foregroundStyle(AppColors.error)
             }
         }
     }
@@ -174,28 +174,19 @@ struct PaywallView: View {
             } label: {
                 Text(String(localized: "paywall_restore"))
                     .font(AppFonts.subheadline())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
             }
             .disabled(viewModel.isLoading)
 
             // Legal
-            HStack(spacing: 16) {
-                Link(String(localized: "settings_privacy"), destination: URL(string: AppConstants.privacyPolicyURL)!)
-                    .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textTertiary)
-
-                Text("•")
-                    .foregroundColor(AppColors.textTertiary)
-
-                Link(String(localized: "settings_terms"), destination: URL(string: AppConstants.termsOfUseURL)!)
-                    .font(AppFonts.caption())
-                    .foregroundColor(AppColors.textTertiary)
-            }
+            Link(String(localized: "settings_privacy"), destination: URL(string: AppConstants.privacyPolicyURL)!)
+                .font(AppFonts.caption())
+                .foregroundStyle(AppColors.textTertiary)
 
             // Subscription Info
             Text(String(localized: "paywall_info"))
                 .font(AppFonts.caption2())
-                .foregroundColor(AppColors.textTertiary)
+                .foregroundStyle(AppColors.textTertiary)
                 .multilineTextAlignment(.center)
         }
     }
@@ -228,13 +219,13 @@ struct PlanCard: View {
                     HStack {
                         Text(String(localized: String.LocalizationValue(plan.title)))
                             .font(AppFonts.headline())
-                            .foregroundColor(AppColors.textPrimary)
+                            .foregroundStyle(AppColors.textPrimary)
 
                         if plan.isPopular {
                             Text(String(localized: "paywall_popular"))
                                 .font(AppFonts.caption2())
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)
+                                .foregroundStyle(.white)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
                                 .background(AppColors.accent)
@@ -244,7 +235,7 @@ struct PlanCard: View {
 
                     Text(String(localized: String.LocalizationValue(plan.period)))
                         .font(AppFonts.caption())
-                        .foregroundColor(AppColors.textSecondary)
+                        .foregroundStyle(AppColors.textSecondary)
                 }
 
                 Spacer()
@@ -253,12 +244,12 @@ struct PlanCard: View {
                 VStack(alignment: .trailing, spacing: 2) {
                     Text(plan.price)
                         .font(AppFonts.headline())
-                        .foregroundColor(AppColors.textPrimary)
+                        .foregroundStyle(AppColors.textPrimary)
 
                     if let savings = plan.savings {
                         Text(String(localized: String.LocalizationValue(savings)))
                             .font(AppFonts.caption())
-                            .foregroundColor(AppColors.success)
+                            .foregroundStyle(AppColors.success)
                     }
                 }
             }
@@ -272,9 +263,4 @@ struct PlanCard: View {
         }
         .buttonStyle(.plain)
     }
-}
-
-// MARK: - Preview
-#Preview {
-    PaywallView()
 }

@@ -31,7 +31,7 @@ struct OnboardingView: View {
                         } label: {
                             Text(String(localized: "onboarding_skip"))
                                 .font(AppFonts.subheadline())
-                                .foregroundColor(AppColors.textSecondary)
+                                .foregroundStyle(AppColors.textSecondary)
                         }
                     }
                 }
@@ -133,7 +133,7 @@ struct OnboardingPageView: View {
                 // Icon
                 Image(systemName: page.icon)
                     .font(.system(size: 56))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
             }
             .animation(
                 .easeInOut(duration: 2).repeatForever(autoreverses: true),
@@ -144,12 +144,12 @@ struct OnboardingPageView: View {
             VStack(spacing: 16) {
                 Text(String(localized: String.LocalizationValue(page.title)))
                     .font(AppFonts.title())
-                    .foregroundColor(AppColors.textPrimary)
+                    .foregroundStyle(AppColors.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text(String(localized: String.LocalizationValue(page.subtitle)))
                     .font(AppFonts.body())
-                    .foregroundColor(AppColors.textSecondary)
+                    .foregroundStyle(AppColors.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineLimit(3)
             }
@@ -162,9 +162,4 @@ struct OnboardingPageView: View {
             isAnimating = true
         }
     }
-}
-
-// MARK: - Preview
-#Preview {
-    OnboardingView(isOnboardingComplete: .constant(false))
 }
