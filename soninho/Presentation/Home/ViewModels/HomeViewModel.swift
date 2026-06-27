@@ -142,6 +142,15 @@ final class HomeViewModel: ObservableObject {
         UIApplication.shared.open(url)
     }
 
+    /// Opens Apple Health so the user can set up Sleep (the only way an iPhone
+    /// without an Apple Watch records sleep). Falls back to app Settings.
+    func openHealthApp() {
+        guard let url = URL(string: "x-apple-health://") else { openHealthSettings(); return }
+        UIApplication.shared.open(url, options: [:]) { [weak self] success in
+            if !success { self?.openHealthSettings() }
+        }
+    }
+
     func refresh() async {
         await loadData()
     }

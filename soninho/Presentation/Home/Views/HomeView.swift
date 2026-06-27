@@ -244,11 +244,11 @@ struct HomeView: View {
     // MARK: - Empty State Section
     private var emptyStateSection: some View {
         EmptyStateView(
-            icon: "heart.text.square.fill",
+            icon: "bed.double.fill",
             title: String(localized: "home_apple_empty_title"),
             message: String(localized: "home_apple_empty_message"),
             actionTitle: viewModel.isHealthKitAvailable ? String(localized: "home_apple_empty_action") : nil,
-            action: viewModel.isHealthKitAvailable ? { Task { await viewModel.requestHealthKitAccess() } } : nil
+            action: viewModel.isHealthKitAvailable ? { viewModel.openHealthApp() } : nil
         )
         .frame(minHeight: 460)
     }

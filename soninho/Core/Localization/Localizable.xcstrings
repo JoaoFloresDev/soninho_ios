@@ -1590,19 +1590,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connect Apple Health"
+            "value" : "Open the Health app"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conectar Apple Saúde"
+            "value" : "Abrir o app Saúde"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conectar Apple Salud"
+            "value" : "Abrir la app Salud"
           }
         }
       }
@@ -1612,19 +1612,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connect Apple Health to see the nights your iPhone or Apple Watch recorded here."
+            "value" : "To see your sleep here, turn on Sleep in the iPhone's Health app (set a schedule + \"Use iPhone to track\"). With an Apple Watch you also get detailed stages."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conecte o Apple Saúde pra ver aqui as noites que seu iPhone ou Apple Watch registraram."
+            "value" : "Pra ver seu sono aqui, ative o Sono no app Saúde do iPhone (defina uma agenda + \"Acompanhar com iPhone\"). Com Apple Watch, vêm também as fases detalhadas."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conecta Apple Salud para ver aquí las noches que registró tu iPhone o Apple Watch."
+            "value" : "Para ver tu sueño aquí, activa Sueño en la app Salud del iPhone (define un horario + \"Usar iPhone para registrar\"). Con Apple Watch, también obtienes las fases."
           }
         }
       }
@@ -1634,19 +1634,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Apple Health data"
+            "value" : "Your iPhone isn't tracking sleep yet"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sem dados no Apple Saúde"
+            "value" : "Seu iPhone ainda não registra sono"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sin datos en Apple Salud"
+            "value" : "Tu iPhone aún no registra el sueño"
           }
         }
       }

@@ -20,25 +20,40 @@ struct SoninhoApp: App {
 
     // MARK: - Init
     init() {
-        _isOnboardingComplete = State(initialValue: StorageService.shared.hasCompletedOnboarding)
+        let skipOnboarding = StorageService.shared.hasCompletedOnboarding
+        _isOnboardingComplete = State(initialValue: skipOnboarding)
         configureAppearance()
         configureNotifications()
+        AlarmSoundGenerator.generateAlarmSoundsIfNeeded()
+        // Prepare audio session early so background audio works immediately
+        BackgroundAlarmPlayer.shared.prepare()
     }
 
     // MARK: - View Body
     var body: some Scene {
         WindowGroup {
-            Group {
-                if isOnboardingComplete {
-                    MainTabView()
-                        .environmentObject(storageService)
-                        .environmentObject(purchaseService)
+            ZStack {
+                Group {
+                    if isOnboardingComplete {
+                        MainTabView()
+                            .environmentObject(storageService)
+                            .environmentObject(purchaseService)
+                            .environmentObject(notificationService)
+                    } else {
+                        OnboardingView(isOnboardingComplete: $isOnboardingComplete)
+                            .environmentObject(storageService)
+                    }
+                }
+
+                // Full-screen alarm overlay
+                if notificationService.isAlarmRinging {
+                    AlarmRingingView()
                         .environmentObject(notificationService)
-                } else {
-                    OnboardingView(isOnboardingComplete: $isOnboardingComplete)
-                        .environmentObject(storageService)
+                        .transition(.opacity.combined(with: .scale(scale: 1.05)))
+                        .zIndex(100)
                 }
             }
+            .animation(.spring(response: 0.4), value: notificationService.isAlarmRinging)
             .preferredColorScheme(.dark)
             .onChange(of: isOnboardingComplete) { _, newValue in
                 storageService.hasCompletedOnboarding = newValue
@@ -57,6 +72,11 @@ struct SoninhoApp: App {
         // Increment app open count
         reviewService.incrementAppOpenCount()
 
+        // Schedule all enabled alarms on every app launch
+        Task {
+            await notificationService.scheduleAllEnabledAlarms()
+        }
+
         // Request review if appropriate (between 5th and 10th launch)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             reviewService.requestReviewIfAppropriate()
@@ -66,14 +86,21 @@ struct SoninhoApp: App {
     private func handleScenePhaseChange(_ phase: ScenePhase) {
         switch phase {
         case .active:
-            // App became active
+            // Stop background keep-alive when app is fully in foreground
+            BackgroundAlarmPlayer.shared.stopBackgroundKeepAlive()
             Task {
                 await notificationService.checkAuthorizationStatus()
+                await notificationService.scheduleAllEnabledAlarms()
             }
         case .inactive:
-            break
+            // Phone is being locked or app is switching — start background keep-alive NOW
+            // This is critical: must start BEFORE .background to ensure audio session is ready
+            BackgroundAlarmPlayer.shared.startBackgroundKeepAlive()
         case .background:
-            break
+            // Ensure background keep-alive is running
+            if !BackgroundAlarmPlayer.shared.isBackgroundActive {
+                BackgroundAlarmPlayer.shared.startBackgroundKeepAlive()
+            }
         @unknown default:
             break
         }
@@ -90,6 +117,7 @@ struct SoninhoApp: App {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = UIColor(AppColors.background)
+        navigationBarAppearance.shadowColor = .clear
         navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
