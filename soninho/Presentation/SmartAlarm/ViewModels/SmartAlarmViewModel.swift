@@ -147,7 +147,8 @@ final class SmartAlarmViewModel: ObservableObject {
         editingIsSmartAlarm = true
         editingSmartWindow = 30
         editingSound = .sunrise
-        editingRepeatDays = []
+        // Default new alarms to ring every day (user can deselect days).
+        editingRepeatDays = Set(Weekday.allCases)
         editingLabel = ""
         // Default new alarms to the shake-to-dismiss mission so the wake-up
         // challenge is on out of the box (user can change/disable it).
@@ -243,7 +244,7 @@ final class SmartAlarmViewModel: ObservableObject {
             isSmartAlarm: true,
             smartAlarmWindow: 30,
             sound: .sunrise,
-            repeatDays: [],
+            repeatDays: Set(Weekday.allCases),
             label: String(localized: "alarm_default_label")
         )
     }

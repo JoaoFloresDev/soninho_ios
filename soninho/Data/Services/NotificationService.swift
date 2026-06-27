@@ -128,7 +128,7 @@ final class NotificationService: ObservableObject {
         // the Critical Alerts entitlement. Budget stays under iOS's 64-pending
         // limit by sharing the slots across all enabled alarms.
         let enabledCount = max(1, StorageService.shared.loadAlarms().filter { $0.isEnabled }.count)
-        let burstCount = max(8, min(24, 55 / enabledCount))
+        let burstCount = max(6, min(18, 40 / enabledCount))
         let spacing: TimeInterval = AlarmBurst.spacing
         for i in 0..<burstCount {
             let fireDate = nextDate.addingTimeInterval(Double(i) * spacing)
@@ -139,6 +139,26 @@ final class NotificationService: ObservableObject {
                 identifier: "\(alarm.id.uuidString)\(AlarmBurst.suffix)\(i)",
                 isSmartWake: false
             )
+        }
+
+        // Baseline for repeating alarms: a repeats:true notification per selected
+        // weekday so it keeps firing each day even if the app is never reopened
+        // (the burst above only covers the next occurrence). One per weekday.
+        if !alarm.repeatDays.isEmpty {
+            let timeComps = calendar.dateComponents([.hour, .minute], from: alarm.time)
+            for weekday in alarm.repeatDays {
+                var comps = DateComponents()
+                comps.hour = timeComps.hour
+                comps.minute = timeComps.minute
+                comps.weekday = weekday.rawValue
+                await scheduleNotification(
+                    alarm: alarm,
+                    dateComponents: comps,
+                    repeats: true,
+                    identifier: "\(alarm.id.uuidString)_day_\(weekday.rawValue)",
+                    isSmartWake: false
+                )
+            }
         }
 
         await refreshPendingNotifications()
