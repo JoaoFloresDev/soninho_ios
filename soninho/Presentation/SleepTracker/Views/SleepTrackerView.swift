@@ -31,8 +31,7 @@ struct SleepTrackerView: View {
                         .transition(.opacity)
                 }
             }
-            .navigationTitle(String(localized: "tracker_title"))
-            .navigationBarTitleDisplayMode(.large)
+            .toolbar(.hidden, for: .navigationBar)
             .confirmationDialog(
                 String(localized: "tracker_stop_title"),
                 isPresented: $showingStopConfirmation,
