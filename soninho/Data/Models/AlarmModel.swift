@@ -136,7 +136,7 @@ struct AlarmModel: Codable, Identifiable {
         isSmartAlarm: Bool = true,
         smartAlarmWindow: Int = 30,
         sound: AlarmSound = .sunrise,
-        volume: Double = 0.7,
+        volume: Double = 1.0,
         vibrationEnabled: Bool = true,
         repeatDays: Set<Weekday> = [],
         label: String? = nil,

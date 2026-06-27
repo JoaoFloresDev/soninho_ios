@@ -41,6 +41,38 @@ final class BackgroundAlarmPlayer: ObservableObject {
         silentAudioData = generateSilentAudioData()
         // Configure audio session early
         configureAudioSession()
+        registerAudioSessionObservers()
+    }
+
+    // MARK: - Audio Session Resilience
+
+    private func registerAudioSessionObservers() {
+        let nc = NotificationCenter.default
+        nc.addObserver(forName: AVAudioSession.interruptionNotification, object: nil, queue: .main) { [weak self] note in
+            guard let raw = note.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+                  AVAudioSession.InterruptionType(rawValue: raw) == .ended else { return }
+            Task { @MainActor in self?.recoverPlayback() }
+        }
+        nc.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor in self?.recoverPlayback() }
+        }
+        nc.addObserver(forName: AVAudioSession.mediaServicesWereResetNotification, object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor in self?.recoverPlayback() }
+        }
+    }
+
+    /// Re-activates the session and resumes whatever should be playing. An
+    /// interruption (call, Siri, another app) can silently kill the silent
+    /// keep-alive — without this the app suspends and the alarm never fires.
+    private func recoverPlayback() {
+        guard isBackgroundActive else { return }
+        if alarmPlayer != nil {
+            try? audioSession.setActive(true)
+            alarmPlayer?.play()
+        } else {
+            configureAudioSession()
+            startSilentAudio()
+        }
     }
 
     // MARK: - Public Methods
@@ -124,7 +156,7 @@ final class BackgroundAlarmPlayer: ObservableObject {
                 alarmPlayer?.numberOfLoops = -1
                 alarmPlayer?.prepareToPlay()
                 if gradualSeconds > 0 {
-                    alarmPlayer?.volume = max(0.04, volume * 0.06)
+                    alarmPlayer?.volume = max(0.35, volume * 0.4)
                     alarmPlayer?.play()
                     alarmPlayer?.setVolume(volume, fadeDuration: gradualSeconds)
                 } else {
@@ -252,6 +284,12 @@ final class BackgroundAlarmPlayer: ObservableObject {
     // MARK: - Alarm Check
 
     private func checkAlarmTimes() {
+        // Keep the silent keep-alive playing (restart if it stopped for any
+        // reason) so the app stays alive until the alarm fires.
+        if isBackgroundActive, alarmPlayer == nil, silentPlayer?.isPlaying != true {
+            startSilentAudio()
+        }
+
         let alarms = StorageService.shared.loadAlarms()
         let now = Date()
 

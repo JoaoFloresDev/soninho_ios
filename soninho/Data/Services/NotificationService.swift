@@ -302,7 +302,7 @@ final class NotificationService: ObservableObject {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.numberOfLoops = -1
                 if gradualSeconds > 0 {
-                    audioPlayer?.volume = max(0.04, volume * 0.06)
+                    audioPlayer?.volume = max(0.35, volume * 0.4)
                     audioPlayer?.play()
                     audioPlayer?.setVolume(volume, fadeDuration: gradualSeconds)
                 } else {
