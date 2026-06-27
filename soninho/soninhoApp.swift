@@ -87,7 +87,6 @@ struct SoninhoApp: App {
     }
 
     private func handleScenePhaseChange(_ phase: ScenePhase) {
-        print("[SCENE] \(phase)")
         switch phase {
         case .active:
             // Stop background keep-alive when app is fully in foreground

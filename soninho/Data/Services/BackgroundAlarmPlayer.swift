@@ -65,7 +65,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
     /// interruption (call, Siri, another app) can silently kill the silent
     /// keep-alive — without this the app suspends and the alarm never fires.
     private func recoverPlayback() {
-        print("[FIRE] recover bgActive=\(isBackgroundActive) alarmPlayer=\(alarmPlayer != nil)")
         guard isBackgroundActive else { return }
         if alarmPlayer != nil {
             try? audioSession.setActive(true)
@@ -175,7 +174,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
             playSystemAlarm()
         }
 
-        print("[FIRE] BG isPlaying=\(alarmPlayer?.isPlaying ?? false) vol=\(alarmPlayer?.volume ?? -1) grad=\(gradualSeconds) out=\(audioSession.outputVolume) cat=\(audioSession.category.rawValue)")
 
         // Start vibration
         if vibrationEnabled {
@@ -306,7 +304,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
         if isBackgroundActive, alarmPlayer == nil, silentPlayer?.isPlaying != true {
             startSilentAudio()
         }
-        print("[HEARTBEAT] bgActive=\(isBackgroundActive) silent=\(silentPlayer?.isPlaying ?? false)")
 
         let alarms = StorageService.shared.loadAlarms()
         let now = Date()

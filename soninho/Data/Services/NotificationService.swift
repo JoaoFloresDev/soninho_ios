@@ -87,7 +87,20 @@ final class NotificationService: ObservableObject {
             options: [.customDismissAction]
         )
 
-        notificationCenter.setNotificationCategories([alarmCategory])
+        // Bedtime reminder with a one-tap "start the sleep night" button.
+        let startSleepAction = UNNotificationAction(
+            identifier: "START_SLEEP_ACTION",
+            title: String(localized: "bedtime_start_sleep"),
+            options: [.foreground]
+        )
+        let bedtimeCategory = UNNotificationCategory(
+            identifier: "BEDTIME_CATEGORY",
+            actions: [startSleepAction],
+            intentIdentifiers: [],
+            options: []
+        )
+
+        notificationCenter.setNotificationCategories([alarmCategory, bedtimeCategory])
     }
 
     // MARK: - Schedule Alarm
@@ -319,8 +332,6 @@ final class NotificationService: ObservableObject {
         } else {
             playFallbackAlarm()
         }
-
-        print("[FIRE] FG isPlaying=\(audioPlayer?.isPlaying ?? false) vol=\(audioPlayer?.volume ?? -1) grad=\(gradualSeconds) out=\(audioSession.outputVolume) cat=\(audioSession.category.rawValue)")
 
         // Vibration loop
         if vibration {
@@ -592,6 +603,7 @@ final class NotificationService: ObservableObject {
         content.body = String(localized: "bedtime_reminder_message")
         content.sound = .default
         content.interruptionLevel = .timeSensitive
+        content.categoryIdentifier = "BEDTIME_CATEGORY"
 
         let components = Calendar.current.dateComponents([.hour, .minute], from: time)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
@@ -644,6 +656,22 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
+        let categoryId = response.notification.request.content.categoryIdentifier
+
+        // Bedtime reminder: the action button OR tapping it starts the sleep night.
+        if categoryId == "BEDTIME_CATEGORY" {
+            if response.actionIdentifier == "START_SLEEP_ACTION"
+                || response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+                // Delay so the UI is subscribed by the time we post (cold launch).
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    NotificationCenter.default.post(name: .didRequestSwitchToSleepTab, object: nil)
+                    NotificationCenter.default.post(name: .didRequestStartSleepTracking, object: nil)
+                }
+            }
+            completionHandler()
+            return
+        }
+
         let userInfo = response.notification.request.content.userInfo
         let alarmId = userInfo["alarmId"] as? String ?? ""
         let soundName = userInfo["soundName"] as? String ?? "sunrise"

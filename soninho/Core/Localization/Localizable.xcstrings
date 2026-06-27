@@ -7565,6 +7565,28 @@
           }
         }
       }
+    },
+    "bedtime_start_sleep": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start sleep night"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar noite de sono"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar la noche de sueño"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
