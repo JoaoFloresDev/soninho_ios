@@ -19,7 +19,6 @@ extension Notification.Name {
 
 // MARK: - Tab Item
 enum TabItem: Int, CaseIterable, Identifiable {
-    case home
     case tracker
     case alarm
     case statistics
@@ -29,7 +28,6 @@ enum TabItem: Int, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .home: return String(localized: "tab_home")
         case .tracker: return String(localized: "tab_sleep")
         case .alarm: return String(localized: "tab_alarm")
         case .statistics: return String(localized: "tab_stats")
@@ -39,7 +37,6 @@ enum TabItem: Int, CaseIterable, Identifiable {
 
     var icon: String {
         switch self {
-        case .home: return "square.grid.2x2.fill"
         case .tracker: return "moon.zzz.fill"
         case .alarm: return "alarm.fill"
         case .statistics: return "chart.bar.fill"
@@ -49,7 +46,6 @@ enum TabItem: Int, CaseIterable, Identifiable {
 
     var iconUnselected: String {
         switch self {
-        case .home: return "square.grid.2x2"
         case .tracker: return "moon.zzz"
         case .alarm: return "alarm"
         case .statistics: return "chart.bar"
@@ -89,12 +85,6 @@ struct MainTabView: View {
                 }
                 .tag(TabItem.alarm)
 
-            HomeView()
-                .tabItem {
-                    Label(TabItem.home.title, systemImage: selectedTab == .home ? TabItem.home.icon : TabItem.home.iconUnselected)
-                }
-                .tag(TabItem.home)
-
             StatisticsView()
                 .tabItem {
                     Label(TabItem.statistics.title, systemImage: selectedTab == .statistics ? TabItem.statistics.icon : TabItem.statistics.iconUnselected)
@@ -109,7 +99,7 @@ struct MainTabView: View {
         }
         .tint(AppColors.primary)
         .onChange(of: selectedTab) { _, newTab in
-            if newTab == .home || newTab == .statistics {
+            if newTab == .statistics {
                 NotificationCenter.default.post(name: .didSwitchToDataTab, object: nil)
             }
         }
