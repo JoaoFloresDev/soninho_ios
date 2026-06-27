@@ -122,7 +122,17 @@ struct SettingsView: View {
             .tint(AppColors.primary)
             .listRowBackground(AppColors.surface)
 
-            // Auto-start the sleep night at bedtime (while the app is alive)
+            // Bedtime Reminder Time
+            if viewModel.bedtimeReminderEnabled {
+                DatePicker(selection: $viewModel.bedtimeReminderTime, displayedComponents: .hourAndMinute) {
+                    settingsRowLabel("clock", String(localized: "settings_bedtime_time"))
+                        .foregroundStyle(AppColors.textPrimary)
+                }
+                .tint(AppColors.primary)
+                .listRowBackground(AppColors.surface)
+            }
+
+            // Auto-start the sleep night at its own time (while the app is alive)
             Toggle(isOn: $viewModel.autoStartSleepEnabled) {
                 VStack(alignment: .leading, spacing: 2) {
                     settingsRowLabel("powersleep", String(localized: "settings_autostart_sleep"))
@@ -135,10 +145,10 @@ struct SettingsView: View {
             .tint(AppColors.primary)
             .listRowBackground(AppColors.surface)
 
-            // Bedtime Time (used by both the reminder and auto-start)
-            if viewModel.bedtimeReminderEnabled || viewModel.autoStartSleepEnabled {
-                DatePicker(selection: $viewModel.bedtimeReminderTime, displayedComponents: .hourAndMinute) {
-                    settingsRowLabel("clock", String(localized: "settings_bedtime_time"))
+            // Auto-start Time
+            if viewModel.autoStartSleepEnabled {
+                DatePicker(selection: $viewModel.autoStartSleepTime, displayedComponents: .hourAndMinute) {
+                    settingsRowLabel("powersleep", String(localized: "settings_autostart_time"))
                         .foregroundStyle(AppColors.textPrimary)
                 }
                 .tint(AppColors.primary)

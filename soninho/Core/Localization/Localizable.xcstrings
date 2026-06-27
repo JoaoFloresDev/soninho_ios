@@ -7653,6 +7653,28 @@
           }
         }
       }
+    },
+    "settings_autostart_time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto-start time"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horário do auto-início"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora de inicio automático"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

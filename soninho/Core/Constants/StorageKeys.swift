@@ -29,6 +29,7 @@ enum StorageKeys {
     static let bedtimeReminderMinutes = "bedtimeReminderMinutes"
     static let bedtimeReminderTime = "bedtimeReminderTime"
     static let autoStartSleepEnabled = "autoStartSleepEnabled"
+    static let autoStartSleepTime = "autoStartSleepTime"
     static let lastAutoStartSleep = "lastAutoStartSleep"
     static let sleepGoalHours = "sleepGoalHours"
 

@@ -104,7 +104,7 @@ final class BackgroundAlarmPlayer: ObservableObject {
         // sleep night can begin in background without a morning alarm.
         let autoStartDue: Bool = {
             guard StorageService.shared.autoStartSleepEnabled else { return false }
-            let hm = Calendar.current.dateComponents([.hour, .minute], from: StorageService.shared.bedtimeReminderTime)
+            let hm = Calendar.current.dateComponents([.hour, .minute], from: StorageService.shared.autoStartSleepTime)
             guard let next = Calendar.current.nextDate(after: Date(), matching: hm, matchingPolicy: .nextTime) else { return false }
             return next.timeIntervalSinceNow < 12 * 3600
         }()

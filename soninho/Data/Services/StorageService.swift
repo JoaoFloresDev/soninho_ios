@@ -211,6 +211,18 @@ final class StorageService: ObservableObject {
         set { defaults.set(newValue, forKey: StorageKeys.bedtimeReminderTime) }
     }
 
+    /// Time of day the sleep night auto-starts (independent of the reminder).
+    var autoStartSleepTime: Date {
+        get {
+            if let date = defaults.object(forKey: StorageKeys.autoStartSleepTime) as? Date {
+                return date
+            }
+            // Default: today at 23:00.
+            return Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date()) ?? Date()
+        }
+        set { defaults.set(newValue, forKey: StorageKeys.autoStartSleepTime) }
+    }
+
     // MARK: - Streak Tracking
     var currentStreak: Int {
         get { defaults.integer(forKey: StorageKeys.currentStreak) }

@@ -38,7 +38,7 @@ enum SleepAutoStart {
 
         let now = Date()
         let calendar = Calendar.current
-        let hm = calendar.dateComponents([.hour, .minute], from: store.bedtimeReminderTime)
+        let hm = calendar.dateComponents([.hour, .minute], from: store.autoStartSleepTime)
         var comps = calendar.dateComponents([.year, .month, .day], from: now)
         comps.hour = hm.hour
         comps.minute = hm.minute
@@ -74,5 +74,8 @@ enum SleepAutoStart {
             UserDefaults.standard.set(Date(), forKey: StorageKeys.trackingStartTime)
             MotionSleepMonitor.shared.startMonitoring()
         }
+
+        // Let the user know the night started (works whether bg or fg).
+        NotificationService.shared.notifySleepAutoStarted()
     }
 }

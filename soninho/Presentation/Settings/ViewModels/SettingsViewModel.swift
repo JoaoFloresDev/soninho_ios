@@ -30,11 +30,10 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     @Published var autoStartSleepEnabled: Bool {
-        didSet {
-            storageService.autoStartSleepEnabled = autoStartSleepEnabled
-            // Refresh the bedtime reminder so its text reflects auto-start.
-            updateBedtimeReminder()
-        }
+        didSet { storageService.autoStartSleepEnabled = autoStartSleepEnabled }
+    }
+    @Published var autoStartSleepTime: Date {
+        didSet { storageService.autoStartSleepTime = autoStartSleepTime }
     }
     @Published var showingLanguagePicker = false
 
@@ -66,6 +65,7 @@ final class SettingsViewModel: ObservableObject {
         self.bedtimeReminderEnabled = storageService.bedtimeReminderEnabled
         self.bedtimeReminderTime = storageService.bedtimeReminderTime
         self.autoStartSleepEnabled = storageService.autoStartSleepEnabled
+        self.autoStartSleepTime = storageService.autoStartSleepTime
     }
 
     // MARK: - Public Methods

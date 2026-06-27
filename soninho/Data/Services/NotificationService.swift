@@ -600,11 +600,7 @@ final class NotificationService: ObservableObject {
 
         let content = UNMutableNotificationContent()
         content.title = String(localized: "bedtime_reminder_title")
-        // When auto-start is on, the reminder doubles as the "your sleep night
-        // has started" confirmation.
-        content.body = StorageService.shared.autoStartSleepEnabled
-            ? String(localized: "bedtime_autostart_message")
-            : String(localized: "bedtime_reminder_message")
+        content.body = String(localized: "bedtime_reminder_message")
         content.sound = .default
         content.interruptionLevel = .timeSensitive
         content.categoryIdentifier = "BEDTIME_CATEGORY"
@@ -617,6 +613,18 @@ final class NotificationService: ObservableObject {
 
     func cancelBedtimeReminder() async {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [bedtimeReminderIdentifier])
+    }
+
+    /// Immediate confirmation that the sleep night auto-started.
+    func notifySleepAutoStarted() {
+        let content = UNMutableNotificationContent()
+        content.title = String(localized: "bedtime_reminder_title")
+        content.body = String(localized: "bedtime_autostart_message")
+        content.sound = .default
+        content.interruptionLevel = .timeSensitive
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: "SLEEP_AUTOSTARTED", content: content, trigger: trigger)
+        Task { try? await notificationCenter.add(request) }
     }
 }
 
