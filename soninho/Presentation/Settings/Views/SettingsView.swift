@@ -129,16 +129,6 @@ struct SettingsView: View {
     // MARK: - Sleep Settings Section
     private var sleepSettingsSection: some View {
         Section(header: Text(String(localized: "settings_sleep"))) {
-            // Smart Alarm
-            Toggle(isOn: Binding(
-                get: { viewModel.smartAlarmEnabled },
-                set: { _ in viewModel.toggleSmartAlarm() }
-            )) {
-                Label(String(localized: "settings_smart_alarm"), systemImage: "brain.head.profile")
-            }
-            .tint(AppColors.accent)
-            .listRowBackground(AppColors.surface)
-
             // Bedtime Reminder
             Toggle(isOn: $viewModel.bedtimeReminderEnabled) {
                 Label(String(localized: "settings_bedtime_reminder"), systemImage: "moon.zzz.fill")
@@ -249,11 +239,33 @@ struct ShareSheet: UIViewControllerRepresentable {
 
 // MARK: - HealthKit Settings View
 struct HealthKitSettingsView: View {
+    @StateObject private var healthKit = HealthKitService.shared
+    @State private var isRequesting = false
+
     var body: some View {
         List {
             Section {
+                // Connect — triggers the Apple Health read-permission sheet.
+                Button {
+                    requestAccess()
+                } label: {
+                    HStack {
+                        Label(String(localized: "settings_health_connect"), systemImage: "heart.fill")
+                            .foregroundStyle(AppColors.textPrimary)
+                        Spacer()
+                        if isRequesting {
+                            ProgressView()
+                        } else {
+                            Image(systemName: "arrow.right.circle.fill")
+                                .foregroundStyle(AppColors.primary)
+                        }
+                    }
+                }
+                .disabled(isRequesting)
+                .listRowBackground(AppColors.surface)
+
                 // Apple hides read-only authorization, so we can't honestly show
-                // a "Connected" status. Send the user to manage access directly.
+                // a "Connected" status. Let the user manage access directly.
                 Button {
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.open(url)
@@ -278,5 +290,13 @@ struct HealthKitSettingsView: View {
         .scrollContentBackground(.hidden)
         .background(AppColors.background)
         .navigationTitle(String(localized: "settings_health_app"))
+    }
+
+    private func requestAccess() {
+        isRequesting = true
+        Task {
+            try? await healthKit.requestAuthorization()
+            isRequesting = false
+        }
     }
 }

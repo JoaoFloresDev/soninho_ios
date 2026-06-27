@@ -3289,19 +3289,19 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Connect to Health"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conectar a Salud"
+            "value": "Connect Apple Health"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Conectar ao Saúde"
+            "value": "Conectar Apple Saúde"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectar Apple Salud"
           }
         }
       }
