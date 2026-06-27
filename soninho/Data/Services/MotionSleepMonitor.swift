@@ -121,12 +121,14 @@ final class MotionSleepMonitor: ObservableObject {
         smartAlarmCallback = nil
     }
 
-    /// Releases the microphone/recording audio session so the alarm can own
-    /// the `.playback` session. Motion monitoring keeps running. Call this when
-    /// an alarm fires — otherwise the recorder and the alarm player fight over
-    /// AVAudioSession and the alarm audio can fail to start.
-    func releaseAudioForAlarm() {
+    /// Releases the sensors the alarm/its missions need: the microphone (so the
+    /// alarm can own the `.playback` audio session) AND the accelerometer (so
+    /// the shake mission's own CMMotionManager isn't starved by this monitor's
+    /// — two accelerometer consumers conflict). Call when an alarm fires.
+    /// Sleep is over at that point, so dropping these sensors is fine.
+    func releaseForAlarm() {
         stopAudioMetering()
+        motionManager.stopAccelerometerUpdates()
     }
 
     /// Configures the smart alarm wake window.

@@ -149,7 +149,9 @@ final class SmartAlarmViewModel: ObservableObject {
         editingSound = .sunrise
         editingRepeatDays = []
         editingLabel = ""
-        editingMission = .none
+        // Default new alarms to the shake-to-dismiss mission so the wake-up
+        // challenge is on out of the box (user can change/disable it).
+        editingMission = .shake
         editingMissionDifficulty = .medium
         editingGradualWake = true
         editingGradualDuration = 2

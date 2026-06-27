@@ -103,7 +103,7 @@ final class BackgroundAlarmPlayer: ObservableObject {
     func triggerAlarm(soundName: String = "sunrise", volume: Float = 1.0, vibrationEnabled: Bool = true, gradualSeconds: TimeInterval = 0) {
         // Release the sleep-tracking microphone session so it can't block the
         // alarm from owning the .playback session (recorder vs player conflict).
-        MotionSleepMonitor.shared.releaseAudioForAlarm()
+        MotionSleepMonitor.shared.releaseForAlarm()
 
         // Stop silent audio first
         silentPlayer?.stop()

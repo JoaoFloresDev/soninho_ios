@@ -279,7 +279,7 @@ final class NotificationService: ObservableObject {
     func startAlarmAudio(soundName: String, volume: Float = 1.0, vibration: Bool = true, gradualSeconds: TimeInterval = 0) {
         // Release the sleep-tracking microphone session first so it can't block
         // the alarm from owning the .playback session.
-        MotionSleepMonitor.shared.releaseAudioForAlarm()
+        MotionSleepMonitor.shared.releaseForAlarm()
 
         // Tear down only the audio/vibration — keep ringing identifiers so
         // snooze and re-ring keep working.
