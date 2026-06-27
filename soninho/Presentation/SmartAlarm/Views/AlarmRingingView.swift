@@ -12,7 +12,7 @@ import SwiftUI
 struct AlarmRingingView: View {
     // MARK: - Phase
     private enum Phase {
-        case ringing, mission, confirmation
+        case ringing, mission, confirmation, success, snoozed
     }
 
     /// What the user asked for before the mission gate — so snooze can't bypass
@@ -42,9 +42,13 @@ struct AlarmRingingView: View {
                 missionContent
             case .confirmation:
                 WakeConfirmationView(
-                    onConfirmed: { notificationService.completeAlarm() },
+                    onConfirmed: { finishWithGreeting() },
                     onRelapse: { relapse() }
                 )
+            case .success:
+                WakeGreetingView(onDismiss: { notificationService.completeAlarm() })
+            case .snoozed:
+                WakeGreetingView(mode: .snooze, onDismiss: { notificationService.snoozeCurrentAlarm() })
             }
         }
         .transition(.opacity)
@@ -177,7 +181,7 @@ struct AlarmRingingView: View {
 
     private func requestSnooze() {
         pendingAction = .snooze
-        gateThroughMission { notificationService.snoozeCurrentAlarm() }
+        gateThroughMission { snoozeWithMessage() }
     }
 
     /// If the alarm has a wake-up mission, show it first; otherwise run the
@@ -194,7 +198,7 @@ struct AlarmRingingView: View {
     private func missionCompleted() {
         switch pendingAction {
         case .snooze:
-            notificationService.snoozeCurrentAlarm()
+            snoozeWithMessage()
         case .dismiss:
             finishOrConfirm()
         }
@@ -205,8 +209,22 @@ struct AlarmRingingView: View {
             notificationService.muteAlarm()
             withAnimation(.spring(response: 0.4)) { phase = .confirmation }
         } else {
-            notificationService.completeAlarm()
+            finishWithGreeting()
         }
+    }
+
+    /// Silence the alarm and show the animated good-morning greeting before
+    /// fully dismissing — the reward for completing the wake-up.
+    private func finishWithGreeting() {
+        notificationService.muteAlarm()
+        withAnimation(.spring(response: 0.5)) { phase = .success }
+    }
+
+    /// Snoozing shows its own short "see you in a few minutes" message — a
+    /// different tone from the wake-up greeting — then reschedules the snooze.
+    private func snoozeWithMessage() {
+        notificationService.muteAlarm()
+        withAnimation(.spring(response: 0.5)) { phase = .snoozed }
     }
 
     private func relapse() {

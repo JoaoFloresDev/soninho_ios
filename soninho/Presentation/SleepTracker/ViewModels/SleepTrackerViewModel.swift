@@ -81,7 +81,7 @@ final class SleepTrackerViewModel: ObservableObject {
         startTimer()
     }
 
-    func stopTracking() async {
+    func stopTracking(greet: Bool = true) async {
         stopTimer()
 
         guard let startTime = trackingStartTime else { return }
@@ -132,8 +132,11 @@ final class SleepTrackerViewModel: ObservableObject {
         UserDefaults.standard.set(false, forKey: StorageKeys.isCurrentlyTracking)
         UserDefaults.standard.removeObject(forKey: StorageKeys.trackingStartTime)
 
-        // Greet the user — the night is over.
-        WakeGreetingManager.shared.show()
+        // Greet the user — the night is over. Skipped when the alarm screen
+        // already showed its own good-morning (avoids a double greeting).
+        if greet {
+            WakeGreetingManager.shared.show()
+        }
     }
 
     func cancelTracking() {
@@ -157,7 +160,8 @@ final class SleepTrackerViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self, self.isTracking else { return }
-                Task { await self.stopTracking() }
+                // The alarm screen shows its own greeting on completion.
+                Task { await self.stopTracking(greet: false) }
             }
             .store(in: &cancellables)
     }

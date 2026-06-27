@@ -137,8 +137,11 @@ struct SleepTrackerView: View {
             .buttonStyle(.plain)
             .contentShape(Rectangle())
             .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.top, 12)
+            .padding(.top, 16)
             .padding(.bottom, 16)
+            .frame(maxWidth: .infinity)
+            .background(AppColors.surface)
+            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 22, topTrailingRadius: 22, style: .continuous))
         }
     }
 
@@ -229,10 +232,10 @@ struct SleepTrackerView: View {
                 PhasePill(phase: .rem)
             }
         }
-        .padding(16)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     // MARK: - Battery Info Card
@@ -260,10 +263,10 @@ struct SleepTrackerView: View {
 
             Spacer(minLength: 0)
         }
-        .padding(16)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     // MARK: - Tracking Content
