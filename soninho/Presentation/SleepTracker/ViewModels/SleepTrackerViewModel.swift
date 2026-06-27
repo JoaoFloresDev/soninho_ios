@@ -56,6 +56,7 @@ final class SleepTrackerViewModel: ObservableObject {
         self.motionMonitor = motionMonitor
         loadTrackingState()
         observeMotionMonitor()
+        observeAlarmCompletion()
     }
 
     // MARK: - Public Methods
@@ -145,6 +146,19 @@ final class SleepTrackerViewModel: ObservableObject {
     }
 
     // MARK: - Private Methods
+
+    /// When an alarm is fully dismissed (not snoozed), end the active sleep
+    /// session — waking up via the alarm means the night is over.
+    private func observeAlarmCompletion() {
+        NotificationCenter.default.publisher(for: .didCompleteAlarm)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self, self.isTracking else { return }
+                Task { await self.stopTracking() }
+            }
+            .store(in: &cancellables)
+    }
+
     private func observeMotionMonitor() {
         motionMonitor.$currentPhase
             .receive(on: DispatchQueue.main)

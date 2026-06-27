@@ -12,6 +12,9 @@ extension Notification.Name {
     static let didSwitchToDataTab = Notification.Name("didSwitchToDataTab")
     static let didRequestSwitchToSleepTab = Notification.Name("didRequestSwitchToSleepTab")
     static let didRequestStartSleepTracking = Notification.Name("didRequestStartSleepTracking")
+    /// Posted when an alarm is fully dismissed (not snoozed) — ends any active
+    /// sleep tracking session.
+    static let didCompleteAlarm = Notification.Name("didCompleteAlarm")
 }
 
 // MARK: - Tab Item

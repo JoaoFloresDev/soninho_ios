@@ -367,6 +367,7 @@ final class NotificationService: ObservableObject {
     func completeAlarm() {
         disableOneTimeAlarmIfNeeded()
         stopAlarmAudio()
+        NotificationCenter.default.post(name: .didCompleteAlarm, object: nil)
     }
 
     /// A one-time alarm (no repeat days) must disappear after it's dismissed.
@@ -463,6 +464,7 @@ final class NotificationService: ObservableObject {
     func dismissCurrentAlarm() {
         disableOneTimeAlarmIfNeeded()
         stopAlarmAudio()
+        NotificationCenter.default.post(name: .didCompleteAlarm, object: nil)
     }
 
     // MARK: - Cancel Alarm
