@@ -24,9 +24,6 @@ struct SettingsView: View {
                     premiumSection
                 }
 
-                // Preferences Section
-                preferencesSection
-
                 // Sleep Settings Section
                 sleepSettingsSection
 
@@ -52,6 +49,16 @@ struct SettingsView: View {
                     URL(string: AppConstants.appStoreURL) as Any
                 ].compactMap { $0 })
             }
+        }
+    }
+
+    // MARK: - Row Label (matches SettingsRowLabelStyle for controls that ignore it)
+    private func settingsRowLabel(_ systemImage: String, _ title: String) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: systemImage)
+                .font(.system(size: 14))
+                .frame(width: 22, alignment: .center)
+            Text(title)
         }
     }
 
@@ -112,27 +119,12 @@ struct SettingsView: View {
         }
     }
 
-    // MARK: - Preferences Section
-    private var preferencesSection: some View {
-        Section(header: Text(String(localized: "settings_preferences"))) {
-            // Notifications
-            Toggle(isOn: Binding(
-                get: { viewModel.notificationsEnabled },
-                set: { _ in viewModel.toggleNotifications() }
-            )) {
-                Label(String(localized: "settings_notifications"), systemImage: "bell.badge")
-            }
-            .tint(AppColors.primary)
-            .listRowBackground(AppColors.surface)
-        }
-    }
-
     // MARK: - Sleep Settings Section
     private var sleepSettingsSection: some View {
         Section(header: Text(String(localized: "settings_sleep"))) {
             // Bedtime Reminder
             Toggle(isOn: $viewModel.bedtimeReminderEnabled) {
-                Label(String(localized: "settings_bedtime_reminder"), systemImage: "moon.zzz.fill")
+                settingsRowLabel("moon.zzz.fill", String(localized: "settings_bedtime_reminder"))
             }
             .tint(AppColors.primary)
             .listRowBackground(AppColors.surface)
@@ -140,7 +132,7 @@ struct SettingsView: View {
             // Bedtime Reminder Time
             if viewModel.bedtimeReminderEnabled {
                 DatePicker(selection: $viewModel.bedtimeReminderTime, displayedComponents: .hourAndMinute) {
-                    Label(String(localized: "settings_bedtime_time"), systemImage: "clock")
+                    settingsRowLabel("clock", String(localized: "settings_bedtime_time"))
                         .foregroundStyle(AppColors.textPrimary)
                 }
                 .tint(AppColors.primary)

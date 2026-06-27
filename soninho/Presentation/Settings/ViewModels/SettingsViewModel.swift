@@ -17,7 +17,6 @@ final class SettingsViewModel: ObservableObject {
 
     // MARK: - Published Properties
     @Published var hapticFeedbackEnabled: Bool
-    @Published var notificationsEnabled: Bool
     @Published var bedtimeReminderEnabled: Bool {
         didSet {
             storageService.bedtimeReminderEnabled = bedtimeReminderEnabled
@@ -57,7 +56,6 @@ final class SettingsViewModel: ObservableObject {
     init(storageService: StorageService = .shared) {
         self.storageService = storageService
         self.hapticFeedbackEnabled = storageService.hapticFeedbackEnabled
-        self.notificationsEnabled = storageService.notificationsEnabled
         self.bedtimeReminderEnabled = storageService.bedtimeReminderEnabled
         self.bedtimeReminderTime = storageService.bedtimeReminderTime
     }
@@ -66,11 +64,6 @@ final class SettingsViewModel: ObservableObject {
     func toggleHapticFeedback() {
         hapticFeedbackEnabled.toggle()
         storageService.hapticFeedbackEnabled = hapticFeedbackEnabled
-    }
-
-    func toggleNotifications() {
-        notificationsEnabled.toggle()
-        storageService.notificationsEnabled = notificationsEnabled
     }
 
     private func updateBedtimeReminder() {
