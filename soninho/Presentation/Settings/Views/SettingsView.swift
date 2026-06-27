@@ -37,6 +37,7 @@ struct SettingsView: View {
                 aboutSection
             }
             .listStyle(.insetGrouped)
+            .labelStyle(SettingsRowLabelStyle())
             .scrollContentBackground(.hidden)
             .background(AppColors.background)
             .contentMargins(.bottom, AppSpacing.lg, for: .scrollContent)
@@ -60,7 +61,7 @@ struct SettingsView: View {
             if viewModel.isPremium {
                 HStack(spacing: 12) {
                     Image(systemName: "crown.fill")
-                        .font(.system(size: 20))
+                        .font(.system(size: 17))
                         .foregroundStyle(AppColors.accent)
 
                     VStack(alignment: .leading, spacing: 2) {
@@ -226,6 +227,19 @@ struct SettingsView: View {
 
 }
 
+// MARK: - Settings Row Label Style
+/// Smaller, consistently-aligned row icons (the default Label icon reads too big).
+private struct SettingsRowLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 12) {
+            configuration.icon
+                .font(.system(size: 14))
+                .frame(width: 22, alignment: .center)
+            configuration.title
+        }
+    }
+}
+
 // MARK: - Share Sheet
 struct ShareSheet: UIViewControllerRepresentable {
     let items: [Any]
@@ -287,6 +301,7 @@ struct HealthKitSettingsView: View {
             }
         }
         .listStyle(.insetGrouped)
+        .labelStyle(SettingsRowLabelStyle())
         .scrollContentBackground(.hidden)
         .background(AppColors.background)
         .navigationTitle(String(localized: "settings_health_app"))
