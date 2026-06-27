@@ -573,6 +573,27 @@ final class NotificationService: ObservableObject {
         }
     }
 
+    /// Schedules a daily bedtime reminder at the exact time the user picked.
+    func scheduleBedtimeReminder(at time: Date) async {
+        if !isAuthorized {
+            let granted = await requestAuthorization()
+            if !granted { return }
+        }
+
+        await cancelBedtimeReminder()
+
+        let content = UNMutableNotificationContent()
+        content.title = String(localized: "bedtime_reminder_title")
+        content.body = String(localized: "bedtime_reminder_message")
+        content.sound = .default
+        content.interruptionLevel = .timeSensitive
+
+        let components = Calendar.current.dateComponents([.hour, .minute], from: time)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        let request = UNNotificationRequest(identifier: bedtimeReminderIdentifier, content: content, trigger: trigger)
+        try? await notificationCenter.add(request)
+    }
+
     func cancelBedtimeReminder() async {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [bedtimeReminderIdentifier])
     }

@@ -1137,6 +1137,28 @@
         }
       }
     },
+    "bedtime_reminder_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to wind down and get ready for bed."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora de desacelerar e se preparar pra dormir."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora de relajarte y prepararte para dormir."
+          }
+        }
+      }
+    },
     "bedtime_reminder_title" : {
       "localizations" : {
         "en" : {
@@ -3169,6 +3191,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lembrete de Dormir"
+          }
+        }
+      }
+    },
+    "settings_bedtime_time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder time"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horário do lembrete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora del recordatorio"
           }
         }
       }

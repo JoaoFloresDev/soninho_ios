@@ -146,6 +146,16 @@ struct SettingsView: View {
             .tint(AppColors.primary)
             .listRowBackground(AppColors.surface)
 
+            // Bedtime Reminder Time
+            if viewModel.bedtimeReminderEnabled {
+                DatePicker(selection: $viewModel.bedtimeReminderTime, displayedComponents: .hourAndMinute) {
+                    Label(String(localized: "settings_bedtime_time"), systemImage: "clock")
+                        .foregroundStyle(AppColors.textPrimary)
+                }
+                .tint(AppColors.primary)
+                .listRowBackground(AppColors.surface)
+            }
+
             // Sleep Tips
             NavigationLink {
                 SleepTipsView()

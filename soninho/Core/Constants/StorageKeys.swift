@@ -27,6 +27,7 @@ enum StorageKeys {
     static let alarmVolume = "alarmVolume"
     static let bedtimeReminderEnabled = "bedtimeReminderEnabled"
     static let bedtimeReminderMinutes = "bedtimeReminderMinutes"
+    static let bedtimeReminderTime = "bedtimeReminderTime"
     static let sleepGoalHours = "sleepGoalHours"
 
     // MARK: - Premium
@@ -46,4 +47,16 @@ enum StorageKeys {
     // MARK: - Tracking
     static let isCurrentlyTracking = "isCurrentlyTracking"
     static let trackingStartTime = "trackingStartTime"
+
+    // MARK: - Data Storage
+    static let savedAlarms = "savedAlarms"
+    static let cachedSleepRecords = "cachedSleepRecords"
+
+    // MARK: - First Use
+    static let hasStartedFirstSleep = "hasStartedFirstSleep"
+
+    // MARK: - Streak
+    static let currentStreak = "currentStreak"
+    static let longestStreak = "longestStreak"
+    static let lastSleepDate = "lastSleepDate"
 }

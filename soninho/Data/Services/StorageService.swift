@@ -194,6 +194,18 @@ final class StorageService: ObservableObject {
         set { defaults.set(newValue, forKey: StorageKeys.defaultWakeTime) }
     }
 
+    /// Time of day the bedtime reminder fires.
+    var bedtimeReminderTime: Date {
+        get {
+            if let date = defaults.object(forKey: StorageKeys.bedtimeReminderTime) as? Date {
+                return date
+            }
+            // Default: today at 22:30.
+            return Calendar.current.date(bySettingHour: 22, minute: 30, second: 0, of: Date()) ?? Date()
+        }
+        set { defaults.set(newValue, forKey: StorageKeys.bedtimeReminderTime) }
+    }
+
     // MARK: - Streak Tracking
     var currentStreak: Int {
         get { defaults.integer(forKey: StorageKeys.currentStreak) }
