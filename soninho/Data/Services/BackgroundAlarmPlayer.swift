@@ -48,7 +48,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
     /// Prepares the audio session. Call on app launch.
     func prepare() {
         configureAudioSession()
-        print("[BackgroundAlarm] Audio session prepared")
     }
 
     /// Starts background audio to keep the app alive.
@@ -70,7 +69,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
         let isTrackingSleep = MotionSleepMonitor.shared.isMonitoring
 
         guard hasUpcomingAlarm || isTrackingSleep else {
-            print("[BackgroundAlarm] No upcoming alarms or active tracking, skipping")
             return
         }
 
@@ -88,7 +86,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
 
         isBackgroundActive = true
         hasFiredAlarmIds = []
-        print("[BackgroundAlarm] Background keep-alive STARTED")
     }
 
     /// Stops background audio. Call when app comes to foreground.
@@ -99,12 +96,15 @@ final class BackgroundAlarmPlayer: ObservableObject {
         isBackgroundActive = false
         hasFiredAlarmIds = []
         endBackgroundTask()
-        print("[BackgroundAlarm] Background keep-alive STOPPED")
     }
 
     /// Triggers the alarm sound with vibration. When `gradualSeconds > 0`, the
     /// volume fades in and the vibration ramps up over that window.
     func triggerAlarm(soundName: String = "sunrise", volume: Float = 1.0, vibrationEnabled: Bool = true, gradualSeconds: TimeInterval = 0) {
+        // Release the sleep-tracking microphone session so it can't block the
+        // alarm from owning the .playback session (recorder vs player conflict).
+        MotionSleepMonitor.shared.releaseAudioForAlarm()
+
         // Stop silent audio first
         silentPlayer?.stop()
         silentPlayer = nil
@@ -114,7 +114,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
             try audioSession.setCategory(.playback, mode: .default, options: [.duckOthers])
             try audioSession.setActive(true)
         } catch {
-            print("[BackgroundAlarm] Audio reconfigure error: \(error)")
         }
 
         // Play the selected alarm sound
@@ -132,13 +131,10 @@ final class BackgroundAlarmPlayer: ObservableObject {
                     alarmPlayer?.volume = volume
                     alarmPlayer?.play()
                 }
-                print("[BackgroundAlarm] Alarm audio PLAYING (gradual=\(gradualSeconds)s)")
             } catch {
-                print("[BackgroundAlarm] Failed to play alarm: \(error)")
                 playSystemAlarm()
             }
         } else {
-            print("[BackgroundAlarm] No alarm sound file, using system fallback")
             playSystemAlarm()
         }
 
@@ -172,7 +168,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
             try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers])
             try audioSession.setActive(true)
         } catch {
-            print("[BackgroundAlarm] Audio session error: \(error)")
         }
     }
 
@@ -182,7 +177,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
         silentPlayer?.stop()
 
         guard let data = silentAudioData else {
-            print("[BackgroundAlarm] No silent audio data!")
             return
         }
 
@@ -191,10 +185,8 @@ final class BackgroundAlarmPlayer: ObservableObject {
             silentPlayer?.numberOfLoops = -1 // Loop forever
             silentPlayer?.volume = 0.01
             silentPlayer?.prepareToPlay()
-            let success = silentPlayer?.play() ?? false
-            print("[BackgroundAlarm] Silent audio started: \(success)")
+            silentPlayer?.play()
         } catch {
-            print("[BackgroundAlarm] Failed to start silent audio: \(error)")
         }
     }
 
@@ -250,7 +242,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
         }
         timer.resume()
         alarmCheckTimer = timer
-        print("[BackgroundAlarm] GCD timer started (15s interval)")
     }
 
     private func stopAlarmCheckTimer() {
@@ -289,7 +280,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
 
     private func fireAlarm(_ alarm: AlarmModel) {
         hasFiredAlarmIds.insert(alarm.id.uuidString)
-        print("[BackgroundAlarm] FIRING alarm: \(alarm.id) at \(Date())")
 
         let gradualSeconds: TimeInterval = alarm.gradualWakeEnabled ? TimeInterval(alarm.gradualWakeDuration * 60) : 0
         triggerAlarm(soundName: alarm.sound.rawValue, volume: Float(alarm.volume), vibrationEnabled: alarm.vibrationEnabled, gradualSeconds: gradualSeconds)

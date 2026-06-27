@@ -68,6 +68,9 @@ final class HomeViewModel: ObservableObject {
         self.storageService = storageService
         updateGreeting()
         observeNotifications()
+        // Pre-load Apple Health sleep at launch so Resumo is already populated
+        // by the time the user opens it (instead of waiting for the tab to appear).
+        Task { await loadData() }
     }
 
     // MARK: - Private Properties

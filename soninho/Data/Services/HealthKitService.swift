@@ -57,14 +57,25 @@ final class HealthKitService: ObservableObject {
         HKHealthStore.isHealthDataAvailable()
     }
 
+    /// HealthKit does NOT expose read authorization status (privacy).
+    /// We check write authorization as a proxy, but also allow data fetching
+    /// when the user has been through the authorization flow at least once.
     func checkAuthorizationStatus() {
         guard isHealthKitAvailable else {
             isAuthorized = false
             return
         }
 
-        let status = healthStore.authorizationStatus(for: sleepType)
-        isAuthorized = status == .sharingAuthorized
+        let writeStatus = healthStore.authorizationStatus(for: sleepType)
+        // Consider authorized if we have write access OR if we've requested authorization before.
+        // Apple intentionally hides read-only authorization — the only way to know is to try fetching.
+        isAuthorized = writeStatus == .sharingAuthorized || hasRequestedAuthorization
+    }
+
+    /// Track whether we've ever gone through the authorization flow
+    private var hasRequestedAuthorization: Bool {
+        get { UserDefaults.standard.bool(forKey: "healthkit_authorization_requested") }
+        set { UserDefaults.standard.set(newValue, forKey: "healthkit_authorization_requested") }
     }
 
     func requestAuthorization() async throws {
@@ -73,13 +84,16 @@ final class HealthKitService: ObservableObject {
         }
 
         try await healthStore.requestAuthorization(toShare: writeTypes, read: readTypes)
+        hasRequestedAuthorization = true
         checkAuthorizationStatus()
     }
 
     // MARK: - Fetch Sleep Data
+    /// Fetches sleep data from HealthKit. Attempts to fetch even if authorization
+    /// status is uncertain, since Apple doesn't expose read-only authorization.
     func fetchSleepData(from startDate: Date, to endDate: Date) async throws -> [SleepRecord] {
-        guard isAuthorized else {
-            throw HealthKitError.notAuthorized
+        guard isHealthKitAvailable else {
+            throw HealthKitError.notAvailable
         }
 
         isLoading = true
@@ -113,7 +127,13 @@ final class HealthKitService: ObservableObject {
                     return
                 }
 
-                let records = self?.processSleepSamples(samples) ?? []
+                // Resumo reflects sleep recorded BY the device/other apps — not
+                // the sessions this app tracked and wrote back to HealthKit.
+                // Exclude our own writes so Resumo ≠ the in-app tracker.
+                let ownBundleId = Bundle.main.bundleIdentifier
+                let external = samples.filter { $0.sourceRevision.source.bundleIdentifier != ownBundleId }
+
+                let records = self?.processSleepSamples(external) ?? []
                 continuation.resume(returning: records)
             }
 
@@ -123,7 +143,9 @@ final class HealthKitService: ObservableObject {
 
     func fetchRecentSleepData(days: Int = 14) async throws -> [SleepRecord] {
         let endDate = Date()
-        let startDate = Calendar.current.date(byAdding: .day, value: -days, to: endDate)!
+        guard let startDate = Calendar.current.date(byAdding: .day, value: -days, to: endDate) else {
+            return []
+        }
         return try await fetchSleepData(from: startDate, to: endDate)
     }
 
@@ -157,17 +179,30 @@ final class HealthKitService: ObservableObject {
 
         // Convert sessions to SleepRecords
         return sessions.compactMap { sessionSamples -> SleepRecord? in
-            guard let firstSample = sessionSamples.first,
-                  let lastSample = sessionSamples.last else { return nil }
+            guard !sessionSamples.isEmpty else { return nil }
 
-            let startTime = firstSample.startDate
-            let endTime = lastSample.endDate
+            // Bound the session by the earliest start and latest end across all
+            // its samples — samples are sorted by start, but the last-starting
+            // sample isn't necessarily the last-ending one.
+            let startTime = sessionSamples.map(\.startDate).min() ?? sessionSamples[0].startDate
+            let endTime = sessionSamples.map(\.endDate).max() ?? sessionSamples[0].endDate
             let duration = endTime.timeIntervalSince(startTime)
 
-            // Skip very short sessions (less than 3 hours)
-            guard duration >= 3 * 3600 else { return nil }
+            // Skip very short sessions (naps under 1 hour).
+            guard duration >= 3600 else { return nil }
 
-            let phases = convertToPhases(sessionSamples)
+            // iPhone-only sleep (no Apple Watch) is recorded as "In Bed" with no
+            // detailed stages. If this session has no real asleep stages, treat
+            // In Bed as light sleep so the night isn't classified as all-awake.
+            let hasRealStages = sessionSamples.contains { sample in
+                let v = sample.value
+                return v == HKCategoryValueSleepAnalysis.asleepUnspecified.rawValue
+                    || v == HKCategoryValueSleepAnalysis.asleepCore.rawValue
+                    || v == HKCategoryValueSleepAnalysis.asleepDeep.rawValue
+                    || v == HKCategoryValueSleepAnalysis.asleepREM.rawValue
+            }
+
+            let phases = convertToPhases(sessionSamples, treatInBedAsLight: !hasRealStages)
             let qualityScore = calculateQualityScore(phases: phases, duration: duration)
 
             return SleepRecord(
@@ -180,12 +215,12 @@ final class HealthKitService: ObservableObject {
         }
     }
 
-    nonisolated private func convertToPhases(_ samples: [HKCategorySample]) -> [SleepPhaseData] {
+    nonisolated private func convertToPhases(_ samples: [HKCategorySample], treatInBedAsLight: Bool = false) -> [SleepPhaseData] {
         samples.compactMap { sample in
             let phase: SleepPhase
             switch sample.value {
             case HKCategoryValueSleepAnalysis.inBed.rawValue:
-                phase = .awake
+                phase = treatInBedAsLight ? .light : .awake
             case HKCategoryValueSleepAnalysis.asleepUnspecified.rawValue:
                 phase = .light
             case HKCategoryValueSleepAnalysis.asleepCore.rawValue:
@@ -261,6 +296,56 @@ final class HealthKitService: ObservableObject {
         }
 
         return min(100, max(0, score))
+    }
+
+    // MARK: - Fetch Apple Watch Sleep Phases
+    /// Fetches sleep phase data from HealthKit for a specific time range.
+    /// Returns nil if no data found (e.g. user doesn't have Apple Watch).
+    /// Returns phases if Apple Watch recorded sleep during this period.
+    func fetchSleepPhases(from start: Date, to end: Date) async -> [SleepPhaseData]? {
+        guard isHealthKitAvailable else { return nil }
+
+        let predicate = HKQuery.predicateForSamples(
+            withStart: start,
+            end: end,
+            options: .strictStartDate
+        )
+
+        let sortDescriptor = NSSortDescriptor(
+            key: HKSampleSortIdentifierStartDate,
+            ascending: true
+        )
+
+        return await withCheckedContinuation { continuation in
+            let query = HKSampleQuery(
+                sampleType: sleepType,
+                predicate: predicate,
+                limit: HKObjectQueryNoLimit,
+                sortDescriptors: [sortDescriptor]
+            ) { [weak self] _, samples, error in
+                guard error == nil,
+                      let samples = samples as? [HKCategorySample],
+                      !samples.isEmpty else {
+                    continuation.resume(returning: nil)
+                    return
+                }
+
+                // Filter out "inBed" samples — we only want actual sleep phase data
+                let sleepSamples = samples.filter { sample in
+                    sample.value != HKCategoryValueSleepAnalysis.inBed.rawValue
+                }
+
+                guard !sleepSamples.isEmpty else {
+                    continuation.resume(returning: nil)
+                    return
+                }
+
+                let phases = self?.convertToPhases(sleepSamples) ?? []
+                continuation.resume(returning: phases.isEmpty ? nil : phases)
+            }
+
+            healthStore.execute(query)
+        }
     }
 
     // MARK: - Save Sleep Data

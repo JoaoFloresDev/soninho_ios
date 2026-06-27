@@ -12,7 +12,6 @@ struct HomeView: View {
     // MARK: - Properties
     @StateObject private var viewModel = HomeViewModel()
     @State private var showingPaywall = false
-    @AppStorage(StorageKeys.hasStartedFirstSleep) private var hasStartedFirstSleep = false
 
     // MARK: - Environment
     @EnvironmentObject private var storageService: StorageService
@@ -51,11 +50,6 @@ struct HomeView: View {
             .background(AppColors.background)
             .navigationTitle(String(localized: "home_title"))
             .navigationBarTitleDisplayMode(.large)
-            .safeAreaInset(edge: .bottom) {
-                if !hasStartedFirstSleep {
-                    startSleepButton
-                }
-            }
             .refreshable {
                 await viewModel.refresh()
             }
@@ -257,44 +251,6 @@ struct HomeView: View {
             action: viewModel.isHealthKitAvailable ? { Task { await viewModel.requestHealthKitAccess() } } : nil
         )
         .frame(minHeight: 460)
-    }
-
-    // MARK: - Start Sleep Button
-    private var startSleepButton: some View {
-        Button {
-            hasStartedFirstSleep = true
-            NotificationCenter.default.post(name: .didRequestSwitchToSleepTab, object: nil)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                NotificationCenter.default.post(name: .didRequestStartSleepTracking, object: nil)
-            }
-        } label: {
-            HStack(spacing: 10) {
-                Image(systemName: "moon.zzz.fill")
-                    .font(.system(size: 18, weight: .semibold))
-
-                Text(String(localized: "empty_start_night"))
-                    .font(AppFonts.headline())
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: AppSpacing.buttonHeight)
-            .foregroundStyle(.white)
-            .background(AppColors.primary)
-            .clipShape(RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous))
-        }
-        .buttonStyle(.plain)
-        .contentShape(Rectangle())
-        .padding(.horizontal, AppSpacing.screenHorizontal)
-        .padding(.bottom, 8)
-        .background(
-            LinearGradient(
-                colors: [AppColors.background.opacity(0), AppColors.background],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: 40)
-            .offset(y: -40),
-            alignment: .top
-        )
     }
 }
 

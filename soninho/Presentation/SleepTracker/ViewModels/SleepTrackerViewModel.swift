@@ -14,6 +14,7 @@ final class SleepTrackerViewModel: ObservableObject {
     // MARK: - Dependencies
     private let healthKitService: HealthKitService
     private let storageService: StorageService
+    private let motionMonitor: MotionSleepMonitor
 
     // MARK: - Published Properties
     @Published var isTracking = false
@@ -21,6 +22,8 @@ final class SleepTrackerViewModel: ObservableObject {
     @Published var elapsedTime: TimeInterval = 0
     @Published var currentPhase: SleepPhase = .light
     @Published var estimatedWakeTime: Date?
+    @Published var movementIntensity: Double = 0
+    @Published var soundLevel: Double = 0
 
     // MARK: - Private Properties
     private var timer: Timer?
@@ -45,17 +48,22 @@ final class SleepTrackerViewModel: ObservableObject {
     // MARK: - Init
     init(
         healthKitService: HealthKitService = .shared,
-        storageService: StorageService = .shared
+        storageService: StorageService = .shared,
+        motionMonitor: MotionSleepMonitor = .shared
     ) {
         self.healthKitService = healthKitService
         self.storageService = storageService
+        self.motionMonitor = motionMonitor
         loadTrackingState()
+        observeMotionMonitor()
     }
 
     // MARK: - Public Methods
     func startTracking() {
-        HapticManager.success()
+        guard !isTracking else { return }
+
         isTracking = true
+
         trackingStartTime = Date()
         elapsedTime = 0
 
@@ -63,11 +71,16 @@ final class SleepTrackerViewModel: ObservableObject {
         UserDefaults.standard.set(true, forKey: StorageKeys.isCurrentlyTracking)
         UserDefaults.standard.set(trackingStartTime, forKey: StorageKeys.trackingStartTime)
 
+        // Start real motion monitoring
+        motionMonitor.startMonitoring()
+
+        // Configure smart alarm if one is enabled
+        configureSmartAlarmIfNeeded()
+
         startTimer()
     }
 
     func stopTracking() async {
-        HapticManager.success()
         stopTimer()
 
         guard let startTime = trackingStartTime else { return }
@@ -75,9 +88,21 @@ final class SleepTrackerViewModel: ObservableObject {
         let endTime = Date()
         let duration = endTime.timeIntervalSince(startTime)
 
-        // Generate simulated sleep phases
-        let phases = generateSleepPhases(from: startTime, to: endTime)
-        let qualityScore = calculateQualityScore(phases: phases, duration: duration)
+        // Get motion-detected phases (cycle model + accelerometer)
+        let motionPhases = motionMonitor.getRecordedPhases()
+        let phases: [SleepPhaseData]
+        let qualityScore: Int
+
+        if !motionPhases.isEmpty {
+            phases = motionPhases
+        } else {
+            phases = generateFallbackPhases(from: startTime, to: endTime)
+        }
+
+        qualityScore = motionMonitor.calculateQualityScore(phases: phases, totalDuration: duration)
+
+        // Stop motion monitoring
+        motionMonitor.stopMonitoring()
 
         let record = SleepRecord(
             startTime: startTime,
@@ -86,14 +111,8 @@ final class SleepTrackerViewModel: ObservableObject {
             qualityScore: qualityScore
         )
 
-        // Try to save to HealthKit
-        if healthKitService.isAuthorized {
-            do {
-                try await healthKitService.saveSleepRecord(record)
-            } catch {
-                print("Failed to save to HealthKit: \(error)")
-            }
-        }
+        // In-app tracked sleep stays local — it is NOT written to Apple Health.
+        // (Apple Health / Resumo must reflect only the device's own sleep data.)
 
         // Save locally
         var records = storageService.loadCachedSleepRecords()
@@ -104,29 +123,80 @@ final class SleepTrackerViewModel: ObservableObject {
         isTracking = false
         trackingStartTime = nil
         elapsedTime = 0
+        movementIntensity = 0
 
         UserDefaults.standard.set(false, forKey: StorageKeys.isCurrentlyTracking)
         UserDefaults.standard.removeObject(forKey: StorageKeys.trackingStartTime)
     }
 
     func cancelTracking() {
-        HapticManager.mediumImpact()
         stopTimer()
+        motionMonitor.stopMonitoring()
         isTracking = false
         trackingStartTime = nil
         elapsedTime = 0
+        movementIntensity = 0
 
         UserDefaults.standard.set(false, forKey: StorageKeys.isCurrentlyTracking)
         UserDefaults.standard.removeObject(forKey: StorageKeys.trackingStartTime)
     }
 
     // MARK: - Private Methods
+    private func observeMotionMonitor() {
+        motionMonitor.$currentPhase
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] phase in
+                self?.currentPhase = phase
+            }
+            .store(in: &cancellables)
+
+        motionMonitor.$movementIntensity
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] intensity in
+                self?.movementIntensity = intensity
+            }
+            .store(in: &cancellables)
+
+        motionMonitor.$soundLevel
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] level in
+                self?.soundLevel = level
+            }
+            .store(in: &cancellables)
+    }
+
+    private func configureSmartAlarmIfNeeded() {
+        let alarms = storageService.loadAlarms()
+        guard let smartAlarm = alarms.first(where: { $0.isEnabled && $0.isSmartAlarm }) else { return }
+        guard let nextAlarmDate = smartAlarm.nextAlarmDate else { return }
+
+        let windowStart = nextAlarmDate.addingTimeInterval(-Double(smartAlarm.smartAlarmWindow * 60))
+
+        motionMonitor.configureSmartAlarm(windowStart: windowStart, windowEnd: nextAlarmDate) {
+            Task { @MainActor in
+                // Smart alarm detected light sleep - trigger alarm
+                let notificationService = NotificationService.shared
+                notificationService.handleForegroundAlarm(
+                    alarmId: smartAlarm.id.uuidString,
+                    soundName: smartAlarm.sound.rawValue,
+                    volume: Float(smartAlarm.volume),
+                    vibration: smartAlarm.vibrationEnabled
+                )
+            }
+        }
+    }
+
     private func loadTrackingState() {
         isTracking = UserDefaults.standard.bool(forKey: StorageKeys.isCurrentlyTracking)
         trackingStartTime = UserDefaults.standard.object(forKey: StorageKeys.trackingStartTime) as? Date
 
         if isTracking, let startTime = trackingStartTime {
             elapsedTime = Date().timeIntervalSince(startTime)
+            // Resume motion monitoring if it was active
+            if !motionMonitor.isMonitoring {
+                motionMonitor.startMonitoring()
+                configureSmartAlarmIfNeeded()
+            }
             startTimer()
         }
     }
@@ -147,38 +217,17 @@ final class SleepTrackerViewModel: ObservableObject {
     private func updateElapsedTime() {
         guard let startTime = trackingStartTime else { return }
         elapsedTime = Date().timeIntervalSince(startTime)
-
-        // Update current phase simulation
-        updateCurrentPhase()
     }
 
-    private func updateCurrentPhase() {
-        // Simulate phase changes based on elapsed time
-        let minutes = Int(elapsedTime / 60)
-        let cyclePosition = minutes % 90 // 90 minute sleep cycle
-
-        switch cyclePosition {
-        case 0..<20:
-            currentPhase = .light
-        case 20..<50:
-            currentPhase = .deep
-        case 50..<70:
-            currentPhase = .light
-        case 70..<90:
-            currentPhase = .rem
-        default:
-            currentPhase = .light
-        }
-    }
-
-    private func generateSleepPhases(from start: Date, to end: Date) -> [SleepPhaseData] {
+    // MARK: - Fallback Phase Generation
+    /// Used when accelerometer is not available (simulator, older devices)
+    private func generateFallbackPhases(from start: Date, to end: Date) -> [SleepPhaseData] {
         var phases: [SleepPhaseData] = []
         var currentTime = start
         let totalDuration = end.timeIntervalSince(start)
-        let cycleCount = max(1, Int(totalDuration / 5400)) // 90 min cycles
+        let cycleCount = max(1, Int(totalDuration / 5400))
 
         for cycle in 0..<cycleCount {
-            // Light sleep
             let lightDuration = Double.random(in: 15...25) * 60
             let lightEnd = min(currentTime.addingTimeInterval(lightDuration), end)
             phases.append(SleepPhaseData(phase: .light, startTime: currentTime, endTime: lightEnd))
@@ -186,7 +235,6 @@ final class SleepTrackerViewModel: ObservableObject {
 
             guard currentTime < end else { break }
 
-            // Deep sleep (more in first half)
             let deepMultiplier = cycle < cycleCount / 2 ? 1.5 : 0.5
             let deepDuration = Double.random(in: 15...30) * 60 * deepMultiplier
             let deepEnd = min(currentTime.addingTimeInterval(deepDuration), end)
@@ -195,14 +243,12 @@ final class SleepTrackerViewModel: ObservableObject {
 
             guard currentTime < end else { break }
 
-            // REM sleep (more in second half)
             let remMultiplier = cycle >= cycleCount / 2 ? 1.5 : 0.5
             let remDuration = Double.random(in: 10...25) * 60 * remMultiplier
             let remEnd = min(currentTime.addingTimeInterval(remDuration), end)
             phases.append(SleepPhaseData(phase: .rem, startTime: currentTime, endTime: remEnd))
             currentTime = remEnd
 
-            // Brief awake
             if Bool.random() && currentTime < end {
                 let awakeDuration = Double.random(in: 1...5) * 60
                 let awakeEnd = min(currentTime.addingTimeInterval(awakeDuration), end)
@@ -211,7 +257,6 @@ final class SleepTrackerViewModel: ObservableObject {
             }
         }
 
-        // Fill remaining time
         if currentTime < end {
             phases.append(SleepPhaseData(phase: .light, startTime: currentTime, endTime: end))
         }
@@ -219,10 +264,9 @@ final class SleepTrackerViewModel: ObservableObject {
         return phases
     }
 
-    private func calculateQualityScore(phases: [SleepPhaseData], duration: TimeInterval) -> Int {
+    private func calculateFallbackQualityScore(phases: [SleepPhaseData], duration: TimeInterval) -> Int {
         var score = 50
 
-        // Duration score
         let hours = duration / 3600
         if hours >= 7 && hours <= 9 {
             score += 25
@@ -232,7 +276,6 @@ final class SleepTrackerViewModel: ObservableObject {
             score -= 15
         }
 
-        // Deep sleep score
         let deepDuration = phases.filter { $0.phase == .deep }.reduce(0) { $0 + $1.duration }
         let deepPercentage = (deepDuration / duration) * 100
         if deepPercentage >= 15 && deepPercentage <= 25 {
@@ -241,7 +284,6 @@ final class SleepTrackerViewModel: ObservableObject {
             score += 8
         }
 
-        // REM score
         let remDuration = phases.filter { $0.phase == .rem }.reduce(0) { $0 + $1.duration }
         let remPercentage = (remDuration / duration) * 100
         if remPercentage >= 20 && remPercentage <= 25 {

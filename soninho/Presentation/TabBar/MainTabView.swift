@@ -58,7 +58,7 @@ enum TabItem: Int, CaseIterable, Identifiable {
 // MARK: - Main Tab View
 struct MainTabView: View {
     // MARK: - Properties
-    @State private var selectedTab: TabItem = .home
+    @State private var selectedTab: TabItem = .tracker
     @EnvironmentObject private var storageService: StorageService
 
     // MARK: - Init
