@@ -122,8 +122,21 @@ struct SettingsView: View {
             .tint(AppColors.primary)
             .listRowBackground(AppColors.surface)
 
-            // Bedtime Reminder Time
-            if viewModel.bedtimeReminderEnabled {
+            // Auto-start the sleep night at bedtime (while the app is alive)
+            Toggle(isOn: $viewModel.autoStartSleepEnabled) {
+                VStack(alignment: .leading, spacing: 2) {
+                    settingsRowLabel("powersleep", String(localized: "settings_autostart_sleep"))
+                    Text(String(localized: "settings_autostart_sleep_desc"))
+                        .font(AppFonts.caption())
+                        .foregroundStyle(AppColors.textSecondary)
+                        .padding(.leading, 34)
+                }
+            }
+            .tint(AppColors.primary)
+            .listRowBackground(AppColors.surface)
+
+            // Bedtime Time (used by both the reminder and auto-start)
+            if viewModel.bedtimeReminderEnabled || viewModel.autoStartSleepEnabled {
                 DatePicker(selection: $viewModel.bedtimeReminderTime, displayedComponents: .hourAndMinute) {
                     settingsRowLabel("clock", String(localized: "settings_bedtime_time"))
                         .foregroundStyle(AppColors.textPrimary)

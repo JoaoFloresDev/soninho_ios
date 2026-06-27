@@ -52,6 +52,10 @@ final class StorageService: ObservableObject {
         didSet { defaults.set(sleepGoalHours, forKey: StorageKeys.sleepGoalHours) }
     }
 
+    @Published var autoStartSleepEnabled: Bool {
+        didSet { defaults.set(autoStartSleepEnabled, forKey: StorageKeys.autoStartSleepEnabled) }
+    }
+
     // MARK: - Init
     private init() {
         self.hasCompletedOnboarding = defaults.bool(forKey: StorageKeys.hasCompletedOnboarding)
@@ -62,6 +66,7 @@ final class StorageService: ObservableObject {
         self.bedtimeReminderEnabled = defaults.object(forKey: StorageKeys.bedtimeReminderEnabled) as? Bool ?? false
         self.bedtimeReminderMinutes = defaults.object(forKey: StorageKeys.bedtimeReminderMinutes) as? Int ?? 30
         self.sleepGoalHours = defaults.object(forKey: StorageKeys.sleepGoalHours) as? Double ?? 8.0
+        self.autoStartSleepEnabled = defaults.object(forKey: StorageKeys.autoStartSleepEnabled) as? Bool ?? false
     }
 
     // MARK: - Alarm Methods

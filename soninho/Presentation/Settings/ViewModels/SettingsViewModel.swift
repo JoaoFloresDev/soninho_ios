@@ -29,6 +29,13 @@ final class SettingsViewModel: ObservableObject {
             updateBedtimeReminder()
         }
     }
+    @Published var autoStartSleepEnabled: Bool {
+        didSet {
+            storageService.autoStartSleepEnabled = autoStartSleepEnabled
+            // Refresh the bedtime reminder so its text reflects auto-start.
+            updateBedtimeReminder()
+        }
+    }
     @Published var showingLanguagePicker = false
 
     // MARK: - Properties
@@ -58,6 +65,7 @@ final class SettingsViewModel: ObservableObject {
         self.hapticFeedbackEnabled = storageService.hapticFeedbackEnabled
         self.bedtimeReminderEnabled = storageService.bedtimeReminderEnabled
         self.bedtimeReminderTime = storageService.bedtimeReminderTime
+        self.autoStartSleepEnabled = storageService.autoStartSleepEnabled
     }
 
     // MARK: - Public Methods

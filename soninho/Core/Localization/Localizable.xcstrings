@@ -7587,6 +7587,72 @@
           }
         }
       }
+    },
+    "settings_autostart_sleep": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto-start sleep night"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto-iniciar noite de sono"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar la noche automáticamente"
+          }
+        }
+      }
+    },
+    "settings_autostart_sleep_desc": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At bedtime, starts the night automatically when the app is open or running in the background."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No horário de dormir, inicia a noite sozinho quando o app está aberto ou ativo em segundo plano."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A la hora de dormir, inicia la noche automáticamente cuando la app está abierta o activa en segundo plano."
+          }
+        }
+      }
+    },
+    "bedtime_autostart_message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your sleep night has started. Sleep well!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua noite de sono começou. Bons sonhos!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu noche de sueño ha comenzado. ¡Que descanses!"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

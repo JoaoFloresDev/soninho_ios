@@ -72,6 +72,9 @@ struct SoninhoApp: App {
         // Attach the hidden volume control so the alarm can blast at max volume.
         SystemVolume.prepare()
 
+        // Auto-start the sleep night at bedtime while the app is in foreground.
+        SleepAutoStart.startForegroundMonitor()
+
         // Increment app open count
         reviewService.incrementAppOpenCount()
 

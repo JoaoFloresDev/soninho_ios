@@ -100,7 +100,16 @@ final class BackgroundAlarmPlayer: ObservableObject {
         // Also check if sleep tracking is active
         let isTrackingSleep = MotionSleepMonitor.shared.isMonitoring
 
-        guard hasUpcomingAlarm || isTrackingSleep else {
+        // Keep alive into the bedtime window when auto-start is enabled, so the
+        // sleep night can begin in background without a morning alarm.
+        let autoStartDue: Bool = {
+            guard StorageService.shared.autoStartSleepEnabled else { return false }
+            let hm = Calendar.current.dateComponents([.hour, .minute], from: StorageService.shared.bedtimeReminderTime)
+            guard let next = Calendar.current.nextDate(after: Date(), matching: hm, matchingPolicy: .nextTime) else { return false }
+            return next.timeIntervalSinceNow < 12 * 3600
+        }()
+
+        guard hasUpcomingAlarm || isTrackingSleep || autoStartDue else {
             return
         }
 
@@ -299,9 +308,15 @@ final class BackgroundAlarmPlayer: ObservableObject {
     // MARK: - Alarm Check
 
     private func checkAlarmTimes() {
+        // Auto-start the sleep night at bedtime while the app is alive in bg.
+        SleepAutoStart.checkAndStartIfDue()
+
         // Keep the silent keep-alive playing (restart if it stopped for any
-        // reason) so the app stays alive until the alarm fires.
-        if isBackgroundActive, alarmPlayer == nil, silentPlayer?.isPlaying != true {
+        // reason) so the app stays alive until the alarm fires. Skip while the
+        // sleep monitor owns the recording session — restarting silent .playback
+        // would fight the mic recorder.
+        if isBackgroundActive, alarmPlayer == nil, silentPlayer?.isPlaying != true,
+           !MotionSleepMonitor.shared.isMonitoring {
             startSilentAudio()
         }
 

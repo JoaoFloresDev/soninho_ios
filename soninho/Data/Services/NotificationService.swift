@@ -600,7 +600,11 @@ final class NotificationService: ObservableObject {
 
         let content = UNMutableNotificationContent()
         content.title = String(localized: "bedtime_reminder_title")
-        content.body = String(localized: "bedtime_reminder_message")
+        // When auto-start is on, the reminder doubles as the "your sleep night
+        // has started" confirmation.
+        content.body = StorageService.shared.autoStartSleepEnabled
+            ? String(localized: "bedtime_autostart_message")
+            : String(localized: "bedtime_reminder_message")
         content.sound = .default
         content.interruptionLevel = .timeSensitive
         content.categoryIdentifier = "BEDTIME_CATEGORY"
