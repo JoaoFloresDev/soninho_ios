@@ -284,6 +284,10 @@ final class BackgroundAlarmPlayer: ObservableObject {
         let gradualSeconds: TimeInterval = alarm.gradualWakeEnabled ? TimeInterval(alarm.gradualWakeDuration * 60) : 0
         triggerAlarm(soundName: alarm.sound.rawValue, volume: Float(alarm.volume), vibrationEnabled: alarm.vibrationEnabled, gradualSeconds: gradualSeconds)
 
+        // The app is alive and ringing via audio — drop the fallback burst so we
+        // don't get a doubled notification sound on top.
+        NotificationService.shared.cancelBurst(alarmId: alarm.id.uuidString)
+
         // Update NotificationService to show alarm UI
         NotificationService.shared.ringingAlarmId = alarm.id.uuidString
         NotificationService.shared.ringingAlarmTime = alarm.time

@@ -103,80 +103,60 @@ final class NotificationService: ObservableObject {
         // Cancel all existing notifications for this alarm
         await cancelAlarm(alarm)
 
-        guard alarm.isEnabled else { return }
+        guard alarm.isEnabled, let nextDate = alarm.nextAlarmDate else { return }
 
-        let alarmHour = Calendar.current.component(.hour, from: alarm.time)
-        let alarmMinute = Calendar.current.component(.minute, from: alarm.time)
+        let calendar = Calendar.current
 
-        if alarm.repeatDays.isEmpty {
-            // One-time alarm — schedule for next occurrence with exact date
-            guard let nextDate = alarm.nextAlarmDate else { return }
-
-            await scheduleNotification(
-                alarm: alarm,
-                dateComponents: Calendar.current.dateComponents(
-                    [.year, .month, .day, .hour, .minute],
-                    from: nextDate
-                ),
-                repeats: false,
-                identifier: alarm.id.uuidString,
-                isSmartWake: false
-            )
-
-            // Smart alarm: early notification
-            if alarm.isSmartAlarm {
-                let smartDate = nextDate.addingTimeInterval(-Double(alarm.smartAlarmWindow * 60))
+        // Smart alarm: a single early notification in the light-sleep window.
+        if alarm.isSmartAlarm {
+            let smartDate = nextDate.addingTimeInterval(-Double(alarm.smartAlarmWindow * 60))
+            if smartDate > Date() {
                 await scheduleNotification(
                     alarm: alarm,
-                    dateComponents: Calendar.current.dateComponents(
-                        [.year, .month, .day, .hour, .minute],
-                        from: smartDate
-                    ),
+                    dateComponents: calendar.dateComponents([.year, .month, .day, .hour, .minute], from: smartDate),
                     repeats: false,
                     identifier: "\(alarm.id.uuidString)_smart",
                     isSmartWake: true
                 )
             }
-        } else {
-            // Repeating alarm — one notification per weekday with repeats:true
-            for weekday in alarm.repeatDays {
-                var components = DateComponents()
-                components.hour = alarmHour
-                components.minute = alarmMinute
-                components.weekday = weekday.rawValue
+        }
 
-                let identifier = "\(alarm.id.uuidString)_day_\(weekday.rawValue)"
-
-                await scheduleNotification(
-                    alarm: alarm,
-                    dateComponents: components,
-                    repeats: true,
-                    identifier: identifier,
-                    isSmartWake: false
-                )
-
-                // Smart alarm for each weekday
-                if alarm.isSmartAlarm {
-                    var smartComponents = DateComponents()
-                    let totalMinutes = alarmHour * 60 + alarmMinute - alarm.smartAlarmWindow
-                    let wrapped = ((totalMinutes % 1440) + 1440) % 1440
-                    smartComponents.hour = wrapped / 60
-                    smartComponents.minute = wrapped % 60
-                    smartComponents.weekday = weekday.rawValue
-
-                    await scheduleNotification(
-                        alarm: alarm,
-                        dateComponents: smartComponents,
-                        repeats: true,
-                        identifier: "\(alarm.id.uuidString)_day_\(weekday.rawValue)_smart",
-                        isSmartWake: true
-                    )
-                }
-            }
+        // PERSISTENT RING: schedule a burst of notifications spaced ~30s apart
+        // (each plays the 29s alarm sound), so the alarm keeps ringing for
+        // several minutes at the next occurrence even if the app is suspended or
+        // the user force-quit it. This is the only reliable way to ring without
+        // the Critical Alerts entitlement. Budget stays under iOS's 64-pending
+        // limit by sharing the slots across all enabled alarms.
+        let enabledCount = max(1, StorageService.shared.loadAlarms().filter { $0.isEnabled }.count)
+        let burstCount = max(8, min(24, 55 / enabledCount))
+        let spacing: TimeInterval = AlarmBurst.spacing
+        for i in 0..<burstCount {
+            let fireDate = nextDate.addingTimeInterval(Double(i) * spacing)
+            await scheduleNotification(
+                alarm: alarm,
+                dateComponents: calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: fireDate),
+                repeats: false,
+                identifier: "\(alarm.id.uuidString)\(AlarmBurst.suffix)\(i)",
+                isSmartWake: false
+            )
         }
 
         await refreshPendingNotifications()
-        print("Alarm scheduled. Total pending: \(pendingNotifications.count)")
+    }
+
+    // MARK: - Alarm Burst Config
+    private enum AlarmBurst {
+        static let spacing: TimeInterval = 30   // seconds between notifications
+        static let suffix = "_burst_"
+        static let maxIds = 30                  // upper bound for cancellation
+    }
+
+    /// Cancels the remaining burst notifications for an alarm — call when the
+    /// alarm is handled in-app, dismissed, or snoozed, so it doesn't keep
+    /// ringing from already-scheduled notifications.
+    func cancelBurst(alarmId: String) {
+        let ids = (0..<AlarmBurst.maxIds).map { "\(alarmId)\(AlarmBurst.suffix)\($0)" }
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: ids)
     }
 
     // MARK: - Schedule Single Notification
@@ -336,6 +316,8 @@ final class NotificationService: ObservableObject {
 
     func stopAlarmAudio() {
         teardownAudio()
+        // Stop any remaining burst notifications so it doesn't keep ringing.
+        if let id = ringingAlarmId { cancelBurst(alarmId: id) }
         isAlarmRinging = false
         ringingAlarmId = nil
         ringingAlarmTime = nil
@@ -415,6 +397,9 @@ final class NotificationService: ObservableObject {
 
     // MARK: - Handle Foreground Alarm
     func handleForegroundAlarm(alarmId: String, soundName: String, volume: Float = 1.0, vibration: Bool = true) {
+        // The app is now ringing in-app — drop the remaining fallback burst so
+        // we don't get a double sound.
+        cancelBurst(alarmId: alarmId)
         ringingAlarmId = alarmId
         ringingAlarmSoundName = soundName
         ringingAlarmVolume = volume
@@ -468,10 +453,15 @@ final class NotificationService: ObservableObject {
             "\(alarm.id.uuidString)_smart"
         ]
 
-        // Also cancel all per-weekday notifications
+        // Legacy per-weekday notifications (older builds)
         for weekday in Weekday.allCases {
             identifiers.append("\(alarm.id.uuidString)_day_\(weekday.rawValue)")
             identifiers.append("\(alarm.id.uuidString)_day_\(weekday.rawValue)_smart")
+        }
+
+        // The persistent-ring burst
+        for i in 0..<AlarmBurst.maxIds {
+            identifiers.append("\(alarm.id.uuidString)\(AlarmBurst.suffix)\(i)")
         }
 
         notificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
@@ -615,9 +605,11 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         Task { @MainActor in
             switch response.actionIdentifier {
             case "SNOOZE_ACTION":
+                NotificationService.shared.cancelBurst(alarmId: alarmId)
                 NotificationService.shared.stopAlarmAudio()
                 await NotificationService.shared.scheduleSnooze(for: alarmId, soundName: soundName, volume: Float(volume), vibrationEnabled: vibration)
             case "DISMISS_ACTION", UNNotificationDismissActionIdentifier:
+                NotificationService.shared.cancelBurst(alarmId: alarmId)
                 NotificationService.shared.disableOneTimeAlarmIfNeeded(id: alarmId)
                 NotificationService.shared.stopAlarmAudio()
             case UNNotificationDefaultActionIdentifier:
