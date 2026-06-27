@@ -15,9 +15,16 @@ struct AlarmRingingView: View {
         case ringing, mission, confirmation
     }
 
+    /// What the user asked for before the mission gate — so snooze can't bypass
+    /// the wake-up mission either.
+    private enum PendingAction {
+        case dismiss, snooze
+    }
+
     // MARK: - Properties
     @EnvironmentObject private var notificationService: NotificationService
     @State private var phase: Phase = .ringing
+    @State private var pendingAction: PendingAction = .dismiss
     @State private var alarm: AlarmModel?
     @State private var sunriseProgress: Double = 0
     @State private var pulseScale: CGFloat = 1.0
@@ -85,7 +92,7 @@ struct AlarmRingingView: View {
 
             VStack(spacing: 16) {
                 Button {
-                    advanceFromRing()
+                    requestDismiss()
                 } label: {
                     actionLabel(
                         icon: missionIcon,
@@ -96,7 +103,7 @@ struct AlarmRingingView: View {
                 }
 
                 Button {
-                    notificationService.snoozeCurrentAlarm()
+                    requestSnooze()
                 } label: {
                     actionLabel(
                         icon: "clock.arrow.circlepath",
@@ -163,16 +170,34 @@ struct AlarmRingingView: View {
         alarm = StorageService.shared.loadAlarms().first { $0.id == uuid }
     }
 
-    private func advanceFromRing() {
+    private func requestDismiss() {
+        pendingAction = .dismiss
+        gateThroughMission { finishOrConfirm() }
+    }
+
+    private func requestSnooze() {
+        pendingAction = .snooze
+        gateThroughMission { notificationService.snoozeCurrentAlarm() }
+    }
+
+    /// If the alarm has a wake-up mission, show it first; otherwise run the
+    /// action immediately. Snooze and dismiss both pass through here so snooze
+    /// can't skip the mission.
+    private func gateThroughMission(_ immediate: () -> Void) {
         if alarm?.mission.requiresMission ?? false {
             withAnimation(.spring(response: 0.4)) { phase = .mission }
         } else {
-            finishOrConfirm()
+            immediate()
         }
     }
 
     private func missionCompleted() {
-        finishOrConfirm()
+        switch pendingAction {
+        case .snooze:
+            notificationService.snoozeCurrentAlarm()
+        case .dismiss:
+            finishOrConfirm()
+        }
     }
 
     private func finishOrConfirm() {
