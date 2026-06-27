@@ -10,13 +10,17 @@ import Foundation
 // MARK: - App Constants
 enum AppConstants {
     // MARK: - App Info
-    static let appName = "Soninho"
-    static let appStoreId = "YOUR_APP_STORE_ID"
-    static let supportEmail = "support@gambitstudio.com"
+    static var appName: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+            ?? Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
+            ?? "Soninho"
+    }
+    static let appStoreId = "6758740138"
+    static let supportEmail = "contact@gambitstudiotech.com"
 
     // MARK: - URLs
-    static let privacyPolicyURL = "https://gambitstudio.com/soninho/privacy"
-    static let termsOfUseURL = "https://gambitstudio.com/soninho/terms"
+    static let privacyPolicyURL = "https://drive.google.com/file/d/1fEHysu7rRdk9Hns4CCgK-4ty2_a57vR_/view"
+    static let termsOfUseURL = "https://drive.google.com/file/d/1fEHysu7rRdk9Hns4CCgK-4ty2_a57vR_/view"
     static let appStoreURL = "https://apps.apple.com/app/id\(appStoreId)"
 
     // MARK: - Feature Flags
