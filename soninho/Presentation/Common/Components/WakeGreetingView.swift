@@ -48,7 +48,7 @@ struct WakeGreetingView: View {
     var body: some View {
         ZStack {
             LinearGradient(colors: gradientColors, startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+                .ignoresSafeArea(edges: .top)
 
             VStack(spacing: 28) {
                 ZStack {
