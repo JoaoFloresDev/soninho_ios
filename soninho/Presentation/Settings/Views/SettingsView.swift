@@ -148,7 +148,7 @@ struct SettingsView: View {
             // Auto-start Time
             if viewModel.autoStartSleepEnabled {
                 DatePicker(selection: $viewModel.autoStartSleepTime, displayedComponents: .hourAndMinute) {
-                    settingsRowLabel("powersleep", String(localized: "settings_autostart_time"))
+                    Text(String(localized: "settings_autostart_time"))
                         .foregroundStyle(AppColors.textPrimary)
                 }
                 .tint(AppColors.primary)
