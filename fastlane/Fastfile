@@ -40,7 +40,7 @@ platform :ios do
       force: true,
       submit_for_review: false,
       run_precheck_before_submit: false,
-      languages: ["pt-BR", "es-ES"]
+      languages: ["en-US", "pt-BR", "es-ES"]
     )
   end
 end
