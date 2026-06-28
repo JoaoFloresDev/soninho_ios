@@ -132,28 +132,32 @@ struct SettingsView: View {
                 .listRowBackground(AppColors.surface)
             }
 
-            // Auto-start the sleep night at its own time (while the app is alive)
-            Toggle(isOn: $viewModel.autoStartSleepEnabled) {
-                VStack(alignment: .leading, spacing: 2) {
-                    settingsRowLabel("powersleep", String(localized: "settings_autostart_sleep"))
-                    Text(String(localized: "settings_autostart_sleep_desc"))
-                        .font(AppFonts.caption())
-                        .foregroundStyle(AppColors.textSecondary)
-                        .padding(.leading, 34)
-                }
-            }
-            .tint(AppColors.primary)
-            .listRowBackground(AppColors.surface)
-
-            // Auto-start Time
-            if viewModel.autoStartSleepEnabled {
-                DatePicker(selection: $viewModel.autoStartSleepTime, displayedComponents: .hourAndMinute) {
-                    Text(String(localized: "settings_autostart_time"))
-                        .foregroundStyle(AppColors.textPrimary)
+            // Auto-start — a single cell that expands to reveal its time picker.
+            VStack(alignment: .leading, spacing: 0) {
+                Toggle(isOn: $viewModel.autoStartSleepEnabled) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        settingsRowLabel("powersleep", String(localized: "settings_autostart_sleep"))
+                        Text(String(localized: "settings_autostart_sleep_desc"))
+                            .font(AppFonts.caption())
+                            .foregroundStyle(AppColors.textSecondary)
+                            .padding(.leading, 34)
+                    }
                 }
                 .tint(AppColors.primary)
-                .listRowBackground(AppColors.surface)
+
+                if viewModel.autoStartSleepEnabled {
+                    Divider()
+                        .padding(.vertical, 12)
+
+                    DatePicker(selection: $viewModel.autoStartSleepTime, displayedComponents: .hourAndMinute) {
+                        Text(String(localized: "settings_autostart_time"))
+                            .foregroundStyle(AppColors.textPrimary)
+                    }
+                    .tint(AppColors.primary)
+                }
             }
+            .listRowBackground(AppColors.surface)
+            .animation(.easeInOut(duration: 0.25), value: viewModel.autoStartSleepEnabled)
 
             // Sleep Tips
             NavigationLink {
