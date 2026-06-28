@@ -206,10 +206,11 @@ func marketing<Content: View>(
     MarketingScreen(
         device: device,
         headline: h.text,
-        highlightWord: h.highlight,
+        highlightWord: nil,
         slotIndex: slot,
         totalSlots: totalSlots,
         theme: theme,
+        splitFirstWord: true,   // big first word + smaller ≤3-word line (steps pattern)
         content: content
     )
 }
