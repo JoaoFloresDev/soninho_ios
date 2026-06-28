@@ -1,23 +1,21 @@
 import SwiftUI
 import GambitScreenshotKit
 
-// MARK: - Onboarding Screen (Slot 5 — Sleep Tips: daily tip + filter chips + tips list)
+// MARK: - Onboarding/Stats Screen (Slot 5 — Sleep cycle hypnogram + summary)
 //
-// Faithful recreation of soninho's SleepTipsView. The real screen flow:
-//   - Daily Tip section (sparkles label + expanded TipCard with icon, title,
-//     description, no chevron because it's already shown)
-//   - Horizontal category filter chips (All + 5 categories), "All" selected
-//     by default and styled with primary color
-//   - Tips list — vertical stack of TipCards (icon tile + title + chevron)
-//
-// File name kept as "OnboardingScreen.swift" by convention with the
-// screenshots-tool slot numbering, but this is the Sleep Tips screen.
-// Sized for iPhone 6.5" canvas (414×896pt). NO ScrollView.
+// The tracking payoff: a hypnogram of last night's cycle (Awake/REM/Light/Deep)
+// plus the headline numbers. Mirrors the Statistics tab.
 
 struct OnboardingScreen: View {
     let locale: String
+    private func L(_ en: String, _ pt: String, _ es: String) -> String {
+        locale == "pt-BR" ? pt : (locale.hasPrefix("es") ? es : en)
+    }
 
-    // MARK: - View Body
+    // Phase level per time slot: 0 Awake (top) · 1 REM · 2 Light · 3 Deep (bottom)
+    private let hypno: [Int] = [2, 3, 3, 2, 1, 2, 3, 3, 2, 1, 1, 2, 2, 1, 0, 2, 1, 0]
+    private let phaseColors: [Color] = [MockTheme.awake, MockTheme.remSleep, MockTheme.lightSleep, MockTheme.deepSleep]
+
     var body: some View {
         ZStack {
             MockTheme.background.ignoresSafeArea()
@@ -25,174 +23,157 @@ struct OnboardingScreen: View {
             VStack(spacing: 0) {
                 iOSStatusBar(foreground: .white)
 
-                navBar
-
-                VStack(alignment: .leading, spacing: 22) {
-                    dailyTipSection
-                    categoryFilterRow
-                    tipsList
+                HStack {
+                    Text(L("Sleep cycle", "Ciclo de sono", "Ciclo de sueño"))
+                        .font(.system(size: 30, weight: .bold))
+                        .foregroundStyle(.white)
+                    Spacer()
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 4)
+                .padding(.horizontal, 22)
+                .padding(.top, 10)
+                .padding(.bottom, 16)
+
+                VStack(spacing: 16) {
+                    summaryRow
+                    hypnogramCard
+                }
+                .padding(.horizontal, 18)
 
                 Spacer(minLength: 0)
             }
         }
     }
 
-    // MARK: - Nav Bar (mirrors navigationTitle "Sleep Tips")
-    private var navBar: some View {
-        HStack {
-            Image(systemName: "chevron.left")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(MockTheme.primaryLight)
-                .frame(width: 40, height: 40)
+    private var summaryRow: some View {
+        HStack(spacing: 12) {
+            metric(L("Duration", "Duração", "Duración"), "7h 32m", MockTheme.primaryLight)
+            metric(L("Score", "Nota", "Nota"), "86", MockTheme.accentSecondary)
+            metric(L("Deep", "Profundo", "Profundo"), "1h 28m", MockTheme.deepSleep)
+        }
+    }
 
-            Spacer()
-
-            Text(LocalizedLabels.tipsTitle[locale] ?? "Sleep Tips")
-                .font(.system(size: 18, weight: .bold))
+    private func metric(_ title: String, _ value: String, _ tint: Color) -> some View {
+        VStack(spacing: 6) {
+            Text(value)
+                .font(.system(size: 22, weight: .heavy, design: .rounded))
                 .foregroundStyle(MockTheme.textPrimary)
-
-            Spacer()
-
-            // Spacer counterpart to keep title centered
-            Color.clear.frame(width: 40, height: 40)
+            Text(title)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(MockTheme.textSecondary)
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .background(MockTheme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .overlay(alignment: .top) {
+            Capsule().fill(tint).frame(width: 32, height: 3).padding(.top, 8)
+        }
     }
 
-    // MARK: - Daily Tip Section
-    //
-    // Mirrors `dailyTipCard` in SleepTipsView: a section header row
-    // (sparkles + "Tip of the day") above an expanded TipCard.
-    private var dailyTipSection: some View {
+    private var hypnogramCard: some View {
         VStack(alignment: .leading, spacing: 14) {
-            HStack(spacing: 8) {
-                Image(systemName: "sparkles")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundStyle(MockTheme.accent)
-
-                Text(LocalizedLabels.tipsDailyLabel[locale] ?? "Tip of the day")
-                    .font(.system(size: 16, weight: .semibold))
+            HStack {
+                Text(L("Last night", "Última noite", "Anoche"))
+                    .font(.system(size: 17, weight: .bold))
                     .foregroundStyle(MockTheme.textPrimary)
+                Spacer()
+                Text("23:18 → 06:50")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(MockTheme.textTertiary)
             }
 
-            expandedTipCard
-        }
-    }
+            HStack(spacing: 10) {
+                VStack(alignment: .leading, spacing: 0) {
+                    phaseLabel(L("Awake", "Acordado", "Despierto"), MockTheme.awake)
+                    Spacer()
+                    phaseLabel("REM", MockTheme.remSleep)
+                    Spacer()
+                    phaseLabel(L("Light", "Leve", "Ligero"), MockTheme.lightSleep)
+                    Spacer()
+                    phaseLabel(L("Deep", "Profundo", "Profundo"), MockTheme.deepSleep)
+                }
+                .frame(width: 84, height: 360)
 
-    /// Expanded TipCard (isExpanded = true) — icon tile + title + description.
-    private var expandedTipCard: some View {
-        HStack(alignment: .top, spacing: 16) {
-            // Icon tile (mirrors the real TipCard 48×48 icon with primary tint)
-            ZStack {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(MockTheme.primary.opacity(0.15))
-                    .frame(width: 56, height: 56)
-                Image(systemName: "clock.fill")
-                    .font(.system(size: 26, weight: .semibold))
-                    .foregroundStyle(MockTheme.primary)
+                hypnogram.frame(height: 360)
             }
 
-            VStack(alignment: .leading, spacing: 6) {
-                Text(LocalizedLabels.tipsDailyTitle[locale] ?? "Same bedtime, every night")
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(MockTheme.textPrimary)
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
+            HStack(spacing: 16) {
+                legend(MockTheme.deepSleep, L("Deep", "Profundo", "Profundo"))
+                legend(MockTheme.lightSleep, L("Light", "Leve", "Ligero"))
+                legend(MockTheme.remSleep, "REM")
+                Spacer()
+            }
 
-                Text(LocalizedLabels.tipsDailyBody[locale] ?? "")
-                    .font(.system(size: 13, weight: .regular))
+            Rectangle().fill(MockTheme.surfaceSecondary).frame(height: 1).padding(.vertical, 2)
+
+            HStack {
+                Text(L("7-night average", "Média de 7 noites", "Promedio de 7 noches"))
+                    .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(MockTheme.textSecondary)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(4)
-                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+                Text("7h 18m · 5 \(L("cycles", "ciclos", "ciclos"))")
+                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .foregroundStyle(MockTheme.primaryLight)
             }
-
-            Spacer(minLength: 0)
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            ZStack {
-                MockTheme.surface
-                LinearGradient(
-                    colors: [MockTheme.primary.opacity(0.14), MockTheme.accent.opacity(0.06)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            }
-        )
+        .background(MockTheme.surface)
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 
-    // MARK: - Category Filter Chips
-    //
-    // Mirrors the horizontal scroll FilterChip strip in the real app.
-    // First chip "All" is selected (filled primary); rest are unselected
-    // (surface bg + textSecondary). No scroll — fits 4 chips inline at 6.5".
-    private var categoryFilterRow: some View {
-        let allLabel = LocalizedLabels.tipsAll[locale] ?? "All"
-        return HStack(spacing: 8) {
-            filterChip(title: allLabel, selected: true)
-            ForEach(MockTipCategories.all.prefix(3)) { cat in
-                let name = LocalizedLabels.tipsCategoryNames[cat.nameKey]?[locale] ?? cat.nameKey
-                filterChip(title: name, selected: false)
-            }
-        }
-    }
-
-    private func filterChip(title: String, selected: Bool) -> some View {
-        Text(title)
-            .font(.system(size: 13, weight: selected ? .semibold : .regular))
-            .foregroundStyle(selected ? .white : MockTheme.textSecondary)
-            .padding(.horizontal, 14)
-            .padding(.vertical, 8)
-            .background(
-                Capsule().fill(selected ? AnyShapeStyle(MockTheme.primary) : AnyShapeStyle(MockTheme.surface))
-            )
-    }
-
-    // MARK: - Tips List
-    //
-    // Mirrors the LazyVStack of collapsed TipCards in the real app.
-    private var tipsList: some View {
-        VStack(spacing: 12) {
-            ForEach(MockTipList.all) { tip in
-                tipRow(tip)
-            }
-        }
-    }
-
-    private func tipRow(_ tip: MockTipListItem) -> some View {
-        HStack(spacing: 16) {
-            // Icon tile (48×48, tinted)
-            ZStack {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(tip.tint.opacity(0.18))
-                    .frame(width: 48, height: 48)
-                Image(systemName: tip.icon)
-                    .font(.system(size: 22, weight: .semibold))
-                    .foregroundStyle(tip.tint)
-            }
-
-            Text(MockTipList.title(for: tip, locale: locale))
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(MockTheme.textPrimary)
-                .multilineTextAlignment(.leading)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Spacer(minLength: 0)
-
-            Image(systemName: "chevron.down")
+    private func phaseLabel(_ text: String, _ tint: Color) -> some View {
+        HStack(spacing: 5) {
+            Circle().fill(tint).frame(width: 7, height: 7)
+            Text(text)
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(MockTheme.textTertiary)
+                .foregroundStyle(MockTheme.textSecondary)
         }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(MockTheme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+    }
+
+    private func legend(_ color: Color, _ text: String) -> some View {
+        HStack(spacing: 5) {
+            RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 12, height: 4)
+            Text(text).font(.system(size: 11, weight: .medium)).foregroundStyle(MockTheme.textTertiary)
+        }
+    }
+
+    private func yFor(_ level: Int, _ h: CGFloat) -> CGFloat { (CGFloat(level) + 0.5) / 4.0 * h }
+
+    private var hypnogram: some View {
+        GeometryReader { geo in
+            let w = geo.size.width
+            let h = geo.size.height
+            let stepX = w / CGFloat(hypno.count)
+
+            ZStack {
+                ForEach(0..<4, id: \.self) { lvl in
+                    Path { p in
+                        let yy = (CGFloat(lvl) + 0.5) / 4.0 * h
+                        p.move(to: CGPoint(x: 0, y: yy))
+                        p.addLine(to: CGPoint(x: w, y: yy))
+                    }
+                    .stroke(MockTheme.surfaceSecondary.opacity(0.6), lineWidth: 1)
+                }
+                Path { p in
+                    for (i, lvl) in hypno.enumerated() {
+                        let x0 = CGFloat(i) * stepX
+                        let x1 = x0 + stepX
+                        let yy = yFor(lvl, h)
+                        if i == 0 {
+                            p.move(to: CGPoint(x: x0, y: yy))
+                        } else {
+                            p.addLine(to: CGPoint(x: x0, y: yFor(hypno[i - 1], h)))
+                            p.addLine(to: CGPoint(x: x0, y: yy))
+                        }
+                        p.addLine(to: CGPoint(x: x1, y: yy))
+                    }
+                }
+                .stroke(
+                    LinearGradient(colors: [MockTheme.deepSleep, MockTheme.accentSecondary], startPoint: .leading, endPoint: .trailing),
+                    style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
+                )
+            }
+        }
     }
 }

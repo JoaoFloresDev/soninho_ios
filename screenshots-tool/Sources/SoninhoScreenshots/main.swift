@@ -57,11 +57,9 @@ func runFullRenderPipeline(mode: RenderMode) throws {
     let outputBase = URL(fileURLWithPath: NSString(string: "../fastlane/screenshots").expandingTildeInPath)
     try FileManager.default.createDirectory(at: outputBase, withIntermediateDirectories: true)
 
-    // Slumber's live default product page is APP_IPHONE_65 (1242×2688).
-    // Both initial-mode (defaults-page populate) and abtest-mode (PPO) must
-    // match this exact size — uploading any other dimensions returns
-    // IMAGE_INCORRECT_DIMENSIONS.
-    let device: DeviceKind = .iPhone6_5
+    // iPhone 6.9" (1320×2868) — the newest required App Store display size
+    // (iPhone 16 Pro Max). This is the primary size Apple shows now.
+    let device: DeviceKind = .iPhone6_9
     let canvas = device.canvasSize
     let locales = ["en-US", "pt-BR", "es-ES"]
 
