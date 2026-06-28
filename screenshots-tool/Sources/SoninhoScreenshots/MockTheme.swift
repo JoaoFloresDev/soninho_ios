@@ -97,12 +97,11 @@ extension MarketingTheme {
         )
     }
 
-    /// Treatment A — deep dawn indigo (#312E81). Matches the sunrise alarm
-    /// brand (the night end of the in-device gradient) and lets the white
-    /// headline + warm-amber glow read like daybreak.
+    /// Treatment A — warm reddish-orange sunrise (#E14B23). Energetic "wake up"
+    /// tone for an alarm app; the white heavy headline + soft glow stay legible.
     static let soninhoSolidA = soninhoSolid(
-        Color(red: 0.192, green: 0.180, blue: 0.506),
-        glow: Color(red: 1.00, green: 0.72, blue: 0.30).opacity(0.40)
+        Color(red: 0.882, green: 0.294, blue: 0.137),
+        glow: Color(red: 1.00, green: 0.82, blue: 0.50).opacity(0.40)
     )
 
     /// Treatment B — royal violet (#2D0E5F).
