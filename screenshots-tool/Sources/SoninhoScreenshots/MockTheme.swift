@@ -97,12 +97,12 @@ extension MarketingTheme {
         )
     }
 
-    /// Treatment A — striking vivid violet (#7C3AED). Pops on the App Store
-    /// grid without losing the night/sleep association; white heavy headline
-    /// stays legible thanks to the depth shadow.
+    /// Treatment A — deep dawn indigo (#312E81). Matches the sunrise alarm
+    /// brand (the night end of the in-device gradient) and lets the white
+    /// headline + warm-amber glow read like daybreak.
     static let soninhoSolidA = soninhoSolid(
-        Color(red: 0.486, green: 0.227, blue: 0.929),
-        glow: Color(red: 0.75, green: 0.55, blue: 1.00).opacity(0.40)
+        Color(red: 0.192, green: 0.180, blue: 0.506),
+        glow: Color(red: 1.00, green: 0.72, blue: 0.30).opacity(0.40)
     )
 
     /// Treatment B — royal violet (#2D0E5F).

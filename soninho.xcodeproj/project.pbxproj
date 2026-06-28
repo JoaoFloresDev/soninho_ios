@@ -296,7 +296,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = soninho/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Sunrise Alarm";
+				INFOPLIST_KEY_CFBundleDisplayName = Sunrise;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Slumber uses your sleep data to provide detailed sleep analysis and personalized insights to help you sleep better.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Slumber saves your sleep records to Apple Health so you can track your sleep history across all your devices.";
@@ -333,7 +333,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = soninho/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Sunrise Alarm";
+				INFOPLIST_KEY_CFBundleDisplayName = Sunrise;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Slumber uses your sleep data to provide detailed sleep analysis and personalized insights to help you sleep better.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Slumber saves your sleep records to Apple Health so you can track your sleep history across all your devices.";
