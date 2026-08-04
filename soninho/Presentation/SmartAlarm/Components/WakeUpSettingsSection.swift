@@ -39,7 +39,7 @@ struct WakeUpSettingsSection: View {
             sectionLabel(icon: "checklist", title: String(localized: "wake_mission_label"),
                          subtitle: String(localized: "wake_mission_description"))
 
-            HStack(spacing: 8) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3), spacing: 8) {
                 ForEach(WakeMission.allCases) { option in
                     chip(
                         title: option.displayName,

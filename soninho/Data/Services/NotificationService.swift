@@ -32,6 +32,9 @@ final class NotificationService: ObservableObject {
     private var ringingAlarmSoundName: String = "sunrise"
     private var ringingAlarmVolume: Float = 1.0
     private var ringingAlarmVibration: Bool = true
+    /// Snoozes used per alarm id in the current ring cycle — resets when the
+    /// alarm is fully dismissed. Backs the per-alarm snooze limit.
+    private var snoozesUsed: [String: Int] = [:]
 
     // MARK: - Private Properties
     private let notificationCenter = UNUserNotificationCenter.current()
@@ -247,9 +250,22 @@ final class NotificationService: ObservableObject {
         }
     }
 
+    // MARK: - Snooze Limit
+    /// How many snoozes remain for this alarm in the current ring cycle.
+    func remainingSnoozes(for alarmId: String) -> Int {
+        guard let uuid = UUID(uuidString: alarmId),
+              let alarm = StorageService.shared.loadAlarms().first(where: { $0.id == uuid }) else {
+            return AlarmModel.unlimitedSnoozes
+        }
+        guard alarm.snoozeLimit < AlarmModel.unlimitedSnoozes else { return AlarmModel.unlimitedSnoozes }
+        return max(0, alarm.snoozeLimit - (snoozesUsed[alarmId] ?? 0))
+    }
+
     // MARK: - Schedule Snooze
     func scheduleSnooze(for alarmId: String, minutes: Int = 9, soundName: String = "sunrise", volume: Float = 1.0, vibrationEnabled: Bool = true) async {
         guard isAuthorized else { return }
+
+        snoozesUsed[alarmId, default: 0] += 1
 
         let alarmSound = AlarmSound(rawValue: soundName) ?? .sunrise
         let content = UNMutableNotificationContent()
@@ -317,12 +333,14 @@ final class NotificationService: ObservableObject {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.numberOfLoops = -1
+                // Honor the per-alarm volume (never fully silent — it's an alarm).
+                let targetVolume = max(0.3, volume)
                 if gradualSeconds > 0 {
-                    audioPlayer?.volume = max(0.4, volume * 0.45)
+                    audioPlayer?.volume = max(0.2, targetVolume * 0.45)
                     audioPlayer?.play()
-                    audioPlayer?.setVolume(1.0, fadeDuration: gradualSeconds)
+                    audioPlayer?.setVolume(targetVolume, fadeDuration: gradualSeconds)
                 } else {
-                    audioPlayer?.volume = 1.0
+                    audioPlayer?.volume = targetVolume
                     audioPlayer?.play()
                 }
             } catch {
@@ -381,6 +399,7 @@ final class NotificationService: ObservableObject {
 
     /// Fully dismisses the alarm (mission + confirmation cleared).
     func completeAlarm() {
+        if let id = ringingAlarmId { snoozesUsed[id] = 0 }
         disableOneTimeAlarmIfNeeded()
         stopAlarmAudio()
         NotificationCenter.default.post(name: .didCompleteAlarm, object: nil)
@@ -459,25 +478,28 @@ final class NotificationService: ObservableObject {
 
     func snoozeCurrentAlarm() {
         guard let alarmId = ringingAlarmId else { return }
-        // Resolve the configured sound/volume/vibration from storage — the
-        // background fire path doesn't populate the backing fields, so relying
-        // on them would snooze with the wrong (default) sound at full volume.
+        // Resolve the configured sound/volume/vibration/duration from storage —
+        // the background fire path doesn't populate the backing fields, so
+        // relying on them would snooze with the wrong (default) settings.
         var soundName = ringingAlarmSoundName
         var volume = ringingAlarmVolume
         var vibration = ringingAlarmVibration
+        var minutes = 9
         if let uuid = UUID(uuidString: alarmId),
            let alarm = StorageService.shared.loadAlarms().first(where: { $0.id == uuid }) {
             soundName = alarm.sound.rawValue
             volume = Float(alarm.volume)
             vibration = alarm.vibrationEnabled
+            minutes = alarm.snoozeDuration
         }
         stopAlarmAudio()
         Task {
-            await scheduleSnooze(for: alarmId, soundName: soundName, volume: volume, vibrationEnabled: vibration)
+            await scheduleSnooze(for: alarmId, minutes: minutes, soundName: soundName, volume: volume, vibrationEnabled: vibration)
         }
     }
 
     func dismissCurrentAlarm() {
+        if let id = ringingAlarmId { snoozesUsed[id] = 0 }
         disableOneTimeAlarmIfNeeded()
         stopAlarmAudio()
         NotificationCenter.default.post(name: .didCompleteAlarm, object: nil)
@@ -695,7 +717,10 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             case "SNOOZE_ACTION":
                 NotificationService.shared.cancelBurst(alarmId: alarmId)
                 NotificationService.shared.stopAlarmAudio()
-                await NotificationService.shared.scheduleSnooze(for: alarmId, soundName: soundName, volume: Float(volume), vibrationEnabled: vibration)
+                let minutes = UUID(uuidString: alarmId)
+                    .flatMap { uuid in StorageService.shared.loadAlarms().first { $0.id == uuid } }?
+                    .snoozeDuration ?? 9
+                await NotificationService.shared.scheduleSnooze(for: alarmId, minutes: minutes, soundName: soundName, volume: Float(volume), vibrationEnabled: vibration)
             case "DISMISS_ACTION", UNNotificationDismissActionIdentifier:
                 NotificationService.shared.cancelBurst(alarmId: alarmId)
                 NotificationService.shared.disableOneTimeAlarmIfNeeded(id: alarmId)

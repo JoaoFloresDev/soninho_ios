@@ -37,6 +37,8 @@ enum AppConstants {
     static let maxSleepDurationHours: Double = 14
     static let idealSleepHours: Double = 8
     static let smartAlarmWindowMinutes: Int = 30
+    /// Sessions longer than this are auto-cancelled — the user forgot to stop tracking.
+    static let autoCancelSleepSessionHours: Double = 12
 
     // MARK: - Sleep Phases Duration (average percentages)
     static let deepSleepPercentage: Double = 0.20 // 20%

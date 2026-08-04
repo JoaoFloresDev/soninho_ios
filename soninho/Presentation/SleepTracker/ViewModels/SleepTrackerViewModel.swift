@@ -215,6 +215,11 @@ final class SleepTrackerViewModel: ObservableObject {
         trackingStartTime = UserDefaults.standard.object(forKey: StorageKeys.trackingStartTime) as? Date
 
         if isTracking, let startTime = trackingStartTime {
+            // Sessions past the auto-cancel limit are stale — discard instead of resuming.
+            guard Date().timeIntervalSince(startTime) < AppConstants.autoCancelSleepSessionHours * 3600 else {
+                cancelTracking()
+                return
+            }
             elapsedTime = Date().timeIntervalSince(startTime)
             // Resume motion monitoring if it was active
             if !motionMonitor.isMonitoring {
@@ -241,6 +246,10 @@ final class SleepTrackerViewModel: ObservableObject {
     private func updateElapsedTime() {
         guard let startTime = trackingStartTime else { return }
         elapsedTime = Date().timeIntervalSince(startTime)
+
+        if elapsedTime >= AppConstants.autoCancelSleepSessionHours * 3600 {
+            cancelTracking()
+        }
     }
 
     // MARK: - Fallback Phase Generation

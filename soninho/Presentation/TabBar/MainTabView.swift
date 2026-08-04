@@ -19,8 +19,8 @@ extension Notification.Name {
 
 // MARK: - Tab Item
 enum TabItem: Int, CaseIterable, Identifiable {
-    case tracker
     case alarm
+    case tracker
     case statistics
     case settings
 
@@ -57,12 +57,12 @@ enum TabItem: Int, CaseIterable, Identifiable {
 // MARK: - Main Tab View
 struct MainTabView: View {
     // MARK: - Properties
-    @State private var selectedTab: TabItem = .tracker
+    @State private var selectedTab: TabItem = .alarm
     @EnvironmentObject private var storageService: StorageService
 
     // MARK: - Init
     init() {
-        // Dark tab bar appearance
+        // Adaptive tab bar appearance
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
         appearance.backgroundColor = UIColor(AppColors.surface)
@@ -73,17 +73,17 @@ struct MainTabView: View {
     // MARK: - View Body
     var body: some View {
         TabView(selection: $selectedTab) {
-            SleepTrackerView()
-                .tabItem {
-                    Label(TabItem.tracker.title, systemImage: selectedTab == .tracker ? TabItem.tracker.icon : TabItem.tracker.iconUnselected)
-                }
-                .tag(TabItem.tracker)
-
             SmartAlarmView()
                 .tabItem {
                     Label(TabItem.alarm.title, systemImage: selectedTab == .alarm ? TabItem.alarm.icon : TabItem.alarm.iconUnselected)
                 }
                 .tag(TabItem.alarm)
+
+            SleepTrackerView()
+                .tabItem {
+                    Label(TabItem.tracker.title, systemImage: selectedTab == .tracker ? TabItem.tracker.icon : TabItem.tracker.iconUnselected)
+                }
+                .tag(TabItem.tracker)
 
             StatisticsView()
                 .tabItem {

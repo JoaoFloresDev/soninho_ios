@@ -14,6 +14,8 @@ enum WakeMission: String, Codable, CaseIterable, Identifiable {
     case none = "none"
     case math = "math"
     case shake = "shake"
+    case typing = "typing"
+    case memory = "memory"
 
     var id: String { rawValue }
 
@@ -22,6 +24,8 @@ enum WakeMission: String, Codable, CaseIterable, Identifiable {
         case .none: return String(localized: "wake_mission_none")
         case .math: return String(localized: "wake_mission_math")
         case .shake: return String(localized: "wake_mission_shake")
+        case .typing: return String(localized: "wake_mission_typing")
+        case .memory: return String(localized: "wake_mission_memory")
         }
     }
 
@@ -30,6 +34,8 @@ enum WakeMission: String, Codable, CaseIterable, Identifiable {
         case .none: return "moon.zzz.fill"
         case .math: return "function"
         case .shake: return "iphone.gen3.radiowaves.left.and.right"
+        case .typing: return "keyboard"
+        case .memory: return "square.grid.3x3.fill"
         }
     }
 
@@ -70,6 +76,42 @@ enum MissionDifficulty: String, Codable, CaseIterable, Identifiable {
         case .medium: return 25
         case .hard: return 40
         }
+    }
+
+    /// Number of phrases that must be typed in a row.
+    var typingRounds: Int {
+        switch self {
+        case .easy: return 1
+        case .medium: return 1
+        case .hard: return 2
+        }
+    }
+
+    /// Length of the tile sequence to memorize and repeat.
+    var memorySequenceLength: Int {
+        switch self {
+        case .easy: return 4
+        case .medium: return 5
+        case .hard: return 7
+        }
+    }
+}
+
+// MARK: - Typing Challenge
+/// A localized phrase the user must retype exactly to dismiss the alarm.
+struct TypingChallenge: Identifiable {
+    // MARK: - Properties
+    let id = UUID()
+    let phrase: String
+
+    // MARK: - Factory
+    static func make(for difficulty: MissionDifficulty) -> TypingChallenge {
+        // Short phrases wake a light sleeper; long ones force real focus.
+        let shortKeys = ["wake_phrase_1", "wake_phrase_2", "wake_phrase_3"]
+        let longKeys = ["wake_phrase_4", "wake_phrase_5", "wake_phrase_6"]
+        let pool = difficulty == .easy ? shortKeys : longKeys
+        let key = pool.randomElement() ?? "wake_phrase_1"
+        return TypingChallenge(phrase: String(localized: String.LocalizationValue(key)))
     }
 }
 

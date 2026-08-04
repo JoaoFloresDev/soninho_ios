@@ -30,6 +30,10 @@ final class SmartAlarmViewModel: ObservableObject {
     @Published var editingSound: AlarmSound = .sunrise
     @Published var editingRepeatDays: Set<Weekday> = []
     @Published var editingLabel = ""
+    @Published var editingVolume = 1.0
+    @Published var editingVibration = true
+    @Published var editingSnoozeDuration = 9
+    @Published var editingSnoozeLimit = AlarmModel.unlimitedSnoozes
 
     // Pacote Despertar editing state
     @Published var editingMission: WakeMission = .none
@@ -39,8 +43,17 @@ final class SmartAlarmViewModel: ObservableObject {
     @Published var editingAntiRelapse = false
 
     // MARK: - Computed Properties
+    /// The enabled alarm that fires next (earliest nextAlarmDate).
+    var nextEnabledAlarm: AlarmModel? {
+        alarms
+            .filter { $0.isEnabled }
+            .compactMap { alarm in alarm.nextAlarmDate.map { (alarm, $0) } }
+            .min { $0.1 < $1.1 }?
+            .0
+    }
+
     var nextAlarmText: String {
-        guard let alarm = alarms.first(where: { $0.isEnabled }),
+        guard let alarm = nextEnabledAlarm,
               let nextDate = alarm.nextAlarmDate else {
             return String(localized: "alarm_no_alarm_set")
         }
@@ -93,6 +106,7 @@ final class SmartAlarmViewModel: ObservableObject {
             alarms = [defaultAlarm]
             storageService.saveAlarm(defaultAlarm)
         }
+        sortAlarms()
         updateNextAlarmDate()
     }
 
@@ -115,6 +129,34 @@ final class SmartAlarmViewModel: ObservableObject {
         }
     }
 
+    /// Creates a disabled copy of the alarm so the user can tweak the time
+    /// without rebuilding the whole configuration.
+    func duplicateAlarm(_ alarm: AlarmModel) {
+        let copy = AlarmModel(
+            id: UUID(),
+            time: alarm.time,
+            isEnabled: false,
+            isSmartAlarm: alarm.isSmartAlarm,
+            smartAlarmWindow: alarm.smartAlarmWindow,
+            sound: alarm.sound,
+            volume: alarm.volume,
+            vibrationEnabled: alarm.vibrationEnabled,
+            repeatDays: alarm.repeatDays,
+            label: alarm.label,
+            mission: alarm.mission,
+            missionDifficulty: alarm.missionDifficulty,
+            gradualWakeEnabled: alarm.gradualWakeEnabled,
+            gradualWakeDuration: alarm.gradualWakeDuration,
+            antiRelapseEnabled: alarm.antiRelapseEnabled,
+            snoozeDuration: alarm.snoozeDuration,
+            snoozeLimit: alarm.snoozeLimit
+        )
+        storageService.saveAlarm(copy)
+        alarms.append(copy)
+        sortAlarms()
+        startEditing(copy)
+    }
+
     func deleteAlarm(_ alarm: AlarmModel) {
         storageService.deleteAlarm(alarm)
         alarms.removeAll { $0.id == alarm.id }
@@ -133,6 +175,10 @@ final class SmartAlarmViewModel: ObservableObject {
         editingSound = alarm.sound
         editingRepeatDays = alarm.repeatDays
         editingLabel = alarm.label ?? ""
+        editingVolume = alarm.volume
+        editingVibration = alarm.vibrationEnabled
+        editingSnoozeDuration = alarm.snoozeDuration
+        editingSnoozeLimit = alarm.snoozeLimit
         editingMission = alarm.mission
         editingMissionDifficulty = alarm.missionDifficulty
         editingGradualWake = alarm.gradualWakeEnabled
@@ -150,6 +196,10 @@ final class SmartAlarmViewModel: ObservableObject {
         // Default new alarms to ring every day (user can deselect days).
         editingRepeatDays = Set(Weekday.allCases)
         editingLabel = ""
+        editingVolume = 1.0
+        editingVibration = true
+        editingSnoozeDuration = 9
+        editingSnoozeLimit = AlarmModel.unlimitedSnoozes
         // Default new alarms to the shake-to-dismiss mission so the wake-up
         // challenge is on out of the box (user can change/disable it).
         editingMission = .shake
@@ -169,13 +219,17 @@ final class SmartAlarmViewModel: ObservableObject {
             isSmartAlarm: editingIsSmartAlarm,
             smartAlarmWindow: editingSmartWindow,
             sound: editingSound,
+            volume: editingVolume,
+            vibrationEnabled: editingVibration,
             repeatDays: editingRepeatDays,
             label: editingLabel.isEmpty ? nil : editingLabel,
             mission: editingMission,
             missionDifficulty: editingMissionDifficulty,
             gradualWakeEnabled: editingGradualWake,
             gradualWakeDuration: editingGradualDuration,
-            antiRelapseEnabled: editingAntiRelapse
+            antiRelapseEnabled: editingAntiRelapse,
+            snoozeDuration: editingSnoozeDuration,
+            snoozeLimit: editingSnoozeLimit
         )
 
         storageService.saveAlarm(alarm)
@@ -185,6 +239,7 @@ final class SmartAlarmViewModel: ObservableObject {
         } else {
             alarms.append(alarm)
         }
+        sortAlarms()
 
         Task {
             if alarm.isEnabled {
@@ -220,6 +275,15 @@ final class SmartAlarmViewModel: ObservableObject {
     }
 
     // MARK: - Private Methods
+    private func sortAlarms() {
+        let calendar = Calendar.current
+        alarms.sort { lhs, rhs in
+            let l = calendar.dateComponents([.hour, .minute], from: lhs.time)
+            let r = calendar.dateComponents([.hour, .minute], from: rhs.time)
+            return (l.hour ?? 0, l.minute ?? 0) < (r.hour ?? 0, r.minute ?? 0)
+        }
+    }
+
     private func updateNextAlarmDate() {
         nextAlarmDate = alarms
             .filter { $0.isEnabled }

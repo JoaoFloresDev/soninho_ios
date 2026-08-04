@@ -83,6 +83,17 @@ struct AlarmModel: Codable, Identifiable {
     /// After dismissing, require movement to confirm the user actually got up.
     var antiRelapseEnabled: Bool
 
+    // MARK: - Snooze
+    /// Minutes a snooze postpones the alarm.
+    var snoozeDuration: Int
+    /// How many snoozes are allowed per ring: 0 = snooze disabled,
+    /// `AlarmModel.unlimitedSnoozes` = no limit.
+    var snoozeLimit: Int
+
+    static let unlimitedSnoozes = 99
+
+    var isSnoozeEnabled: Bool { snoozeLimit > 0 }
+
     // MARK: - Computed Properties
     var timeString: String {
         time.timeString
@@ -156,7 +167,9 @@ struct AlarmModel: Codable, Identifiable {
         missionDifficulty: MissionDifficulty = .medium,
         gradualWakeEnabled: Bool = true,
         gradualWakeDuration: Int = 2,
-        antiRelapseEnabled: Bool = false
+        antiRelapseEnabled: Bool = false,
+        snoozeDuration: Int = 9,
+        snoozeLimit: Int = AlarmModel.unlimitedSnoozes
     ) {
         self.id = id
         self.time = time
@@ -173,6 +186,8 @@ struct AlarmModel: Codable, Identifiable {
         self.gradualWakeEnabled = gradualWakeEnabled
         self.gradualWakeDuration = gradualWakeDuration
         self.antiRelapseEnabled = antiRelapseEnabled
+        self.snoozeDuration = snoozeDuration
+        self.snoozeLimit = snoozeLimit
     }
 
     // MARK: - Codable (backward compatible)
@@ -180,6 +195,7 @@ struct AlarmModel: Codable, Identifiable {
         case id, time, isEnabled, isSmartAlarm, smartAlarmWindow, sound, volume
         case vibrationEnabled, repeatDays, label
         case mission, missionDifficulty, gradualWakeEnabled, gradualWakeDuration, antiRelapseEnabled
+        case snoozeDuration, snoozeLimit
     }
 
     init(from decoder: Decoder) throws {
@@ -200,6 +216,8 @@ struct AlarmModel: Codable, Identifiable {
         gradualWakeEnabled = try c.decodeIfPresent(Bool.self, forKey: .gradualWakeEnabled) ?? true
         gradualWakeDuration = try c.decodeIfPresent(Int.self, forKey: .gradualWakeDuration) ?? 2
         antiRelapseEnabled = try c.decodeIfPresent(Bool.self, forKey: .antiRelapseEnabled) ?? false
+        snoozeDuration = try c.decodeIfPresent(Int.self, forKey: .snoozeDuration) ?? 9
+        snoozeLimit = try c.decodeIfPresent(Int.self, forKey: .snoozeLimit) ?? AlarmModel.unlimitedSnoozes
     }
 }
 

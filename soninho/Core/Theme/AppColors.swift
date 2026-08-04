@@ -8,48 +8,50 @@
 import SwiftUI
 
 // MARK: - App Colors
-/// App color palette following iOS design guidelines with dark theme focus.
+/// Alarm-app palette: sunrise orange + amber sun, light-first with adaptive dark.
 enum AppColors {
     // MARK: - Background Colors
-    static let background = Color(hex: "000000")
-    static let surface = Color(hex: "1C1C1E")
-    static let surfaceSecondary = Color(hex: "2C2C2E")
-    static let surfaceTertiary = Color(hex: "3A3A3C")
+    static let background = Color(light: "FFF8F1", dark: "000000")
+    static let surface = Color(light: "FFFFFF", dark: "1C1C1E")
+    static let surfaceSecondary = Color(light: "F6EDE2", dark: "2C2C2E")
+    static let surfaceTertiary = Color(light: "EDE1D2", dark: "3A3A3C")
 
     // MARK: - Primary Colors
-    static let primary = Color(hex: "6366F1") // Indigo - sleep themed
-    static let primaryLight = Color(hex: "818CF8")
-    static let primaryDark = Color(hex: "4F46E5")
+    static let primary = Color(light: "F4511E", dark: "FF6E40") // Sunrise orange
+    static let primaryLight = Color(hex: "FF8A50")
+    static let primaryDark = Color(hex: "D84315")
 
     // MARK: - Accent Colors
-    static let accent = Color(hex: "8B5CF6") // Purple
-    static let accentSecondary = Color(hex: "A78BFA")
+    // Single interactive color across the app — same sunrise orange as primary
+    // (mixing amber and orange buttons read as inconsistent).
+    static let accent = Color(light: "F4511E", dark: "FF6E40")
+    static let accentSecondary = Color(hex: "FF8A50")
 
     // MARK: - Sleep Phase Colors
-    static let deepSleep = Color(hex: "3B82F6") // Blue
+    static let deepSleep = Color(light: "2563EB", dark: "3B82F6") // Blue
     static let lightSleep = Color(hex: "60A5FA") // Light Blue
-    static let remSleep = Color(hex: "A855F7") // Purple
+    static let remSleep = Color(light: "7C3AED", dark: "A855F7") // Purple
     static let awake = Color(hex: "F97316") // Orange
 
     // MARK: - Semantic Colors
-    static let success = Color(hex: "22C55E")
+    static let success = Color(light: "16A34A", dark: "22C55E")
     static let warning = Color(hex: "F59E0B")
-    static let error = Color(hex: "EF4444")
+    static let error = Color(light: "DC2626", dark: "EF4444")
 
     // MARK: - Text Colors
-    static let textPrimary = Color.white
-    static let textSecondary = Color(hex: "A1A1AA")
-    static let textTertiary = Color(hex: "71717A")
+    static let textPrimary = Color(light: "231A12", dark: "FFFFFF")
+    static let textSecondary = Color(light: "6E6259", dark: "A1A1AA")
+    static let textTertiary = Color(light: "9C9088", dark: "71717A")
 
     // MARK: - Gradient
     static let sleepGradient = LinearGradient(
-        colors: [primary, accent],
+        colors: [primary, primaryLight],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
 
     static let nightGradient = LinearGradient(
-        colors: [Color(hex: "0F172A"), Color(hex: "1E1B4B")],
+        colors: [Color(light: "FFE8D1", dark: "1A1A1C"), Color(light: "FFF8F1", dark: "000000")],
         startPoint: .top,
         endPoint: .bottom
     )
@@ -85,5 +87,14 @@ extension Color {
             blue: Double(b) / 255,
             opacity: Double(a) / 255
         )
+    }
+
+    /// Trait-adaptive color from light/dark hex pairs.
+    init(light: String, dark: String) {
+        self.init(uiColor: UIColor { trait in
+            trait.userInterfaceStyle == .dark
+                ? UIColor(Color(hex: dark))
+                : UIColor(Color(hex: light))
+        })
     }
 }

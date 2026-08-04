@@ -31,28 +31,28 @@ final class OnboardingViewModel: ObservableObject {
     // MARK: - Properties
     let pages: [OnboardingPage] = [
         OnboardingPage(
+            icon: "alarm.fill",
+            title: "onboarding_title_3",
+            subtitle: "onboarding_subtitle_3",
+            gradient: ["F4511E", "FF8A50"]
+        ),
+        OnboardingPage(
             icon: "moon.stars.fill",
             title: "onboarding_title_1",
             subtitle: "onboarding_subtitle_1",
-            gradient: ["6366F1", "8B5CF6"]
+            gradient: ["7C3AED", "A78BFA"]
         ),
         OnboardingPage(
             icon: "chart.bar.fill",
             title: "onboarding_title_2",
             subtitle: "onboarding_subtitle_2",
-            gradient: ["3B82F6", "60A5FA"]
-        ),
-        OnboardingPage(
-            icon: "alarm.fill",
-            title: "onboarding_title_3",
-            subtitle: "onboarding_subtitle_3",
             gradient: ["F59E0B", "FBBF24"]
         ),
         OnboardingPage(
             icon: "heart.fill",
             title: "onboarding_title_4",
             subtitle: "onboarding_subtitle_4",
-            gradient: ["22C55E", "4ADE80"]
+            gradient: ["16A34A", "4ADE80"]
         )
     ]
 

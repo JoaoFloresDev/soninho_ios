@@ -83,11 +83,7 @@ struct SettingsView: View {
                         Image(systemName: "crown.fill")
                             .font(.system(size: 20))
                             .foregroundStyle(
-                                LinearGradient(
-                                    colors: [AppColors.accent, Color(hex: "FBBF24")],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
+                                AppColors.sleepGradient
                             )
 
                         VStack(alignment: .leading, spacing: 2) {

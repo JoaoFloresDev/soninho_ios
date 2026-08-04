@@ -78,7 +78,7 @@ struct SmartAlarmView: View {
             }
 
             // Smart Alarm Badge
-            if let alarm = viewModel.alarms.first(where: { $0.isEnabled }), alarm.isSmartAlarm {
+            if let alarm = viewModel.nextEnabledAlarm, alarm.isSmartAlarm {
                 HStack(spacing: 4) {
                     Image(systemName: "brain.head.profile")
                         .font(.system(size: 12))
@@ -111,6 +111,7 @@ struct SmartAlarmView: View {
                     alarm: alarm,
                     onToggle: { viewModel.toggleAlarm(alarm) },
                     onTap: { viewModel.startEditing(alarm) },
+                    onDuplicate: { viewModel.duplicateAlarm(alarm) },
                     onDelete: { viewModel.deleteAlarm(alarm) }
                 )
             }
@@ -123,6 +124,7 @@ struct AlarmCard: View {
     let alarm: AlarmModel
     let onToggle: () -> Void
     let onTap: () -> Void
+    let onDuplicate: () -> Void
     let onDelete: () -> Void
 
     var body: some View {
@@ -145,15 +147,28 @@ struct AlarmCard: View {
                         .foregroundStyle(AppColors.textTertiary)
                 }
 
-                if alarm.isSmartAlarm {
-                    HStack(spacing: 4) {
-                        Image(systemName: "brain.head.profile")
-                            .font(.system(size: 10))
+                HStack(spacing: 10) {
+                    if alarm.isSmartAlarm {
+                        HStack(spacing: 4) {
+                            Image(systemName: "brain.head.profile")
+                                .font(.system(size: 10))
 
-                        Text(String(localized: "alarm_smart_window \(alarm.smartAlarmWindow)"))
-                            .font(AppFonts.caption2())
+                            Text(String(localized: "alarm_smart_window \(alarm.smartAlarmWindow)"))
+                                .font(AppFonts.caption2())
+                        }
+                        .foregroundStyle(AppColors.accent)
                     }
-                    .foregroundStyle(AppColors.accent)
+
+                    if alarm.mission.requiresMission {
+                        HStack(spacing: 4) {
+                            Image(systemName: alarm.mission.icon)
+                                .font(.system(size: 10))
+
+                            Text(alarm.mission.displayName)
+                                .font(AppFonts.caption2())
+                        }
+                        .foregroundStyle(AppColors.primary)
+                    }
                 }
             }
 
@@ -175,6 +190,12 @@ struct AlarmCard: View {
             onTap()
         }
         .contextMenu {
+            Button {
+                onDuplicate()
+            } label: {
+                Label(String(localized: "action_duplicate"), systemImage: "plus.square.on.square")
+            }
+
             Button(role: .destructive) {
                 onDelete()
             } label: {

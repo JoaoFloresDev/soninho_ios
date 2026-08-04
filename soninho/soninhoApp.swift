@@ -124,8 +124,8 @@ struct SoninhoApp: App {
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = UIColor(AppColors.background)
         navigationBarAppearance.shadowColor = .clear
-        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(AppColors.textPrimary)]
+        navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(AppColors.textPrimary)]
 
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance

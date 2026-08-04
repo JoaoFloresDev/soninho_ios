@@ -22,83 +22,65 @@ struct AppIconView: View {
     // MARK: - View Body
     var body: some View {
         ZStack {
-            // Background gradient
+            // Sunrise background gradient
             LinearGradient(
                 colors: [
-                    Color(hex: "1E1B4B"),
-                    Color(hex: "0F172A")
+                    Color(hex: "FF7043"),
+                    Color(hex: "F4511E")
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
 
-            // Stars decoration
-            starsLayer
+            // Sun rays decoration
+            raysLayer
 
-            // Main moon icon
+            // Main alarm icon
             ZStack {
-                // Glow effect (subtle)
-                Image(systemName: "moon.zzz.fill")
-                    .font(.system(size: size * 0.45, weight: .regular))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [
-                                Color(hex: "8B5CF6"),
-                                Color(hex: "6366F1")
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .blur(radius: size * 0.03)
-                    .opacity(0.6)
+                // Soft glow behind the bell
+                Image(systemName: "alarm.fill")
+                    .font(.system(size: size * 0.48, weight: .regular))
+                    .foregroundStyle(Color(hex: "FFCC4D"))
+                    .blur(radius: size * 0.035)
+                    .opacity(0.55)
 
                 // Main icon
-                Image(systemName: "moon.zzz.fill")
-                    .font(.system(size: size * 0.45, weight: .regular))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [
-                                Color(hex: "A78BFA"),
-                                Color(hex: "818CF8")
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
+                Image(systemName: "alarm.fill")
+                    .font(.system(size: size * 0.48, weight: .regular))
+                    .foregroundStyle(.white)
             }
-            .offset(x: size * 0.02, y: -size * 0.02)
+            .offset(y: -size * 0.01)
         }
         .frame(width: size, height: size)
     }
 
     // MARK: - Subviews
-    private var starsLayer: some View {
+    private var raysLayer: some View {
         GeometryReader { geometry in
             ZStack {
-                // Small stars scattered around
+                // Small sparks scattered around, echoing a rising sun
                 ForEach(0..<8, id: \.self) { index in
-                    Image(systemName: "star.fill")
-                        .font(.system(size: size * starSize(for: index)))
-                        .foregroundStyle(.white.opacity(starOpacity(for: index)))
-                        .position(starPosition(for: index, in: geometry.size))
+                    Image(systemName: "sun.max.fill")
+                        .font(.system(size: size * raySize(for: index)))
+                        .foregroundStyle(.white.opacity(rayOpacity(for: index)))
+                        .position(rayPosition(for: index, in: geometry.size))
                 }
             }
         }
     }
 
     // MARK: - Private Methods
-    private func starSize(for index: Int) -> CGFloat {
-        let sizes: [CGFloat] = [0.02, 0.015, 0.025, 0.018, 0.012, 0.02, 0.015, 0.022]
+    private func raySize(for index: Int) -> CGFloat {
+        let sizes: [CGFloat] = [0.03, 0.02, 0.035, 0.022, 0.018, 0.028, 0.02, 0.03]
         return sizes[index % sizes.count]
     }
 
-    private func starOpacity(for index: Int) -> Double {
-        let opacities: [Double] = [0.8, 0.5, 0.7, 0.4, 0.6, 0.5, 0.7, 0.45]
+    private func rayOpacity(for index: Int) -> Double {
+        let opacities: [Double] = [0.5, 0.3, 0.45, 0.25, 0.35, 0.3, 0.4, 0.28]
         return opacities[index % opacities.count]
     }
 
-    private func starPosition(for index: Int, in size: CGSize) -> CGPoint {
+    private func rayPosition(for index: Int, in size: CGSize) -> CGPoint {
         let positions: [(x: CGFloat, y: CGFloat)] = [
             (0.15, 0.2),
             (0.85, 0.15),

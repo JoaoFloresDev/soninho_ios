@@ -124,6 +124,28 @@
         }
       }
     },
+    "action_duplicate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duplicate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duplicar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duplicar"
+          }
+        }
+      }
+    },
     "action_ok": {
       "localizations": {
         "en": {
@@ -208,6 +230,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alarme"
+          }
+        }
+      }
+    },
+    "alarm_delete": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete Alarm"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar Alarma"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apagar Alarme"
           }
         }
       }
@@ -762,6 +806,28 @@
         }
       }
     },
+    "alarm_snooze_duration": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snooze length"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duración"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duração da soneca"
+          }
+        }
+      }
+    },
     "alarm_snooze_label": {
       "localizations": {
         "en": {
@@ -780,6 +846,116 @@
           "stringUnit": {
             "state": "translated",
             "value": "Soneca (9 min)"
+          }
+        }
+      }
+    },
+    "alarm_snooze_min_option %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        }
+      }
+    },
+    "alarm_snooze_minutes %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snooze %lld min"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posponer %lld min"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soneca %lld min"
+          }
+        }
+      }
+    },
+    "alarm_snooze_off": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem"
+          }
+        }
+      }
+    },
+    "alarm_snooze_section": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snooze"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posponer"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soneca"
+          }
+        }
+      }
+    },
+    "alarm_snooze_section_description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit snoozes to actually get up on time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limita las siestas para levantarte a tiempo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limite as sonecas para levantar na hora certa"
           }
         }
       }
@@ -847,6 +1023,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Amanhã às %@"
+          }
+        }
+      }
+    },
+    "alarm_vibration": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vibration"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vibración"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vibração"
+          }
+        }
+      }
+    },
+    "alarm_volume": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volume"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volumen"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volume"
           }
         }
       }
@@ -1115,6 +1335,28 @@
         }
       }
     },
+    "bedtime_autostart_message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your sleep night has started. Sleep well!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu noche de sueño ha comenzado. ¡Que descanses!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua noite de sono começou. Bons sonhos!"
+          }
+        }
+      }
+    },
     "bedtime_reminder_body %lld": {
       "localizations": {
         "en": {
@@ -1145,16 +1387,16 @@
             "value": "Time to wind down and get ready for bed."
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hora de desacelerar e se preparar pra dormir."
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Hora de relajarte y prepararte para dormir."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora de desacelerar e se preparar pra dormir."
           }
         }
       }
@@ -1177,6 +1419,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hora de Relaxar"
+          }
+        }
+      }
+    },
+    "bedtime_start_sleep": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start sleep night"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar la noche de sueño"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar noite de sono"
           }
         }
       }
@@ -1615,16 +1879,16 @@
             "value": "Open the Health app"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abrir o app Saúde"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Abrir la app Salud"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir o app Saúde"
           }
         }
       }
@@ -1637,16 +1901,16 @@
             "value": "To see your sleep here, turn on Sleep in the iPhone's Health app (set a schedule + \"Use iPhone to track\"). With an Apple Watch you also get detailed stages."
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pra ver seu sono aqui, ative o Sono no app Saúde do iPhone (defina uma agenda + \"Acompanhar com iPhone\"). Com Apple Watch, vêm também as fases detalhadas."
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Para ver tu sueño aquí, activa Sueño en la app Salud del iPhone (define un horario + \"Usar iPhone para registrar\"). Con Apple Watch, también obtienes las fases."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pra ver seu sono aqui, ative o Sono no app Saúde do iPhone (defina uma agenda + \"Acompanhar com iPhone\"). Com Apple Watch, vêm também as fases detalhadas."
           }
         }
       }
@@ -1659,16 +1923,16 @@
             "value": "Your iPhone isn't tracking sleep yet"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seu iPhone ainda não registra sono"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Tu iPhone aún no registra el sueño"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu iPhone ainda não registra sono"
           }
         }
       }
@@ -1770,16 +2034,16 @@
             "value": "Apple Health"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple Saúde"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Apple Salud"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Saúde"
           }
         }
       }
@@ -3150,6 +3414,72 @@
         }
       }
     },
+    "settings_autostart_sleep": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto-start sleep night"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar la noche automáticamente"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto-iniciar noite de sono"
+          }
+        }
+      }
+    },
+    "settings_autostart_sleep_desc": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At bedtime, starts the night automatically when the app is open or running in the background."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A la hora de dormir, inicia la noche automáticamente cuando la app está abierta o activa en segundo plano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No horário de dormir, inicia a noite sozinho quando o app está aberto ou ativo em segundo plano."
+          }
+        }
+      }
+    },
+    "settings_autostart_time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto-start time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora de inicio automático"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horário do auto-início"
+          }
+        }
+      }
+    },
     "settings_bedtime": {
       "extractionState": "stale",
       "localizations": {
@@ -3203,16 +3533,16 @@
             "value": "Reminder time"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Horário do lembrete"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Hora del recordatorio"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horário do lembrete"
           }
         }
       }
@@ -3292,16 +3622,16 @@
             "value": "Connect Apple Health"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conectar Apple Saúde"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Conectar Apple Salud"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectar Apple Saúde"
           }
         }
       }
@@ -3358,16 +3688,16 @@
             "value": "Manage in Apple Health"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gerenciar no Apple Saúde"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Gestionar en Apple Salud"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerenciar no Apple Saúde"
           }
         }
       }
@@ -4239,6 +4569,50 @@
         }
       }
     },
+    "snooze_greeting": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snoozing…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posponiendo…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soneca…"
+          }
+        }
+      }
+    },
+    "snooze_greeting_subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See you in a few minutes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te aviso en unos minutos"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te chamo de novo em alguns minutos"
+          }
+        }
+      }
+    },
     "sound_birds": {
       "localizations": {
         "en": {
@@ -4257,6 +4631,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pássaros"
+          }
+        }
+      }
+    },
+    "sound_chimes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chimes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Campanillas"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sinos de vento"
           }
         }
       }
@@ -4305,6 +4701,50 @@
         }
       }
     },
+    "sound_harp": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harp"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arpa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harpa"
+          }
+        }
+      }
+    },
+    "sound_marimba": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marimba"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marimba"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marimba"
+          }
+        }
+      }
+    },
     "sound_ocean": {
       "localizations": {
         "en": {
@@ -4345,6 +4785,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Piano"
+          }
+        }
+      }
+    },
+    "sound_rain": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rain"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lluvia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chuva"
           }
         }
       }
@@ -4995,16 +5457,16 @@
             "value": "Your tracking"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seu rastreamento"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Tu seguimiento"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu rastreamento"
           }
         }
       }
@@ -5039,16 +5501,16 @@
             "value": "Track my night"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rastrear minha noite"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Rastrear mi noche"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rastrear minha noite"
           }
         }
       }
@@ -5061,16 +5523,16 @@
             "value": "Track a night with Soninho to see your sleep analysis here."
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rastreie uma noite com o Soninho pra ver suas análises de sono aqui."
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Registra una noche con Soninho para ver tu análisis de sueño aquí."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rastreie uma noite com o Soninho pra ver suas análises de sono aqui."
           }
         }
       }
@@ -5083,16 +5545,16 @@
             "value": "No nights tracked yet"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nenhuma noite rastreada"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Ninguna noche registrada"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma noite rastreada"
           }
         }
       }
@@ -5202,16 +5664,16 @@
             "value": "Summary"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Resumo"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Resumen"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumo"
           }
         }
       }
@@ -6869,16 +7331,16 @@
             "value": "Re-rings if you lie back down after dismissing"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toca de novo se você deitar depois de desligar"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Vuelve a sonar si te acuestas tras apagar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca de novo se você deitar depois de desligar"
           }
         }
       }
@@ -6891,16 +7353,16 @@
             "value": "Anti-relapse check"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Confirmação anti-recaída"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Confirmación anti-recaída"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirmação anti-recaída"
           }
         }
       }
@@ -6913,13 +7375,13 @@
             "value": "%lld s left"
           }
         },
-        "pt-BR": {
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld s restantes"
           }
         },
-        "es": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld s restantes"
@@ -6935,16 +7397,16 @@
             "value": "steps"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "passos"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "pasos"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "passos"
           }
         }
       }
@@ -6957,16 +7419,16 @@
             "value": "Get up and take a few steps to finish"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Levante e dê alguns passos para concluir"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Levántate y da unos pasos para terminar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Levante e dê alguns passos para concluir"
           }
         }
       }
@@ -6979,16 +7441,16 @@
             "value": "Are you up?"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "De pé?"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "¿Ya estás de pie?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De pé?"
           }
         }
       }
@@ -7001,13 +7463,13 @@
             "value": "Easy"
           }
         },
-        "pt-BR": {
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Fácil"
           }
         },
-        "es": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "Fácil"
@@ -7023,13 +7485,13 @@
             "value": "Hard"
           }
         },
-        "pt-BR": {
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Difícil"
           }
         },
-        "es": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "Difícil"
@@ -7045,16 +7507,16 @@
             "value": "Difficulty"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dificuldade"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Dificultad"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dificuldade"
           }
         }
       }
@@ -7067,16 +7529,16 @@
             "value": "Medium"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Médio"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Medio"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Médio"
           }
         }
       }
@@ -7089,16 +7551,16 @@
             "value": "Fade volume and light in, sunrise style"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sobe volume e luz aos poucos, estilo nascer do sol"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Sube volumen y luz poco a poco, estilo amanecer"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sobe volume e luz aos poucos, estilo nascer do sol"
           }
         }
       }
@@ -7111,13 +7573,13 @@
             "value": "Gradual wake"
           }
         },
-        "pt-BR": {
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Despertar gradual"
           }
         },
-        "es": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "Despertar gradual"
@@ -7133,13 +7595,13 @@
             "value": "%lld min"
           }
         },
-        "pt-BR": {
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld min"
           }
         },
-        "es": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld min"
@@ -7155,16 +7617,16 @@
             "value": "Good morning"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bom dia"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Buenos días"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bom dia"
           }
         }
       }
@@ -7177,16 +7639,16 @@
             "value": "Enjoy the rest of your day"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bom resto de dia"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Disfruta el resto del día"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bom resto de dia"
           }
         }
       }
@@ -7199,16 +7661,16 @@
             "value": "Your night was saved"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sua noite foi registrada"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Tu noche fue guardada"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua noite foi registrada"
           }
         }
       }
@@ -7221,16 +7683,82 @@
             "value": "Solve to wake up"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resuelve para despertar"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "Resolva para acordar"
           }
+        }
+      }
+    },
+    "wake_memory_repeat": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your turn — repeat the sequence"
+          }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Resuelve para despertar"
+            "value": "Tu turno — repite la secuencia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua vez — repita a sequência"
+          }
+        }
+      }
+    },
+    "wake_memory_replay": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar de nuevo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar de novo"
+          }
+        }
+      }
+    },
+    "wake_memory_watch": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch the sequence..."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observa la secuencia..."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observe a sequência..."
           }
         }
       }
@@ -7243,16 +7771,16 @@
             "value": "Make turning the alarm off require real effort"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Exige esforço de verdade para desligar o alarme"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Exige esfuerzo real para apagar la alarma"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exige esforço de verdade para desligar o alarme"
           }
         }
       }
@@ -7265,16 +7793,16 @@
             "value": "Dismiss mission"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Missão para desligar"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Misión para apagar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missão para desligar"
           }
         }
       }
@@ -7287,16 +7815,38 @@
             "value": "Math"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matemáticas"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "Matemática"
           }
+        }
+      }
+    },
+    "wake_mission_memory": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memory"
+          }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Matemáticas"
+            "value": "Memoria"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memória"
           }
         }
       }
@@ -7309,16 +7859,16 @@
             "value": "None"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nenhuma"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Ninguna"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma"
           }
         }
       }
@@ -7331,16 +7881,170 @@
             "value": "Shake"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agitar"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "Chacoalhar"
           }
+        }
+      }
+    },
+    "wake_mission_typing": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type"
+          }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Agitar"
+            "value": "Escribir"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Digitar"
+          }
+        }
+      }
+    },
+    "wake_phrase_1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "good morning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "buenos días"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bom dia"
+          }
+        }
+      }
+    },
+    "wake_phrase_2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wake up now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "despertar ahora"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "acordar agora"
+          }
+        }
+      }
+    },
+    "wake_phrase_3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rise and shine"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hora de levantarse"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hora de levantar"
+          }
+        }
+      }
+    },
+    "wake_phrase_4": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "i am awake and out of bed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "estoy despierto y fuera de la cama"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "estou acordado e fora da cama"
+          }
+        }
+      }
+    },
+    "wake_phrase_5": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "today is going to be a great day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hoy va a ser un gran día"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hoje vai ser um ótimo dia"
+          }
+        }
+      }
+    },
+    "wake_phrase_6": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no more sleeping the day starts now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no más dormir el día empieza ahora"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "chega de dormir o dia começa agora"
           }
         }
       }
@@ -7353,13 +8057,13 @@
             "value": "Wake up"
           }
         },
-        "pt-BR": {
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Despertar"
           }
         },
-        "es": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
             "value": "Despertar"
@@ -7375,16 +8079,16 @@
             "value": "Shake your phone until the ring fills"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chacoalhe o celular até completar o círculo"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Agita el teléfono hasta completar el círculo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chacoalhe o celular até completar o círculo"
           }
         }
       }
@@ -7397,16 +8101,16 @@
             "value": "Shake to wake up"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chacoalhe para acordar"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Agita para despertar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chacoalhe para acordar"
           }
         }
       }
@@ -7419,263 +8123,87 @@
             "value": "Wake up"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Acordar"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Despertar"
           }
-        }
-      }
-    },
-    "🏆": {},
-    "snooze_greeting": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Snoozing…"
-          }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Soneca…"
+            "value": "Acordar"
+          }
+        }
+      }
+    },
+    "wake_typing_confirm": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirm"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Posponiendo…"
-          }
-        }
-      }
-    },
-    "snooze_greeting_subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "See you in a few minutes"
+            "value": "Confirmar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Te chamo de novo em alguns minutos"
+            "value": "Confirmar"
+          }
+        }
+      }
+    },
+    "wake_typing_placeholder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type here..."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Te aviso en unos minutos"
-          }
-        }
-      }
-    },
-    "sound_chimes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chimes"
+            "value": "Escribe aquí..."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sinos de vento"
+            "value": "Digite aqui..."
+          }
+        }
+      }
+    },
+    "wake_typing_title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type the phrase to turn off the alarm"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Campanillas"
-          }
-        }
-      }
-    },
-    "sound_harp": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Harp"
+            "value": "Escribe la frase para apagar la alarma"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Harpa"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arpa"
+            "value": "Digite a frase para desligar o alarme"
           }
         }
       }
     },
-    "sound_rain": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rain"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chuva"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lluvia"
-          }
-        }
-      }
-    },
-    "sound_marimba": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Marimba"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Marimba"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Marimba"
-          }
-        }
-      }
-    },
-    "bedtime_start_sleep": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start sleep night"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Iniciar noite de sono"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Iniciar la noche de sueño"
-          }
-        }
-      }
-    },
-    "settings_autostart_sleep": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto-start sleep night"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto-iniciar noite de sono"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Iniciar la noche automáticamente"
-          }
-        }
-      }
-    },
-    "settings_autostart_sleep_desc": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "At bedtime, starts the night automatically when the app is open or running in the background."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No horário de dormir, inicia a noite sozinho quando o app está aberto ou ativo em segundo plano."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A la hora de dormir, inicia la noche automáticamente cuando la app está abierta o activa en segundo plano."
-          }
-        }
-      }
-    },
-    "bedtime_autostart_message": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your sleep night has started. Sleep well!"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sua noite de sono começou. Bons sonhos!"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu noche de sueño ha comenzado. ¡Que descanses!"
-          }
-        }
-      }
-    },
-    "settings_autostart_time": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto-start time"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Horário do auto-início"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hora de inicio automático"
-          }
-        }
-      }
-    }
+    "🏆": {}
   },
   "version": "1.0"
 }

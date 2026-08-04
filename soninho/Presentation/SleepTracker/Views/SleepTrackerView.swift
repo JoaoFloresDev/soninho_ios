@@ -24,7 +24,9 @@ struct SleepTrackerView: View {
                 backgroundGradient
 
                 if viewModel.isTracking {
+                    // Night scene stays dark regardless of appearance mode
                     trackingContent
+                        .environment(\.colorScheme, .dark)
                         .transition(.opacity)
                 } else {
                     idleContent

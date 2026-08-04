@@ -51,6 +51,8 @@ struct AlarmRingingView: View {
                 WakeGreetingView(mode: .snooze, onDismiss: { notificationService.snoozeCurrentAlarm() })
             }
         }
+        // Immersive sunrise scene keeps dark styling in any appearance mode
+        .environment(\.colorScheme, .dark)
         .transition(.opacity)
         .onAppear { setup() }
     }
@@ -106,15 +108,19 @@ struct AlarmRingingView: View {
                     )
                 }
 
-                Button {
-                    requestSnooze()
-                } label: {
-                    actionLabel(
-                        icon: "clock.arrow.circlepath",
-                        text: String(localized: "alarm_snooze_label"),
-                        foreground: AppColors.textSecondary,
-                        background: AppColors.surface.opacity(0.85)
-                    )
+                // Snooze respects the per-alarm limit: hidden when disabled or
+                // when the allowed snoozes for this ring were used up.
+                if canSnooze {
+                    Button {
+                        requestSnooze()
+                    } label: {
+                        actionLabel(
+                            icon: "clock.arrow.circlepath",
+                            text: snoozeButtonText,
+                            foreground: AppColors.textSecondary,
+                            background: AppColors.surface.opacity(0.85)
+                        )
+                    }
                 }
             }
             .padding(.horizontal, 32)
@@ -127,9 +133,14 @@ struct AlarmRingingView: View {
     private var missionContent: some View {
         let difficulty = alarm?.missionDifficulty ?? .medium
         VStack {
-            if alarm?.mission == .shake {
+            switch alarm?.mission ?? .math {
+            case .shake:
                 ShakeMissionView(difficulty: difficulty, onComplete: missionCompleted)
-            } else {
+            case .typing:
+                TypingMissionView(difficulty: difficulty, onComplete: missionCompleted)
+            case .memory:
+                MemoryMissionView(difficulty: difficulty, onComplete: missionCompleted)
+            case .math, .none:
                 MathMissionView(difficulty: difficulty, onComplete: missionCompleted)
             }
         }
@@ -137,6 +148,17 @@ struct AlarmRingingView: View {
     }
 
     // MARK: - Computed Properties
+    private var canSnooze: Bool {
+        guard alarm?.isSnoozeEnabled ?? true else { return false }
+        guard let id = notificationService.ringingAlarmId else { return true }
+        return notificationService.remainingSnoozes(for: id) > 0
+    }
+
+    private var snoozeButtonText: String {
+        let minutes = alarm?.snoozeDuration ?? 9
+        return String(localized: "alarm_snooze_minutes \(minutes)")
+    }
+
     private var missionIcon: String {
         (alarm?.mission.requiresMission ?? false) ? "checklist" : "xmark"
     }

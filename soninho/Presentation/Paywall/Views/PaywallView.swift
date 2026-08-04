@@ -70,13 +70,7 @@ struct PaywallView: View {
 
                 Image(systemName: "crown.fill")
                     .font(.system(size: 44))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [AppColors.accent, Color(hex: "FBBF24")],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
+                    .foregroundStyle(AppColors.sleepGradient)
             }
 
             // Text
