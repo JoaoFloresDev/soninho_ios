@@ -65,12 +65,21 @@ struct AlarmEditSheet: View {
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(String(localized: "action_save")) {
-                        viewModel.saveAlarm()
-                        dismiss()
+                    // Saving can raise the notification prompt, so the control
+                    // shows a spinner until the system call comes back.
+                    if viewModel.isRequestingNotificationPermission {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: AppColors.primary))
+                    } else {
+                        Button(String(localized: "action_save")) {
+                            Task {
+                                await viewModel.saveAlarm()
+                                dismiss()
+                            }
+                        }
+                        .fontWeight(.semibold)
+                        .foregroundStyle(AppColors.primary)
                     }
-                    .fontWeight(.semibold)
-                    .foregroundStyle(AppColors.primary)
                 }
             }
         }

@@ -125,19 +125,12 @@ final class NotificationService: ObservableObject {
 
         let calendar = Calendar.current
 
-        // Smart alarm: a single early notification in the light-sleep window.
-        if alarm.isSmartAlarm {
-            let smartDate = nextDate.addingTimeInterval(-Double(alarm.smartAlarmWindow * 60))
-            if smartDate > Date() {
-                await scheduleNotification(
-                    alarm: alarm,
-                    dateComponents: calendar.dateComponents([.year, .month, .day, .hour, .minute], from: smartDate),
-                    repeats: false,
-                    identifier: "\(alarm.id.uuidString)_smart",
-                    isSmartWake: true
-                )
-            }
-        }
+        // A smart alarm deliberately schedules NOTHING at the start of its
+        // window. It used to fire a full-volume notification there, which meant
+        // every smart alarm went off at the earliest minute it was allowed to —
+        // the exact opposite of the feature. The early ring now comes only from
+        // MotionSleepMonitor, when the sleeper is actually near the surface;
+        // otherwise the burst below rings at the real alarm time.
 
         // PERSISTENT RING: schedule a burst of notifications spaced ~30s apart
         // (each plays the 29s alarm sound), so the alarm keeps ringing for
@@ -155,7 +148,6 @@ final class NotificationService: ObservableObject {
                 dateComponents: calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: fireDate),
                 repeats: false,
                 identifier: "\(alarm.id.uuidString)\(AlarmBurst.suffix)\(i)",
-                isSmartWake: false
             )
         }
 
@@ -174,7 +166,6 @@ final class NotificationService: ObservableObject {
                     dateComponents: comps,
                     repeats: true,
                     identifier: "\(alarm.id.uuidString)_day_\(weekday.rawValue)",
-                    isSmartWake: false
                 )
             }
         }
@@ -203,17 +194,11 @@ final class NotificationService: ObservableObject {
         dateComponents: DateComponents,
         repeats: Bool,
         identifier: String,
-        isSmartWake: Bool
     ) async {
         let content = UNMutableNotificationContent()
 
-        if isSmartWake {
-            content.title = String(localized: "alarm_smart_wake_title")
-            content.body = String(localized: "alarm_smart_wake_body")
-        } else {
-            content.title = String(localized: "alarm_notification_title")
-            content.body = alarm.label ?? String(localized: "alarm_notification_body")
-        }
+        content.title = String(localized: "alarm_notification_title")
+        content.body = alarm.label ?? String(localized: "alarm_notification_body")
 
         content.categoryIdentifier = Constants.alarmCategoryIdentifier
         content.interruptionLevel = .timeSensitive
@@ -221,7 +206,7 @@ final class NotificationService: ObservableObject {
 
         content.userInfo = [
             "alarmId": alarm.id.uuidString,
-            "isSmartAlarm": isSmartWake,
+            "isSmartAlarm": alarm.isSmartAlarm,
             "soundName": alarm.sound.rawValue,
             "volume": alarm.volume,
             "vibrationEnabled": alarm.vibrationEnabled

@@ -19,6 +19,9 @@ final class SmartAlarmViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var alarms: [AlarmModel] = []
     @Published var selectedAlarm: AlarmModel?
+    /// True while the system permission sheet is up, so the control that
+    /// triggered it can show a loading state instead of looking frozen.
+    @Published private(set) var isRequestingNotificationPermission = false
     @Published var isEditing = false
     @Published var showingAddSheet = false
     @Published private(set) var nextAlarmDate: Date?
@@ -122,6 +125,7 @@ final class SmartAlarmViewModel: ObservableObject {
 
         Task {
             if updatedAlarm.isEnabled {
+                await ensureNotificationPermission()
                 await notificationService.scheduleAlarm(updatedAlarm)
             } else {
                 await notificationService.cancelAlarm(updatedAlarm)
@@ -211,7 +215,7 @@ final class SmartAlarmViewModel: ObservableObject {
         showingAddSheet = true
     }
 
-    func saveAlarm() {
+    func saveAlarm() async {
 
         let alarm = AlarmModel(
             id: selectedAlarm?.id ?? UUID(),
@@ -233,6 +237,13 @@ final class SmartAlarmViewModel: ObservableObject {
             snoozeLimit: editingSnoozeLimit
         )
 
+        // The alarm only rings through a local notification, so this is the
+        // moment the permission starts mattering — ask for it here rather than
+        // on launch, when the user has no idea what it is for.
+        if alarm.isEnabled {
+            await ensureNotificationPermission()
+        }
+
         storageService.saveAlarm(alarm)
 
         if let index = alarms.firstIndex(where: { $0.id == alarm.id }) {
@@ -242,12 +253,10 @@ final class SmartAlarmViewModel: ObservableObject {
         }
         sortAlarms()
 
-        Task {
-            if alarm.isEnabled {
-                await notificationService.scheduleAlarm(alarm)
-            }
-            updateNextAlarmDate()
+        if alarm.isEnabled {
+            await notificationService.scheduleAlarm(alarm)
         }
+        updateNextAlarmDate()
 
         isEditing = false
         showingAddSheet = false
@@ -259,8 +268,15 @@ final class SmartAlarmViewModel: ObservableObject {
     }
 
     // MARK: - Notifications
-    func requestNotificationPermission() async {
+    /// Asks for the notification permission the first time the user does
+    /// something that depends on it. Already-granted stays silent, and a denied
+    /// status resolves without drawing anything, so this is safe to call on
+    /// every save and every toggle.
+    private func ensureNotificationPermission() async {
+        guard !notificationService.isAuthorized else { return }
+        isRequestingNotificationPermission = true
         _ = await notificationService.requestAuthorization()
+        isRequestingNotificationPermission = false
     }
 
     // MARK: - Private Methods

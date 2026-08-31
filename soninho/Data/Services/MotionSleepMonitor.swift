@@ -32,8 +32,28 @@ final class MotionSleepMonitor: ObservableObject {
         static let awakeThreshold: Double = 0.04 // Significant movement = awake
         static let deepSleepThreshold: Double = 0.012 // Low movement = deep sleep (accounts for breathing)
         static let remUpperThreshold: Double = 0.025 // Moderate movement with variance = REM
-        static let smartAlarmMovementThreshold: Double = 0.025
         static let sleepCycleDurationMinutes: Double = 90 // One full sleep cycle
+    }
+
+    /// Tuning for the smart wake search.
+    ///
+    /// The window is a budget, not a green light: waking someone at minute one
+    /// of a 30-minute window throws away 29 minutes of sleep for a moment that
+    /// is probably no better than the next one. So the monitor demands strong
+    /// evidence early and settles for less as the alarm time approaches.
+    private enum SmartWake {
+        /// How long a qualifying reading must hold — one good minute can just be
+        /// a turn in bed.
+        static let confirmationMinutes = 2
+        /// Nothing fires in the first slice of the window unless the sleeper is
+        /// plainly awake.
+        static let earliestProgress: Double = 0.15
+        /// Score demanded at the start of the window (essentially: awake).
+        static let startingBar: Double = 0.92
+        /// Score demanded at the very end (light or REM is good enough).
+        static let endingBar: Double = 0.40
+        /// At or above this the sleeper is treated as already awake.
+        static let awakeScore: Double = 0.92
     }
 
     // MARK: - Published Properties
@@ -52,6 +72,11 @@ final class MotionSleepMonitor: ObservableObject {
     private var monitoringStartTime: Date?
     private var smartAlarmWindow: (start: Date, end: Date)?
     private var smartAlarmCallback: (() -> Void)?
+    /// Decides the stages from the movement data. See SleepStagingEngine for
+    /// what actigraphy can and cannot tell us.
+    private var staging: SleepStagingEngine?
+    /// Consecutive one-minute windows whose wake score cleared the bar.
+    private var qualifyingMinutes = 0
     private var phaseAggregationTimer: DispatchSourceTimer?
     private let timerQueue = DispatchQueue(label: "com.gambitstudio.soninho.motionTimer", qos: .utility)
 
@@ -77,11 +102,13 @@ final class MotionSleepMonitor: ObservableObject {
 
         isMonitoring = true
         monitoringStartTime = Date()
+        staging = SleepStagingEngine(sessionStart: Date())
         lastPhaseChangeTime = Date()
         movementSamples = []
         phaseHistory = []
         currentPhase = .light
         smartAlarmTriggered = false
+        qualifyingMinutes = 0
         soundLevel = 0
 
         startAudioMetering()
@@ -137,45 +164,17 @@ final class MotionSleepMonitor: ObservableObject {
         smartAlarmWindow = (start: windowStart, end: windowEnd)
         smartAlarmCallback = onLightSleep
         smartAlarmTriggered = false
+        qualifyingMinutes = 0
     }
 
-    /// Returns all recorded phases since monitoring started.
+    /// The night's stages, merged into contiguous spans.
     func getRecordedPhases() -> [SleepPhaseData] {
-        // If no phases recorded (session < 60 seconds), create a single light sleep phase
-        if phaseHistory.isEmpty, let startTime = monitoringStartTime {
-            return [SleepPhaseData(phase: .light, startTime: startTime, endTime: Date())]
+        let now = Date()
+        guard let staging, !staging.epochs.isEmpty else {
+            let start = monitoringStartTime ?? now
+            return [SleepPhaseData(phase: .light, startTime: start, endTime: now)]
         }
-        guard phaseHistory.count >= 2 else {
-            // Single phase entry - return it as a phase from its time to now
-            if let single = phaseHistory.first {
-                return [SleepPhaseData(phase: single.phase, startTime: single.date, endTime: Date())]
-            }
-            return []
-        }
-
-        var phases: [SleepPhaseData] = []
-
-        for i in 0..<(phaseHistory.count - 1) {
-            let current = phaseHistory[i]
-            let next = phaseHistory[i + 1]
-
-            phases.append(SleepPhaseData(
-                phase: current.phase,
-                startTime: current.date,
-                endTime: next.date
-            ))
-        }
-
-        // Add the last phase extending to now
-        if let last = phaseHistory.last {
-            phases.append(SleepPhaseData(
-                phase: last.phase,
-                startTime: last.date,
-                endTime: Date()
-            ))
-        }
-
-        return phases
+        return staging.phaseSpans(now: now)
     }
 
     /// Calculates a quality score based on actual motion data and phase distribution.
@@ -268,138 +267,28 @@ final class MotionSleepMonitor: ObservableObject {
 
     private func aggregateAndClassifyPhase() {
         guard !movementSamples.isEmpty else { return }
-
-        // Calculate statistics over the window
-        let avgMovement = movementSamples.reduce(0, +) / Double(movementSamples.count)
-        let maxMovement = movementSamples.max() ?? 0
-        let variance = movementSamples.map { pow($0 - avgMovement, 2) }.reduce(0, +) / Double(movementSamples.count)
-        let stdDev = sqrt(variance)
-
-        guard let startTime = monitoringStartTime else {
+        guard monitoringStartTime != nil else {
             movementSamples = []
             return
         }
 
-        let elapsedMinutes = Date().timeIntervalSince(startTime) / 60
+        let avgMovement = movementSamples.reduce(0, +) / Double(movementSamples.count)
+        movementSamples = []
 
-        // Determine phase using hybrid approach:
-        // 1. Movement data from accelerometer
-        // 2. Sleep cycle model (90-min cycles: light → deep → light → REM)
-        let newPhase: SleepPhase
+        // The engine owns the staging: it smooths this minute against its
+        // neighbours and calibrates against the night's own movement, rather
+        // than guessing the stage from the clock.
+        let settled = staging?.record(activity: avgMovement) ?? .light
 
-        if avgMovement > Constants.awakeThreshold || maxMovement > 0.10 {
-            // Significant movement = awake or restless
-            newPhase = .awake
-        } else if elapsedMinutes < 10 {
-            // Sleep onset: always light sleep (falling asleep phase)
-            newPhase = .light
-        } else {
-            // Sleep cycle model is the PRIMARY driver.
-            // Movement can only OVERRIDE to awake (handled above) or
-            // shift between deep/light within the cycle window.
-            newPhase = classifyWithSleepCycle(
-                elapsedMinutes: elapsedMinutes,
-                avgMovement: avgMovement,
-                stdDev: stdDev
-            )
-        }
-
-        // Prevent rapid phase oscillation (minimum 2 minutes per phase)
-        let timeSinceLastChange = Date().timeIntervalSince(lastPhaseChangeTime)
-        if newPhase != currentPhase && timeSinceLastChange > 120 {
-            currentPhase = newPhase
+        // Stages only move after a couple of minutes, so no extra damping here.
+        if settled != currentPhase {
+            currentPhase = settled
             lastPhaseChangeTime = Date()
         }
 
-        phaseHistory.append((date: Date(), phase: currentPhase, movement: avgMovement))
+        phaseHistory.append((date: Date(), phase: settled, movement: avgMovement))
 
-        // Check smart alarm condition
         checkSmartAlarmCondition(avgMovement: avgMovement)
-
-        // Clear samples for next window
-        movementSamples = []
-    }
-
-    /// Classifies sleep phase using a 90-minute sleep cycle model.
-    /// The cycle model is the PRIMARY driver — phone accelerometer on a mattress
-    /// cannot reliably distinguish deep/REM/light from movement alone.
-    ///
-    /// Real sleep follows repeating ~90-min cycles:
-    ///   Light → Deep → Light → REM → (brief wake) → repeat
-    /// - Early night (cycles 0-1): longer deep sleep, shorter/no REM
-    /// - Late night (cycles 2+): shorter deep sleep, longer REM
-    ///
-    /// Movement data can only OVERRIDE the cycle model upward (toward lighter sleep):
-    /// - High movement during deep window → light sleep instead
-    /// - Very still during light window → could be deep extension
-    private func classifyWithSleepCycle(elapsedMinutes: Double, avgMovement: Double, stdDev: Double) -> SleepPhase {
-        let cycleDuration = Constants.sleepCycleDurationMinutes
-        let cyclePosition = (elapsedMinutes.truncatingRemainder(dividingBy: cycleDuration)) / cycleDuration
-        let cycleNumber = Int(elapsedMinutes / cycleDuration)
-
-        // Determine the expected phase from the cycle model.
-        // Cycle structure (percentages of 90 min):
-        //   0.00–0.12  (0–11 min):  Light sleep — falling into cycle
-        //   0.12–0.45  (11–40 min): Deep sleep — restorative phase
-        //   0.45–0.55  (40–50 min): Light sleep — transition
-        //   0.55–0.90  (50–81 min): REM sleep — dreaming phase
-        //   0.90–1.00  (81–90 min): Light/brief wake — between cycles
-
-        // Deep sleep gets shorter in later cycles
-        let deepEnd: Double
-        switch cycleNumber {
-        case 0: deepEnd = 0.50  // First cycle: longest deep
-        case 1: deepEnd = 0.42
-        case 2: deepEnd = 0.30
-        default: deepEnd = 0.20 // Later cycles: very short deep
-        }
-
-        // REM gets longer in later cycles
-        let remStart: Double
-        switch cycleNumber {
-        case 0: remStart = 0.70  // First cycle: short REM, starts late
-        case 1: remStart = 0.58
-        default: remStart = 0.50 // Later cycles: REM starts earlier, lasts longer
-        }
-
-        let expectedPhase: SleepPhase
-        if cyclePosition < 0.12 {
-            expectedPhase = .light
-        } else if cyclePosition < deepEnd {
-            expectedPhase = .deep
-        } else if cyclePosition < remStart {
-            expectedPhase = .light
-        } else if cyclePosition < 0.92 {
-            expectedPhase = .rem
-        } else {
-            // Brief awakening between cycles (natural)
-            expectedPhase = cycleNumber > 0 ? .awake : .light
-        }
-
-        // Movement can override the cycle model:
-        // High movement during any sleep window → upgrade to lighter phase
-        let isRestless = avgMovement > Constants.remUpperThreshold
-
-        switch expectedPhase {
-        case .deep:
-            if isRestless {
-                return .light // Too much movement for deep sleep
-            }
-            return .deep
-
-        case .rem:
-            if isRestless {
-                return .light // Too much movement for REM
-            }
-            return .rem
-
-        case .awake:
-            // Brief inter-cycle awakening
-            return .awake
-
-        case .light:
-            return .light
-        }
     }
 
     private func checkSmartAlarmCondition(avgMovement: Double) {
@@ -407,20 +296,34 @@ final class MotionSleepMonitor: ObservableObject {
         guard let window = smartAlarmWindow else { return }
 
         let now = Date()
-        guard now >= window.start && now <= window.end else { return }
+        guard now >= window.start, now <= window.end else { return }
 
-        // Trigger smart alarm when user shows signs of light sleep / transitioning to wakefulness:
-        // - Movement above deep sleep threshold (user is in lighter phase)
-        // - OR a recent spike in movement (user shifted position)
-        // Also fires when the user has been in light sleep for at least 2
-        // consecutive minutes. Either condition triggers exactly once.
-        let recentPhases = phaseHistory.suffix(2)
-        let lightForTwoMinutes = recentPhases.count >= 2 && recentPhases.allSatisfy { $0.phase == .light }
+        let total = window.end.timeIntervalSince(window.start)
+        guard total > 0 else { return }
+        let progress = min(1, max(0, now.timeIntervalSince(window.start) / total))
 
-        if avgMovement > Constants.smartAlarmMovementThreshold || lightForTwoMinutes {
-            smartAlarmTriggered = true
-            smartAlarmCallback?()
+        // Judging on a single minute is what made this fire the moment the
+        // window opened; wait until the engine has calibrated on the night.
+        guard staging?.isCalibrated == true else { return }
+
+        let score = staging?.wakeReadiness() ?? 0
+        let isAwake = score >= SmartWake.awakeScore
+
+        // Early in the window only a sleeper who is plainly awake is worth
+        // ringing for — everyone else still has sleep to gain.
+        guard progress >= SmartWake.earliestProgress || isAwake else {
+            qualifyingMinutes = 0
+            return
         }
+
+        let bar = SmartWake.startingBar - (SmartWake.startingBar - SmartWake.endingBar) * progress
+        qualifyingMinutes = score >= bar ? qualifyingMinutes + 1 : 0
+
+        let needed = isAwake ? 1 : SmartWake.confirmationMinutes
+        guard qualifyingMinutes >= needed else { return }
+
+        smartAlarmTriggered = true
+        smartAlarmCallback?()
     }
 
     // MARK: - Audio Metering

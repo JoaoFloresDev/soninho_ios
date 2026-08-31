@@ -50,9 +50,6 @@ struct SmartAlarmView: View {
             .sheet(isPresented: $viewModel.isEditing) {
                 AlarmEditSheet(viewModel: viewModel)
             }
-            .task {
-                await viewModel.requestNotificationPermission()
-            }
         }
     }
 
@@ -116,6 +113,9 @@ struct SmartAlarmView: View {
                     }
                 }
             }
+            // Switching an alarm on can raise the notification prompt; keep the
+            // list inert until the system call comes back.
+            .disabled(viewModel.isRequestingNotificationPermission)
         }
     }
 }
