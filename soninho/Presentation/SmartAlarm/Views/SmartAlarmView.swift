@@ -42,6 +42,8 @@ struct SmartAlarmView: View {
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(AppColors.primary)
                     }
+                    .accessibilityIdentifier("alarm.add")
+                    .accessibilityLabel(Text(String(localized: "alarm_add")))
                 }
             }
             .sheet(isPresented: $viewModel.showingAddSheet) {
@@ -182,6 +184,8 @@ struct AlarmCard: View {
             ))
             .labelsHidden()
             .tint(AppColors.primary)
+            .accessibilityIdentifier("alarm.toggle.\(alarm.id.uuidString)")
+            .accessibilityLabel(Text(alarm.timeString))
         }
         .padding()
         .contentShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))

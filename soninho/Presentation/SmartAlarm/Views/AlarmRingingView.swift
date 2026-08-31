@@ -73,20 +73,18 @@ struct AlarmRingingView: View {
                 ForEach(0..<3, id: \.self) { index in
                     Circle()
                         .stroke(Color.white.opacity(0.15), lineWidth: 2)
-                        .frame(width: 140 + CGFloat(index) * 40, height: 140 + CGFloat(index) * 40)
+                        .frame(width: 200 + CGFloat(index) * 40, height: 200 + CGFloat(index) * 40)
                         .scaleEffect(pulseScale)
                         .opacity(2.0 - pulseScale)
                 }
 
-                Circle()
-                    .fill(AppColors.surface.opacity(0.85))
-                    .frame(width: 140, height: 140)
-                    .shadow(color: .black.opacity(0.3), radius: 20)
-
-                Image(systemName: "alarm.fill")
-                    .font(.system(size: 56))
-                    .foregroundStyle(AppColors.sleepGradient)
-                    .rotationEffect(.degrees(bellRotation))
+                // The mascot waking up, rather than a bell — a different pose
+                // each morning so the screen does not feel like a loop.
+                Image(WakeArtwork.current)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 240, height: 240)
+                    .scaleEffect(pulseScale)
             }
 
             Text(String(localized: "alarm_ringing_title"))
@@ -104,6 +102,7 @@ struct AlarmRingingView: View {
                         .background(AppColors.primaryButtonGradient)
                         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 }
+                .accessibilityIdentifier("alarm.dismiss")
                 .buttonStyle(ScaleButtonStyle())
 
                 // Snooze respects the per-alarm limit: hidden when disabled or

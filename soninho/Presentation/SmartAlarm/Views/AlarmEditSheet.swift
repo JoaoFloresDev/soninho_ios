@@ -77,6 +77,7 @@ struct AlarmEditSheet: View {
                                 dismiss()
                             }
                         }
+                        .accessibilityIdentifier("alarm.save")
                         .fontWeight(.semibold)
                         .foregroundStyle(AppColors.primary)
                     }

@@ -33,3 +33,20 @@ Gemini returns JPEG on a white/solid ground. Each art is keyed to transparency
 with a luminance-based alpha so the baked halo blends into the dark UI instead
 of leaving a dark ring: opaque inside r<=0.48, outer alpha = max(r,g,b)*1.45,
 crossfade 0.48-0.62, zero at r>=1.02, radius normalised to the inscribed circle.
+
+## Wake-up poses
+
+`AlarmRingingView` shows a mascot pose instead of a bell glyph, rotating through
+three so the wake-up screen does not feel like a loop. `WakeArtwork` persists the
+index, so the rotation survives relaunches.
+
+| source | imageset |
+|---|---|
+| `wake1_stretch.png` | heroWake1 — stretching under a rising sun |
+| `wake_sunglasses.png` | heroWake2 — sunglasses, waving |
+| `wake_coffee.png` | heroWake3 — sipping coffee |
+
+All three are generated on solid black and keyed with `art/key_glow.py`, the same
+luminance-based alpha used for the other heroes: the lit blob stays opaque and the
+halo fades out exactly as bright as it is, so it blends into the dark UI instead of
+leaving a ring. Run it as `key_glow.py <source.png> <out.png>`.
