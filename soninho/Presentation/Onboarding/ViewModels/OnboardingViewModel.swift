@@ -23,7 +23,10 @@ final class OnboardingViewModel: ObservableObject {
     private let storageService: StorageService
 
     // MARK: - Published Properties
-    @Published var currentPage = 0
+    @Published var currentPage = 0 {
+        didSet { Analytics.onboardingStepViewed(currentPage + 1) }
+    }
+    private let startedAt = Date()
 
     // MARK: - Properties
     let pages: [OnboardingPage] = [
@@ -71,12 +74,17 @@ final class OnboardingViewModel: ObservableObject {
     }
 
     func skipToEnd() {
+        Analytics.onboardingSkipped(at: currentPage + 1)
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             currentPage = pages.count - 1
         }
     }
 
     func completeOnboarding() {
+        Analytics.onboardingCompleted(
+            steps: pages.count,
+            seconds: Int(Date().timeIntervalSince(startedAt))
+        )
         storageService.hasCompletedOnboarding = true
         storageService.incrementSessionCount()
     }

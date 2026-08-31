@@ -19,6 +19,8 @@ struct SoninhoApp: App {
 
     // MARK: - Init
     init() {
+        Analytics.configure()
+
         let skipOnboarding = StorageService.shared.hasCompletedOnboarding
         _isOnboardingComplete = State(initialValue: skipOnboarding)
         configureAppearance()

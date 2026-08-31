@@ -49,14 +49,17 @@ final class RatingGateService: ObservableObject {
         guard count >= Constants.minPositiveEvents, isEligible, !isPresented else { return false }
         defaults.set(Date(), forKey: Constants.lastShownKey)
         isPresented = true
+        Analytics.log("rating_gate_shown", ["positive_events": count])
         return true
     }
 
     func answeredYes() {
+        Analytics.log("rating_gate_answered", ["liked": true])
         requestNativeReview()
     }
 
     func answeredNo() {
+        Analytics.log("rating_gate_answered", ["liked": false])
         defaults.set(Date(), forKey: Constants.lastNegativeKey)
     }
 
@@ -69,6 +72,7 @@ final class RatingGateService: ObservableObject {
             URLQueryItem(name: "body", value: text)
         ]
         guard let url = components?.url else { return }
+        Analytics.log("rating_gate_feedback_sent")
         UIApplication.shared.open(url)
     }
 

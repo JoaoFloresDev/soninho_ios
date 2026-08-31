@@ -127,6 +127,8 @@ final class SmartAlarmViewModel: ObservableObject {
             if updatedAlarm.isEnabled {
                 await ensureNotificationPermission()
                 await notificationService.scheduleAlarm(updatedAlarm)
+                Analytics.coreAction("alarm_armed")
+                _ = RatingGateService.shared.recordPositiveEvent()
             } else {
                 await notificationService.cancelAlarm(updatedAlarm)
             }
@@ -255,6 +257,9 @@ final class SmartAlarmViewModel: ObservableObject {
 
         if alarm.isEnabled {
             await notificationService.scheduleAlarm(alarm)
+            // Arming an alarm is the aha: the user has trusted the app to wake them.
+            Analytics.coreAction("alarm_armed")
+            _ = RatingGateService.shared.recordPositiveEvent()
         }
         updateNextAlarmDate()
 
@@ -275,7 +280,8 @@ final class SmartAlarmViewModel: ObservableObject {
     private func ensureNotificationPermission() async {
         guard !notificationService.isAuthorized else { return }
         isRequestingNotificationPermission = true
-        _ = await notificationService.requestAuthorization()
+        let granted = await notificationService.requestAuthorization()
+        Analytics.permissionResult("notifications", granted: granted)
         isRequestingNotificationPermission = false
     }
 

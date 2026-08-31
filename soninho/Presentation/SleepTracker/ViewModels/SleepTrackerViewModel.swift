@@ -58,6 +58,7 @@ final class SleepTrackerViewModel: ObservableObject {
 
     // MARK: - Public Methods
     func startTracking() {
+        Analytics.featureUsed("sleep_tracking", source: "tab")
         guard !isTracking else { return }
 
         isTracking = true
@@ -116,6 +117,10 @@ final class SleepTrackerViewModel: ObservableObject {
         var records = storageService.loadCachedSleepRecords()
         records.insert(record, at: 0)
         storageService.saveSleepRecords(records)
+        // A night seen through to the morning is the other moment the app
+        // delivered on its promise.
+        Analytics.coreAction("night_tracked")
+        _ = RatingGateService.shared.recordPositiveEvent()
 
         // Update the tracked-nights streak (was never being called → stuck at 0).
         storageService.updateStreak(for: record.endTime)

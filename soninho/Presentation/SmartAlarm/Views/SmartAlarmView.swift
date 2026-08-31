@@ -31,6 +31,7 @@ struct SmartAlarmView: View {
                 }
                 .softScrollEdge()
             }
+            .onAppear { Analytics.screen("alarm") }
             .navigationTitle(String(localized: "alarm_title"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {

@@ -26,6 +26,16 @@ enum TabItem: Int, CaseIterable, Identifiable {
 
     var id: Int { rawValue }
 
+    /// Stable name for analytics — independent of the localized title.
+    var analyticsName: String {
+        switch self {
+        case .alarm: return "alarm"
+        case .tracker: return "sleep"
+        case .statistics: return "stats"
+        case .settings: return "settings"
+        }
+    }
+
     var title: String {
         switch self {
         case .tracker: return String(localized: "tab_sleep")
@@ -48,7 +58,9 @@ enum TabItem: Int, CaseIterable, Identifiable {
 // MARK: - Main Tab View
 struct MainTabView: View {
     // MARK: - Properties
-    @State private var selectedTab: TabItem = .alarm
+    @State private var selectedTab: TabItem = .alarm {
+        didSet { Analytics.tabViewed(selectedTab.analyticsName) }
+    }
     @EnvironmentObject private var storageService: StorageService
 
     // MARK: - Init
