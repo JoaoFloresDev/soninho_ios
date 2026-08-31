@@ -61,8 +61,7 @@ struct SnoozeSettingsSection: View {
             }
         }
         .padding()
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+        .glassSurface()
         .animation(.easeInOut(duration: 0.2), value: snoozeLimit)
     }
 

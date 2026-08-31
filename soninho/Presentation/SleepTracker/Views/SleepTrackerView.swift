@@ -21,7 +21,7 @@ struct SleepTrackerView: View {
         NavigationStack {
             ZStack {
                 // Background
-                backgroundGradient
+                background
 
                 if viewModel.isTracking {
                     // Night scene stays dark regardless of appearance mode
@@ -85,15 +85,18 @@ struct SleepTrackerView: View {
     }
 
     // MARK: - Background
-    private var backgroundGradient: some View {
-        LinearGradient(
-            colors: viewModel.isTracking
-                ? [Color(hex: "0F172A"), Color(hex: "1E1B4B"), Color(hex: "312E81")]
-                : [AppColors.background, AppColors.background],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        .ignoresSafeArea()
+    @ViewBuilder
+    private var background: some View {
+        if viewModel.isTracking {
+            LinearGradient(
+                colors: [Color(hex: "000000"), Color(hex: "140A05"), Color(hex: "331507")],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        } else {
+            GlassBackdrop()
+        }
     }
 
     // MARK: - Idle Content (Not Tracking)
@@ -117,8 +120,7 @@ struct SleepTrackerView: View {
                 .padding(.bottom, 24)
             }
 
-            // Fixed bottom button — safeAreaInset from MainTabView already
-            // accounts for the custom tab bar, so we only need minimal padding.
+            // Fixed bottom button — floats above the glass tab bar.
             Button {
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                     viewModel.startTracking()
@@ -135,26 +137,25 @@ struct SleepTrackerView: View {
                 .foregroundStyle(.white)
                 .background(AppColors.primary)
                 .clipShape(RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous))
+                .shadow(color: .black.opacity(0.25), radius: 12, y: 4)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(ScaleButtonStyle())
             .contentShape(Rectangle())
             .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.top, 16)
-            .padding(.bottom, 16)
-            .frame(maxWidth: .infinity)
-            .background(AppColors.surface)
-            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 22, topTrailingRadius: 22, style: .continuous))
+            .padding(.top, 8)
+            .padding(.bottom, 12)
         }
     }
 
     // MARK: - Idle Header Section
     private var idleHeaderSection: some View {
         VStack(spacing: 6) {
-            Image(systemName: "moon.stars.fill")
-                .font(.system(size: 48))
-                .foregroundStyle(AppColors.primary)
-                .padding(.top, 16)
-                .padding(.bottom, 8)
+            Image("heroNight")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 140)
+                .padding(.top, 12)
+                .padding(.bottom, 4)
 
             Text(String(localized: "tracker_ready_to_sleep"))
                 .font(AppFonts.title2())
@@ -176,30 +177,32 @@ struct SleepTrackerView: View {
                 .font(AppFonts.headline())
                 .foregroundStyle(AppColors.textPrimary)
 
-            VStack(spacing: 12) {
-                StepCard(
-                    number: 1,
-                    icon: "moon.fill",
-                    title: String(localized: "tracker_step1_title"),
-                    description: String(localized: "tracker_step1_desc"),
-                    color: AppColors.primary
-                )
+            GlassContainer(spacing: 12) {
+                VStack(spacing: 12) {
+                    StepCard(
+                        number: 1,
+                        icon: "moon.fill",
+                        title: String(localized: "tracker_step1_title"),
+                        description: String(localized: "tracker_step1_desc"),
+                        color: AppColors.primary
+                    )
 
-                StepCard(
-                    number: 2,
-                    icon: "waveform.path.ecg",
-                    title: String(localized: "tracker_step2_title"),
-                    description: String(localized: "tracker_step2_desc"),
-                    color: AppColors.deepSleep
-                )
+                    StepCard(
+                        number: 2,
+                        icon: "waveform.path.ecg",
+                        title: String(localized: "tracker_step2_title"),
+                        description: String(localized: "tracker_step2_desc"),
+                        color: AppColors.deepSleep
+                    )
 
-                StepCard(
-                    number: 3,
-                    icon: "sunrise.fill",
-                    title: String(localized: "tracker_step3_title"),
-                    description: String(localized: "tracker_step3_desc"),
-                    color: AppColors.accent
-                )
+                    StepCard(
+                        number: 3,
+                        icon: "sunrise.fill",
+                        title: String(localized: "tracker_step3_title"),
+                        description: String(localized: "tracker_step3_desc"),
+                        color: AppColors.accent
+                    )
+                }
             }
         }
     }
@@ -228,16 +231,17 @@ struct SleepTrackerView: View {
             }
 
             // Phase pills
-            HStack(spacing: 8) {
-                PhasePill(phase: .light)
-                PhasePill(phase: .deep)
-                PhasePill(phase: .rem)
+            GlassContainer(spacing: 8) {
+                HStack(spacing: 8) {
+                    PhasePill(phase: .light)
+                    PhasePill(phase: .deep)
+                    PhasePill(phase: .rem)
+                }
             }
         }
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .glassSurface(cornerRadius: 14)
     }
 
     // MARK: - Battery Info Card
@@ -267,8 +271,7 @@ struct SleepTrackerView: View {
         }
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .glassSurface(cornerRadius: 14)
     }
 
     // MARK: - Tracking Content
@@ -322,7 +325,7 @@ struct SleepTrackerView: View {
                     .background(AppColors.primary)
                     .clipShape(RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(ScaleButtonStyle())
                 .contentShape(Rectangle())
 
                 Button {
@@ -404,8 +407,7 @@ struct SleepTrackerView: View {
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 10)
-        .background(viewModel.currentPhase.color.opacity(0.12))
-        .clipShape(Capsule())
+        .glassCapsule(tint: viewModel.currentPhase.color.opacity(0.25))
         .animation(.easeInOut(duration: 0.5), value: viewModel.currentPhase)
     }
 
@@ -432,8 +434,7 @@ struct SleepTrackerView: View {
             }
         }
         .padding(12)
-        .background(AppColors.surface.opacity(0.5))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .glassSurface(cornerRadius: 12)
     }
 
     // MARK: - Movement Indicator
@@ -560,8 +561,7 @@ private struct StepCard: View {
             Spacer(minLength: 0)
         }
         .padding(14)
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .glassSurface(cornerRadius: 14)
     }
 }
 
@@ -581,7 +581,6 @@ private struct PhasePill: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
-        .background(phase.color.opacity(0.1))
-        .clipShape(Capsule())
+        .glassCapsule(tint: phase.color.opacity(0.22))
     }
 }

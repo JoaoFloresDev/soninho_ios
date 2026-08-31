@@ -62,7 +62,8 @@ struct MainTabView: View {
 
     // MARK: - Init
     init() {
-        // Adaptive tab bar appearance
+        // iOS 26 renders the tab bar in Liquid Glass — leave it untouched there.
+        if #available(iOS 26.0, *) { return }
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
         appearance.backgroundColor = UIColor(AppColors.surface)

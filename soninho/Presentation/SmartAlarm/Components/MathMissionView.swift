@@ -60,15 +60,16 @@ struct MathMissionView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
-            .background(AppColors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .glassSurface(cornerRadius: 20)
 
             // Keypad
-            VStack(spacing: 12) {
-                ForEach(keypad, id: \.self) { row in
-                    HStack(spacing: 12) {
-                        ForEach(row, id: \.self) { key in
-                            keypadButton(key)
+            GlassContainer(spacing: 12) {
+                VStack(spacing: 12) {
+                    ForEach(keypad, id: \.self) { row in
+                        HStack(spacing: 12) {
+                            ForEach(row, id: \.self) { key in
+                                keypadButton(key)
+                            }
                         }
                     }
                 }
@@ -93,12 +94,13 @@ struct MathMissionView: View {
                 }
             }
             .font(.system(size: 26, weight: .semibold, design: .rounded))
-            .foregroundStyle(key == "OK" ? .white : AppColors.textPrimary)
+            .foregroundStyle(AppColors.textPrimary)
             .frame(maxWidth: .infinity)
             .frame(height: 64)
-            .background(key == "OK" ? AppColors.accent : AppColors.surfaceSecondary)
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
+        .glassSurface(cornerRadius: 16, tint: key == "OK" ? AppColors.accent : nil, interactive: true)
     }
 
     // MARK: - Private Methods

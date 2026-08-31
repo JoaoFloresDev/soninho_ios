@@ -15,18 +15,22 @@ struct SmartAlarmView: View {
     // MARK: - View Body
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    // Next Alarm Card
-                    nextAlarmCard
+            ZStack {
+                GlassBackdrop()
 
-                    // Alarms List
-                    alarmsSection
+                ScrollView {
+                    VStack(spacing: 24) {
+                        // Next Alarm Card
+                        nextAlarmCard
+
+                        // Alarms List
+                        alarmsSection
+                    }
+                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                    .padding(.bottom, AppSpacing.lg)
                 }
-                .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, AppSpacing.lg)
+                .softScrollEdge()
             }
-            .background(AppColors.background)
             .navigationTitle(String(localized: "alarm_title"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
@@ -58,7 +62,7 @@ struct SmartAlarmView: View {
             // Icon
             ZStack {
                 Circle()
-                    .fill(AppColors.primary.opacity(0.15))
+                    .fill(AppColors.primary.opacity(0.18))
                     .frame(width: 80, height: 80)
 
                 Image(systemName: "alarm.fill")
@@ -89,14 +93,12 @@ struct SmartAlarmView: View {
                 .foregroundStyle(AppColors.accent)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
-                .background(AppColors.accent.opacity(0.15))
-                .clipShape(Capsule())
+                .glassCapsule(tint: AppColors.accent.opacity(0.3))
             }
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 24)
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+        .glassSurface(cornerRadius: 20, tint: AppColors.primary.opacity(0.12))
     }
 
     // MARK: - Alarms Section
@@ -106,14 +108,18 @@ struct SmartAlarmView: View {
                 .font(AppFonts.headline())
                 .foregroundStyle(AppColors.textPrimary)
 
-            ForEach(viewModel.alarms) { alarm in
-                AlarmCard(
-                    alarm: alarm,
-                    onToggle: { viewModel.toggleAlarm(alarm) },
-                    onTap: { viewModel.startEditing(alarm) },
-                    onDuplicate: { viewModel.duplicateAlarm(alarm) },
-                    onDelete: { viewModel.deleteAlarm(alarm) }
-                )
+            GlassContainer(spacing: 12) {
+                VStack(spacing: 12) {
+                    ForEach(viewModel.alarms) { alarm in
+                        AlarmCard(
+                            alarm: alarm,
+                            onToggle: { viewModel.toggleAlarm(alarm) },
+                            onTap: { viewModel.startEditing(alarm) },
+                            onDuplicate: { viewModel.duplicateAlarm(alarm) },
+                            onDelete: { viewModel.deleteAlarm(alarm) }
+                        )
+                    }
+                }
             }
         }
     }
@@ -183,12 +189,11 @@ struct AlarmCard: View {
             .tint(AppColors.primary)
         }
         .padding()
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
         .contentShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
         .onTapGesture {
             onTap()
         }
+        .glassSurface(cornerRadius: AppSpacing.cardCornerRadius, interactive: true)
         .contextMenu {
             Button {
                 onDuplicate()

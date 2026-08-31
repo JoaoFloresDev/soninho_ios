@@ -168,12 +168,15 @@ final class BackgroundAlarmPlayer: ObservableObject {
                 alarmPlayer = try AVAudioPlayer(contentsOf: alarmURL)
                 alarmPlayer?.numberOfLoops = -1
                 alarmPlayer?.prepareToPlay()
+                // Honor the per-alarm volume (never fully silent — it's an
+                // alarm), same floor as the in-app player.
+                let targetVolume = max(0.3, volume)
                 if gradualSeconds > 0 {
-                    alarmPlayer?.volume = max(0.4, volume * 0.45)
+                    alarmPlayer?.volume = max(0.2, targetVolume * 0.45)
                     alarmPlayer?.play()
-                    alarmPlayer?.setVolume(1.0, fadeDuration: gradualSeconds)
+                    alarmPlayer?.setVolume(targetVolume, fadeDuration: gradualSeconds)
                 } else {
-                    alarmPlayer?.volume = 1.0
+                    alarmPlayer?.volume = targetVolume
                     alarmPlayer?.play()
                 }
             } catch {

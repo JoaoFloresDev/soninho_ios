@@ -52,8 +52,7 @@ struct TypingMissionView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 24)
                 .padding(.horizontal, 16)
-                .background(AppColors.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .glassSurface(cornerRadius: 20)
                 .offset(x: shakeWrong ? -10 : 0)
 
             // Input
@@ -67,8 +66,7 @@ struct TypingMissionView: View {
                 .submitLabel(.done)
                 .onSubmit { submit() }
                 .padding()
-                .background(AppColors.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .glassSurface(cornerRadius: 16)
 
             // Confirm
             Button {

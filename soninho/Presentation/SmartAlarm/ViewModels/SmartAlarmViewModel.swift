@@ -93,8 +93,9 @@ final class SmartAlarmViewModel: ObservableObject {
     ) {
         self.storageService = storageService
         self.notificationService = notificationService
+        // Scheduling is owned by the App (launch + every foreground), so the
+        // ViewModel only mirrors storage here.
         loadAlarms()
-        scheduleAllEnabledAlarms()
     }
 
     // MARK: - Public Methods
@@ -260,18 +261,6 @@ final class SmartAlarmViewModel: ObservableObject {
     // MARK: - Notifications
     func requestNotificationPermission() async {
         _ = await notificationService.requestAuthorization()
-    }
-
-    func scheduleAllEnabledAlarms() {
-        Task {
-            for alarm in alarms where alarm.isEnabled {
-                await notificationService.scheduleAlarm(alarm)
-            }
-            updateNextAlarmDate()
-
-            // Debug: print scheduled notifications
-            await notificationService.printPendingNotifications()
-        }
     }
 
     // MARK: - Private Methods

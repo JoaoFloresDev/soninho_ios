@@ -67,7 +67,7 @@ struct SleepPhaseChart: View {
             AxisMarks(values: [0, 1, 2, 3]) { value in
                 let phase = phaseFromYValue(value.as(Int.self) ?? 0)
                 AxisValueLabel {
-                    Text(phase.displayName)
+                    Text(phase.localizedName)
                         .font(AppFonts.caption2())
                         .foregroundStyle(AppColors.textSecondary)
                 }
@@ -113,7 +113,7 @@ struct SleepPhaseChart: View {
                         .fill(phase.color)
                         .frame(width: 8, height: 8)
 
-                    Text(phase.displayName)
+                    Text(phase.localizedName)
                         .font(AppFonts.caption2())
                         .foregroundStyle(AppColors.textSecondary)
                 }
@@ -203,7 +203,7 @@ struct SleepPhaseDistribution: View {
                     .fill(phase.color)
                     .frame(width: 6, height: 6)
 
-                Text(phase.displayName)
+                Text(phase.localizedName)
                     .font(AppFonts.caption2())
                     .foregroundStyle(AppColors.textSecondary)
             }

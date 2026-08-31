@@ -116,8 +116,10 @@ final class NotificationService: ObservableObject {
             }
         }
 
-        // Cancel all existing notifications for this alarm
-        await cancelAlarm(alarm)
+        // Replace this alarm's scheduled notifications. A pending snooze is
+        // kept: rescheduling runs on every foreground and must not swallow a
+        // snooze the user is waiting on.
+        await cancelAlarm(alarm, includingSnooze: false)
 
         guard alarm.isEnabled, let nextDate = alarm.nextAlarmDate else { return }
 
@@ -375,7 +377,12 @@ final class NotificationService: ObservableObject {
         isAlarmRinging = false
         ringingAlarmId = nil
         ringingAlarmTime = nil
-        try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
+        // The background keep-alive owns the session while the app is
+        // backgrounded — deactivating it here would suspend the app and kill
+        // the next alarm.
+        if !BackgroundAlarmPlayer.shared.isBackgroundActive {
+            try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
+        }
     }
 
     // MARK: - Pacote Despertar coordination
@@ -456,6 +463,11 @@ final class NotificationService: ObservableObject {
         // The app is now ringing in-app — drop the remaining fallback burst so
         // we don't get a double sound.
         cancelBurst(alarmId: alarmId)
+
+        // Already ringing this alarm (a weekday baseline and a burst slot can
+        // land in the same second) — restarting would only glitch the audio.
+        if isAlarmRinging, ringingAlarmId == alarmId { return }
+
         ringingAlarmId = alarmId
         ringingAlarmSoundName = soundName
         ringingAlarmVolume = volume
@@ -506,12 +518,16 @@ final class NotificationService: ObservableObject {
     }
 
     // MARK: - Cancel Alarm
-    func cancelAlarm(_ alarm: AlarmModel) async {
+    /// Removes every pending notification of the alarm. `includingSnooze: false`
+    /// keeps an in-flight snooze alive (used when merely rescheduling).
+    func cancelAlarm(_ alarm: AlarmModel, includingSnooze: Bool = true) async {
         var identifiers = [
             alarm.id.uuidString,
-            "\(alarm.id.uuidString)_snooze",
             "\(alarm.id.uuidString)_smart"
         ]
+        if includingSnooze {
+            identifiers.append("\(alarm.id.uuidString)_snooze")
+        }
 
         // Legacy per-weekday notifications (older builds)
         for weekday in Weekday.allCases {

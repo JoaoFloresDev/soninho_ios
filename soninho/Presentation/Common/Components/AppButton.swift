@@ -72,9 +72,13 @@ struct AppButton: View {
                 RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous)
                     .stroke(borderColor, lineWidth: style == .outline ? 2 : 0)
             )
+            .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
-        .contentShape(Rectangle())
+        .if(style == .secondary) { button in
+            // Secondary actions sit on a pane of glass instead of a flat surface.
+            button.glassSurface(cornerRadius: AppSpacing.buttonCornerRadius, interactive: true)
+        }
         .disabled(isDisabled || isLoading)
         .opacity(isDisabled ? 0.5 : 1.0)
     }
@@ -85,7 +89,7 @@ struct AppButton: View {
         case .primary:
             return AppColors.primary
         case .secondary:
-            return AppColors.surface
+            return .clear
         case .outline:
             return .clear
         case .ghost:
@@ -149,12 +153,12 @@ struct SmallButton: View {
                     .fontWeight(.semibold)
             }
             .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            .frame(minHeight: 44)
             .foregroundStyle(AppColors.primary)
-            .background(AppColors.primary.opacity(0.15))
-            .clipShape(Capsule())
+            .contentShape(Capsule())
         }
         .buttonStyle(ScaleButtonStyle(scale: 0.97))
+        .glassCapsule(tint: AppColors.primary.opacity(0.3), interactive: true)
     }
 }
 
@@ -181,9 +185,9 @@ struct IconButton: View {
                 .font(.system(size: size * 0.45, weight: .medium))
                 .foregroundStyle(AppColors.textPrimary)
                 .frame(width: size, height: size)
-                .background(AppColors.surface)
-                .clipShape(Circle())
+                .contentShape(Circle())
         }
         .buttonStyle(ScaleButtonStyle())
+        .glassCapsule(interactive: true)
     }
 }

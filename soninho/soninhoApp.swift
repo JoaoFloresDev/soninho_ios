@@ -14,7 +14,6 @@ struct SoninhoApp: App {
     @StateObject private var storageService = StorageService.shared
     @StateObject private var purchaseService = PurchaseService.shared
     @StateObject private var notificationService = NotificationService.shared
-    @StateObject private var reviewService = ReviewService.shared
     @State private var isOnboardingComplete: Bool
     @Environment(\.scenePhase) private var scenePhase
 
@@ -24,7 +23,12 @@ struct SoninhoApp: App {
         _isOnboardingComplete = State(initialValue: skipOnboarding)
         configureAppearance()
         configureNotifications()
-        AlarmSoundGenerator.generateAlarmSoundsIfNeeded()
+        // Generating the 10 alarm WAVs takes seconds on first launch — off the
+        // main thread, or the launch screen hangs. Alarms fire much later, so
+        // the files are ready long before any notification needs them.
+        Task.detached(priority: .userInitiated) {
+            AlarmSoundGenerator.generateAlarmSoundsIfNeeded()
+        }
         // Prepare audio session early so background audio works immediately
         BackgroundAlarmPlayer.shared.prepare()
     }
@@ -55,11 +59,19 @@ struct SoninhoApp: App {
             }
             .animation(.spring(response: 0.4), value: notificationService.isAlarmRinging)
             .preferredColorScheme(.dark)
+            .ratingGate()
             .onChange(of: isOnboardingComplete) { _, newValue in
                 storageService.hasCompletedOnboarding = newValue
             }
             .onChange(of: scenePhase) { _, newPhase in
                 handleScenePhaseChange(newPhase)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .didCompleteAlarm)) { _ in
+                // Waking up with the alarm is the aha-moment — count it towards
+                // the rating gate once the ringing screen has gone away.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    RatingGateService.shared.recordPositiveEvent()
+                }
             }
             .onAppear {
                 handleAppLaunch()
@@ -75,17 +87,9 @@ struct SoninhoApp: App {
         // Auto-start the sleep night at bedtime while the app is in foreground.
         SleepAutoStart.startForegroundMonitor()
 
-        // Increment app open count
-        reviewService.incrementAppOpenCount()
-
         // Schedule all enabled alarms on every app launch
         Task {
             await notificationService.scheduleAllEnabledAlarms()
-        }
-
-        // Request review if appropriate (between 5th and 10th launch)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            reviewService.requestReviewIfAppropriate()
         }
     }
 
@@ -119,7 +123,14 @@ struct SoninhoApp: App {
     }
 
     private func configureAppearance() {
-        // Configure navigation bar appearance
+        // Page control
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(AppColors.primary)
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor(AppColors.surfaceSecondary)
+
+        // iOS 26 draws the navigation and tab bars in Liquid Glass; an opaque
+        // custom appearance would replace the glass with a flat bar.
+        if #available(iOS 26.0, *) { return }
+
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = UIColor(AppColors.background)
@@ -131,16 +142,11 @@ struct SoninhoApp: App {
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
 
-        // Configure tab bar appearance
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         tabBarAppearance.backgroundColor = UIColor(AppColors.surface)
 
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-
-        // Configure page control
-        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(AppColors.primary)
-        UIPageControl.appearance().pageIndicatorTintColor = UIColor(AppColors.surfaceSecondary)
     }
 }

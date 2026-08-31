@@ -130,9 +130,11 @@ struct AlarmModel: Codable, Identifiable {
             return calendar.nextDate(after: now, matching: comps, matchingPolicy: .nextTime)
         }
 
-        // Repeating alarm
+        // Repeating alarm. 0...7 (not 0..<7): a single-weekday alarm checked
+        // right after today's time has passed only matches next week — the
+        // exclusive range returned nil and the alarm lost every notification.
         var nextDate: Date?
-        for dayOffset in 0..<7 {
+        for dayOffset in 0...7 {
             guard let checkDate = calendar.date(byAdding: .day, value: dayOffset, to: now) else { continue }
             let checkWeekday = calendar.component(.weekday, from: checkDate)
 
@@ -261,15 +263,8 @@ enum Weekday: Int, Codable, CaseIterable, Identifiable {
         return ""
     }
 
+    /// Locale-aware single-letter weekday (S M T W T F S in English, D S T Q Q S S in Portuguese).
     var letter: String {
-        switch self {
-        case .sunday: return "S"
-        case .monday: return "M"
-        case .tuesday: return "T"
-        case .wednesday: return "W"
-        case .thursday: return "T"
-        case .friday: return "F"
-        case .saturday: return "S"
-        }
+        Calendar.current.veryShortWeekdaySymbols[safe: rawValue - 1] ?? ""
     }
 }

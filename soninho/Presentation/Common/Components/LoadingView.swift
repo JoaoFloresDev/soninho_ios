@@ -51,7 +51,6 @@ struct LoadingView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(AppColors.background)
         .onAppear {
             isAnimating = true
         }

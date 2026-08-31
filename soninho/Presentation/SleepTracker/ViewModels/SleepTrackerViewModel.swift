@@ -12,7 +12,6 @@ import Combine
 @MainActor
 final class SleepTrackerViewModel: ObservableObject {
     // MARK: - Dependencies
-    private let healthKitService: HealthKitService
     private let storageService: StorageService
     private let motionMonitor: MotionSleepMonitor
 
@@ -47,11 +46,9 @@ final class SleepTrackerViewModel: ObservableObject {
 
     // MARK: - Init
     init(
-        healthKitService: HealthKitService = .shared,
         storageService: StorageService = .shared,
         motionMonitor: MotionSleepMonitor = .shared
     ) {
-        self.healthKitService = healthKitService
         self.storageService = storageService
         self.motionMonitor = motionMonitor
         loadTrackingState()
@@ -136,6 +133,10 @@ final class SleepTrackerViewModel: ObservableObject {
         // already showed its own good-morning (avoids a double greeting).
         if greet {
             WakeGreetingManager.shared.show()
+            // A saved night is an aha-moment; let the greeting finish first.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                RatingGateService.shared.recordPositiveEvent()
+            }
         }
     }
 

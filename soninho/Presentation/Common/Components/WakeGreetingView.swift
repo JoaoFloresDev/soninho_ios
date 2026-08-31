@@ -53,15 +53,15 @@ struct WakeGreetingView: View {
 
     private var gradientColors: [Color] {
         if mode == .snooze {
-            return [Color(hex: "4C1D95"), Color(hex: "312E81"), Color(hex: "0B1026")]
+            return [Color(hex: "2B1206"), Color(hex: "140A05"), Color(hex: "000000")]
         }
         if isMorning {
-            return [Color(hex: "FFD194"), Color(hex: "F97316"), Color(hex: "4F46E5")]
+            return [Color(hex: "FBBF24"), Color(hex: "F97316"), Color(hex: "2B1206")]
         }
         if isDay {
-            return [Color(hex: "60A5FA"), Color(hex: "4F46E5"), Color(hex: "312E81")]
+            return [Color(hex: "FF8A50"), Color(hex: "D84315"), Color(hex: "1A0C05")]
         }
-        return [Color(hex: "312E81"), Color(hex: "4C1D95"), Color(hex: "0B1026")]
+        return [Color(hex: "331507"), Color(hex: "140A05"), Color(hex: "000000")]
     }
 
     private var autoDismissDelay: TimeInterval { mode == .snooze ? 2.2 : 4.0 }

@@ -285,5 +285,6 @@ final class StorageService: ObservableObject {
         bedtimeReminderEnabled = false
         bedtimeReminderMinutes = 30
         sleepGoalHours = 8.0
+        autoStartSleepEnabled = false
     }
 }

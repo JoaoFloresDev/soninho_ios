@@ -19,33 +19,37 @@ struct AlarmEditSheet: View {
     // MARK: - View Body
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    timePicker
-                    smartAlarmCard
-                    WakeUpSettingsSection(
-                        mission: $viewModel.editingMission,
-                        difficulty: $viewModel.editingMissionDifficulty,
-                        gradualWake: $viewModel.editingGradualWake,
-                        gradualDuration: $viewModel.editingGradualDuration,
-                        antiRelapse: $viewModel.editingAntiRelapse
-                    )
-                    SnoozeSettingsSection(
-                        snoozeLimit: $viewModel.editingSnoozeLimit,
-                        snoozeDuration: $viewModel.editingSnoozeDuration
-                    )
-                    repeatSection
-                    soundSection
-                    labelSection
+            ZStack {
+                GlassBackdrop()
 
-                    if viewModel.selectedAlarm != nil {
-                        deleteButton
+                ScrollView {
+                    VStack(spacing: 24) {
+                        timePicker
+                        smartAlarmCard
+                        WakeUpSettingsSection(
+                            mission: $viewModel.editingMission,
+                            difficulty: $viewModel.editingMissionDifficulty,
+                            gradualWake: $viewModel.editingGradualWake,
+                            gradualDuration: $viewModel.editingGradualDuration,
+                            antiRelapse: $viewModel.editingAntiRelapse
+                        )
+                        SnoozeSettingsSection(
+                            snoozeLimit: $viewModel.editingSnoozeLimit,
+                            snoozeDuration: $viewModel.editingSnoozeDuration
+                        )
+                        repeatSection
+                        soundSection
+                        labelSection
+
+                        if viewModel.selectedAlarm != nil {
+                            deleteButton
+                        }
                     }
+                    .padding()
+                    .padding(.bottom, 50)
                 }
-                .padding()
-                .padding(.bottom, 50)
+                .softScrollEdge()
             }
-            .background(AppColors.background)
             .onDisappear { stopPreview() }
             .navigationTitle(viewModel.selectedAlarm == nil
                 ? String(localized: "alarm_add")
@@ -131,30 +135,26 @@ struct AlarmEditSheet: View {
                 .font(AppFonts.headline())
                 .foregroundStyle(AppColors.textPrimary)
 
-            HStack(spacing: 8) {
-                ForEach(Weekday.allCases) { day in
-                    Button {
-                        if viewModel.editingRepeatDays.contains(day) {
-                            viewModel.editingRepeatDays.remove(day)
-                        } else {
-                            viewModel.editingRepeatDays.insert(day)
+            GlassContainer(spacing: 8) {
+                HStack(spacing: 8) {
+                    ForEach(Weekday.allCases) { day in
+                        let selected = viewModel.editingRepeatDays.contains(day)
+                        Button {
+                            if selected {
+                                viewModel.editingRepeatDays.remove(day)
+                            } else {
+                                viewModel.editingRepeatDays.insert(day)
+                            }
+                        } label: {
+                            Text(day.letter)
+                                .font(AppFonts.caption())
+                                .fontWeight(.semibold)
+                                .frame(width: 40, height: 40)
+                                .foregroundStyle(selected ? .white : AppColors.textSecondary)
+                                .contentShape(Circle())
                         }
-                    } label: {
-                        Text(day.letter)
-                            .font(AppFonts.caption())
-                            .fontWeight(.semibold)
-                            .frame(width: 36, height: 36)
-                            .foregroundStyle(
-                                viewModel.editingRepeatDays.contains(day)
-                                    ? .white
-                                    : AppColors.textSecondary
-                            )
-                            .background(
-                                viewModel.editingRepeatDays.contains(day)
-                                    ? AppColors.primary
-                                    : AppColors.surfaceSecondary
-                            )
-                            .clipShape(Circle())
+                        .buttonStyle(.plain)
+                        .glassCapsule(tint: selected ? AppColors.primary : nil, interactive: true)
                     }
                 }
             }
@@ -168,36 +168,38 @@ struct AlarmEditSheet: View {
                 .font(AppFonts.headline())
                 .foregroundStyle(AppColors.textPrimary)
 
-            ForEach(AlarmSound.allCases) { sound in
-                Button {
-                    viewModel.editingSound = sound
-                    playPreview(sound)
-                } label: {
-                    HStack(spacing: 12) {
-                        Image(systemName: sound.icon)
-                            .font(.system(size: 16))
-                            .foregroundStyle(AppColors.primary)
-                            .frame(width: 32)
+            GlassContainer(spacing: 8) {
+                VStack(spacing: 8) {
+                    ForEach(AlarmSound.allCases) { sound in
+                        let selected = viewModel.editingSound == sound
+                        Button {
+                            viewModel.editingSound = sound
+                            playPreview(sound)
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: sound.icon)
+                                    .font(.system(size: 16))
+                                    .foregroundStyle(AppColors.primary)
+                                    .frame(width: 32)
 
-                        Text(sound.displayName)
-                            .font(AppFonts.body())
-                            .foregroundStyle(AppColors.textPrimary)
+                                Text(sound.displayName)
+                                    .font(AppFonts.body())
+                                    .foregroundStyle(AppColors.textPrimary)
 
-                        Spacer()
+                                Spacer()
 
-                        if viewModel.editingSound == sound {
-                            Image(systemName: isPreviewingSelected ? "speaker.wave.2.fill" : "checkmark")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundStyle(AppColors.primary)
+                                if selected {
+                                    Image(systemName: isPreviewingSelected ? "speaker.wave.2.fill" : "checkmark")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundStyle(AppColors.primary)
+                                }
+                            }
+                            .padding()
+                            .contentShape(Rectangle())
                         }
+                        .buttonStyle(.plain)
+                        .glassSurface(cornerRadius: 12, tint: selected ? AppColors.primary.opacity(0.3) : nil, interactive: true)
                     }
-                    .padding()
-                    .background(
-                        viewModel.editingSound == sound
-                            ? AppColors.primary.opacity(0.1)
-                            : AppColors.surface
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
             }
 
@@ -261,8 +263,7 @@ struct AlarmEditSheet: View {
             }
         }
         .padding()
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .glassSurface(cornerRadius: 12)
     }
 
     // MARK: - Sound Preview
@@ -280,8 +281,12 @@ struct AlarmEditSheet: View {
         }
         stopPreview()
         guard let url = AlarmSoundGenerator.alarmSoundURL(for: sound) else { return }
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.duckOthers])
-        try? AVAudioSession.sharedInstance().setActive(true)
+        // While a sleep night is being tracked the monitor owns a record
+        // session — switching the category would kill its microphone meter.
+        if !MotionSleepMonitor.shared.isMonitoring {
+            try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.duckOthers])
+            try? AVAudioSession.sharedInstance().setActive(true)
+        }
         previewPlayer = try? AVAudioPlayer(contentsOf: url)
         previewPlayer?.volume = Float(viewModel.editingVolume)
         previewPlayer?.play()
@@ -294,7 +299,9 @@ struct AlarmEditSheet: View {
     private func stopPreview() {
         previewPlayer?.stop()
         previewPlayer = nil
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        if !MotionSleepMonitor.shared.isMonitoring, !BackgroundAlarmPlayer.shared.isBackgroundActive {
+            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        }
     }
 
     // MARK: - Delete Button
@@ -311,9 +318,10 @@ struct AlarmEditSheet: View {
                 .foregroundStyle(AppColors.error)
                 .frame(maxWidth: .infinity)
                 .frame(height: 52)
-                .background(AppColors.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
+        .glassSurface(cornerRadius: 12, tint: AppColors.error.opacity(0.25), interactive: true)
     }
 
     // MARK: - Label Section
@@ -325,9 +333,9 @@ struct AlarmEditSheet: View {
 
             TextField(String(localized: "alarm_label_placeholder"), text: $viewModel.editingLabel)
                 .textFieldStyle(.plain)
+                .foregroundStyle(AppColors.textPrimary)
                 .padding()
-                .background(AppColors.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .glassSurface(cornerRadius: 12)
         }
     }
 }

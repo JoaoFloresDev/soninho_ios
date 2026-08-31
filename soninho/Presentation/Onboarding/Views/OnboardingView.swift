@@ -17,8 +17,7 @@ struct OnboardingView: View {
     var body: some View {
         ZStack {
             // Background
-            AppColors.background
-                .ignoresSafeArea()
+            GlassBackdrop()
 
             VStack(spacing: 0) {
                 // Skip Button
@@ -65,13 +64,10 @@ struct OnboardingView: View {
                         AppButton(
                             title: String(localized: "onboarding_get_started"),
                             style: .primary,
-                            icon: "arrow.right",
-                            isLoading: viewModel.isRequestingHealthKit
+                            icon: "arrow.right"
                         ) {
-                            Task {
-                                await viewModel.completeOnboarding()
-                                isOnboardingComplete = true
-                            }
+                            viewModel.completeOnboarding()
+                            isOnboardingComplete = true
                         }
                     } else {
                         AppButton(
@@ -103,37 +99,19 @@ struct OnboardingPageView: View {
         VStack(spacing: 40) {
             Spacer()
 
-            // Icon
+            // Hero illustration
             ZStack {
-                // Outer glow
+                // Soft brand glow behind the artwork
                 Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: page.gradient.map { Color(hex: $0).opacity(0.2) },
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: 200, height: 200)
-                    .blur(radius: 30)
-                    .scaleEffect(isAnimating ? 1.1 : 1.0)
+                    .fill(AppColors.primary.opacity(0.22))
+                    .frame(width: 230, height: 230)
+                    .blur(radius: 40)
+                    .scaleEffect(isAnimating ? 1.12 : 1.0)
 
-                // Inner circle
-                Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: page.gradient.map { Color(hex: $0) },
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: 140, height: 140)
-                    .shadow(color: .black.opacity(0.3), radius: 20)
-
-                // Icon
-                Image(systemName: page.icon)
-                    .font(.system(size: 56))
-                    .foregroundStyle(.white)
+                Image(page.heroImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 260, height: 260)
             }
             .animation(
                 .easeInOut(duration: 2).repeatForever(autoreverses: true),

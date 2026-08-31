@@ -37,7 +37,6 @@ enum TimePeriod: String, CaseIterable, Identifiable {
 @MainActor
 final class StatisticsViewModel: ObservableObject {
     // MARK: - Dependencies
-    private let healthKitService: HealthKitService
     private let storageService: StorageService
 
     // MARK: - Published Properties
@@ -131,11 +130,7 @@ final class StatisticsViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Init
-    init(
-        healthKitService: HealthKitService = .shared,
-        storageService: StorageService = .shared
-    ) {
-        self.healthKitService = healthKitService
+    init(storageService: StorageService = .shared) {
         self.storageService = storageService
         observeNotifications()
     }

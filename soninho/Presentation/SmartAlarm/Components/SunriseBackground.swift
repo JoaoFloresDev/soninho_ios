@@ -17,9 +17,9 @@ struct SunriseBackground: View {
     // MARK: - View Body
     var body: some View {
         ZStack {
-            // Night base
+            // Night base — black with a faint warm ember low on the screen.
             LinearGradient(
-                colors: [Color(hex: "0B1026"), Color(hex: "1E1B4B"), Color(hex: "312E81")],
+                colors: [Color(hex: "000000"), Color(hex: "140A05"), Color(hex: "331507")],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -27,7 +27,7 @@ struct SunriseBackground: View {
 
             // Sunrise wash, faded in by progress
             LinearGradient(
-                colors: [Color(hex: "1E1B4B"), Color(hex: "7C3AED"), Color(hex: "F97316"), Color(hex: "FBBF24")],
+                colors: [Color(hex: "1A0C05"), Color(hex: "8A2E0C"), Color(hex: "F97316"), Color(hex: "FBBF24")],
                 startPoint: .top,
                 endPoint: .bottom
             )

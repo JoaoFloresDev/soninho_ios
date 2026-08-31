@@ -16,12 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alarm.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ptf">
-                                <rect key="frame" x="146.66666666666666" y="376" width="100" height="100"/>
-                                <color key="tintColor" red="0.95686274509803915" green="0.31764705882352939" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ptf">
+                                <rect key="frame" x="116.5" y="346" width="160" height="160"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="0jh-XX-XXX"/>
-                                    <constraint firstAttribute="height" constant="100" id="0jh-YY-YYY"/>
+                                    <constraint firstAttribute="width" constant="160" id="0jh-XX-XXX"/>
+                                    <constraint firstAttribute="height" constant="160" id="0jh-YY-YYY"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -39,6 +38,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LaunchIcon" width="160" height="160"/>
         <systemColor name="systemBackgroundColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -10,9 +10,11 @@ import Foundation
 // MARK: - Date Extensions
 extension Date {
     // MARK: - Formatters
+    /// Follows the device's 12/24-hour setting ("07:00" vs "7:00 AM").
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
         return formatter
     }()
 

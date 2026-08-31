@@ -12,7 +12,7 @@ struct SleepTipsView: View {
     // MARK: - Properties
     @State private var selectedCategory: SleepTip.TipCategory?
     private let tipsService = SleepTipsService.shared
-    
+
     // MARK: - Computed Properties
     private var filteredTips: [SleepTip] {
         if let category = selectedCategory {
@@ -20,72 +20,78 @@ struct SleepTipsView: View {
         }
         return tipsService.getAllTips()
     }
-    
+
     // MARK: - View Body
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Daily Tip Card
-                dailyTipCard
-                
-                // Category Filter
-                categoryFilter
-                
-                // Tips List
-                tipsList
+        ZStack {
+            GlassBackdrop()
+
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Daily Tip Card
+                    dailyTipCard
+
+                    // Category Filter
+                    categoryFilter
+
+                    // Tips List
+                    tipsList
+                }
+                .padding(.horizontal, AppSpacing.screenHorizontal)
+                .padding(.bottom, AppSpacing.lg)
             }
-            .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.bottom, AppSpacing.lg)
+            .softScrollEdge()
         }
-        .background(AppColors.background)
         .navigationTitle(String(localized: "tips_all_title"))
     }
-    
+
     // MARK: - Daily Tip Card
     private var dailyTipCard: some View {
         let dailyTip = tipsService.getDailyTip()
-        
+
         return VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Image(systemName: "sparkles")
                     .foregroundStyle(AppColors.accent)
-                
+
                 Text(String(localized: "tips_daily_title"))
                     .font(AppFonts.headline())
                     .foregroundStyle(AppColors.textPrimary)
             }
-            
+
             TipCard(tip: dailyTip, isExpanded: true)
         }
     }
-    
+
     // MARK: - Category Filter
     private var categoryFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                FilterChip(
-                    title: String(localized: "action_all"),
-                    isSelected: selectedCategory == nil
-                ) {
-                    withAnimation(.spring(response: 0.3)) {
-                        selectedCategory = nil
-                    }
-                }
-                
-                ForEach(SleepTip.TipCategory.allCases, id: \.self) { category in
+            GlassContainer(spacing: 8) {
+                HStack(spacing: 8) {
                     FilterChip(
-                        title: category.localizedName,
-                        isSelected: selectedCategory == category
+                        title: String(localized: "action_all"),
+                        isSelected: selectedCategory == nil
                     ) {
                         withAnimation(.spring(response: 0.3)) {
-                            selectedCategory = category
+                            selectedCategory = nil
+                        }
+                    }
+
+                    ForEach(SleepTip.TipCategory.allCases, id: \.self) { category in
+                        FilterChip(
+                            title: category.localizedName,
+                            isSelected: selectedCategory == category
+                        ) {
+                            withAnimation(.spring(response: 0.3)) {
+                                selectedCategory = category
+                            }
                         }
                     }
                 }
             }
         }
     }
-    
+
     // MARK: - Tips List
     private var tipsList: some View {
         LazyVStack(spacing: 12) {
@@ -100,9 +106,9 @@ struct SleepTipsView: View {
 struct TipCard: View {
     let tip: SleepTip
     let isExpanded: Bool
-    
+
     @State private var showingDetail = false
-    
+
     var body: some View {
         Button {
             showingDetail.toggle()
@@ -115,7 +121,7 @@ struct TipCard: View {
                     .frame(width: 48, height: 48)
                     .background(AppColors.primary.opacity(0.15))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                
+
                 // Content
                 VStack(alignment: .leading, spacing: 4) {
                     Text(String(localized: String.LocalizationValue(tip.title)))
@@ -123,7 +129,7 @@ struct TipCard: View {
                         .fontWeight(.medium)
                         .foregroundStyle(AppColors.textPrimary)
                         .multilineTextAlignment(.leading)
-                    
+
                     if isExpanded || showingDetail {
                         Text(String(localized: String.LocalizationValue(tip.description)))
                             .font(AppFonts.caption())
@@ -132,18 +138,20 @@ struct TipCard: View {
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 }
-                
+
                 Spacer()
-                
+
                 if !isExpanded {
                     Image(systemName: showingDetail ? "chevron.up" : "chevron.down")
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(AppColors.textTertiary)
                 }
             }
-            .cardStyle()
+            .padding(AppSpacing.cardPadding)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .glassSurface(interactive: !isExpanded)
         .animation(.spring(response: 0.3), value: showingDetail)
     }
 }
@@ -153,7 +161,7 @@ struct FilterChip: View {
     let title: String
     let isSelected: Bool
     let action: () -> Void
-    
+
     var body: some View {
         Button(action: action) {
             Text(title)
@@ -161,10 +169,10 @@ struct FilterChip: View {
                 .fontWeight(isSelected ? .semibold : .regular)
                 .foregroundStyle(isSelected ? .white : AppColors.textSecondary)
                 .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(isSelected ? AppColors.primary : AppColors.surface)
-                .clipShape(Capsule())
+                .frame(minHeight: 44)
+                .contentShape(Capsule())
         }
         .buttonStyle(.plain)
+        .glassCapsule(tint: isSelected ? AppColors.primary : nil, interactive: true)
     }
 }

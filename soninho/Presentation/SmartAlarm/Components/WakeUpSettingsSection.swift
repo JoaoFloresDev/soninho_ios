@@ -39,13 +39,15 @@ struct WakeUpSettingsSection: View {
             sectionLabel(icon: "checklist", title: String(localized: "wake_mission_label"),
                          subtitle: String(localized: "wake_mission_description"))
 
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3), spacing: 8) {
-                ForEach(WakeMission.allCases) { option in
-                    chip(
-                        title: option.displayName,
-                        icon: option.icon,
-                        selected: mission == option
-                    ) { mission = option }
+            GlassContainer(spacing: 8) {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3), spacing: 8) {
+                    ForEach(WakeMission.allCases) { option in
+                        chip(
+                            title: option.displayName,
+                            icon: option.icon,
+                            selected: mission == option
+                        ) { mission = option }
+                    }
                 }
             }
 
@@ -63,8 +65,7 @@ struct WakeUpSettingsSection: View {
             }
         }
         .padding()
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+        .glassSurface()
     }
 
     // MARK: - Gradual Card
@@ -86,8 +87,7 @@ struct WakeUpSettingsSection: View {
             }
         }
         .padding()
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+        .glassSurface()
     }
 
     // MARK: - Anti-Relapse Card
@@ -98,8 +98,7 @@ struct WakeUpSettingsSection: View {
         }
         .tint(AppColors.accent)
         .padding()
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius))
+        .glassSurface()
     }
 
     // MARK: - Subviews
@@ -135,8 +134,9 @@ struct WakeUpSettingsSection: View {
             .foregroundStyle(selected ? .white : AppColors.textSecondary)
             .frame(maxWidth: .infinity)
             .frame(height: 64)
-            .background(selected ? AppColors.accent : AppColors.surfaceSecondary)
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
+        .glassSurface(cornerRadius: 12, tint: selected ? AppColors.accent : nil, interactive: true)
     }
 }

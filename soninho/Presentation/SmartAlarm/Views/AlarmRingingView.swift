@@ -100,13 +100,11 @@ struct AlarmRingingView: View {
                 Button {
                     requestDismiss()
                 } label: {
-                    actionLabel(
-                        icon: missionIcon,
-                        text: missionDismissText,
-                        foreground: .white,
-                        background: AppColors.primary
-                    )
+                    actionLabel(icon: missionIcon, text: missionDismissText, foreground: .white)
+                        .background(AppColors.primary)
+                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 }
+                .buttonStyle(ScaleButtonStyle())
 
                 // Snooze respects the per-alarm limit: hidden when disabled or
                 // when the allowed snoozes for this ring were used up.
@@ -114,13 +112,10 @@ struct AlarmRingingView: View {
                     Button {
                         requestSnooze()
                     } label: {
-                        actionLabel(
-                            icon: "clock.arrow.circlepath",
-                            text: snoozeButtonText,
-                            foreground: AppColors.textSecondary,
-                            background: AppColors.surface.opacity(0.85)
-                        )
+                        actionLabel(icon: "clock.arrow.circlepath", text: snoozeButtonText, foreground: .white)
                     }
+                    .buttonStyle(.plain)
+                    .glassSurface(cornerRadius: 16, interactive: true)
                 }
             }
             .padding(.horizontal, 32)
@@ -170,7 +165,7 @@ struct AlarmRingingView: View {
     }
 
     // MARK: - Subviews
-    private func actionLabel(icon: String, text: String, foreground: Color, background: Color) -> some View {
+    private func actionLabel(icon: String, text: String, foreground: Color) -> some View {
         HStack(spacing: 8) {
             Image(systemName: icon)
                 .font(.system(size: 16, weight: .semibold))
@@ -180,8 +175,7 @@ struct AlarmRingingView: View {
         .foregroundStyle(foreground)
         .frame(maxWidth: .infinity)
         .frame(height: 56)
-        .background(background)
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .contentShape(Rectangle())
     }
 
     // MARK: - Flow

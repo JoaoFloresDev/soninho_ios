@@ -16,27 +16,31 @@ struct PaywallView: View {
     // MARK: - View Body
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 32) {
-                    // Header
-                    headerSection
+            ZStack {
+                GlassBackdrop()
 
-                    // Features
-                    featuresSection
+                ScrollView {
+                    VStack(spacing: 32) {
+                        // Header
+                        headerSection
 
-                    // Plans
-                    plansSection
+                        // Features
+                        featuresSection
 
-                    // Purchase Button
-                    purchaseButton
+                        // Plans
+                        plansSection
 
-                    // Footer
-                    footerSection
+                        // Purchase Button
+                        purchaseButton
+
+                        // Footer
+                        footerSection
+                    }
+                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                    .padding(.bottom, 32)
                 }
-                .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, 32)
+                .softScrollEdge()
             }
-            .background(AppColors.background)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -119,8 +123,7 @@ struct PaywallView: View {
             }
         }
         .padding()
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .glassSurface()
     }
 
     // MARK: - Plans Section
@@ -248,13 +251,13 @@ struct PlanCard: View {
                 }
             }
             .padding()
-            .background(isSelected ? AppColors.primary.opacity(0.1) : AppColors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(isSelected ? AppColors.primary : .clear, lineWidth: 2)
-            )
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .glassSurface(tint: isSelected ? AppColors.primary.opacity(0.3) : nil, interactive: true)
+        .overlay(
+            RoundedRectangle(cornerRadius: AppSpacing.cardCornerRadius, style: .continuous)
+                .stroke(isSelected ? AppColors.primary : .clear, lineWidth: 2)
+        )
     }
 }

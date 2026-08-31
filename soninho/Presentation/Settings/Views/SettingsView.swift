@@ -35,7 +35,7 @@ struct SettingsView: View {
             .listStyle(.insetGrouped)
             .labelStyle(SettingsRowLabelStyle())
             .scrollContentBackground(.hidden)
-            .background(AppColors.background)
+            .background(GlassBackdrop())
             .contentMargins(.bottom, AppSpacing.lg, for: .scrollContent)
             .navigationTitle(String(localized: "settings_title"))
             .navigationBarTitleDisplayMode(.large)
@@ -74,7 +74,7 @@ struct SettingsView: View {
                             .foregroundStyle(AppColors.textSecondary)
                     }
                 }
-                .listRowBackground(AppColors.surface)
+                .glassListRow()
             } else {
                 Button {
                     showingPaywall = true
@@ -103,7 +103,7 @@ struct SettingsView: View {
                             .foregroundStyle(AppColors.textTertiary)
                     }
                 }
-                .listRowBackground(AppColors.surface)
+                .glassListRow()
             }
         }
     }
@@ -116,7 +116,7 @@ struct SettingsView: View {
                 settingsRowLabel("moon.zzz.fill", String(localized: "settings_bedtime_reminder"))
             }
             .tint(AppColors.primary)
-            .listRowBackground(AppColors.surface)
+            .glassListRow()
 
             // Bedtime Reminder Time
             if viewModel.bedtimeReminderEnabled {
@@ -125,7 +125,7 @@ struct SettingsView: View {
                         .foregroundStyle(AppColors.textPrimary)
                 }
                 .tint(AppColors.primary)
-                .listRowBackground(AppColors.surface)
+                .glassListRow()
             }
 
             // Auto-start — a single cell that expands to reveal its time picker.
@@ -152,7 +152,7 @@ struct SettingsView: View {
                     .tint(AppColors.primary)
                 }
             }
-            .listRowBackground(AppColors.surface)
+            .glassListRow()
             .animation(.easeInOut(duration: 0.25), value: viewModel.autoStartSleepEnabled)
 
             // Sleep Tips
@@ -162,16 +162,7 @@ struct SettingsView: View {
                 Label(String(localized: "settings_sleep_tips"), systemImage: "lightbulb.fill")
                     .foregroundStyle(AppColors.textPrimary)
             }
-            .listRowBackground(AppColors.surface)
-
-            // Health App Integration
-            NavigationLink {
-                HealthKitSettingsView()
-            } label: {
-                Label(String(localized: "settings_health_app"), systemImage: "heart.fill")
-                    .foregroundStyle(AppColors.textPrimary)
-            }
-            .listRowBackground(AppColors.surface)
+            .glassListRow()
         }
     }
 
@@ -185,7 +176,7 @@ struct SettingsView: View {
                 Label(String(localized: "settings_rate_app"), systemImage: "star.fill")
                     .foregroundStyle(AppColors.textPrimary)
             }
-            .listRowBackground(AppColors.surface)
+            .glassListRow()
 
             // Share App
             if let shareURL = URL(string: AppConstants.appStoreURL) {
@@ -193,7 +184,7 @@ struct SettingsView: View {
                     settingsRowLabel("square.and.arrow.up", String(localized: "settings_share_app"))
                         .foregroundStyle(AppColors.textPrimary)
                 }
-                .listRowBackground(AppColors.surface)
+                .glassListRow()
             }
 
             // Send Feedback
@@ -203,7 +194,7 @@ struct SettingsView: View {
                 Label(String(localized: "settings_feedback"), systemImage: "envelope.fill")
                     .foregroundStyle(AppColors.textPrimary)
             }
-            .listRowBackground(AppColors.surface)
+            .glassListRow()
         }
     }
 
@@ -217,7 +208,16 @@ struct SettingsView: View {
                 Label(String(localized: "settings_privacy"), systemImage: "hand.raised.fill")
                     .foregroundStyle(AppColors.textPrimary)
             }
-            .listRowBackground(AppColors.surface)
+            .glassListRow()
+
+            // Terms of Use
+            Button {
+                viewModel.openTermsOfUse()
+            } label: {
+                Label(String(localized: "settings_terms"), systemImage: "doc.text.fill")
+                    .foregroundStyle(AppColors.textPrimary)
+            }
+            .glassListRow()
 
             // Version
             HStack {
@@ -229,10 +229,9 @@ struct SettingsView: View {
                 Text(viewModel.appVersion)
                     .foregroundStyle(AppColors.textSecondary)
             }
-            .listRowBackground(AppColors.surface)
+            .glassListRow()
         }
     }
-
 }
 
 // MARK: - Settings Row Label Style
@@ -244,71 +243,6 @@ private struct SettingsRowLabelStyle: LabelStyle {
                 .font(.system(size: 14))
                 .frame(width: 22, alignment: .center)
             configuration.title
-        }
-    }
-}
-
-// MARK: - HealthKit Settings View
-struct HealthKitSettingsView: View {
-    @StateObject private var healthKit = HealthKitService.shared
-    @State private var isRequesting = false
-
-    var body: some View {
-        List {
-            Section {
-                // Connect — triggers the Apple Health read-permission sheet.
-                Button {
-                    requestAccess()
-                } label: {
-                    HStack {
-                        Label(String(localized: "settings_health_connect"), systemImage: "heart.fill")
-                            .foregroundStyle(AppColors.textPrimary)
-                        Spacer()
-                        if isRequesting {
-                            ProgressView()
-                        } else {
-                            Image(systemName: "arrow.right.circle.fill")
-                                .foregroundStyle(AppColors.primary)
-                        }
-                    }
-                }
-                .disabled(isRequesting)
-                .listRowBackground(AppColors.surface)
-
-                // Apple hides read-only authorization, so we can't honestly show
-                // a "Connected" status. Let the user manage access directly.
-                Button {
-                    if let url = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(url)
-                    }
-                } label: {
-                    HStack {
-                        Text(String(localized: "settings_health_manage"))
-                            .foregroundStyle(AppColors.primary)
-                        Spacer()
-                        Image(systemName: "arrow.up.forward.app")
-                            .foregroundStyle(AppColors.textTertiary)
-                    }
-                }
-                .listRowBackground(AppColors.surface)
-            } header: {
-                Text(String(localized: "settings_health_section"))
-            } footer: {
-                Text(String(localized: "settings_health_footer"))
-            }
-        }
-        .listStyle(.insetGrouped)
-        .labelStyle(SettingsRowLabelStyle())
-        .scrollContentBackground(.hidden)
-        .background(AppColors.background)
-        .navigationTitle(String(localized: "settings_health_app"))
-    }
-
-    private func requestAccess() {
-        isRequesting = true
-        Task {
-            try? await healthKit.requestAuthorization()
-            isRequesting = false
         }
     }
 }

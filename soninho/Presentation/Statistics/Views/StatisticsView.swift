@@ -16,43 +16,47 @@ struct StatisticsView: View {
     // MARK: - View Body
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    // Source badge — this screen analyzes Soninho's own tracking.
-                    sourceBadge
+            ZStack {
+                GlassBackdrop()
 
-                    // Period Picker
-                    periodPicker
+                ScrollView {
+                    VStack(spacing: 24) {
+                        // Source badge — this screen analyzes the app's own tracking.
+                        sourceBadge
 
-                    if viewModel.isLoading {
-                        LoadingView()
-                            .frame(height: 400)
-                    } else if viewModel.records.isEmpty {
-                        trackerEmptyState
-                    } else {
-                        // Overview Card
-                        overviewCard
+                        // Period Picker
+                        periodPicker
 
-                        // Sleep Goal Progress
-                        sleepGoalSection
+                        if viewModel.isLoading {
+                            LoadingView()
+                                .frame(height: 400)
+                        } else if viewModel.records.isEmpty {
+                            trackerEmptyState
+                        } else {
+                            // Overview Card
+                            overviewCard
 
-                        // Sleep Duration Chart
-                        durationChartSection
+                            // Sleep Goal Progress
+                            sleepGoalSection
 
-                        // Sleep Phases
-                        phasesSection
+                            // Sleep Duration Chart
+                            durationChartSection
 
-                        // Sleep Schedule
-                        scheduleSection
+                            // Sleep Phases
+                            phasesSection
 
-                        // Sleep History
-                        historySection
+                            // Sleep Schedule
+                            scheduleSection
+
+                            // Sleep History
+                            historySection
+                        }
                     }
+                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                    .padding(.bottom, AppSpacing.lg)
                 }
-                .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, AppSpacing.lg)
+                .softScrollEdge()
             }
-            .background(AppColors.background)
             .navigationTitle(String(localized: "stats_title"))
             .navigationBarTitleDisplayMode(.large)
             .task {
@@ -72,15 +76,14 @@ struct StatisticsView: View {
         .foregroundStyle(AppColors.accent)
         .padding(.horizontal, 10)
         .padding(.vertical, 5)
-        .background(AppColors.accent.opacity(0.15))
-        .clipShape(Capsule())
+        .glassCapsule(tint: AppColors.accent.opacity(0.3))
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Tracker Empty State
     private var trackerEmptyState: some View {
         EmptyStateView(
-            icon: "moon.zzz.fill",
+            imageName: "heroBed",
             title: String(localized: "stats_tracker_empty_title"),
             message: String(localized: "stats_tracker_empty_message"),
             actionTitle: String(localized: "stats_tracker_empty_action"),
@@ -434,13 +437,18 @@ struct StatisticsView: View {
                 .font(AppFonts.headline())
                 .foregroundStyle(AppColors.textPrimary)
 
-            ForEach(viewModel.records) { record in
-                NavigationLink {
-                    SleepDetailView(record: record)
-                } label: {
-                    historyRow(record)
+            GlassContainer(spacing: 12) {
+                VStack(spacing: 12) {
+                    ForEach(viewModel.records) { record in
+                        NavigationLink {
+                            SleepDetailView(record: record)
+                        } label: {
+                            historyRow(record)
+                        }
+                        .buttonStyle(.plain)
+                        .glassSurface(cornerRadius: 12, interactive: true)
+                    }
                 }
-                .buttonStyle(.plain)
             }
         }
     }
@@ -472,8 +480,7 @@ struct StatisticsView: View {
                 .foregroundStyle(AppColors.textTertiary)
         }
         .padding()
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .contentShape(Rectangle())
     }
 }
 
@@ -486,30 +493,35 @@ struct SleepDetailView: View {
 
     // MARK: - View Body
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                SleepAnalysisCard(record: record)
+        ZStack {
+            GlassBackdrop()
 
-                // Delete button
-                Button {
-                    showingDeleteConfirmation = true
-                } label: {
-                    HStack(spacing: 8) {
-                        Image(systemName: "trash")
-                        Text(String(localized: "stats_delete_record"))
+            ScrollView {
+                VStack(spacing: 24) {
+                    SleepAnalysisCard(record: record)
+
+                    // Delete button
+                    Button {
+                        showingDeleteConfirmation = true
+                    } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "trash")
+                            Text(String(localized: "stats_delete_record"))
+                        }
+                        .font(AppFonts.subheadline())
+                        .foregroundStyle(AppColors.error)
+                        .frame(maxWidth: .infinity)
+                        .frame(minHeight: 48)
+                        .contentShape(Rectangle())
                     }
-                    .font(AppFonts.subheadline())
-                    .foregroundStyle(AppColors.error)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(AppColors.error.opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .buttonStyle(.plain)
+                    .glassSurface(cornerRadius: 12, tint: AppColors.error.opacity(0.25), interactive: true)
                 }
+                .padding(.horizontal, AppSpacing.screenHorizontal)
+                .padding(.bottom, AppSpacing.lg)
             }
-            .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.bottom, AppSpacing.lg)
+            .softScrollEdge()
         }
-        .background(AppColors.background)
         .navigationTitle(record.startTime.mediumDateString)
         .navigationBarTitleDisplayMode(.inline)
         .confirmationDialog(

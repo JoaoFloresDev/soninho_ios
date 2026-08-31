@@ -64,8 +64,7 @@ struct SleepAnalysisCard: View {
             insightsSection
         }
         .padding(20)
-        .background(AppColors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .glassSurface(cornerRadius: 20)
     }
 
     // MARK: - Header Section

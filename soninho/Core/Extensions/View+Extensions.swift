@@ -10,34 +10,15 @@ import SwiftUI
 // MARK: - View Extensions
 extension View {
     // MARK: - Card Style
+    /// Padded Liquid Glass card (flat surface before iOS 26).
     func cardStyle(
         padding: CGFloat = AppSpacing.cardPadding,
-        cornerRadius: CGFloat = AppSpacing.cardCornerRadius
+        cornerRadius: CGFloat = AppSpacing.cardCornerRadius,
+        tint: Color? = nil
     ) -> some View {
         self
             .padding(padding)
-            .background(AppColors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-    }
-
-    // MARK: - Gradient Card Style
-    func gradientCardStyle(
-        padding: CGFloat = AppSpacing.cardPadding,
-        cornerRadius: CGFloat = AppSpacing.cardCornerRadius
-    ) -> some View {
-        self
-            .padding(padding)
-            .background(AppColors.cardGradient)
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-    }
-
-    // MARK: - Glass Morphism
-    func glassStyle(
-        cornerRadius: CGFloat = AppSpacing.cardCornerRadius
-    ) -> some View {
-        self
-            .background(.ultraThinMaterial.opacity(0.5))
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+            .glassSurface(cornerRadius: cornerRadius, tint: tint)
     }
 
     // MARK: - Shadow
@@ -50,21 +31,9 @@ extension View {
         self.shadow(color: color, radius: radius, x: x, y: y)
     }
 
-    // MARK: - Glow Effect (Black shadows only per design guidelines)
-    func glowEffect(radius: CGFloat = 20) -> some View {
-        self
-            .shadow(color: .black.opacity(0.2), radius: radius)
-            .shadow(color: .black.opacity(0.1), radius: radius * 2)
-    }
-
     // MARK: - Shimmer Loading
     func shimmer(isActive: Bool = true) -> some View {
         self.modifier(ShimmerModifier(isActive: isActive))
-    }
-
-    // MARK: - Animated Button
-    func animatedButton(scale: CGFloat = 0.95) -> some View {
-        self.modifier(AnimatedButtonModifier(scale: scale))
     }
 
     // MARK: - Conditional Modifier
@@ -82,15 +51,6 @@ extension View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 
-    // MARK: - On First Appear
-    func onFirstAppear(perform action: @escaping () -> Void) -> some View {
-        self.modifier(FirstAppearModifier(action: action))
-    }
-
-    // MARK: - Screen Padding
-    func screenPadding() -> some View {
-        self.padding(.horizontal, AppSpacing.screenHorizontal)
-    }
 }
 
 // MARK: - Shimmer Modifier
@@ -128,16 +88,6 @@ struct ShimmerModifier: ViewModifier {
     }
 }
 
-// MARK: - Animated Button Modifier
-struct AnimatedButtonModifier: ViewModifier {
-    let scale: CGFloat
-
-    func body(content: Content) -> some View {
-        content
-            .buttonStyle(ScaleButtonStyle(scale: scale))
-    }
-}
-
 // MARK: - Scale Button Style
 struct ScaleButtonStyle: ButtonStyle {
     let scale: CGFloat
@@ -150,20 +100,5 @@ struct ScaleButtonStyle: ButtonStyle {
         configuration.label
             .scaleEffect(configuration.isPressed ? scale : 1.0)
             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
-    }
-}
-
-// MARK: - First Appear Modifier
-struct FirstAppearModifier: ViewModifier {
-    let action: () -> Void
-    @State private var hasAppeared = false
-
-    func body(content: Content) -> some View {
-        content
-            .onAppear {
-                guard !hasAppeared else { return }
-                hasAppeared = true
-                action()
-            }
     }
 }

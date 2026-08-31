@@ -412,14 +412,12 @@ final class MotionSleepMonitor: ObservableObject {
         // Trigger smart alarm when user shows signs of light sleep / transitioning to wakefulness:
         // - Movement above deep sleep threshold (user is in lighter phase)
         // - OR a recent spike in movement (user shifted position)
-        if avgMovement > Constants.smartAlarmMovementThreshold {
-            smartAlarmTriggered = true
-            smartAlarmCallback?()
-        }
-
-        // Also check if the user has been in light sleep for at least 2 consecutive minutes
+        // Also fires when the user has been in light sleep for at least 2
+        // consecutive minutes. Either condition triggers exactly once.
         let recentPhases = phaseHistory.suffix(2)
-        if recentPhases.count >= 2 && recentPhases.allSatisfy({ $0.phase == .light }) {
+        let lightForTwoMinutes = recentPhases.count >= 2 && recentPhases.allSatisfy { $0.phase == .light }
+
+        if avgMovement > Constants.smartAlarmMovementThreshold || lightForTwoMinutes {
             smartAlarmTriggered = true
             smartAlarmCallback?()
         }
@@ -463,7 +461,7 @@ final class MotionSleepMonitor: ObservableObject {
         do {
             // Configure audio session for recording alongside playback
             let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers, .allowBluetooth])
+            try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers, .allowBluetoothHFP])
             try session.setActive(true)
 
             audioRecorder = try AVAudioRecorder(url: tempURL, settings: settings)

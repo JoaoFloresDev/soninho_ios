@@ -61,8 +61,7 @@ struct MemoryMissionView: View {
                 }
             }
             .padding(20)
-            .background(AppColors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .glassSurface(cornerRadius: 20)
 
             // Replay
             Button {
