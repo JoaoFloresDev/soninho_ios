@@ -43,15 +43,6 @@ enum TabItem: Int, CaseIterable, Identifiable {
         case .settings: return "gearshape.fill"
         }
     }
-
-    var iconUnselected: String {
-        switch self {
-        case .tracker: return "moon.zzz"
-        case .alarm: return "alarm"
-        case .statistics: return "chart.bar"
-        case .settings: return "gearshape"
-        }
-    }
 }
 
 // MARK: - Main Tab View
@@ -76,25 +67,25 @@ struct MainTabView: View {
         TabView(selection: $selectedTab) {
             SmartAlarmView()
                 .tabItem {
-                    Label(TabItem.alarm.title, systemImage: selectedTab == .alarm ? TabItem.alarm.icon : TabItem.alarm.iconUnselected)
+                    Label(TabItem.alarm.title, systemImage: TabItem.alarm.icon)
                 }
                 .tag(TabItem.alarm)
 
             SleepTrackerView()
                 .tabItem {
-                    Label(TabItem.tracker.title, systemImage: selectedTab == .tracker ? TabItem.tracker.icon : TabItem.tracker.iconUnselected)
+                    Label(TabItem.tracker.title, systemImage: TabItem.tracker.icon)
                 }
                 .tag(TabItem.tracker)
 
             StatisticsView()
                 .tabItem {
-                    Label(TabItem.statistics.title, systemImage: selectedTab == .statistics ? TabItem.statistics.icon : TabItem.statistics.iconUnselected)
+                    Label(TabItem.statistics.title, systemImage: TabItem.statistics.icon)
                 }
                 .tag(TabItem.statistics)
 
             SettingsView()
                 .tabItem {
-                    Label(TabItem.settings.title, systemImage: selectedTab == .settings ? TabItem.settings.icon : TabItem.settings.iconUnselected)
+                    Label(TabItem.settings.title, systemImage: TabItem.settings.icon)
                 }
                 .tag(TabItem.settings)
         }

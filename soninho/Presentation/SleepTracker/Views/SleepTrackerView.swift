@@ -347,6 +347,7 @@ struct SleepTrackerView: View {
 
     // MARK: - Tracking Timer Display
     private var trackingTimerDisplay: some View {
+        VStack(spacing: 0) {
         ZStack {
             // Pulsing rings
             ForEach(0..<3, id: \.self) { index in
@@ -368,23 +369,18 @@ struct SleepTrackerView: View {
                     )
             }
 
-            // Main circle
-            Circle()
-                .fill(AppColors.surface.opacity(0.85))
-                .frame(width: 150, height: 150)
-                .shadow(color: .black.opacity(0.3), radius: 20)
+            // Sleeping sloth mascot (same asset as the stats placeholder)
+            Image("heroBed")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 165, height: 165)
+        }
 
-            // Timer content
-            VStack(spacing: 6) {
-                Image(systemName: "moon.zzz.fill")
-                    .font(.system(size: 22))
-                    .foregroundStyle(AppColors.sleepGradient)
-
-                Text(viewModel.elapsedTimeString)
-                    .font(AppFonts.title2())
-                    .foregroundStyle(AppColors.textPrimary)
-                    .monospacedDigit()
-            }
+        Text(viewModel.elapsedTimeString)
+            .font(AppFonts.title())
+            .foregroundStyle(AppColors.textPrimary)
+            .monospacedDigit()
+            .padding(.top, 10)
         }
         .onAppear {
             pulseAnimation = true

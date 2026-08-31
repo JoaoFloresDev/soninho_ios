@@ -58,17 +58,12 @@ struct SmartAlarmView: View {
 
     // MARK: - Next Alarm Card
     private var nextAlarmCard: some View {
-        VStack(spacing: 16) {
-            // Icon
-            ZStack {
-                Circle()
-                    .fill(AppColors.primary.opacity(0.18))
-                    .frame(width: 80, height: 80)
-
-                Image(systemName: "alarm.fill")
-                    .font(.system(size: 36))
-                    .foregroundStyle(AppColors.sleepGradient)
-            }
+        VStack(spacing: 12) {
+            // Mascot hugging its alarm clock (carries its own baked halo glow)
+            Image("heroAlarm")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 150)
 
             // Next Alarm Info
             VStack(spacing: 4) {

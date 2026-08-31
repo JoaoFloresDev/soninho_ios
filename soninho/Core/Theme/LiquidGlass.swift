@@ -186,32 +186,18 @@ extension View {
 }
 
 // MARK: - Glass Backdrop
-/// Black + sunrise-orange backdrop behind every screen — the glass panes need
-/// colour behind them to refract, and pure black shows nothing.
+/// Near-black backdrop: content readability comes first, so the only colour is
+/// a whisper of sunrise orange at the very top edge, away from any text.
 struct GlassBackdrop: View {
     var body: some View {
         ZStack {
             AppColors.background
 
             RadialGradient(
-                colors: [AppColors.primary.opacity(0.40), .clear],
-                center: UnitPoint(x: 0.9, y: 0.0),
+                colors: [AppColors.primary.opacity(0.12), .clear],
+                center: UnitPoint(x: 0.85, y: -0.08),
                 startRadius: 0,
-                endRadius: 400
-            )
-
-            RadialGradient(
-                colors: [Color(hex: "D84315").opacity(0.28), .clear],
-                center: UnitPoint(x: 0.05, y: 1.0),
-                startRadius: 0,
-                endRadius: 440
-            )
-
-            RadialGradient(
-                colors: [Color(hex: "FF8A50").opacity(0.10), .clear],
-                center: UnitPoint(x: 0.2, y: 0.35),
-                startRadius: 0,
-                endRadius: 300
+                endRadius: 320
             )
         }
         .ignoresSafeArea()

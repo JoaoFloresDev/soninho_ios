@@ -99,24 +99,16 @@ struct OnboardingPageView: View {
         VStack(spacing: 40) {
             Spacer()
 
-            // Hero illustration
-            ZStack {
-                // Soft brand glow behind the artwork
-                Circle()
-                    .fill(AppColors.primary.opacity(0.22))
-                    .frame(width: 230, height: 230)
-                    .blur(radius: 40)
-                    .scaleEffect(isAnimating ? 1.12 : 1.0)
-
-                Image(page.heroImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 260, height: 260)
-            }
-            .animation(
-                .easeInOut(duration: 2).repeatForever(autoreverses: true),
-                value: isAnimating
-            )
+            // Hero illustration (carries its own baked halo glow)
+            Image(page.heroImage)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 300)
+                .scaleEffect(isAnimating ? 1.03 : 1.0)
+                .animation(
+                    .easeInOut(duration: 2).repeatForever(autoreverses: true),
+                    value: isAnimating
+                )
 
             // Text
             VStack(spacing: 16) {
@@ -129,7 +121,7 @@ struct OnboardingPageView: View {
                     .font(AppFonts.body())
                     .foregroundStyle(AppColors.textSecondary)
                     .multilineTextAlignment(.center)
-                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.horizontal, 32)
 

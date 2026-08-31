@@ -21,6 +21,192 @@
             "state": "translated",
             "value": "Despertador"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المنبّه"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Despertador"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budík"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vækkeur"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wecker"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ξυπνητήρι"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herätyskello"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réveil"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מעורר"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अलार्म"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budilica"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ébresztő"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sveglia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penggera"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wekker"
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vekkerklokke"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budzik"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Despertador"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deșteptător"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Будильник"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budík"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Väckarklocka"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ปลุก"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Будильник"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Báo thức"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "闹钟"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鬧鐘"
+          }
         }
       }
     },
@@ -43,6 +229,192 @@
           "stringUnit": {
             "state": "translated",
             "value": "Despertador"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المنبّه"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Despertador"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budík"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vækkeur"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wecker"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ξυπνητήρι"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herätyskello"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réveil"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מעורר"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अलार्म"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budilica"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ébresztő"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sveglia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penggera"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wekker"
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vekkerklokke"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budzik"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Despertador"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deșteptător"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Будильник"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budík"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Väckarklocka"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ปลุก"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Будильник"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Báo thức"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "闹钟"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鬧鐘"
           }
         }
       }
@@ -67,6 +439,192 @@
             "state": "translated",
             "value": "Sunrise Alarm usa os sensores de movimento para detectar suas fases de sono e acordá-lo no momento ideal durante o sono leve."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يستخدم Sunrise Alarm مستشعرات الحركة لرصد مراحل النوم وإيقاظك في اللحظة المثالية أثناء النوم الخفيف."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm fa servir els sensors de moviment per detectar les fases del son i despertar-te en el moment òptim del son lleuger."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm využívá pohybové senzory k rozpoznání fází spánku a probuzení v optimální chvíli lehkého spánku."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm bruger bevægelsessensorer til at registrere dine søvnstadier og vække dig på det optimale tidspunkt under let søvn."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm nutzt Bewegungssensoren, um deine Schlafphasen zu erkennen und dich im optimalen Moment im leichten Schlaf zu wecken."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το Sunrise Alarm χρησιμοποιεί αισθητήρες κίνησης για να ανιχνεύει τα στάδια ύπνου και να σε ξυπνά στην ιδανική στιγμή του ελαφρού ύπνου."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm käyttää liikeantureita tunnistaakseen univaiheesi ja herättääkseen sinut optimaalisella hetkellä kevyessä unessa."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm utilise les capteurs de mouvement pour détecter vos phases de sommeil et vous réveiller au moment optimal, en sommeil léger."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm משתמש בחיישני התנועה לזיהוי שלבי שינה ולהשכמה ברגע המושלם בשנת השינה הקלה."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm नींद के चरण पहचानने और हल्की नींद के सही पल में आपको जगाने के लिए मोशन सेंसर इस्तेमाल करता है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm koristi senzore pokreta za prepoznavanje faza sna i buđenje u optimalnom trenutku laganog sna."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Sunrise Alarm mozgásérzékelőkkel ismeri fel az alvási fázisaidat, és a könnyű alvás optimális pillanatában ébreszt."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm memakai sensor gerak untuk mendeteksi tahap tidur dan membangunkanmu di momen optimal saat tidur ringan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm usa i sensori di movimento per rilevare le fasi del sonno e svegliarti nel momento ottimale durante il sonno leggero."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarmはモーションセンサーで睡眠ステージを検知し、浅い眠りの最適なタイミングで起こします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm은 모션 센서로 수면 단계를 감지해 얕은 수면 중 최적의 순간에 깨워 줍니다."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm menggunakan penderia gerakan untuk mengesan peringkat tidur dan mengejutkan anda pada saat optimum semasa tidur ringan."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm gebruikt bewegingssensoren om je slaapfasen te herkennen en je op het optimale moment in lichte slaap te wekken."
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm bruker bevegelsessensorer for å gjenkjenne søvnstadiene dine og vekke deg i det optimale øyeblikket i lett søvn."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm używa czujników ruchu, aby rozpoznawać fazy snu i budzić Cię w optymalnym momencie lekkiego snu."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Sunrise Alarm usa os sensores de movimento para detetar as fases do sono e acordá-lo no momento ideal durante o sono leve."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm folosește senzorii de mișcare pentru a detecta fazele somnului și a te trezi în momentul optim din somnul ușor."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm использует датчики движения, чтобы распознавать фазы сна и будить вас в оптимальный момент лёгкого сна."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm využíva pohybové senzory na rozpoznanie fáz spánku a zobudenie v optimálnej chvíli ľahkého spánku."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm använder rörelsesensorer för att känna av dina sömnstadier och väcka dig i det optimala ögonblicket under lätt sömn."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm ใช้เซ็นเซอร์การเคลื่อนไหวเพื่อตรวจจับระยะการนอนและปลุกคุณในจังหวะที่ดีที่สุดช่วงหลับตื้น"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm, uyku evrelerinizi algılamak ve sizi hafif uykudaki en uygun anda uyandırmak için hareket sensörlerini kullanır."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm використовує датчики руху, щоб розпізнавати фази сну і будити вас в оптимальний момент легкого сну."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm dùng cảm biến chuyển động để nhận diện giai đoạn giấc ngủ và đánh thức bạn vào thời điểm hoàn hảo trong giấc ngủ nông."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm 使用运动传感器来检测你的睡眠阶段，并在浅睡时的最佳时刻唤醒你。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm 會使用動作感測器偵測你的睡眠階段，並在淺眠的最佳時刻喚醒你。"
+          }
         }
       }
     },
@@ -89,6 +647,192 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sunrise Alarm usa o microfone para medir os níveis de som ambiente durante o sono e melhorar a precisão da detecção de fases de sono."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يستخدم Sunrise Alarm الميكروفون لقياس مستوى الضوضاء المحيطة أثناء النوم لتحسين دقة رصد مراحل النوم."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm fa servir el micròfon per mesurar el so ambiental durant el son i millorar la detecció de les fases."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm využívá mikrofon k měření okolního hluku během spánku a zpřesnění rozpoznávání fází."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm bruger mikrofonen til at måle lydniveauet i rummet under søvn og forbedre registreringen af søvnstadier."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm nutzt das Mikrofon, um die Umgebungslautstärke im Schlaf zu messen und die Erkennung der Schlafphasen zu verbessern."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το Sunrise Alarm χρησιμοποιεί το μικρόφωνο για να μετρά τον περιβάλλοντα ήχο στον ύπνο και να βελτιώνει την ανίχνευση σταδίων."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm käyttää mikrofonia mittaamaan ympäristön äänitasoa unen aikana univaiheiden tunnistuksen parantamiseksi."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm utilise le micro pour mesurer le niveau sonore ambiant pendant le sommeil et améliorer la détection des phases."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm משתמש במיקרופון למדידת רעשי הסביבה בזמן השינה כדי לשפר את דיוק זיהוי שלבי השינה."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm नींद के चरणों की पहचान बेहतर करने के लिए सोते समय आसपास की आवाज़ मापने हेतु माइक्रोफ़ोन इस्तेमाल करता है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm koristi mikrofon za mjerenje razine okolne buke tijekom sna i točnije prepoznavanje faza."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Sunrise Alarm a mikrofonnal méri a környezeti zajszintet alvás közben a fázisfelismerés pontosításához."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm memakai mikrofon untuk mengukur tingkat suara sekitar saat tidur dan meningkatkan akurasi deteksi tahap tidur."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm usa il microfono per misurare il rumore ambientale durante il sonno e migliorare il rilevamento delle fasi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarmはマイクで睡眠中の環境音レベルを測定し、睡眠ステージ検知の精度を高めます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm은 마이크로 수면 중 주변 소음 수준을 측정해 수면 단계 감지 정확도를 높입니다."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm menggunakan mikrofon untuk mengukur tahap bunyi sekeliling semasa tidur bagi meningkatkan ketepatan pengesanan peringkat tidur."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm gebruikt de microfoon om omgevingsgeluid tijdens je slaap te meten en de detectie van slaapfasen te verbeteren."
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm bruker mikrofonen til å måle lydnivået i rommet under søvn og forbedre gjenkjenningen av søvnstadier."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm używa mikrofonu do pomiaru poziomu dźwięków otoczenia podczas snu, aby poprawić rozpoznawanie faz."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Sunrise Alarm usa o microfone para medir o som ambiente durante o sono e melhorar a deteção das fases."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm folosește microfonul pentru a măsura zgomotul ambiental din timpul somnului și a îmbunătăți detectarea fazelor."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm использует микрофон для измерения уровня фонового шума во сне и повышения точности распознавания фаз."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm využíva mikrofón na meranie okolitého hluku počas spánku a presnejšie rozpoznávanie fáz."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm använder mikrofonen för att mäta ljudnivån i rummet under sömnen och förbättra igenkänningen av sömnstadier."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm ใช้ไมโครโฟนวัดระดับเสียงรอบข้างขณะนอน เพื่อเพิ่มความแม่นยำในการตรวจจับระยะการนอน"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm, uyku sırasında ortam ses düzeyini ölçmek ve evre algılamayı iyileştirmek için mikrofonu kullanır."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm використовує мікрофон для вимірювання рівня фонового шуму під час сну і точнішого розпізнавання фаз."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm dùng micrô để đo mức âm thanh xung quanh khi ngủ, giúp nhận diện giai đoạn giấc ngủ chính xác hơn."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm 使用麦克风测量睡眠期间的环境声音大小，以提升睡眠阶段检测的准确度。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise Alarm 會使用麥克風測量睡眠期間的環境音量，以提升睡眠階段偵測的準確度。"
           }
         }
       }

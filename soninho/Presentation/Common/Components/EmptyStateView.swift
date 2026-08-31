@@ -44,22 +44,10 @@ struct EmptyStateView: View {
 
             // Hero illustration or icon bubble
             if let imageName {
-                ZStack {
-                    Circle()
-                        .fill(AppColors.primary.opacity(0.18))
-                        .frame(width: 150, height: 150)
-                        .blur(radius: 34)
-                        .scaleEffect(isAnimating ? 1.1 : 1.0)
-                        .animation(
-                            .easeInOut(duration: 2).repeatForever(autoreverses: true),
-                            value: isAnimating
-                        )
-
-                    Image(imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 180, height: 180)
-                }
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 190, height: 190)
             } else {
                 ZStack {
                     Circle()
