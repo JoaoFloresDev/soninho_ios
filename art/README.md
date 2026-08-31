@@ -3,8 +3,13 @@
 Sloth mascot set generated with Gemini (`nano-banana-pro-preview`), black + orange palette.
 
 ## icon/
-- `icon_orange.png` — SHIPPED app icon: sloth hugging an alarm clock, flat #F4511E background.
-- `icon_black.png` — same artwork on flat #121212, kept as the alternate.
+- `icon_shipped_black.png` — SHIPPED app icon: sloth hugging an alarm clock on a flat
+  near-black ground, reframed at 1.24x so the mascot reads bigger and the top gap drops
+  from 17.8% to 8.3%. Derived from `icon_black.png` by scale-and-crop rather than a new
+  generation, so the approved artwork is preserved exactly (the flat ground makes the
+  crop invisible).
+- `icon_black.png` — the raw generation, original framing.
+- `icon_orange.png` — same artwork on flat #F4511E, the earlier take.
 - `icon_a.png` — sloth face variant, rejected (less brand pop than the clock pose).
 
 The icon set (`Assets.xcassets/AppIcon.appiconset`, 12 sizes) and the launch
