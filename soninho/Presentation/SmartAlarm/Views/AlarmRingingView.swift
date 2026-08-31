@@ -101,7 +101,7 @@ struct AlarmRingingView: View {
                     requestDismiss()
                 } label: {
                     actionLabel(icon: missionIcon, text: missionDismissText, foreground: .white)
-                        .background(AppColors.primary)
+                        .background(AppColors.primaryButtonGradient)
                         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 }
                 .buttonStyle(ScaleButtonStyle())

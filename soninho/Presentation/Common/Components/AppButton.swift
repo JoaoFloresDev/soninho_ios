@@ -66,7 +66,7 @@ struct AppButton: View {
             .frame(maxWidth: .infinity)
             .frame(height: AppSpacing.buttonHeight)
             .foregroundStyle(textColor)
-            .background(backgroundColor)
+            .background(backgroundStyle)
             .clipShape(RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous)
@@ -84,18 +84,14 @@ struct AppButton: View {
     }
 
     // MARK: - Computed Properties
-    private var backgroundColor: Color {
+    private var backgroundStyle: AnyShapeStyle {
         switch style {
         case .primary:
-            return AppColors.primary
-        case .secondary:
-            return .clear
-        case .outline:
-            return .clear
-        case .ghost:
-            return .clear
+            return AnyShapeStyle(AppColors.primaryButtonGradient)
+        case .secondary, .outline, .ghost:
+            return AnyShapeStyle(Color.clear)
         case .destructive:
-            return AppColors.error
+            return AnyShapeStyle(AppColors.destructiveButtonGradient)
         }
     }
 

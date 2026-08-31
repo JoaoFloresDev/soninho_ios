@@ -135,7 +135,7 @@ struct SleepTrackerView: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: AppSpacing.buttonHeight)
                 .foregroundStyle(.white)
-                .background(AppColors.primary)
+                .background(AppColors.primaryButtonGradient)
                 .clipShape(RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous))
                 .shadow(color: .black.opacity(0.25), radius: 12, y: 4)
             }
@@ -322,7 +322,7 @@ struct SleepTrackerView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: AppSpacing.buttonHeight)
                     .foregroundStyle(.white)
-                    .background(AppColors.primary)
+                    .background(AppColors.primaryButtonGradient)
                     .clipShape(RoundedRectangle(cornerRadius: AppSpacing.buttonCornerRadius, style: .continuous))
                 }
                 .buttonStyle(ScaleButtonStyle())

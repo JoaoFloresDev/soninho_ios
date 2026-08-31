@@ -50,6 +50,20 @@ enum AppColors {
         endPoint: .bottomTrailing
     )
 
+    /// Warm top-lit fill for hero CTAs — reads as a sunrise, matching the app's theme.
+    static let primaryButtonGradient = LinearGradient(
+        colors: [primaryLight, primary],
+        startPoint: .top,
+        endPoint: .bottom
+    )
+
+    /// Same top-lit treatment for destructive actions, so buttons stay consistent.
+    static let destructiveButtonGradient = LinearGradient(
+        colors: [error.opacity(0.88), error],
+        startPoint: .top,
+        endPoint: .bottom
+    )
+
     static let nightGradient = LinearGradient(
         colors: [Color(light: "FFE8D1", dark: "1A1A1C"), Color(light: "FFF8F1", dark: "000000")],
         startPoint: .top,

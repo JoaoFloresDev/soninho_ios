@@ -43,11 +43,15 @@ struct SoninhoApp: App {
                             .environmentObject(storageService)
                             .environmentObject(purchaseService)
                             .environmentObject(notificationService)
+                            .transition(.move(edge: .trailing))
                     } else {
                         OnboardingView(isOnboardingComplete: $isOnboardingComplete)
                             .environmentObject(storageService)
+                            .transition(.move(edge: .leading))
                     }
                 }
+                // Leaving onboarding reads as a push forward, not a cross-fade.
+                .animation(.easeInOut(duration: 0.45), value: isOnboardingComplete)
 
                 // Full-screen alarm overlay
                 if notificationService.isAlarmRinging {
