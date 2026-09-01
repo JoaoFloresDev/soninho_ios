@@ -108,12 +108,11 @@ final class NotificationService: ObservableObject {
 
     // MARK: - Schedule Alarm
     func scheduleAlarm(_ alarm: AlarmModel) async {
+        // Notifications are the fallback, not the only path: on iOS 26 AlarmKit
+        // can ring even when the user declined them, so a refusal must not
+        // abort scheduling.
         if !isAuthorized {
-            let granted = await requestAuthorization()
-            if !granted {
-                print("Notification not authorized")
-                return
-            }
+            _ = await requestAuthorization()
         }
 
         // Replace this alarm's scheduled notifications. A pending snooze is
@@ -131,6 +130,17 @@ final class NotificationService: ObservableObject {
         // the exact opposite of the feature. The early ring now comes only from
         // MotionSleepMonitor, when the sleeper is actually near the surface;
         // otherwise the burst below rings at the real alarm time.
+
+        // AlarmKit is the real thing where it exists: it rings through a Focus
+        // and the ringer switch, which a notification cannot. When it accepts
+        // the alarm the burst below is redundant and would only double the
+        // sound, so it is skipped.
+        // A repeating alarm goes in as a weekly recurrence, so AlarmKit renews it
+        // on its own and the weekday baseline below is not needed either.
+        if await SystemAlarmScheduler.schedule(alarm, at: nextDate) {
+            await refreshPendingNotifications()
+            return
+        }
 
         // PERSISTENT RING: schedule a burst of notifications spaced ~30s apart
         // (each plays the 29s alarm sound), so the alarm keeps ringing for
@@ -506,6 +516,7 @@ final class NotificationService: ObservableObject {
     /// Removes every pending notification of the alarm. `includingSnooze: false`
     /// keeps an in-flight snooze alive (used when merely rescheduling).
     func cancelAlarm(_ alarm: AlarmModel, includingSnooze: Bool = true) async {
+        SystemAlarmScheduler.cancel(alarm)
         var identifiers = [
             alarm.id.uuidString,
             "\(alarm.id.uuidString)_smart"

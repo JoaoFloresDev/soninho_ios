@@ -41,6 +41,8 @@
 		<string>zh-Hans</string>
 		<string>zh-Hant</string>
 	</array>
+	<key>NSAlarmKitUsageDescription</key>
+	<string>So your alarm still sounds when your phone is silent or in a Focus.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Sunrise Alarm uses the microphone to measure ambient sound levels during sleep to improve sleep phase detection accuracy.</string>
 	<key>NSMotionUsageDescription</key>

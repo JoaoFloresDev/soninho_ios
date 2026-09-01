@@ -72,6 +72,20 @@ struct SoninhoApp: App {
             .onChange(of: scenePhase) { _, newPhase in
                 handleScenePhaseChange(newPhase)
             }
+            .onReceive(NotificationCenter.default.publisher(for: .systemAlarmStopped)) { note in
+                // AlarmKit's alert only stops its own sound. The wake-up itself
+                // resumes here, so the mission still has to be cleared.
+                guard let alarmId = note.userInfo?["alarmId"] as? String,
+                      let uuid = UUID(uuidString: alarmId),
+                      let alarm = StorageService.shared.loadAlarms().first(where: { $0.id == uuid })
+                else { return }
+                notificationService.handleForegroundAlarm(
+                    alarmId: alarmId,
+                    soundName: alarm.sound.rawValue,
+                    volume: Float(alarm.volume),
+                    vibration: alarm.vibrationEnabled
+                )
+            }
             .onReceive(NotificationCenter.default.publisher(for: .didCompleteAlarm)) { _ in
                 // Waking up with the alarm is the aha-moment — count it towards
                 // the rating gate once the ringing screen has gone away.

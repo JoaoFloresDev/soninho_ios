@@ -836,6 +836,215 @@
           }
         }
       }
+    },
+    "NSAlarmKitUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So your alarm still sounds when your phone is silent or in a Focus."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para o alarme tocar mesmo com o celular no silencioso ou em um Foco."
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para o alarme tocar mesmo com o telemóvel em silêncio ou num Foco."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para que la alarma suene aunque el teléfono esté en silencio o en un Modo de Concentración."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Damit der Wecker auch bei Stummschaltung oder aktivem Fokus klingelt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour que votre alarme sonne même en mode silencieux ou en mode Concentration."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perché la sveglia suoni anche con il telefono in silenzioso o con un Full Immersion attivo."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zodat je wekker ook afgaat als je telefoon stil staat of in een focus."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サイレントモードや集中モード中でもアラームが鳴るようにするためです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "무음 모드나 집중 모드에서도 알람이 울리도록 하기 위해서입니다."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "让闹钟在手机静音或开启专注模式时依然响起。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讓鬧鐘在手機靜音或開啟專注模式時仍會響起。"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чтобы будильник звонил даже в беззвучном режиме или при включённом фокусировании."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aby budzik zadzwonił nawet przy wyciszonym telefonie lub włączonym trybie skupienia."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telefonunuz sessizdeyken veya bir Odak açıkken bile alarmınız çalsın diye."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Så att alarmet ljuder även när telefonen är ljudlös eller i ett fokusläge."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Щоб будильник дзвонив навіть у беззвучному режимі або з увімкненим фокусуванням."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Så din alarm stadig lyder, når telefonen er lydløs eller i et fokus."
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slik at alarmen ringer selv når telefonen er lydløs eller i et fokus."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jotta herätys soi myös äänettömässä tilassa tai keskittymistilan aikana."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aby budík zazvonil i při ztlumeném telefonu nebo zapnutém soustředění."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pentru ca alarma să sune chiar și cu telefonul pe silențios sau cu un Focus activ."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hogy az ébresztő néma módban vagy bekapcsolt Fókusz mellett is megszólaljon."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Για να χτυπά το ξυπνητήρι ακόμη κι όταν το τηλέφωνο είναι σε σίγαση ή σε Εστίαση."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da alarm zvoni i kad je telefon nijem ili je uključen fokus."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aby budík zazvonil aj pri stlmenom telefóne alebo zapnutom sústredení."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perquè l'alarma soni encara que el telèfon estigui en silenci o en un mode de concentració."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agar alarm tetap berbunyi saat ponsel senyap atau dalam mode Fokus."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supaya penggera tetap berbunyi walaupun telefon senyap atau dalam mod Fokus."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى ينبّهك المنبّه حتى لو كان الهاتف صامتًا أو وضع التركيز مفعّلًا."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כדי שהשעון המעורר יצלצל גם כשהטלפון שקט או במצב פוקוס."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ताकि फ़ोन साइलेंट या फ़ोकस मोड में हो तब भी अलार्म बजे."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เพื่อให้นาฬิกาปลุกดังแม้เครื่องจะปิดเสียงหรือเปิดโหมดโฟกัส"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Để báo thức vẫn kêu khi điện thoại im lặng hoặc đang bật Chế độ tập trung."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
