@@ -37,7 +37,7 @@ final class NotificationService: ObservableObject {
     private var snoozesUsed: [String: Int] = [:]
 
     // MARK: - Private Properties
-    private let notificationCenter = UNUserNotificationCenter.current()
+    let notificationCenter = UNUserNotificationCenter.current()
     private var audioPlayer: AVAudioPlayer?
     private var audioSession: AVAudioSession { AVAudioSession.sharedInstance() }
     private var vibrationTimer: Timer?
@@ -120,7 +120,11 @@ final class NotificationService: ObservableObject {
         // snooze the user is waiting on.
         await cancelAlarm(alarm, includingSnooze: false)
 
-        guard alarm.isEnabled, let nextDate = alarm.nextAlarmDate else { return }
+        // The ledger skips an occurrence the smart alarm already rang early —
+        // re-arming it would wake the sleeper a second time minutes later.
+        guard alarm.isEnabled,
+              let scheduled = AlarmOccurrenceLedger.scheduledDate(for: alarm) else { return }
+        let nextDate = scheduled.date
 
         let calendar = Calendar.current
 
@@ -142,7 +146,11 @@ final class NotificationService: ObservableObject {
         // AlarmKit should have fired: if it rang, the app cancels the burst on
         // the way in and the sleeper never hears it. If it did not, they wake a
         // minute late instead of not at all.
-        let systemAlarmScheduled = await SystemAlarmScheduler.schedule(alarm, at: nextDate)
+        let systemAlarmScheduled = await SystemAlarmScheduler.schedule(
+            alarm,
+            at: nextDate,
+            forceFixed: scheduled.skippedHandled
+        )
         let burstStart = systemAlarmScheduled
             ? nextDate.addingTimeInterval(AlarmBurst.safetyNetDelay)
             : nextDate
@@ -172,6 +180,16 @@ final class NotificationService: ObservableObject {
         if !alarm.repeatDays.isEmpty {
             let timeComps = calendar.dateComponents([.hour, .minute], from: alarm.time)
             for weekday in alarm.repeatDays {
+                // If today's occurrence already rang early, re-adding today's
+                // weekday baseline would ring it again at the fixed time; it
+                // comes back on the first reschedule after the time passes.
+                if scheduled.skippedHandled,
+                   weekday.rawValue == calendar.component(.weekday, from: Date()),
+                   let today = alarm.nextOccurrence(after: Date().addingTimeInterval(-24 * 3600)),
+                   AlarmOccurrenceLedger.wasHandled(alarmId: alarm.id.uuidString, occurrence: today),
+                   today > Date() {
+                    continue
+                }
                 var comps = DateComponents()
                 comps.hour = timeComps.hour
                 comps.minute = timeComps.minute
@@ -607,171 +625,5 @@ final class NotificationService: ObservableObject {
                 print("---")
             }
         }
-    }
-
-    // MARK: - Bedtime Reminder
-    private let bedtimeReminderIdentifier = "BEDTIME_REMINDER"
-
-    func scheduleBedtimeReminder(bedtime: Date, minutesBefore: Int) async {
-        if !isAuthorized {
-            let granted = await requestAuthorization()
-            if !granted { return }
-        }
-
-        await cancelBedtimeReminder()
-
-        let reminderTime = bedtime.addingTimeInterval(-Double(minutesBefore * 60))
-
-        let content = UNMutableNotificationContent()
-        content.title = String(localized: "bedtime_reminder_title")
-        content.body = String(localized: "bedtime_reminder_body \(minutesBefore)")
-        content.sound = .default
-        content.interruptionLevel = .timeSensitive
-
-        let components = Calendar.current.dateComponents([.hour, .minute], from: reminderTime)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-
-        let request = UNNotificationRequest(
-            identifier: bedtimeReminderIdentifier,
-            content: content,
-            trigger: trigger
-        )
-
-        do {
-            try await notificationCenter.add(request)
-            print("Bedtime reminder scheduled for \(components.hour ?? 0):\(components.minute ?? 0)")
-        } catch {
-            print("Failed to schedule bedtime reminder: \(error)")
-        }
-    }
-
-    /// Schedules a daily bedtime reminder at the exact time the user picked.
-    func scheduleBedtimeReminder(at time: Date) async {
-        if !isAuthorized {
-            let granted = await requestAuthorization()
-            if !granted { return }
-        }
-
-        await cancelBedtimeReminder()
-
-        let content = UNMutableNotificationContent()
-        content.title = String(localized: "bedtime_reminder_title")
-        content.body = String(localized: "bedtime_reminder_message")
-        content.sound = .default
-        content.interruptionLevel = .timeSensitive
-        content.categoryIdentifier = "BEDTIME_CATEGORY"
-
-        let components = Calendar.current.dateComponents([.hour, .minute], from: time)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-        let request = UNNotificationRequest(identifier: bedtimeReminderIdentifier, content: content, trigger: trigger)
-        try? await notificationCenter.add(request)
-    }
-
-    func cancelBedtimeReminder() async {
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [bedtimeReminderIdentifier])
-    }
-
-    /// Immediate confirmation that the sleep night auto-started.
-    func notifySleepAutoStarted() {
-        let content = UNMutableNotificationContent()
-        content.title = String(localized: "bedtime_reminder_title")
-        content.body = String(localized: "bedtime_autostart_message")
-        content.sound = .default
-        content.interruptionLevel = .timeSensitive
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "SLEEP_AUTOSTARTED", content: content, trigger: trigger)
-        Task { try? await notificationCenter.add(request) }
-    }
-}
-
-// MARK: - Notification Delegate
-class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
-    static let shared = NotificationDelegate()
-
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        let userInfo = notification.request.content.userInfo
-        let categoryId = notification.request.content.categoryIdentifier
-
-        // If it's an alarm and app is in foreground, play audio directly
-        if categoryId == "ALARM_CATEGORY" {
-            let alarmId = userInfo["alarmId"] as? String ?? ""
-            let soundName = userInfo["soundName"] as? String ?? "sunrise"
-            let volume = userInfo["volume"] as? Double ?? 1.0
-            let vibration = userInfo["vibrationEnabled"] as? Bool ?? true
-
-            Task { @MainActor in
-                NotificationService.shared.handleForegroundAlarm(
-                    alarmId: alarmId,
-                    soundName: soundName,
-                    volume: Float(volume),
-                    vibration: vibration
-                )
-            }
-
-            // Show banner but we handle sound ourselves
-            completionHandler([.banner, .badge])
-        } else {
-            completionHandler([.banner, .sound, .badge])
-        }
-    }
-
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        didReceive response: UNNotificationResponse,
-        withCompletionHandler completionHandler: @escaping () -> Void
-    ) {
-        let categoryId = response.notification.request.content.categoryIdentifier
-
-        // Bedtime reminder: the action button OR tapping it starts the sleep night.
-        if categoryId == "BEDTIME_CATEGORY" {
-            if response.actionIdentifier == "START_SLEEP_ACTION"
-                || response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-                // Delay so the UI is subscribed by the time we post (cold launch).
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                    NotificationCenter.default.post(name: .didRequestSwitchToSleepTab, object: nil)
-                    NotificationCenter.default.post(name: .didRequestStartSleepTracking, object: nil)
-                }
-            }
-            completionHandler()
-            return
-        }
-
-        let userInfo = response.notification.request.content.userInfo
-        let alarmId = userInfo["alarmId"] as? String ?? ""
-        let soundName = userInfo["soundName"] as? String ?? "sunrise"
-        let volume = userInfo["volume"] as? Double ?? 1.0
-        let vibration = userInfo["vibrationEnabled"] as? Bool ?? true
-
-        Task { @MainActor in
-            switch response.actionIdentifier {
-            case "SNOOZE_ACTION":
-                NotificationService.shared.cancelBurst(alarmId: alarmId)
-                NotificationService.shared.stopAlarmAudio()
-                let minutes = UUID(uuidString: alarmId)
-                    .flatMap { uuid in StorageService.shared.loadAlarms().first { $0.id == uuid } }?
-                    .snoozeDuration ?? 9
-                await NotificationService.shared.scheduleSnooze(for: alarmId, minutes: minutes, soundName: soundName, volume: Float(volume), vibrationEnabled: vibration)
-            case "DISMISS_ACTION", UNNotificationDismissActionIdentifier:
-                NotificationService.shared.cancelBurst(alarmId: alarmId)
-                NotificationService.shared.disableOneTimeAlarmIfNeeded(id: alarmId)
-                NotificationService.shared.stopAlarmAudio()
-            case UNNotificationDefaultActionIdentifier:
-                // User tapped notification — show alarm screen
-                NotificationService.shared.handleForegroundAlarm(
-                    alarmId: alarmId,
-                    soundName: soundName,
-                    volume: Float(volume),
-                    vibration: vibration
-                )
-            default:
-                NotificationService.shared.stopAlarmAudio()
-            }
-        }
-
-        completionHandler()
     }
 }

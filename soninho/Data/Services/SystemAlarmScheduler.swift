@@ -80,10 +80,38 @@ enum SystemAlarmScheduler {
         return false
     }
 
+    /// Rings `alarm` through the system RIGHT NOW — the smart-wake actuator.
+    ///
+    /// The in-app audio path plays sound from a black locked screen; AlarmKit
+    /// puts the real alarm alert on the lock screen and breaks through Focus
+    /// and the ringer switch. So when light sleep is detected, the pending
+    /// fixed-time occurrence is cancelled and replaced by a fixed alarm a few
+    /// seconds out. If the replacement cannot be scheduled, the original is
+    /// restored — losing the fixed-time alarm is the one unacceptable outcome.
+    static func fireNow(_ alarm: AlarmModel, originalOccurrence: Date) async -> Bool {
+        #if canImport(AlarmKit)
+        if #available(iOS 26.0, *) {
+            guard owns(alarm.id.uuidString) else { return false }
+
+            try? AlarmManager.shared.cancel(id: alarm.id)
+            if await schedule(alarm, at: Date().addingTimeInterval(3), forceFixed: true) {
+                return true
+            }
+            // Could not ring early — put the fixed-time alarm back.
+            _ = await schedule(alarm, at: originalOccurrence)
+            return false
+        }
+        #endif
+        return false
+    }
+
     /// Schedules `alarm` to ring at `date`. Returns whether AlarmKit took it —
     /// a false means the caller must keep the notification burst armed.
+    /// `forceFixed` schedules a one-off at `date` even for a repeating alarm —
+    /// used to ring early and to skip an occurrence that already rang (a
+    /// weekly relative schedule cannot skip a single week).
     @discardableResult
-    static func schedule(_ alarm: AlarmModel, at date: Date) async -> Bool {
+    static func schedule(_ alarm: AlarmModel, at date: Date, forceFixed: Bool = false) async -> Bool {
         #if canImport(AlarmKit)
         if #available(iOS 26.0, *) {
             guard await requestAuthorization() else { return false }
@@ -121,7 +149,7 @@ enum SystemAlarmScheduler {
                 countdownDuration: alarm.snoozeLimit > 0
                     ? Alarm.CountdownDuration(preAlert: nil, postAlert: TimeInterval(alarm.snoozeDuration * 60))
                     : nil,
-                schedule: schedule(for: alarm, at: date),
+                schedule: forceFixed ? .fixed(date) : schedule(for: alarm, at: date),
                 attributes: attributes,
                 stopIntent: StopAlarmIntent(alarmId: alarm.id.uuidString)
             )

@@ -5,73 +5,98 @@
 
 import Foundation
 
+// MARK: - Sound Minute
+/// One minute of microphone evidence, produced by the sound monitor.
+struct SoundMinute: Codable {
+    /// Seconds of the minute the classifier heard snoring or steady breathing.
+    let sleepSoundSeconds: Int
+    /// Seconds of speech or loud disturbance — evidence of being awake.
+    let disturbanceSeconds: Int
+}
+
 // MARK: - Sleep Staging Engine
-/// Turns a night of one-minute movement readings into sleep stages, and finds
-/// the best moment to wake the sleeper inside the smart-alarm window.
+/// Turns per-minute movement features into sleep stages and a wake-readiness
+/// score for the smart alarm.
 ///
-/// What actigraphy can and cannot know is worth stating plainly, because the
-/// previous implementation got it backwards. Movement reliably separates
-/// **sleep from wake** — that is what decades of actigraphy research supports.
-/// It cannot truly resolve deep vs REM vs light, especially from a phone lying
-/// on a mattress rather than a wrist. So here sleep/wake is decided from the
-/// data, depth is a graded estimate of how still the sleeper is, and the
-/// 90-minute cycle is used only as a weak tiebreaker for labelling REM. The old
-/// code derived the phase from elapsed time and let movement merely nudge it,
-/// which meant the phase was mostly fiction and the smart alarm fired on it.
+/// Movement honestly separates **sleep from wake**; within sleep, all a mattress
+/// phone can grade is stillness. So wake is decided by a Cole-Kripke-style
+/// weighted kernel over the surrounding minutes, depth is read from how long
+/// the sleeper has been still (deep sleep is long unbroken stillness; light
+/// sleep surrounds movement events), and the 90-minute cycle acts only as a
+/// weak tiebreaker for labelling REM. Everything is scaled to THIS night's own
+/// typical turn, because phones, mattresses and sleepers differ by more than
+/// any fixed constant could absorb.
 ///
-/// Two adaptations are deliberate:
-///
-/// 1. **Cole-Kripke's weighting kernel, not its constant.** The 1992 weights
-///    are used to smooth each minute against its neighbours, so a single turn
-///    in bed cannot read as waking up. The published decision constant is
-///    calibrated for ActiGraph wrist counts, which a phone on a mattress does
-///    not produce, so it is not reused.
-/// 2. **Self-calibration.** Thresholds are expressed as multiples of *this
-///    night's own* typical movement. Phones, mattresses and sleeping positions
-///    differ by more than any fixed threshold could absorb.
-struct SleepStagingEngine {
+/// The engine is Codable: the whole night survives a relaunch, and minutes the
+/// process was dead are recorded as gaps — a gap must never masquerade as
+/// stillness, or a suspension would fake a block of deep sleep.
+struct SleepStagingEngine: Codable {
 
     // MARK: - Epoch
-    /// One aggregated minute of movement.
-    struct Epoch {
+    /// One staged minute of the night.
+    struct Epoch: Codable {
         let date: Date
-        /// Mean deviation from rest over the minute, in g. Device-dependent.
-        let activity: Double
-        /// Movement smoothed against neighbouring minutes.
-        var smoothed: Double = 0
+        let activityIndex: Double
+        let activeSeconds: Int
+        let maxBurst: Double
+        let postureChanged: Bool
+        let sleepSoundSeconds: Int
+        let disturbanceSeconds: Int
+        /// True when the process was dead and no data exists for this minute.
+        let isGap: Bool
         var phase: SleepPhase = .light
+
+        /// Whether this minute contains a real movement event.
+        func isEvent(turnScale: Double) -> Bool {
+            guard !isGap else { return false }
+            return postureChanged || activityIndex > turnScale * Tuning.eventFraction
+        }
     }
 
     // MARK: - Constants
-    private enum Tuning {
-        /// Cole-Kripke (1992) one-minute weights: four minutes back, the current
-        /// minute, two minutes forward. The current minute dominates; the
-        /// neighbours damp isolated spikes.
-        static let weights: [Double] = [404, 598, 326, 441, 1408, 508, 350]
-        static let currentIndex = 4
-        /// Minutes of lookahead the kernel needs. A stage is therefore settled
-        /// two minutes late, which is immaterial inside a 30-minute window.
+    enum Tuning {
+        /// Cole-Kripke (1992) one-minute weights: four minutes back, the
+        /// current minute, two ahead. The published decision constant is
+        /// calibrated for wrist-worn ActiGraph counts, so only the KERNEL is
+        /// reused; the threshold is expressed in this night's own turn units.
+        static let kernelWeights: [Double] = [106, 54, 58, 76, 230, 74, 67]
+        static let kernelCurrentIndex = 4
         static let lookahead = 2
 
-        /// A minute this many times the night's typical movement is real motion,
-        /// not breathing — the sleeper is awake or close to it.
-        static let awakeFactor: Double = 3.5
-        /// Below this multiple of the night's typical movement the sleeper is
-        /// unusually still, which is the best proxy for deep sleep available.
-        static let deepFactor: Double = 0.65
+        /// Kernel-weighted activity (in turns) at or above which the sleeper
+        /// is awake.
+        static let wakeScore: Double = 1.0
+        /// A minute moving for this long is wake regardless of the kernel.
+        static let sustainedAwakeSeconds = 20
+        /// Snoring through most of a minute vetoes a wake call — people do not
+        /// snore while awake; the movement was a turn, not an awakening.
+        static let snoreVetoSeconds = 20
 
-        /// Until this many minutes are recorded the reference is too noisy to
-        /// calibrate against, so everything is reported as light sleep.
-        static let minimumEpochsForReference = 8
-        /// Guards against dividing by an essentially motionless reference.
-        static let activityFloor: Double = 0.0015
+        /// Fraction of a typical turn that still counts as a movement event.
+        static let eventFraction: Double = 0.15
+        /// Normalized activity is capped so one violent minute cannot dominate
+        /// the kernel for its whole window.
+        static let activityCap: Double = 4.0
+        /// Fallback scale (g·s of activity in a minute) for a typical turn,
+        /// used until the night has produced turns of its own to measure.
+        static let fallbackTurnScale: Double = 0.05
+        static let minimumTurnScale: Double = 0.01
 
+        /// Unbroken stillness this long reads as deep sleep (or REM, late in a
+        /// cycle); the first minutes after a movement event are the descent.
+        static let deepRunMinutes = 10
+        static let descentMinutes = 3
+
+        static let minimumEpochsForCalibration = 8
         static let cycleMinutes: Double = 90
+        /// REM begins to be plausible only after the first full cycle.
+        static let remEarliestMinutes: Double = 90
+        static let remCyclePosition: Double = 0.55
     }
 
     // MARK: - Properties
     private(set) var epochs: [Epoch] = []
-    private let sessionStart: Date
+    let sessionStart: Date
 
     // MARK: - Init
     init(sessionStart: Date) {
@@ -80,80 +105,149 @@ struct SleepStagingEngine {
 
     // MARK: - Computed Properties
 
-    /// This night's typical movement — the median smoothed minute. Median
-    /// rather than mean so a few restless minutes cannot drag the baseline up.
-    private var reference: Double {
-        let settled = epochs.compactMap { $0.smoothed > 0 ? $0.smoothed : nil }.sorted()
-        guard !settled.isEmpty else { return Tuning.activityFloor }
-        let median = settled[settled.count / 2]
-        return max(median, Tuning.activityFloor)
+    /// This night's typical turn: the median activity of the minutes that had
+    /// any. Movement is sparse, so the median of NONZERO minutes is the unit —
+    /// a median over all minutes would be zero every quiet night.
+    var turnScale: Double {
+        let moving = epochs.compactMap { !$0.isGap && $0.activityIndex > 0 ? $0.activityIndex : nil }.sorted()
+        guard moving.count >= 3, let median = moving[safe: moving.count / 2] else {
+            return Tuning.fallbackTurnScale
+        }
+        return max(median, Tuning.minimumTurnScale)
     }
 
-    /// Whether enough of the night has been observed to judge anything.
     var isCalibrated: Bool {
-        epochs.count >= Tuning.minimumEpochsForReference
+        epochs.filter { !$0.isGap }.count >= Tuning.minimumEpochsForCalibration
     }
 
-    /// The most recently settled stage, or light sleep before the lookahead
-    /// has enough minutes to settle anything.
+    /// The most recently settled stage (the kernel needs two minutes of
+    /// lookahead before a minute stops moving).
     var currentPhase: SleepPhase {
         let index = epochs.count - 1 - Tuning.lookahead
-        guard index >= 0 else { return .light }
-        return epochs[index].phase
+        guard let epoch = epochs[safe: max(index, 0)] else { return .light }
+        return epoch.phase
+    }
+
+    /// Minutes with real data — for judging whether the night produced any
+    /// usable signal at all.
+    var observedMinutes: Int {
+        epochs.filter { !$0.isGap }.count
+    }
+
+    /// Movement events seen tonight. A whole night at zero means the phone was
+    /// not coupled to the sleeper (nightstand) or the sensor was dead.
+    var eventCount: Int {
+        let scale = turnScale
+        return epochs.filter { $0.isEvent(turnScale: scale) }.count
     }
 
     // MARK: - Public Methods
 
-    /// Records a minute of movement and restages the epochs that the new
-    /// lookahead now settles. Returns the stage that just became final.
+    /// Records a minute and restages the night. Returns the settled stage.
     @discardableResult
-    mutating func record(activity: Double, at date: Date = Date()) -> SleepPhase {
-        epochs.append(Epoch(date: date, activity: activity))
-        smoothRecentEpochs()
-        stageRecentEpochs()
+    mutating func record(_ features: MovementFeatures, sound: SoundMinute? = nil) -> SleepPhase {
+        if features.hasEnoughData {
+            epochs.append(Epoch(
+                date: features.date,
+                activityIndex: features.activityIndex,
+                activeSeconds: features.activeSeconds,
+                maxBurst: features.maxBurst,
+                postureChanged: features.postureChanged,
+                sleepSoundSeconds: sound?.sleepSoundSeconds ?? 0,
+                disturbanceSeconds: sound?.disturbanceSeconds ?? 0,
+                isGap: false
+            ))
+        } else {
+            // A starved minute must not read as stillness.
+            epochs.append(gapEpoch(at: features.date))
+        }
+        restage()
         return currentPhase
     }
 
-    /// How close to the surface the sleeper is right now, 0 (deep) to 1 (awake).
-    ///
-    /// Blends the settled stage with live movement, because someone stirring is
-    /// nearer to waking than the stage alone suggests.
-    func wakeReadiness() -> Double {
+    /// Registers minutes the process was dead. They break stillness runs and
+    /// carry no movement information.
+    mutating func recordGap(from start: Date, to end: Date) {
+        var minute = start
+        while minute < end {
+            epochs.append(gapEpoch(at: minute))
+            minute = minute.addingTimeInterval(60)
+        }
+        restage()
+    }
+
+    /// Replaces gap epochs with real minutes recovered later (the system's
+    /// sensor recorder keeps logging while the app is dead). Only minutes that
+    /// land on an existing gap are accepted — real observations never get
+    /// overwritten by a backfill.
+    mutating func fillGaps(with minutes: [MovementFeatures]) {
+        guard !minutes.isEmpty else { return }
+
+        for features in minutes where features.hasEnoughData {
+            guard let index = epochs.firstIndex(where: {
+                $0.isGap && abs($0.date.timeIntervalSince(features.date)) < 45
+            }) else { continue }
+
+            epochs[index] = Epoch(
+                date: epochs[index].date,
+                activityIndex: features.activityIndex,
+                activeSeconds: features.activeSeconds,
+                maxBurst: features.maxBurst,
+                postureChanged: features.postureChanged,
+                sleepSoundSeconds: 0,
+                disturbanceSeconds: 0,
+                isGap: false
+            )
+        }
+        restage()
+    }
+
+    /// How close to the surface the sleeper is right now, 0 (deep) to 1
+    /// (awake). `liveActivity` is the current one-second activity index from
+    /// the extractor, so a stir registers before its minute closes.
+    func wakeReadiness(liveActivity: Double = 0) -> Double {
         guard isCalibrated else { return 0 }
 
-        let index = epochs.count - 1 - Tuning.lookahead
-        guard index >= 0 else { return 0 }
+        let settledIndex = epochs.count - 1 - Tuning.lookahead
+        guard settledIndex >= 0 else { return 0 }
 
-        // Weight the settled minutes so the most recent counts most.
-        let window = epochs[max(0, index - 2)...index]
+        // Settled stages, most recent counting most.
         var weighted = 0.0
         var weightSum = 0.0
-        for (offset, epoch) in window.enumerated() {
+        for (offset, epoch) in epochs[max(0, settledIndex - 2)...settledIndex].enumerated() {
             let weight = Double(offset + 1)
             weighted += phaseReadiness(epoch.phase) * weight
             weightSum += weight
         }
         let stageComponent = weightSum > 0 ? weighted / weightSum : 0
 
-        // Live movement, as a fraction of what counts as being awake.
-        let live = epochs[epochs.count - 1].activity
-        let motionComponent = min(live / (reference * Tuning.awakeFactor), 1.0)
+        // Arousal: movement in the last minutes plus what is happening right
+        // now. A posture change is the strongest sign the sleeper surfaced.
+        let scale = turnScale
+        var arousal = 0.0
+        for (offset, epoch) in epochs.suffix(3).enumerated() {
+            guard !epoch.isGap else { continue }
+            let recency = Double(offset + 1) / 3.0
+            if epoch.postureChanged { arousal = max(arousal, 0.8 * recency) }
+            else if epoch.isEvent(turnScale: scale) { arousal = max(arousal, 0.5 * recency) }
+        }
+        let liveComponent = min(liveActivity / (scale / 4), 1.0)
+        arousal = min(1.0, max(arousal, liveComponent))
 
-        return min(1.0, stageComponent * 0.7 + motionComponent * 0.3)
+        return min(1.0, stageComponent * 0.55 + arousal * 0.45)
     }
 
-    /// Stages assembled into contiguous spans, for the night's report.
+    /// Stages assembled into contiguous spans for the night's report.
     func phaseSpans(now: Date = Date()) -> [SleepPhaseData] {
-        guard !epochs.isEmpty else {
+        guard let first = epochs.first else {
             return [SleepPhaseData(phase: .light, startTime: sessionStart, endTime: now)]
         }
 
         var spans: [SleepPhaseData] = []
-        var spanStart = epochs[0].date
-        var spanPhase = epochs[0].phase
+        var spanStart = first.date
+        var spanPhase = first.phase
 
-        for epoch in epochs.dropFirst() {
-            guard epoch.phase != spanPhase else { continue }
+        for epoch in epochs.dropFirst() where epoch.phase != spanPhase {
             spans.append(SleepPhaseData(phase: spanPhase, startTime: spanStart, endTime: epoch.date))
             spanStart = epoch.date
             spanPhase = epoch.phase
@@ -164,7 +258,14 @@ struct SleepStagingEngine {
 
     // MARK: - Private Methods
 
-    /// How good each stage is as a wake-up point.
+    private func gapEpoch(at date: Date) -> Epoch {
+        Epoch(
+            date: date, activityIndex: 0, activeSeconds: 0, maxBurst: 0,
+            postureChanged: false, sleepSoundSeconds: 0, disturbanceSeconds: 0,
+            isGap: true
+        )
+    }
+
     private func phaseReadiness(_ phase: SleepPhase) -> Double {
         switch phase {
         case .awake: return 1.0
@@ -174,63 +275,83 @@ struct SleepStagingEngine {
         }
     }
 
-    /// Applies the Cole-Kripke kernel to every epoch whose neighbours are known.
-    private mutating func smoothRecentEpochs() {
-        let weights = Tuning.weights
-        let last = epochs.count - 1
-
-        for index in stride(from: last, through: max(0, last - weights.count), by: -1) {
-            var weighted = 0.0
-            var weightSum = 0.0
-            for (offset, weight) in weights.enumerated() {
-                let neighbour = index + offset - Tuning.currentIndex
-                guard neighbour >= 0, neighbour < epochs.count else { continue }
-                weighted += epochs[neighbour].activity * weight
-                weightSum += weight
-            }
-            guard weightSum > 0 else { continue }
-            epochs[index].smoothed = weighted / weightSum
-        }
-    }
-
-    /// Assigns a stage to every epoch the lookahead now covers.
-    private mutating func stageRecentEpochs() {
+    /// Restages the whole night. At one epoch per minute this is at most a few
+    /// hundred elements — recomputing everything beats managing incremental
+    /// state, and lets stillness runs upgrade to deep retroactively.
+    private mutating func restage() {
         guard isCalibrated else { return }
 
-        let reference = self.reference
-        let last = epochs.count - 1
+        let scale = turnScale
+        let normalized: [Double] = epochs.map { epoch in
+            epoch.isGap ? 0 : min(epoch.activityIndex / scale, Tuning.activityCap)
+        }
 
-        for index in stride(from: last, through: max(0, last - Tuning.lookahead - 1), by: -1) {
-            epochs[index].phase = stage(at: index, reference: reference)
+        // Pass 1 — sleep/wake via the kernel (gaps neither wake nor sleep).
+        var wake = [Bool](repeating: false, count: epochs.count)
+        for index in epochs.indices where !epochs[index].isGap {
+            var weighted = 0.0
+            var weightSum = 0.0
+            for (offset, weight) in Tuning.kernelWeights.enumerated() {
+                let neighbour = index + offset - Tuning.kernelCurrentIndex
+                guard let value = normalized[safe: neighbour],
+                      epochs[safe: neighbour]?.isGap == false else { continue }
+                weighted += value * weight
+                weightSum += weight
+            }
+            let score = weightSum > 0 ? weighted / weightSum : 0
+
+            var isAwake = score >= Tuning.wakeScore
+                || epochs[index].activeSeconds >= Tuning.sustainedAwakeSeconds
+            if epochs[index].sleepSoundSeconds >= Tuning.snoreVetoSeconds {
+                isAwake = false
+            }
+            wake[index] = isAwake
+        }
+
+        // Pass 2 — depth from stillness runs between events, wake and gaps.
+        var runStart: Int? = nil
+        for index in epochs.indices {
+            let breaksRun = epochs[index].isGap || wake[index] || epochs[index].isEvent(turnScale: scale)
+
+            if breaksRun {
+                if let start = runStart { stageRun(from: start, to: index - 1) }
+                runStart = nil
+                epochs[index].phase = wake[index] ? .awake : .light
+            } else if runStart == nil {
+                runStart = index
+            }
+        }
+        if let start = runStart { stageRun(from: start, to: epochs.count - 1) }
+    }
+
+    /// Stages one unbroken run of still sleep minutes. Long runs read as deep
+    /// (or REM late in a cycle); short ones stay light. The first minutes are
+    /// the descent and stay light.
+    private mutating func stageRun(from start: Int, to end: Int) {
+        let length = end - start + 1
+
+        guard length >= Tuning.deepRunMinutes else {
+            for index in start...end { epochs[index].phase = .light }
+            return
+        }
+
+        for index in start...end {
+            if index < start + Tuning.descentMinutes {
+                epochs[index].phase = .light
+            } else {
+                epochs[index].phase = looksLikeREMWindow(at: index) ? .rem : .deep
+            }
         }
     }
 
-    private func stage(at index: Int, reference: Double) -> SleepPhase {
-        let level = epochs[index].smoothed / reference
-
-        // Sleep/wake is the one call movement can actually make.
-        if level >= Tuning.awakeFactor {
-            return .awake
-        }
-
-        // Within sleep, all we honestly have is how still the sleeper is.
-        if level <= Tuning.deepFactor {
-            // Very still. Late in the night the same stillness is more likely to
-            // be REM than deep sleep, so the cycle acts as a tiebreaker here —
-            // and only here.
-            return looksLikeREMWindow(at: index) ? .rem : .deep
-        }
-
-        return .light
-    }
-
-    /// Weak prior: REM lengthens and deep sleep shortens as the night goes on,
-    /// so still minutes late in a cycle are more likely REM than deep.
+    /// Weak prior: REM lengthens as the night goes on, so stillness late in a
+    /// cycle is more likely REM than deep — never before the first full cycle.
     private func looksLikeREMWindow(at index: Int) -> Bool {
-        let elapsed = epochs[index].date.timeIntervalSince(sessionStart) / 60
-        guard elapsed > Tuning.cycleMinutes else { return false }
+        guard let epoch = epochs[safe: index] else { return false }
+        let elapsed = epoch.date.timeIntervalSince(sessionStart) / 60
+        guard elapsed > Tuning.remEarliestMinutes else { return false }
 
         let position = elapsed.truncatingRemainder(dividingBy: Tuning.cycleMinutes) / Tuning.cycleMinutes
-        return position > 0.55
+        return position > Tuning.remCyclePosition
     }
 }

@@ -315,11 +315,13 @@ final class BackgroundAlarmPlayer: ObservableObject {
         SleepAutoStart.checkAndStartIfDue()
 
         // Keep the silent keep-alive playing (restart if it stopped for any
-        // reason) so the app stays alive until the alarm fires. Skip while the
-        // sleep monitor owns the recording session — restarting silent .playback
-        // would fight the mic recorder.
+        // reason) so the app stays alive until the alarm fires. Skip only while
+        // the sleep monitor's OWN audio session is actually running — checking
+        // `isMonitoring` alone once left the app with no keep-alive at all when
+        // the mic was denied or its session dropped, and iOS suspended the
+        // night mid-way (the alarm then only rang at the fixed time).
         if isBackgroundActive, alarmPlayer == nil, silentPlayer?.isPlaying != true,
-           !MotionSleepMonitor.shared.isMonitoring {
+           !MotionSleepMonitor.shared.isAudioKeepAliveActive {
             startSilentAudio()
         }
 

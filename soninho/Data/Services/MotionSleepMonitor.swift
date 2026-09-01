@@ -7,19 +7,55 @@
 
 import Foundation
 import CoreMotion
-import AVFoundation
 import Combine
 
+// MARK: - Motion Pipeline
+/// Owns the extractor on the motion queue. Every raw sample is processed off
+/// the main thread; only finished minutes and once-a-second live readings hop
+/// to the main actor. (The previous design hopped per sample — 36,000 main
+/// thread hops an hour, all night.)
+private final class MotionPipeline {
+    private var extractor: MovementFeatureExtractor
+    private var lastSecondReport = Date.distantPast
+
+    /// Called on the motion queue with (minute, liveActivity, noiseVariance).
+    var onMinute: ((MovementFeatures, Double, Double) -> Void)?
+    /// Called on the motion queue about once a second with the live activity.
+    var onSecond: ((Double) -> Void)?
+
+    init(noiseVariance: Double?) {
+        if let noiseVariance {
+            extractor = MovementFeatureExtractor(noiseVariance: noiseVariance)
+        } else {
+            extractor = MovementFeatureExtractor()
+        }
+    }
+
+    func process(x: Double, y: Double, z: Double) {
+        let now = Date()
+        if let minute = extractor.add(x: x, y: y, z: z, at: now) {
+            onMinute?(minute, extractor.liveActivity, extractor.noiseVariance)
+        }
+        if now.timeIntervalSince(lastSecondReport) >= 1 {
+            lastSecondReport = now
+            onSecond?(extractor.liveActivity)
+        }
+    }
+
+    func flush() -> MovementFeatures? {
+        extractor.flush(at: Date())
+    }
+}
+
 // MARK: - Motion Sleep Monitor
-/// Uses CoreMotion accelerometer to detect sleep phases based on device movement.
-/// The phone should be placed on the mattress (face-down or on a nightstand)
-/// so the accelerometer picks up the user's movement during sleep.
+/// Runs the night: accelerometer → features → staging engine → smart alarm.
+/// The phone lies on the mattress; the microphone both keeps the process
+/// alive overnight and tells snoring from disturbance.
 ///
-/// Sleep phase detection logic:
-/// - Very low movement (< 0.005g)  → Deep Sleep
-/// - Low movement (< 0.015g)       → REM or Light Sleep (REM has micro-twitches)
-/// - Medium movement (< 0.05g)     → Light Sleep (transitions)
-/// - High movement (> 0.05g)       → Awake
+/// Everything that matters survives a relaunch: the engine, the smart-wake
+/// decider and the noise calibration persist once a minute, minutes the
+/// process was dead come back as explicit gaps, and the system's own sensor
+/// recorder (which outlives the app) refills those gaps with real data.
 @MainActor
 final class MotionSleepMonitor: ObservableObject {
     // MARK: - Singleton
@@ -27,33 +63,12 @@ final class MotionSleepMonitor: ObservableObject {
 
     // MARK: - Constants
     private enum Constants {
-        static let accelerometerUpdateInterval: TimeInterval = 1.0 / 10.0 // 10 Hz sampling
-        static let phaseWindowSeconds: TimeInterval = 60 // Aggregate movement over 1 minute
-        static let awakeThreshold: Double = 0.04 // Significant movement = awake
-        static let deepSleepThreshold: Double = 0.012 // Low movement = deep sleep (accounts for breathing)
-        static let remUpperThreshold: Double = 0.025 // Moderate movement with variance = REM
-        static let sleepCycleDurationMinutes: Double = 90 // One full sleep cycle
-    }
-
-    /// Tuning for the smart wake search.
-    ///
-    /// The window is a budget, not a green light: waking someone at minute one
-    /// of a 30-minute window throws away 29 minutes of sleep for a moment that
-    /// is probably no better than the next one. So the monitor demands strong
-    /// evidence early and settles for less as the alarm time approaches.
-    private enum SmartWake {
-        /// How long a qualifying reading must hold — one good minute can just be
-        /// a turn in bed.
-        static let confirmationMinutes = 2
-        /// Nothing fires in the first slice of the window unless the sleeper is
-        /// plainly awake.
-        static let earliestProgress: Double = 0.15
-        /// Score demanded at the start of the window (essentially: awake).
-        static let startingBar: Double = 0.92
-        /// Score demanded at the very end (light or REM is good enough).
-        static let endingBar: Double = 0.40
-        /// At or above this the sleeper is treated as already awake.
-        static let awakeScore: Double = 0.92
+        static let sampleRate: Double = 50
+        /// No epoch for this long while monitoring = the pipeline stalled.
+        static let watchdogStallSeconds: TimeInterval = 180
+        static let watchdogInterval: TimeInterval = 60
+        /// A persisted session older than this is a different night.
+        static let sessionResumeLimit: TimeInterval = 12 * 3600
     }
 
     // MARK: - Published Properties
@@ -62,27 +77,26 @@ final class MotionSleepMonitor: ObservableObject {
     @Published private(set) var movementIntensity: Double = 0
     @Published private(set) var soundLevel: Double = 0
     @Published private(set) var smartAlarmTriggered = false
+    /// Whether the microphone keep-alive is actually running. False overnight
+    /// means iOS may suspend the app; the keep-alive player must cover for it.
+    @Published private(set) var isAudioKeepAliveActive = false
+    /// The user declined the microphone — tracking can silently die overnight.
+    @Published private(set) var microphoneDenied = false
 
     // MARK: - Private Properties
     private let motionManager = CMMotionManager()
     private let motionQueue = OperationQueue()
-    private var movementSamples: [Double] = []
-    private var phaseHistory: [(date: Date, phase: SleepPhase, movement: Double)] = []
-    private var lastPhaseChangeTime = Date()
-    private var monitoringStartTime: Date?
-    private var smartAlarmWindow: (start: Date, end: Date)?
-    private var smartAlarmCallback: (() -> Void)?
-    /// Decides the stages from the movement data. See SleepStagingEngine for
-    /// what actigraphy can and cannot tell us.
-    private var staging: SleepStagingEngine?
-    /// Consecutive one-minute windows whose wake score cleared the bar.
-    private var qualifyingMinutes = 0
-    private var phaseAggregationTimer: DispatchSourceTimer?
-    private let timerQueue = DispatchQueue(label: "com.gambitstudio.soninho.motionTimer", qos: .utility)
+    private let soundMonitor = SleepSoundMonitor()
 
-    // Audio metering
-    private var audioRecorder: AVAudioRecorder?
-    private var audioMeterTimer: DispatchSourceTimer?
+    private var pipeline: MotionPipeline?
+    private var engine: SleepStagingEngine?
+    private var decider: SmartWakeDecider?
+    private var noiseVariance: Double?
+    private var lastEpochAt: Date?
+    private var releasedForAlarm = false
+
+    private var watchdogTimer: DispatchSourceTimer?
+    private let timerQueue = DispatchQueue(label: "com.gambitstudio.soninho.motionTimer", qos: .utility)
 
     // MARK: - Init
     private init() {
@@ -92,321 +106,313 @@ final class MotionSleepMonitor: ObservableObject {
 
     // MARK: - Public Methods
 
-    /// Starts monitoring motion for sleep phase detection.
-    /// Call this when the user starts sleep tracking.
+    /// Starts (or resumes) the night. A persisted session from a relaunch is
+    /// restored with its gap recorded and backfilled; a fresh night starts a
+    /// new engine anchored at the tracked start time.
     func startMonitoring() {
         guard !isMonitoring else { return }
-        guard motionManager.isAccelerometerAvailable else {
-            return
-        }
+        guard motionManager.isAccelerometerAvailable else { return }
 
         isMonitoring = true
-        monitoringStartTime = Date()
-        staging = SleepStagingEngine(sessionStart: Date())
-        lastPhaseChangeTime = Date()
-        movementSamples = []
-        phaseHistory = []
+        releasedForAlarm = false
         currentPhase = .light
-        smartAlarmTriggered = false
-        qualifyingMinutes = 0
+        movementIntensity = 0
         soundLevel = 0
 
-        startAudioMetering()
+        restoreOrStartSession()
+        armSmartAlarm()
+        startAccelerometer()
+        startAudio()
+        startWatchdog()
+        persist()
 
-        motionManager.accelerometerUpdateInterval = Constants.accelerometerUpdateInterval
-
-        // Use dedicated OperationQueue (works in background, unlike .main)
-        motionManager.startAccelerometerUpdates(to: motionQueue) { [weak self] data, error in
-            guard let data else { return }
-
-            Task { @MainActor in
-                self?.processAccelerometerData(data)
-            }
-        }
-
-        // Use GCD timer for phase aggregation (reliable in background)
-        let timer = DispatchSource.makeTimerSource(queue: timerQueue)
-        timer.schedule(deadline: .now() + Constants.phaseWindowSeconds, repeating: Constants.phaseWindowSeconds)
-        timer.setEventHandler { [weak self] in
-            Task { @MainActor in
-                self?.aggregateAndClassifyPhase()
-            }
-        }
-        timer.resume()
-        phaseAggregationTimer = timer
-
+        // The system recorder keeps logging even if this process dies — the
+        // backstop that lets a relaunch refill the dead minutes with data.
+        SleepSessionStore.startSystemRecorder()
     }
 
-    /// Stops motion monitoring.
+    /// Stops the night for good and discards the persisted session.
     func stopMonitoring() {
         motionManager.stopAccelerometerUpdates()
-        phaseAggregationTimer?.cancel()
-        phaseAggregationTimer = nil
-        stopAudioMetering()
+        watchdogTimer?.cancel()
+        watchdogTimer = nil
+        soundMonitor.stop()
+        pipeline = nil
+        isAudioKeepAliveActive = false
         isMonitoring = false
-        smartAlarmWindow = nil
-        smartAlarmCallback = nil
+        engine = nil
+        decider = nil
+        noiseVariance = nil
+        lastEpochAt = nil
+        SleepSessionStore.clear()
     }
 
-    /// Releases the sensors the alarm/its missions need: the microphone (so the
-    /// alarm can own the `.playback` audio session) AND the accelerometer (so
-    /// the shake mission's own CMMotionManager isn't starved by this monitor's
-    /// — two accelerometer consumers conflict). Call when an alarm fires.
-    /// Sleep is over at that point, so dropping these sensors is fine.
+    /// Releases the sensors the alarm and its missions need: the microphone
+    /// (so the alarm can own the audio session) and the accelerometer (the
+    /// shake mission runs its own CMMotionManager). Sleep is over at that
+    /// point; the staged night is flushed and persisted first.
     func releaseForAlarm() {
-        stopAudioMetering()
-        motionManager.stopAccelerometerUpdates()
-    }
+        guard !releasedForAlarm else { return }
+        releasedForAlarm = true
 
-    /// Configures the smart alarm wake window.
-    /// During this window, the monitor will watch for light sleep and call the callback.
-    func configureSmartAlarm(windowStart: Date, windowEnd: Date, onLightSleep: @escaping () -> Void) {
-        smartAlarmWindow = (start: windowStart, end: windowEnd)
-        smartAlarmCallback = onLightSleep
-        smartAlarmTriggered = false
-        qualifyingMinutes = 0
+        if let final = pipeline?.flush(), final.hasEnoughData {
+            recordMinute(final, liveActivity: 0, noiseVariance: noiseVariance)
+        }
+
+        motionManager.stopAccelerometerUpdates()
+        watchdogTimer?.cancel()
+        watchdogTimer = nil
+        soundMonitor.stop()
+        isAudioKeepAliveActive = false
+        persist()
     }
 
     /// The night's stages, merged into contiguous spans.
     func getRecordedPhases() -> [SleepPhaseData] {
         let now = Date()
-        guard let staging, !staging.epochs.isEmpty else {
-            let start = monitoringStartTime ?? now
+        guard let engine, !engine.epochs.isEmpty else {
+            let start = engine?.sessionStart
+                ?? UserDefaults.standard.object(forKey: StorageKeys.trackingStartTime) as? Date
+                ?? now
             return [SleepPhaseData(phase: .light, startTime: start, endTime: now)]
         }
-        return staging.phaseSpans(now: now)
+        return engine.phaseSpans(now: now)
     }
 
-    /// Calculates a quality score based on actual motion data and phase distribution.
     func calculateQualityScore(phases: [SleepPhaseData], totalDuration: TimeInterval) -> Int {
-        guard totalDuration > 0 else { return 50 }
-
-        var score = 40
-
-        let hours = totalDuration / 3600
-        let deepDuration = phases.filter { $0.phase == .deep }.reduce(0.0) { $0 + $1.duration }
-        let remDuration = phases.filter { $0.phase == .rem }.reduce(0.0) { $0 + $1.duration }
-        let awakeDuration = phases.filter { $0.phase == .awake }.reduce(0.0) { $0 + $1.duration }
-        let deepPct = (deepDuration / totalDuration) * 100
-        let remPct = (remDuration / totalDuration) * 100
-        let awakePct = (awakeDuration / totalDuration) * 100
-
-        // Duration score (7-9 hours ideal) — max +15
-        if hours >= 7 && hours <= 9 {
-            score += 15
-        } else if hours >= 6 && hours <= 10 {
-            score += 10
-        } else if hours >= 5 {
-            score += 5
-        }
-
-        // Deep sleep (15-25% ideal) — max +20, penalty for missing
-        if deepPct >= 15 && deepPct <= 25 {
-            score += 20
-        } else if deepPct >= 10 {
-            score += 12
-        } else if deepPct >= 5 {
-            score += 5
-        } else {
-            // Less than 5% deep sleep is poor
-            score -= 10
-        }
-
-        // REM sleep (15-25% ideal) — max +15, penalty for missing
-        if remPct >= 15 && remPct <= 25 {
-            score += 15
-        } else if remPct >= 10 {
-            score += 8
-        } else if remPct >= 5 {
-            score += 3
-        } else {
-            // Less than 5% REM is poor
-            score -= 10
-        }
-
-        // Low awake time (<5% ideal) — max +10
-        if awakePct < 3 {
-            score += 10
-        } else if awakePct < 8 {
-            score += 5
-        } else if awakePct > 15 {
-            score -= 10
-        }
-
-        // Phase diversity bonus — having all phases present is healthy
-        let hasDeep = deepPct > 3
-        let hasRem = remPct > 3
-        let phasesPresent = [hasDeep, hasRem].filter { $0 }.count
-        if phasesPresent == 2 {
-            score += 10 // All meaningful phases present
-        } else if phasesPresent == 1 {
-            score += 3
-        }
-
-        return min(100, max(0, score))
+        SleepQualityScorer.score(phases: phases, totalDuration: totalDuration)
     }
 
-    // MARK: - Private Methods
+    // MARK: - Session Lifecycle
 
-    private func processAccelerometerData(_ data: CMAccelerometerData) {
-        // Calculate total acceleration magnitude (removing gravity ~1.0g)
-        let x = data.acceleration.x
-        let y = data.acceleration.y
-        let z = data.acceleration.z
-        let totalAcceleration = sqrt(x * x + y * y + z * z)
+    private func restoreOrStartSession() {
+        let trackedStart = UserDefaults.standard.object(forKey: StorageKeys.trackingStartTime) as? Date
 
-        // Movement is deviation from resting (gravity = ~1.0g)
-        let movement = abs(totalAcceleration - 1.0)
-        movementSamples.append(movement)
-
-        // Update real-time movement intensity (smoothed)
-        let recentCount = min(movementSamples.count, 30)
-        let recentSamples = movementSamples.suffix(recentCount)
-        movementIntensity = recentSamples.reduce(0, +) / Double(recentCount)
+        if let state = SleepSessionStore.load(),
+           Date().timeIntervalSince(state.engine.sessionStart) < Constants.sessionResumeLimit,
+           let trackedStart,
+           abs(state.engine.sessionStart.timeIntervalSince(trackedStart)) < 120 {
+            // Same night, back from a relaunch: the dead minutes become a gap,
+            // then the system recorder refills them with what really happened.
+            var restored = state.engine
+            let deadFrom = state.lastAliveAt
+            let now = Date()
+            if now.timeIntervalSince(deadFrom) > 120 {
+                restored.recordGap(from: deadFrom, to: now)
+                Analytics.featureUsed("sleep_monitor_gap", source: "restore")
+                backfillGap(from: deadFrom, to: now, noiseVariance: state.noiseVariance)
+            }
+            engine = restored
+            decider = state.decider
+            noiseVariance = state.noiseVariance
+            smartAlarmTriggered = state.smartAlarmTriggered
+            currentPhase = restored.currentPhase
+        } else {
+            engine = SleepStagingEngine(sessionStart: trackedStart ?? Date())
+            decider = nil
+            noiseVariance = nil
+            smartAlarmTriggered = false
+        }
+        lastEpochAt = Date()
     }
 
-    private func aggregateAndClassifyPhase() {
-        guard !movementSamples.isEmpty else { return }
-        guard monitoringStartTime != nil else {
-            movementSamples = []
-            return
+    private func backfillGap(from start: Date, to end: Date, noiseVariance: Double) {
+        SleepSessionStore.recoverGap(from: start, to: end, noiseVariance: noiseVariance) { [weak self] minutes in
+            guard let self, !minutes.isEmpty else { return }
+            self.engine?.fillGaps(with: minutes)
+            self.persist()
+            Analytics.featureUsed("sleep_gap_recovered", source: "sensor_recorder")
+        }
+    }
+
+    private func persist() {
+        guard let engine else { return }
+        SleepSessionStore.save(SleepSessionState(
+            engine: engine,
+            decider: decider,
+            noiseVariance: noiseVariance ?? MovementFeatureExtractor.Tuning.initialNoiseVariance,
+            smartAlarmTriggered: smartAlarmTriggered,
+            lastAliveAt: Date()
+        ))
+    }
+
+    // MARK: - Sensors
+
+    private func startAccelerometer() {
+        let pipeline = MotionPipeline(noiseVariance: noiseVariance)
+        pipeline.onMinute = { [weak self] minute, live, noise in
+            Task { @MainActor in
+                self?.recordMinute(minute, liveActivity: live, noiseVariance: noise)
+            }
+        }
+        pipeline.onSecond = { [weak self] live in
+            Task { @MainActor in
+                self?.movementIntensity = live
+            }
+        }
+        self.pipeline = pipeline
+
+        motionManager.accelerometerUpdateInterval = 1 / Constants.sampleRate
+        motionManager.startAccelerometerUpdates(to: motionQueue) { data, _ in
+            guard let data else { return }
+            pipeline.process(
+                x: data.acceleration.x,
+                y: data.acceleration.y,
+                z: data.acceleration.z
+            )
+        }
+    }
+
+    private func startAudio() {
+        soundMonitor.onLevel = { [weak self] level in
+            self?.soundLevel = level
+        }
+        soundMonitor.start { [weak self] granted in
+            guard let self else { return }
+            self.microphoneDenied = !granted
+            self.isAudioKeepAliveActive = self.soundMonitor.isRunning
+            Analytics.permissionResult("microphone", granted: granted)
+        }
+    }
+
+    /// If no epoch lands for a few minutes while we believe we are monitoring,
+    /// the pipeline stalled (session interruption, sensor hiccup). Record the
+    /// hole honestly and restart the sensors — silence must never look like a
+    /// night of stillness.
+    private func startWatchdog() {
+        let timer = DispatchSource.makeTimerSource(queue: timerQueue)
+        timer.schedule(
+            deadline: .now() + Constants.watchdogInterval,
+            repeating: Constants.watchdogInterval
+        )
+        timer.setEventHandler { [weak self] in
+            Task { @MainActor in
+                self?.watchdogTick()
+            }
+        }
+        timer.resume()
+        watchdogTimer = timer
+    }
+
+    private func watchdogTick() {
+        guard isMonitoring, !releasedForAlarm else { return }
+
+        // Keep the persisted heartbeat fresh even between epochs, so a
+        // relaunch measures the gap from when the process actually died.
+        persist()
+
+        if let last = lastEpochAt, Date().timeIntervalSince(last) > Constants.watchdogStallSeconds {
+            engine?.recordGap(from: last.addingTimeInterval(60), to: Date())
+            lastEpochAt = Date()
+            Analytics.featureUsed("sleep_monitor_gap", source: "watchdog")
+
+            motionManager.stopAccelerometerUpdates()
+            startAccelerometer()
         }
 
-        let avgMovement = movementSamples.reduce(0, +) / Double(movementSamples.count)
-        movementSamples = []
+        if !soundMonitor.isRunning, !microphoneDenied {
+            // The audio session dropped (interruption, route change). Restart —
+            // it is both the keep-alive and the snore channel.
+            startAudio()
+        }
+        isAudioKeepAliveActive = soundMonitor.isRunning
+    }
 
-        // The engine owns the staging: it smooths this minute against its
-        // neighbours and calibrates against the night's own movement, rather
-        // than guessing the stage from the clock.
-        let settled = staging?.record(activity: avgMovement) ?? .light
+    // MARK: - Staging
 
-        // Stages only move after a couple of minutes, so no extra damping here.
+    private func recordMinute(_ minute: MovementFeatures, liveActivity: Double, noiseVariance: Double?) {
+        guard isMonitoring else { return }
+
+        self.noiseVariance = noiseVariance
+        lastEpochAt = Date()
+
+        let sound = soundMonitor.snapshotMinute()
+        let settled = engine?.record(minute, sound: sound) ?? .light
         if settled != currentPhase {
             currentPhase = settled
-            lastPhaseChangeTime = Date()
         }
 
-        phaseHistory.append((date: Date(), phase: settled, movement: avgMovement))
-
-        checkSmartAlarmCondition(avgMovement: avgMovement)
+        // No smart check once the alarm rang: the ringing phone's own sound
+        // and vibration read as movement and would re-trigger the wake.
+        if !releasedForAlarm {
+            checkSmartAlarm(liveActivity: liveActivity)
+        }
+        persist()
     }
 
-    private func checkSmartAlarmCondition(avgMovement: Double) {
+    // MARK: - Smart Alarm
+
+    /// Resolves the wake window from storage. Runs at start AND every minute,
+    /// so an alarm created or edited after the night began still gets its
+    /// window — before, only the alarm present at tracking start counted.
+    private func armSmartAlarm() {
         guard !smartAlarmTriggered else { return }
-        guard let window = smartAlarmWindow else { return }
 
-        let now = Date()
-        guard now >= window.start, now <= window.end else { return }
-
-        let total = window.end.timeIntervalSince(window.start)
-        guard total > 0 else { return }
-        let progress = min(1, max(0, now.timeIntervalSince(window.start) / total))
-
-        // Judging on a single minute is what made this fire the moment the
-        // window opened; wait until the engine has calibrated on the night.
-        guard staging?.isCalibrated == true else { return }
-
-        let score = staging?.wakeReadiness() ?? 0
-        let isAwake = score >= SmartWake.awakeScore
-
-        // Early in the window only a sleeper who is plainly awake is worth
-        // ringing for — everyone else still has sleep to gain.
-        guard progress >= SmartWake.earliestProgress || isAwake else {
-            qualifyingMinutes = 0
+        let alarms = StorageService.shared.loadAlarms()
+        guard let alarm = alarms.first(where: { $0.isEnabled && $0.isSmartAlarm }),
+              let occurrence = AlarmOccurrenceLedger.scheduledDate(for: alarm)?.date else {
+            decider = nil
             return
         }
 
-        let bar = SmartWake.startingBar - (SmartWake.startingBar - SmartWake.endingBar) * progress
-        qualifyingMinutes = score >= bar ? qualifyingMinutes + 1 : 0
+        let windowStart = occurrence.addingTimeInterval(-Double(alarm.smartAlarmWindow * 60))
 
-        let needed = isAwake ? 1 : SmartWake.confirmationMinutes
-        guard qualifyingMinutes >= needed else { return }
+        // Keep the current decider only if it still describes this window —
+        // its confirmation count and fired state are per-window.
+        if let decider,
+           decider.alarmId == alarm.id.uuidString,
+           abs(decider.windowEnd.timeIntervalSince(occurrence)) < 60 {
+            return
+        }
+        decider = SmartWakeDecider(
+            windowStart: windowStart,
+            windowEnd: occurrence,
+            alarmId: alarm.id.uuidString
+        )
+    }
 
+    private func checkSmartAlarm(liveActivity: Double) {
+        armSmartAlarm()
+
+        guard var decider, !decider.hasFired, let engine else { return }
+
+        let score = engine.wakeReadiness(liveActivity: liveActivity)
+        let fired = decider.evaluate(score: score, calibrated: engine.isCalibrated, at: Date())
+        self.decider = decider
+
+        guard fired else { return }
+        triggerSmartWake(alarmId: decider.alarmId, occurrence: decider.windowEnd)
+    }
+
+    /// Rings the early wake. On iOS 26 the pending fixed-time system alarm is
+    /// replaced by one a few seconds out, so the REAL alarm rings on the lock
+    /// screen; elsewhere the in-app audio rings and a notification gives the
+    /// locked phone a face. Either way the fixed-time occurrence is marked
+    /// handled so no path rings it a second time.
+    private func triggerSmartWake(alarmId: String, occurrence: Date) {
         smartAlarmTriggered = true
-        smartAlarmCallback?()
-    }
+        persist()
 
-    // MARK: - Audio Metering
+        guard let uuid = UUID(uuidString: alarmId),
+              let alarm = StorageService.shared.loadAlarms().first(where: { $0.id == uuid }) else { return }
 
-    private func startAudioMetering() {
-        // Request microphone permission first
-        if #available(iOS 17.0, *) {
-            AVAudioApplication.requestRecordPermission { [weak self] granted in
-                Task { @MainActor in
-                    guard granted else {
-                        return
-                    }
-                    self?.setupAudioRecorder()
-                }
+        AlarmOccurrenceLedger.markHandled(alarmId: alarmId, occurrence: occurrence)
+        NotificationService.shared.suppressFixedOccurrence(for: alarm)
+        Analytics.featureUsed("smart_wake_early", source: "motion")
+
+        Task { @MainActor in
+            if await SystemAlarmScheduler.fireNow(alarm, originalOccurrence: occurrence) {
+                // The system alert will ring and hand control back through the
+                // stop intent — the app then resumes into the mission flow.
+                return
             }
-        } else {
-            AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted in
-                Task { @MainActor in
-                    guard granted else {
-                        return
-                    }
-                    self?.setupAudioRecorder()
-                }
-            }
+            NotificationService.shared.postSmartWakeNotification(for: alarm)
+            NotificationService.shared.handleForegroundAlarm(
+                alarmId: alarm.id.uuidString,
+                soundName: alarm.sound.rawValue,
+                volume: Float(alarm.volume),
+                vibration: alarm.vibrationEnabled
+            )
         }
-    }
-
-    private func setupAudioRecorder() {
-        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("sleep_meter.caf")
-
-        let settings: [String: Any] = [
-            AVFormatIDKey: Int(kAudioFormatAppleLossless),
-            AVSampleRateKey: 44100.0,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.min.rawValue
-        ]
-
-        do {
-            // Configure audio session for recording alongside playback
-            let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers, .allowBluetoothHFP])
-            try session.setActive(true)
-
-            audioRecorder = try AVAudioRecorder(url: tempURL, settings: settings)
-            audioRecorder?.isMeteringEnabled = true
-            audioRecorder?.record()
-
-            // Poll audio levels every 0.5 seconds using GCD timer (background-safe)
-            let timer = DispatchSource.makeTimerSource(queue: timerQueue)
-            timer.schedule(deadline: .now() + 0.5, repeating: 0.5)
-            timer.setEventHandler { [weak self] in
-                Task { @MainActor in
-                    self?.updateSoundLevel()
-                }
-            }
-            timer.resume()
-            audioMeterTimer = timer
-
-        } catch {
-        }
-    }
-
-    private func stopAudioMetering() {
-        audioMeterTimer?.cancel()
-        audioMeterTimer = nil
-        audioRecorder?.stop()
-        audioRecorder = nil
-        soundLevel = 0
-
-        // Clean up temp file
-        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("sleep_meter.caf")
-        try? FileManager.default.removeItem(at: tempURL)
-    }
-
-    private func updateSoundLevel() {
-        guard let recorder = audioRecorder, recorder.isRecording else { return }
-        recorder.updateMeters()
-
-        // averagePower returns dB: -160 (silence) to 0 (max)
-        let dB = recorder.averagePower(forChannel: 0)
-
-        // Normalize to 0-1 range: -60dB = silence, 0dB = max
-        let normalized = max(0, (dB + 60) / 60)
-        soundLevel = Double(normalized)
     }
 }

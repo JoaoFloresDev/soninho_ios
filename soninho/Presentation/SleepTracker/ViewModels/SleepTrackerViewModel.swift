@@ -70,11 +70,9 @@ final class SleepTrackerViewModel: ObservableObject {
         UserDefaults.standard.set(true, forKey: StorageKeys.isCurrentlyTracking)
         UserDefaults.standard.set(trackingStartTime, forKey: StorageKeys.trackingStartTime)
 
-        // Start real motion monitoring
+        // Start real motion monitoring — the monitor arms the smart-alarm
+        // window itself, from storage, and re-checks it every minute.
         motionMonitor.startMonitoring()
-
-        // Configure smart alarm if one is enabled
-        configureSmartAlarmIfNeeded()
 
         startTimer()
     }
@@ -87,18 +85,9 @@ final class SleepTrackerViewModel: ObservableObject {
         let endTime = Date()
         let duration = endTime.timeIntervalSince(startTime)
 
-        // Get motion-detected phases (cycle model + accelerometer)
-        let motionPhases = motionMonitor.getRecordedPhases()
-        let phases: [SleepPhaseData]
-        let qualityScore: Int
-
-        if !motionPhases.isEmpty {
-            phases = motionPhases
-        } else {
-            phases = generateFallbackPhases(from: startTime, to: endTime)
-        }
-
-        qualityScore = motionMonitor.calculateQualityScore(phases: phases, totalDuration: duration)
+        // Motion-detected phases (staging engine over the accelerometer data)
+        let phases = motionMonitor.getRecordedPhases()
+        let qualityScore = motionMonitor.calculateQualityScore(phases: phases, totalDuration: duration)
 
         // Stop motion monitoring
         motionMonitor.stopMonitoring()
@@ -195,27 +184,6 @@ final class SleepTrackerViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func configureSmartAlarmIfNeeded() {
-        let alarms = storageService.loadAlarms()
-        guard let smartAlarm = alarms.first(where: { $0.isEnabled && $0.isSmartAlarm }) else { return }
-        guard let nextAlarmDate = smartAlarm.nextAlarmDate else { return }
-
-        let windowStart = nextAlarmDate.addingTimeInterval(-Double(smartAlarm.smartAlarmWindow * 60))
-
-        motionMonitor.configureSmartAlarm(windowStart: windowStart, windowEnd: nextAlarmDate) {
-            Task { @MainActor in
-                // Smart alarm detected light sleep - trigger alarm
-                let notificationService = NotificationService.shared
-                notificationService.handleForegroundAlarm(
-                    alarmId: smartAlarm.id.uuidString,
-                    soundName: smartAlarm.sound.rawValue,
-                    volume: Float(smartAlarm.volume),
-                    vibration: smartAlarm.vibrationEnabled
-                )
-            }
-        }
-    }
-
     private func loadTrackingState() {
         isTracking = UserDefaults.standard.bool(forKey: StorageKeys.isCurrentlyTracking)
         trackingStartTime = UserDefaults.standard.object(forKey: StorageKeys.trackingStartTime) as? Date
@@ -227,10 +195,10 @@ final class SleepTrackerViewModel: ObservableObject {
                 return
             }
             elapsedTime = Date().timeIntervalSince(startTime)
-            // Resume motion monitoring if it was active
+            // Resume motion monitoring if it was active — the monitor restores
+            // the persisted night and records the dead minutes as a gap.
             if !motionMonitor.isMonitoring {
                 motionMonitor.startMonitoring()
-                configureSmartAlarmIfNeeded()
             }
             startTimer()
         }
@@ -256,81 +224,5 @@ final class SleepTrackerViewModel: ObservableObject {
         if elapsedTime >= AppConstants.autoCancelSleepSessionHours * 3600 {
             cancelTracking()
         }
-    }
-
-    // MARK: - Fallback Phase Generation
-    /// Used when accelerometer is not available (simulator, older devices)
-    private func generateFallbackPhases(from start: Date, to end: Date) -> [SleepPhaseData] {
-        var phases: [SleepPhaseData] = []
-        var currentTime = start
-        let totalDuration = end.timeIntervalSince(start)
-        let cycleCount = max(1, Int(totalDuration / 5400))
-
-        for cycle in 0..<cycleCount {
-            let lightDuration = Double.random(in: 15...25) * 60
-            let lightEnd = min(currentTime.addingTimeInterval(lightDuration), end)
-            phases.append(SleepPhaseData(phase: .light, startTime: currentTime, endTime: lightEnd))
-            currentTime = lightEnd
-
-            guard currentTime < end else { break }
-
-            let deepMultiplier = cycle < cycleCount / 2 ? 1.5 : 0.5
-            let deepDuration = Double.random(in: 15...30) * 60 * deepMultiplier
-            let deepEnd = min(currentTime.addingTimeInterval(deepDuration), end)
-            phases.append(SleepPhaseData(phase: .deep, startTime: currentTime, endTime: deepEnd))
-            currentTime = deepEnd
-
-            guard currentTime < end else { break }
-
-            let remMultiplier = cycle >= cycleCount / 2 ? 1.5 : 0.5
-            let remDuration = Double.random(in: 10...25) * 60 * remMultiplier
-            let remEnd = min(currentTime.addingTimeInterval(remDuration), end)
-            phases.append(SleepPhaseData(phase: .rem, startTime: currentTime, endTime: remEnd))
-            currentTime = remEnd
-
-            if Bool.random() && currentTime < end {
-                let awakeDuration = Double.random(in: 1...5) * 60
-                let awakeEnd = min(currentTime.addingTimeInterval(awakeDuration), end)
-                phases.append(SleepPhaseData(phase: .awake, startTime: currentTime, endTime: awakeEnd))
-                currentTime = awakeEnd
-            }
-        }
-
-        if currentTime < end {
-            phases.append(SleepPhaseData(phase: .light, startTime: currentTime, endTime: end))
-        }
-
-        return phases
-    }
-
-    private func calculateFallbackQualityScore(phases: [SleepPhaseData], duration: TimeInterval) -> Int {
-        var score = 50
-
-        let hours = duration / 3600
-        if hours >= 7 && hours <= 9 {
-            score += 25
-        } else if hours >= 6 && hours <= 10 {
-            score += 15
-        } else if hours < 5 {
-            score -= 15
-        }
-
-        let deepDuration = phases.filter { $0.phase == .deep }.reduce(0) { $0 + $1.duration }
-        let deepPercentage = (deepDuration / duration) * 100
-        if deepPercentage >= 15 && deepPercentage <= 25 {
-            score += 15
-        } else if deepPercentage >= 10 {
-            score += 8
-        }
-
-        let remDuration = phases.filter { $0.phase == .rem }.reduce(0) { $0 + $1.duration }
-        let remPercentage = (remDuration / duration) * 100
-        if remPercentage >= 20 && remPercentage <= 25 {
-            score += 10
-        } else if remPercentage >= 15 {
-            score += 5
-        }
-
-        return min(100, max(0, score + Int.random(in: -5...5)))
     }
 }
