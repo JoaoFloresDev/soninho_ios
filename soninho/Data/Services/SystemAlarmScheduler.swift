@@ -24,7 +24,30 @@ import SwiftUI
 @MainActor
 enum SystemAlarmScheduler {
 
+    // MARK: - Constants
+    /// Alarms AlarmKit currently owns. Persisted because the background keep-alive
+    /// runs in a fresh process after a relaunch and must still know to stay quiet.
+    private static let ownedKey = "systemAlarm.ownedIds"
+
     // MARK: - Computed Properties
+
+    /// Whether the system will ring this alarm on its own. The app's other ring
+    /// paths — the notification burst and the background keep-alive — must stand
+    /// down for these, or the sleeper gets two alarms at once.
+    static func owns(_ alarmId: String) -> Bool {
+        ownedIds().contains(alarmId)
+    }
+
+    private static func ownedIds() -> Set<String> {
+        Set(UserDefaults.standard.stringArray(forKey: ownedKey) ?? [])
+    }
+
+    private static func setOwned(_ alarmId: String, _ owned: Bool) {
+        var ids = ownedIds()
+        if owned { ids.insert(alarmId) } else { ids.remove(alarmId) }
+        UserDefaults.standard.set(Array(ids), forKey: ownedKey)
+    }
+
 
     /// Whether this device can ring through Focus and the ringer switch.
     static var isAvailable: Bool {
@@ -105,6 +128,7 @@ enum SystemAlarmScheduler {
 
             do {
                 _ = try await AlarmManager.shared.schedule(id: alarm.id, configuration: configuration)
+                setOwned(alarm.id.uuidString, true)
                 return true
             } catch {
                 // Falling back is safer than failing loudly: a missed alarm is a
@@ -132,7 +156,63 @@ enum SystemAlarmScheduler {
         return .relative(.init(time: time, repeats: .weekly(days)))
     }
 
+    /// Schedules the snooze as a system alarm too. A snooze delivered only as a
+    /// notification is silenced by exactly the same Focus that AlarmKit exists
+    /// to get past — the sleeper would tap Snooze and simply never be woken.
+    @discardableResult
+    static func scheduleSnooze(for alarm: AlarmModel, minutes: Int) async -> Bool {
+        #if canImport(AlarmKit)
+        if #available(iOS 26.0, *) {
+            guard await requestAuthorization() else { return false }
+
+            let stop = AlarmButton(
+                text: LocalizedStringResource(stringLiteral: String(localized: "alarm_dismiss")),
+                textColor: .white,
+                systemImageName: "sun.max.fill"
+            )
+            let alert = AlarmPresentation.Alert(
+                title: LocalizedStringResource(stringLiteral: String(localized: "alarm_notification_title")),
+                stopButton: stop
+            )
+            let attributes = AlarmAttributes<SunriseAlarmMetadata>(
+                presentation: AlarmPresentation(alert: alert),
+                metadata: SunriseAlarmMetadata(alarmId: alarm.id.uuidString),
+                tintColor: AppColors.primary
+            )
+            let configuration = AlarmManager.AlarmConfiguration(
+                schedule: .fixed(Date().addingTimeInterval(TimeInterval(minutes * 60))),
+                attributes: attributes,
+                stopIntent: StopAlarmIntent(alarmId: alarm.id.uuidString)
+            )
+            do {
+                _ = try await AlarmManager.shared.schedule(id: snoozeId(for: alarm), configuration: configuration)
+                return true
+            } catch {
+                return false
+            }
+        }
+        #endif
+        return false
+    }
+
+    static func cancelSnooze(_ alarm: AlarmModel) {
+        #if canImport(AlarmKit)
+        if #available(iOS 26.0, *) {
+            try? AlarmManager.shared.cancel(id: snoozeId(for: alarm))
+        }
+        #endif
+    }
+
+    /// A snooze needs its own identifier: reusing the alarm's would replace the
+    /// recurring schedule with a one-off nine minutes from now.
+    private static func snoozeId(for alarm: AlarmModel) -> UUID {
+        var bytes = alarm.id.uuid
+        bytes.0 = bytes.0 ^ 0xFF
+        return UUID(uuid: bytes)
+    }
+
     static func cancel(_ alarm: AlarmModel) {
+        setOwned(alarm.id.uuidString, false)
         #if canImport(AlarmKit)
         if #available(iOS 26.0, *) {
             try? AlarmManager.shared.cancel(id: alarm.id)

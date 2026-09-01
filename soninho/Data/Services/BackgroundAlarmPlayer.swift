@@ -357,6 +357,11 @@ final class BackgroundAlarmPlayer: ObservableObject {
             let fireKey = "\(alarm.id.uuidString)@\(Int(recent.timeIntervalSince1970))"
             guard !hasFiredAlarmIds.contains(fireKey) else { continue }
 
+            // AlarmKit should have rung this one already. Give it a moment to do
+            // so before stepping in — long enough not to double up on a working
+            // system alarm, short enough that a failed one still wakes someone.
+            if SystemAlarmScheduler.owns(alarm.id.uuidString), sinceFire < 60 { continue }
+
             // If a smart alarm already rang early in its light-sleep window, don't
             // ring again at the hard deadline.
             let isSmartActive = alarm.isSmartAlarm && MotionSleepMonitor.shared.isMonitoring

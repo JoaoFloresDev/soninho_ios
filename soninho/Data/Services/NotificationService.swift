@@ -135,12 +135,17 @@ final class NotificationService: ObservableObject {
         // and the ringer switch, which a notification cannot. When it accepts
         // the alarm the burst below is redundant and would only double the
         // sound, so it is skipped.
-        // A repeating alarm goes in as a weekly recurrence, so AlarmKit renews it
-        // on its own and the weekday baseline below is not needed either.
-        if await SystemAlarmScheduler.schedule(alarm, at: nextDate) {
-            await refreshPendingNotifications()
-            return
-        }
+        // AlarmKit gets the alarm first, but it does not get it exclusively.
+        // Trusting it alone means that if it ever fails to deliver, the alarm is
+        // silently lost — the single worst outcome this app can produce. So the
+        // burst below stays armed as a safety net, delayed past the moment
+        // AlarmKit should have fired: if it rang, the app cancels the burst on
+        // the way in and the sleeper never hears it. If it did not, they wake a
+        // minute late instead of not at all.
+        let systemAlarmScheduled = await SystemAlarmScheduler.schedule(alarm, at: nextDate)
+        let burstStart = systemAlarmScheduled
+            ? nextDate.addingTimeInterval(AlarmBurst.safetyNetDelay)
+            : nextDate
 
         // PERSISTENT RING: schedule a burst of notifications spaced ~30s apart
         // (each plays the 29s alarm sound), so the alarm keeps ringing for
@@ -152,7 +157,7 @@ final class NotificationService: ObservableObject {
         let burstCount = max(6, min(18, 40 / enabledCount))
         let spacing: TimeInterval = AlarmBurst.spacing
         for i in 0..<burstCount {
-            let fireDate = nextDate.addingTimeInterval(Double(i) * spacing)
+            let fireDate = burstStart.addingTimeInterval(Double(i) * spacing)
             await scheduleNotification(
                 alarm: alarm,
                 dateComponents: calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: fireDate),
@@ -186,6 +191,10 @@ final class NotificationService: ObservableObject {
     // MARK: - Alarm Burst Config
     private enum AlarmBurst {
         static let spacing: TimeInterval = 30   // seconds between notifications
+        /// How long the fallback waits for AlarmKit to do its job before ringing
+        /// anyway. Long enough that a working system alarm is dismissed first,
+        /// short enough that a failed one still wakes the sleeper.
+        static let safetyNetDelay: TimeInterval = 60
         static let suffix = "_burst_"
         static let maxIds = 30                  // upper bound for cancellation
     }
@@ -260,9 +269,18 @@ final class NotificationService: ObservableObject {
 
     // MARK: - Schedule Snooze
     func scheduleSnooze(for alarmId: String, minutes: Int = 9, soundName: String = "sunrise", volume: Float = 1.0, vibrationEnabled: Bool = true) async {
-        guard isAuthorized else { return }
-
         snoozesUsed[alarmId, default: 0] += 1
+
+        // The system alarm gets the snooze first: it survives a Focus, and it
+        // works even when the user declined notifications entirely.
+        if let uuid = UUID(uuidString: alarmId),
+           let alarm = StorageService.shared.loadAlarms().first(where: { $0.id == uuid }),
+           await SystemAlarmScheduler.scheduleSnooze(for: alarm, minutes: minutes) {
+            return
+        }
+
+        // Falling back to a notification, which needs permission to land at all.
+        guard isAuthorized else { return }
 
         let alarmSound = AlarmSound(rawValue: soundName) ?? .sunrise
         let content = UNMutableNotificationContent()
@@ -485,6 +503,9 @@ final class NotificationService: ObservableObject {
 
     func snoozeCurrentAlarm() {
         guard let alarmId = ringingAlarmId else { return }
+        // The view hides the button past the limit, but a limit enforced only by
+        // what is drawn is not enforced.
+        guard remainingSnoozes(for: alarmId) > 0 else { return }
         // Resolve the configured sound/volume/vibration/duration from storage —
         // the background fire path doesn't populate the backing fields, so
         // relying on them would snooze with the wrong (default) settings.
@@ -523,6 +544,7 @@ final class NotificationService: ObservableObject {
         ]
         if includingSnooze {
             identifiers.append("\(alarm.id.uuidString)_snooze")
+            SystemAlarmScheduler.cancelSnooze(alarm)
         }
 
         // Legacy per-weekday notifications (older builds)

@@ -26,6 +26,15 @@ struct SleepTip: Identifiable {
             String(localized: String.LocalizationValue("tip_category_\(rawValue)"))
         }
     }
+
+    /// Stands in when the catalogue is somehow empty, so a missing tip never
+    /// takes the screen down with it.
+    static let placeholder = SleepTip(
+        icon: "moon.stars",
+        title: String(localized: "tips_daily_title"),
+        description: String(localized: "tip_wind_down_desc"),
+        category: .routine
+    )
 }
 
 // MARK: - Sleep Tips Service
@@ -143,9 +152,10 @@ final class SleepTipsService {
     // MARK: - Public Methods
     func getDailyTip() -> SleepTip {
         // Get a different tip each day based on the day of year
+        guard !allTips.isEmpty else { return SleepTip.placeholder }
         let dayOfYear = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
         let index = dayOfYear % allTips.count
-        return allTips[index]
+        return allTips[safe: index] ?? SleepTip.placeholder
     }
     
     func getTipsForCategory(_ category: SleepTip.TipCategory) -> [SleepTip] {
