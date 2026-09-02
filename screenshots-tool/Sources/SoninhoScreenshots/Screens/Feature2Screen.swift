@@ -56,6 +56,11 @@ struct Feature2Screen: View {
                                 Text(L("7h 42min asleep", "7h 42min dormindo", "7h 42min dormido"))
                                     .font(.system(size: 14))
                                     .foregroundStyle(AppPalette.textSecondary)
+                                GlassChip(
+                                    icon: "arrow.up.right",
+                                    text: L("Improving", "Melhorando", "Mejorando"),
+                                    tint: AppPalette.success
+                                )
                             }
                             Spacer()
                             scoreRing

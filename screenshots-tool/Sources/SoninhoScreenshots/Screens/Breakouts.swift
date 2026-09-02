@@ -296,3 +296,128 @@ struct DurationChartCardMock: View {
         }
     }
 }
+
+// MARK: - Wake Window Card (slot 2 core — the smart wake itself)
+struct WakeWindowCardMock: View {
+    let locale: String
+    private func L(_ en: String, _ pt: String, _ es: String) -> String {
+        locale == "pt-BR" ? pt : (locale.hasPrefix("es") ? es : en)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 8) {
+                Image(systemName: "brain.head.profile")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(AppPalette.primary)
+                Text(L("Smart wake window", "Janela de despertar", "Ventana inteligente"))
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(AppPalette.textPrimary)
+                Spacer()
+                Text("07:00 – 07:30")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(AppPalette.textSecondary)
+                    .monospacedDigit()
+            }
+
+            // Window timeline: deep → light, ring marker inside the light zone
+            ZStack(alignment: .leading) {
+                GeometryReader { geo in
+                    let w = geo.size.width
+                    HStack(spacing: 0) {
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(AppPalette.deepSleep.opacity(0.85))
+                            .frame(width: w * 0.34)
+                        Rectangle()
+                            .fill(AppPalette.lightSleep.opacity(0.9))
+                            .frame(width: w * 0.46)
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(Color.white.opacity(0.10))
+                            .frame(width: w * 0.20)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+
+                    // Ring marker at 07:22 — inside the light zone
+                    VStack(spacing: 3) {
+                        Image(systemName: "sunrise.fill")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundStyle(.white)
+                            .padding(7)
+                            .background(Circle().fill(AppPalette.primary))
+                        Rectangle()
+                            .fill(AppPalette.primary)
+                            .frame(width: 3, height: 12)
+                    }
+                    .position(x: w * 0.72, y: 2)
+                }
+            }
+            .frame(height: 44)
+            .padding(.top, 16)
+
+            HStack {
+                HStack(spacing: 6) {
+                    Circle().fill(AppPalette.lightSleep).frame(width: 8, height: 8)
+                    Text(L("Woke at 7:22 — light sleep", "Acordou 7:22 — sono leve", "Despertó 7:22 — sueño ligero"))
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(AppPalette.textPrimary)
+                }
+                Spacer()
+                Text(L("8 min early", "8 min antes", "8 min antes"))
+                    .font(.system(size: 13))
+                    .foregroundStyle(AppPalette.success)
+            }
+        }
+        .padding(18)
+    }
+}
+
+// MARK: - Gradual Volume Card (slot 4 core — gentle rising sound)
+struct GradualVolumeCardMock: View {
+    let locale: String
+    private func L(_ en: String, _ pt: String, _ es: String) -> String {
+        locale == "pt-BR" ? pt : (locale.hasPrefix("es") ? es : en)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                HStack(spacing: 8) {
+                    Image(systemName: "sunrise.fill")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(AppPalette.primary)
+                    Text(L("Sunrise · gradual wake", "Amanhecer · despertar gradual", "Amanecer · despertar gradual"))
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(AppPalette.textPrimary)
+                }
+                Spacer()
+                GlassChip(icon: "checkmark", text: L("On", "Ativo", "Activo"), tint: AppPalette.success)
+            }
+
+            HStack(alignment: .bottom, spacing: 5) {
+                ForEach(0..<18, id: \.self) { index in
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(
+                            LinearGradient(
+                                colors: [AppPalette.primaryLight, AppPalette.primary],
+                                startPoint: .top, endPoint: .bottom
+                            )
+                        )
+                        .frame(width: 15, height: 8 + CGFloat(index) * 3.6)
+                        .opacity(0.45 + Double(index) * 0.03)
+                }
+            }
+            .frame(maxWidth: .infinity)
+
+            HStack {
+                Text(L("Starts at a whisper", "Começa num sussurro", "Empieza en un susurro"))
+                    .font(.system(size: 13))
+                    .foregroundStyle(AppPalette.textSecondary)
+                Spacer()
+                Text(L("Full volume in 2 min", "Volume cheio em 2 min", "Volumen total en 2 min"))
+                    .font(.system(size: 13))
+                    .foregroundStyle(AppPalette.textSecondary)
+            }
+        }
+        .padding(18)
+    }
+}

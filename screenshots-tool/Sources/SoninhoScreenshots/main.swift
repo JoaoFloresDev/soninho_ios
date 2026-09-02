@@ -128,30 +128,31 @@ func renderLocaleSet(
                 canvas: canvas, scale: 1.0, to: url1)
 
     // Slot 2: Feature 1
-    let url2 = outputDir.appendingPathComponent("02_feature1_iphone.png")
+    let url2 = outputDir.appendingPathComponent("02_smartwake_iphone.png")
     try render(view: marketing(device: device, slot: 1, totalSlots: totalSlots,
                                 headline: treatment.feature1[locale], theme: theme,
-                                foreground: breakoutForeground(MissionCardMock(locale: locale), y: 2080, canvas: canvas)) { Feature1Screen(locale: locale) },
+                                foreground: breakoutForeground(WakeWindowCardMock(locale: locale), y: 2100, canvas: canvas)) { TrackingScreen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url2)
 
     // Slot 3: Feature 2
-    let url3 = outputDir.appendingPathComponent("03_feature2_iphone.png")
+    let url3 = outputDir.appendingPathComponent("03_mission_iphone.png")
     try render(view: marketing(device: device, slot: 2, totalSlots: totalSlots,
                                 headline: treatment.feature2[locale], theme: theme,
-                                foreground: breakoutForeground(HypnogramCardMock(locale: locale), y: 1980, canvas: canvas)) { Feature2Screen(locale: locale) },
+                                foreground: breakoutForeground(MissionCardMock(locale: locale), y: 2080, canvas: canvas)) { Feature1Screen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url3)
 
     // Slot 4: Settings
-    let url4 = outputDir.appendingPathComponent("04_settings_iphone.png")
+    let url4 = outputDir.appendingPathComponent("04_sounds_iphone.png")
     try render(view: marketing(device: device, slot: 3, totalSlots: totalSlots,
-                                headline: treatment.settings[locale], theme: theme) { SettingsScreen(locale: locale) },
+                                headline: treatment.settings[locale], theme: theme,
+                                foreground: breakoutForeground(GradualVolumeCardMock(locale: locale), y: 2080, canvas: canvas)) { SoundsScreen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url4)
 
     // Slot 5: Onboarding
-    let url5 = outputDir.appendingPathComponent("05_stats_iphone.png")
+    let url5 = outputDir.appendingPathComponent("05_report_iphone.png")
     try render(view: marketing(device: device, slot: 4, totalSlots: totalSlots,
                                 headline: treatment.onboarding[locale], theme: theme,
-                                foreground: breakoutForeground(DurationChartCardMock(locale: locale), y: 2050, canvas: canvas)) { StatsScreen(locale: locale) },
+                                foreground: breakoutForeground(HypnogramCardMock(locale: locale), y: 1990, canvas: canvas)) { Feature2Screen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url5)
 
     // Slot 6: App Store listing mockup (validation only, abtest mode only)
