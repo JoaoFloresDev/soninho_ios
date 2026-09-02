@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D5A494687B1E1CCBE197409 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 452043D9079FF98767E19B0D /* FirebaseCrashlytics */; };
 		E67EF86A3429852076DB3639 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1465FD894F6959FDE069F7 /* FirebaseAnalytics */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E67EF86A3429852076DB3639 /* FirebaseAnalytics in Frameworks */,
+				5D5A494687B1E1CCBE197409 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +137,7 @@
 			name = soninho;
 			packageProductDependencies = (
 				1E1465FD894F6959FDE069F7 /* FirebaseAnalytics */,
+				452043D9079FF98767E19B0D /* FirebaseCrashlytics */,
 			);
 			productName = soninho;
 			productReference = C492C6202F29BF10003058AD /* soninho.app */;
@@ -617,6 +620,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B61DDDA315477BCBA42C4829 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		452043D9079FF98767E19B0D /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B61DDDA315477BCBA42C4829 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
