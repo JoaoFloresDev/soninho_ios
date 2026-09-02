@@ -33,7 +33,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
     private let timerQueue = DispatchQueue(label: "com.gambitstudio.soninho.alarmtimer", qos: .userInteractive)
     private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
     private var silentAudioData: Data?
-    private var hasFiredAlarmIds: Set<String> = []
 
     // MARK: - Init
     private init() {
@@ -82,17 +81,28 @@ final class BackgroundAlarmPlayer: ObservableObject {
         configureAudioSession()
     }
 
+    /// The monitor's recording session (playAndRecord + mixWithOthers) is
+    /// itself a keep-alive; flipping the category to solo .playback under it
+    /// kills the mic tap and the two services then fight every watchdog tick.
+    private var monitorOwnsSession: Bool {
+        MotionSleepMonitor.shared.isAudioKeepAliveActive
+    }
+
     /// Starts background audio to keep the app alive.
     /// Call this when the app is about to enter background (inactive or background phase).
     func startBackgroundKeepAlive() {
         guard !isBackgroundActive else { return }
 
-        // Check if there's an upcoming alarm within the next 12 hours
+        // A smart alarm gets a 24h horizon: the keep-alive is what arms its
+        // monitoring, and with 12h anyone whose last app use was before
+        // (alarm − 12h) silently lost the smart wake for the night. Plain
+        // alarms keep 12h (AlarmKit/notifications ring without the app).
         let alarms = StorageService.shared.loadAlarms()
         let hasUpcomingAlarm = alarms.contains { alarm in
             guard alarm.isEnabled else { return false }
             if let nextDate = alarm.nextAlarmDate {
-                return nextDate.timeIntervalSinceNow < 12 * 3600 && nextDate.timeIntervalSinceNow > 0
+                let horizon: TimeInterval = alarm.isSmartAlarm ? 24 * 3600 : 12 * 3600
+                return nextDate.timeIntervalSinceNow < horizon && nextDate.timeIntervalSinceNow > 0
             }
             return !alarm.repeatDays.isEmpty
         }
@@ -126,7 +136,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
         startAlarmCheckTimer()
 
         isBackgroundActive = true
-        hasFiredAlarmIds = []
     }
 
     /// Stops background audio. Call when app comes to foreground.
@@ -135,7 +144,6 @@ final class BackgroundAlarmPlayer: ObservableObject {
         silentPlayer?.stop()
         silentPlayer = nil
         isBackgroundActive = false
-        hasFiredAlarmIds = []
         endBackgroundTask()
     }
 
@@ -211,6 +219,7 @@ final class BackgroundAlarmPlayer: ObservableObject {
     // MARK: - Audio Session
 
     private func configureAudioSession() {
+        guard !monitorOwnsSession else { return }
         do {
             // .playback (solo, no .mixWithOthers): owns the audio session so iOS
             // keeps the app alive in the background. Mixable/ambient audio is
@@ -361,28 +370,43 @@ final class BackgroundAlarmPlayer: ObservableObject {
                 guard let weekday = Weekday(calendarWeekday: wd), alarm.repeatDays.contains(weekday) else { continue }
             }
 
+            // An occurrence the smart alarm already rang early is HANDLED —
+            // the ledger survives dismissal and process death, unlike the
+            // live monitor state this guard used to rely on.
+            if AlarmOccurrenceLedger.wasHandled(alarmId: alarm.id.uuidString, occurrence: recent) { continue }
+
             // Fire once per occurrence (key includes the occurrence timestamp).
             let fireKey = "\(alarm.id.uuidString)@\(Int(recent.timeIntervalSince1970))"
-            guard !hasFiredAlarmIds.contains(fireKey) else { continue }
+            guard !hasFiredOccurrence(fireKey) else { continue }
+
+            // A ring already in progress needs no catch-up on top of it.
+            if NotificationService.shared.isAlarmRinging { continue }
 
             // AlarmKit should have rung this one already. Give it a moment to do
             // so before stepping in — long enough not to double up on a working
             // system alarm, short enough that a failed one still wakes someone.
             if SystemAlarmScheduler.owns(alarm.id.uuidString), sinceFire < 60 { continue }
 
-            // If a smart alarm already rang early in its light-sleep window, don't
-            // ring again at the hard deadline.
-            let isSmartActive = alarm.isSmartAlarm && MotionSleepMonitor.shared.isMonitoring
-            if isSmartActive && MotionSleepMonitor.shared.smartAlarmTriggered { continue }
-
-            hasFiredAlarmIds.insert(fireKey)
+            markOccurrenceFired(fireKey)
             fireAlarm(alarm)
         }
     }
 
-    private func fireAlarm(_ alarm: AlarmModel) {
-        hasFiredAlarmIds.insert(alarm.id.uuidString)
+    // MARK: - Fired Occurrences
+    /// Persisted, unlike the old in-memory set that was wiped on every
+    /// keep-alive cycle — a lock right after a snooze re-fired the same
+    /// occurrence within the 90s catch-up window.
+    private func hasFiredOccurrence(_ key: String) -> Bool {
+        (UserDefaults.standard.stringArray(forKey: "backgroundAlarm.firedKeys") ?? []).contains(key)
+    }
 
+    private func markOccurrenceFired(_ key: String) {
+        var keys = UserDefaults.standard.stringArray(forKey: "backgroundAlarm.firedKeys") ?? []
+        keys.append(key)
+        UserDefaults.standard.set(Array(keys.suffix(30)), forKey: "backgroundAlarm.firedKeys")
+    }
+
+    private func fireAlarm(_ alarm: AlarmModel) {
         let gradualSeconds: TimeInterval = alarm.gradualWakeEnabled ? TimeInterval(alarm.gradualWakeDuration * 60) : 0
         triggerAlarm(soundName: alarm.sound.rawValue, volume: Float(alarm.volume), vibrationEnabled: alarm.vibrationEnabled, gradualSeconds: gradualSeconds)
 

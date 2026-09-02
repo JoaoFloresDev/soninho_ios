@@ -92,6 +92,18 @@ struct AlarmOccurrenceLedgerTests {
         // weekly relative schedule cannot skip a single occurrence).
         #expect(scheduled.skippedHandled)
         #expect(abs(scheduled.date.timeIntervalSince(occurrence) - 24 * 3600) < 120)
+        // The handled occurrence itself must come back too: the weekday
+        // baseline guard keys on IT, not on "today" (an early ring near
+        // midnight lands on the previous calendar day, and deriving the day
+        // from Date() re-armed the very occurrence that already rang).
+        #expect(scheduled.handledOccurrence == occurrence)
+    }
+
+    @Test func unhandledScheduleCarriesNoHandledOccurrence() {
+        let defaults = makeDefaults()
+        let alarm = makeAlarm(hour: 7, minute: 0)
+        let scheduled = AlarmOccurrenceLedger.scheduledDate(for: alarm, defaults: defaults)
+        #expect(scheduled?.handledOccurrence == nil)
     }
 
     @Test func scheduledDateIsUntouchedWhenNothingRang() {

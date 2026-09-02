@@ -12,17 +12,10 @@ import UIKit
 struct SettingsView: View {
     // MARK: - Properties
     @StateObject private var viewModel = SettingsViewModel()
-    @State private var showingPaywall = false
-
     // MARK: - View Body
     var body: some View {
         NavigationStack {
             List {
-                // Premium Section (only show when purchases enabled)
-                if AppConstants.isPurchasesEnabled {
-                    premiumSection
-                }
-
                 // Sleep Settings Section
                 sleepSettingsSection
 
@@ -39,9 +32,7 @@ struct SettingsView: View {
             .contentMargins(.bottom, AppSpacing.lg, for: .scrollContent)
             .navigationTitle(String(localized: "settings_title"))
             .navigationBarTitleDisplayMode(.large)
-            .sheet(isPresented: $showingPaywall) {
-                PaywallView()
-            }
+            .onAppear { Analytics.screen("settings") }
         }
     }
 
@@ -55,58 +46,6 @@ struct SettingsView: View {
         }
     }
 
-    // MARK: - Premium Section
-    private var premiumSection: some View {
-        Section {
-            if viewModel.isPremium {
-                HStack(spacing: 12) {
-                    Image(systemName: "crown.fill")
-                        .font(.system(size: 17))
-                        .foregroundStyle(AppColors.accent)
-
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(String(localized: "settings_premium_active"))
-                            .font(AppFonts.body())
-                            .foregroundStyle(AppColors.textPrimary)
-
-                        Text(String(localized: "settings_premium_thanks"))
-                            .font(AppFonts.caption())
-                            .foregroundStyle(AppColors.textSecondary)
-                    }
-                }
-                .glassListRow()
-            } else {
-                Button {
-                    showingPaywall = true
-                } label: {
-                    HStack(spacing: 12) {
-                        Image(systemName: "crown.fill")
-                            .font(.system(size: 20))
-                            .foregroundStyle(
-                                AppColors.sleepGradient
-                            )
-
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(String(localized: "settings_upgrade_pro"))
-                                .font(AppFonts.body())
-                                .foregroundStyle(AppColors.textPrimary)
-
-                            Text(String(localized: "settings_upgrade_description"))
-                                .font(AppFonts.caption())
-                                .foregroundStyle(AppColors.textSecondary)
-                        }
-
-                        Spacer()
-
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundStyle(AppColors.textTertiary)
-                    }
-                }
-                .glassListRow()
-            }
-        }
-    }
 
     // MARK: - Sleep Settings Section
     private var sleepSettingsSection: some View {
@@ -174,24 +113,6 @@ struct SettingsView: View {
                 viewModel.requestReview()
             } label: {
                 Label(String(localized: "settings_rate_app"), systemImage: "star.fill")
-                    .foregroundStyle(AppColors.textPrimary)
-            }
-            .glassListRow()
-
-            // Share App
-            if let shareURL = URL(string: AppConstants.appStoreURL) {
-                ShareLink(item: shareURL, message: Text(String(localized: "share_message"))) {
-                    settingsRowLabel("square.and.arrow.up", String(localized: "settings_share_app"))
-                        .foregroundStyle(AppColors.textPrimary)
-                }
-                .glassListRow()
-            }
-
-            // Send Feedback
-            Button {
-                viewModel.sendFeedback()
-            } label: {
-                Label(String(localized: "settings_feedback"), systemImage: "envelope.fill")
                     .foregroundStyle(AppColors.textPrimary)
             }
             .glassListRow()

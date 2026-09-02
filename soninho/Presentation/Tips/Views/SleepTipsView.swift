@@ -43,6 +43,7 @@ struct SleepTipsView: View {
             .softScrollEdge()
         }
         .navigationTitle(String(localized: "tips_all_title"))
+        .onAppear { Analytics.screen("tips") }
     }
 
     // MARK: - Daily Tip Card

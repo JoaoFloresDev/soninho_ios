@@ -180,14 +180,14 @@ final class NotificationService: ObservableObject {
         if !alarm.repeatDays.isEmpty {
             let timeComps = calendar.dateComponents([.hour, .minute], from: alarm.time)
             for weekday in alarm.repeatDays {
-                // If today's occurrence already rang early, re-adding today's
-                // weekday baseline would ring it again at the fixed time; it
-                // comes back on the first reschedule after the time passes.
-                if scheduled.skippedHandled,
-                   weekday.rawValue == calendar.component(.weekday, from: Date()),
-                   let today = alarm.nextOccurrence(after: Date().addingTimeInterval(-24 * 3600)),
-                   AlarmOccurrenceLedger.wasHandled(alarmId: alarm.id.uuidString, occurrence: today),
-                   today > Date() {
+                // The handled occurrence's own weekday baseline must not be
+                // re-armed while that occurrence is still in the future — it
+                // would ring minutes after the early smart ring. (Weekday from
+                // the OCCURRENCE, not from Date(): a window crossing midnight
+                // rings "early" on the previous calendar day.)
+                if let handled = scheduled.handledOccurrence,
+                   weekday.rawValue == calendar.component(.weekday, from: handled),
+                   handled > Date() {
                     continue
                 }
                 var comps = DateComponents()
@@ -436,6 +436,13 @@ final class NotificationService: ObservableObject {
     }
 
     /// Fully dismisses the alarm (mission + confirmation cleared).
+    /// Clears the snooze budget for an alarm — the lock-screen dismiss path
+    /// has no `ringingAlarmId`, so `completeAlarm` alone left the counter
+    /// consumed and the snooze button gone the next morning.
+    func resetSnoozes(for alarmId: String) {
+        snoozesUsed[alarmId] = 0
+    }
+
     func completeAlarm() {
         if let id = ringingAlarmId { snoozesUsed[id] = 0 }
         disableOneTimeAlarmIfNeeded()

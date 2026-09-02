@@ -55,7 +55,9 @@ final class RatingGateService: ObservableObject {
 
     func answeredYes() {
         Analytics.log("rating_gate_answered", ["liked": true])
-        requestNativeReview()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            self?.requestNativeReview()
+        }
     }
 
     func answeredNo() {

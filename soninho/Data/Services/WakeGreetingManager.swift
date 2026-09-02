@@ -15,16 +15,22 @@ final class WakeGreetingManager: ObservableObject {
 
     // MARK: - Published Properties
     @Published var isShowing = false
+    /// Whether the night this greeting closes was actually saved — the
+    /// subtitle claims it, and the tracking state is already cleared by the
+    /// time the manual-stop path shows the greeting.
+    private(set) var lastNightWasSaved = false
 
     // MARK: - Init
     private init() {}
 
     // MARK: - Public Methods
-    func show() {
+    func show(nightSaved: Bool = false) {
+        lastNightWasSaved = nightSaved
         isShowing = true
     }
 
     func dismiss() {
         isShowing = false
+        lastNightWasSaved = false
     }
 }

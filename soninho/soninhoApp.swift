@@ -93,11 +93,12 @@ struct SoninhoApp: App {
                 )
             }
             .onReceive(NotificationCenter.default.publisher(for: .didCompleteAlarm)) { _ in
-                // Waking up with the alarm is the aha-moment — count it towards
-                // the rating gate once the ringing screen has gone away.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                    RatingGateService.shared.recordPositiveEvent()
-                }
+                // App-scope finisher: saving the night must not depend on the
+                // monitor singleton or the Sleep tab having been touched this
+                // launch. Idempotent — the first finisher wins, and it records
+                // the rating-gate event exactly once (the extra event that
+                // used to live here made the 2-night gate trip on night one).
+                SleepNightRecorder.finishTrackedNight()
             }
             .onAppear {
                 handleAppLaunch()
@@ -129,9 +130,11 @@ struct SoninhoApp: App {
                 await notificationService.scheduleAllEnabledAlarms()
             }
         case .inactive:
-            // Phone is being locked or app is switching — start background keep-alive NOW
-            // This is critical: must start BEFORE .background to ensure audio session is ready
-            BackgroundAlarmPlayer.shared.startBackgroundKeepAlive()
+            // NOT here: .inactive also fires for Control Center, the app
+            // switcher and incoming calls — starting the solo playback session
+            // there stole the user's music on every swipe. .background is soon
+            // enough (the audio background mode covers the transition).
+            break
         case .background:
             // Ensure background keep-alive is running
             if !BackgroundAlarmPlayer.shared.isBackgroundActive {

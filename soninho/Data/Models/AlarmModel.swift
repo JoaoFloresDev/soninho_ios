@@ -207,7 +207,7 @@ struct AlarmModel: Codable, Identifiable {
         isEnabled = try c.decode(Bool.self, forKey: .isEnabled)
         isSmartAlarm = try c.decode(Bool.self, forKey: .isSmartAlarm)
         smartAlarmWindow = try c.decode(Int.self, forKey: .smartAlarmWindow)
-        sound = try c.decode(AlarmSound.self, forKey: .sound)
+        sound = (try? c.decode(AlarmSound.self, forKey: .sound)) ?? .sunrise
         volume = try c.decodeIfPresent(Double.self, forKey: .volume) ?? 0.7
         vibrationEnabled = try c.decodeIfPresent(Bool.self, forKey: .vibrationEnabled) ?? true
         repeatDays = try c.decode(Set<Weekday>.self, forKey: .repeatDays)

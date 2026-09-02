@@ -384,6 +384,7 @@ struct SleepTrackerView: View {
         }
         .onAppear {
             pulseAnimation = true
+            Analytics.screen("sleep")
         }
     }
 

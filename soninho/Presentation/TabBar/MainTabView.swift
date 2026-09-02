@@ -58,9 +58,7 @@ enum TabItem: Int, CaseIterable, Identifiable {
 // MARK: - Main Tab View
 struct MainTabView: View {
     // MARK: - Properties
-    @State private var selectedTab: TabItem = .alarm {
-        didSet { Analytics.tabViewed(selectedTab.analyticsName) }
-    }
+    @State private var selectedTab: TabItem = .alarm
     @EnvironmentObject private var storageService: StorageService
 
     // MARK: - Init
@@ -103,6 +101,9 @@ struct MainTabView: View {
         }
         .tint(AppColors.primary)
         .onChange(of: selectedTab) { _, newTab in
+            // Here, not in a didSet on the @State: the TabView writes through
+            // the binding, which bypasses property observers entirely.
+            Analytics.tabViewed(newTab.analyticsName)
             if newTab == .statistics {
                 NotificationCenter.default.post(name: .didSwitchToDataTab, object: nil)
             }

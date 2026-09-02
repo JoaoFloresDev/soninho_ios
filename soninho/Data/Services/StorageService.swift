@@ -71,25 +71,36 @@ final class StorageService: ObservableObject {
 
     // MARK: - Alarm Methods
     func saveAlarm(_ alarm: AlarmModel) {
-        if (try? encoder.encode(alarm)) != nil {
-            var alarms = loadAlarms()
-            if let index = alarms.firstIndex(where: { $0.id == alarm.id }) {
-                alarms[index] = alarm
-            } else {
-                alarms.append(alarm)
-            }
-            if let alarmsData = try? encoder.encode(alarms) {
-                defaults.set(alarmsData, forKey: StorageKeys.savedAlarms)
-            }
+        var alarms = loadAlarms()
+        if let index = alarms.firstIndex(where: { $0.id == alarm.id }) {
+            alarms[index] = alarm
+        } else {
+            alarms.append(alarm)
         }
+        if let alarmsData = try? encoder.encode(alarms) {
+            defaults.set(alarmsData, forKey: StorageKeys.savedAlarms)
+        }
+        // An edited alarm is a fresh statement of intent: a "already rang
+        // early" mark from a previous configuration must not silently skip
+        // the occurrence the user just asked for.
+        AlarmOccurrenceLedger.clear(alarmId: alarm.id.uuidString)
     }
 
     func loadAlarms() -> [AlarmModel] {
-        guard let data = defaults.data(forKey: StorageKeys.savedAlarms),
-              let alarms = try? decoder.decode([AlarmModel].self, from: data) else {
-            return []
+        guard let data = defaults.data(forKey: StorageKeys.savedAlarms) else { return [] }
+        if let alarms = try? decoder.decode([AlarmModel].self, from: data) {
+            return alarms
         }
-        return alarms
+        // One undecodable element must not silently delete every alarm —
+        // decode element-wise and park the blob for recovery.
+        defaults.set(data, forKey: StorageKeys.savedAlarms + ".corrupt")
+        if let raw = try? JSONSerialization.jsonObject(with: data) as? [Any] {
+            return raw.compactMap { element in
+                guard let elementData = try? JSONSerialization.data(withJSONObject: element) else { return nil }
+                return try? decoder.decode(AlarmModel.self, from: elementData)
+            }
+        }
+        return []
     }
 
     func deleteAlarm(_ alarm: AlarmModel) {

@@ -41,15 +41,15 @@ enum AlarmOccurrenceLedger {
         for alarm: AlarmModel,
         now: Date = Date(),
         defaults: UserDefaults = .standard
-    ) -> (date: Date, skippedHandled: Bool)? {
+    ) -> (date: Date, skippedHandled: Bool, handledOccurrence: Date?)? {
         guard let next = alarm.nextOccurrence(after: now) else { return nil }
         guard wasHandled(alarmId: alarm.id.uuidString, occurrence: next, defaults: defaults) else {
-            return (next, false)
+            return (next, false, nil)
         }
         guard let following = alarm.nextOccurrence(after: next.addingTimeInterval(tolerance)) else {
             return nil
         }
-        return (following, true)
+        return (following, true, next)
     }
 
     static func clear(alarmId: String, defaults: UserDefaults = .standard) {

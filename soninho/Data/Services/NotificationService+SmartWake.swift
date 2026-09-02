@@ -17,12 +17,14 @@ extension NotificationService {
     /// the safety-net burst and today's weekday baseline. Called when the
     /// smart alarm rings early — the occurrence is handled, ringing it again
     /// at the fixed time would punish the feature for working.
-    func suppressFixedOccurrence(for alarm: AlarmModel) {
+    func suppressFixedOccurrence(for alarm: AlarmModel, occurrence: Date) {
         cancelBurst(alarmId: alarm.id.uuidString)
 
-        let todayWeekday = Calendar.current.component(.weekday, from: Date())
+        // Weekday of the OCCURRENCE: a wake window that crosses midnight
+        // rings early on the previous calendar day.
+        let weekday = Calendar.current.component(.weekday, from: occurrence)
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [
-            "\(alarm.id.uuidString)_day_\(todayWeekday)"
+            "\(alarm.id.uuidString)_day_\(weekday)"
         ])
     }
 
@@ -35,7 +37,9 @@ extension NotificationService {
         content.body = alarm.label ?? String(localized: "alarm_notification_body")
         content.categoryIdentifier = "ALARM_CATEGORY"
         content.interruptionLevel = .timeSensitive
-        content.sound = AlarmSoundGenerator.notificationSound(for: alarm.sound)
+        // The in-app player is the sound source on this path — a sound here
+        // doubles the same 29s file a fraction of a second apart.
+        content.sound = nil
         content.userInfo = [
             "alarmId": alarm.id.uuidString,
             "isSmartAlarm": true,

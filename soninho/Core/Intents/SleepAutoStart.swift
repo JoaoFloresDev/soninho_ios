@@ -71,7 +71,11 @@ enum SleepAutoStart {
         if UIApplication.shared.applicationState == .active {
             // A live ViewModel will start tracking and update the UI.
             NotificationCenter.default.post(name: .didRequestSwitchToSleepTab, object: nil)
-            NotificationCenter.default.post(name: .didRequestStartSleepTracking, object: nil)
+            // The Sleep tab's subscriber only exists after its body renders —
+            // a synchronous post right after the tab switch lands on nobody.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                NotificationCenter.default.post(name: .didRequestStartSleepTracking, object: nil)
+            }
         } else {
             // No UI alive — start the session directly; the ViewModel restores it
             // from these defaults the next time the app is opened.

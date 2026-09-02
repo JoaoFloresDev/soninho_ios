@@ -35,8 +35,10 @@ final class SleepSoundMonitor: NSObject {
             "speech", "male_speech", "female_speech", "child_speech",
             "conversation", "person_walking", "door", "door_slam",
         ]
-        /// Loudness floor (0-1) below which no classification runs.
-        static let analysisGate: Double = 0.08
+        /// Loudness floor (0-1) below which no classification runs. 0.30 is
+        /// about −42 dB — a quiet bedroom's floor sits below it, so silence
+        /// actually skips inference (0.08 was −55 dB, quieter than any room).
+        static let analysisGate: Double = 0.30
     }
 
     // MARK: - Properties
@@ -144,6 +146,10 @@ final class SleepSoundMonitor: NSObject {
                 Tuning.windowSeconds,
                 preferredTimescale: 48_000
             )
+            // Default overlap (0.5) emits one result per HALF window, so each
+            // credited windowSeconds double-counted — the snore veto tripped
+            // at half its threshold.
+            request.overlapFactor = 0
             try streamAnalyzer.add(request, withObserver: self)
             analyzer = streamAnalyzer
 
@@ -155,6 +161,12 @@ final class SleepSoundMonitor: NSObject {
             try audioEngine.start()
             isRunning = true
         } catch {
+            // A half-started engine must be fully unwound: the watchdog
+            // retries once a minute, and installing a second tap on the same
+            // bus is a crash.
+            audioEngine.inputNode.removeTap(onBus: 0)
+            analyzer?.completeAnalysis()
+            analyzer = nil
             isRunning = false
         }
     }

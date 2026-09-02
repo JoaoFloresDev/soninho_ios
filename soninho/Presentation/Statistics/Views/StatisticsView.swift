@@ -59,6 +59,7 @@ struct StatisticsView: View {
             }
             .navigationTitle(String(localized: "stats_title"))
             .navigationBarTitleDisplayMode(.large)
+            .onAppear { Analytics.screen("stats") }
             .task {
                 await viewModel.loadData()
             }
@@ -424,7 +425,7 @@ struct StatisticsView: View {
                 .foregroundStyle(AppColors.textPrimary)
 
             GlassContainer(spacing: 12) {
-                VStack(spacing: 12) {
+                LazyVStack(spacing: 12) {
                     ForEach(viewModel.records) { record in
                         NavigationLink {
                             SleepDetailView(record: record)

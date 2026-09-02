@@ -80,7 +80,12 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             case "DISMISS_ACTION", UNNotificationDismissActionIdentifier:
                 NotificationService.shared.cancelBurst(alarmId: alarmId)
                 NotificationService.shared.disableOneTimeAlarmIfNeeded(id: alarmId)
+                NotificationService.shared.resetSnoozes(for: alarmId)
                 NotificationService.shared.stopAlarmAudio()
+                // Dismissing from the lock screen ends the night too — without
+                // this the tracked session lingered until the 12h stale guard
+                // DISCARDED it: a full night tracked, nothing saved.
+                NotificationCenter.default.post(name: .didCompleteAlarm, object: nil)
             case UNNotificationDefaultActionIdentifier:
                 // User tapped notification — show alarm screen
                 NotificationService.shared.handleForegroundAlarm(

@@ -23,6 +23,7 @@ struct WakeGreetingView: View {
 
     @State private var appeared = false
     @State private var glow = false
+    @State private var didDismiss = false
 
     private let hour = Calendar.current.component(.hour, from: Date())
 
@@ -47,11 +48,13 @@ struct WakeGreetingView: View {
 
     private var subtitle: String? {
         if mode == .snooze { return String(localized: "snooze_greeting_subtitle") }
-        // "Your night was saved" is only true when a tracked night is (or is
-        // about to be) written. A plain alarm, or the smart alarm's own
-        // monitoring session, saves nothing — claiming otherwise sends the
-        // user to an unchanged Statistics tab.
-        guard UserDefaults.standard.bool(forKey: StorageKeys.isCurrentlyTracking)
+        // "Your night was saved" only when one was (or is about to be). The
+        // manual-stop path clears the tracking state BEFORE showing this, so
+        // the manager's flag — set by whoever saved — is the reliable signal;
+        // the live-state checks cover the alarm path, where the greeting shows
+        // before the night is finished.
+        guard WakeGreetingManager.shared.lastNightWasSaved
+                || UserDefaults.standard.bool(forKey: StorageKeys.isCurrentlyTracking)
                 || MotionSleepMonitor.shared.isMonitoring && !MotionSleepMonitor.shared.isAlarmOnlySession else {
             return nil
         }
@@ -114,7 +117,7 @@ struct WakeGreetingView: View {
             .padding(.horizontal, 40)
         }
         .contentShape(Rectangle())
-        .onTapGesture { onDismiss() }
+        .onTapGesture { finish() }
         .onAppear { start() }
     }
 
@@ -129,7 +132,15 @@ struct WakeGreetingView: View {
         }
         // Auto-dismiss after a few seconds.
         DispatchQueue.main.asyncAfter(deadline: .now() + autoDismissDelay) {
-            onDismiss()
+            finish()
         }
+    }
+
+    /// Tap and the auto-dismiss timer both land here; the callback re-posts
+    /// .didCompleteAlarm, so running it twice double-counted downstream.
+    private func finish() {
+        guard !didDismiss else { return }
+        didDismiss = true
+        onDismiss()
     }
 }

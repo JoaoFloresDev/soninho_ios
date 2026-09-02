@@ -68,8 +68,8 @@ final class SleepTrackerViewModel: ObservableObject {
 
     // MARK: - Public Methods
     func startTracking() {
-        Analytics.featureUsed("sleep_tracking", source: "tab")
         guard !isTracking else { return }
+        Analytics.featureUsed("sleep_tracking", source: "tab")
 
         isTracking = true
 
@@ -114,7 +114,7 @@ final class SleepTrackerViewModel: ObservableObject {
         // already showed its own good-morning, and when nothing was actually
         // saved ("your night was saved" over an empty stats tab reads as a lie).
         if greet, record != nil {
-            WakeGreetingManager.shared.show()
+            WakeGreetingManager.shared.show(nightSaved: true)
         }
     }
 

@@ -80,7 +80,7 @@ struct EmptyStateView: View {
                     .font(AppFonts.body())
                     .foregroundStyle(AppColors.textSecondary)
                     .multilineTextAlignment(.center)
-                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.horizontal, 32)
 

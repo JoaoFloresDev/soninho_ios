@@ -24,9 +24,13 @@ final class OnboardingViewModel: ObservableObject {
 
     // MARK: - Published Properties
     @Published var currentPage = 0 {
-        didSet { Analytics.onboardingStepViewed(currentPage + 1) }
+        didSet {
+            guard !isSkipping else { return }
+            Analytics.onboardingStepViewed(currentPage + 1)
+        }
     }
     private let startedAt = Date()
+    private var isSkipping = false
 
     // MARK: - Properties
     let pages: [OnboardingPage] = [
@@ -54,6 +58,9 @@ final class OnboardingViewModel: ObservableObject {
     // MARK: - Init
     init(storageService: StorageService = .shared) {
         self.storageService = storageService
+        // didSet does not run for the initial value — without this, step 1
+        // (the one every install sees) never reached the funnel.
+        Analytics.onboardingStepViewed(1)
     }
 
     // MARK: - Public Methods
@@ -75,9 +82,11 @@ final class OnboardingViewModel: ObservableObject {
 
     func skipToEnd() {
         Analytics.onboardingSkipped(at: currentPage + 1)
+        isSkipping = true
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             currentPage = pages.count - 1
         }
+        isSkipping = false
     }
 
     func completeOnboarding() {

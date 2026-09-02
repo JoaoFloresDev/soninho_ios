@@ -20,7 +20,7 @@ enum AppConstants {
 
     // MARK: - URLs
     static let privacyPolicyURL = "https://drive.google.com/file/d/1fEHysu7rRdk9Hns4CCgK-4ty2_a57vR_/view"
-    static let termsOfUseURL = "https://drive.google.com/file/d/1fEHysu7rRdk9Hns4CCgK-4ty2_a57vR_/view"
+    static let termsOfUseURL = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
     static let appStoreURL = "https://apps.apple.com/app/id\(appStoreId)"
 
     // MARK: - Feature Flags

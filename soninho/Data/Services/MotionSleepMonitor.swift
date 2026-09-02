@@ -112,6 +112,7 @@ final class MotionSleepMonitor: ObservableObject {
     private var noiseVariance: Double?
     private var lastEpochAt: Date?
     private var releasedForAlarm = false
+    private var loggedWatchdogGap = false
 
     private var watchdogTimer: DispatchSourceTimer?
     private let timerQueue = DispatchQueue(label: "com.gambitstudio.soninho.motionTimer", qos: .utility)
@@ -410,7 +411,10 @@ final class MotionSleepMonitor: ObservableObject {
         if let last = lastEpochAt, Date().timeIntervalSince(last) > Constants.watchdogStallSeconds {
             engine?.recordGap(from: last.addingTimeInterval(60), to: Date())
             lastEpochAt = Date()
-            Analytics.featureUsed("sleep_monitor_gap", source: "watchdog")
+            if !loggedWatchdogGap {
+                loggedWatchdogGap = true
+                Analytics.featureUsed("sleep_monitor_gap", source: "watchdog")
+            }
 
             motionManager.stopAccelerometerUpdates()
             startAccelerometer()
@@ -482,7 +486,8 @@ final class MotionSleepMonitor: ObservableObject {
         // its confirmation count and fired state are per-window.
         if let decider,
            decider.alarmId == alarm.id.uuidString,
-           abs(decider.windowEnd.timeIntervalSince(occurrence)) < 60 {
+           abs(decider.windowEnd.timeIntervalSince(occurrence)) < 60,
+           abs(decider.windowStart.timeIntervalSince(windowStart)) < 60 {
             return
         }
         decider = SmartWakeDecider(
@@ -540,7 +545,7 @@ final class MotionSleepMonitor: ObservableObject {
               let alarm = StorageService.shared.loadAlarms().first(where: { $0.id == uuid }) else { return }
 
         AlarmOccurrenceLedger.markHandled(alarmId: alarmId, occurrence: occurrence)
-        NotificationService.shared.suppressFixedOccurrence(for: alarm)
+        NotificationService.shared.suppressFixedOccurrence(for: alarm, occurrence: occurrence)
         Analytics.featureUsed("smart_wake_early", source: "motion")
 
         Task { @MainActor in
@@ -555,6 +560,10 @@ final class MotionSleepMonitor: ObservableObject {
             #if DEBUG
             NSLog("[sleep] smart wake: fireNow refused, falling back to in-app ring for %@", alarmId)
             #endif
+            // fireNow restored the fixed-time AlarmKit alarm on failure; the
+            // in-app ring below IS the wake, so that restored occurrence must
+            // not ring a second time minutes later.
+            SystemAlarmScheduler.cancel(alarm)
             NotificationService.shared.postSmartWakeNotification(for: alarm)
             NotificationService.shared.handleForegroundAlarm(
                 alarmId: alarm.id.uuidString,
