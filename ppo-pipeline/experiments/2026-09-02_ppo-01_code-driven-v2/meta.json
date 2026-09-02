@@ -5,7 +5,11 @@
   "live_version": "1.2.0",
   "live_version_id": "7afb50c7-960f-440f-870a-b839b0b0f96e",
   "display_type": "APP_IPHONE_67",
-  "locales": ["en-US", "pt-BR", "es-ES"],
+  "locales": [
+    "en-US",
+    "pt-BR",
+    "es-ES"
+  ],
   "hypothesis": "Prints code-driven novos (layout Liquid Glass + mascote preguica + breakouts com glow laranja) convertem melhor que os prints live da era do rebrand (controle). Entre os 3 framings de copy, medir qual headline vende mais: acao direta, beneficio/resultado ou especifico/carisma.",
   "control": "default product page live (prints antigos do rebrand, snapshot em source/control-live/)",
   "treatments": {
@@ -13,9 +17,25 @@
     "B": "Benefit / Outcome - Mornings feel easy / Wake at the right moment / Never oversleep again / Start calm every day / Know your sleep at last",
     "C": "Specific / Charisma - Say hi to your alarm / Smart window, light wake / Snooze has no chance / Ten sounds, one sunrise / Every phase, every night"
   },
-  "slots": ["01_main (home alarmes)", "02_smartwake (tracking + janela)", "03_mission (tocando + missao matematica)", "04_sounds (sons + volume gradual)", "05_report (relatorio da noite)"],
-  "asc": { "experiment_id": null, "treatment_ids": {}, "review_submission_id": null },
+  "slots": [
+    "01_main (home alarmes)",
+    "02_smartwake (tracking + janela)",
+    "03_mission (tocando + missao matematica)",
+    "04_sounds (sons + volume gradual)",
+    "05_report (relatorio da noite)"
+  ],
+  "asc": {
+    "experiment_id": "1ce3cdfa-a1cd-4f7e-9cab-5e30278415e5",
+    "treatment_ids": {
+      "A": "88dd6224-c8dc-4933-a544-23b7888222d3",
+      "B": "266b91d7-8364-4a1d-93ea-049f0ff554d6",
+      "C": "79947143-224e-46bb-a674-29beff33bfa0"
+    },
+    "review_submission_id": "72b5e149-9863-4c49-a66d-30d5eae651a0"
+  },
   "started": null,
   "winner": null,
-  "notes": "Renderer: screenshots-tool/ swift run SoninhoScreenshots abtest. Start SO apos aprovacao + re-verify de checksums (LEARNINGS 35/39)."
+  "notes": "Renderer: screenshots-tool/ swift run SoninhoScreenshots abtest. Start SO apos aprovacao + re-verify de checksums (LEARNINGS 35/39).",
+  "submitted": "2026-09-02",
+  "state": "WAITING_FOR_REVIEW"
 }
