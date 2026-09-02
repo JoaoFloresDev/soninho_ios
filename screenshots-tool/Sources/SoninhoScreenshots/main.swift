@@ -123,19 +123,22 @@ func renderLocaleSet(
     // Slot 1: Main / Home
     let url1 = outputDir.appendingPathComponent("01_main_iphone.png")
     try render(view: marketing(device: device, slot: 0, totalSlots: totalSlots,
-                                headline: treatment.home[locale], theme: theme) { MainScreen(locale: locale) },
+                                headline: treatment.home[locale], theme: theme,
+                                foreground: breakoutForeground(AlarmCardMock(locale: locale), y: 2260, canvas: canvas)) { MainScreen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url1)
 
     // Slot 2: Feature 1
     let url2 = outputDir.appendingPathComponent("02_feature1_iphone.png")
     try render(view: marketing(device: device, slot: 1, totalSlots: totalSlots,
-                                headline: treatment.feature1[locale], theme: theme) { Feature1Screen(locale: locale) },
+                                headline: treatment.feature1[locale], theme: theme,
+                                foreground: breakoutForeground(MissionCardMock(locale: locale), y: 2080, canvas: canvas)) { Feature1Screen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url2)
 
     // Slot 3: Feature 2
     let url3 = outputDir.appendingPathComponent("03_feature2_iphone.png")
     try render(view: marketing(device: device, slot: 2, totalSlots: totalSlots,
-                                headline: treatment.feature2[locale], theme: theme) { Feature2Screen(locale: locale) },
+                                headline: treatment.feature2[locale], theme: theme,
+                                foreground: breakoutForeground(HypnogramCardMock(locale: locale), y: 1980, canvas: canvas)) { Feature2Screen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url3)
 
     // Slot 4: Settings
@@ -147,7 +150,8 @@ func renderLocaleSet(
     // Slot 5: Onboarding
     let url5 = outputDir.appendingPathComponent("05_stats_iphone.png")
     try render(view: marketing(device: device, slot: 4, totalSlots: totalSlots,
-                                headline: treatment.onboarding[locale], theme: theme) { StatsScreen(locale: locale) },
+                                headline: treatment.onboarding[locale], theme: theme,
+                                foreground: breakoutForeground(DurationChartCardMock(locale: locale), y: 2050, canvas: canvas)) { StatsScreen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url5)
 
     // Slot 6: App Store listing mockup (validation only, abtest mode only)
@@ -200,6 +204,7 @@ func marketing<Content: View>(
     totalSlots: Int,
     headline: Headline?,
     theme: MarketingTheme,
+    foreground: AnyView? = nil,
     @ViewBuilder content: () -> Content
 ) -> some View {
     let h = headline ?? Headline(text: "", highlight: nil)
@@ -210,6 +215,7 @@ func marketing<Content: View>(
         slotIndex: slot,
         totalSlots: totalSlots,
         theme: theme,
+        foreground: foreground,
         splitFirstWord: true,   // big first word + smaller ≤3-word line (steps pattern)
         content: content
     )
