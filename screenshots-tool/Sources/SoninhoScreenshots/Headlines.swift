@@ -68,68 +68,67 @@ enum Headlines {
         ]
     )
 
-    // MARK: - Treatment B — Emotional / Aspirational
+    // MARK: - Treatment B — Benefit / Outcome
 
     static let treatmentB = TreatmentCopy(
         id: "B",
-        label: "Emotional / Aspirational",
+        label: "Benefit / Outcome",
         home: [
-            "en-US": Headline(text: "Sleep is your superpower",             highlight: "superpower"),
-            "pt-BR": Headline(text: "Dormir é seu superpoder",              highlight: "superpoder"),
-            "es-ES": Headline(text: "Dormir es tu superpoder",              highlight: "superpoder")
+            "en-US": Headline(text: "Mornings feel easy",          highlight: nil),
+            "pt-BR": Headline(text: "Manhãs sem sofrimento",       highlight: nil),
+            "es-ES": Headline(text: "Mañanas sin sufrir",          highlight: nil)
         ],
         feature1: [
-            "en-US": Headline(text: "Finally understand your deep sleep",   highlight: "deep"),
-            "pt-BR": Headline(text: "Entenda enfim seu sono profundo",      highlight: "profundo"),
-            "es-ES": Headline(text: "Comprende por fin tu sueño profundo",  highlight: "profundo")
+            "en-US": Headline(text: "Wake at the right moment",    highlight: nil),
+            "pt-BR": Headline(text: "Acorde na hora certa",        highlight: nil),
+            "es-ES": Headline(text: "Despierta en el momento justo", highlight: nil)
         ],
         feature2: [
-            "en-US": Headline(text: "Gentle mornings start here",           highlight: "Gentle"),
-            "pt-BR": Headline(text: "Manhãs mais leves começam aqui",       highlight: "leves")
-            ,
-            "es-ES": Headline(text: "Mañanas suaves empiezan aquí",         highlight: "suaves")
+            "en-US": Headline(text: "Never oversleep again",       highlight: nil),
+            "pt-BR": Headline(text: "Chega de perder a hora",      highlight: nil),
+            "es-ES": Headline(text: "Adiós a quedarse dormido",    highlight: nil)
         ],
         settings: [
-            "en-US": Headline(text: "Your sleep, finally understood",       highlight: "understood"),
-            "pt-BR": Headline(text: "Seu sono, enfim compreendido",         highlight: "compreendido"),
-            "es-ES": Headline(text: "Tu descanso, por fin comprendido",     highlight: "comprendido")
+            "en-US": Headline(text: "Start calm every day",        highlight: nil),
+            "pt-BR": Headline(text: "Comece o dia sem susto",      highlight: nil),
+            "es-ES": Headline(text: "Empieza el día sin sustos",   highlight: nil)
         ],
         onboarding: [
-            "en-US": Headline(text: "Tonight, sleep a little better",       highlight: "better"),
-            "pt-BR": Headline(text: "Hoje, durma um pouco melhor",          highlight: "melhor"),
-            "es-ES": Headline(text: "Esta noche, duerme un poco mejor",     highlight: "mejor")
+            "en-US": Headline(text: "Know your sleep at last",     highlight: nil),
+            "pt-BR": Headline(text: "Entenda seu sono enfim",      highlight: nil),
+            "es-ES": Headline(text: "Entiende tu sueño al fin",    highlight: nil)
         ]
     )
 
-    // MARK: - Treatment C — Feature / Technical (differentiator-led)
+    // MARK: - Treatment C — Specific / Charisma
 
     static let treatmentC = TreatmentCopy(
         id: "C",
-        label: "Feature / Technical",
+        label: "Specific / Charisma",
         home: [
-            "en-US": Headline(text: "Apple Health sleep analytics",         highlight: "analytics"),
-            "pt-BR": Headline(text: "Análise de sono via Apple Saúde",      highlight: "Análise"),
-            "es-ES": Headline(text: "Análisis de sueño con Apple Salud",    highlight: "Análisis")
+            "en-US": Headline(text: "Say hi to your alarm",        highlight: nil),
+            "pt-BR": Headline(text: "Conheça seu despertador",     highlight: nil),
+            "es-ES": Headline(text: "Conoce tu despertador",       highlight: nil)
         ],
         feature1: [
-            "en-US": Headline(text: "4 sleep phases scored every night",    highlight: "4"),
-            "pt-BR": Headline(text: "4 fases de sono, nota diária",         highlight: "4"),
-            "es-ES": Headline(text: "4 fases de sueño con puntuación",      highlight: "4")
+            "en-US": Headline(text: "Smart window, light wake",    highlight: nil),
+            "pt-BR": Headline(text: "Janela smart, acordar leve",  highlight: nil),
+            "es-ES": Headline(text: "Ventana smart, despertar suave", highlight: nil)
         ],
         feature2: [
-            "en-US": Headline(text: "Smart alarm in your light phase",      highlight: "Smart"),
-            "pt-BR": Headline(text: "Alarme inteligente na fase leve",      highlight: "inteligente"),
-            "es-ES": Headline(text: "Alarma inteligente en fase ligera",    highlight: "inteligente")
+            "en-US": Headline(text: "Snooze has no chance",        highlight: nil),
+            "pt-BR": Headline(text: "Soneca não tem vez",          highlight: nil),
+            "es-ES": Headline(text: "Cero snooze, cero atraso",    highlight: nil)
         ],
         settings: [
-            "en-US": Headline(text: "30 days of sleep trends",              highlight: "30"),
-            "pt-BR": Headline(text: "30 dias de tendências de sono",        highlight: "30"),
-            "es-ES": Headline(text: "30 días de tendencias de sueño",       highlight: "30")
+            "en-US": Headline(text: "Ten sounds, one sunrise",     highlight: nil),
+            "pt-BR": Headline(text: "Dez sons pra acordar",        highlight: nil),
+            "es-ES": Headline(text: "Diez sonidos suaves",         highlight: nil)
         ],
         onboarding: [
-            "en-US": Headline(text: "15 expert sleep tips inside",          highlight: "15"),
-            "pt-BR": Headline(text: "15 dicas para o sono profundo",        highlight: "15"),
-            "es-ES": Headline(text: "15 consejos para el sueño profundo",   highlight: "15")
+            "en-US": Headline(text: "Every phase, every night",    highlight: nil),
+            "pt-BR": Headline(text: "Toda fase, toda noite",       highlight: nil),
+            "es-ES": Headline(text: "Cada fase, cada noche",       highlight: nil)
         ]
     )
 
