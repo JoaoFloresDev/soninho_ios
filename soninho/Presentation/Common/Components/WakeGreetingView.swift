@@ -32,11 +32,22 @@ struct WakeGreetingView: View {
     /// Daytime — sun shown until 20h; moon only at actual night.
     private var isDay: Bool { (12..<20).contains(hour) }
 
-    private var icon: String {
-        if mode == .snooze { return "moon.zzz.fill" }
-        if isMorning { return "sunrise.fill" }
-        if isDay { return "sun.max.fill" }
-        return "moon.stars.fill"
+    /// The sloth mascot, dressed for the moment of day — two poses per
+    /// moment, picked at random so the screen doesn't feel like a loop.
+    /// Stored `let`: the pick must not change mid-display.
+    private let mascotVariant = Int.random(in: 0...1)
+
+    private var mascotImage: String {
+        if mode == .snooze { return "slothSnooze" }
+        let pool: [String]
+        if isMorning {
+            pool = ["slothWakeMorning", "slothWakeMorning2"]
+        } else if isDay {
+            pool = ["slothWakeDay", "slothWakeDay2"]
+        } else {
+            pool = ["slothWakeNight", "slothWakeNight2"]
+        }
+        return pool[safe: mascotVariant] ?? pool[0]
     }
 
     private var greeting: String {
@@ -86,12 +97,13 @@ struct WakeGreetingView: View {
                 ZStack {
                     Circle()
                         .fill(Color.white.opacity(0.16))
-                        .frame(width: 150, height: 150)
-                        .scaleEffect(glow ? 1.12 : 0.95)
+                        .frame(width: 190, height: 190)
+                        .scaleEffect(glow ? 1.1 : 0.95)
 
-                    Image(systemName: icon)
-                        .font(.system(size: 76))
-                        .foregroundStyle(.white)
+                    Image(mascotImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 185, height: 185)
                         .shadow(color: .black.opacity(0.25), radius: 12, y: 4)
                 }
                 .scaleEffect(appeared ? 1 : 0.5)

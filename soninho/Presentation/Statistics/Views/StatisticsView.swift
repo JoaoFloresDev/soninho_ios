@@ -84,7 +84,7 @@ struct StatisticsView: View {
     // MARK: - Tracker Empty State
     private var trackerEmptyState: some View {
         EmptyStateView(
-            imageName: "heroBed",
+            imageName: "slothSnooze",
             title: String(localized: "stats_tracker_empty_title"),
             message: String(localized: "stats_tracker_empty_message"),
             actionTitle: String(localized: "stats_tracker_empty_action"),
