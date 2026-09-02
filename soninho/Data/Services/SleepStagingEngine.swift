@@ -74,6 +74,11 @@ struct SleepStagingEngine: Codable {
 
         /// Fraction of a typical turn that still counts as a movement event.
         static let eventFraction: Double = 0.15
+        /// A genuine sleep turn moves the phone for a few seconds; longer
+        /// movement is handling or restlessness and must stay out of the
+        /// turn-scale median. (Real-device capture 2026-09-02: minutes of
+        /// in-hand use ran 18-30 active seconds at 3-10x a turn's activity.)
+        static let turnMaxActiveSeconds = 10
         /// Normalized activity is capped so one violent minute cannot dominate
         /// the kernel for its whole window.
         static let activityCap: Double = 4.0
@@ -121,7 +126,7 @@ struct SleepStagingEngine: Codable {
         let moving = epochs.compactMap { epoch -> Double? in
             guard !epoch.isGap,
                   epoch.activityIndex > 0,
-                  epoch.activeSeconds < Tuning.sustainedAwakeSeconds else { return nil }
+                  epoch.activeSeconds <= Tuning.turnMaxActiveSeconds else { return nil }
             return epoch.activityIndex
         }.sorted()
         guard moving.count >= 3, let median = moving[safe: moving.count / 2] else {

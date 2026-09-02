@@ -246,6 +246,15 @@ struct SleepStagingEngineTests {
         }
 
         advance(20) { EpochFactory.storm(at: $0, activity: 0.6) }
+        // Real-device capture: in-hand use also produces minutes just under
+        // the sustained-wake bar (18s active, huge activity) — they must stay
+        // out of the scale as well.
+        advance(3) {
+            MovementFeatures(
+                date: $0, activityIndex: 0.28, activeSeconds: 18,
+                maxBurst: 0.06, postureChanged: true, sampleCount: 3000
+            )
+        }
         advance(10) { EpochFactory.still(at: $0) }
         advance(1) { EpochFactory.turn(at: $0, activity: 0.12, posture: false) }
         advance(10) { EpochFactory.still(at: $0) }
