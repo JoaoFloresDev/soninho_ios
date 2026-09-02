@@ -33,6 +33,12 @@ struct SoninhoApp: App {
         }
         // Prepare audio session early so background audio works immediately
         BackgroundAlarmPlayer.shared.prepare()
+
+        #if DEBUG
+        Task { @MainActor in
+            DebugAutomation.runIfRequested()
+        }
+        #endif
     }
 
     // MARK: - View Body

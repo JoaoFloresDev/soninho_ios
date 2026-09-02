@@ -404,6 +404,15 @@ final class MotionSleepMonitor: ObservableObject {
             currentPhase = settled
         }
 
+        #if DEBUG
+        NSLog("[sleep] epoch AI=%.4f activeS=%d max=%.4f posture=%d snore=%ds phase=%@ readiness=%.2f slept=%d",
+              minute.activityIndex, minute.activeSeconds, minute.maxBurst,
+              minute.postureChanged ? 1 : 0, sound.sleepSoundSeconds,
+              settled.rawValue,
+              engine?.wakeReadiness(liveActivity: liveActivity) ?? 0,
+              engine?.hasSleptEnough == true ? 1 : 0)
+        #endif
+
         // No smart check once the alarm rang: the ringing phone's own sound
         // and vibration read as movement and would re-trigger the wake.
         if !releasedForAlarm {
@@ -420,9 +429,11 @@ final class MotionSleepMonitor: ObservableObject {
     private func armSmartAlarm() {
         guard !smartAlarmTriggered else { return }
 
-        let alarms = StorageService.shared.loadAlarms()
-        guard let alarm = alarms.first(where: { $0.isEnabled && $0.isSmartAlarm }),
-              let occurrence = AlarmOccurrenceLedger.scheduledDate(for: alarm)?.date else {
+        // The NEAREST occurrence wins — a daily alarm for tomorrow must not
+        // shadow a one-off about to ring.
+        guard let (alarm, occurrence) = SmartAlarmAutoArm.earliestSmartAlarm(
+            alarms: StorageService.shared.loadAlarms()
+        ) else {
             decider = nil
             return
         }
@@ -446,7 +457,9 @@ final class MotionSleepMonitor: ObservableObject {
     private func checkSmartAlarm(liveActivity: Double) {
         armSmartAlarm()
 
-        guard var decider, !decider.hasFired, let engine else { return }
+        // smartAlarmTriggered covers the debug force path, whose decider
+        // never went through evaluate and still reads as un-fired.
+        guard !smartAlarmTriggered, var decider, !decider.hasFired, let engine else { return }
 
         let score = engine.wakeReadiness(liveActivity: liveActivity)
         let fired = decider.evaluate(
@@ -460,6 +473,21 @@ final class MotionSleepMonitor: ObservableObject {
         guard fired else { return }
         triggerSmartWake(alarmId: decider.alarmId, occurrence: decider.windowEnd)
     }
+
+    #if DEBUG
+    /// Drives the COMPLETE early-ring path on demand (ledger, suppression,
+    /// AlarmKit reschedule) — the one thing simulation cannot prove is that
+    /// the system alert actually rings on real hardware from the background.
+    func debugForceSmartWake() {
+        if let decider, !decider.hasFired {
+            triggerSmartWake(alarmId: decider.alarmId, occurrence: decider.windowEnd)
+        } else if let (alarm, occurrence) = SmartAlarmAutoArm.earliestSmartAlarm(
+            alarms: StorageService.shared.loadAlarms()
+        ) {
+            triggerSmartWake(alarmId: alarm.id.uuidString, occurrence: occurrence)
+        }
+    }
+    #endif
 
     /// Rings the early wake. On iOS 26 the pending fixed-time system alarm is
     /// replaced by one a few seconds out, so the REAL alarm rings on the lock
@@ -481,8 +509,14 @@ final class MotionSleepMonitor: ObservableObject {
             if await SystemAlarmScheduler.fireNow(alarm, originalOccurrence: occurrence) {
                 // The system alert will ring and hand control back through the
                 // stop intent — the app then resumes into the mission flow.
+                #if DEBUG
+                NSLog("[sleep] smart wake: AlarmKit fireNow OK for %@", alarmId)
+                #endif
                 return
             }
+            #if DEBUG
+            NSLog("[sleep] smart wake: fireNow refused, falling back to in-app ring for %@", alarmId)
+            #endif
             NotificationService.shared.postSmartWakeNotification(for: alarm)
             NotificationService.shared.handleForegroundAlarm(
                 alarmId: alarm.id.uuidString,

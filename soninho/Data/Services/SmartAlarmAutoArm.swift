@@ -28,6 +28,26 @@ enum SmartAlarmAutoArm {
 
     // MARK: - Public Methods
 
+    /// The enabled smart alarm with the NEAREST upcoming occurrence, or nil.
+    /// Nearest matters: with a daily alarm for tomorrow and a one-off in
+    /// twenty minutes, arming the daily one's window would sleep through the
+    /// one that is about to ring.
+    static func earliestSmartAlarm(
+        alarms: [AlarmModel],
+        now: Date = Date(),
+        defaults: UserDefaults = .standard
+    ) -> (alarm: AlarmModel, occurrence: Date)? {
+        alarms
+            .filter { $0.isEnabled && $0.isSmartAlarm }
+            .compactMap { alarm -> (AlarmModel, Date)? in
+                guard let scheduled = AlarmOccurrenceLedger.scheduledDate(
+                    for: alarm, now: now, defaults: defaults
+                ) else { return nil }
+                return (alarm, scheduled.date)
+            }
+            .min { $0.1 < $1.1 }
+    }
+
     /// The enabled smart alarm whose upcoming occurrence wants monitoring
     /// right now, or nil. Pure — the callers own the side effects.
     static func alarmNeedingMonitoring(
@@ -35,20 +55,15 @@ enum SmartAlarmAutoArm {
         now: Date = Date(),
         defaults: UserDefaults = .standard
     ) -> (alarm: AlarmModel, occurrence: Date)? {
-        for alarm in alarms where alarm.isEnabled && alarm.isSmartAlarm {
-            guard let scheduled = AlarmOccurrenceLedger.scheduledDate(
-                for: alarm, now: now, defaults: defaults
-            ) else { continue }
+        guard let (alarm, occurrence) = earliestSmartAlarm(
+            alarms: alarms, now: now, defaults: defaults
+        ) else { return nil }
 
-            let occurrence = scheduled.date
-            let armFrom = occurrence.addingTimeInterval(
-                -Double((alarm.smartAlarmWindow + Tuning.leadMinutes) * 60)
-            )
-            if now >= armFrom && now < occurrence {
-                return (alarm, occurrence)
-            }
-        }
-        return nil
+        let armFrom = occurrence.addingTimeInterval(
+            -Double((alarm.smartAlarmWindow + Tuning.leadMinutes) * 60)
+        )
+        guard now >= armFrom && now < occurrence else { return nil }
+        return (alarm, occurrence)
     }
 
     /// Starts the alarm-only session when one is due. Safe to call every few

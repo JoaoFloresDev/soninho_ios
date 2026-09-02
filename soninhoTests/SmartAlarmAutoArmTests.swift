@@ -130,6 +130,31 @@ struct SmartAlarmAutoArmTests {
         #expect(result?.alarm.id == smart.id)
     }
 
+    @Test func earliestOccurrenceWinsAmongSmartAlarms() {
+        // Field bug: with the user's daily alarm (next occurrence tomorrow)
+        // listed first and a one-off about to ring, "first enabled smart
+        // alarm" armed the wrong window. Nearest occurrence must win.
+        let defaults = makeDefaults()
+        let dailyTomorrow = makeAlarm(minutesFromNow: 22 * 60, now: now)
+        let oneOffSoon = AlarmModel(
+            time: now.addingTimeInterval(60 * 60),
+            isEnabled: true,
+            isSmartAlarm: true,
+            smartAlarmWindow: 30,
+            repeatDays: []
+        )
+
+        let earliest = SmartAlarmAutoArm.earliestSmartAlarm(
+            alarms: [dailyTomorrow, oneOffSoon], now: now, defaults: defaults
+        )
+        #expect(earliest?.alarm.id == oneOffSoon.id)
+
+        let arming = SmartAlarmAutoArm.alarmNeedingMonitoring(
+            alarms: [dailyTomorrow, oneOffSoon], now: now, defaults: defaults
+        )
+        #expect(arming?.alarm.id == oneOffSoon.id)
+    }
+
     @Test func occurrenceReportedMatchesTheAlarm() {
         let defaults = makeDefaults()
         let alarm = makeAlarm(minutesFromNow: 60, now: now)
