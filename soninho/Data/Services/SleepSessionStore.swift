@@ -29,6 +29,9 @@ struct SleepSessionState: Codable {
     /// When the last epoch (or heartbeat) was written — a stale value on
     /// restore means the process was dead and the difference is a gap.
     var lastAliveAt: Date
+    /// Whether the smart alarm started this session by itself (no
+    /// user-tracked night, no sleep record on the way out).
+    var isAlarmOnly: Bool
 }
 
 // MARK: - Sleep Session Store

@@ -32,6 +32,11 @@ enum SleepAutoStart {
     /// Starts a sleep night if auto-start is on, it's bedtime, and we're not
     /// already tracking. Safe to call frequently.
     static func checkAndStartIfDue() {
+        // Independently of the bedtime auto-start below, a smart alarm arms
+        // its own monitoring as its window approaches (foreground path; the
+        // background path runs from the keep-alive tick).
+        SmartAlarmAutoArm.checkAndArmIfDue()
+
         let store = StorageService.shared
         guard store.autoStartSleepEnabled else { return }
         guard !UserDefaults.standard.bool(forKey: StorageKeys.isCurrentlyTracking) else { return }

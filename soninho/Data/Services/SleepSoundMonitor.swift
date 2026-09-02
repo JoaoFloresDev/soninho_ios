@@ -61,7 +61,10 @@ final class SleepSoundMonitor: NSObject {
     /// Asks for the microphone and starts listening. Reports whether the mic
     /// was granted — a denial must surface, not vanish: without the input
     /// session the app can be suspended mid-night and tracking dies with it.
-    func start(completion: @escaping (Bool) -> Void) {
+    /// With `promptIfNeeded` false the system dialog never appears (a session
+    /// the alarm started by itself must not wake the sleeper with a prompt);
+    /// audio simply stays off unless permission already exists.
+    func start(promptIfNeeded: Bool = true, completion: @escaping (Bool) -> Void) {
         let begin: (Bool) -> Void = { [weak self] granted in
             DispatchQueue.main.async {
                 guard granted else {
@@ -73,11 +76,24 @@ final class SleepSoundMonitor: NSObject {
             }
         }
 
+        guard promptIfNeeded else {
+            begin(Self.permissionAlreadyGranted)
+            return
+        }
+
         if #available(iOS 17.0, *) {
             AVAudioApplication.requestRecordPermission(completionHandler: begin)
         } else {
             AVAudioSession.sharedInstance().requestRecordPermission(begin)
         }
+    }
+
+    /// Whether the microphone is usable without showing the system prompt.
+    private static var permissionAlreadyGranted: Bool {
+        if #available(iOS 17.0, *) {
+            return AVAudioApplication.shared.recordPermission == .granted
+        }
+        return AVAudioSession.sharedInstance().recordPermission == .granted
     }
 
     func stop() {

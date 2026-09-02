@@ -82,6 +82,10 @@ final class MotionSleepMonitor: ObservableObject {
     @Published private(set) var isAudioKeepAliveActive = false
     /// The user declined the microphone — tracking can silently die overnight.
     @Published private(set) var microphoneDenied = false
+    /// A session the smart alarm started by itself (no user-tracked night):
+    /// it exists only to find the light-sleep wake moment and saves no sleep
+    /// record; it ends when the alarm is dismissed.
+    private(set) var isAlarmOnlySession = false
 
     // MARK: - Private Properties
     private let motionManager = CMMotionManager()
@@ -102,18 +106,52 @@ final class MotionSleepMonitor: ObservableObject {
     private init() {
         motionQueue.name = "com.gambitstudio.soninho.motion"
         motionQueue.maxConcurrentOperationCount = 1
+
+        // An alarm-only session has no ViewModel watching over it — it ends
+        // itself when the alarm is fully dismissed.
+        NotificationCenter.default.addObserver(
+            forName: .didCompleteAlarm, object: nil, queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in
+                guard let self, self.isAlarmOnlySession else { return }
+                self.stopMonitoring()
+            }
+        }
     }
 
     // MARK: - Public Methods
 
-    /// Starts (or resumes) the night. A persisted session from a relaunch is
-    /// restored with its gap recorded and backfilled; a fresh night starts a
-    /// new engine anchored at the tracked start time.
+    /// Starts (or resumes) the user's tracked night. A persisted session from
+    /// a relaunch is restored with its gap recorded and backfilled; a fresh
+    /// night starts a new engine anchored at the tracked start time.
     func startMonitoring() {
+        // The smart alarm may already be running an alarm-only session; the
+        // user starting a real night ADOPTS it — the staging context is worth
+        // more than a fresh engine.
+        if isMonitoring, isAlarmOnlySession {
+            isAlarmOnlySession = false
+            startAudio(promptIfNeeded: true)
+            persist()
+            return
+        }
+        start(alarmOnly: false)
+    }
+
+    /// Starts monitoring for the smart alarm alone — no user-tracked night,
+    /// no sleep record. Never prompts for the microphone (it fires while the
+    /// user sleeps); audio joins only if permission already exists.
+    func startAlarmOnlyMonitoring() {
+        guard !isMonitoring else { return }
+        Analytics.featureUsed("smart_wake_autoarm", source: "keepalive")
+        start(alarmOnly: true)
+    }
+
+    private func start(alarmOnly: Bool) {
         guard !isMonitoring else { return }
         guard motionManager.isAccelerometerAvailable else { return }
 
         isMonitoring = true
+        isAlarmOnlySession = alarmOnly
         releasedForAlarm = false
         currentPhase = .light
         movementIntensity = 0
@@ -122,7 +160,7 @@ final class MotionSleepMonitor: ObservableObject {
         restoreOrStartSession()
         armSmartAlarm()
         startAccelerometer()
-        startAudio()
+        startAudio(promptIfNeeded: !alarmOnly)
         startWatchdog()
         persist()
 
@@ -140,6 +178,7 @@ final class MotionSleepMonitor: ObservableObject {
         pipeline = nil
         isAudioKeepAliveActive = false
         isMonitoring = false
+        isAlarmOnlySession = false
         engine = nil
         decider = nil
         noiseVariance = nil
@@ -188,10 +227,17 @@ final class MotionSleepMonitor: ObservableObject {
     private func restoreOrStartSession() {
         let trackedStart = UserDefaults.standard.object(forKey: StorageKeys.trackingStartTime) as? Date
 
+        // A tracked night must match the tracked start time; an alarm-only
+        // session has none, so recency is the whole test.
+        let matchesSession: (SleepSessionState) -> Bool = { state in
+            if state.isAlarmOnly { return true }
+            guard let trackedStart else { return false }
+            return abs(state.engine.sessionStart.timeIntervalSince(trackedStart)) < 120
+        }
+
         if let state = SleepSessionStore.load(),
            Date().timeIntervalSince(state.engine.sessionStart) < Constants.sessionResumeLimit,
-           let trackedStart,
-           abs(state.engine.sessionStart.timeIntervalSince(trackedStart)) < 120 {
+           matchesSession(state) {
             // Same night, back from a relaunch: the dead minutes become a gap,
             // then the system recorder refills them with what really happened.
             var restored = state.engine
@@ -207,8 +253,14 @@ final class MotionSleepMonitor: ObservableObject {
             noiseVariance = state.noiseVariance
             smartAlarmTriggered = state.smartAlarmTriggered
             currentPhase = restored.currentPhase
+            if state.isAlarmOnly, !isAlarmOnlySession {
+                // A user-tracked start adopts the restored alarm-only night.
+                isAlarmOnlySession = false
+            }
         } else {
-            engine = SleepStagingEngine(sessionStart: trackedStart ?? Date())
+            engine = SleepStagingEngine(
+                sessionStart: isAlarmOnlySession ? Date() : (trackedStart ?? Date())
+            )
             decider = nil
             noiseVariance = nil
             smartAlarmTriggered = false
@@ -232,7 +284,8 @@ final class MotionSleepMonitor: ObservableObject {
             decider: decider,
             noiseVariance: noiseVariance ?? MovementFeatureExtractor.Tuning.initialNoiseVariance,
             smartAlarmTriggered: smartAlarmTriggered,
-            lastAliveAt: Date()
+            lastAliveAt: Date(),
+            isAlarmOnly: isAlarmOnlySession
         ))
     }
 
@@ -263,15 +316,17 @@ final class MotionSleepMonitor: ObservableObject {
         }
     }
 
-    private func startAudio() {
+    private func startAudio(promptIfNeeded: Bool = true) {
         soundMonitor.onLevel = { [weak self] level in
             self?.soundLevel = level
         }
-        soundMonitor.start { [weak self] granted in
+        soundMonitor.start(promptIfNeeded: promptIfNeeded) { [weak self] granted in
             guard let self else { return }
             self.microphoneDenied = !granted
             self.isAudioKeepAliveActive = self.soundMonitor.isRunning
-            Analytics.permissionResult("microphone", granted: granted)
+            if promptIfNeeded {
+                Analytics.permissionResult("microphone", granted: granted)
+            }
         }
     }
 
@@ -295,7 +350,20 @@ final class MotionSleepMonitor: ObservableObject {
     }
 
     private func watchdogTick() {
-        guard isMonitoring, !releasedForAlarm else { return }
+        guard isMonitoring else { return }
+
+        // An alarm-only session whose window is long gone was orphaned (the
+        // alarm never completed through the app) — release the sensors.
+        if isAlarmOnlySession {
+            let horizon = (decider?.windowEnd ?? (engine?.sessionStart ?? Date()).addingTimeInterval(12 * 3600))
+                .addingTimeInterval(2 * 3600)
+            if Date() > horizon {
+                stopMonitoring()
+                return
+            }
+        }
+
+        guard !releasedForAlarm else { return }
 
         // Keep the persisted heartbeat fresh even between epochs, so a
         // relaunch measures the gap from when the process actually died.
@@ -312,8 +380,9 @@ final class MotionSleepMonitor: ObservableObject {
 
         if !soundMonitor.isRunning, !microphoneDenied {
             // The audio session dropped (interruption, route change). Restart —
-            // it is both the keep-alive and the snore channel.
-            startAudio()
+            // it is both the keep-alive and the snore channel. Never prompt
+            // from an alarm-only session: its user is asleep.
+            startAudio(promptIfNeeded: !isAlarmOnlySession)
         }
         isAudioKeepAliveActive = soundMonitor.isRunning
     }

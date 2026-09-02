@@ -314,6 +314,12 @@ final class BackgroundAlarmPlayer: ObservableObject {
         // Auto-start the sleep night at bedtime while the app is alive in bg.
         SleepAutoStart.checkAndStartIfDue()
 
+        // A smart alarm arms its own monitoring — the user setting an alarm
+        // and locking the phone must be enough. Without this, the smart window
+        // only existed inside a manually started tracking session, and every
+        // night without one rang at the fixed time.
+        SmartAlarmAutoArm.checkAndArmIfDue()
+
         // Keep the silent keep-alive playing (restart if it stopped for any
         // reason) so the app stays alive until the alarm fires. Skip only while
         // the sleep monitor's OWN audio session is actually running — checking
