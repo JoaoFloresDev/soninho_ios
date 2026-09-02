@@ -88,6 +88,9 @@ struct SleepStagingEngine: Codable {
         static let descentMinutes = 3
 
         static let minimumEpochsForCalibration = 8
+        /// Staged sleep minutes required before the smart alarm may ring
+        /// early at all.
+        static let minimumSleepMinutesForEarlyWake = 15
         static let cycleMinutes: Double = 90
         /// REM begins to be plausible only after the first full cycle.
         static let remEarliestMinutes: Double = 90
@@ -108,12 +111,34 @@ struct SleepStagingEngine: Codable {
     /// This night's typical turn: the median activity of the minutes that had
     /// any. Movement is sparse, so the median of NONZERO minutes is the unit —
     /// a median over all minutes would be zero every quiet night.
+    ///
+    /// Minutes of SUSTAINED movement are excluded: scrolling in bed before a
+    /// nap moves the phone for most of every minute, and letting that into
+    /// the median inflates the scale until real sleep turns — a hundredth of
+    /// the size — stop registering as events. The unit must be the turn, not
+    /// the phone use.
     var turnScale: Double {
-        let moving = epochs.compactMap { !$0.isGap && $0.activityIndex > 0 ? $0.activityIndex : nil }.sorted()
+        let moving = epochs.compactMap { epoch -> Double? in
+            guard !epoch.isGap,
+                  epoch.activityIndex > 0,
+                  epoch.activeSeconds < Tuning.sustainedAwakeSeconds else { return nil }
+            return epoch.activityIndex
+        }.sorted()
         guard moving.count >= 3, let median = moving[safe: moving.count / 2] else {
             return Tuning.fallbackTurnScale
         }
         return max(median, Tuning.minimumTurnScale)
+    }
+
+    /// Whether the night has actually contained sleep yet. Someone who has
+    /// not slept is not "surfacing from sleep" — before this is true the
+    /// early ring must stay silent and the fixed time do the waking. (Without
+    /// it, a sleeper still settling down when the wake window opens reads as
+    /// "plainly awake" and gets rung at the window's first minute.)
+    var hasSleptEnough: Bool {
+        guard isCalibrated else { return false }
+        let sleepMinutes = epochs.filter { !$0.isGap && $0.phase != .awake }.count
+        return sleepMinutes >= Tuning.minimumSleepMinutesForEarlyWake
     }
 
     var isCalibrated: Bool {
@@ -283,7 +308,15 @@ struct SleepStagingEngine: Codable {
 
         let scale = turnScale
         let normalized: [Double] = epochs.map { epoch in
-            epoch.isGap ? 0 : min(epoch.activityIndex / scale, Tuning.activityCap)
+            guard !epoch.isGap else { return 0 }
+            let value = min(epoch.activityIndex / scale, Tuning.activityCap)
+            // Movement WHILE snoring is sleep movement — a turn, not an
+            // awakening. Dampening it here keeps the kernel from smearing a
+            // snoring toss into "awake" on the silent minutes around it.
+            if epoch.sleepSoundSeconds >= Tuning.snoreVetoSeconds {
+                return min(value, 1.0)
+            }
+            return value
         }
 
         // Pass 1 — sleep/wake via the kernel (gaps neither wake nor sleep).

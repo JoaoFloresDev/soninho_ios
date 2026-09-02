@@ -352,12 +352,15 @@ final class MotionSleepMonitor: ObservableObject {
     private func watchdogTick() {
         guard isMonitoring else { return }
 
-        // An alarm-only session whose window is long gone was orphaned (the
-        // alarm never completed through the app) — release the sensors.
+        // An alarm-only session exists only to serve a smart alarm: if its
+        // window is long gone (orphaned ring) or the alarm was disabled or
+        // deleted under it, release the sensors.
         if isAlarmOnlySession {
             let horizon = (decider?.windowEnd ?? (engine?.sessionStart ?? Date()).addingTimeInterval(12 * 3600))
                 .addingTimeInterval(2 * 3600)
-            if Date() > horizon {
+            let alarmGone = !smartAlarmTriggered && decider == nil
+                && SmartAlarmAutoArm.alarmNeedingMonitoring(alarms: StorageService.shared.loadAlarms()) == nil
+            if Date() > horizon || alarmGone {
                 stopMonitoring()
                 return
             }
@@ -446,7 +449,12 @@ final class MotionSleepMonitor: ObservableObject {
         guard var decider, !decider.hasFired, let engine else { return }
 
         let score = engine.wakeReadiness(liveActivity: liveActivity)
-        let fired = decider.evaluate(score: score, calibrated: engine.isCalibrated, at: Date())
+        let fired = decider.evaluate(
+            score: score,
+            calibrated: engine.isCalibrated,
+            hasSlept: engine.hasSleptEnough,
+            at: Date()
+        )
         self.decider = decider
 
         guard fired else { return }

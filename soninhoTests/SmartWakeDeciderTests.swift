@@ -96,6 +96,25 @@ struct SmartWakeDeciderTests {
         #expect(decider.hasFired == true)
     }
 
+    @Test func neverFiresBeforeAnySleep() {
+        // Settling down when the window opens reads as "plainly awake" — but
+        // there is no sleep to surface from yet, so nothing may ring.
+        var decider = makeDecider()
+        for offset in 0..<30 {
+            let fired = decider.evaluate(
+                score: 1.0, calibrated: true, hasSlept: false, at: minute(Double(offset))
+            )
+            #expect(fired == false)
+        }
+    }
+
+    @Test func sleepArrivingMidWindowUnlocksTheRing() {
+        var decider = makeDecider()
+        #expect(decider.evaluate(score: 1.0, calibrated: true, hasSlept: false, at: minute(10)) == false)
+        // Twenty minutes later the sleeper has slept and is surfacing.
+        #expect(decider.evaluate(score: 0.95, calibrated: true, hasSlept: true, at: minute(28)) == true)
+    }
+
     // MARK: - Bar Shape
 
     @Test func barDecaysMonotonicallyTowardsLightSleep() {

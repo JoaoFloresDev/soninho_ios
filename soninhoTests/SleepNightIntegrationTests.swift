@@ -111,7 +111,12 @@ struct SleepNightIntegrationTests {
                 night.play(.still(minutes: 1))
             }
             let score = night.engine.wakeReadiness(liveActivity: night.extractor.liveActivity)
-            if decider.evaluate(score: score, calibrated: night.engine.isCalibrated, at: night.now) {
+            if decider.evaluate(
+                score: score,
+                calibrated: night.engine.isCalibrated,
+                hasSlept: night.engine.hasSleptEnough,
+                at: night.now
+            ) {
                 return minute
             }
         }
@@ -168,6 +173,48 @@ struct SleepNightIntegrationTests {
 
         let fired = runWindow(night: &night, eventsAt: [
             6: .turn(seconds: 3, amplitude: 0.05, tiltDegrees: 0),
+        ])
+
+        #expect(fired == nil)
+    }
+
+    // MARK: - Nap After Phone Use (field scenario 2026-09-02)
+
+    /// The user scrolls in bed for over an hour, sets a nap alarm, settles
+    /// down INSIDE the wake window, sleeps twenty minutes and stirs. The ring
+    /// must wait for the stir — not fire at the window's first minutes while
+    /// they are still putting the phone down.
+    @Test func napAfterPhoneUseWaitsForSleepThenFiresOnStir() {
+        var night = SyntheticNight()
+        night.play(.restless(minutes: 100, amplitude: 0.08))
+
+        let fired = runWindow(night: &night, eventsAt: [
+            0: .restless(minutes: 1, amplitude: 0.08),
+            1: .restless(minutes: 1, amplitude: 0.06),
+            2: .restless(minutes: 1, amplitude: 0.05),
+            24: .turn(seconds: 3, amplitude: 0.05, tiltDegrees: 1.5),
+            25: .restless(minutes: 1, amplitude: 0.05),
+            26: .restless(minutes: 1, amplitude: 0.05),
+            27: .restless(minutes: 1, amplitude: 0.05),
+            28: .restless(minutes: 1, amplitude: 0.05),
+        ])
+
+        // Fires on the morning stir, never during the settling minutes.
+        #expect(fired != nil)
+        if let fired {
+            #expect(fired >= 24)
+        }
+    }
+
+    @Test func napWithNoStirFallsThroughToFixedTime() {
+        // Settles inside the window and sleeps straight through: the smart
+        // alarm stays silent and the fixed time does the waking.
+        var night = SyntheticNight()
+        night.play(.restless(minutes: 100, amplitude: 0.08))
+
+        let fired = runWindow(night: &night, eventsAt: [
+            0: .restless(minutes: 1, amplitude: 0.08),
+            1: .restless(minutes: 1, amplitude: 0.06),
         ])
 
         #expect(fired == nil)

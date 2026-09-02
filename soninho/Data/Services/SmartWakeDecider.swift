@@ -68,13 +68,16 @@ struct SmartWakeDecider: Codable {
     // MARK: - Public Methods
 
     /// Feeds one readiness evaluation. Returns true exactly once, at the
-    /// moment the alarm should ring.
-    mutating func evaluate(score: Double, calibrated: Bool, at now: Date) -> Bool {
+    /// moment the alarm should ring. `hasSlept` says whether the night has
+    /// contained real sleep yet — without it there is nothing to wake FROM,
+    /// and someone still settling down reads as "plainly awake".
+    mutating func evaluate(score: Double, calibrated: Bool, hasSlept: Bool = true, at now: Date) -> Bool {
         guard !hasFired, isInsideWindow(now) else { return false }
 
         // An uncalibrated engine has no idea — judging on it is what used to
-        // make the alarm fire the moment the window opened.
-        guard calibrated else {
+        // make the alarm fire the moment the window opened. And before any
+        // sleep happened, an early ring would punish lying down late.
+        guard calibrated, hasSlept else {
             qualifyingMinutes = 0
             return false
         }

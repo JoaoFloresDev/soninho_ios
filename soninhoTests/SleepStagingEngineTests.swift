@@ -233,6 +233,49 @@ struct SleepStagingEngineTests {
         #expect(engine.eventCount == 4)
     }
 
+    @Test func sustainedMovementDoesNotInflateTurnScale() {
+        // An hour of scrolling moves the phone hugely; the scale must stay
+        // anchored to the sleep turns or they stop registering as events.
+        var engine = makeEngine()
+        var minute = 0
+        func advance(_ count: Int, _ features: (Date) -> MovementFeatures) {
+            for _ in 0..<count {
+                engine.record(features(start.addingTimeInterval(Double(minute) * 60)))
+                minute += 1
+            }
+        }
+
+        advance(20) { EpochFactory.storm(at: $0, activity: 0.6) }
+        advance(10) { EpochFactory.still(at: $0) }
+        advance(1) { EpochFactory.turn(at: $0, activity: 0.12, posture: false) }
+        advance(10) { EpochFactory.still(at: $0) }
+        advance(1) { EpochFactory.turn(at: $0, activity: 0.10, posture: false) }
+        advance(10) { EpochFactory.still(at: $0) }
+        advance(1) { EpochFactory.turn(at: $0, activity: 0.14, posture: false) }
+        advance(5) { EpochFactory.still(at: $0) }
+
+        #expect(engine.turnScale < 0.2)
+        #expect(engine.turnScale > 0.05)
+    }
+
+    @Test func hasSleptEnoughOnlyAfterRealSleep() {
+        // A night that is all phone use is not sleep — and quiet minutes
+        // after it must accumulate before the early ring is allowed.
+        var engine = makeEngine()
+        var minute = 0
+        for _ in 0..<30 {
+            engine.record(EpochFactory.storm(at: start.addingTimeInterval(Double(minute) * 60)))
+            minute += 1
+        }
+        #expect(engine.hasSleptEnough == false)
+
+        for _ in 0..<20 {
+            engine.record(EpochFactory.still(at: start.addingTimeInterval(Double(minute) * 60)))
+            minute += 1
+        }
+        #expect(engine.hasSleptEnough == true)
+    }
+
     // MARK: - Persistence
 
     @Test func codableRoundTripPreservesEverything() throws {
