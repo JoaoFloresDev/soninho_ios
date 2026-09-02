@@ -42,29 +42,29 @@ enum Headlines {
         id: "A",
         label: "Direct / Action",
         home: [
-            "en-US": Headline(text: "Wake to a sunrise",       highlight: "sunrise"),
-            "pt-BR": Headline(text: "Acorde com o sol",        highlight: "sol"),
-            "es-ES": Headline(text: "Despierta con el amanecer", highlight: "amanecer")
+            "en-US": Headline(text: "Wake to a sunrise",           highlight: nil),
+            "pt-BR": Headline(text: "Acorde com o sol",            highlight: nil),
+            "es-ES": Headline(text: "Despierta con el amanecer",   highlight: nil)
         ],
         feature1: [
-            "en-US": Headline(text: "Solve math to wake",      highlight: "math"),
-            "pt-BR": Headline(text: "Resolva contas pra acordar", highlight: "contas"),
-            "es-ES": Headline(text: "Resuelve mates para apagar", highlight: "mates")
+            "en-US": Headline(text: "Solve math to wake",          highlight: nil),
+            "pt-BR": Headline(text: "Resolva contas pra acordar",  highlight: nil),
+            "es-ES": Headline(text: "Resuelve mates para apagar",  highlight: nil)
         ],
         feature2: [
-            "en-US": Headline(text: "Get out of bed",          highlight: "bed"),
-            "pt-BR": Headline(text: "Saia logo da cama",       highlight: "cama"),
-            "es-ES": Headline(text: "Levántate de la cama",    highlight: "cama")
+            "en-US": Headline(text: "See your sleep phases",       highlight: nil),
+            "pt-BR": Headline(text: "Veja suas fases de sono",     highlight: nil),
+            "es-ES": Headline(text: "Mira tus fases de sueño",     highlight: nil)
         ],
         settings: [
-            "en-US": Headline(text: "Loud gentle sounds",      highlight: "sounds"),
-            "pt-BR": Headline(text: "Sons altos e suaves",     highlight: "Sons"),
-            "es-ES": Headline(text: "Sonidos altos y suaves",  highlight: "Sonidos")
+            "en-US": Headline(text: "Start the day light",         highlight: nil),
+            "pt-BR": Headline(text: "Comece o dia leve",           highlight: nil),
+            "es-ES": Headline(text: "Empieza el día ligero",       highlight: nil)
         ],
         onboarding: [
-            "en-US": Headline(text: "Track your sleep cycle",  highlight: "cycle"),
-            "pt-BR": Headline(text: "Veja seu ciclo",          highlight: "ciclo"),
-            "es-ES": Headline(text: "Sigue tu ciclo",          highlight: "ciclo")
+            "en-US": Headline(text: "Track your sleep trends",     highlight: nil),
+            "pt-BR": Headline(text: "Siga sua evolução",           highlight: nil),
+            "es-ES": Headline(text: "Sigue tu progreso",           highlight: nil)
         ]
     )
 

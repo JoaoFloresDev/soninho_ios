@@ -145,9 +145,9 @@ func renderLocaleSet(
                 canvas: canvas, scale: 1.0, to: url4)
 
     // Slot 5: Onboarding
-    let url5 = outputDir.appendingPathComponent("05_onboarding_iphone.png")
+    let url5 = outputDir.appendingPathComponent("05_stats_iphone.png")
     try render(view: marketing(device: device, slot: 4, totalSlots: totalSlots,
-                                headline: treatment.onboarding[locale], theme: theme) { OnboardingScreen(locale: locale) },
+                                headline: treatment.onboarding[locale], theme: theme) { StatsScreen(locale: locale) },
                 canvas: canvas, scale: 1.0, to: url5)
 
     // Slot 6: App Store listing mockup (validation only, abtest mode only)

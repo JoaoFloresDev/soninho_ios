@@ -1,10 +1,10 @@
 import SwiftUI
 import GambitScreenshotKit
 
-// MARK: - Feature 1 (Slot 2 — Math dismiss mission)
+// MARK: - Feature 1 (Slot 2 — Alarm ringing + math mission)
 //
-// Recreates MathMissionView: progress dots, a question card, and the custom
-// keypad you must solve before the alarm can be silenced.
+// Faithful to AlarmRingingView (dark night gradient, mascot with baked halo,
+// big clock) with MathMissionView's challenge card front and center.
 
 struct Feature1Screen: View {
     let locale: String
@@ -12,75 +12,89 @@ struct Feature1Screen: View {
         locale == "pt-BR" ? pt : (locale.hasPrefix("es") ? es : en)
     }
 
-    private let keypad: [[String]] = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], ["⌫", "0", "OK"]]
-
     var body: some View {
         ZStack {
-            MockTheme.background.ignoresSafeArea()
+            LinearGradient(
+                colors: [Color(hex: 0x000000), Color(hex: 0x140A05), Color(hex: 0x331507)],
+                startPoint: .top, endPoint: .bottom
+            ).ignoresSafeArea()
 
             VStack(spacing: 0) {
                 iOSStatusBar(foreground: .white)
 
-                VStack(spacing: 26) {
-                    Spacer()
+                Spacer().frame(height: 12)
 
-                    HStack(spacing: 9) {
-                        ForEach(0..<3, id: \.self) { i in
-                            Circle()
-                                .fill(i == 0 ? MockTheme.accent : MockTheme.surfaceSecondary)
-                                .frame(width: 10, height: 10)
-                        }
-                    }
+                Text("06:30")
+                    .font(.system(size: 74, weight: .thin, design: .rounded))
+                    .foregroundStyle(.white)
+                    .monospacedDigit()
 
-                    Text(L("Solve to turn off the alarm", "Resolva pra desligar o alarme", "Resuelve para apagar la alarma"))
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(MockTheme.textSecondary)
+                Text(L("Time to wake up", "Hora de acordar", "Hora de despertar"))
+                    .font(.system(size: 17, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.9))
 
-                    VStack(spacing: 12) {
-                        Text("7 × 8")
-                            .font(.system(size: 60, weight: .bold, design: .rounded))
-                            .foregroundStyle(MockTheme.textPrimary)
-                        Text("56")
-                            .font(.system(size: 44, weight: .semibold, design: .rounded))
-                            .foregroundStyle(MockTheme.accent)
-                            .monospacedDigit()
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 30)
-                    .background(MockTheme.surface)
-                    .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+                mascotImage("heroAlarm")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 190, height: 190)
+                    .padding(.top, 6)
 
+                // Mission card (MathMissionView)
+                GlassCard(cornerRadius: 24) {
                     VStack(spacing: 14) {
-                        ForEach(keypad, id: \.self) { row in
-                            HStack(spacing: 14) {
-                                ForEach(row, id: \.self) { key in keypadButton(key) }
+                        HStack(spacing: 6) {
+                            ForEach(0..<3, id: \.self) { index in
+                                Circle()
+                                    .fill(index == 0 ? AppPalette.primary : Color.white.opacity(0.18))
+                                    .frame(width: 9, height: 9)
                             }
                         }
-                    }
 
-                    Spacer()
+                        Text(L("Solve to turn off", "Resolva para desligar", "Resuelve para apagar"))
+                            .font(.system(size: 15))
+                            .foregroundStyle(AppPalette.textSecondary)
+
+                        Text("24 + 17")
+                            .font(.system(size: 52, weight: .bold, design: .rounded))
+                            .foregroundStyle(AppPalette.textPrimary)
+
+                        Text("4")
+                            .font(.system(size: 40, weight: .semibold, design: .rounded))
+                            .foregroundStyle(AppPalette.primary)
+                            .frame(height: 44)
+
+                        VStack(spacing: 8) {
+                            keypadRow(["1", "2", "3"])
+                            keypadRow(["4", "5", "6"])
+                        }
+                    }
+                    .padding(20)
                 }
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 26)
+                .padding(.top, 10)
+
+                Spacer()
             }
         }
     }
 
-    private func keypadButton(_ key: String) -> some View {
-        let isOK = key == "OK"
-        return ZStack {
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(isOK ? MockTheme.accent : MockTheme.surface)
-                .frame(height: 66)
-            Group {
-                if key == "⌫" {
-                    Image(systemName: "delete.left.fill").foregroundStyle(MockTheme.textSecondary)
-                } else if isOK {
-                    Image(systemName: "checkmark").foregroundStyle(.white)
-                } else {
-                    Text(key).foregroundStyle(MockTheme.textPrimary)
-                }
+    private func keypadRow(_ keys: [String]) -> some View {
+        HStack(spacing: 8) {
+            ForEach(keys, id: \.self) { key in
+                Text(key)
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
+                    .foregroundStyle(AppPalette.textPrimary)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 54)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .fill(Color.white.opacity(0.10))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                    .strokeBorder(Color.white.opacity(0.15), lineWidth: 1)
+                            )
+                    )
             }
-            .font(.system(size: 26, weight: .semibold, design: .rounded))
         }
     }
 }
