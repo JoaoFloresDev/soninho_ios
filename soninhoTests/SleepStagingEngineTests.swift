@@ -34,6 +34,22 @@ struct SleepStagingEngineTests {
         #expect(engine.wakeReadiness() == 0)
     }
 
+    @Test func calibrationCompletesAtFiveObservedMinutes() {
+        // The tracker pill shows "Calibrating… N/5 min" — the fifth observed
+        // minute must actually resolve it, and gap minutes must not count.
+        var engine = makeEngine()
+        var cursor = start
+        engine.recordGap(from: cursor, to: cursor.addingTimeInterval(10 * 60))
+        cursor = cursor.addingTimeInterval(10 * 60)
+
+        for index in 0..<5 {
+            #expect(engine.isCalibrated == false, "calibrated too early at epoch \(index)")
+            engine.record(EpochFactory.still(at: cursor))
+            cursor = cursor.addingTimeInterval(60)
+        }
+        #expect(engine.isCalibrated == true)
+    }
+
     // MARK: - Regression: the flat-light night
 
     @Test func wholeStillNightIsNotAllLight() {

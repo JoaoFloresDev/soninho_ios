@@ -408,9 +408,14 @@ struct SleepTrackerView: View {
                 Image(systemName: "waveform.path.ecg")
                     .foregroundStyle(AppColors.textSecondary)
 
-                Text(String(localized: "tracker_calibrating"))
-                    .font(AppFonts.subheadline())
-                    .foregroundStyle(AppColors.textSecondary)
+                Text(String(
+                    format: String(localized: "tracker_calibrating_progress"),
+                    viewModel.calibrationMinutesObserved,
+                    viewModel.calibrationMinutesNeeded
+                ))
+                .font(AppFonts.subheadline())
+                .foregroundStyle(AppColors.textSecondary)
+                .monospacedDigit()
             }
         }
         .padding(.horizontal, 20)

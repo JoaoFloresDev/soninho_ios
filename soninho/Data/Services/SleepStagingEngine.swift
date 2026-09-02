@@ -92,7 +92,10 @@ struct SleepStagingEngine: Codable {
         static let deepRunMinutes = 10
         static let descentMinutes = 3
 
-        static let minimumEpochsForCalibration = 8
+        /// The noise floor settles after the first minute; five gives the
+        /// kernel real context. Eight was inherited caution — during a
+        /// daytime check it just reads as the app hanging on "calibrating".
+        static let minimumEpochsForCalibration = 5
         /// Staged sleep minutes required before the smart alarm may ring
         /// early at all.
         static let minimumSleepMinutesForEarlyWake = 15

@@ -442,12 +442,13 @@ final class MotionSleepMonitor: ObservableObject {
         movementScale = engine?.turnScale ?? SleepStagingEngine.Tuning.fallbackTurnScale
 
         #if DEBUG
-        NSLog("[sleep] epoch AI=%.4f activeS=%d max=%.4f posture=%d snore=%ds phase=%@ readiness=%.2f slept=%d",
+        NSLog("[sleep] epoch AI=%.4f activeS=%d max=%.4f posture=%d snore=%ds phase=%@ readiness=%.2f slept=%d cal=%d",
               minute.activityIndex, minute.activeSeconds, minute.maxBurst,
               minute.postureChanged ? 1 : 0, sound.sleepSoundSeconds,
               settled.rawValue,
               engine?.wakeReadiness(liveActivity: liveActivity) ?? 0,
-              engine?.hasSleptEnough == true ? 1 : 0)
+              engine?.hasSleptEnough == true ? 1 : 0,
+              engine?.isCalibrated == true ? 1 : 0)
         #endif
 
         // No smart check once the alarm rang: the ringing phone's own sound

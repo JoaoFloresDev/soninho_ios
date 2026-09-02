@@ -49212,6 +49212,29 @@
         }
       }
     },
+    "tracker_calibrating_progress": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calibrating… %1$lld/%2$lld min"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calibrando… %1$lld/%2$lld min"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calibrando… %1$lld/%2$lld min"
+          }
+        }
+      }
+    },
     "tracker_cancel": {
       "localizations": {
         "ar": {

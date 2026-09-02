@@ -25,6 +25,12 @@ final class SleepTrackerViewModel: ObservableObject {
     /// Whether the engine has staged anything yet — before this the phase is
     /// a placeholder and the UI must say "calibrating", not "Light Sleep".
     @Published var isCalibrated = false
+    /// Minutes observed so far, for the calibration progress label — a bare
+    /// "Calibrating…" with no movement reads as the app hanging.
+    @Published var calibrationMinutesObserved = 0
+
+    // MARK: - Constants
+    let calibrationMinutesNeeded = SleepStagingEngine.Tuning.minimumEpochsForCalibration
     /// This night's typical turn — the unit the movement bar scales against.
     @Published var movementScale: Double = SleepStagingEngine.Tuning.fallbackTurnScale
 
@@ -77,6 +83,14 @@ final class SleepTrackerViewModel: ObservableObject {
         // Start real motion monitoring — the monitor arms the smart-alarm
         // window itself, from storage, and re-checks it every minute.
         motionMonitor.startMonitoring()
+
+        // If the monitor could not actually start (no accelerometer, start
+        // guard), showing the tracking UI would leave "calibrating" on screen
+        // forever with nothing behind it.
+        guard motionMonitor.isMonitoring else {
+            cancelTracking()
+            return
+        }
 
         startTimer()
     }
@@ -209,6 +223,10 @@ final class SleepTrackerViewModel: ObservableObject {
     private func updateElapsedTime() {
         guard let startTime = trackingStartTime else { return }
         elapsedTime = Date().timeIntervalSince(startTime)
+
+        if !isCalibrated {
+            calibrationMinutesObserved = min(motionMonitor.observedMinutes, calibrationMinutesNeeded)
+        }
 
         if elapsedTime >= AppConstants.autoCancelSleepSessionHours * 3600 {
             cancelTracking()
