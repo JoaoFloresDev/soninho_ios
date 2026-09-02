@@ -25,6 +25,12 @@ final class SmartAlarmViewModel: ObservableObject {
     @Published var isEditing = false
     @Published var showingAddSheet = false
     @Published private(set) var nextAlarmDate: Date?
+    /// Heartbeat for the "next alarm in…" countdown — ticks every 30s so the
+    /// text keeps up with the clock.
+    @Published private(set) var clock = Date()
+
+    // MARK: - Private Properties
+    private var clockTimer: Timer?
 
     // Editing state
     @Published var editingTime = Date()
@@ -46,22 +52,29 @@ final class SmartAlarmViewModel: ObservableObject {
     @Published var editingAntiRelapse = false
 
     // MARK: - Computed Properties
-    /// The enabled alarm that fires next (earliest nextAlarmDate).
+    /// The enabled alarm that fires next — skipping an occurrence the smart
+    /// alarm already rang early (the ledger), which would otherwise display
+    /// as due "now" after an early wake.
     var nextEnabledAlarm: AlarmModel? {
         alarms
             .filter { $0.isEnabled }
-            .compactMap { alarm in alarm.nextAlarmDate.map { (alarm, $0) } }
+            .compactMap { alarm in
+                AlarmOccurrenceLedger.scheduledDate(for: alarm).map { (alarm, $0.date) }
+            }
             .min { $0.1 < $1.1 }?
             .0
     }
 
     var nextAlarmText: String {
         guard let alarm = nextEnabledAlarm,
-              let nextDate = alarm.nextAlarmDate else {
+              let nextDate = AlarmOccurrenceLedger.scheduledDate(for: alarm)?.date else {
             return String(localized: "alarm_no_alarm_set")
         }
 
-        let now = Date()
+        // `clock` (not Date()) so the countdown actually counts: a computed
+        // string only re-renders when a published property changes, and
+        // nothing used to change — "in 20h 15m" froze until the next edit.
+        let now = clock
         let interval = nextDate.timeIntervalSince(now)
 
         if interval <= 0 {
@@ -99,6 +112,16 @@ final class SmartAlarmViewModel: ObservableObject {
         // Scheduling is owned by the App (launch + every foreground), so the
         // ViewModel only mirrors storage here.
         loadAlarms()
+
+        clockTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                self?.clock = Date()
+            }
+        }
+    }
+
+    deinit {
+        clockTimer?.invalidate()
     }
 
     // MARK: - Public Methods
@@ -296,9 +319,11 @@ final class SmartAlarmViewModel: ObservableObject {
     }
 
     private func updateNextAlarmDate() {
+        // Ledger-aware, like the countdown text — an occurrence the smart
+        // alarm already rang must not surface as the "next" one.
         nextAlarmDate = alarms
             .filter { $0.isEnabled }
-            .compactMap { $0.nextAlarmDate }
+            .compactMap { AlarmOccurrenceLedger.scheduledDate(for: $0)?.date }
             .min()
     }
 
