@@ -80,8 +80,15 @@ final class StatisticsViewModel: ObservableObject {
         return stats.averageRemSleep.hoursMinutesString
     }
 
-    var sleepTrend: SleepTrend {
-        statistics?.sleepTrend ?? .stable
+    var averageAwake: String {
+        guard let stats = statistics else { return "--" }
+        return stats.averageAwake.hoursMinutesString
+    }
+
+    /// nil until enough same-engine nights exist — the chip is hidden rather
+    /// than presenting a hardcoded "stable" as a finding.
+    var sleepTrend: SleepTrend? {
+        statistics?.sleepTrend
     }
 
     var consistencyScore: Int {
@@ -100,7 +107,7 @@ final class StatisticsViewModel: ObservableObject {
             sum + abs(time - avgBedtime)
         } / bedtimes.count
 
-        // Lower variance = higher consistency (30 min variance = ~100%, 2h = ~0%)
+        // Linear penalty: 0 min of mean bedtime deviation = 100, 60 min = 0.
         let score = max(0, min(100, 100 - (variance * 100 / 60)))
         return score
     }

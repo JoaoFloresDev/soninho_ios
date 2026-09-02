@@ -45,10 +45,17 @@ struct WakeGreetingView: View {
             : String(localized: "wake_greeting_rest")
     }
 
-    private var subtitle: String {
-        mode == .snooze
-            ? String(localized: "snooze_greeting_subtitle")
-            : String(localized: "wake_greeting_subtitle")
+    private var subtitle: String? {
+        if mode == .snooze { return String(localized: "snooze_greeting_subtitle") }
+        // "Your night was saved" is only true when a tracked night is (or is
+        // about to be) written. A plain alarm, or the smart alarm's own
+        // monitoring session, saves nothing — claiming otherwise sends the
+        // user to an unchanged Statistics tab.
+        guard UserDefaults.standard.bool(forKey: StorageKeys.isCurrentlyTracking)
+                || MotionSleepMonitor.shared.isMonitoring && !MotionSleepMonitor.shared.isAlarmOnlySession else {
+            return nil
+        }
+        return String(localized: "wake_greeting_subtitle")
     }
 
     private var gradientColors: [Color] {
@@ -94,10 +101,12 @@ struct WakeGreetingView: View {
                         .multilineTextAlignment(.center)
                         .shadow(color: .black.opacity(0.2), radius: 8, y: 2)
 
-                    Text(subtitle)
-                        .font(AppFonts.body())
-                        .foregroundStyle(.white.opacity(0.85))
-                        .multilineTextAlignment(.center)
+                    if let subtitle {
+                        Text(subtitle)
+                            .font(AppFonts.body())
+                            .foregroundStyle(.white.opacity(0.85))
+                            .multilineTextAlignment(.center)
+                    }
                 }
                 .opacity(appeared ? 1 : 0)
                 .offset(y: appeared ? 0 : 24)

@@ -132,14 +132,16 @@ struct StatisticsView: View {
                             .foregroundStyle(AppColors.textTertiary)
                     }
 
-                    HStack(spacing: 4) {
-                        Image(systemName: viewModel.sleepTrend.icon)
-                            .font(.system(size: 12, weight: .bold))
+                    if let trend = viewModel.sleepTrend {
+                        HStack(spacing: 4) {
+                            Image(systemName: trend.icon)
+                                .font(.system(size: 12, weight: .bold))
 
-                        Text(viewModel.sleepTrend.localizedDescription)
-                            .font(AppFonts.caption())
+                            Text(trend.localizedDescription)
+                                .font(AppFonts.caption())
+                        }
+                        .foregroundStyle(trend.color)
                     }
-                    .foregroundStyle(viewModel.sleepTrend.color)
                 }
 
                 Spacer()
@@ -265,18 +267,12 @@ struct StatisticsView: View {
                 .font(AppFonts.headline())
                 .foregroundStyle(AppColors.textPrimary)
 
-            if #available(iOS 17.0, *) {
-                sleepDurationChart
-                    .frame(height: 200)
-                    .cardStyle()
-            } else {
-                legacyDurationChart
-                    .cardStyle()
-            }
+            sleepDurationChart
+                .frame(height: 200)
+                .cardStyle()
         }
     }
 
-    @available(iOS 17.0, *)
     private var sleepDurationChart: some View {
         Chart {
             ForEach(viewModel.records.prefix(viewModel.selectedPeriod.days)) { record in
@@ -310,24 +306,6 @@ struct StatisticsView: View {
         }
     }
 
-    private var legacyDurationChart: some View {
-        HStack(alignment: .bottom, spacing: 8) {
-            ForEach(viewModel.records.suffix(min(7, viewModel.records.count))) { record in
-                VStack(spacing: 4) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(record.quality.color)
-                        .frame(width: 24, height: CGFloat(record.totalHours / 10.0) * 120)
-
-                    Text(record.startTime.shortDay)
-                        .font(AppFonts.caption2())
-                        .foregroundStyle(AppColors.textTertiary)
-                }
-            }
-        }
-        .frame(height: 150)
-        .frame(maxWidth: .infinity)
-    }
-
     // MARK: - Phases Section
     private var phasesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -352,6 +330,14 @@ struct StatisticsView: View {
                     phase: .rem,
                     duration: viewModel.averageRemSleep,
                     description: String(localized: "stats_rem_description")
+                )
+
+                // Awake used to be omitted, so the rows visibly failed to add
+                // up to the average duration shown above.
+                phaseRow(
+                    phase: .awake,
+                    duration: viewModel.averageAwake,
+                    description: String(localized: "stats_awake_description")
                 )
             }
             .cardStyle()

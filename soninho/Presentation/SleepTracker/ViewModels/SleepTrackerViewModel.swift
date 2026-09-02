@@ -20,9 +20,13 @@ final class SleepTrackerViewModel: ObservableObject {
     @Published var trackingStartTime: Date?
     @Published var elapsedTime: TimeInterval = 0
     @Published var currentPhase: SleepPhase = .light
-    @Published var estimatedWakeTime: Date?
     @Published var movementIntensity: Double = 0
     @Published var soundLevel: Double = 0
+    /// Whether the engine has staged anything yet — before this the phase is
+    /// a placeholder and the UI must say "calibrating", not "Light Sleep".
+    @Published var isCalibrated = false
+    /// This night's typical turn — the unit the movement bar scales against.
+    @Published var movementScale: Double = SleepStagingEngine.Tuning.fallbackTurnScale
 
     // MARK: - Private Properties
     private var timer: Timer?
@@ -80,39 +84,11 @@ final class SleepTrackerViewModel: ObservableObject {
     func stopTracking(greet: Bool = true) async {
         stopTimer()
 
-        guard let startTime = trackingStartTime else { return }
-
-        let endTime = Date()
-        let duration = endTime.timeIntervalSince(startTime)
-
-        // Motion-detected phases (staging engine over the accelerometer data)
-        let phases = motionMonitor.getRecordedPhases()
-        let qualityScore = motionMonitor.calculateQualityScore(phases: phases, totalDuration: duration)
-
-        // Stop motion monitoring
-        motionMonitor.stopMonitoring()
-
-        let record = SleepRecord(
-            startTime: startTime,
-            endTime: endTime,
-            phases: phases,
-            qualityScore: qualityScore
-        )
-
-        // In-app tracked sleep stays local — it is NOT written to Apple Health.
-        // (Apple Health / Resumo must reflect only the device's own sleep data.)
-
-        // Save locally
-        var records = storageService.loadCachedSleepRecords()
-        records.insert(record, at: 0)
-        storageService.saveSleepRecords(records)
-        // A night seen through to the morning is the other moment the app
-        // delivered on its promise.
-        Analytics.coreAction("night_tracked")
-        _ = RatingGateService.shared.recordPositiveEvent()
-
-        // Update the tracked-nights streak (was never being called → stuck at 0).
-        storageService.updateStreak(for: record.endTime)
+        // The recorder owns saving (it also runs from the alarm-completion
+        // path when this ViewModel does not exist); a second finisher just
+        // gets nil back. In-app tracked sleep stays local — never written to
+        // Apple Health.
+        let record = SleepNightRecorder.finishTrackedNight()
 
         // Reset state
         isTracking = false
@@ -120,23 +96,22 @@ final class SleepTrackerViewModel: ObservableObject {
         elapsedTime = 0
         movementIntensity = 0
 
-        UserDefaults.standard.set(false, forKey: StorageKeys.isCurrentlyTracking)
-        UserDefaults.standard.removeObject(forKey: StorageKeys.trackingStartTime)
-
         // Greet the user — the night is over. Skipped when the alarm screen
-        // already showed its own good-morning (avoids a double greeting).
-        if greet {
+        // already showed its own good-morning, and when nothing was actually
+        // saved ("your night was saved" over an empty stats tab reads as a lie).
+        if greet, record != nil {
             WakeGreetingManager.shared.show()
-            // A saved night is an aha-moment; let the greeting finish first.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                RatingGateService.shared.recordPositiveEvent()
-            }
         }
     }
 
     func cancelTracking() {
         stopTimer()
-        motionMonitor.stopMonitoring()
+        // The monitor may be serving the SMART ALARM (alarm-only session) —
+        // discarding a stale tracked night must not disarm this morning's
+        // wake-up with it.
+        if !motionMonitor.isAlarmOnlySession {
+            motionMonitor.stopMonitoring()
+        }
         isTracking = false
         trackingStartTime = nil
         elapsedTime = 0
@@ -180,6 +155,20 @@ final class SleepTrackerViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] level in
                 self?.soundLevel = level
+            }
+            .store(in: &cancellables)
+
+        motionMonitor.$isCalibrated
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] calibrated in
+                self?.isCalibrated = calibrated
+            }
+            .store(in: &cancellables)
+
+        motionMonitor.$movementScale
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] scale in
+                self?.movementScale = scale
             }
             .store(in: &cancellables)
     }

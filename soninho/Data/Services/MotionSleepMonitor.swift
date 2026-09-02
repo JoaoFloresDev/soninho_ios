@@ -86,6 +86,20 @@ final class MotionSleepMonitor: ObservableObject {
     /// it exists only to find the light-sleep wake moment and saves no sleep
     /// record; it ends when the alarm is dismissed.
     private(set) var isAlarmOnlySession = false
+    /// Whether the engine has seen enough of the night to stage anything —
+    /// the UI shows "calibrating" instead of a fabricated Light Sleep pill.
+    @Published private(set) var isCalibrated = false
+    /// This night's typical turn (g·s) — the unit live movement should be
+    /// displayed against. The old UI hardcoded thresholds from the previous
+    /// algorithm's scale and rendered a dead bar.
+    @Published private(set) var movementScale = SleepStagingEngine.Tuning.fallbackTurnScale
+
+    // MARK: - Computed Properties
+    /// Minutes with real data this session — zero means the night was never
+    /// actually observed and no report should be fabricated from it.
+    var observedMinutes: Int { engine?.observedMinutes ?? 0 }
+    /// Movement events seen this session.
+    var eventCount: Int { engine?.eventCount ?? 0 }
 
     // MARK: - Private Properties
     private let motionManager = CMMotionManager()
@@ -107,14 +121,21 @@ final class MotionSleepMonitor: ObservableObject {
         motionQueue.name = "com.gambitstudio.soninho.motion"
         motionQueue.maxConcurrentOperationCount = 1
 
-        // An alarm-only session has no ViewModel watching over it — it ends
-        // itself when the alarm is fully dismissed.
+        // Ending the night must not depend on any particular screen being
+        // open. An alarm-only session ends itself here; a TRACKED night is
+        // saved here too — the ViewModel that used to be the only saver only
+        // exists after the user visits the Sleep tab, and a night dismissed
+        // from the alarm screen on a fresh launch never got saved at all.
         NotificationCenter.default.addObserver(
             forName: .didCompleteAlarm, object: nil, queue: .main
         ) { [weak self] _ in
             Task { @MainActor in
-                guard let self, self.isAlarmOnlySession else { return }
-                self.stopMonitoring()
+                guard let self else { return }
+                if self.isAlarmOnlySession {
+                    self.stopMonitoring()
+                } else {
+                    SleepNightRecorder.finishTrackedNight()
+                }
             }
         }
     }
@@ -126,10 +147,14 @@ final class MotionSleepMonitor: ObservableObject {
     /// night starts a new engine anchored at the tracked start time.
     func startMonitoring() {
         // The smart alarm may already be running an alarm-only session; the
-        // user starting a real night ADOPTS it — the staging context is worth
-        // more than a fresh engine.
+        // user starting a real night ADOPTS it — keeping the calibration but
+        // dropping the pre-tap epochs, which are the user's evening, not
+        // their night (left in, they push phase percentages past 100%).
         if isMonitoring, isAlarmOnlySession {
             isAlarmOnlySession = false
+            if let trackedStart = UserDefaults.standard.object(forKey: StorageKeys.trackingStartTime) as? Date {
+                engine?.trimEpochs(before: trackedStart)
+            }
             startAudio(promptIfNeeded: true)
             persist()
             return
@@ -158,6 +183,8 @@ final class MotionSleepMonitor: ObservableObject {
         soundLevel = 0
 
         restoreOrStartSession()
+        isCalibrated = engine?.isCalibrated ?? false
+        movementScale = engine?.turnScale ?? SleepStagingEngine.Tuning.fallbackTurnScale
         armSmartAlarm()
         startAccelerometer()
         startAudio(promptIfNeeded: !alarmOnly)
@@ -227,10 +254,14 @@ final class MotionSleepMonitor: ObservableObject {
     private func restoreOrStartSession() {
         let trackedStart = UserDefaults.standard.object(forKey: StorageKeys.trackingStartTime) as? Date
 
-        // A tracked night must match the tracked start time; an alarm-only
-        // session has none, so recency is the whole test.
+        // A tracked night must match the tracked start time. An alarm-only
+        // session has none — but only a RECENT one may be resumed or adopted:
+        // one that died with the process this morning is a different night,
+        // and adopting its hours of phantom epochs corrupts the new record.
         let matchesSession: (SleepSessionState) -> Bool = { state in
-            if state.isAlarmOnly { return true }
+            if state.isAlarmOnly {
+                return Date().timeIntervalSince(state.engine.sessionStart) < 3 * 3600
+            }
             guard let trackedStart else { return false }
             return abs(state.engine.sessionStart.timeIntervalSince(trackedStart)) < 120
         }
@@ -254,8 +285,12 @@ final class MotionSleepMonitor: ObservableObject {
             smartAlarmTriggered = state.smartAlarmTriggered
             currentPhase = restored.currentPhase
             if state.isAlarmOnly, !isAlarmOnlySession {
-                // A user-tracked start adopts the restored alarm-only night.
+                // A user-tracked start adopts the restored alarm-only night —
+                // minus its pre-tap minutes (see the live-adopt path above).
                 isAlarmOnlySession = false
+                if let trackedStart {
+                    engine?.trimEpochs(before: trackedStart)
+                }
             }
         } else {
             engine = SleepStagingEngine(
@@ -403,6 +438,8 @@ final class MotionSleepMonitor: ObservableObject {
         if settled != currentPhase {
             currentPhase = settled
         }
+        isCalibrated = engine?.isCalibrated ?? false
+        movementScale = engine?.turnScale ?? SleepStagingEngine.Tuning.fallbackTurnScale
 
         #if DEBUG
         NSLog("[sleep] epoch AI=%.4f activeS=%d max=%.4f posture=%d snore=%ds phase=%@ readiness=%.2f slept=%d",

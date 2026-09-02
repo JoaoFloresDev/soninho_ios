@@ -170,33 +170,4 @@ final class SleepTipsService {
         Array(allTips.shuffled().prefix(count))
     }
     
-    func getPersonalizedTips(
-        averageQuality: Int,
-        averageDuration: TimeInterval,
-        consistency: Int
-    ) -> [SleepTip] {
-        var tips: [SleepTip] = []
-        
-        // Low quality score - suggest relaxation
-        if averageQuality < 60 {
-            tips.append(contentsOf: getTipsForCategory(.relaxation).prefix(1))
-        }
-        
-        // Short sleep duration - suggest routine
-        if averageDuration < 7 * 3600 {
-            tips.append(contentsOf: getTipsForCategory(.routine).prefix(1))
-        }
-        
-        // Low consistency - suggest environment
-        if consistency < 70 {
-            tips.append(contentsOf: getTipsForCategory(.environment).prefix(1))
-        }
-        
-        // If no specific issues, return general tips
-        if tips.isEmpty {
-            tips = getRandomTips(count: 2)
-        }
-        
-        return Array(tips.prefix(3))
-    }
 }

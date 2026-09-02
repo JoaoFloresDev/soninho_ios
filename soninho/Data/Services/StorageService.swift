@@ -104,14 +104,24 @@ final class StorageService: ObservableObject {
     static let sleepRecordsDidChangeNotification = Notification.Name("sleepRecordsDidChange")
 
     func saveSleepRecords(_ records: [SleepRecord], notify: Bool = true) {
-        // Prune records older than 90 days to prevent UserDefaults bloat
-        let cutoff = Date().addingTimeInterval(-90 * 86400)
+        // Keep a full year — the Statistics "Year" period promises 365 days;
+        // the old 90-day prune silently capped it at a quarter.
+        let cutoff = Date().addingTimeInterval(-365 * 86400)
         let pruned = records.filter { $0.endTime > cutoff }
 
-        if let data = try? encoder.encode(pruned) {
-            defaults.set(data, forKey: StorageKeys.cachedSleepRecords)
+        // If a blob exists but no longer decodes, overwriting it would turn
+        // one schema hiccup into permanent loss of the whole history — park
+        // it first so it can be recovered by a fixed build.
+        if let existing = defaults.data(forKey: StorageKeys.cachedSleepRecords),
+           (try? decoder.decode([SleepRecord].self, from: existing)) == nil {
+            defaults.set(existing, forKey: StorageKeys.cachedSleepRecords + ".corrupt")
         }
 
+        guard let data = try? encoder.encode(pruned) else { return }
+        defaults.set(data, forKey: StorageKeys.cachedSleepRecords)
+
+        // Only announce a save that actually happened — consumers reload on
+        // this and would otherwise present stale data as fresh.
         if notify {
             NotificationCenter.default.post(name: Self.sleepRecordsDidChangeNotification, object: nil)
         }
@@ -248,6 +258,11 @@ final class StorageService: ObservableObject {
         if let lastDate = lastSleepDate {
             let normalizedLastDate = calendar.startOfDay(for: lastDate)
             let daysBetween = calendar.dateComponents([.day], from: normalizedLastDate, to: normalizedSleepDate).day ?? 0
+
+            // A record dated BEFORE the last one (clock change, timezone
+            // travel) must not drag lastSleepDate backwards — the next real
+            // night would then read as a 2-day hole and reset the streak.
+            guard daysBetween >= 0 else { return }
 
             if daysBetween == 1 {
                 // Consecutive day - increment streak

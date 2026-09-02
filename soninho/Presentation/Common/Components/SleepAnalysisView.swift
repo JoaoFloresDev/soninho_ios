@@ -15,34 +15,32 @@ struct SleepAnalysisCard: View {
     let record: SleepRecord
 
     // MARK: - Computed Properties
+    /// Straight from the record — this card and the Time Asleep card used to
+    /// derive their own numbers (with a latency fudge and a 97% cap) and
+    /// disagree side by side on the same screen.
     private var sleepEfficiency: Double {
-        let totalTime = record.totalDuration
-        guard totalTime > 0 else { return 0 }
+        record.efficiency * 100
+    }
 
-        let awakeTime = record.awakeDuration
-
-        // Assume minimum sleep onset latency (~5 min to fall asleep)
-        // and brief micro-awakenings that motion sensors can't detect
-        let sleepOnsetLatency: TimeInterval = 5 * 60
-        let estimatedAwakeTime = max(awakeTime, sleepOnsetLatency)
-
-        let actualSleep = totalTime - estimatedAwakeTime
-        let efficiency = (actualSleep / totalTime) * 100
-
-        // Cap at 97% — perfect 100% efficiency is unrealistic even for ideal sleepers
-        return min(max(efficiency, 0), 97)
+    /// Fraction of the night the app was NOT observing. Above a tenth, phase
+    /// advice would be judging a night the app mostly missed.
+    private var gapFraction: Double {
+        guard record.totalDuration > 0 else { return 0 }
+        return record.gapDuration / record.totalDuration
     }
 
     private var isOptimalDuration: Bool {
         record.totalHours >= 7 && record.totalHours <= 9
     }
 
+    // Bands come from the scorer, so the badge and the ring can never
+    // disagree about the same percentage.
     private var isOptimalDeepSleep: Bool {
-        record.deepSleepPercentage >= 15 && record.deepSleepPercentage <= 25
+        SleepQualityScorer.deepIdealPercent.contains(record.deepSleepPercentage)
     }
 
     private var isOptimalREM: Bool {
-        record.remSleepPercentage >= 20 && record.remSleepPercentage <= 25
+        SleepQualityScorer.remIdealPercent.contains(record.remSleepPercentage)
     }
 
     // MARK: - View Body
@@ -110,44 +108,36 @@ struct SleepAnalysisCard: View {
                 .font(AppFonts.headline())
                 .foregroundStyle(AppColors.textPrimary)
 
-            if #available(iOS 17.0, *) {
-                hypnogramChart
-            } else {
-                legacyHypnogram
-            }
+            hypnogramChart
+            hypnogramLegend
         }
     }
 
-    // MARK: - Hypnogram Chart (iOS 17+)
-    @available(iOS 17.0, *)
+    // MARK: - Hypnogram Chart
+    /// One coloured block per staged span, on the record's own time window.
+    /// The old chart drew a single-colour line with an area fill that made
+    /// AWAKE the biggest filled shape and deep sleep the smallest — a good
+    /// night rendered nearly empty. Gaps (app not observing) are muted, not
+    /// disguised as sleep.
     private var hypnogramChart: some View {
-        let dataPoints = hypnogramDataPoints
-        return Chart {
-            ForEach(Array(dataPoints.enumerated()), id: \.offset) { _, point in
-                LineMark(
-                    x: .value("Time", point.time),
-                    y: .value("Stage", point.stage)
+        Chart {
+            ForEach(record.phases) { span in
+                RectangleMark(
+                    xStart: .value("Start", max(span.startTime, record.startTime)),
+                    xEnd: .value("End", min(span.endTime, record.endTime)),
+                    y: .value("Stage", stageValue(span.phase))
                 )
-                .interpolationMethod(.stepEnd)
-                .foregroundStyle(AppColors.primary)
-                .lineStyle(StrokeStyle(lineWidth: 2))
-
-                AreaMark(
-                    x: .value("Time", point.time),
-                    y: .value("Stage", point.stage)
-                )
-                .interpolationMethod(.stepEnd)
                 .foregroundStyle(
-                    LinearGradient(
-                        colors: [AppColors.primary.opacity(0.25), AppColors.primary.opacity(0.02)],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
+                    span.isMissingData
+                        ? AppColors.textTertiary.opacity(0.25)
+                        : span.phase.color
                 )
+                .cornerRadius(2)
             }
         }
+        .chartXScale(domain: record.startTime...record.endTime)
         .chartXAxis {
-            AxisMarks(values: .stride(by: .hour, count: 2)) { value in
+            AxisMarks(values: .stride(by: .hour, count: 2)) { _ in
                 AxisValueLabel(format: .dateTime.hour(.defaultDigits(amPM: .abbreviated)))
                     .foregroundStyle(AppColors.textTertiary)
                 AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5, dash: [4]))
@@ -167,53 +157,21 @@ struct SleepAnalysisCard: View {
         .frame(height: 160)
     }
 
-    // MARK: - Hypnogram Data Points
-    private var hypnogramDataPoints: [(time: Date, stage: Int)] {
-        var points: [(time: Date, stage: Int)] = []
-        for phase in record.phases {
-            points.append((time: phase.startTime, stage: stageValue(phase.phase)))
-        }
-        if let lastPhase = record.phases.last {
-            points.append((time: lastPhase.endTime, stage: stageValue(lastPhase.phase)))
-        }
-        return points
-    }
-
-    // MARK: - Legacy Hypnogram
-    private var legacyHypnogram: some View {
-        GeometryReader { geometry in
-            let totalDuration = record.endTime.timeIntervalSince(record.startTime)
-            let width = geometry.size.width
-            let height: CGFloat = 120
-
-            ZStack(alignment: .topLeading) {
-                // Grid lines
-                ForEach(0..<4, id: \.self) { i in
-                    Rectangle()
-                        .fill(AppColors.surfaceSecondary)
-                        .frame(height: 1)
-                        .offset(y: CGFloat(i) * (height / 4))
+    // MARK: - Hypnogram Legend
+    private var hypnogramLegend: some View {
+        HStack(spacing: 12) {
+            ForEach(SleepPhase.allCases, id: \.self) { phase in
+                HStack(spacing: 4) {
+                    Circle()
+                        .fill(phase.color)
+                        .frame(width: 8, height: 8)
+                    Text(phase.localizedName)
+                        .font(.system(size: 11))
+                        .foregroundStyle(AppColors.textSecondary)
                 }
-
-                // Phase path
-                Path { path in
-                    var isFirst = true
-                    for phase in record.phases {
-                        let x = phase.startTime.timeIntervalSince(record.startTime) / totalDuration * width
-                        let y = height - (CGFloat(stageValue(phase.phase)) / 4.0 * height)
-
-                        if isFirst {
-                            path.move(to: CGPoint(x: x, y: y))
-                            isFirst = false
-                        } else {
-                            path.addLine(to: CGPoint(x: x, y: y))
-                        }
-                    }
-                }
-                .stroke(AppColors.primary, lineWidth: 2)
             }
         }
-        .frame(height: 120)
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 
     // MARK: - Key Metrics Grid
@@ -233,7 +191,7 @@ struct SleepAnalysisCard: View {
             MetricCard(
                 icon: "clock.fill",
                 title: String(localized: "metric_time_asleep"),
-                value: (record.totalDuration - record.awakeDuration).hoursMinutesString,
+                value: record.timeAsleep.hoursMinutesString,
                 subtitle: isOptimalDuration ? String(localized: "metric_ideal_range") : String(localized: "metric_adjust_schedule"),
                 color: isOptimalDuration ? AppColors.success : AppColors.warning
             )
@@ -273,6 +231,8 @@ struct SleepAnalysisCard: View {
                 }
             }
             .frame(height: 24)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(AppColors.surfaceSecondary)
             .clipShape(RoundedRectangle(cornerRadius: 12))
 
             // Phase Details
@@ -280,7 +240,13 @@ struct SleepAnalysisCard: View {
                 PhaseDetailRow(phase: .deep, duration: record.deepSleepDuration, total: record.totalDuration, isOptimal: isOptimalDeepSleep)
                 PhaseDetailRow(phase: .light, duration: record.lightSleepDuration, total: record.totalDuration, isOptimal: true)
                 PhaseDetailRow(phase: .rem, duration: record.remSleepDuration, total: record.totalDuration, isOptimal: isOptimalREM)
-                PhaseDetailRow(phase: .awake, duration: record.awakeDuration, total: record.totalDuration, isOptimal: record.awakeDuration / record.totalDuration < 0.05)
+                PhaseDetailRow(
+                    phase: .awake,
+                    duration: record.awakeDuration,
+                    total: record.totalDuration,
+                    isOptimal: record.totalDuration > 0
+                        && record.awakeDuration / record.totalDuration < SleepQualityScorer.awakeOptimalFraction
+                )
             }
         }
     }
@@ -311,7 +277,10 @@ struct SleepAnalysisCard: View {
                     )
                 }
 
-                if !isOptimalDeepSleep {
+                // Phase advice is withheld when the app missed a chunk of the
+                // night — "low deep sleep, avoid caffeine" over a data hole
+                // blames the user for an iOS suspension.
+                if !isOptimalDeepSleep, gapFraction < 0.1 {
                     InsightRow(
                         icon: "moon.zzz",
                         text: record.deepSleepPercentage < 15
@@ -321,7 +290,7 @@ struct SleepAnalysisCard: View {
                     )
                 }
 
-                if sleepEfficiency < 85 {
+                if sleepEfficiency < 85, gapFraction < 0.1 {
                     InsightRow(
                         icon: "bed.double",
                         text: String(localized: "insight_improve_efficiency"),
@@ -335,9 +304,11 @@ struct SleepAnalysisCard: View {
     // MARK: - Helper Views
     private func phaseBar(_ phase: SleepPhase, _ duration: TimeInterval, _ totalWidth: CGFloat) -> some View {
         let percentage = record.totalDuration > 0 ? duration / record.totalDuration : 0
+        // No minimum width: a phase that did not happen gets no bar, and the
+        // old 4 pt floor across four segments clipped the rightmost one.
         return Rectangle()
             .fill(phase.color)
-            .frame(width: max(totalWidth * percentage, 4))
+            .frame(width: percentage > 0 ? max(totalWidth * percentage, 1) : 0)
     }
 
     // MARK: - Helper Methods

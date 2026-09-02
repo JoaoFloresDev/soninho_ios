@@ -42,11 +42,6 @@ enum StorageKeys {
     static let sessionCount = "sessionCount"
     static let hasRatedApp = "hasRatedApp"
 
-    // MARK: - Statistics
-    static let totalSleepSessions = "totalSleepSessions"
-    static let averageSleepDuration = "averageSleepDuration"
-    static let averageBedtime = "averageBedtime"
-
     // MARK: - Tracking
     static let isCurrentlyTracking = "isCurrentlyTracking"
     static let trackingStartTime = "trackingStartTime"

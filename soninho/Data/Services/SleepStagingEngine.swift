@@ -267,23 +267,50 @@ struct SleepStagingEngine: Codable {
         return min(1.0, stageComponent * 0.55 + arousal * 0.45)
     }
 
-    /// Stages assembled into contiguous spans for the night's report.
+    /// Stages assembled into contiguous spans for the night's report. Gap
+    /// minutes become their own spans, flagged, so the report can show a hole
+    /// instead of fabricated light sleep. If observation stopped well before
+    /// `now` (the alarm released the sensors; the user did the mission, got
+    /// up), the tail is an explicit awake span — the old code stretched the
+    /// last staged phase over it, crediting the ringing as deep sleep.
     func phaseSpans(now: Date = Date()) -> [SleepPhaseData] {
-        guard let first = epochs.first else {
+        guard let first = epochs.first, let last = epochs.last else {
             return [SleepPhaseData(phase: .light, startTime: sessionStart, endTime: now)]
         }
+
+        let observedEnd = min(now, last.date.addingTimeInterval(60))
 
         var spans: [SleepPhaseData] = []
         var spanStart = first.date
         var spanPhase = first.phase
+        var spanIsGap = first.isGap
 
-        for epoch in epochs.dropFirst() where epoch.phase != spanPhase {
-            spans.append(SleepPhaseData(phase: spanPhase, startTime: spanStart, endTime: epoch.date))
+        for epoch in epochs.dropFirst() where epoch.phase != spanPhase || epoch.isGap != spanIsGap {
+            spans.append(SleepPhaseData(
+                phase: spanPhase, startTime: spanStart, endTime: epoch.date,
+                isGap: spanIsGap ? true : nil
+            ))
             spanStart = epoch.date
             spanPhase = epoch.phase
+            spanIsGap = epoch.isGap
         }
-        spans.append(SleepPhaseData(phase: spanPhase, startTime: spanStart, endTime: now))
+        spans.append(SleepPhaseData(
+            phase: spanPhase, startTime: spanStart, endTime: observedEnd,
+            isGap: spanIsGap ? true : nil
+        ))
+
+        if now.timeIntervalSince(observedEnd) > 90 {
+            spans.append(SleepPhaseData(phase: .awake, startTime: observedEnd, endTime: now))
+        }
         return spans
+    }
+
+    /// Drops epochs before `date` — used when a user-tracked night adopts an
+    /// alarm-only session: the pre-tap minutes are that person's evening, not
+    /// their night, and leaving them in pushes phase percentages past 100%.
+    mutating func trimEpochs(before date: Date) {
+        epochs.removeAll { $0.date < date.addingTimeInterval(-60) }
+        restage()
     }
 
     // MARK: - Private Methods

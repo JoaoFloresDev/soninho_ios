@@ -43,6 +43,22 @@ enum DebugAutomation {
                 MotionSleepMonitor.shared.debugForceSmartWake()
             }
         }
+
+        // Tracked-night session driven from the command line, through the
+        // REAL ViewModel paths — start writes the tracking defaults and spins
+        // the monitor; stop (typically on a relaunch, which also exercises
+        // the persistence restore) saves the SleepRecord like a real morning.
+        if arguments.bool(forKey: "SleepTestStartTracking") {
+            SleepTrackerViewModel().startTracking()
+        }
+        if arguments.bool(forKey: "SleepTestStopTracking") {
+            let viewModel = SleepTrackerViewModel()
+            Task {
+                // Give the restore path a beat to re-anchor the session.
+                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                await viewModel.stopTracking(greet: false)
+            }
+        }
     }
 
     // MARK: - Private Methods

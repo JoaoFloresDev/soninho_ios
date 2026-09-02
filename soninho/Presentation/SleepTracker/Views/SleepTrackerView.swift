@@ -388,23 +388,36 @@ struct SleepTrackerView: View {
     }
 
     // MARK: - Current Phase Display
+    /// Until the engine has calibrated on this night, the phase is only a
+    /// placeholder — showing "Light Sleep" in the first minutes would be
+    /// invented. The reading also settles a couple of minutes behind live.
     private var currentPhaseDisplay: some View {
         HStack(spacing: 8) {
-            Circle()
-                .fill(viewModel.currentPhase.color)
-                .frame(width: 8, height: 8)
+            if viewModel.isCalibrated {
+                Circle()
+                    .fill(viewModel.currentPhase.color)
+                    .frame(width: 8, height: 8)
 
-            Image(systemName: viewModel.currentPhase.icon)
-                .foregroundStyle(viewModel.currentPhase.color)
+                Image(systemName: viewModel.currentPhase.icon)
+                    .foregroundStyle(viewModel.currentPhase.color)
 
-            Text(viewModel.currentPhase.localizedName)
-                .font(AppFonts.subheadline())
-                .foregroundStyle(viewModel.currentPhase.color)
+                Text(viewModel.currentPhase.localizedName)
+                    .font(AppFonts.subheadline())
+                    .foregroundStyle(viewModel.currentPhase.color)
+            } else {
+                Image(systemName: "waveform.path.ecg")
+                    .foregroundStyle(AppColors.textSecondary)
+
+                Text(String(localized: "tracker_calibrating"))
+                    .font(AppFonts.subheadline())
+                    .foregroundStyle(AppColors.textSecondary)
+            }
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 10)
-        .glassCapsule(tint: viewModel.currentPhase.color.opacity(0.25))
+        .glassCapsule(tint: (viewModel.isCalibrated ? viewModel.currentPhase.color : AppColors.textSecondary).opacity(0.25))
         .animation(.easeInOut(duration: 0.5), value: viewModel.currentPhase)
+        .animation(.easeInOut(duration: 0.5), value: viewModel.isCalibrated)
     }
 
     // MARK: - Tracking Tip Card
@@ -462,17 +475,25 @@ struct SleepTrackerView: View {
         }
     }
 
+    /// Movement relative to this night's typical TURN (the engine's own
+    /// unit). The old bar was normalized against the previous algorithm's
+    /// scale and sat dead at zero all night.
+    private var movementInTurns: Double {
+        guard viewModel.movementScale > 0 else { return 0 }
+        return viewModel.movementIntensity / viewModel.movementScale
+    }
+
     private var normalizedMovement: CGFloat {
-        // Normalize movement to 0-1 range (0.1g = full bar)
-        min(1.0, CGFloat(viewModel.movementIntensity / 0.1))
+        // Full bar at twice a typical turn.
+        min(1.0, CGFloat(movementInTurns / 2))
     }
 
     private var movementBarColor: Color {
-        if viewModel.movementIntensity < 0.005 {
+        if movementInTurns < 0.15 {
             return AppColors.deepSleep
-        } else if viewModel.movementIntensity < 0.015 {
+        } else if movementInTurns < 0.5 {
             return AppColors.lightSleep
-        } else if viewModel.movementIntensity < 0.05 {
+        } else if movementInTurns < 1.0 {
             return AppColors.warning
         } else {
             return AppColors.error
@@ -500,7 +521,7 @@ struct SleepTrackerView: View {
 
                     RoundedRectangle(cornerRadius: 3)
                         .fill(soundBarColor)
-                        .frame(width: max(4, geometry.size.width * CGFloat(viewModel.soundLevel)))
+                        .frame(width: max(4, geometry.size.width * perceptualSound))
                         .animation(.easeInOut(duration: 0.5), value: viewModel.soundLevel)
                 }
             }
@@ -508,12 +529,19 @@ struct SleepTrackerView: View {
         }
     }
 
+    /// Perceptual curve: a quiet bedroom lives at the very bottom of the dB
+    /// range, so the raw level kept the bar at its minimum stub all night
+    /// and the upper colours were unreachable below near-clipping loudness.
+    private var perceptualSound: CGFloat {
+        CGFloat(pow(max(0, viewModel.soundLevel), 0.35))
+    }
+
     private var soundBarColor: Color {
-        if viewModel.soundLevel < 0.2 {
+        if viewModel.soundLevel < 0.08 {
             return AppColors.deepSleep
-        } else if viewModel.soundLevel < 0.4 {
+        } else if viewModel.soundLevel < 0.18 {
             return AppColors.lightSleep
-        } else if viewModel.soundLevel < 0.7 {
+        } else if viewModel.soundLevel < 0.35 {
             return AppColors.warning
         } else {
             return AppColors.error

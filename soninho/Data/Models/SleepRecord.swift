@@ -127,6 +127,10 @@ struct SleepPhaseData: Codable, Identifiable {
     let phase: SleepPhase
     let startTime: Date
     let endTime: Date
+    /// True when the app was NOT observing during this span (process dead,
+    /// sensor starved). Optional so records saved before the field existed
+    /// keep decoding — nil means "observed", like every old span.
+    let isGap: Bool?
 
     // MARK: - Computed Properties
     var duration: TimeInterval {
@@ -137,17 +141,28 @@ struct SleepPhaseData: Codable, Identifiable {
         Int(duration / 60)
     }
 
+    /// Whether this span is a hole in the data rather than staged sleep.
+    var isMissingData: Bool {
+        isGap == true
+    }
+
     // MARK: - Init
-    init(id: UUID = UUID(), phase: SleepPhase, startTime: Date, endTime: Date) {
+    init(id: UUID = UUID(), phase: SleepPhase, startTime: Date, endTime: Date, isGap: Bool? = nil) {
         self.id = id
         self.phase = phase
         self.startTime = startTime
         self.endTime = endTime
+        self.isGap = isGap
     }
 }
 
 // MARK: - Sleep Record
 struct SleepRecord: Codable, Identifiable {
+    /// Version stamped on records produced by the event-based staging engine
+    /// (2026-09). Older records (nil) carry a single flat light span and a
+    /// score from a different algorithm — statistics must not mix the two.
+    static let currentEngineVersion = 2
+
     let id: UUID
     let startTime: Date
     let endTime: Date
@@ -155,6 +170,8 @@ struct SleepRecord: Codable, Identifiable {
     let qualityScore: Int
     let notes: String?
     let createdAt: Date
+    /// nil on records saved before the staging rewrite.
+    let engineVersion: Int?
 
     // MARK: - Computed Properties
     var totalDuration: TimeInterval {
@@ -174,19 +191,42 @@ struct SleepRecord: Codable, Identifiable {
     }
 
     var deepSleepDuration: TimeInterval {
-        phases.filter { $0.phase == .deep }.reduce(0) { $0 + $1.duration }
+        phases.filter { $0.phase == .deep && !$0.isMissingData }.reduce(0) { $0 + $1.duration }
     }
 
     var lightSleepDuration: TimeInterval {
-        phases.filter { $0.phase == .light }.reduce(0) { $0 + $1.duration }
+        phases.filter { $0.phase == .light && !$0.isMissingData }.reduce(0) { $0 + $1.duration }
     }
 
     var remSleepDuration: TimeInterval {
-        phases.filter { $0.phase == .rem }.reduce(0) { $0 + $1.duration }
+        phases.filter { $0.phase == .rem && !$0.isMissingData }.reduce(0) { $0 + $1.duration }
     }
 
     var awakeDuration: TimeInterval {
-        phases.filter { $0.phase == .awake }.reduce(0) { $0 + $1.duration }
+        phases.filter { $0.phase == .awake && !$0.isMissingData }.reduce(0) { $0 + $1.duration }
+    }
+
+    /// Minutes the app was NOT observing (process dead, sensor starved).
+    var gapDuration: TimeInterval {
+        phases.filter { $0.isMissingData }.reduce(0) { $0 + $1.duration }
+    }
+
+    /// The part of the night the app actually watched.
+    var observedDuration: TimeInterval {
+        max(0, totalDuration - gapDuration)
+    }
+
+    /// Time actually asleep among the OBSERVED minutes — a gap is unknown,
+    /// not sleep. The single source both analysis cards read (they used to
+    /// derive it independently and disagree on the same screen).
+    var timeAsleep: TimeInterval {
+        max(0, observedDuration - awakeDuration)
+    }
+
+    /// Sleep efficiency over the observed night, 0-1.
+    var efficiency: Double {
+        guard observedDuration > 0 else { return 0 }
+        return timeAsleep / observedDuration
     }
 
     var deepSleepPercentage: Double {
@@ -220,7 +260,8 @@ struct SleepRecord: Codable, Identifiable {
         phases: [SleepPhaseData] = [],
         qualityScore: Int,
         notes: String? = nil,
-        createdAt: Date = Date()
+        createdAt: Date = Date(),
+        engineVersion: Int? = SleepRecord.currentEngineVersion
     ) {
         self.id = id
         self.startTime = startTime
@@ -229,6 +270,7 @@ struct SleepRecord: Codable, Identifiable {
         self.qualityScore = qualityScore
         self.notes = notes
         self.createdAt = createdAt
+        self.engineVersion = engineVersion
     }
 }
 
@@ -237,6 +279,21 @@ struct SleepStatistics {
     let records: [SleepRecord]
 
     // MARK: - Computed Properties
+
+    /// Records produced by the current staging engine. Pre-rewrite records
+    /// carry one flat light span (zero deep, zero REM) and scores from a
+    /// different algorithm — averaging them in drags every phase metric
+    /// toward zero and turns the trend into an artifact of the deploy.
+    var structuredRecords: [SleepRecord] {
+        records.filter { $0.engineVersion != nil }
+    }
+
+    /// Records long enough to be nights — a nap must not shift "average
+    /// bedtime" by hours.
+    private var scheduleRecords: [SleepRecord] {
+        records.filter { $0.totalDuration >= 3 * 3600 }
+    }
+
     var averageDuration: TimeInterval {
         guard !records.isEmpty else { return 0 }
         let total = records.reduce(0) { $0 + $1.totalDuration }
@@ -250,65 +307,49 @@ struct SleepStatistics {
     }
 
     var averageDeepSleep: TimeInterval {
-        guard !records.isEmpty else { return 0 }
-        let total = records.reduce(0) { $0 + $1.deepSleepDuration }
-        return total / Double(records.count)
+        guard !structuredRecords.isEmpty else { return 0 }
+        let total = structuredRecords.reduce(0) { $0 + $1.deepSleepDuration }
+        return total / Double(structuredRecords.count)
     }
 
     var averageLightSleep: TimeInterval {
-        guard !records.isEmpty else { return 0 }
-        let total = records.reduce(0) { $0 + $1.lightSleepDuration }
-        return total / Double(records.count)
+        guard !structuredRecords.isEmpty else { return 0 }
+        let total = structuredRecords.reduce(0) { $0 + $1.lightSleepDuration }
+        return total / Double(structuredRecords.count)
     }
 
     var averageRemSleep: TimeInterval {
-        guard !records.isEmpty else { return 0 }
-        let total = records.reduce(0) { $0 + $1.remSleepDuration }
-        return total / Double(records.count)
+        guard !structuredRecords.isEmpty else { return 0 }
+        let total = structuredRecords.reduce(0) { $0 + $1.remSleepDuration }
+        return total / Double(structuredRecords.count)
+    }
+
+    var averageAwake: TimeInterval {
+        guard !structuredRecords.isEmpty else { return 0 }
+        let total = structuredRecords.reduce(0) { $0 + $1.awakeDuration }
+        return total / Double(structuredRecords.count)
     }
 
     var averageBedtime: Date? {
-        guard !records.isEmpty else { return nil }
-        let totalMinutes = records.reduce(0) { total, record in
-            let hour = record.startTime.hour
-            let minute = record.startTime.minute
-            // Handle overnight bedtimes
-            let adjustedHour = hour < 12 ? hour + 24 : hour
-            return total + (adjustedHour * 60 + minute)
-        }
-        let averageMinutes = totalMinutes / records.count
-        let hour = (averageMinutes / 60) % 24
-        let minute = averageMinutes % 60
-
-        return Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: Date())
+        Self.circularMeanTime(of: scheduleRecords.map(\.startTime))
     }
 
     var averageWakeTime: Date? {
-        guard !records.isEmpty else { return nil }
-        let totalMinutes = records.reduce(0) { total, record in
-            let hour = record.endTime.hour
-            let minute = record.endTime.minute
-            return total + (hour * 60 + minute)
-        }
-        let averageMinutes = totalMinutes / records.count
-        let hour = averageMinutes / 60
-        let minute = averageMinutes % 60
-
-        return Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: Date())
+        Self.circularMeanTime(of: scheduleRecords.map(\.endTime))
     }
 
-    var thisWeekRecords: [SleepRecord] {
-        records.filter { $0.startTime.isThisWeek }
-    }
+    /// nil until enough same-engine nights exist to compare halves — a chip
+    /// rendered from too little data presents an unavailable assessment as a
+    /// finding.
+    var sleepTrend: SleepTrend? {
+        let comparable = structuredRecords
+        guard comparable.count >= 10 else { return nil }
 
-    var sleepTrend: SleepTrend {
-        guard records.count >= 10 else { return .stable }
+        let half = comparable.count / 2
+        let recentRecords = Array(comparable.prefix(half))
+        let olderRecords = Array(comparable.suffix(comparable.count - half))
 
-        let half = records.count / 2
-        let recentRecords = Array(records.prefix(half))
-        let olderRecords = Array(records.suffix(records.count - half))
-
-        guard recentRecords.count >= 3, !olderRecords.isEmpty else { return .stable }
+        guard recentRecords.count >= 3, !olderRecords.isEmpty else { return nil }
 
         let recentAvg = recentRecords.reduce(0) { $0 + $1.qualityScore } / recentRecords.count
         let olderAvg = olderRecords.reduce(0) { $0 + $1.qualityScore } / olderRecords.count
@@ -322,6 +363,32 @@ struct SleepStatistics {
         } else {
             return .stable
         }
+    }
+
+    // MARK: - Private Methods
+
+    /// Mean of times-of-day on the clock face (circular mean): 23:50 and
+    /// 00:10 average to 00:00, not to noon. The old linear mean produced
+    /// exactly that noon for wake times around midnight.
+    private static func circularMeanTime(of dates: [Date]) -> Date? {
+        guard !dates.isEmpty else { return nil }
+
+        let calendar = Calendar.current
+        var x = 0.0
+        var y = 0.0
+        for date in dates {
+            let minutes = calendar.component(.hour, from: date) * 60 + calendar.component(.minute, from: date)
+            let angle = Double(minutes) / (24 * 60) * 2 * .pi
+            x += Foundation.cos(angle)
+            y += Foundation.sin(angle)
+        }
+        guard abs(x) > 1e-9 || abs(y) > 1e-9 else { return nil }
+
+        var angle = atan2(y, x)
+        if angle < 0 { angle += 2 * .pi }
+        let meanMinutes = Int((angle / (2 * .pi) * 24 * 60).rounded()) % (24 * 60)
+
+        return calendar.date(bySettingHour: meanMinutes / 60, minute: meanMinutes % 60, second: 0, of: Date())
     }
 }
 

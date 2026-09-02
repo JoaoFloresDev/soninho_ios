@@ -33,23 +33,9 @@ enum AppConstants {
     static let annualProductId = "soninho_annual_9990"
 
     // MARK: - Sleep Constants
-    static let minSleepDurationHours: Double = 3
-    static let maxSleepDurationHours: Double = 14
-    static let idealSleepHours: Double = 8
     static let smartAlarmWindowMinutes: Int = 30
     /// Sessions longer than this are auto-cancelled — the user forgot to stop tracking.
     static let autoCancelSleepSessionHours: Double = 12
-
-    // MARK: - Sleep Phases Duration (average percentages)
-    static let deepSleepPercentage: Double = 0.20 // 20%
-    static let lightSleepPercentage: Double = 0.50 // 50%
-    static let remSleepPercentage: Double = 0.25 // 25%
-    static let awakePercentage: Double = 0.05 // 5%
-
-    // MARK: - Sleep Quality Thresholds
-    static let excellentSleepScore: Int = 85
-    static let goodSleepScore: Int = 70
-    static let fairSleepScore: Int = 50
 
     // MARK: - Review
     static let reviewMinDays: Int = 60
