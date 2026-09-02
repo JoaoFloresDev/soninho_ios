@@ -32,6 +32,19 @@ struct TreatmentCopy {
     let feature2: LocalizedHeadlines
     let settings: LocalizedHeadlines
     let onboarding: LocalizedHeadlines
+    /// Optional subheadline per slot key ("home"…) → locale → text.
+    /// Only treatment B uses these (single-block headline + benefit subline).
+    var subtitles: [String: [String: String]] = [:]
+
+    func headlines(for key: String) -> LocalizedHeadlines {
+        switch key {
+        case "home": return home
+        case "feature1": return feature1
+        case "feature2": return feature2
+        case "settings": return settings
+        default: return onboarding
+        }
+    }
 }
 
 enum Headlines {
@@ -74,9 +87,9 @@ enum Headlines {
         id: "B",
         label: "Benefit / Outcome",
         home: [
-            "en-US": Headline(text: "Mornings feel easy",          highlight: nil),
-            "pt-BR": Headline(text: "Manhãs sem sofrimento",       highlight: nil),
-            "es-ES": Headline(text: "Mañanas sin sufrir",          highlight: nil)
+            "en-US": Headline(text: "Never oversleep again",       highlight: nil),
+            "pt-BR": Headline(text: "Chega de perder a hora",      highlight: nil),
+            "es-ES": Headline(text: "Adiós a quedarse dormido",    highlight: nil)
         ],
         feature1: [
             "en-US": Headline(text: "Wake at the right moment",    highlight: nil),
@@ -84,9 +97,9 @@ enum Headlines {
             "es-ES": Headline(text: "Despierta en el momento justo", highlight: nil)
         ],
         feature2: [
-            "en-US": Headline(text: "Never oversleep again",       highlight: nil),
-            "pt-BR": Headline(text: "Chega de perder a hora",      highlight: nil),
-            "es-ES": Headline(text: "Adiós a quedarse dormido",    highlight: nil)
+            "en-US": Headline(text: "Get up, not just awake",      highlight: nil),
+            "pt-BR": Headline(text: "Levante de verdade",          highlight: nil),
+            "es-ES": Headline(text: "Levántate de verdad",         highlight: nil)
         ],
         settings: [
             "en-US": Headline(text: "Start calm every day",        highlight: nil),
@@ -94,9 +107,36 @@ enum Headlines {
             "es-ES": Headline(text: "Empieza el día sin sustos",   highlight: nil)
         ],
         onboarding: [
-            "en-US": Headline(text: "Know your sleep at last",     highlight: nil),
-            "pt-BR": Headline(text: "Entenda seu sono enfim",      highlight: nil),
-            "es-ES": Headline(text: "Entiende tu sueño al fin",    highlight: nil)
+            "en-US": Headline(text: "Mornings feel easy",          highlight: nil),
+            "pt-BR": Headline(text: "Manhãs sem sofrimento",       highlight: nil),
+            "es-ES": Headline(text: "Mañanas sin sufrir",          highlight: nil)
+        ],
+        subtitles: [
+            "home": [
+                "en-US": "Alarms that actually get you up",
+                "pt-BR": "Alarmes que te levantam de verdade",
+                "es-ES": "Alarmas que sí te levantan"
+            ],
+            "feature1": [
+                "en-US": "The window finds your lightest sleep",
+                "pt-BR": "A janela acha seu sono mais leve",
+                "es-ES": "La ventana halla tu sueño ligero"
+            ],
+            "feature2": [
+                "en-US": "A quick puzzle stops the snooze",
+                "pt-BR": "Um desafio rápido corta a soneca",
+                "es-ES": "Un reto rápido corta la siesta"
+            ],
+            "settings": [
+                "en-US": "Volume rises gently, no jump scare",
+                "pt-BR": "O volume sobe aos poucos, sem susto",
+                "es-ES": "El volumen sube poco a poco"
+            ],
+            "onboarding": [
+                "en-US": "See what your night really looked like",
+                "pt-BR": "Veja como foi sua noite de verdade",
+                "es-ES": "Mira cómo fue tu noche en realidad"
+            ]
         ]
     )
 

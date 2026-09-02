@@ -105,6 +105,76 @@ func runFullRenderPipeline(mode: RenderMode) throws {
 }
 
 // MARK: - Per-Locale Rendering
+//
+// Each treatment now differs in ORDER, LAYOUT and COPY — not just background:
+//   A (orange): house look — verb-split + breakout, order main→smartwake→mission→sounds→report
+//   B (violet): benefit — single-block headline + subheadline, NO breakout,
+//               device scaled up bleeding off canvas + orange rim glow,
+//               order report→smartwake→main→mission→sounds (outcome first)
+//   C (navy):   specific — verb-split + breakout, 3D-tilted device (±7°),
+//               order mission→smartwake→sounds→main→report (mission hook first)
+
+struct SlotSpec {
+    let fileName: String
+    let headlineKey: String
+    let split: Bool
+    let tilt: Double
+    let scaleMult: CGFloat
+    let rimGlow: Bool
+    let hasBreakout: Bool
+    let breakoutY: CGFloat
+}
+
+@MainActor
+func screenView(for key: String, locale: String) -> AnyView {
+    switch key {
+    case "home":     return AnyView(MainScreen(locale: locale))
+    case "feature1": return AnyView(TrackingScreen(locale: locale))
+    case "feature2": return AnyView(Feature1Screen(locale: locale))
+    case "settings": return AnyView(SoundsScreen(locale: locale))
+    default:         return AnyView(Feature2Screen(locale: locale))
+    }
+}
+
+@MainActor
+func breakoutView(for key: String, locale: String, y: CGFloat, canvas: CGSize) -> AnyView {
+    switch key {
+    case "home":     return breakoutForeground(AlarmCardMock(locale: locale), y: y, canvas: canvas)
+    case "feature1": return breakoutForeground(WakeWindowCardMock(locale: locale), y: y, canvas: canvas)
+    case "feature2": return breakoutForeground(MissionCardMock(locale: locale), y: y, canvas: canvas)
+    case "settings": return breakoutForeground(GradualVolumeCardMock(locale: locale), y: y, canvas: canvas)
+    default:         return breakoutForeground(HypnogramCardMock(locale: locale), y: y, canvas: canvas)
+    }
+}
+
+func layoutSpecs(for treatmentID: String) -> [SlotSpec] {
+    switch treatmentID {
+    case "A":
+        return [
+            SlotSpec(fileName: "01_main_iphone.png",      headlineKey: "home",       split: true, tilt: 0, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 2260),
+            SlotSpec(fileName: "02_smartwake_iphone.png", headlineKey: "feature1",   split: true, tilt: 0, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 2100),
+            SlotSpec(fileName: "03_mission_iphone.png",   headlineKey: "feature2",   split: true, tilt: 0, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 2080),
+            SlotSpec(fileName: "04_sounds_iphone.png",    headlineKey: "settings",   split: true, tilt: 0, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 2080),
+            SlotSpec(fileName: "05_report_iphone.png",    headlineKey: "onboarding", split: true, tilt: 0, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 1990)
+        ]
+    case "B":
+        return [
+            SlotSpec(fileName: "01_report_iphone.png",    headlineKey: "onboarding", split: false, tilt: 0, scaleMult: 1.18, rimGlow: true, hasBreakout: false, breakoutY: 0),
+            SlotSpec(fileName: "02_smartwake_iphone.png", headlineKey: "feature1",   split: false, tilt: 0, scaleMult: 1.18, rimGlow: true, hasBreakout: false, breakoutY: 0),
+            SlotSpec(fileName: "03_main_iphone.png",      headlineKey: "home",       split: false, tilt: 0, scaleMult: 1.18, rimGlow: true, hasBreakout: false, breakoutY: 0),
+            SlotSpec(fileName: "04_mission_iphone.png",   headlineKey: "feature2",   split: false, tilt: 0, scaleMult: 1.18, rimGlow: true, hasBreakout: false, breakoutY: 0),
+            SlotSpec(fileName: "05_sounds_iphone.png",    headlineKey: "settings",   split: false, tilt: 0, scaleMult: 1.18, rimGlow: true, hasBreakout: false, breakoutY: 0)
+        ]
+    default: // C
+        return [
+            SlotSpec(fileName: "01_mission_iphone.png",   headlineKey: "feature2",   split: true, tilt:  10, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 2080),
+            SlotSpec(fileName: "02_smartwake_iphone.png", headlineKey: "feature1",   split: true, tilt: -10, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 2100),
+            SlotSpec(fileName: "03_sounds_iphone.png",    headlineKey: "settings",   split: true, tilt:  10, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 2080),
+            SlotSpec(fileName: "04_main_iphone.png",      headlineKey: "home",       split: true, tilt: -10, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 2260),
+            SlotSpec(fileName: "05_report_iphone.png",    headlineKey: "onboarding", split: true, tilt:  10, scaleMult: 1.0, rimGlow: false, hasBreakout: true, breakoutY: 1990)
+        ]
+    }
+}
 
 @MainActor
 func renderLocaleSet(
@@ -116,46 +186,38 @@ func renderLocaleSet(
     outputDir: URL,
     validationDir: URL?
 ) throws {
-    let totalSlots = 5
-    // Each treatment renders on its own flat solid-color backdrop.
     let theme = solidTheme(for: treatment.id)
+    let specs = layoutSpecs(for: treatment.id)
+    var firstThree: [URL] = []
 
-    // Slot 1: Main / Home
-    let url1 = outputDir.appendingPathComponent("01_main_iphone.png")
-    try render(view: marketing(device: device, slot: 0, totalSlots: totalSlots,
-                                headline: treatment.home[locale], theme: theme,
-                                foreground: breakoutForeground(AlarmCardMock(locale: locale), y: 2260, canvas: canvas)) { MainScreen(locale: locale) },
-                canvas: canvas, scale: 1.0, to: url1)
+    for (index, spec) in specs.enumerated() {
+        let url = outputDir.appendingPathComponent(spec.fileName)
+        let headline = treatment.headlines(for: spec.headlineKey)[locale] ?? Headline(text: "", highlight: nil)
+        let subheadline = treatment.subtitles[spec.headlineKey]?[locale]
+        let foreground: AnyView? = spec.hasBreakout
+            ? breakoutView(for: spec.headlineKey, locale: locale, y: spec.breakoutY, canvas: canvas)
+            : nil
 
-    // Slot 2: Feature 1
-    let url2 = outputDir.appendingPathComponent("02_smartwake_iphone.png")
-    try render(view: marketing(device: device, slot: 1, totalSlots: totalSlots,
-                                headline: treatment.feature1[locale], theme: theme,
-                                foreground: breakoutForeground(WakeWindowCardMock(locale: locale), y: 2100, canvas: canvas)) { TrackingScreen(locale: locale) },
-                canvas: canvas, scale: 1.0, to: url2)
+        let view = MarketingScreen(
+            device: device,
+            headline: headline.text,
+            highlightWord: nil,
+            slotIndex: index,
+            totalSlots: specs.count,
+            theme: theme,
+            foreground: foreground,
+            subheadline: subheadline,
+            deviceTilt: spec.tilt,
+            splitFirstWord: spec.split,
+            deviceScaleMultiplier: spec.scaleMult,
+            deviceRimGlow: spec.rimGlow ? AppPalette.primary.opacity(0.55) : nil
+        ) { screenView(for: spec.headlineKey, locale: locale) }
 
-    // Slot 3: Feature 2
-    let url3 = outputDir.appendingPathComponent("03_mission_iphone.png")
-    try render(view: marketing(device: device, slot: 2, totalSlots: totalSlots,
-                                headline: treatment.feature2[locale], theme: theme,
-                                foreground: breakoutForeground(MissionCardMock(locale: locale), y: 2080, canvas: canvas)) { Feature1Screen(locale: locale) },
-                canvas: canvas, scale: 1.0, to: url3)
+        try render(view: view, canvas: canvas, scale: 1.0, to: url)
+        if index < 3 { firstThree.append(url) }
+    }
 
-    // Slot 4: Settings
-    let url4 = outputDir.appendingPathComponent("04_sounds_iphone.png")
-    try render(view: marketing(device: device, slot: 3, totalSlots: totalSlots,
-                                headline: treatment.settings[locale], theme: theme,
-                                foreground: breakoutForeground(GradualVolumeCardMock(locale: locale), y: 2080, canvas: canvas)) { SoundsScreen(locale: locale) },
-                canvas: canvas, scale: 1.0, to: url4)
-
-    // Slot 5: Onboarding
-    let url5 = outputDir.appendingPathComponent("05_report_iphone.png")
-    try render(view: marketing(device: device, slot: 4, totalSlots: totalSlots,
-                                headline: treatment.onboarding[locale], theme: theme,
-                                foreground: breakoutForeground(HypnogramCardMock(locale: locale), y: 1990, canvas: canvas)) { Feature2Screen(locale: locale) },
-                canvas: canvas, scale: 1.0, to: url5)
-
-    // Slot 6: App Store listing mockup (validation only, abtest mode only)
+    // App Store listing mockup (validation only, abtest mode only)
     if let validationDir = validationDir {
         let urlMockup = validationDir.appendingPathComponent("06_appstore_listing_\(outputLocale).png")
         try render(
@@ -163,7 +225,7 @@ func renderLocaleSet(
                 appName: LocalizedListing.appName[locale] ?? "TODO: App Name",
                 subtitle: LocalizedListing.subtitle[locale] ?? "TODO: Subtitle",
                 searchQuery: searchKeyword(locale: locale),
-                screenshotURLs: [url1, url2, url3]
+                screenshotURLs: firstThree
             ) {
                 DefaultAppIcon(size: 110)
             },

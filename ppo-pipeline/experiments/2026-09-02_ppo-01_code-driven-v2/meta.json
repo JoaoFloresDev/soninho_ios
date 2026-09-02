@@ -10,20 +10,14 @@
     "pt-BR",
     "es-ES"
   ],
-  "hypothesis": "Prints code-driven novos (layout Liquid Glass + mascote preguica + breakouts com glow laranja) convertem melhor que os prints live da era do rebrand (controle). Entre os 3 framings de copy, medir qual headline vende mais: acao direta, beneficio/resultado ou especifico/carisma.",
+  "hypothesis": "v2 (pedido do Joao 02/09: variar mais): cada tratamento difere em ORDEM dos slots, LAYOUT e COPY, nao so cor de fundo. Mede qual composicao de pagina converte melhor contra os prints live antigos (controle).",
   "control": "default product page live (prints antigos do rebrand, snapshot em source/control-live/)",
   "treatments": {
-    "A": "Direct / Action - Wake to a sunrise / Rise in light sleep / Solve math to wake / Gentle rising volume / See your whole night",
-    "B": "Benefit / Outcome - Mornings feel easy / Wake at the right moment / Never oversleep again / Start calm every day / Know your sleep at last",
-    "C": "Specific / Charisma - Say hi to your alarm / Smart window, light wake / Snooze has no chance / Ten sounds, one sunrise / Every phase, every night"
+    "A": "Direct/Action (laranja) - look canonico: verb-split + breakout glow; ordem main, smartwake, mission, sounds, report",
+    "B": "Benefit/Outcome (violeta) - headline unica + subheadline, SEM breakout, device 1.18x bleed + rim glow laranja; ordem report, smartwake, main, mission, sounds (resultado primeiro)",
+    "C": "Specific/Charisma (navy) - verb-split + breakout, device com tilt 3D alternado +/-10; ordem mission, smartwake, sounds, main, report (missao como gancho)"
   },
-  "slots": [
-    "01_main (home alarmes)",
-    "02_smartwake (tracking + janela)",
-    "03_mission (tocando + missao matematica)",
-    "04_sounds (sons + volume gradual)",
-    "05_report (relatorio da noite)"
-  ],
+  "slots": "por tratamento - ver layoutSpecs() em source/ e main.swift do screenshots-tool",
   "asc": {
     "experiment_id": "1ce3cdfa-a1cd-4f7e-9cab-5e30278415e5",
     "treatment_ids": {
@@ -31,11 +25,12 @@
       "B": "266b91d7-8364-4a1d-93ea-049f0ff554d6",
       "C": "79947143-224e-46bb-a674-29beff33bfa0"
     },
-    "review_submission_id": "72b5e149-9863-4c49-a66d-30d5eae651a0"
+    "review_submission_id": "91db0375-a9f2-4e71-8a79-77663159c134",
+    "canceled_submission_v1": "72b5e149-9863-4c49-a66d-30d5eae651a0"
   },
   "started": null,
   "winner": null,
-  "notes": "Renderer: screenshots-tool/ swift run SoninhoScreenshots abtest. Start SO apos aprovacao + re-verify de checksums (LEARNINGS 35/39).",
+  "notes": "v1 (mesma ordem/layout, so cor+copy) foi cancelada antes da review e substituida pela v2 no MESMO experimento ASC. Fix no GambitScreenshotKit: deviceRimGlow por plates blurred (o .shadow() carimbava placas atras de cada glifo no ImageRenderer). Start SO apos aprovacao + re-verify de checksums (LEARNINGS 35/39).",
   "submitted": "2026-09-02",
   "state": "WAITING_FOR_REVIEW"
 }
