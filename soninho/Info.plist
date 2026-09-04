@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDisplayName</key>
 	<string>Sunrise</string>
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>ar</string>
@@ -41,6 +43,8 @@
 		<string>zh-Hans</string>
 		<string>zh-Hant</string>
 	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSAlarmKitUsageDescription</key>
 	<string>So your alarm still sounds when your phone is silent or in a Focus.</string>
 	<key>NSMicrophoneUsageDescription</key>
