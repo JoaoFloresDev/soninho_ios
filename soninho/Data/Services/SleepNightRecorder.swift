@@ -65,7 +65,13 @@ enum SleepNightRecorder {
         StorageService.shared.updateStreak(for: record.endTime)
 
         Analytics.coreAction("night_tracked")
-        _ = RatingGateService.shared.recordPositiveEvent()
+        // The review aha-moment: the user woke to a night the app actually
+        // measured. An unmeasured night (no phases) or a poor one is no moment
+        // to ask in. The service waits for the alarm screen and the greeting to
+        // leave before asking.
+        if !phases.isEmpty, record.quality != .poor {
+            ReviewService.shared.recordPositiveEvent(trigger: .nightTracked)
+        }
 
         return record
     }

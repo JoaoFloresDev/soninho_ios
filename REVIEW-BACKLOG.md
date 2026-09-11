@@ -3,9 +3,9 @@
 Corrigidos: ver commits 22469b9 (análise de sono), 8fb72cf (serviços+telas). Reports completos com file:line no scratchpad da sessão (review_alarm/services/screens/data/presentation.md) — resumo dos IDs em cada commit message.
 
 ## Pendentes (por prioridade)
-1. **[T7] Acessibilidade**: ~60 controles sem accessibilityIdentifier/Label. Fix estrutural: params em AppButton + ids `dominio.acao` por tela (tabs, settings, tips, stats, onboarding, rating gate). Pré-requisito pra QA por Maestro (RULES #66).
+1. **[T7] Acessibilidade**: ~60 controles sem accessibilityIdentifier/Label. Fix estrutural: params em AppButton + ids `dominio.acao` por tela (tabs, settings, tips, stats, onboarding). Pré-requisito pra QA por Maestro (RULES #66).
 2. **[S18] Crashlytics** ausente (obrigatório, taxonomia §6) + user properties §2.7. Adicionar produto SPM via gem xcodeproj + dSYM Release.
-3. **[S13/S16] Analytics restantes**: rating_gate_yes/no/feedback (renomear) + rating_gate_dismissed + trigger param; permission_prompted + alarmkit auth log.
+3. **[S13/S16] Analytics restantes**: permission_prompted + alarmkit auth log. (O pré-prompt de avaliação saiu em 11/09 — só prompt nativo, `review_prompt_requested`.)
 4. **[A5] forceFixed pós-early-ring**: alarme de 1 dia/semana pode silenciar na 3ª semana se o app nunca voltar ao foreground (baseline semanal cobre parcialmente). Repensar: supressão por flag em vez de trocar o schedule.
 5. **[A7/A8] AlarmSoundGenerator**: geração inline no main na 1ª passada + write não-atômico; fallback in-app não loopa (alarme silencioso se WAV corrompido).
 6. **[A10] Limite de snooze não aplicável no AlarmKit** (countdown do sistema não volta pro app).

@@ -69,7 +69,7 @@ final class SettingsViewModel: ObservableObject {
 
 
     func requestReview() {
-        RatingGateService.shared.openWriteReview()
+        ReviewService.shared.openWriteReview()
     }
 
 

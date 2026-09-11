@@ -37,10 +37,8 @@ enum StorageKeys {
     static let isPremiumUser = "isPremiumUser"
     static let premiumExpirationDate = "premiumExpirationDate"
 
-    // MARK: - Review
-    static let lastReviewRequestDate = "lastReviewRequestDate"
+    // MARK: - Sessions
     static let sessionCount = "sessionCount"
-    static let hasRatedApp = "hasRatedApp"
 
     // MARK: - Tracking
     static let isCurrentlyTracking = "isCurrentlyTracking"

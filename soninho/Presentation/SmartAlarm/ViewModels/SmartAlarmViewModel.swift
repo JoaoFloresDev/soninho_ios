@@ -151,7 +151,6 @@ final class SmartAlarmViewModel: ObservableObject {
                 await ensureNotificationPermission()
                 await notificationService.scheduleAlarm(updatedAlarm)
                 Analytics.coreAction("alarm_armed")
-                _ = RatingGateService.shared.recordPositiveEvent()
             } else {
                 await notificationService.cancelAlarm(updatedAlarm)
             }
@@ -280,9 +279,10 @@ final class SmartAlarmViewModel: ObservableObject {
 
         if alarm.isEnabled {
             await notificationService.scheduleAlarm(alarm)
-            // Arming an alarm is the aha: the user has trusted the app to wake them.
+            // Arming an alarm is activation: the user has trusted the app to wake
+            // them. Not the review moment — it is setup, often right after the
+            // notification prompt, with the editor sheet still on screen.
             Analytics.coreAction("alarm_armed")
-            _ = RatingGateService.shared.recordPositiveEvent()
         }
         updateNextAlarmDate()
 

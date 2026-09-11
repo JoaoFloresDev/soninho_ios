@@ -71,7 +71,6 @@ struct SoninhoApp: App {
             }
             .animation(.spring(response: 0.4), value: notificationService.isAlarmRinging)
             .preferredColorScheme(.dark)
-            .ratingGate()
             .onChange(of: isOnboardingComplete) { _, newValue in
                 storageService.hasCompletedOnboarding = newValue
             }
@@ -96,8 +95,8 @@ struct SoninhoApp: App {
                 // App-scope finisher: saving the night must not depend on the
                 // monitor singleton or the Sleep tab having been touched this
                 // launch. Idempotent — the first finisher wins, and it records
-                // the rating-gate event exactly once (the extra event that
-                // used to live here made the 2-night gate trip on night one).
+                // the review aha-moment exactly once (an extra event here used
+                // to count night one twice).
                 SleepNightRecorder.finishTrackedNight()
             }
             .onAppear {

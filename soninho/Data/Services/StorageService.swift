@@ -162,33 +162,6 @@ final class StorageService: ObservableObject {
         sessionCount += 1
     }
 
-    // MARK: - Review
-    var lastReviewRequestDate: Date? {
-        get { defaults.object(forKey: StorageKeys.lastReviewRequestDate) as? Date }
-        set { defaults.set(newValue, forKey: StorageKeys.lastReviewRequestDate) }
-    }
-
-    var hasRatedApp: Bool {
-        get { defaults.bool(forKey: StorageKeys.hasRatedApp) }
-        set { defaults.set(newValue, forKey: StorageKeys.hasRatedApp) }
-    }
-
-    func shouldRequestReview() -> Bool {
-        guard !hasRatedApp else { return false }
-        guard sessionCount >= AppConstants.reviewMinSessions else { return false }
-
-        if let lastRequest = lastReviewRequestDate {
-            let daysSinceLastRequest = Calendar.current.dateComponents(
-                [.day],
-                from: lastRequest,
-                to: Date()
-            ).day ?? 0
-            return daysSinceLastRequest >= AppConstants.reviewMinDays
-        }
-
-        return true
-    }
-
     // MARK: - Language
     var selectedLanguage: String? {
         get { defaults.string(forKey: StorageKeys.selectedLanguage) }

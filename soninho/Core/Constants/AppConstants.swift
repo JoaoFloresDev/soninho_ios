@@ -37,10 +37,6 @@ enum AppConstants {
     /// Sessions longer than this are auto-cancelled — the user forgot to stop tracking.
     static let autoCancelSleepSessionHours: Double = 12
 
-    // MARK: - Review
-    static let reviewMinDays: Int = 60
-    static let reviewMinSessions: Int = 5
-
     // MARK: - Animation
     static let animationDuration: Double = 0.3
     static let springAnimation: Double = 0.5
