@@ -23,14 +23,9 @@ enum AppConstants {
     static let termsOfUseURL = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
     static let appStoreURL = "https://apps.apple.com/app/id\(appStoreId)"
 
-    // MARK: - Feature Flags
-    /// Set to true to enable in-app purchases and premium features
-    static let isPurchasesEnabled = false
-
     // MARK: - StoreKit Products
-    static let entitlementIdentifier = "premium"
-    static let monthlyProductId = "soninho_monthly_1590"
-    static let annualProductId = "soninho_annual_9990"
+    static let weeklyProductId = "com.gambitstudio.soninho.premium.weekly"
+    static let yearlyProductId = "com.gambitstudio.soninho.premium.yearly"
 
     // MARK: - Sleep Constants
     static let smartAlarmWindowMinutes: Int = 30

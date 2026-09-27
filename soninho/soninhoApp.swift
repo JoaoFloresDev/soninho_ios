@@ -7,12 +7,12 @@
 
 import SwiftUI
 import UserNotifications
+import PaywallKit
 
 @main
 struct SoninhoApp: App {
     // MARK: - Properties
     @StateObject private var storageService = StorageService.shared
-    @StateObject private var purchaseService = PurchaseService.shared
     @StateObject private var notificationService = NotificationService.shared
     @State private var isOnboardingComplete: Bool
     @Environment(\.scenePhase) private var scenePhase
@@ -20,6 +20,11 @@ struct SoninhoApp: App {
     // MARK: - Init
     init() {
         Analytics.configure()
+        PaywallAnalytics.onEvent = { name, params in Analytics.log(name, params) }
+        StoreKitManager.shared.configure(
+            weekly: AppConstants.weeklyProductId,
+            yearly: AppConstants.yearlyProductId
+        )
 
         let skipOnboarding = StorageService.shared.hasCompletedOnboarding
         _isOnboardingComplete = State(initialValue: skipOnboarding)
@@ -49,7 +54,6 @@ struct SoninhoApp: App {
                     if isOnboardingComplete {
                         MainTabView()
                             .environmentObject(storageService)
-                            .environmentObject(purchaseService)
                             .environmentObject(notificationService)
                             .transition(.move(edge: .trailing))
                     } else {

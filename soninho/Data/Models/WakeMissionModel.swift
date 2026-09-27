@@ -40,6 +40,15 @@ enum WakeMission: String, Codable, CaseIterable, Identifiable {
     }
 
     var requiresMission: Bool { self != .none }
+
+    /// Shake, typing and memory are Sunrise Premium. Math stays free so every
+    /// user still has a real mission to wake up with.
+    var isPremium: Bool {
+        switch self {
+        case .none, .math: return false
+        case .shake, .typing, .memory: return true
+        }
+    }
 }
 
 // MARK: - Mission Difficulty

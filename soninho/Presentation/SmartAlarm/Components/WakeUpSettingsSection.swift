@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PaywallKit
 
 // MARK: - Wake Up Settings Section
 struct WakeUpSettingsSection: View {
@@ -16,6 +17,13 @@ struct WakeUpSettingsSection: View {
     @Binding var gradualWake: Bool
     @Binding var gradualDuration: Int
     @Binding var antiRelapse: Bool
+
+    // MARK: - Dependencies
+    @ObservedObject private var store = StoreKitManager.shared
+
+    // MARK: - State
+    @State private var showPaywall = false
+    @State private var pendingMission: WakeMission?
 
     // MARK: - Constants
     private let durations = [1, 2, 3, 5]
@@ -31,6 +39,32 @@ struct WakeUpSettingsSection: View {
             gradualCard
             antiRelapseCard
         }
+        .fullScreenCover(isPresented: $showPaywall, onDismiss: applyPendingMission) {
+            PaywallView(isPresented: $showPaywall)
+        }
+    }
+
+    // MARK: - Actions
+    private func select(_ option: WakeMission) {
+        // A mission already saved on the alarm keeps working, so only picking
+        // a new premium one is gated.
+        guard isLocked(option) else {
+            mission = option
+            return
+        }
+        pendingMission = option
+        PaywallAnalytics.source = "gate_mission_\(option.rawValue)"
+        showPaywall = true
+    }
+
+    private func applyPendingMission() {
+        defer { pendingMission = nil }
+        guard let pendingMission, store.isPremium else { return }
+        mission = pendingMission
+    }
+
+    private func isLocked(_ option: WakeMission) -> Bool {
+        option.isPremium && !store.isPremium && mission != option
     }
 
     // MARK: - Mission Card
@@ -45,8 +79,10 @@ struct WakeUpSettingsSection: View {
                         chip(
                             title: option.displayName,
                             icon: option.icon,
-                            selected: mission == option
-                        ) { mission = option }
+                            selected: mission == option,
+                            locked: isLocked(option)
+                        ) { select(option) }
+                        .accessibilityIdentifier("alarm.mission.\(option.rawValue)")
                     }
                 }
             }
@@ -121,22 +157,33 @@ struct WakeUpSettingsSection: View {
         }
     }
 
-    private func chip(title: String, icon: String, selected: Bool, action: @escaping () -> Void) -> some View {
+    private func chip(title: String, icon: String, selected: Bool, locked: Bool,
+                      action: @escaping () -> Void) -> some View {
         Button(action: action) {
             VStack(spacing: 6) {
                 Image(systemName: icon)
                     .font(.system(size: 18))
                 Text(title)
                     .font(AppFonts.caption())
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .foregroundStyle(selected ? .white : AppColors.textSecondary)
-            .frame(maxWidth: .infinity)
-            .frame(height: 64)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 4)
+            .frame(maxWidth: .infinity, minHeight: 64)
+            .overlay(alignment: .topTrailing) {
+                if locked {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(AppColors.accent)
+                        .padding(6)
+                }
+            }
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .glassSurface(cornerRadius: 12, tint: selected ? AppColors.accent : nil, interactive: true)
+        .accessibilityLabel(locked ? String(localized: "wake_mission_locked \(title)") : title)
     }
 }

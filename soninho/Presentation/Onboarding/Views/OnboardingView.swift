@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import PaywallKit
 
 // MARK: - Onboarding View
 struct OnboardingView: View {
     // MARK: - Properties
     @StateObject private var viewModel = OnboardingViewModel()
     @Binding var isOnboardingComplete: Bool
+    @State private var showPaywall = false
 
     // MARK: - View Body
     var body: some View {
@@ -66,9 +68,9 @@ struct OnboardingView: View {
                             style: .primary,
                             icon: "arrow.right"
                         ) {
-                            viewModel.completeOnboarding()
-                            isOnboardingComplete = true
+                            finishOnboarding()
                         }
+                        .accessibilityIdentifier("onboarding.getStarted")
                     } else {
                         AppButton(
                             title: String(localized: "onboarding_continue"),
@@ -83,6 +85,26 @@ struct OnboardingView: View {
                 .padding(.bottom, 48)
             }
         }
+        .fullScreenCover(isPresented: $showPaywall, onDismiss: completeOnboarding) {
+            PaywallView(isPresented: $showPaywall)
+        }
+    }
+
+    // MARK: - Actions
+    /// The paywall comes right after the last step; whatever the user does
+    /// there (buy, restore or close), onboarding ends when it goes away.
+    private func finishOnboarding() {
+        guard !StoreKitManager.shared.isPremium else {
+            completeOnboarding()
+            return
+        }
+        PaywallAnalytics.source = "onboarding"
+        showPaywall = true
+    }
+
+    private func completeOnboarding() {
+        viewModel.completeOnboarding()
+        isOnboardingComplete = true
     }
 }
 

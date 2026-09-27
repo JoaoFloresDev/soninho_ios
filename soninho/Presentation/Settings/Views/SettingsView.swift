@@ -7,15 +7,21 @@
 
 import SwiftUI
 import UIKit
+import PaywallKit
 
 // MARK: - Settings View
 struct SettingsView: View {
     // MARK: - Properties
     @StateObject private var viewModel = SettingsViewModel()
+    @ObservedObject private var store = StoreKitManager.shared
+    @State private var showPaywall = false
     // MARK: - View Body
     var body: some View {
         NavigationStack {
             List {
+                // Premium Section
+                premiumSection
+
                 // Sleep Settings Section
                 sleepSettingsSection
 
@@ -33,6 +39,50 @@ struct SettingsView: View {
             .navigationTitle(String(localized: "settings_title"))
             .navigationBarTitleDisplayMode(.large)
             .onAppear { Analytics.screen("settings") }
+            .fullScreenCover(isPresented: $showPaywall) {
+                PaywallView(isPresented: $showPaywall)
+            }
+        }
+    }
+
+    // MARK: - Premium Section
+    private var premiumSection: some View {
+        Section {
+            if store.isPremium {
+                Label(String(localized: "settings_premium_active"), systemImage: "checkmark.seal.fill")
+                    .foregroundStyle(AppColors.textPrimary)
+                    .glassListRow()
+            } else {
+                Button {
+                    PaywallAnalytics.source = "settings"
+                    showPaywall = true
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "sunrise.fill")
+                            .font(.system(size: 18))
+                            .foregroundStyle(AppColors.accent)
+                            .frame(width: 22)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(String(localized: "settings_premium"))
+                                .font(AppFonts.body())
+                                .foregroundStyle(AppColors.textPrimary)
+                            Text(String(localized: "settings_premium_subtitle"))
+                                .font(AppFonts.caption())
+                                .foregroundStyle(AppColors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        Spacer(minLength: 0)
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(AppColors.textSecondary)
+                    }
+                    .frame(minHeight: 44)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("settings.premium")
+                .glassListRow()
+            }
         }
     }
 
