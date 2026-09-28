@@ -3,8 +3,8 @@
 //  soninho
 //
 //  Sunrise Premium paywall: unlocks the shake, typing and memory wake-up
-//  missions. Same layout as the lab's App Locker paywall (gradient, pulsing
-//  hero, benefit rows, radio plan cards, white CTA), in the sunrise palette.
+//  missions. Same layout as the lab's App Locker paywall (pulsing
+//  hero, benefit rows, radio plan cards), black with sunrise-orange accents.
 //  StoreKit comes from PaywallKit's StoreKitManager.
 //
 
@@ -22,13 +22,16 @@ struct PaywallView: View {
 
     // MARK: - Constants
     private static let closeDelay: TimeInterval = 3.0
-    /// Orange only, from sunrise orange to deep burnt orange: deep enough that
-    /// white text keeps its contrast everywhere (a light orange top was unreadable).
-    private static let gradient = LinearGradient(
-        colors: [Color(hex: "E8531F"), Color(hex: "C8400F"), Color(hex: "9C300A")],
-        startPoint: .top,
-        endPoint: .bottom
+    /// Black dominant, like the app and its icon. Orange is only an accent: a soft
+    /// sunrise glow behind the icon, the selected plan and the CTA.
+    private static let background = Color(hex: "0B0907")
+    private static let sunriseGlow = RadialGradient(
+        colors: [Color(hex: "F4511E").opacity(0.38), Color(hex: "F4511E").opacity(0.10), .clear],
+        center: UnitPoint(x: 0.5, y: 0.14),
+        startRadius: 10,
+        endRadius: 360
     )
+    private static let accent = Color(hex: "FF6E40")
     private static let badgeColor = Color(hex: "FFD54F")
     private static let iconSize: CGFloat = 96
 
@@ -63,7 +66,8 @@ struct PaywallView: View {
     // MARK: - View Body
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Self.gradient.ignoresSafeArea()
+            Self.background.ignoresSafeArea()
+            Self.sunriseGlow.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
@@ -227,11 +231,11 @@ struct PaywallView: View {
             HStack(spacing: 12) {
                 ZStack {
                     Circle()
-                        .stroke(.white, lineWidth: 2)
+                        .stroke(isSelected ? Self.accent : .white.opacity(0.5), lineWidth: 2)
                         .frame(width: 24, height: 24)
                     if isSelected {
                         Circle()
-                            .fill(.white)
+                            .fill(Self.accent)
                             .frame(width: 12, height: 12)
                     }
                 }
@@ -269,10 +273,10 @@ struct PaywallView: View {
             .frame(minHeight: 44)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(.white.opacity(isSelected ? 0.25 : 0.14))
+                    .fill(isSelected ? Self.accent.opacity(0.12) : .white.opacity(0.06))
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(.white, lineWidth: isSelected ? 2 : 0)
+                            .stroke(isSelected ? Self.accent : .white.opacity(0.10), lineWidth: isSelected ? 2 : 1)
                     )
             )
             .contentShape(RoundedRectangle(cornerRadius: 16))
@@ -296,17 +300,17 @@ struct PaywallView: View {
             ZStack {
                 if store.isLoading {
                     ProgressView()
-                        .tint(AppColors.primaryDark)
+                        .tint(.white)
                 } else {
                     Text(ctaTitle)
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundStyle(AppColors.primaryDark)
+                        .foregroundStyle(.white)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
             .frame(maxWidth: .infinity, minHeight: 52)
-            .background(RoundedRectangle(cornerRadius: 14).fill(.white))
+            .background(RoundedRectangle(cornerRadius: 14).fill(AppColors.primaryButtonGradient))
         }
         .buttonStyle(.plain)
         .disabled(store.isLoading || selectedProduct == nil)
