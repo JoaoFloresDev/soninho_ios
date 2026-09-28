@@ -22,10 +22,17 @@ struct PaywallView: View {
 
     // MARK: - Constants
     private static let closeDelay: TimeInterval = 3.0
+    /// Near-black behind the headline and benefits (white text needs real
+    /// contrast), warming into sunrise orange behind the plans.
     private static let gradient = LinearGradient(
-        colors: [Color(hex: "FF8A50"), Color(hex: "F4511E"), Color(hex: "A8320C")],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
+        stops: [
+            .init(color: Color(hex: "120804"), location: 0.0),
+            .init(color: Color(hex: "1E0D05"), location: 0.42),
+            .init(color: Color(hex: "B8400F"), location: 0.78),
+            .init(color: Color(hex: "E0541A"), location: 1.0)
+        ],
+        startPoint: .top,
+        endPoint: .bottom
     )
     private static let badgeColor = Color(hex: "FFD54F")
 
@@ -103,20 +110,20 @@ struct PaywallView: View {
             ZStack {
                 Circle()
                     .fill(Self.badgeColor.opacity(0.22))
-                    .frame(width: 96, height: 96)
+                    .frame(width: 76, height: 76)
                     .scaleEffect(iconPulse ? 1.08 : 1.0)
                     // A few beats, then still: an endless animation keeps the UI from ever
                     // settling, which stalls UI test drivers on this screen.
                     .animation(.easeInOut(duration: 1.2).repeatCount(5, autoreverses: true), value: iconPulse)
 
                 Image(systemName: "sunrise.fill")
-                    .font(.system(size: 44))
+                    .font(.system(size: 34))
                     .foregroundStyle(Self.badgeColor)
             }
-            .padding(.top, 52)
+            .padding(.top, 48)
 
-            Text(String(localized: "paywall.title"))
-                .font(.system(size: 26, weight: .bold))
+            Text(String(localized: "paywall.headline"))
+                .font(.system(size: 30, weight: .heavy))
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
@@ -124,33 +131,29 @@ struct PaywallView: View {
         }
         .opacity(showHeader ? 1 : 0)
         .offset(y: showHeader ? 0 : 20)
-        .padding(.bottom, 24)
+        .padding(.bottom, 28)
     }
 
     // MARK: - Benefits
     private var benefits: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            ForEach(PaywallContent.features) { feature in
-                HStack(alignment: .top, spacing: 14) {
-                    ZStack {
-                        Circle()
-                            .fill(.white.opacity(0.2))
-                            .frame(width: 36, height: 36)
-                        Image(systemName: feature.icon)
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(.white)
-                    }
+        VStack(alignment: .leading, spacing: 18) {
+            ForEach(PaywallContent.benefits) { benefit in
+                HStack(alignment: .top, spacing: 12) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundStyle(Self.badgeColor)
+                        .padding(.top, 1)
 
-                    Text(feature.title)
-                        .font(.system(size: 16, weight: .medium))
+                    Text(benefit.text)
+                        .font(.system(size: 17))
                         .foregroundStyle(.white)
                         .fixedSize(horizontal: false, vertical: true)
-                        .frame(maxWidth: .infinity, minHeight: 36, alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
-        .padding(.horizontal, 28)
-        .padding(.bottom, 26)
+        .padding(.horizontal, 32)
+        .padding(.bottom, 32)
         .opacity(showBenefits ? 1 : 0)
         .offset(y: showBenefits ? 0 : 20)
     }
@@ -283,6 +286,19 @@ struct PaywallView: View {
 
     // MARK: - CTA
     private var ctaButton: some View {
+        VStack(spacing: 10) {
+            Text(String(localized: "paywall.cancelAnytime"))
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(.white.opacity(0.9))
+            purchaseButton
+        }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 14)
+        .opacity(showButton ? 1 : 0)
+        .offset(y: showButton ? 0 : 20)
+    }
+
+    private var purchaseButton: some View {
         Button(action: purchase) {
             ZStack {
                 if store.isLoading {
@@ -303,10 +319,6 @@ struct PaywallView: View {
         .disabled(store.isLoading || selectedProduct == nil)
         .opacity(store.isLoading || selectedProduct == nil ? 0.6 : 1)
         .accessibilityIdentifier("paywall.purchase")
-        .padding(.horizontal, 20)
-        .padding(.bottom, 14)
-        .opacity(showButton ? 1 : 0)
-        .offset(y: showButton ? 0 : 20)
     }
 
     // MARK: - Footer
@@ -424,19 +436,18 @@ struct PaywallView: View {
 // MARK: - Paywall Content
 enum PaywallContent {
     // MARK: - Types
-    struct Feature: Identifiable {
-        let id = UUID()
-        let title: String
-        let icon: String
+    struct Benefit: Identifiable {
+        let id: String
+        let text: AttributedString
     }
 
     // MARK: - Computed Properties
-    static var features: [Feature] {
+    /// Outcome first, three rows, one line about the wake-up challenges.
+    static var benefits: [Benefit] {
         [
-            Feature(title: String(localized: "paywall.feature.1"), icon: WakeMission.shake.icon),
-            Feature(title: String(localized: "paywall.feature.2"), icon: WakeMission.typing.icon),
-            Feature(title: String(localized: "paywall.feature.3"), icon: WakeMission.memory.icon),
-            Feature(title: String(localized: "paywall.feature.4"), icon: "alarm.fill")
+            Benefit(id: "challenges", text: AttributedString(localized: "paywall.benefit.challenges")),
+            Benefit(id: "sleep", text: AttributedString(localized: "paywall.benefit.sleep")),
+            Benefit(id: "smart", text: AttributedString(localized: "paywall.benefit.smart"))
         ]
     }
 }

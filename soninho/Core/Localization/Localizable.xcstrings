@@ -17699,6 +17699,842 @@
         }
       }
     },
+    "paywall.benefit.challenges": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**تحديات الاستيقاظ**: هزّ الهاتف أو اكتب أو احفظ لإيقاف المنبه"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Reptes per despertar-te**: agita, escriu o memoritza per aturar l'alarma"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Výzvy k probuzení**: zatřeste, napište nebo si zapamatujte, abyste vypnuli budík"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Opvågningsudfordringer**: ryst, skriv eller husk for at slukke alarmen"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Aufwach-Challenges**: schütteln, tippen oder auswendig lernen, um den Wecker zu stoppen"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Προκλήσεις αφύπνισης**: κούνησε, πληκτρολόγησε ή απομνημόνευσε για να σταματήσεις το ξυπνητήρι"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Wake-up challenges**: shake, type or memorize to stop the alarm"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Retos para despertar**: agita, escribe o memoriza para apagar la alarma"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Herätyshaasteet**: ravista, kirjoita tai muista sammuttaaksesi hälytyksen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Défis de réveil** : secoue, tape ou mémorise pour arrêter l'alarme"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**אתגרי השכמה**: נער, הקלד או שנן כדי לכבות את ההתראה"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**जागने की चुनौतियाँ**: अलार्म बंद करने के लिए हिलाएं, टाइप करें या याद करें"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Izazovi buđenja**: protresi, upiši ili zapamti da isključiš alarm"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Ébresztő kihívások**: rázd meg, gépeld be vagy jegyezd meg, hogy leállítsd a riasztást"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Tantangan bangun tidur**: goyangkan, ketik, atau hafalkan untuk mematikan alarm"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Sfide per svegliarsi**: scuoti, digita o memorizza per fermare la sveglia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**目覚めチャレンジ**：振る、入力する、または暗記してアラームを止める"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**기상 챌린지**: 흔들거나 입력하거나 외워서 알람을 꺼요"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Cabaran bangun tidur**: goncang, taip atau hafal untuk hentikan penggera"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Wakker-worden-uitdagingen**: schud, typ of onthoud om het alarm te stoppen"
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Oppvåkningsutfordringer**: rist, skriv eller husk for å stoppe alarmen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Wyzwania na dzień dobry**: potrząśnij, wpisz lub zapamiętaj, aby wyłączyć alarm"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Desafios pra acordar**: chacoalhe, digite ou memorize pra desligar o alarme"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Desafios para acordar**: agita, escreve ou memoriza para desligar o alarme"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Provocări de trezire**: scutură, tastează sau memorează pentru a opri alarma"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Задания для пробуждения**: встряхни, введи текст или запомни, чтобы выключить будильник"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Výzvy na prebudenie**: potraste, napíšte alebo si zapamätajte, aby ste vypli budík"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Uppvakningsutmaningar**: skaka, skriv eller memorera för att stänga av larmet"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**ความท้าทายในการตื่นนอน**: เขย่า พิมพ์ หรือจำเพื่อปิดปลุก"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Uyanma zorlukları**: alarmı durdurmak için sallayın, yazın veya ezberleyin"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Завдання для пробудження**: струсни, введи текст або запам'ятай, щоб вимкнути будильник"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Thử thách thức dậy**: lắc, gõ hoặc ghi nhớ để tắt báo thức"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**起床挑战**：摇一摇、输入或记忆以关闭闹钟"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**起床挑戰**：搖一搖、輸入或記憶以關閉鬧鐘"
+          }
+        }
+      }
+    },
+    "paywall.benefit.sleep": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**تحليل النوم** لكل ليلة، مع المراحل والنتيجة"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Anàlisi del son** de cada nit, amb fases i puntuació"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analýza spánku** každé noci, s fázemi a skóre"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Søvnanalyse** hver nat, med faser og en score"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Schlafanalyse** jeder Nacht, mit Phasen und einer Punktzahl"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Ανάλυση ύπνου** κάθε βράδυ, με φάσεις και βαθμολογία"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Sleep analysis** of every night, with phases and a score"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Análisis del sueño** de cada noche, con fases y puntuación"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Unianalyysi** joka yöltä, vaiheineen ja pisteineen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analyse du sommeil** chaque nuit, avec phases et score"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**ניתוח שינה** לכל לילה, עם שלבים וציון"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**नींद का विश्लेषण** हर रात का, चरणों और स्कोर के साथ"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analiza sna** svake noći, s fazama i ocjenom"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Alvásanalízis** minden éjszakáról, fázisokkal és pontszámmal"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analisis tidur** setiap malam, dengan fase dan skor"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analisi del sonno** di ogni notte, con fasi e punteggio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**睡眠分析**を毎晩、フェーズとスコアつきで"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**수면 분석**을 매일 밤, 단계와 점수와 함께"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analisis tidur** setiap malam, dengan fasa dan skor"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Slaapanalyse** van elke nacht, met fasen en een score"
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Søvnanalyse** hver natt, med faser og en poengsum"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analiza snu** każdej nocy, z fazami i wynikiem"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Análise do sono** de cada noite, com fases e nota"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Análise do sono** de cada noite, com fases e pontuação"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analiza somnului** în fiecare noapte, cu faze și scor"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Анализ сна** каждую ночь, с фазами и оценкой"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Analýza spánku** každú noc, s fázami a skóre"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Sömnanalys** varje natt, med faser och poäng"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**การวิเคราะห์การนอน** ของทุกคืน พร้อมช่วงการนอนและคะแนน"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Uyku analizi** her gece, evreler ve puanla"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Аналіз сну** щоночі, з фазами та оцінкою"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Phân tích giấc ngủ** mỗi đêm, với các giai đoạn và điểm số"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**睡眠分析**，记录每晚的睡眠阶段和评分"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**睡眠分析**，記錄每晚的睡眠階段與評分"
+          }
+        }
+      }
+    },
+    "paywall.benefit.smart": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**الاستيقاظ الذكي** خلال أخف مراحل نومك"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Despertar intel·ligent** durant el teu son més lleuger"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Chytré probuzení** během vašeho nejlehčího spánku"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Smart opvågning** i din letteste søvn"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Intelligentes Wecken** in deiner leichtesten Schlafphase"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Έξυπνη αφύπνιση** στον πιο ελαφρύ σου ύπνο"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Smart wake-up** during your lightest sleep"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Despertar inteligente** en tu sueño más ligero"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Älykäs herätys** kevyimmän univaiheesi aikana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Réveil intelligent** pendant ton sommeil le plus léger"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**השכמה חכמה** בשלב השינה הקלה ביותר שלך"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**स्मार्ट वेक-अप** आपकी सबसे हल्की नींद के दौरान"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Pametno buđenje** tijekom tvog najlakšeg sna"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Okos ébresztés** a legkönnyebb alvási fázisodban"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Bangun pintar** saat tidurmu paling ringan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Sveglia intelligente** nel tuo sonno più leggero"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**スマート目覚まし**、眠りが最も浅いタイミングで"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**스마트 기상**, 가장 얕은 수면 중에"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Bangun pintar** semasa tidur paling ringan anda"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Slim wekken** tijdens je lichtste slaap"
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Smart oppvåkning** i din letteste søvn"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Inteligentna pobudka** w Twoim najlżejszym śnie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Despertar inteligente** no seu sono mais leve"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Despertar inteligente** no teu sono mais leve"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Trezire inteligentă** în cel mai ușor somn al tău"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Умный будильник** в фазе самого лёгкого сна"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Inteligentné budenie** počas vášho najľahšieho spánku"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Smart väckning** under din lättaste sömn"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**ปลุกอัจฉริยะ** ในช่วงที่คุณหลับตื้นที่สุด"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Akıllı uyandırma** en hafif uykunuzda"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Розумне пробудження** у фазі найлегшого сну"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**Đánh thức thông minh** trong giấc ngủ nhẹ nhất của bạn"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**智能唤醒**，在你睡眠最浅时叫醒你"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**智慧喚醒**，在你睡眠最淺時叫醒你"
+          }
+        }
+      }
+    },
+    "paywall.cancelAnytime": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ألغِ في أي وقت"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel·la quan vulguis"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kdykoli zrušit"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opsig når som helst"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jederzeit kündbar"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ακύρωση οποιαδήποτε στιγμή"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel anytime"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancela cuando quieras"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peru milloin tahansa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulez à tout moment"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "בטל בכל עת"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कभी भी रद्द करें"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otkaži kad god želiš"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bármikor lemondható"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batalkan kapan saja"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulla quando vuoi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "いつでもキャンセル可能"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "언제든지 취소 가능"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batal bila-bila masa"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altijd opzegbaar"
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avbestill når som helst"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuluj w dowolnym momencie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancele quando quiser"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancela quando quiseres"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anulează oricând"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отмена в любой момент"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kedykoľvek zrušiť"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avsluta när du vill"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ยกเลิกได้ทุกเมื่อ"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İstediğiniz zaman iptal edin"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скасувати будь-коли"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hủy bất cứ lúc nào"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "随时可取消"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隨時可取消"
+          }
+        }
+      }
+    },
     "paywall.close": {
       "extractionState": "manual",
       "localizations": {
@@ -18949,6 +19785,215 @@
           "stringUnit": {
             "state": "translated",
             "value": "選擇真正能讓你起床的挑戰"
+          }
+        }
+      }
+    },
+    "paywall.headline": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استيقظ فعلاً كل يوم"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desperta't de veritat, cada dia"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probuď se doopravdy, každý den"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vågn rigtigt op, hver dag"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wach wirklich auf, jeden Tag"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ξύπνα πραγματικά, κάθε μέρα"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wake up for real, every day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Despierta de verdad, cada día"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herää oikeasti joka päivä"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réveille-toi pour de vrai, chaque jour"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תתעורר באמת, כל יום"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हर दिन सच में जागो"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probudi se stvarno, svaki dan"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ébredj fel igazán, minden nap"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bangun sungguhan, setiap hari"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Svegliati per davvero, ogni giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎日、本当に目覚める"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "매일 진짜로 잠에서 깨어나요"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bangun sebenar, setiap hari"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word echt wakker, elke dag"
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Våkn virkelig opp, hver dag"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budź się naprawdę, każdego dnia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acorde de verdade, todo dia"
+          }
+        },
+        "pt-PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acorda a sério, todos os dias"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trezește-te cu adevărat, în fiecare zi"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Просыпайся по-настоящему, каждый день"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zobuď sa naozaj, každý deň"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vakna på riktigt, varje dag"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ตื่นจริง ๆ ทุกวัน"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her gün gerçekten uyan"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прокидайся по-справжньому, щодня"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thức dậy thật sự, mỗi ngày"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每天真正醒来"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每天真正醒來"
           }
         }
       }
