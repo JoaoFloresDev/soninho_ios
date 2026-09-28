@@ -241,7 +241,7 @@ struct PaywallView: View {
                     }
                 }
 
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(title)
                         .font(AppFonts.title3(18, weight: .bold))
                         .foregroundStyle(.white)
@@ -270,7 +270,8 @@ struct PaywallView: View {
                         .foregroundStyle(.white.opacity(0.85))
                 }
             }
-            .padding(20)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 14)
             .frame(minHeight: 44)
             .background(
                 RoundedRectangle(cornerRadius: 16)
