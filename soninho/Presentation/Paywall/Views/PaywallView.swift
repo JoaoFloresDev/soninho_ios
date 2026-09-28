@@ -69,16 +69,25 @@ struct PaywallView: View {
             Self.background.ignoresSafeArea()
             Self.sunriseGlow.ignoresSafeArea()
 
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 0) {
-                    header
-                    benefits
-                    plans
-                    ctaButton
-                    footer
+            // Three blocks: title pinned to the top, plans + CTA + links pinned to the
+            // bottom, benefits centered in the space between. Scrolls only when the
+            // screen is too short to fit everything.
+            GeometryReader { geo in
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        header
+                        Spacer(minLength: 24)
+                        benefits
+                        Spacer(minLength: 24)
+                        VStack(spacing: 0) {
+                            plans
+                            ctaButton
+                            footer
+                        }
+                    }
+                    .frame(maxWidth: 520)
+                    .frame(maxWidth: .infinity, minHeight: geo.size.height)
                 }
-                .frame(maxWidth: 520)
-                .frame(maxWidth: .infinity)
             }
 
             if showClose {
@@ -133,7 +142,6 @@ struct PaywallView: View {
         }
         .opacity(showHeader ? 1 : 0)
         .offset(y: showHeader ? 0 : 20)
-        .padding(.bottom, 28)
     }
 
     // MARK: - Benefits
@@ -155,7 +163,6 @@ struct PaywallView: View {
             }
         }
         .padding(.horizontal, 32)
-        .padding(.bottom, 32)
         .opacity(showBenefits ? 1 : 0)
         .offset(y: showBenefits ? 0 : 20)
     }
@@ -216,7 +223,7 @@ struct PaywallView: View {
             }
         }
         .padding(.horizontal, 20)
-        .padding(.bottom, 28)
+        .padding(.bottom, 20)
         .opacity(showPlans ? 1 : 0)
         .offset(y: showPlans ? 0 : 20)
     }
