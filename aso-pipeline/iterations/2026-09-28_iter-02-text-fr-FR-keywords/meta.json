@@ -630,6 +630,19 @@
     "pre_snapshot": "iterations/2026-09-27_iter-01-text-en-US-keywords/research/asc_pre_deploy_2026-09-28.json",
     "post_snapshot": "iterations/2026-09-27_iter-01-text-en-US-keywords/research/asc_post_deploy_2026-09-28.json",
     "goes_public_when": "a 1.4.0 for submetida, aprovada e ficar READY_FOR_SALE",
-    "rollback": "PATCH keywords de volta para os valores 'before' (iguais a current/metadata/<locale>/keywords.txt)"
+    "rollback": "PATCH keywords de volta para os valores 'before' (iguais a current/metadata/<locale>/keywords.txt)",
+    "verifier": {
+      "at": "2026-09-28",
+      "agent": "deploy-verifier",
+      "result": "OK — 0 divergências em 390 valores, nenhum PATCH",
+      "checked": [
+        "5 keywords deployadas = arquivos locais (≤100 chars)",
+        "229 outros campos das 39 localizações da 1.4.0 iguais ao pre-snapshot (incl. de-DE com 'langschläfer')",
+        "156 name/subtitle nos 2 appInfos iguais",
+        "1.3.0 live com as keywords antigas nos 5 locales",
+        "screenshots 1.4.0: 39 locales × APP_IPHONE_67=5 e APP_IPHONE_65=5, sem checksum repetido"
+      ],
+      "note": "appInfo 1dc33c78 agora devolve estado READY_FOR_DISTRIBUTION (antes READY_FOR_SALE) — só rótulo da API, dados iguais"
+    }
   }
 }
