@@ -22,6 +22,9 @@ import UIKit
 enum ReviewTrigger: String {
     /// A measured night was saved after the user woke up.
     case nightTracked = "night_tracked"
+    /// The user beat the wake-up challenge and dismissed the alarm — the success
+    /// of the two thirds of users who never track their sleep.
+    case wakeChallengeCompleted = "wake_challenge_completed"
 }
 
 // MARK: - Review Service
@@ -49,6 +52,10 @@ final class ReviewService {
         static let sameInterruptionSeconds: TimeInterval = 3_600
         static let historyLimit = 10
         static let positiveCountKey = "review.positiveCount"
+        static let lastPositiveKey = "review.lastPositiveAt"
+        /// One morning is one aha-moment: the night and the challenge of the same
+        /// wake-up must not count twice.
+        static let samePositiveSeconds: TimeInterval = 3 * 3_600
         static let requestDatesKey = "review.requestDates"
         static let lastRequestVersionKey = "review.lastRequestVersion"
         static let legacyMigratedKey = "review.legacyMigrated"
@@ -95,7 +102,12 @@ final class ReviewService {
     @discardableResult
     func recordPositiveEvent(trigger: ReviewTrigger) -> Bool {
         migrateLegacyStateIfNeeded()
-        let count = defaults.integer(forKey: Constants.positiveCountKey) + 1
+        let now = Date()
+        let lastPositive = defaults.double(forKey: Constants.lastPositiveKey)
+        let sameMorning = lastPositive > 0
+            && now.timeIntervalSince1970 - lastPositive < Constants.samePositiveSeconds
+        defaults.set(now.timeIntervalSince1970, forKey: Constants.lastPositiveKey)
+        let count = defaults.integer(forKey: Constants.positiveCountKey) + (sameMorning ? 0 : 1)
         defaults.set(count, forKey: Constants.positiveCountKey)
         guard !isRequestPending, isEligible(positiveCount: count, now: Date()) else { return false }
 

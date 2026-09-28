@@ -215,6 +215,9 @@ struct AlarmRingingView: View {
         case .snooze:
             snoozeWithMessage()
         case .dismiss:
+            // Beating the challenge to turn the alarm off is the wake-up's success.
+            // The service waits for this screen and the greeting to leave before asking.
+            _ = ReviewService.shared.recordPositiveEvent(trigger: .wakeChallengeCompleted)
             finishOrConfirm()
         }
     }
