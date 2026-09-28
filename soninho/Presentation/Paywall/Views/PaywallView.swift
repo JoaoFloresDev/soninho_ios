@@ -15,6 +15,12 @@ import PaywallKit
 // MARK: - Paywall View
 struct PaywallView: View {
     // MARK: - Types
+    /// `.offer` sells; `.owned` is the premium state a subscriber opens from Settings.
+    enum Mode {
+        case offer
+        case owned
+    }
+
     private enum Plan {
         case yearly
         case weekly
@@ -34,9 +40,11 @@ struct PaywallView: View {
     private static let accent = Color(hex: "FF6E40")
     private static let badgeColor = Color(hex: "FFD54F")
     private static let mascotSize: CGFloat = 110
+    private static let manageSubscriptionsURL = "https://apps.apple.com/account/subscriptions"
 
     // MARK: - Properties
     @Binding var isPresented: Bool
+    var mode: Mode = .offer
     @ObservedObject private var store = StoreKitManager.shared
     @Environment(\.openURL) private var openURL
 
@@ -50,8 +58,26 @@ struct PaywallView: View {
     @State private var iconPulse = false
     @State private var errorMessage: String?
     @State private var showNothingRestored = false
+    /// Set when THIS screen started a purchase: that premium flip is a new subscriber to
+    /// welcome. A restore (or a renewal arriving) flips premium too and just closes.
+    @State private var didStartPurchase = false
+    @State private var isCelebrating = false
+    @State private var celebratePop = false
 
     // MARK: - Computed Properties
+    /// The purchased look: a subscriber opening it, or the moment right after buying.
+    private var showsOwned: Bool { mode == .owned || isCelebrating }
+
+    private var title: String {
+        if isCelebrating { return String(localized: "paywall.welcome.title") }
+        return mode == .owned ? String(localized: "paywall.owned.title") : String(localized: "paywall.headline")
+    }
+
+    private var subtitle: String? {
+        if isCelebrating { return String(localized: "paywall.welcome.subtitle") }
+        return mode == .owned ? String(localized: "paywall.owned.subtitle") : nil
+    }
+
     private var selectedProduct: Product? {
         selectedPlan == .yearly ? store.yearlyProduct : store.weeklyProduct
     }
@@ -79,10 +105,16 @@ struct PaywallView: View {
                         Spacer(minLength: 24)
                         benefits
                         Spacer(minLength: 24)
-                        VStack(spacing: 0) {
-                            plans
-                            ctaButton
-                            footer
+                        if showsOwned {
+                            ownedFooter
+                                .transition(.opacity.combined(with: .move(edge: .bottom)))
+                        } else {
+                            VStack(spacing: 0) {
+                                plans
+                                ctaButton
+                                footer
+                            }
+                            .transition(.opacity.combined(with: .move(edge: .bottom)))
                         }
                     }
                     .frame(maxWidth: 520)
@@ -108,8 +140,15 @@ struct PaywallView: View {
             Button("OK", role: .cancel) { }
         }
         .onAppear(perform: handleAppear)
+        // A purchase made here turns this screen into the premium state; a restore or
+        // an entitlement arriving on its own just closes the offer.
         .onChange(of: store.isPremium) { _, premium in
-            if premium { isPresented = false }
+            guard premium, mode == .offer, !isCelebrating else { return }
+            if didStartPurchase {
+                celebrate()
+            } else {
+                isPresented = false
+            }
         }
     }
 
@@ -120,19 +159,32 @@ struct PaywallView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: Self.mascotSize, height: Self.mascotSize)
-                .scaleEffect(iconPulse ? 1.04 : 1.0)
+                .scaleEffect(celebratePop ? 1.22 : (iconPulse ? 1.04 : 1.0))
                 // A few beats, then still: an endless animation keeps the UI from ever
                 // settling, which stalls UI test drivers on this screen.
                 .animation(.easeInOut(duration: 1.2).repeatCount(5, autoreverses: true), value: iconPulse)
                 .accessibilityHidden(true)
                 .padding(.top, 8)
 
-            Text(String(localized: "paywall.headline"))
+            Text(title)
                 .font(AppFonts.display(30, weight: .heavy))
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 28)
+                .id(title)
+                .transition(.opacity.combined(with: .scale(scale: 0.92)))
+
+            if let subtitle {
+                Text(subtitle)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.75))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 32)
+                    .id(subtitle)
+                    .transition(.opacity)
+            }
         }
         .opacity(showHeader ? 1 : 0)
         .offset(y: showHeader ? 0 : 20)
@@ -359,6 +411,37 @@ struct PaywallView: View {
         .accessibilityIdentifier(id)
     }
 
+    // MARK: - Owned Footer
+    /// Right after buying: continue into the app. Opened from Settings: manage the plan.
+    private var ownedFooter: some View {
+        VStack(spacing: 0) {
+            Button(action: isCelebrating ? finishCelebration : openManageSubscriptions) {
+                Text(isCelebrating ? String(localized: "paywall.continue") : String(localized: "paywall.manage"))
+                    .font(AppFonts.headline(17, weight: .bold))
+                    .foregroundStyle(.white)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, minHeight: 52)
+                    .background(RoundedRectangle(cornerRadius: 14).fill(AppColors.primaryButtonGradient))
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier(isCelebrating ? "paywall.welcome.continue" : "paywall.manage")
+            .padding(.horizontal, 20)
+            .padding(.bottom, 14)
+
+            HStack(spacing: 10) {
+                footerLink(String(localized: "paywall.privacy"), id: "paywall.privacy") {
+                    if let url = URL(string: AppConstants.privacyPolicyURL) { openURL(url) }
+                }
+                dot
+                footerLink(String(localized: "paywall.termsOfUse"), id: "paywall.terms") {
+                    if let url = URL(string: AppConstants.termsOfUseURL) { openURL(url) }
+                }
+            }
+            .padding(.bottom, 24)
+        }
+    }
+
     // MARK: - Close
     private var closeButton: some View {
         Button {
@@ -379,7 +462,11 @@ struct PaywallView: View {
     // MARK: - Actions
     private func handleAppear() {
         Analytics.screen("paywall")
-        if !store.isPremium {
+        if mode == .owned {
+            // Not paywall_shown: that event counts people ASKED to buy.
+            Analytics.featureUsed("premium_status_shown", source: PaywallAnalytics.source)
+            withAnimation(.easeIn(duration: 0.3)) { showClose = true }
+        } else if !store.isPremium {
             Analytics.log("paywall_shown", ["placement": "sunrise_paywall", "source": PaywallAnalytics.source])
         }
         if store.products.isEmpty && !store.isLoading {
@@ -406,14 +493,43 @@ struct PaywallView: View {
     private func purchase() {
         guard let product = selectedProduct else { return }
         HapticManager.mediumImpact()
+        didStartPurchase = true
         Task {
             do {
-                // Success flips store.isPremium, which dismisses the paywall.
                 _ = try await store.purchase(product)
+                // The premium flip can land before or after purchase() returns.
+                if store.isPremium { celebrate() } else { didStartPurchase = false }
             } catch {
+                didStartPurchase = false
                 errorMessage = error.localizedDescription
             }
         }
+    }
+
+    /// Turns the offer into the premium state in place instead of closing it.
+    private func celebrate() {
+        guard !isCelebrating else { return }
+        HapticManager.success()
+        Analytics.featureUsed("premium_welcome_shown", source: PaywallAnalytics.source)
+        withAnimation(.spring(response: 0.7, dampingFraction: 0.8)) {
+            isCelebrating = true
+            showClose = false
+        }
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.5)) { celebratePop = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { celebratePop = false }
+        }
+    }
+
+    private func finishCelebration() {
+        HapticManager.selection()
+        Analytics.featureUsed("premium_welcome_continue", source: PaywallAnalytics.source)
+        isPresented = false
+    }
+
+    private func openManageSubscriptions() {
+        Analytics.featureUsed("manage_subscription", source: "paywall_owned")
+        if let url = URL(string: Self.manageSubscriptionsURL) { openURL(url) }
     }
 
     private func restore() {

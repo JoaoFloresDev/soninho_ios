@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import PaywallKit
 
 // MARK: - Smart Alarm View
 struct SmartAlarmView: View {
     // MARK: - Properties
     @StateObject private var viewModel = SmartAlarmViewModel()
+    @ObservedObject private var store = StoreKitManager.shared
 
     // MARK: - View Body
     var body: some View {
@@ -20,6 +22,8 @@ struct SmartAlarmView: View {
 
                 ScrollView {
                     VStack(spacing: 24) {
+                        header
+
                         // Next Alarm Card
                         nextAlarmCard
 
@@ -32,8 +36,9 @@ struct SmartAlarmView: View {
                 .softScrollEdge()
             }
             .onAppear { Analytics.screen("alarm") }
-            .navigationTitle(String(localized: "alarm_title"))
-            .navigationBarTitleDisplayMode(.large)
+            // Own header instead of the system large title: it lines up with the cards
+            // and has room for the Premium tag.
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -54,6 +59,23 @@ struct SmartAlarmView: View {
                 AlarmEditSheet(viewModel: viewModel)
             }
         }
+    }
+
+    // MARK: - Header
+    private var header: some View {
+        HStack(alignment: .center, spacing: 10) {
+            Text(String(localized: "alarm_title"))
+                .font(AppFonts.display(32, weight: .bold))
+                .foregroundStyle(AppColors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+            if store.isPremium {
+                PremiumTag()
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 4)
+        .padding(.top, 4)
     }
 
     // MARK: - Next Alarm Card

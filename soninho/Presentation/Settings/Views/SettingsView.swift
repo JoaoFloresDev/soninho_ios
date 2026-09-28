@@ -15,6 +15,8 @@ struct SettingsView: View {
     @StateObject private var viewModel = SettingsViewModel()
     @ObservedObject private var store = StoreKitManager.shared
     @State private var showPaywall = false
+    /// Fixed when the screen opens: a purchase made inside must not flip it mid-way.
+    @State private var paywallMode: PaywallView.Mode = .offer
     // MARK: - View Body
     var body: some View {
         NavigationStack {
@@ -40,7 +42,7 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.large)
             .onAppear { Analytics.screen("settings") }
             .fullScreenCover(isPresented: $showPaywall) {
-                PaywallView(isPresented: $showPaywall)
+                PaywallView(isPresented: $showPaywall, mode: paywallMode)
             }
         }
     }
@@ -49,12 +51,35 @@ struct SettingsView: View {
     private var premiumSection: some View {
         Section {
             if store.isPremium {
-                Label(String(localized: "settings_premium_active"), systemImage: "checkmark.seal.fill")
-                    .foregroundStyle(AppColors.textPrimary)
-                    .glassListRow()
+                Button {
+                    PaywallAnalytics.source = "settings"
+                    paywallMode = .owned
+                    showPaywall = true
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.system(size: 18))
+                            .foregroundStyle(AppColors.accent)
+                            .frame(width: 22)
+                        Text(String(localized: "settings_premium_active"))
+                            .font(AppFonts.body())
+                            .foregroundStyle(AppColors.textPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(AppColors.textSecondary)
+                    }
+                    .frame(minHeight: 44)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("settings.premium.active")
+                .glassListRow()
             } else {
                 Button {
                     PaywallAnalytics.source = "settings"
+                    paywallMode = .offer
                     showPaywall = true
                 } label: {
                     HStack(spacing: 12) {
