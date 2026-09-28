@@ -270,7 +270,7 @@ struct PaywallView: View {
                 // Charged amount is the most prominent price element (Guideline 3.1.2(c)).
                 VStack(alignment: .trailing, spacing: 2) {
                     Text(product.displayPrice)
-                        .font(AppFonts.title2(22, weight: .bold))
+                        .font(AppFonts.title2(19, weight: .bold))
                         .foregroundStyle(.white)
                     Text(period)
                         .font(.system(size: 12))
