@@ -13,6 +13,7 @@ struct SmartAlarmView: View {
     // MARK: - Properties
     @StateObject private var viewModel = SmartAlarmViewModel()
     @ObservedObject private var store = StoreKitManager.shared
+    @State private var showPremium = false
 
     // MARK: - View Body
     var body: some View {
@@ -22,24 +23,35 @@ struct SmartAlarmView: View {
 
                 ScrollView {
                     VStack(spacing: 24) {
-                        header
-
                         // Next Alarm Card
                         nextAlarmCard
 
                         // Alarms List
                         alarmsSection
                     }
-                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                    // Same inset as the system large title, so title and cards line up.
+                    .padding(.horizontal, AppSpacing.md)
                     .padding(.bottom, AppSpacing.lg)
                 }
                 .softScrollEdge()
             }
             .onAppear { Analytics.screen("alarm") }
-            // Own header instead of the system large title: it lines up with the cards
-            // and has room for the Premium tag.
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(String(localized: "alarm_title"))
+            .navigationBarTitleDisplayMode(.large)
             .toolbar {
+                // Subscriber status sits in the bar, balancing "+" on the other side,
+                // and opens the premium screen.
+                if store.isPremium || PremiumUI.isForced {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            PaywallAnalytics.source = "alarm_premium_badge"
+                            showPremium = true
+                        } label: {
+                            PremiumBadge()
+                        }
+                        .accessibilityIdentifier("alarm.premium")
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.startAddingNew()
@@ -52,6 +64,9 @@ struct SmartAlarmView: View {
                     .accessibilityLabel(Text(String(localized: "alarm_add")))
                 }
             }
+            .fullScreenCover(isPresented: $showPremium) {
+                PaywallView(isPresented: $showPremium, mode: .owned)
+            }
             .sheet(isPresented: $viewModel.showingAddSheet) {
                 AlarmEditSheet(viewModel: viewModel)
             }
@@ -59,23 +74,6 @@ struct SmartAlarmView: View {
                 AlarmEditSheet(viewModel: viewModel)
             }
         }
-    }
-
-    // MARK: - Header
-    private var header: some View {
-        HStack(alignment: .center, spacing: 10) {
-            Text(String(localized: "alarm_title"))
-                .font(AppFonts.display(32, weight: .bold))
-                .foregroundStyle(AppColors.textPrimary)
-                .fixedSize(horizontal: false, vertical: true)
-                .accessibilityAddTraits(.isHeader)
-            if store.isPremium {
-                PremiumTag()
-            }
-            Spacer(minLength: 0)
-        }
-        .padding(.horizontal, 4)
-        .padding(.top, 4)
     }
 
     // MARK: - Next Alarm Card
