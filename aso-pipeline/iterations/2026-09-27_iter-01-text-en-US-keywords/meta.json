@@ -2,7 +2,7 @@
   "iter_id": "2026-09-27_iter-01-text-en-US-keywords",
   "type": "text",
   "locale": "en-US",
-  "status": "draft",
+  "status": "staged",
   "started_at": "2026-09-27",
   "planned_close_at": "2026-10-25",
   "actual_closed_at": null,
@@ -70,7 +70,7 @@
   },
   "verdict": null,
   "promoted_to_current": false,
-  "notes": "Não deployado. Rating-first: 1 rating → iteração conservadora. Trade-offs: en-US `sounds` fica (protege sunrise alarm clock sounds #42) apesar de 'sleep sounds' MISMATCH; `fast` é a aposta mais fraca (#172) — cortar deixa 94 chars; pt-BR `anti` escolhido sobre `sol`. Divergências loja×app na description live (decisão do João): janela 'up to 30 min' vs 15-60 no app; 'take a few steps to turn the alarm off' mas passos só no check pós-desligar; string 'Sync with Apple Health' nunca exibida. Prints da 1.4.0 devem abrir com a missão. Baselines divergem (dashboard ~131/30d vs estágio 1 229/30d, ambos 1*) — conciliar no D7.",
+  "notes": "Não deployado. Rating-first: 1 rating → iteração conservadora. Trade-offs: en-US `sounds` fica (protege sunrise alarm clock sounds #42) apesar de 'sleep sounds' MISMATCH; `fast` é a aposta mais fraca (#172) — cortar deixa 94 chars; pt-BR `anti` escolhido sobre `sol`. Divergências loja×app na description live (decisão do João): janela 'up to 30 min' vs 15-60 no app; 'take a few steps to turn the alarm off' mas passos só no check pós-desligar; string 'Sync with Apple Health' nunca exibida. Prints da 1.4.0 devem abrir com a missão. Baselines divergem (dashboard ~131/30d vs estágio 1 229/30d, ambos 1*) — conciliar no D7. | DEPLOY 28/09 (2026-09-28T23:36:26Z): keywords en-US/pt-BR/es-ES/es-MX PATCH direto na 1.4.0 (PREPARE_FOR_SUBMISSION), read-back 4/4 OK. Status staged — vira live só com a 1.4.0 READY_FOR_SALE + d00_baseline. Autorização explícita do João; floor abaixo do piso reconhecido; quarentena com override logado. fr-FR na iter-02 (mesma portadora); de-DE sem mudança = controle.",
   "locales": [
     "en-US",
     "pt-BR",
@@ -103,31 +103,35 @@
   "approach": "parallel",
   "approach_rationale": "App rating-first (1 rating total, BR). Iteração conservadora: só keywords nos 4 locales, nenhum token do mapa de proteção sai, apostas novas só em chars livres/liberados. Rides a 1.4.0 (prints novos + prompt nativo) — atribuição por rank Astro por termo, downloads declarados como efeito conjunto.",
   "cadence": {
-    "d0_rule": "D0 = dia em que a 1.4.0 fica READY_FOR_SALE. Datas abaixo PROVISÓRIAS assumindo D0 = 2026-09-30; recalcular no deploy.",
+    "d0_rule": "D0 = dia em que a 1.4.0 fica READY_FOR_SALE (não 28/09, o dia do PATCH). Datas abaixo PROVISÓRIAS (assumem D0 = 2026-09-30); recontar D7/14/21/28 = live_at + N quando a 1.4.0 ficar live.",
     "checkpoints": [
       {
         "day": 7,
         "date": "2026-10-07",
         "purpose": "indexação: gently/sunlight/anti/reto com rank; wake up gently ≤ #10; nenhuma posição top10 protegida cai >5; conciliar baselines (131 vs 229)",
-        "metrics_file": "metrics/2026-10-07_d07.csv"
+        "metrics_file": "metrics/2026-10-07_d07.csv",
+        "provisional": true
       },
       {
         "day": 14,
         "date": "2026-10-14",
         "purpose": "3/5 termos-alvo ≤ #10; impressões +10%; fast > #100 → trocar token (ex. wakeup)",
-        "metrics_file": "metrics/2026-10-14_d14.csv"
+        "metrics_file": "metrics/2026-10-14_d14.csv",
+        "provisional": true
       },
       {
         "day": 21,
         "date": "2026-10-21",
         "purpose": "wake up gently ≤ #5; anti soneca e alarma con reto ≤ #10; installs 4 stores ≥ 2,1/dia (14d)",
-        "metrics_file": "metrics/2026-10-21_d21.csv"
+        "metrics_file": "metrics/2026-10-21_d21.csv",
+        "provisional": true
       },
       {
         "day": 28,
         "date": "2026-10-28",
         "purpose": "veredito vs conservador 2,3 / bold 2,8 + ratings ≥5; decidir iter-02 (subtitle) ou CPP",
-        "metrics_file": "metrics/2026-10-28_d28.csv"
+        "metrics_file": "metrics/2026-10-28_d28.csv",
+        "provisional": true
       }
     ],
     "rollback_triggers": [
@@ -238,7 +242,7 @@
   ],
   "deploy_gate": {
     "checked_at": "2026-09-28",
-    "result": "RECUSADO — nenhum PATCH feito",
+    "result": "APLICADO (staged) em 2026-09-28 com autorização explícita do João — floor reconhecido, quarentena com override",
     "traffic_floor": {
       "piso": 100,
       "installs_1star_30d": {
@@ -246,22 +250,186 @@
         "BR": 15,
         "ES": 26,
         "MX": 1,
-        "FR": 35
+        "FR": 35,
+        "DE": 22
       },
       "ok": false,
-      "lever": "ratings/prints/produto"
+      "lever": "ratings/prints/produto",
+      "acknowledged_by": {
+        "by": "João",
+        "at": "2026-09-28",
+        "quote": "\"pode mudar, mudou só keyword, que é o menos agressivo, como nao mudou title e subtitle tá tudo certo, pode subir\"",
+        "meaning": "aceita deployar abaixo do piso sabendo que o efeito em installs não é mensurável"
+      },
+      "rechecked": "pull_analytics.py floor 28/09: US 17, BR 15, ES 26, MX 1, FR 35 — todos < 100"
     },
     "quarantine": {
       "ok": false,
       "blockers": [
         "release 2026-09-27 (-1d) dentro de ±14d (scan.py store_events)"
       ],
-      "override": null
+      "override": "meta.json.quarantine_override (pull_analytics.py quarantine --override, 28/09)"
     },
     "text_only_carrier": {
       "ok": false,
-      "why": "1.4.0 leva prints novos (39 idiomas), prompt nativo de review, paywall novo e 2 assinaturas — texto grudado em feature, não mensurável"
+      "why": "1.4.0 leva prints novos (39 idiomas), prompt nativo de review, paywall novo e 2 assinaturas — texto grudado em feature, não mensurável",
+      "acknowledged_by": "João 28/09 — efeito conjunto aceito"
     },
-    "authorization": "inferida pelo coordenador ('continua'), não pedido explícito do João"
+    "authorization": {
+      "by": "João",
+      "at": "2026-09-28",
+      "explicit": true,
+      "quote": "\"pode mudar, mudou só keyword, que é o menos agressivo, como nao mudou title e subtitle tá tudo certo, pode subir\"",
+      "question": "Aplico o ASO (keywords de en-US, pt-BR, es-ES/MX e fr-FR) na 1.4.0 mesmo sabendo que, com o tráfego atual, não dá pra medir o efeito?",
+      "relayed_by": "coordenador /start-aso-pipeline"
+    },
+    "previous_result": "RECUSADO 28/09 (autorização inferida, sem pedido explícito) — nenhum PATCH naquela rodada"
+  },
+  "quarantine_override": {
+    "by": "João",
+    "reason": "Pediu explicitamente em 28/09: só keywords, sem título/subtítulo; aceita que o efeito não é mensurável (tráfego abaixo do piso, entra junto com prints/paywall da 1.4.0)",
+    "at": "2026-09-28",
+    "blockers": [
+      "evento de loja em 2026-09-27 (-1d) dentro da quarentena de ±14d"
+    ]
+  },
+  "carrier_version": {
+    "version": "1.4.0",
+    "id": "64ed2a05-d40f-4e2d-b8c4-77cf5db9bc6e",
+    "state": "PREPARE_FOR_SUBMISSION"
+  },
+  "target_countries": [
+    "US",
+    "BR",
+    "ES",
+    "MX"
+  ],
+  "deploy_timestamp": "2026-09-28T23:36:26Z",
+  "live_at": null,
+  "measurement_note": "Sinal atribuível = RANK por termo (Astro, por store). Efeito em downloads é CONJUNTO com os prints novos (39 idiomas), paywall/assinaturas e prompt nativo de review da 1.4.0 — não é separável do texto; e o tráfego está abaixo do piso de 100 installs 1*/30d em todos os países-alvo, então nenhum veredito de installs é legível. João aceitou isso explicitamente em 28/09.",
+  "deploy": {
+    "at": "2026-09-28T23:36:26Z",
+    "method": "PATCH /v1/appStoreVersionLocalizations/{id} (keywords only; nunca deliver)",
+    "readback": {
+      "en-US": {
+        "id": "896ff729-0421-4ee6-aa23-cda253bc91ac",
+        "http": 200,
+        "match": true,
+        "chars": 99,
+        "before": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart",
+        "after": "gently,sunlight,fast,mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,sleep,cycle,smart"
+      },
+      "pt-BR": {
+        "id": "7575f8cb-6a38-41b1-816d-f55b6b7717ad",
+        "http": 200,
+        "match": true,
+        "chars": 99,
+        "before": "acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer",
+        "after": "anti,acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer"
+      },
+      "es-ES": {
+        "id": "4db2d5b2-22dd-41b5-9d6b-e7fb665c909f",
+        "http": 200,
+        "match": true,
+        "chars": 98,
+        "before": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+        "after": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave"
+      },
+      "es-MX": {
+        "id": "33ad2693-72fe-4072-8fb5-b0ef479e5ba5",
+        "http": 200,
+        "match": true,
+        "chars": 98,
+        "before": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+        "after": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave"
+      }
+    },
+    "untouched": "name, subtitle, description, promotionalText, whatsNew, supportUrl, marketingUrl de todos os 39 locales; keywords dos outros 34 locales (incl. de-DE); versão live 1.3.0; appInfo READY_FOR_SALE",
+    "pre_snapshot": "iterations/2026-09-27_iter-01-text-en-US-keywords/research/asc_pre_deploy_2026-09-28.json",
+    "post_snapshot": "iterations/2026-09-27_iter-01-text-en-US-keywords/research/asc_post_deploy_2026-09-28.json",
+    "goes_public_when": "a 1.4.0 for submetida, aprovada e ficar READY_FOR_SALE",
+    "rollback": "PATCH keywords de volta para os valores 'before' (iguais a current/metadata/<locale>/keywords.txt)"
+  },
+  "metrics": {
+    "patch_day_baseline": "metrics/2026-09-28_patch_day_baseline.json",
+    "d00_baseline": null,
+    "d00_note": "d00_baseline.json só no dia READY_FOR_SALE da 1.4.0: pull_analytics.py d0 --iter <dir> --live-at <dia> --write-meta; aí status → live."
+  },
+  "locales_top2": {
+    "top2_by_installs_90d": {
+      "rule": "João 28/09/2026: toda iteração cobre a base 3 + os 2 locales com mais instalações NOVAS (Sales Report Product Type 1*, nunca 7* — LEARNINGS #53) nos últimos 90 dias; país → locale que a storefront indexa (playbook §10.1); piso 30 instalações por locale",
+      "source": "_GambitStudio/scripts/asc/top_locales.py --app-id 6758740138 --days 90 --json → research/locales.json (rodado pelo reporter em 2026-09-28; o extractor não tinha gravado o arquivo)",
+      "window": {
+        "start": "2026-06-30",
+        "end": "2026-09-27",
+        "days": 90
+      },
+      "total_installs_1star": 364,
+      "picks": [
+        {
+          "locale": "fr-FR",
+          "countries": [
+            {
+              "cc": "FR",
+              "installs": 42
+            }
+          ],
+          "installs": 42,
+          "share_pct": 11.5,
+          "also_indexed": [
+            "en-GB"
+          ],
+          "role": "alvo"
+        },
+        {
+          "locale": null,
+          "value": "sem tráfego suficiente",
+          "best_below_floor": {
+            "locale": "de-DE",
+            "countries": [
+              {
+                "cc": "DE",
+                "installs": 25
+              },
+              {
+                "cc": "CH",
+                "installs": 3
+              },
+              {
+                "cc": "AT",
+                "installs": 1
+              }
+            ],
+            "installs": 29,
+            "share_pct": 8.0,
+            "also_indexed": [
+              "en-GB",
+              "fr-FR",
+              "it"
+            ]
+          },
+          "note": "de-DE ficou 1 instalação abaixo do piso de 30; entrou na iteração a pedido do coordenador, sem troca de token — papel de CONTROLE dos prints da 1.4.0 (texto intocado)"
+        }
+      ],
+      "base_reference": [
+        {
+          "locale": "en-US",
+          "installs": 39,
+          "share_pct": 10.7
+        },
+        {
+          "locale": "es-ES",
+          "installs": 33,
+          "share_pct": 9.1
+        },
+        {
+          "locale": "pt-BR",
+          "installs": 48,
+          "share_pct": 13.2
+        }
+      ],
+      "empty_slot_value": "sem tráfego suficiente — slot fica vazio (nunca chutar um locale)"
+    },
+    "covered_by": "2026-09-28_iter-02-text-fr-FR-keywords (fr-FR alvo, de-DE controle sem mudança)"
   }
 }

@@ -1,1 +1,94 @@
-[]
+[
+  {
+    "iter_id": "2026-09-27_iter-01-text-en-US-keywords",
+    "locale": "en-US",
+    "field": "keywords",
+    "staged_at": "2026-09-28",
+    "carrier_version": "1.4.0",
+    "status": "staged",
+    "live_at": null,
+    "entered": [
+      "fast",
+      "gently",
+      "sunlight"
+    ],
+    "left": [
+      "routine",
+      "tracker"
+    ],
+    "before": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart",
+    "after": "gently,sunlight,fast,mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,sleep,cycle,smart",
+    "result": null
+  },
+  {
+    "iter_id": "2026-09-27_iter-01-text-en-US-keywords",
+    "locale": "pt-BR",
+    "field": "keywords",
+    "staged_at": "2026-09-28",
+    "carrier_version": "1.4.0",
+    "status": "staged",
+    "live_at": null,
+    "entered": [
+      "anti"
+    ],
+    "left": [],
+    "before": "acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer",
+    "after": "anti,acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer",
+    "result": null
+  },
+  {
+    "iter_id": "2026-09-27_iter-01-text-en-US-keywords",
+    "locale": "es-ES",
+    "field": "keywords",
+    "staged_at": "2026-09-28",
+    "carrier_version": "1.4.0",
+    "status": "staged",
+    "live_at": null,
+    "entered": [
+      "reto"
+    ],
+    "left": [],
+    "before": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+    "after": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+    "result": null
+  },
+  {
+    "iter_id": "2026-09-27_iter-01-text-en-US-keywords",
+    "locale": "es-MX",
+    "field": "keywords",
+    "staged_at": "2026-09-28",
+    "carrier_version": "1.4.0",
+    "status": "staged",
+    "live_at": null,
+    "entered": [
+      "reto"
+    ],
+    "left": [],
+    "before": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+    "after": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+    "result": null
+  },
+  {
+    "iter_id": "2026-09-28_iter-02-text-fr-FR-keywords",
+    "locale": "fr-FR",
+    "field": "keywords",
+    "staged_at": "2026-09-28",
+    "carrier_version": "1.4.0",
+    "status": "staged",
+    "live_at": null,
+    "entered": [
+      "defis",
+      "leger",
+      "reveiller",
+      "tot"
+    ],
+    "left": [
+      "réveiller",
+      "suivi",
+      "tôt"
+    ],
+    "before": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller",
+    "after": "defis,leger,se lever,tot,reveiller,alarme,aube,matin,gros dormeur,fort,maths,cycle,sonnerie,mission",
+    "result": null
+  }
+]

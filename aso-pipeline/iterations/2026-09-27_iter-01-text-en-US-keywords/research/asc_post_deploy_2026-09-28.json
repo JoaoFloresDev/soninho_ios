@@ -1,0 +1,814 @@
+{
+ "versions": [
+  {
+   "id": "64ed2a05-d40f-4e2d-b8c4-77cf5db9bc6e",
+   "versionString": "1.4.0",
+   "appStoreState": "PREPARE_FOR_SUBMISSION",
+   "platform": "IOS",
+   "createdDate": "2026-09-27T16:24:32-07:00"
+  },
+  {
+   "id": "9de82a70-6e16-4cc7-92bd-009327388d89",
+   "versionString": "1.3.0",
+   "appStoreState": "READY_FOR_SALE",
+   "platform": "IOS",
+   "createdDate": "2026-08-30T11:39:51-07:00"
+  },
+  {
+   "id": "7afb50c7-960f-440f-870a-b839b0b0f96e",
+   "versionString": "1.2.0",
+   "appStoreState": "READY_FOR_SALE",
+   "platform": "IOS",
+   "createdDate": "2026-08-03T17:09:05-07:00"
+  },
+  {
+   "id": "aa107ff1-0831-412b-b8c5-2fe3a36f0187",
+   "versionString": "1.1.0",
+   "appStoreState": "READY_FOR_SALE",
+   "platform": "IOS",
+   "createdDate": "2026-06-27T19:14:40-07:00"
+  },
+  {
+   "id": "17b195d1-274b-4e23-9e1a-013087eb860f",
+   "versionString": "1.0",
+   "appStoreState": "READY_FOR_SALE",
+   "platform": "IOS",
+   "createdDate": "2026-02-04T14:48:12-08:00"
+  }
+ ],
+ "version_locs": {
+  "ro": {
+   "id": "60bd80ff-67cd-4127-b2b3-c12be3d85422",
+   "keywords": "alarmă,devreme,dimineață,amânare,misiune,calcul,tare,deșteptător,ciclu de somn,răsărit,somnoros",
+   "description": "Deșteptătorul inteligent care se asigură că te ridici cu adevărat - creat pentru cei cu somn adânc și dependenți de amânare.\n\nMISIUNI CARE OPRESC AMÂNAREA\nRezolvă un calcul rapid sau fă câțiva pași ca să oprești alarma. Creierul se trezește înainte ca degetul să găsească butonul de amânare. Gata cu opritul pe jumătate adormit și cu întârzierile.\n\nFEREASTRĂ DE TREZIRE INTELIGENTĂ\nSetează o fereastră (până la 30 min) și alarma sună în momentul tău de somn cel mai ușor. Trezirea din somnul ușor e naturală - niciodată brutală.\n\nSUNETE PUTERNICE PENTRU SOMN ADÂNC\nDe la clopoței blânzi la sunete care trezesc și cel mai adânc somnoros. Volumul crește treptat: blând cu urechile, imposibil de ignorat.\n\nUN RĂSĂRIT PE ECRANUL TĂU\nLumina și volumul cresc împreună ca un răsărit, ca să te trezești calm, nu speriat.\n\nMONITORIZAREA CICLURILOR DE SOMN\nÎncepe noaptea în aplicație și vezi fazele somnului, eficiența, scorul și tendințele săptămânale - și cum le influențează ora trezirii.\n\nÎN PLUS\n- Alarme recurente pe zile ale săptămânii\n- Sfaturi de somn pentru o rutină mai bună\n- Statistici: săptămână, lună și an\n- Design întunecat și minimalist, gândit pentru dormitor\n- Funcționează offline, fără cont\n\nGata cu amânarea. Ridică-te cu adevărat.\n\nPolitica de confidențialitate: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTermeni de utilizare: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Provocări noi de trezire cu Sunrise Premium — scuturare, tastare și memorie, ca să te ridici cu adevărat din pat.\nProvocarea de matematică rămâne gratuită, iar provocările deja salvate la alarmele tale funcționează în continuare.\nRemedieri și îmbunătățiri pentru dimineți mai liniștite.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "hu": {
+   "id": "6aa78764-a648-4532-9f6e-5faac88e1271",
+   "keywords": "ébredés,felkelni,korán,reggel,szundi,küldetés,számolás,hangos,ébresztőóra,alvási ciklus,napkelte",
+   "description": "Az okos ébresztő, ami gondoskodik róla, hogy tényleg felkelj - mély alvóknak és megrögzött szundizóknak készült.\n\nKÜLDETÉSEK A SZUNDIZÁS ELLEN\nOldj meg egy gyors számolási feladatot, vagy tegyél néhány lépést az ébresztő kikapcsolásához. Az agyad előbb ébred fel, mint hogy az ujjad megtalálná a szundi gombot. Nincs több félálomban kikapcsolás és késés.\n\nOKOS ÉBRESZTÉSI ABLAK\nÁllíts be egy ablakot (max. 30 perc), és az ébresztő a legkönnyebb alvási pillanatodban szólal meg. A könnyű alvásból ébredés természetes - sosem brutális.\n\nHANGOS HANGOK MÉLY ALVÓKNAK\nA lágy csengettyűktől a hangokig, amik a legmélyebben alvót is felébresztik. A hangerő fokozatosan nő: kíméletes a füleknek, átaludni lehetetlen.\n\nNAPKELTE A KIJELZŐDÖN\nA fény és a hangerő együtt erősödik, mint egy napkelte, így nyugodtan ébredsz, nem ijedten.\n\nALVÁSI CIKLUSOK KÖVETÉSE\nIndítsd el az éjszakát az appban, és nézd meg az alvási fázisaidat, a hatékonyságot, a pontszámot és a heti trendeket - és hogy mindezt hogyan befolyásolja az ébredésed ideje.\n\nTOVÁBBÁ\n- Ismétlődő ébresztők a hét napjaira\n- Alvási tippek egy jobb rutinért\n- Statisztikák: hét, hónap és év\n- Sötét, minimalista dizájn a hálószobába\n- Offline működik, fiók nélkül\n\nElég a szundizásból. Kelj fel igazán.\n\nAdatvédelmi irányelvek: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nFelhasználási feltételek: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Új ébresztő kihívások a Sunrise Premiummal — rázás, gépelés és memória, hogy tényleg kikelj az ágyból.\nA matek kihívás továbbra is ingyenes, és az ébresztőidhez már beállított kihívások ugyanúgy működnek.\nJavítások és fejlesztések a nyugodtabb reggelekért.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "ja": {
+   "id": "6529b668-4958-479d-ad5b-d902d2fecec7",
+   "keywords": "起床,朝,早起き,スヌーズ,計算,ミッション,大音量,アラーム,睡眠サイクル,朝日,二度寝,睡眠記録,めざまし,寝坊防止,快眠,爆音,朝活,すっきり,睡眠アプリ,アラーム音,起こして",
+   "description": "本当に起きられるスマート目覚まし - 朝が苦手な人と二度寝の常習犯のために作られました。\n\n二度寝を終わらせるミッション\n簡単な計算を解くか、数歩歩かないとアラームは止まりません。指がスヌーズボタンを探す前に、脳が目を覚まします。寝ぼけたまま止めて遅刻する朝はもう終わりです。\n\nスマート起床ウインドウ\nウインドウ（最大30分）を設定すると、いちばん眠りが浅い瞬間にアラームが鳴ります。浅い眠りからの目覚めは自然で、つらくありません。\n\n朝が苦手な人のための大音量サウンド\nやさしいチャイムから、どんなに深く眠る人も起こすサウンドまで。音量は少しずつ上がるので、耳にやさしく、それでいて眠り続けることはできません。\n\n画面に広がる朝日\n光と音量が朝日のようにいっしょに強くなり、驚いてではなく、穏やかに目覚められます。\n\n睡眠サイクルの記録\nアプリで夜の記録を開始すると、睡眠ステージ、効率、スコア、週ごとの傾向を確認できます。起床時刻の影響もわかります。\n\nその他の機能\n- 曜日ごとの繰り返しアラーム\n- より良い習慣のための睡眠のヒント\n- 週・月・年の睡眠統計\n- 寝室のためのダークでミニマルなデザイン\n- オフラインで動作、アカウント不要\n\nスヌーズはもう終わり。本当に起きましょう。\n\nプライバシーポリシー: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\n利用規約: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Sunrise Premiumで新しい起床チャレンジ — シェイク、タイピング、記憶で、しっかりベッドから出られます。\n計算チャレンジは引き続き無料で、アラームに設定済みのチャレンジもそのまま使えます。\nより穏やかな朝のための修正と改善。",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "fi": {
+   "id": "00a842be-e36a-40bd-9e8f-37a95a110527",
+   "keywords": "herätä,nousta,aikaisin,aamu,torkku,tehtävä,lasku,kova,herätyskello,unisykli,auringonnousu,uni",
+   "description": "Älykäs herätyskello, joka varmistaa, että nouset oikeasti — tehty sikeäunisille ja kroonisille torkuttajille.\n\nTEHTÄVÄT LOPETTAVAT TORKUTTAMISEN\nRatkaise nopea lasku tai ota muutama askel sammuttaaksesi herätyksen. Aivosi heräävät ennen kuin sormi löytää torkkupainikkeen. Ei enää sammuttamista puoliunessa ja myöhästymisiä.\n\nÄLYKÄS HERÄTYSIKKUNA\nAseta ikkuna (enintään 30 min), niin herätys soi kevyimmällä unihetkelläsi. Kevyestä unesta herääminen tuntuu luonnolliselta — ei koskaan rajulta.\n\nKOVAT ÄÄNET SIKEÄUNISILLE\nPehmeistä kelloista ääniin, jotka herättävät sikeimmänkin nukkujan. Äänenvoimakkuus nousee vähitellen: lempeä korville, mahdoton nukkua ohi.\n\nAURINGONNOUSU NÄYTÖLLÄSI\nValo ja ääni voimistuvat yhdessä kuin auringonnousu, joten heräät rauhallisesti etkä säikähtäen.\n\nUNISYKLIEN SEURANTA\nAloita yö apissa ja näe univaiheesi, tehokkuutesi, pisteesi ja viikkotrendit — sekä miten heräämisaikasi vaikuttaa niihin.\n\nLISÄKSI\n- Toistuvat herätykset viikonpäivittäin\n- Univinkkejä parempaan rutiiniin\n- Tilastot: viikko, kuukausi ja vuosi\n- Tumma, minimalistinen muotoilu makuuhuoneeseen\n- Toimii offline-tilassa, ei vaadi tiliä\n\nLopeta torkuttaminen. Nouse oikeasti.\n\nTietosuojakäytäntö: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nKäyttöehdot: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Uusia herätyshaasteita Sunrise Premiumilla — ravistus, kirjoitus ja muisti, jotta todella nouset sängystä.\nMatematiikkahaaste pysyy ilmaisena, ja herätyksiisi jo tallennetut haasteet toimivat edelleen.\nKorjauksia ja parannuksia rauhallisempiin aamuihin.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "es-MX": {
+   "id": "33ad2693-72fe-4072-8fb5-b0ef479e5ba5",
+   "keywords": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+   "description": "El despertador inteligente que se asegura de que te levantes de verdad - hecho para dormilones profundos y adictos a posponer.\n\nMISIONES CONTRA LA SONECA\nResuelve una misión de matemáticas o da unos pasos para apagar la alarma. Tu cerebro despierta antes de que el dedo encuentre el botón de posponer. Se acabó apagarla medio dormido y llegar tarde.\n\nVENTANA INTELIGENTE\nDefine una ventana (hasta 30 min) y la alarma suena en tu momento de sueño más ligero. Despertar del sueño ligero es natural - nunca brutal.\n\nSONIDOS FUERTES PARA SUEÑO PROFUNDO\nDe tonos suaves a sonidos que despiertan al dormilón más profundo. El volumen sube gradualmente: amable con tus oídos, imposible de ignorar.\n\nAMANECER EN TU PANTALLA\nLa luz y el volumen suben juntos como un amanecer, para despertar tranquilo y sin sustos.\n\nCICLO DE SUEÑO\nInicia la noche en la app y ve tus fases de sueño, eficiencia, puntuación y tendencias semanales.\n\nTAMBIÉN INCLUYE\n- Alarmas recurrentes por día de la semana\n- Consejos de sueño para mejorar tu rutina\n- Estadísticas: semana, mes y año\n- Diseño oscuro y minimalista, hecho para el dormitorio\n- Funciona sin conexión y sin cuenta\n\nDeja de posponer. Levántate de verdad.\n\nPolítica de privacidad: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTérminos de uso: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nuevos retos para despertar con Sunrise Premium — agitar, escribir y memoria, para que salgas de la cama de verdad.\nEl reto de matemáticas sigue siendo gratis, y los retos ya guardados en tus alarmas siguen funcionando.\nCorrecciones y mejoras para mañanas más tranquilas.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "sv": {
+   "id": "eedd3a88-870c-4b46-92de-19b1b8420755",
+   "keywords": "vakna,gå upp,tidigt,morgon,snooze,uppdrag,matte,högt,väckarklocka,sömncykel,soluppgång,sova",
+   "description": "Det smarta alarmet som ser till att du faktiskt går upp - byggt för djupsovare och kroniska snoozare.\n\nUPPDRAG SOM STOPPAR SNOOZANDET\nLös ett snabbt mattetal eller ta några steg för att stänga av alarmet. Hjärnan vaknar innan fingret hittar snoozeknappen. Slut på att stänga av i halvsömn och komma försent.\n\nSMART VÄCKNINGSFÖNSTER\nStäll in ett fönster (upp till 30 min) så ringer alarmet i ditt lättaste sömnögonblick. Att vakna ur lätt sömn känns naturligt - aldrig brutalt.\n\nHÖGA LJUD FÖR DJUPSOVARE\nFrån mjuka klockspel till ljud som väcker den djupaste sovaren. Volymen ökar gradvis: skonsam mot öronen, omöjlig att sova igenom.\n\nEN SOLUPPGÅNG PÅ DIN SKÄRM\nLjus och volym stiger tillsammans som en soluppgång, så att du vaknar lugnt i stället för att rycka till.\n\nLOGGA DINA SÖMNCYKLER\nStarta natten i appen och se dina sömnstadier, effektivitet, betyg och veckotrender - och hur din uppvakningstid påverkar dem.\n\nDESSUTOM\n- Återkommande alarm per veckodag\n- Sömntips för en bättre rutin\n- Statistik: vecka, månad och år\n- Mörk, minimalistisk design gjord för sovrummet\n- Fungerar offline, inget konto behövs\n\nSluta snooza. Gå upp på riktigt.\n\nIntegritetspolicy: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nAnvändarvillkor: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nya väckningsutmaningar med Sunrise Premium — skaka, skriva och minne, så att du verkligen kommer ur sängen.\nMatteutmaningen är fortfarande gratis, och utmaningar som redan finns på dina alarm fortsätter att fungera.\nRättningar och förbättringar för lugnare morgnar.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "it": {
+   "id": "12897086-e20a-46ba-9553-89417cafe0a3",
+   "keywords": "svegliarsi,alzarsi,presto,mattina,missione,calcoli,forte,suoneria,ciclo,alba,dormiglione,allarme",
+   "description": "La sveglia intelligente che ti fa alzare davvero dal letto - pensata per chi ha il sonno pesante e posticipa sempre.\n\nMISSIONI CONTRO IL POSTICIPO\nRisolvi un rapido calcolo o fai qualche passo per spegnere la sveglia. Il tuo cervello si sveglia prima che il dito trovi il pulsante posticipa. Basta spegnerla mezzo addormentato e arrivare tardi.\n\nFINESTRA DI RISVEGLIO INTELLIGENTE\nImposta una finestra (fino a 30 min) e la sveglia suona nel tuo momento di sonno più leggero. Svegliarsi dal sonno leggero è naturale - mai brutale.\n\nSUONI POTENTI PER IL SONNO PESANTE\nDa campanelli delicati a suoni che svegliano il dormiglione più profondo. Il volume sale gradualmente: gentile con le orecchie, impossibile da ignorare.\n\nUN'ALBA SUL TUO SCHERMO\nLuce e volume salgono insieme come un'alba, così ti svegli sereno invece che di soprassalto.\n\nMONITORAGGIO DEI CICLI DEL SONNO\nAvvia la notte nell'app e guarda le tue fasi del sonno, l'efficienza, il punteggio e le tendenze settimanali - e come l'orario della sveglia le influenza.\n\nINCLUDE ANCHE\n- Sveglie ricorrenti per giorno della settimana\n- Consigli per una routine del sonno migliore\n- Statistiche: settimana, mese e anno\n- Design scuro e minimale, pensato per la camera da letto\n- Funziona offline, senza account\n\nBasta posticipare. Alzati davvero.\n\nInformativa sulla privacy: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTermini di utilizzo: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nuove sfide per svegliarti con Sunrise Premium — scuotere, digitare e memoria, per alzarti davvero dal letto.\nLa sfida di matematica resta gratuita, e le sfide già salvate nelle tue sveglie continuano a funzionare.\nCorrezioni e miglioramenti per mattine più serene.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "th": {
+   "id": "e4d8195d-29a3-400d-affa-fbf6307f970b",
+   "keywords": "นาฬิกาปลุก,ตื่นเช้า,เสียงดัง,เลื่อนปลุก,ภารกิจ,คณิต,หลับลึก,วงจรนอน,ติดตามการนอน,ตื่นยาก,เช้า",
+   "description": "นาฬิกาปลุกอัจฉริยะที่ทำให้คุณตื่นได้จริง - สร้างมาเพื่อคนหลับลึกและสายเลื่อนปลุก\n\nภารกิจหยุดการเลื่อนปลุก\nแก้โจทย์คณิตง่ายๆ หรือเดินสองสามก้าวเพื่อปิดปลุก สมองจะตื่นก่อนที่นิ้วจะหาปุ่มเลื่อนปลุกเจอ ไม่มีการปิดปลุกแบบครึ่งหลับครึ่งตื่นแล้วสายอีกต่อไป\n\nช่วงปลุกอัจฉริยะ\nตั้งช่วงเวลา (สูงสุด 30 นาที) แล้วนาฬิกาจะปลุกในจังหวะที่คุณหลับตื้นที่สุด การตื่นจากหลับตื้นรู้สึกเป็นธรรมชาติ - ไม่สะดุ้งตกใจ\n\nเสียงดังสำหรับคนหลับลึก\nตั้งแต่กระดิ่งเบาๆ ไปจนถึงเสียงที่ปลุกคนหลับลึกที่สุดได้ เสียงค่อยๆ ดังขึ้น: นุ่มนวลต่อหู แต่เมินไม่ได้แน่นอน\n\nพระอาทิตย์ขึ้นบนหน้าจอ\nแสงและเสียงเพิ่มขึ้นพร้อมกันเหมือนพระอาทิตย์ขึ้น คุณจึงตื่นอย่างสงบ ไม่ใช่ตกใจ\n\nติดตามวงจรการนอน\nเริ่มคืนในแอปแล้วดูระยะการนอน ประสิทธิภาพ คะแนน และแนวโน้มรายสัปดาห์ - รวมถึงผลของเวลาตื่นของคุณ\n\nมีให้อีก\n- ปลุกซ้ำตามวัน\n- เคล็ดลับการนอนเพื่อกิจวัตรที่ดีขึ้น\n- สถิติ: สัปดาห์ เดือน และปี\n- ดีไซน์มืดมินิมัลเหมาะกับห้องนอน\n- ใช้ได้ออฟไลน์ ไม่ต้องมีบัญชี\n\nเลิกเลื่อนปลุก ตื่นจริงสักที\n\nนโยบายความเป็นส่วนตัว: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nข้อกำหนดการใช้งาน: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "ภารกิจปลุกใหม่กับ Sunrise Premium — เขย่า พิมพ์ และความจำ เพื่อให้คุณลุกจากเตียงได้จริง\nภารกิจคณิตศาสตร์ยังคงใช้ฟรี และภารกิจที่ตั้งไว้ในนาฬิกาปลุกแล้วยังใช้งานได้ตามเดิม\nแก้ไขและปรับปรุงเพื่อเช้าที่สบายขึ้น",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "vi": {
+   "id": "c7812910-bdaa-4098-9b8d-9a67f4372052",
+   "keywords": "dậy sớm,buổi sáng,báo lại,nhiệm vụ,toán,to,ngủ sâu,chu kỳ ngủ,theo dõi giấc ngủ,khó dậy,chuông",
+   "description": "Báo thức thông minh đảm bảo bạn thật sự thức dậy - dành cho người ngủ say và nghiện nút báo lại.\n\nNHIỆM VỤ CHẤM DỨT BÁO LẠI\nGiải một phép toán đơn giản hoặc đi vài bước để tắt chuông. Não bạn tỉnh trước khi ngón tay tìm thấy nút báo lại. Không còn tắt chuông trong vô thức rồi dậy muộn.\n\nKHUNG ĐÁNH THỨC THÔNG MINH\nĐặt khung thời gian (tối đa 30 phút) và chuông sẽ reo vào lúc bạn ngủ nông nhất. Thức dậy từ giấc ngủ nông thấy tự nhiên - không bao giờ giật mình.\n\nÂM THANH LỚN CHO NGƯỜI NGỦ SAY\nTừ chuông êm dịu đến âm thanh đánh thức cả người ngủ say nhất. Âm lượng tăng dần: êm tai nhưng không thể phớt lờ.\n\nBÌNH MINH TRÊN MÀN HÌNH\nÁnh sáng và âm lượng tăng cùng nhau như mặt trời mọc, để bạn tỉnh dậy nhẹ nhàng thay vì hoảng hốt.\n\nTHEO DÕI CHU KỲ GIẤC NGỦ\nBắt đầu đêm trong ứng dụng và xem giai đoạn giấc ngủ, hiệu suất, điểm số cùng xu hướng hằng tuần - và cả tác động của giờ dậy.\n\nCÒN CÓ THÊM\n- Báo thức lặp lại theo ngày\n- Mẹo ngủ ngon cho thói quen tốt hơn\n- Thống kê: tuần, tháng và năm\n- Thiết kế tối giản tông tối cho phòng ngủ\n- Hoạt động ngoại tuyến, không cần tài khoản\n\nNgừng báo lại. Thức dậy thật sự.\n\nChính sách quyền riêng tư: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nĐiều khoản sử dụng: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Thử thách báo thức mới với Sunrise Premium — lắc, gõ chữ và trí nhớ, để bạn thật sự rời khỏi giường.\nThử thách toán vẫn miễn phí, và các thử thách đã lưu trong báo thức của bạn vẫn hoạt động bình thường.\nSửa lỗi và cải tiến cho những buổi sáng nhẹ nhàng hơn.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "de-DE": {
+   "id": "13d9ccf6-a7f7-4600-914c-ab238b165b4b",
+   "keywords": "aufwachen,aufstehen,schlummern,mathe,mission,laut,morgen,langschläfer,schlafzyklus,sonnenaufgang",
+   "description": "Der smarte Wecker, der dafür sorgt, dass du wirklich aufstehst - gemacht für Tiefschläfer und notorische Schlummerer.\n\nMISSIONEN GEGEN DAS SCHLUMMERN\nLöse eine kurze Matheaufgabe oder geh ein paar Schritte, um den Alarm auszuschalten. Dein Gehirn wacht auf, bevor dein Finger die Schlummertaste findet. Nie wieder im Halbschlaf ausschalten und zu spät kommen.\n\nINTELLIGENTES WECKFENSTER\nLege ein Fenster fest (bis zu 30 Min.) und der Alarm klingelt in deinem leichtesten Schlafmoment. Aus dem leichten Schlaf zu erwachen fühlt sich natürlich an - nie brutal.\n\nLAUTE TÖNE FÜR TIEFSCHLÄFER\nVon sanften Klängen bis zu Tönen, die den tiefsten Schläfer wecken. Die Lautstärke steigt allmählich: sanft zu deinen Ohren, unmöglich zu verschlafen.\n\nSONNENAUFGANG AUF DEINEM DISPLAY\nLicht und Lautstärke steigen gemeinsam wie ein Sonnenaufgang, damit du ruhig statt erschrocken aufwachst.\n\nSCHLAFZYKLUS-TRACKING\nStarte die Nacht in der App und sieh deine Schlafphasen, Effizienz, Bewertung und Wochentrends - und wie deine Aufwachzeit sie beeinflusst.\n\nAUSSERDEM ENTHALTEN\n- Wiederkehrende Alarme pro Wochentag\n- Schlaftipps für eine bessere Routine\n- Schlafstatistiken: Woche, Monat, Jahr\n- Dunkles, minimalistisches Design fürs Schlafzimmer\n- Funktioniert offline, ohne Konto\n\nSchluss mit Schlummern. Steh wirklich auf.\n\nDatenschutzrichtlinie: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nNutzungsbedingungen: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Neue Weck-Aufgaben mit Sunrise Premium — Schütteln, Tippen und Gedächtnis, damit du wirklich aufstehst.\nDie Rechenaufgabe bleibt kostenlos, und bereits gespeicherte Aufgaben in deinen Weckern funktionieren weiter.\nFehlerbehebungen und Verbesserungen für entspanntere Morgen.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "pt-PT": {
+   "id": "7f3c5420-e6e1-4a0d-a0c9-58f5dcc56276",
+   "keywords": "acordar,cedo,levantar,soneca,sono pesado,matemática,relógio,alto,manhã,dorminhoco,ciclo,amanhecer",
+   "description": "O despertador inteligente que garante que se levanta mesmo - feito para quem tem o sono pesado e vive a adiar o alarme.\n\nMISSÕES QUE ACABAM COM O ADIAR\nResolva um cálculo rápido ou dê alguns passos para desligar o alarme. O cérebro acorda antes de o dedo encontrar o botão de adiar. Acabou-se desligar meio a dormir e chegar atrasado.\n\nJANELA DE DESPERTAR INTELIGENTE\nDefina uma janela (até 30 min) e o alarme toca no seu momento de sono mais leve. Acordar do sono leve é natural - nunca brutal.\n\nSONS FORTES PARA SONO PESADO\nDe toques suaves a sons que acordam o dorminhoco mais profundo. O volume sobe gradualmente: suave para os ouvidos, impossível de ignorar.\n\nNASCER DO SOL NO SEU ECRÃ\nLuz e volume sobem juntos como um nascer do sol, para acordar calmo em vez de assustado.\n\nREGISTO DOS CICLOS DE SONO\nInicie a noite na app e veja as fases do sono, a eficiência, a pontuação e as tendências semanais - e como a hora de acordar as influencia.\n\nTAMBÉM INCLUI\n- Alarmes recorrentes por dia da semana\n- Dicas de sono para uma rotina melhor\n- Estatísticas: semana, mês e ano\n- Design escuro e minimalista, pensado para o quarto\n- Funciona offline, sem conta\n\nChega de adiar. Levante-se a sério.\n\nPolítica de privacidade: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTermos de utilização: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Novos desafios para acordar com o Sunrise Premium — abanar, escrever e memória, para sair mesmo da cama.\nO desafio de matemática continua gratuito, e os desafios já guardados nos seus alarmes continuam a funcionar.\nCorreções e melhorias para manhãs mais tranquilas.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "pl": {
+   "id": "fbe88e4b-41aa-4b5e-ab14-71aa67636cb6",
+   "keywords": "obudzić,wstawać,rano,wcześnie,drzemka,misja,matematyka,głośny,śpioch,cykl snu,wschód,pobudka",
+   "description": "Inteligentny budzik, który dopilnuje, żebyś naprawdę wstał — stworzony dla mocno śpiących i nałogowych drzemaczy.\n\nMISJE PRZECIW DRZEMCE\nRozwiąż proste zadanie z matematyki albo zrób kilka kroków, aby wyłączyć alarm. Mózg budzi się, zanim palec znajdzie przycisk drzemki. Koniec z wyłączaniem przez sen i spóźnieniami.\n\nOKNO INTELIGENTNEGO BUDZENIA\nUstaw okno (do 30 min), a alarm zadzwoni w najlżejszym momencie Twojego snu. Budzenie z lekkiego snu jest naturalne — nigdy brutalne.\n\nGŁOŚNE DŹWIĘKI DLA MOCNO ŚPIĄCYCH\nOd delikatnych dzwonków po dźwięki, które obudzą największego śpiocha. Głośność narasta stopniowo: łagodnie dla uszu, nie da się jej przespać.\n\nWSCHÓD SŁOŃCA NA TWOIM EKRANIE\nŚwiatło i głośność rosną razem jak wschód słońca — budzisz się spokojnie, a nie w przestrachu.\n\nŚLEDZENIE CYKLI SNU\nRozpocznij noc w aplikacji i sprawdzaj fazy snu, efektywność, ocenę i tygodniowe trendy — oraz jak wpływa na nie pora pobudki.\n\nDODATKOWO\n- Powtarzające się alarmy dla dni tygodnia\n- Porady na lepszą rutynę snu\n- Statystyki: tydzień, miesiąc i rok\n- Ciemny, minimalistyczny design do sypialni\n- Działa offline, bez konta\n\nKoniec z drzemką. Wstań naprawdę.\n\nPolityka prywatności: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nWarunki użytkowania: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nowe wyzwania na pobudkę z Sunrise Premium — potrząsanie, pisanie i pamięć, żebyś naprawdę wstał z łóżka.\nWyzwanie matematyczne pozostaje darmowe, a wyzwania już zapisane w Twoich alarmach działają dalej.\nPoprawki i ulepszenia dla spokojniejszych poranków.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "en-GB": {
+   "id": "0f2d585c-d5eb-4946-9e40-5b29016d4c64",
+   "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart",
+   "description": "The smart alarm that makes sure you actually get out of bed - built for heavy sleepers and chronic snoozers.\n\nMISSIONS THAT END SNOOZING\nSolve a quick math mission or take a few steps to turn the alarm off. Your brain wakes up before your finger finds the snooze button. No more turning it off half-asleep and being late again.\n\nSMART WAKE-UP WINDOW\nSet a window (up to 30 min) and the alarm rings at your lightest sleep moment. Waking up from light sleep feels natural - never brutal.\n\nLOUD SOUNDS FOR HEAVY SLEEPERS\nFrom gentle chimes to sounds that wake the deepest sleeper. Volume ramps up gradually, so it is kind to your ears but impossible to sleep through.\n\nSUNRISE ON YOUR SCREEN\nLight and volume rise together like a sunrise, so you wake calm instead of startled.\n\nSLEEP CYCLE TRACKING\nStart the night in the app and see your sleep phases, efficiency, score and weekly trends - and how your wake-up time affects them.\n\nALSO INCLUDED\n- Recurring alarms per weekday\n- Sleep tips to build a better routine\n- Sleep statistics: week, month, year\n- Dark, minimal design made for the bedroom\n- Works offline, no account needed\n\nStop snoozing. Get up for real.\n\nPrivacy Policy: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTerms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "New wake-up challenges with Sunrise Premium — shake, typing and memory, so you really get out of bed.\nThe maths challenge stays free, and challenges already set on your alarms keep working.\nFixes and improvements for smoother mornings.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "no": {
+   "id": "b483c0ea-5cac-4cf3-826d-b2f8dae7c99a",
+   "keywords": "våkne,stå opp,tidlig,morgen,slumre,oppdrag,regning,høy,vekkerklokke,søvnsyklus,soloppgang,sove",
+   "description": "Den smarte vekkerklokka som sørger for at du faktisk står opp – laget for tunge sovere og kroniske slumrere.\n\nOPPDRAG SOM STOPPER SLUMRINGEN\nLøs et raskt regnestykke eller ta noen skritt for å slå av alarmen. Hjernen våkner før fingeren finner slumreknappen. Slutt på å slå av i halvsøvne og komme for sent.\n\nSMART VEKKEVINDU\nSett et vindu (opptil 30 min), og alarmen ringer i ditt letteste søvnøyeblikk. Å våkne fra lett søvn føles naturlig – aldri brutalt.\n\nHØYE LYDER FOR TUNGE SOVERE\nFra myke klokkespill til lyder som vekker den dypeste soveren. Volumet øker gradvis: skånsomt for ørene, umulig å sove gjennom.\n\nEN SOLOPPGANG PÅ SKJERMEN DIN\nLys og volum stiger sammen som en soloppgang, så du våkner rolig i stedet for å skvette.\n\nREGISTRER SØVNSYKLUSENE DINE\nStart natten i appen og se søvnstadier, effektivitet, poengsum og ukentlige trender – og hvordan vekketidspunktet påvirker dem.\n\nI TILLEGG\n- Gjentakende alarmer per ukedag\n- Søvntips for en bedre rutine\n- Statistikk: uke, måned og år\n- Mørkt, minimalistisk design laget for soverommet\n- Fungerer uten nett, ingen konto nødvendig\n\nSlutt å slumre. Stå opp på ordentlig.\n\nPersonvernerklæring: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nBruksvilkår: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nye vekkeutfordringer med Sunrise Premium — rist, skriv og hukommelse, så du virkelig kommer deg ut av sengen.\nRegneutfordringen er fortsatt gratis, og utfordringer som allerede ligger på alarmene dine fungerer som før.\nFeilrettinger og forbedringer for roligere morgener.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "en-US": {
+   "id": "896ff729-0421-4ee6-aa23-cda253bc91ac",
+   "keywords": "gently,sunlight,fast,mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,sleep,cycle,smart",
+   "description": "The smart alarm that makes sure you actually get out of bed - built for heavy sleepers and chronic snoozers.\n\nMISSIONS THAT END SNOOZING\nSolve a quick math mission or take a few steps to turn the alarm off. Your brain wakes up before your finger finds the snooze button. No more turning it off half-asleep and being late again.\n\nSMART WAKE-UP WINDOW\nSet a window (up to 30 min) and the alarm rings at your lightest sleep moment. Waking up from light sleep feels natural - never brutal.\n\nLOUD SOUNDS FOR HEAVY SLEEPERS\nFrom gentle chimes to sounds that wake the deepest sleeper. Volume ramps up gradually, so it is kind to your ears but impossible to sleep through.\n\nSUNRISE ON YOUR SCREEN\nLight and volume rise together like a sunrise, so you wake calm instead of startled.\n\nSLEEP CYCLE TRACKING\nStart the night in the app and see your sleep phases, efficiency, score and weekly trends - and how your wake-up time affects them.\n\nALSO INCLUDED\n- Recurring alarms per weekday\n- Sleep tips to build a better routine\n- Sleep statistics: week, month, year\n- Dark, minimal design made for the bedroom\n- Works offline, no account needed\n\nStop snoozing. Get up for real.\n\nPrivacy Policy: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTerms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "New wake-up challenges with Sunrise Premium — shake, typing and memory, so you really get out of bed.\nThe math challenge stays free, and challenges already set on your alarms keep working.\nFixes and improvements for smoother mornings.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "en-CA": {
+   "id": "48a1f09a-2d80-4f1b-9140-b2e021c07a6c",
+   "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart",
+   "description": "The smart alarm that makes sure you actually get out of bed - built for heavy sleepers and chronic snoozers.\n\nMISSIONS THAT END SNOOZING\nSolve a quick math mission or take a few steps to turn the alarm off. Your brain wakes up before your finger finds the snooze button. No more turning it off half-asleep and being late again.\n\nSMART WAKE-UP WINDOW\nSet a window (up to 30 min) and the alarm rings at your lightest sleep moment. Waking up from light sleep feels natural - never brutal.\n\nLOUD SOUNDS FOR HEAVY SLEEPERS\nFrom gentle chimes to sounds that wake the deepest sleeper. Volume ramps up gradually, so it is kind to your ears but impossible to sleep through.\n\nSUNRISE ON YOUR SCREEN\nLight and volume rise together like a sunrise, so you wake calm instead of startled.\n\nSLEEP CYCLE TRACKING\nStart the night in the app and see your sleep phases, efficiency, score and weekly trends - and how your wake-up time affects them.\n\nALSO INCLUDED\n- Recurring alarms per weekday\n- Sleep tips to build a better routine\n- Sleep statistics: week, month, year\n- Dark, minimal design made for the bedroom\n- Works offline, no account needed\n\nStop snoozing. Get up for real.\n\nPrivacy Policy: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTerms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "New wake-up challenges with Sunrise Premium — shake, typing and memory, so you really get out of bed.\nThe math challenge stays free, and challenges already set on your alarms keep working.\nFixes and improvements for smoother mornings.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "id": {
+   "id": "f66ba072-9a9a-4830-9fd9-eaaf1c031c71",
+   "keywords": "bangun pagi,jam weker,tunda,misi,hitung,keras,susah bangun,siklus tidur,matahari terbit,weker",
+   "description": "Alarm pintar yang memastikan kamu benar-benar bangun - dibuat untuk yang tidurnya pulas dan hobi menunda alarm.\n\nMISI PENGHENTI TOMBOL TUNDA\nSelesaikan soal hitung singkat atau jalan beberapa langkah untuk mematikan alarm. Otakmu bangun sebelum jarimu menemukan tombol tunda. Tak ada lagi mematikan alarm setengah sadar lalu terlambat.\n\nJENDELA BANGUN PINTAR\nAtur jendela (hingga 30 menit) dan alarm berbunyi di momen tidurmu yang paling ringan. Bangun dari tidur ringan terasa alami - tidak pernah kasar.\n\nSUARA KERAS UNTUK TIDUR PULAS\nDari lonceng lembut sampai suara yang membangunkan si paling pulas. Volume naik bertahap: ramah di telinga, mustahil dilewatkan.\n\nMATAHARI TERBIT DI LAYARMU\nCahaya dan volume naik bersama seperti matahari terbit, jadi kamu bangun dengan tenang, bukan kaget.\n\nPELACAKAN SIKLUS TIDUR\nMulai malam di aplikasi dan lihat tahap tidur, efisiensi, skor, dan tren mingguan - serta pengaruh jam bangunmu.\n\nJUGA TERMASUK\n- Alarm berulang per hari dalam seminggu\n- Tips tidur untuk rutinitas yang lebih baik\n- Statistik: minggu, bulan, dan tahun\n- Desain gelap minimalis untuk kamar tidur\n- Bekerja offline, tanpa akun\n\nBerhenti menunda. Bangun sungguhan.\n\nKebijakan Privasi: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nKetentuan Penggunaan: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Tantangan bangun baru dengan Sunrise Premium — goyang, mengetik, dan memori, supaya kamu benar-benar bangun dari tempat tidur.\nTantangan matematika tetap gratis, dan tantangan yang sudah tersimpan di alarmmu tetap berfungsi.\nPerbaikan dan peningkatan untuk pagi yang lebih tenang.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "sk": {
+   "id": "dc052554-196e-4d30-913b-37a99a1add40",
+   "keywords": "zobudiť,vstávať,skoro,ráno,odklad,misia,počty,hlasný,spáč,spánkový cyklus,východ slnka",
+   "description": "Inteligentný budík, ktorý zaistí, že naozaj vstanete — stvorený pre tvrdých spáčov a chronických odkladačov.\n\nMISIE PROTI ODKLADANIU\nVyriešte rýchly príklad alebo urobte pár krokov, aby ste budík vypli. Mozog sa zobudí skôr, než prst nájde tlačidlo odkladu. Koniec vypínania v polospánku a neskorých príchodov.\n\nOKNO INTELIGENTNÉHO BUDENIA\nNastavte okno (až 30 minút) a budík zazvoní v najľahšej chvíli vášho spánku. Zobudenie z ľahkého spánku je prirodzené — nikdy kruté.\n\nHLASITÉ ZVUKY PRE TVRDÝCH SPÁČOV\nOd jemnej zvonkohry po zvuky, ktoré zobudia aj najtvrdšieho spáča. Hlasitosť silnie postupne: šetrná k ušiam, nedá sa zaspať.\n\nVÝCHOD SLNKA NA VAŠOM DISPLEJI\nSvetlo a hlasitosť silnejú spolu ako východ slnka, takže sa zobudíte pokojne, nie s ľaknutím.\n\nSLEDOVANIE SPÁNKOVÝCH CYKLOV\nZačnite noc v aplikácii a sledujte fázy spánku, efektivitu, skóre a týždenné trendy — aj to, ako ich ovplyvňuje čas vstávania.\n\nA NAVYŠE\n- Opakované budíky podľa dní v týždni\n- Tipy na lepší spánkový režim\n- Štatistiky: týždeň, mesiac a rok\n- Tmavý, minimalistický dizajn do spálne\n- Funguje offline, bez účtu\n\nDosť odkladania. Vstaňte naozaj.\n\nZásady ochrany súkromia: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nPodmienky používania: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nové budiace výzvy so Sunrise Premium — trasenie, písanie a pamäť, aby ste naozaj vstali z postele.\nMatematická výzva zostáva zadarmo a výzvy už uložené pri vašich budíkoch naďalej fungujú.\nOpravy a vylepšenia pre pokojnejšie rána.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "cs": {
+   "id": "2e1f0f62-0817-46cb-8082-84e8fd36bf45",
+   "keywords": "probudit,vstávat,brzy,ráno,odklad,mise,počty,hlasitý,spáč,spánkový cyklus,východ slunce",
+   "description": "Chytrý budík, který zajistí, že opravdu vstanete — stvořený pro tvrdé spáče a chronické odkladače.\n\nMISE PROTI ODKLÁDÁNÍ\nVyřešte rychlý příklad nebo udělejte pár kroků, abyste budík vypnuli. Mozek se probudí dřív, než prst najde tlačítko odkladu. Konec vypínání v polospánku a pozdních příchodů.\n\nOKNO CHYTRÉHO BUZENÍ\nNastavte okno (až 30 minut) a budík zazvoní v nejlehčí chvíli vašeho spánku. Probuzení z lehkého spánku je přirozené — nikdy kruté.\n\nHLASITÉ ZVUKY PRO TVRDÉ SPÁČE\nOd jemné zvonkohry po zvuky, které probudí i nejtvrdšího spáče. Hlasitost sílí postupně: šetrná k uším, nejde ji zaspat.\n\nVÝCHOD SLUNCE NA VAŠEM DISPLEJI\nSvětlo a hlasitost sílí společně jako východ slunce, takže se probudíte klidně, ne leknutím.\n\nSLEDOVÁNÍ SPÁNKOVÝCH CYKLŮ\nZahajte noc v aplikaci a sledujte fáze spánku, efektivitu, skóre a týdenní trendy — i to, jak je ovlivňuje čas vstávání.\n\nA NAVÍC\n- Opakované budíky podle dnů v týdnu\n- Tipy pro lepší spánkový režim\n- Statistiky: týden, měsíc a rok\n- Tmavý, minimalistický design do ložnice\n- Funguje offline, bez účtu\n\nDost odkládání. Vstaňte doopravdy.\n\nZásady ochrany soukromí: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nPodmínky použití: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nové budicí výzvy se Sunrise Premium — třesení, psaní a paměť, abyste opravdu vstali z postele.\nMatematická výzva zůstává zdarma a výzvy už uložené u vašich budíků dál fungují.\nOpravy a vylepšení pro klidnější rána.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "fr-CA": {
+   "id": "8e94f3d8-e5eb-4949-a069-bc5722bf484c",
+   "keywords": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller",
+   "description": "Le réveil intelligent qui vous fait vraiment sortir du lit - conçu pour les gros dormeurs et les accros au bouton de rappel.\n\nDES MISSIONS CONTRE LE RAPPEL\nRésolvez un petit calcul ou faites quelques pas pour éteindre l'alarme. Votre cerveau se réveille avant que votre doigt ne trouve le bouton de rappel. Fini de l'éteindre à moitié endormi et d'arriver en retard.\n\nFENÊTRE DE RÉVEIL INTELLIGENT\nDéfinissez une fenêtre (jusqu'à 30 min) et l'alarme sonne à votre moment de sommeil le plus léger. Se réveiller en sommeil léger est naturel - jamais brutal.\n\nDES SONNERIES PUISSANTES POUR LES GROS DORMEURS\nDes carillons doux aux sonneries qui réveillent les plus profonds dormeurs. Le volume monte progressivement : doux pour vos oreilles, impossible à ignorer.\n\nUN LEVER DE SOLEIL SUR VOTRE ÉCRAN\nLa lumière et le volume montent ensemble comme un lever de soleil, pour un réveil calme plutôt qu'en sursaut.\n\nSUIVI DES CYCLES DE SOMMEIL\nLancez la nuit dans l'app et consultez vos phases de sommeil, votre efficacité, votre score et vos tendances hebdomadaires - et l'effet de votre heure de réveil.\n\nÉGALEMENT INCLUS\n- Alarmes récurrentes par jour de la semaine\n- Conseils de sommeil pour une meilleure routine\n- Statistiques : semaine, mois et année\n- Design sombre et minimaliste, pensé pour la chambre\n- Fonctionne hors ligne, sans compte\n\nArrêtez de reporter. Levez-vous pour de vrai.\n\nPolitique de confidentialité : https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nConditions d'utilisation : https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nouveaux défis de réveil avec Sunrise Premium — secouer, taper et mémoire, pour vraiment sortir du lit.\nLe défi de calcul reste gratuit, et les défis déjà enregistrés sur vos alarmes continuent de fonctionner.\nCorrections et améliorations pour des matins plus sereins.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "zh-Hant": {
+   "id": "ae912bb5-6081-4c8d-9137-0c73af885ed5",
+   "keywords": "起床,早起,叫醒,睡過頭,爬不起來,睡眠,週期,追蹤,記錄,深眠,淺眠,自然醒,作息,失眠,早晨,清晨,數學,任務,大聲,鬧鈴,鈴聲,漸強,溫和,打盹,晨型人,懶人",
+   "description": "確保你真正起床的智慧鬧鐘——專為睡得很沉、老是按稍後提醒的人打造。\n\n終結賴床的起床任務\n解一道簡單的數學題，或起身走幾步，才能關掉鬧鐘。在手指找到稍後提醒按鈕之前，大腦就先醒了。再也不會迷迷糊糊關掉鬧鐘又遲到。\n\n智慧喚醒區間\n設定一個區間（最長 30 分鐘），鬧鐘會在你睡得最淺的時刻響起。從淺眠中醒來很自然——一點也不痛苦。\n\n叫醒沉睡者的大音量\n從輕柔的鈴聲，到能叫醒睡得最沉的人的聲音。音量逐漸增強：對耳朵溫柔，卻讓你無法繼續睡。\n\n螢幕上的日出\n光線和音量像日出一樣同步升起，讓你平靜醒來，而不是被嚇醒。\n\n睡眠週期追蹤\n在 App 裡開始今晚的睡眠，查看你的睡眠階段、效率、分數與每週趨勢——以及起床時間對它們的影響。\n\n還包括\n- 依星期幾重複的鬧鐘\n- 幫你養成好習慣的睡眠訣竅\n- 睡眠統計：週、月、年\n- 為臥室設計的深色極簡介面\n- 離線可用，無需帳號\n\n別再賴床了。真正起床吧。\n\n隱私權政策: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\n使用條款: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Sunrise Premium 新增起床挑戰 — 搖一搖、打字和記憶，讓你真正起床。\n數學挑戰繼續免費，鬧鐘裡已設定的挑戰也照常可用。\n修正與改進，讓早晨更從容。",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "pt-BR": {
+   "id": "7575f8cb-6a38-41b1-816d-f55b6b7717ad",
+   "keywords": "anti,acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer",
+   "description": "O despertador inteligente que garante que você levante de verdade - feito pra quem tem sono pesado e vive apertando a soneca.\n\nMISSÕES QUE ACABAM COM A SONECA\nResolva uma missão de matemática ou dê alguns passos pra desligar o alarme. Seu cérebro acorda antes do dedo achar o botão de soneca. Chega de desligar dormindo e se atrasar de novo.\n\nJANELA INTELIGENTE DE DESPERTAR\nDefina uma janela (até 30 min) e o alarme toca no seu momento de sono mais leve. Acordar do sono leve é natural - nunca brutal.\n\nSONS ALTOS PRA SONO PESADO\nDe toques suaves a sons que acordam o dorminhoco mais profundo. O volume sobe gradualmente: gentil com os ouvidos, impossível de ignorar.\n\nAMANHECER NA SUA TELA\nLuz e volume sobem juntos como um nascer do sol, pra você acordar calmo em vez de assustado.\n\nCICLO DE SONO\nInicie a noite no app e veja suas fases de sono, eficiência, nota e tendências da semana - e como seu horário de acordar afeta tudo.\n\nTAMBÉM INCLUSO\n- Alarmes recorrentes por dia da semana\n- Dicas de sono pra melhorar sua rotina\n- Estatísticas: semana, mês e ano\n- Design escuro e minimalista, feito pro quarto\n- Funciona offline, sem cadastro\n\nChega de soneca. Levante de verdade.\n\nPolítica de Privacidade: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTermos de Uso: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Novos desafios pra acordar com o Sunrise Premium — sacudir, digitar e memória, pra você sair da cama de verdade.\nO desafio de matemática continua grátis, e os desafios já salvos nos seus alarmes seguem funcionando.\nCorreções e melhorias pra manhãs mais tranquilas.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "en-AU": {
+   "id": "53a59c0a-4381-436d-a4bc-302ba5db5480",
+   "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart",
+   "description": "The smart alarm that makes sure you actually get out of bed - built for heavy sleepers and chronic snoozers.\n\nMISSIONS THAT END SNOOZING\nSolve a quick math mission or take a few steps to turn the alarm off. Your brain wakes up before your finger finds the snooze button. No more turning it off half-asleep and being late again.\n\nSMART WAKE-UP WINDOW\nSet a window (up to 30 min) and the alarm rings at your lightest sleep moment. Waking up from light sleep feels natural - never brutal.\n\nLOUD SOUNDS FOR HEAVY SLEEPERS\nFrom gentle chimes to sounds that wake the deepest sleeper. Volume ramps up gradually, so it is kind to your ears but impossible to sleep through.\n\nSUNRISE ON YOUR SCREEN\nLight and volume rise together like a sunrise, so you wake calm instead of startled.\n\nSLEEP CYCLE TRACKING\nStart the night in the app and see your sleep phases, efficiency, score and weekly trends - and how your wake-up time affects them.\n\nALSO INCLUDED\n- Recurring alarms per weekday\n- Sleep tips to build a better routine\n- Sleep statistics: week, month, year\n- Dark, minimal design made for the bedroom\n- Works offline, no account needed\n\nStop snoozing. Get up for real.\n\nPrivacy Policy: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTerms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "New wake-up challenges with Sunrise Premium — shake, typing and memory, so you really get out of bed.\nThe maths challenge stays free, and challenges already set on your alarms keep working.\nFixes and improvements for smoother mornings.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "es-ES": {
+   "id": "4db2d5b2-22dd-41b5-9d6b-e7fb665c909f",
+   "keywords": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+   "description": "El despertador inteligente que se asegura de que te levantes de verdad - hecho para dormilones profundos y adictos a posponer.\n\nMISIONES CONTRA LA SONECA\nResuelve una misión de matemáticas o da unos pasos para apagar la alarma. Tu cerebro despierta antes de que el dedo encuentre el botón de posponer. Se acabó apagarla medio dormido y llegar tarde.\n\nVENTANA INTELIGENTE\nDefine una ventana (hasta 30 min) y la alarma suena en tu momento de sueño más ligero. Despertar del sueño ligero es natural - nunca brutal.\n\nSONIDOS FUERTES PARA SUEÑO PROFUNDO\nDe tonos suaves a sonidos que despiertan al dormilón más profundo. El volumen sube gradualmente: amable con tus oídos, imposible de ignorar.\n\nAMANECER EN TU PANTALLA\nLa luz y el volumen suben juntos como un amanecer, para despertar tranquilo y sin sustos.\n\nCICLO DE SUEÑO\nInicia la noche en la app y ve tus fases de sueño, eficiencia, puntuación y tendencias semanales.\n\nTAMBIÉN INCLUYE\n- Alarmas recurrentes por día de la semana\n- Consejos de sueño para mejorar tu rutina\n- Estadísticas: semana, mes y año\n- Diseño oscuro y minimalista, hecho para el dormitorio\n- Funciona sin conexión y sin cuenta\n\nDeja de posponer. Levántate de verdad.\n\nPolítica de privacidad: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTérminos de uso: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nuevos retos para despertar con Sunrise Premium — agitar, escribir y memoria, para que salgas de la cama de verdad.\nEl reto de matemáticas sigue siendo gratis, y los retos ya guardados en tus alarmas siguen funcionando.\nCorrecciones y mejoras para mañanas más tranquilas.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "da": {
+   "id": "89dc4237-cf7e-413c-8bc4-7876e4782c2d",
+   "keywords": "vågne,stå op,tidligt,morgen,udsæt,mission,regning,højt,søvncyklus,solopgang,vækning,sove",
+   "description": "Det smarte vækkeur, der sørger for, at du faktisk står op - bygget til tunge sovere og kroniske udsættere.\n\nMISSIONER DER STOPPER UDSÆTTELSEN\nLøs et hurtigt regnestykke, eller tag et par skridt for at slukke alarmen. Hjernen vågner, før fingeren finder udsæt-knappen. Slut med at slukke i halvsøvne og komme for sent.\n\nSMART VÆKKEVINDUE\nIndstil et vindue (op til 30 min.), og alarmen ringer i dit letteste søvnøjeblik. At vågne fra let søvn føles naturligt - aldrig brutalt.\n\nHØJE LYDE TIL TUNGE SOVERE\nFra blide klokkespil til lyde, der vækker selv den dybeste sover. Lydstyrken stiger gradvist: nænsom mod ørerne, umulig at sove igennem.\n\nEN SOLOPGANG PÅ DIN SKÆRM\nLys og lydstyrke stiger sammen som en solopgang, så du vågner roligt i stedet for med et sæt.\n\nREGISTRÉR DINE SØVNCYKLUSSER\nStart natten i appen og se dine søvnstadier, effektivitet, score og ugentlige tendenser - og hvordan dit vækketidspunkt påvirker dem.\n\nDERUDOVER\n- Gentagne alarmer pr. ugedag\n- Søvntips til en bedre rutine\n- Statistik: uge, måned og år\n- Mørkt, minimalistisk design til soveværelset\n- Virker offline, ingen konto nødvendig\n\nStop med at udsætte. Stå op for alvor.\n\nPrivatlivspolitik: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nBrugsbetingelser: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nye vækkeudfordringer med Sunrise Premium — ryst, skriv og hukommelse, så du virkelig kommer ud af sengen.\nRegneudfordringen er stadig gratis, og udfordringer, der allerede er sat på dine alarmer, virker fortsat.\nRettelser og forbedringer for roligere morgener.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "zh-Hans": {
+   "id": "95af15fa-db2a-4d4c-ba1e-6eb486a8e907",
+   "keywords": "起床,早起,叫醒,睡过头,起不来,睡眠,周期,监测,记录,深睡,浅睡,自然醒,作息,失眠,早晨,清晨,数学,任务,大声,闹铃,铃声,渐强,温和,打盹,晨型人,懒人,追踪",
+   "description": "智能闹钟，确保你真正起床——专为睡得沉、闹钟响了还要再睡一会儿的人打造。\n\n告别贪睡的唤醒任务\n解一道简单的数学题，或起身走几步，才能关掉闹钟。在手指找到稍后提醒按钮之前，大脑就已经醒了。再也不会迷迷糊糊关掉闹钟然后迟到。\n\n智能唤醒窗口\n设置一个窗口（最长 30 分钟），闹钟会在你睡得最浅的时刻响起。从浅睡中醒来很自然——绝不粗暴。\n\n叫醒沉睡者的大音量\n从轻柔的铃声到能叫醒睡得最沉的人的声音。音量逐渐增强：对耳朵温柔，却让你无法继续睡。\n\n屏幕上的日出\n亮光和音量像日出一样一起升起，让你平静地醒来，而不是被吓醒。\n\n睡眠周期记录\n在应用里开始今晚的睡眠，查看你的睡眠阶段、效率、评分和每周趋势——以及起床时间对它们的影响。\n\n还包括\n- 按星期几重复的闹钟\n- 帮你养成好习惯的睡眠贴士\n- 睡眠统计：周、月、年\n- 为卧室设计的深色极简界面\n- 离线可用，无需注册账户\n\n别再贪睡了。真正起床吧。\n\n隐私政策: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\n使用条款: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Sunrise Premium 新增起床挑战 — 摇一摇、打字和记忆，让你真正起床。\n数学挑战继续免费，闹钟里已设置的挑战也照常可用。\n修复与改进，让早晨更从容。",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "el": {
+   "id": "dc88c5aa-d551-43c0-abf0-9544c1a2efcd",
+   "keywords": "ξυπνητήρι,πρωί,νωρίς,αναβολή,αποστολή,μαθηματικά,δυνατό,κύκλος ύπνου,ανατολή,υπναράς,ξύπνα",
+   "description": "Το έξυπνο ξυπνητήρι που φροντίζει να σηκωθείς στ' αλήθεια - φτιαγμένο για όσους κοιμούνται βαριά και πατούν συνέχεια αναβολή.\n\nΑΠΟΣΤΟΛΕΣ ΠΟΥ ΤΕΛΕΙΩΝΟΥΝ ΤΗΝ ΑΝΑΒΟΛΗ\nΛύσε μια γρήγορη άσκηση μαθηματικών ή κάνε μερικά βήματα για να σβήσεις το ξυπνητήρι. Ο εγκέφαλος ξυπνά πριν το δάχτυλο βρει το κουμπί της αναβολής. Τέλος το σβήσιμο μισοκοιμισμένος και οι αργοπορίες.\n\nΕΞΥΠΝΟ ΠΑΡΑΘΥΡΟ ΑΦΥΠΝΙΣΗΣ\nΌρισε ένα παράθυρο (έως 30 λεπτά) και το ξυπνητήρι χτυπά στην πιο ελαφριά στιγμή του ύπνου σου. Το ξύπνημα από ελαφρύ ύπνο είναι φυσικό - ποτέ απότομο.\n\nΔΥΝΑΤΟΙ ΗΧΟΙ ΓΙΑ ΒΑΡΥ ΥΠΝΟ\nΑπό απαλά καμπανάκια μέχρι ήχους που ξυπνούν και τον πιο βαθύ υπναρά. Η ένταση ανεβαίνει σταδιακά: απαλή για τα αυτιά, αδύνατο να την αγνοήσεις.\n\nΜΙΑ ΑΝΑΤΟΛΗ ΣΤΗΝ ΟΘΟΝΗ ΣΟΥ\nΦως και ένταση δυναμώνουν μαζί σαν ανατολή, ώστε να ξυπνάς ήρεμα αντί για τρομαγμένα.\n\nΠΑΡΑΚΟΛΟΥΘΗΣΗ ΚΥΚΛΩΝ ΥΠΝΟΥ\nΞεκίνα τη νύχτα στην εφαρμογή και δες τα στάδια ύπνου, την αποδοτικότητα, τη βαθμολογία και τις εβδομαδιαίες τάσεις - και πώς τα επηρεάζει η ώρα που ξυπνάς.\n\nΕΠΙΣΗΣ ΠΕΡΙΛΑΜΒΑΝΕΙ\n- Επαναλαμβανόμενα ξυπνητήρια ανά ημέρα της εβδομάδας\n- Συμβουλές ύπνου για καλύτερη ρουτίνα\n- Στατιστικά: εβδομάδα, μήνας και έτος\n- Σκούρο, μινιμαλιστικό σχέδιο για την κρεβατοκάμαρα\n- Λειτουργεί offline, χωρίς λογαριασμό\n\nΤέλος η αναβολή. Σήκω στ' αλήθεια.\n\nΠολιτική απορρήτου: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nΌροι χρήσης: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Νέες προκλήσεις αφύπνισης με το Sunrise Premium — κούνημα, πληκτρολόγηση και μνήμη, για να σηκωθείς πραγματικά από το κρεβάτι.\nΗ πρόκληση μαθηματικών παραμένει δωρεάν, και οι προκλήσεις που έχεις ήδη ορίσει στα ξυπνητήρια σου συνεχίζουν να λειτουργούν.\nΔιορθώσεις και βελτιώσεις για πιο ήρεμα πρωινά.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "ca": {
+   "id": "f38bb54f-aac4-463b-a50f-e510f11e5e6a",
+   "keywords": "despertar,llevar-se,aviat,matí,posposar,missió,càlcul,fort,despertador,cicle de son,albada",
+   "description": "El despertador intel·ligent que s'assegura que et llevis de debò - fet per a dormilegues profunds i addictes a posposar.\n\nMISSIONS QUE ACABEN AMB EL POSPOSAMENT\nResol un càlcul ràpid o fes unes quantes passes per apagar l'alarma. El cervell es desperta abans que el dit trobi el botó de posposar. S'ha acabat apagar-la mig adormit i fer tard.\n\nFINESTRA DE DESPERTAR INTEL·LIGENT\nDefineix una finestra (fins a 30 min) i l'alarma sona en el teu moment de son més lleuger. Despertar-se del son lleuger és natural - mai brutal.\n\nSONS POTENTS PER A SON PROFUND\nDe campanetes suaus a sons que desperten el dormilega més profund. El volum puja gradualment: amable amb les orelles, impossible d'ignorar.\n\nUNA ALBADA A LA TEVA PANTALLA\nLa llum i el volum pugen junts com una sortida de sol, perquè et despertis tranquil en lloc d'espantat.\n\nSEGUIMENT DELS CICLES DE SON\nComença la nit a l'app i consulta les fases del son, l'eficiència, la puntuació i les tendències setmanals - i com hi influeix la teva hora de despertar.\n\nTAMBÉ INCLOU\n- Alarmes recurrents per dia de la setmana\n- Consells de son per a una rutina millor\n- Estadístiques: setmana, mes i any\n- Disseny fosc i minimalista, pensat per al dormitori\n- Funciona sense connexió, sense compte\n\nProu de posposar. Lleva't de veritat.\n\nPolítica de privadesa: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nCondicions d'ús: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nous reptes per despertar-te amb Sunrise Premium — sacsejar, escriure i memòria, perquè surtis del llit de veritat.\nEl repte de matemàtiques continua sent gratuït, i els reptes ja desats a les teves alarmes segueixen funcionant.\nCorreccions i millores per a matins més tranquils.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "he": {
+   "id": "0c28e8c9-0db5-4b1c-a1c2-60cb363f928c",
+   "keywords": "בוקר,לקום,נודניק,משימה,חשבון,רם,חזק,כבד,שינה,מחזורי,מעקב,עמוקה,צלצול,קימה,מוקדם,ער,טיימר,לילה",
+   "description": "שעון מעורר חכם שדואג שבאמת תקומו - נבנה לישנים עמוק ולחובבי הנודניק.\n\nמשימות שמסיימות את הנודניק\nפתרו תרגיל חשבון פשוט או לכו כמה צעדים כדי לכבות את ההתראה. המוח מתעורר לפני שהאצבעות מוצאות את כפתור הנודניק. בלי כיבוי בחצי הכרה ואיחורים.\n\nחלון השכמה חכמה\nהגדירו חלון (עד 30 דקות) וההתראה תצלצל ברגע השינה הקל ביותר שלכם. לקום משינה קלה מרגיש טבעי - אף פעם לא מבהיל.\n\nצלילים חזקים לישנים עמוק\nמפעמונים עדינים ועד צלילים שמעירים גם את הישן העמוק ביותר. העוצמה גוברת בהדרגה: נעים לאוזן, בלתי אפשרי להתעלם.\n\nזריחה על המסך שלכם\nהאור והעוצמה גוברים יחד כמו זריחה, כך שאתם מתעוררים ברוגע ולא בבהלה.\n\nמעקב מחזורי שינה\nהתחילו את הלילה באפליקציה וצפו בשלבי השינה, ביעילות, בציון ובמגמות השבועיות - וכיצד שעת ההשכמה משפיעה.\n\nכלול גם\n- התראות חוזרות לפי יום\n- טיפים לשינה לשגרה טובה יותר\n- סטטיסטיקות: שבוע, חודש ושנה\n- עיצוב כהה ומינימליסטי לחדר השינה\n- עובד בלי אינטרנט ובלי חשבון\n\nמספיק עם הנודניק. לקום באמת.\n\nמדיניות פרטיות: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nתנאי שימוש: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "אתגרי השכמה חדשים עם Sunrise Premium — ניעור, הקלדה וזיכרון, כדי שתקומו מהמיטה באמת.\nאתגר החשבון נשאר חינמי, ואתגרים שכבר שמורים בשעונים המעוררים שלכם ממשיכים לעבוד.\nתיקונים ושיפורים לבקרים רגועים יותר.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "fr-FR": {
+   "id": "2e6cb7c4-3b1f-43f3-8b96-06816df6f89c",
+   "keywords": "defis,leger,se lever,tot,reveiller,alarme,aube,matin,gros dormeur,fort,maths,cycle,sonnerie,mission",
+   "description": "Le réveil intelligent qui vous fait vraiment sortir du lit - conçu pour les gros dormeurs et les accros au bouton de rappel.\n\nDES MISSIONS CONTRE LE RAPPEL\nRésolvez un petit calcul ou faites quelques pas pour éteindre l'alarme. Votre cerveau se réveille avant que votre doigt ne trouve le bouton de rappel. Fini de l'éteindre à moitié endormi et d'arriver en retard.\n\nFENÊTRE DE RÉVEIL INTELLIGENT\nDéfinissez une fenêtre (jusqu'à 30 min) et l'alarme sonne à votre moment de sommeil le plus léger. Se réveiller en sommeil léger est naturel - jamais brutal.\n\nDES SONNERIES PUISSANTES POUR LES GROS DORMEURS\nDes carillons doux aux sonneries qui réveillent les plus profonds dormeurs. Le volume monte progressivement : doux pour vos oreilles, impossible à ignorer.\n\nUN LEVER DE SOLEIL SUR VOTRE ÉCRAN\nLa lumière et le volume montent ensemble comme un lever de soleil, pour un réveil calme plutôt qu'en sursaut.\n\nSUIVI DES CYCLES DE SOMMEIL\nLancez la nuit dans l'app et consultez vos phases de sommeil, votre efficacité, votre score et vos tendances hebdomadaires - et l'effet de votre heure de réveil.\n\nÉGALEMENT INCLUS\n- Alarmes récurrentes par jour de la semaine\n- Conseils de sommeil pour une meilleure routine\n- Statistiques : semaine, mois et année\n- Design sombre et minimaliste, pensé pour la chambre\n- Fonctionne hors ligne, sans compte\n\nArrêtez de reporter. Levez-vous pour de vrai.\n\nPolitique de confidentialité : https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nConditions d'utilisation : https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nouveaux défis de réveil avec Sunrise Premium — secouer, taper et mémoire, pour vraiment sortir du lit.\nLe défi de calcul reste gratuit, et les défis déjà enregistrés sur vos alarmes continuent de fonctionner.\nCorrections et améliorations pour des matins plus sereins.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "nl-NL": {
+   "id": "83feb797-0c05-4137-bd39-a9a22d4349a6",
+   "keywords": "wakker worden,opstaan,vroeg,sluimeren,missie,rekenen,luid,ochtend,slaapcyclus,zonsopgang,slaap",
+   "description": "De slimme wekker die ervoor zorgt dat je echt opstaat - gemaakt voor diepe slapers en notoire sluimeraars.\n\nMISSIES TEGEN HET SLUIMEREN\nLos een korte rekensom op of zet een paar stappen om de wekker uit te zetten. Je hersenen worden wakker voordat je vinger de sluimerknop vindt. Nooit meer half slapend uitzetten en te laat komen.\n\nSLIM WEKVENSTER\nStel een venster in (tot 30 min) en de wekker gaat af op je lichtste slaapmoment. Wakker worden uit lichte slaap voelt natuurlijk - nooit bruut.\n\nLUIDE GELUIDEN VOOR DIEPE SLAPERS\nVan zachte klanken tot geluiden die de diepste slaper wekken. Het volume neemt geleidelijk toe: vriendelijk voor je oren, onmogelijk om doorheen te slapen.\n\nEEN ZONSOPGANG OP JE SCHERM\nLicht en volume stijgen samen als een zonsopgang, zodat je rustig wakker wordt in plaats van geschrokken.\n\nSLAAPCYCLI VOLGEN\nStart de nacht in de app en bekijk je slaapfasen, efficiëntie, score en wekelijkse trends - en hoe je wektijd ze beïnvloedt.\n\nOOK INBEGREPEN\n- Terugkerende wekkers per weekdag\n- Slaaptips voor een betere routine\n- Statistieken: week, maand en jaar\n- Donker, minimalistisch ontwerp voor de slaapkamer\n- Werkt offline, zonder account\n\nStop met sluimeren. Sta echt op.\n\nPrivacybeleid: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nGebruiksvoorwaarden: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Nieuwe wekuitdagingen met Sunrise Premium — schudden, typen en geheugen, zodat je echt je bed uit komt.\nDe rekenuitdaging blijft gratis, en uitdagingen die al op je wekkers staan blijven werken.\nOplossingen en verbeteringen voor rustigere ochtenden.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "uk": {
+   "id": "aec5e4f3-7deb-4205-b128-d2c9af0a732b",
+   "keywords": "прокинутися,встати,рано,ранок,місія,задача,гучний,відкласти,цикл сну,соня,підйом,трекер сну",
+   "description": "Розумний будильник, який змусить вас справді встати — створений для тих, хто міцно спить і вічно відкладає.\n\nМІСІЇ ПРОТИ ВІДКЛАДАННЯ\nРозв'яжіть простий приклад або зробіть кілька кроків, щоб вимкнути будильник. Мозок прокинеться раніше, ніж палець знайде кнопку «відкласти». Більше жодних вимкнень у напівсні та запізнень.\n\nВІКНО РОЗУМНОГО ПРОБУДЖЕННЯ\nЗадайте вікно (до 30 хвилин) — і будильник задзвонить у момент найлегшого сну. Прокидатися з легкого сну природно і зовсім не важко.\n\nГУЧНІ ЗВУКИ ДЛЯ МІЦНОГО СНУ\nВід ніжних дзвіночків до звуків, які розбудять найміцнішого соню. Гучність наростає поступово: бережно для вух, але проспати не вийде.\n\nСВІТАНОК НА ВАШОМУ ЕКРАНІ\nСвітло і гучність наростають разом, як справжній світанок, — ви прокидаєтеся спокійно, а не з переляку.\n\nВІДСТЕЖЕННЯ ЦИКЛІВ СНУ\nПочніть ніч у застосунку і переглядайте фази сну, ефективність, оцінку та тижневі тренди — а також як на них впливає час підйому.\n\nА ТАКОЖ\n- Повторювані будильники за днями тижня\n- Поради для кращого режиму сну\n- Статистика: тиждень, місяць, рік\n- Темний мінімалістичний дизайн для спальні\n- Працює офлайн, без облікового запису\n\nДосить відкладати. Вставайте по-справжньому.\n\nПолітика конфіденційності: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nУмови використання: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Нові завдання для пробудження із Sunrise Premium — струшування, набір тексту та пам'ять, щоб ви справді встали з ліжка.\nМатематичне завдання лишається безкоштовним, а завдання, вже збережені у ваших будильниках, і далі працюють.\nВиправлення та покращення для спокійнішого ранку.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "ms": {
+   "id": "f75e753a-c630-4583-b20d-d3a6f3ee6761",
+   "keywords": "bangun pagi,jam loceng,tangguh,misi,kira,kuat,susah bangun,kitaran tidur,matahari terbit,penggera",
+   "description": "Penggera pintar yang memastikan anda benar-benar bangun - dibina untuk yang tidurnya lena dan suka menangguh penggera.\n\nMISI PENAMAT TANGGUHAN\nSelesaikan kiraan ringkas atau berjalan beberapa langkah untuk mematikan penggera. Otak anda bangun sebelum jari menemui butang tangguh. Tiada lagi mematikan separuh sedar lalu terlewat.\n\nTETINGKAP BANGUN PINTAR\nTetapkan tetingkap (sehingga 30 minit) dan penggera berbunyi pada saat tidur anda yang paling ringan. Bangun daripada tidur ringan terasa semula jadi - tidak pernah mengejutkan.\n\nBUNYI KUAT UNTUK TIDUR LENA\nDaripada loceng lembut hingga bunyi yang mengejutkan si tidur paling lena. Kelantangan meningkat beransur-ansur: mesra telinga, mustahil dilepaskan.\n\nMATAHARI TERBIT DI SKRIN ANDA\nCahaya dan kelantangan meningkat bersama seperti matahari terbit, jadi anda bangun dengan tenang, bukan terkejut.\n\nPENJEJAKAN KITARAN TIDUR\nMulakan malam dalam aplikasi dan lihat peringkat tidur, kecekapan, skor dan trend mingguan - serta kesan waktu bangun anda.\n\nTURUT DISERTAKAN\n- Penggera berulang mengikut hari\n- Petua tidur untuk rutin yang lebih baik\n- Statistik: minggu, bulan dan tahun\n- Reka bentuk gelap minimalis untuk bilik tidur\n- Berfungsi luar talian, tanpa akaun\n\nBerhenti menangguh. Bangun betul-betul.\n\nDasar Privasi: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nTerma Penggunaan: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Cabaran bangun baharu dengan Sunrise Premium — goncang, menaip dan ingatan, supaya anda benar-benar bangun dari katil.\nCabaran matematik kekal percuma, dan cabaran yang sudah disimpan pada penggera anda terus berfungsi.\nPembaikan dan penambahbaikan untuk pagi yang lebih tenang.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "ru": {
+   "id": "5cfb3375-0f6a-4a62-ad32-5aa1bb7a4930",
+   "keywords": "проснуться,встать,рано,утро,миссия,задача,громкий,отложить,цикл сна,соня,подъём,трекер сна",
+   "description": "Умный будильник, который заставит вас действительно встать — создан для тех, кто крепко спит и вечно откладывает.\n\nМИССИИ ПРОТИВ ОТСРОЧЕК\nРешите простой пример или сделайте несколько шагов, чтобы выключить будильник. Мозг проснётся раньше, чем палец найдёт кнопку «отложить». Больше никаких выключений в полусне и опозданий.\n\nОКНО УМНОГО ПРОБУЖДЕНИЯ\nЗадайте окно (до 30 минут) — и будильник зазвонит в момент самого лёгкого сна. Просыпаться из лёгкого сна естественно и совсем не тяжело.\n\nГРОМКИЕ ЗВУКИ ДЛЯ КРЕПКОГО СНА\nОт нежных колокольчиков до звуков, которые разбудят самого крепкого соню. Громкость нарастает постепенно: бережно для ушей, но проспать не получится.\n\nРАССВЕТ НА ВАШЕМ ЭКРАНЕ\nСвет и громкость нарастают вместе, как настоящий рассвет, — вы просыпаетесь спокойно, а не в испуге.\n\nОТСЛЕЖИВАНИЕ ЦИКЛОВ СНА\nНачните ночь в приложении и смотрите фазы сна, эффективность, оценку и недельные тренды — а также как на них влияет время подъёма.\n\nА ТАКЖЕ\n- Повторяющиеся будильники по дням недели\n- Советы для лучшего режима сна\n- Статистика: неделя, месяц, год\n- Тёмный минималистичный дизайн для спальни\n- Работает офлайн, без аккаунта\n\nХватит откладывать. Вставайте по-настоящему.\n\nПолитика конфиденциальности: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nУсловия использования: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Новые задания для пробуждения с Sunrise Premium — встряхивание, набор текста и память, чтобы вы точно встали с кровати.\nМатематическое задание остаётся бесплатным, а задания, уже сохранённые в ваших будильниках, продолжают работать.\nИсправления и улучшения для более спокойного утра.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "hr": {
+   "id": "4689af58-085a-4808-ad9c-b3cacdb5bf7b",
+   "keywords": "probuditi,ustati,rano,jutro,odgoda,misija,računanje,glasno,ciklus sna,izlazak sunca,spavalica",
+   "description": "Pametna budilica koja se pobrine da stvarno ustaneš - napravljena za one koji čvrsto spavaju i kronične odgađače.\n\nMISIJE KOJE ZAUSTAVLJAJU ODGAĐANJE\nRiješi brzi račun ili napravi nekoliko koraka da isključiš alarm. Mozak se probudi prije nego što prst pronađe gumb za odgodu. Kraj isključivanja u polusnu i kašnjenja.\n\nPAMETNI PROZOR BUĐENJA\nPostavi prozor (do 30 min) i alarm zvoni u tvom najlakšem trenutku sna. Buđenje iz laganog sna prirodno je - nikad grubo.\n\nGLASNI ZVUKOVI ZA ČVRST SAN\nOd nježnih zvončića do zvukova koji bude i najtvrđeg spavača. Glasnoća raste postupno: nježna za uši, nemoguće ju je prespavati.\n\nIZLAZAK SUNCA NA TVOM EKRANU\nSvjetlo i glasnoća rastu zajedno poput izlaska sunca, pa se budiš smireno umjesto prestrašeno.\n\nPRAĆENJE CIKLUSA SNA\nZapočni noć u aplikaciji i pogledaj faze sna, učinkovitost, ocjenu i tjedne trendove - i kako na njih utječe vrijeme buđenja.\n\nTAKOĐER UKLJUČUJE\n- Ponavljajuće alarme po danima u tjednu\n- Savjete za bolju rutinu spavanja\n- Statistiku: tjedan, mjesec i godina\n- Tamni, minimalistički dizajn za spavaću sobu\n- Radi offline, bez računa\n\nDosta odgađanja. Ustani zaista.\n\nPravila privatnosti: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nUvjeti korištenja: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Novi izazovi za buđenje uz Sunrise Premium — tresenje, tipkanje i pamćenje, da stvarno ustaneš iz kreveta.\nMatematički izazov ostaje besplatan, a izazovi već spremljeni na tvojim alarmima i dalje rade.\nIspravci i poboljšanja za mirnija jutra.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "ko": {
+   "id": "f1fda387-0b66-427b-92d8-df2fe7e70384",
+   "keywords": "기상,아침,일찍,일어나기,다시알림,계산,미션,큰소리,수면주기,일출,늦잠,잠꾸러기,수면기록,알람앱,모닝콜,알람소리,잠,기상알람,새벽,무거운잠,깊은잠,수면분석,아침기상,시끄러운알람",
+   "description": "정말로 일어나게 만들어 주는 스마트 알람 - 잠이 깊은 사람과 다시 알림 중독자를 위해 만들었습니다.\n\n다시 알림을 끝내는 미션\n간단한 계산을 풀거나 몇 걸음을 걸어야 알람이 꺼집니다. 손가락이 다시 알림 버튼을 찾기 전에 뇌가 먼저 깨어나요. 반쯤 잠든 채로 알람을 끄고 지각하는 일은 이제 끝입니다.\n\n스마트 기상 구간\n구간(최대 30분)을 설정하면 가장 얕은 수면 순간에 알람이 울립니다. 얕은 수면에서 깨어나는 건 자연스럽고, 절대 힘들지 않아요.\n\n깊은 잠을 깨우는 큰 소리\n부드러운 차임벨부터 가장 깊이 잠든 사람도 깨우는 소리까지. 음량이 서서히 커져서 귀에는 부드럽지만 계속 잘 수는 없습니다.\n\n화면 위의 일출\n빛과 음량이 일출처럼 함께 커져서 놀라지 않고 차분하게 깨어납니다.\n\n수면 주기 기록\n앱에서 밤을 시작하면 수면 단계, 효율, 점수, 주간 추이를 볼 수 있어요. 기상 시간이 미치는 영향도 확인하세요.\n\n이 외에도\n- 요일별 반복 알람\n- 더 나은 루틴을 위한 수면 팁\n- 주·월·년 수면 통계\n- 침실을 위한 어둡고 미니멀한 디자인\n- 오프라인 작동, 계정 불필요\n\n다시 알림은 그만. 진짜로 일어나세요.\n\n개인정보 처리방침: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\n이용약관: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Sunrise Premium의 새로운 기상 미션 — 흔들기, 타이핑, 기억력으로 확실하게 침대에서 일어나세요.\n수학 미션은 계속 무료이며, 알람에 이미 설정된 미션도 그대로 작동합니다.\n더 편안한 아침을 위한 수정 및 개선.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "ar-SA": {
+   "id": "df5d212c-ec9d-464c-aef9-d727ac1a10a8",
+   "keywords": "ساعة,تنبيه,صباح,نوم,غفوة,مهمة,حساب,عالي,ثقيل,دورة,تتبع,فجر,نغمات,ايقاظ,رنين,مبكر,عميق,هز,صعب,باكر",
+   "description": "منبّه ذكي يضمن استيقاظك فعلاً - صُمم لأصحاب النوم الثقيل ومحبي الغفوات.\n\nمهمات توقف الغفوة\nحلّ مسألة حسابية بسيطة أو امشِ بضع خطوات لإيقاف المنبّه. يستيقظ دماغك قبل أن تجد أصابعك زر الغفوة. لا مزيد من الإيقاف بنصف وعي ثم التأخر.\n\nنافذة الاستيقاظ الذكي\nحدّد نافذة (حتى 30 دقيقة) وسيرن المنبّه في أخف لحظات نومك. الاستيقاظ من النوم الخفيف يبدو طبيعياً - وليس صادماً أبداً.\n\nأصوات قوية للنوم العميق\nمن الأجراس الهادئة إلى أصوات توقظ أعمق النائمين. يزداد الصوت تدريجياً: لطيف على الأذن، مستحيل تجاهله.\n\nشروق الشمس على شاشتك\nيزداد الضوء والصوت معاً مثل شروق الشمس، فتستيقظ بهدوء لا بفزع.\n\nتتبّع دورات النوم\nابدأ ليلتك داخل التطبيق وشاهد مراحل نومك وكفاءته ونتيجتك واتجاهاتك الأسبوعية - وتأثير مواعيد استيقاظك.\n\nيشمل أيضاً\n- منبّهات متكررة حسب اليوم\n- نصائح نوم لروتين أفضل\n- إحصاءات: أسبوع وشهر وسنة\n- تصميم داكن بسيط لغرفة النوم\n- يعمل دون إنترنت ودون حساب\n\nتوقف عن الغفوات. استيقظ فعلاً.\n\nسياسة الخصوصية: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nشروط الاستخدام: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "تحديات استيقاظ جديدة مع Sunrise Premium — الهزّ والكتابة والذاكرة، لتنهض من السرير فعلًا.\nيبقى تحدي الرياضيات مجانيًا، والتحديات المحفوظة مسبقًا في منبهاتك تستمر في العمل.\nإصلاحات وتحسينات لصباح أكثر هدوءًا.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "tr": {
+   "id": "b3202f88-fd66-4cb5-9fc6-50f534b300e4",
+   "keywords": "uyanmak,kalkmak,erken,sabah,erteleme,görev,matematik,yüksek ses,uyku döngüsü,gün doğumu,çalar saat",
+   "description": "Gerçekten kalkmanızı sağlayan akıllı alarm - ağır uyuyanlar ve erteleme bağımlıları için tasarlandı.\n\nERTELEMEYİ BİTİREN GÖREVLER\nAlarmı kapatmak için kısa bir matematik sorusu çözün ya da birkaç adım atın. Parmağınız erteleme düğmesini bulmadan beyniniz uyanır. Yarı uykulu kapatıp geç kalmak artık yok.\n\nAKILLI UYANMA ARALIĞI\nBir aralık belirleyin (30 dakikaya kadar); alarm, uykunuzun en hafif anında çalar. Hafif uykudan uyanmak doğaldır - asla sarsıcı değildir.\n\nAĞIR UYUYANLAR İÇİN YÜKSEK SESLER\nYumuşak çanlardan en derin uyuyanı bile uyandıran seslere. Ses kademeli olarak yükselir: kulaklarınıza nazik, uyuyup kalmanıza imkânsız.\n\nEKRANINIZDA GÜN DOĞUMU\nIşık ve ses, gün doğumu gibi birlikte yükselir; irkilerek değil, sakin bir şekilde uyanırsınız.\n\nUYKU DÖNGÜSÜ TAKİBİ\nGeceyi uygulamada başlatın; uyku evrelerinizi, veriminizi, puanınızı ve haftalık trendleri görün - kalkış saatinizin etkisini de.\n\nAYRICA\n- Haftanın günlerine göre tekrarlanan alarmlar\n- Daha iyi bir rutin için uyku ipuçları\n- İstatistikler: hafta, ay ve yıl\n- Yatak odası için koyu ve minimal tasarım\n- Çevrimdışı çalışır, hesap gerekmez\n\nErtelemeyi bırakın. Gerçekten kalkın.\n\nGizlilik Politikası: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nKullanım Koşulları: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Sunrise Premium ile yeni uyanma görevleri — sallama, yazma ve hafıza, yataktan gerçekten kalkman için.\nMatematik görevi ücretsiz kalmaya devam ediyor, alarmlarına önceden kaydedilen görevler de çalışmayı sürdürüyor.\nDaha huzurlu sabahlar için düzeltmeler ve iyileştirmeler.",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  },
+  "hi": {
+   "id": "eeb0a16a-c84c-43a1-91da-5265946d35f5",
+   "keywords": "सुबह उठना,घड़ी,नींद,स्नूज़,मिशन,तेज,गहरी,चक्र,ट्रैकर,जागो,जल्दी,रिंगटोन,टाइमर,भारी,अलार्म्स",
+   "description": "स्मार्ट अलार्म जो पक्का करता है कि आप सचमुच उठें - गहरी नींद वालों और स्नूज़ के आदी लोगों के लिए बना।\n\nस्नूज़ खत्म करने वाले मिशन\nअलार्म बंद करने के लिए आसान गणित हल करें या कुछ कदम चलें। स्नूज़ बटन तक उँगलियाँ पहुँचने से पहले आपका दिमाग जाग जाता है। अधसोई हालत में अलार्म बंद कर देर होने का सिलसिला खत्म।\n\nस्मार्ट वेक विंडो\nविंडो सेट करें (30 मिनट तक) और अलार्म आपकी सबसे हल्की नींद के पल में बजेगा। हल्की नींद से जागना स्वाभाविक लगता है - कभी झटका नहीं।\n\nगहरी नींद के लिए तेज़ आवाज़ें\nकोमल घंटियों से लेकर सबसे गहरी नींद वाले को जगाने वाली आवाज़ों तक। आवाज़ धीरे-धीरे बढ़ती है: कानों को भली, नज़रअंदाज़ करना नामुमकिन।\n\nआपकी स्क्रीन पर सूर्योदय\nरोशनी और आवाज़ सूर्योदय की तरह साथ बढ़ती हैं, तो आप शांति से जागते हैं, घबराहट में नहीं।\n\nनींद चक्र ट्रैकिंग\nऐप में रात शुरू करें और नींद के चरण, दक्षता, स्कोर और साप्ताहिक रुझान देखें - साथ ही जागने के समय का असर भी।\n\nइसमें और भी\n- दिन के अनुसार दोहराने वाले अलार्म\n- बेहतर दिनचर्या के लिए नींद सुझाव\n- आँकड़े: सप्ताह, महीना और वर्ष\n- बेडरूम के लिए मिनिमल डार्क डिज़ाइन\n- बिना इंटरनेट, बिना खाते के चलता है\n\nस्नूज़ करना बंद करें। सचमुच उठें।\n\nगोपनीयता नीति: https://drive.google.com/file/d/147xkp4cekrxhrBYZnzV-J4PzCSqkix7t/view?usp=sharing\nउपयोग की शर्तें: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+   "promotionalText": null,
+   "whatsNew": "Sunrise Premium के साथ जागने की नई चुनौतियाँ — हिलाना, टाइप करना और याददाश्त, ताकि आप सच में बिस्तर से उठें।\nगणित की चुनौती मुफ़्त रहती है, और आपके अलार्म में पहले से सेव की गई चुनौतियाँ काम करती रहेंगी।\nशांत सुबह के लिए सुधार और बेहतरियाँ।",
+   "supportUrl": "https://gambitstudiotech.com/",
+   "marketingUrl": "https://gambitstudiotech.com/"
+  }
+ },
+ "appInfos": [
+  {
+   "id": "1dc33c78-c152-4398-bed2-ae85a5939059",
+   "state": "READY_FOR_SALE",
+   "locs": {
+    "de-DE": {
+     "id": "fbca1ba4-7963-4c5d-9a0f-4ec43056f049",
+     "name": "Sunrise Alarm Clock: Wecker",
+     "subtitle": "Sanftes Licht, Tiefschläfer"
+    },
+    "vi": {
+     "id": "bd5aaf77-06fc-4fb6-903f-349bb4a1d4e0",
+     "name": "Sunrise Alarm Clock: Báo thức",
+     "subtitle": "Dậy êm ái cùng bình minh"
+    },
+    "zh-Hant": {
+     "id": "651e5e16-52fa-4f5f-ad99-cac49bfdee9b",
+     "name": "Sunrise Alarm Clock: 智慧鬧鐘",
+     "subtitle": "日出喚醒，專治賴床貪睡"
+    },
+    "ca": {
+     "id": "9f3e3be5-8a39-4071-944c-6469742d09b6",
+     "name": "Sunrise Alarm Clock: Alarma",
+     "subtitle": "Llum suau per a son profund"
+    },
+    "it": {
+     "id": "d3838267-003b-4058-84f8-bc76f17a619d",
+     "name": "Sunrise Alarm Clock: Sveglia",
+     "subtitle": "Luce dolce, sonno pesante"
+    },
+    "no": {
+     "id": "6ca6b925-d78f-4e96-9378-e74296a0199c",
+     "name": "Sunrise Alarm Clock: Vekking",
+     "subtitle": "Mykt lys for tunge sovere"
+    },
+    "pl": {
+     "id": "e72410e9-dcf0-4910-a10e-ffe03145d498",
+     "name": "Sunrise Alarm Clock: Budzik",
+     "subtitle": "Łagodne światło, mocny sen"
+    },
+    "pt-PT": {
+     "id": "a3ad913a-ea51-4198-a258-0c816a8bc94b",
+     "name": "Sunrise Alarm Clock Alarme",
+     "subtitle": "Despertador com luz e missões"
+    },
+    "fr-FR": {
+     "id": "d9b46181-dd78-4285-ba4b-a6472ed61637",
+     "name": "Sunrise Alarm Clock : Réveil",
+     "subtitle": "Lumière douce, sommeil lourd"
+    },
+    "he": {
+     "id": "5dc65b45-c91f-4a85-90bf-7ccf4d48f610",
+     "name": "Sunrise Alarm: שעון מעורר",
+     "subtitle": "השכמה עדינה עם זריחה"
+    },
+    "sk": {
+     "id": "380eca4a-2810-40ea-acdd-2a7de72b35a5",
+     "name": "Sunrise Alarm Clock: Budík",
+     "subtitle": "Jemné svetlo, tvrdý spánok"
+    },
+    "da": {
+     "id": "67363779-5e5e-44a9-9f86-6dc881d5c7ca",
+     "name": "Sunrise Alarm Clock: Vækkeur",
+     "subtitle": "Blidt lys til tunge sovere"
+    },
+    "ko": {
+     "id": "a8cbd2c6-431f-4fb7-a11b-4393725fbc3f",
+     "name": "Sunrise Alarm Clock: 알람시계",
+     "subtitle": "부드러운 빛으로 깨우는 기상 알람"
+    },
+    "nl-NL": {
+     "id": "a2a088a8-fa0e-4427-a8e7-264fe214a972",
+     "name": "Sunrise Alarm Clock: Wekker",
+     "subtitle": "Zacht licht, diepe slapers"
+    },
+    "hu": {
+     "id": "47fd6b7a-6a20-4276-a737-36ce82e097f5",
+     "name": "Sunrise Alarm Clock: Keltő",
+     "subtitle": "Lágy fény mély alvóknak"
+    },
+    "cs": {
+     "id": "ee25a97e-c9fe-4c96-af7d-f0db303dfa51",
+     "name": "Sunrise Alarm Clock: Budík",
+     "subtitle": "Jemné světlo, tvrdý spánek"
+    },
+    "el": {
+     "id": "8d3369d0-f4c8-4572-9e89-f8820c6da412",
+     "name": "Sunrise Alarm Clock: Ξύπνημα",
+     "subtitle": "Απαλό φως για βαρύ ύπνο"
+    },
+    "ar-SA": {
+     "id": "c7074704-4b46-4700-a708-d8fe608f5043",
+     "name": "Sunrise Alarm: منبّه الاستيقاظ",
+     "subtitle": "استيقظ بلطف مع شروق الشمس"
+    },
+    "hr": {
+     "id": "c3a49ca5-b437-4f2d-bd60-7aa96bbbea50",
+     "name": "Sunrise Alarm Clock: Budilica",
+     "subtitle": "Nježno svjetlo za čvrst san"
+    },
+    "hi": {
+     "id": "a8f78209-7617-4eae-a3ed-67bdd703b88a",
+     "name": "Sunrise Alarm Clock: अलार्म",
+     "subtitle": "सूर्योदय से कोमल जागरण"
+    },
+    "en-AU": {
+     "id": "ff3289fc-c565-4932-add4-6102f4534f72",
+     "name": "Sunrise Alarm Clock: Wake Up",
+     "subtitle": "Gentle Light, Heavy Sleepers"
+    },
+    "es-ES": {
+     "id": "f1890ef7-2fdb-4b2e-b628-ebc4b900bee9",
+     "name": "Sunrise Alarm Clock: Alarma",
+     "subtitle": "Despertador con Luz y Misión"
+    },
+    "pt-BR": {
+     "id": "e54ffe8e-4bfa-4f5e-bd64-1f874c5c774b",
+     "name": "Sunrise Alarm Clock Alarme",
+     "subtitle": "Despertador com Luz e Missões"
+    },
+    "es-MX": {
+     "id": "5dc85f00-bf2d-4ff1-a389-414aa10dac1c",
+     "name": "Sunrise Alarm Clock: Alarma",
+     "subtitle": "Despertador con Luz y Misión"
+    },
+    "en-US": {
+     "id": "4528b159-3cb8-4ae4-84e7-d7cbdb1e0be4",
+     "name": "Sunrise Alarm Clock: Wake Up",
+     "subtitle": "Gentle Light, Heavy Sleepers"
+    },
+    "sv": {
+     "id": "db02e72e-9a69-44e3-b3b9-436bbf2024bf",
+     "name": "Sunrise Alarm Clock: Väckning",
+     "subtitle": "Mjukt ljus för djupsovare"
+    },
+    "ro": {
+     "id": "ea02cd1a-f5ec-4964-b0e8-d9b481499c1c",
+     "name": "Sunrise Alarm Clock: Trezire",
+     "subtitle": "Lumină blândă, somn adânc"
+    },
+    "fi": {
+     "id": "1e9f4eb3-47c3-4072-bc28-38dbe8b8a2d2",
+     "name": "Sunrise Alarm Clock: Herätys",
+     "subtitle": "Pehmeä valo sikeäuniselle"
+    },
+    "ru": {
+     "id": "d2d3970b-03dc-41fc-ba49-4d9838823f8b",
+     "name": "Sunrise Alarm Clock: Рассвет",
+     "subtitle": "Будильник для крепкого сна"
+    },
+    "en-CA": {
+     "id": "e2ff816e-c283-4e3b-a452-ed90c9808aed",
+     "name": "Sunrise Alarm Clock: Wake Up",
+     "subtitle": "Gentle Light, Heavy Sleepers"
+    },
+    "uk": {
+     "id": "555d9ca2-0218-4e4a-8b2a-2798cc95353b",
+     "name": "Sunrise Alarm Clock: Світанок",
+     "subtitle": "Будильник для міцного сну"
+    },
+    "fr-CA": {
+     "id": "0556cc17-1a79-4341-bc95-4850b548f85e",
+     "name": "Sunrise Alarm Clock : Réveil",
+     "subtitle": "Lumière douce, sommeil lourd"
+    },
+    "tr": {
+     "id": "efe22cdb-8474-4270-aae2-4ed1ffe02a90",
+     "name": "Sunrise Alarm Clock: Uyandır",
+     "subtitle": "Ağır uyuyanlara nazik ışık"
+    },
+    "id": {
+     "id": "c8552e97-78f9-4474-b40d-5efbdf55bb23",
+     "name": "Sunrise Alarm Clock: Bangun",
+     "subtitle": "Cahaya lembut, tidur pulas"
+    },
+    "ms": {
+     "id": "e87c0160-00fd-4ff2-99a3-3ac99667c9c5",
+     "name": "Sunrise Alarm Clock: Bangun",
+     "subtitle": "Cahaya lembut, tidur lena"
+    },
+    "zh-Hans": {
+     "id": "f6a74955-ca7f-4e26-bcd2-50e064558e59",
+     "name": "Sunrise Alarm Clock: 智能闹钟",
+     "subtitle": "日出唤醒，专治赖床贪睡"
+    },
+    "en-GB": {
+     "id": "44c1a34b-13e7-43ef-8005-be6ba773171a",
+     "name": "Sunrise Alarm Clock: Wake Up",
+     "subtitle": "Gentle Light, Heavy Sleepers"
+    },
+    "th": {
+     "id": "90c3fee0-1786-4f6f-b0bf-96c4564b7d3a",
+     "name": "Sunrise Alarm Clock ปลุกตื่น",
+     "subtitle": "ตื่นนุ่มนวลด้วยแสงอรุณ"
+    },
+    "ja": {
+     "id": "c146342b-d5e5-4858-963d-cae97e41e894",
+     "name": "Sunrise Alarm Clock: 目覚まし",
+     "subtitle": "やさしい光で起きられる目覚まし時計"
+    }
+   }
+  },
+  {
+   "id": "eb0696b9-640a-463c-b842-e8595fee25ad",
+   "state": "PREPARE_FOR_SUBMISSION",
+   "locs": {
+    "fr-FR": {
+     "id": "60e9faa3-af63-4300-b9fe-f42e6b3d7dad",
+     "name": "Sunrise Alarm Clock : Réveil",
+     "subtitle": "Lumière douce, sommeil lourd"
+    },
+    "zh-Hans": {
+     "id": "176d72d7-b215-4332-9473-0636330a9aa6",
+     "name": "Sunrise Alarm Clock: 智能闹钟",
+     "subtitle": "日出唤醒，专治赖床贪睡"
+    },
+    "tr": {
+     "id": "cc475198-4b90-4780-b4fe-28216df11bcd",
+     "name": "Sunrise Alarm Clock: Uyandır",
+     "subtitle": "Ağır uyuyanlara nazik ışık"
+    },
+    "sk": {
+     "id": "4f62b1da-822e-4a76-98b1-31854e88c733",
+     "name": "Sunrise Alarm Clock: Budík",
+     "subtitle": "Jemné svetlo, tvrdý spánok"
+    },
+    "ar-SA": {
+     "id": "1e9816ac-efce-464c-b448-5bc5d07cf8d6",
+     "name": "Sunrise Alarm: منبّه الاستيقاظ",
+     "subtitle": "استيقظ بلطف مع شروق الشمس"
+    },
+    "pt-PT": {
+     "id": "42949b2c-3653-4c4a-b79e-f9971d98161c",
+     "name": "Sunrise Alarm Clock Alarme",
+     "subtitle": "Despertador com luz e missões"
+    },
+    "en-CA": {
+     "id": "72d76c70-3109-41f5-acc5-17c5f10cfffa",
+     "name": "Sunrise Alarm Clock: Wake Up",
+     "subtitle": "Gentle Light, Heavy Sleepers"
+    },
+    "nl-NL": {
+     "id": "b266e93f-5191-43ec-b44d-16e8c80a9501",
+     "name": "Sunrise Alarm Clock: Wekker",
+     "subtitle": "Zacht licht, diepe slapers"
+    },
+    "fi": {
+     "id": "56353a5e-a7b7-4a27-b187-69f3742fc355",
+     "name": "Sunrise Alarm Clock: Herätys",
+     "subtitle": "Pehmeä valo sikeäuniselle"
+    },
+    "da": {
+     "id": "1ea67dbb-bab8-456a-9dc4-29d4b89a4137",
+     "name": "Sunrise Alarm Clock: Vækkeur",
+     "subtitle": "Blidt lys til tunge sovere"
+    },
+    "ca": {
+     "id": "e7d1098a-8d09-4aee-b004-1014aa8b4d29",
+     "name": "Sunrise Alarm Clock: Alarma",
+     "subtitle": "Llum suau per a son profund"
+    },
+    "de-DE": {
+     "id": "d5456e74-6f04-4cdd-85ed-17b77c3c91dd",
+     "name": "Sunrise Alarm Clock: Wecker",
+     "subtitle": "Sanftes Licht, Tiefschläfer"
+    },
+    "zh-Hant": {
+     "id": "5d160278-a00b-4363-a3ef-3d86b101f6e6",
+     "name": "Sunrise Alarm Clock: 智慧鬧鐘",
+     "subtitle": "日出喚醒，專治賴床貪睡"
+    },
+    "hu": {
+     "id": "250a79d2-cb5b-45a8-8900-092d34179c80",
+     "name": "Sunrise Alarm Clock: Keltő",
+     "subtitle": "Lágy fény mély alvóknak"
+    },
+    "he": {
+     "id": "d04ab5c2-71be-43e6-8665-82387b9069fb",
+     "name": "Sunrise Alarm: שעון מעורר",
+     "subtitle": "השכמה עדינה עם זריחה"
+    },
+    "it": {
+     "id": "1befb3dd-8bde-48dd-8052-30929d6fefdc",
+     "name": "Sunrise Alarm Clock: Sveglia",
+     "subtitle": "Luce dolce, sonno pesante"
+    },
+    "ko": {
+     "id": "65f558ea-aa60-43e7-a96e-b6bda1e6e0ba",
+     "name": "Sunrise Alarm Clock: 알람시계",
+     "subtitle": "부드러운 빛으로 깨우는 기상 알람"
+    },
+    "ru": {
+     "id": "b70afbf5-3e20-4fc7-99ab-ad9542532f38",
+     "name": "Sunrise Alarm Clock: Рассвет",
+     "subtitle": "Будильник для крепкого сна"
+    },
+    "en-GB": {
+     "id": "401bc6cc-22b1-46dd-9469-aecff7c032f1",
+     "name": "Sunrise Alarm Clock: Wake Up",
+     "subtitle": "Gentle Light, Heavy Sleepers"
+    },
+    "el": {
+     "id": "bc79fa76-cc6b-461e-8bbc-8db29f9a8e27",
+     "name": "Sunrise Alarm Clock: Ξύπνημα",
+     "subtitle": "Απαλό φως για βαρύ ύπνο"
+    },
+    "no": {
+     "id": "b64dcce8-698e-4f15-b2a6-649d864e032f",
+     "name": "Sunrise Alarm Clock: Vekking",
+     "subtitle": "Mykt lys for tunge sovere"
+    },
+    "vi": {
+     "id": "f6bbeac6-899a-479b-99fa-f4a93e95a982",
+     "name": "Sunrise Alarm Clock: Báo thức",
+     "subtitle": "Dậy êm ái cùng bình minh"
+    },
+    "es-ES": {
+     "id": "2662abe3-b837-4c70-8c5d-3a34828473fb",
+     "name": "Sunrise Alarm Clock: Alarma",
+     "subtitle": "Despertador con Luz y Misión"
+    },
+    "pt-BR": {
+     "id": "5c6dc2cb-1766-4067-970f-7a82af909d4b",
+     "name": "Sunrise Alarm Clock Alarme",
+     "subtitle": "Despertador com Luz e Missões"
+    },
+    "en-US": {
+     "id": "bd642cdf-94b0-4d06-8bbb-a3e23956409e",
+     "name": "Sunrise Alarm Clock: Wake Up",
+     "subtitle": "Gentle Light, Heavy Sleepers"
+    },
+    "ro": {
+     "id": "3fac268a-766f-4586-9b36-8b6d044fc93f",
+     "name": "Sunrise Alarm Clock: Trezire",
+     "subtitle": "Lumină blândă, somn adânc"
+    },
+    "fr-CA": {
+     "id": "376f0f6f-d71e-472e-91c9-c24b36d54058",
+     "name": "Sunrise Alarm Clock : Réveil",
+     "subtitle": "Lumière douce, sommeil lourd"
+    },
+    "cs": {
+     "id": "c947c09f-8476-4b59-a500-89fc4f8b8fa4",
+     "name": "Sunrise Alarm Clock: Budík",
+     "subtitle": "Jemné světlo, tvrdý spánek"
+    },
+    "id": {
+     "id": "1880f9cd-f511-41c0-b1a1-a7935ff4a09c",
+     "name": "Sunrise Alarm Clock: Bangun",
+     "subtitle": "Cahaya lembut, tidur pulas"
+    },
+    "ja": {
+     "id": "d5138799-f423-464d-8426-bdb28ecbe584",
+     "name": "Sunrise Alarm Clock: 目覚まし",
+     "subtitle": "やさしい光で起きられる目覚まし時計"
+    },
+    "th": {
+     "id": "66e826bf-1b6a-435d-b1c3-b011adf7ce16",
+     "name": "Sunrise Alarm Clock ปลุกตื่น",
+     "subtitle": "ตื่นนุ่มนวลด้วยแสงอรุณ"
+    },
+    "uk": {
+     "id": "281021ed-2e9f-41cc-88ba-737a9d150c8a",
+     "name": "Sunrise Alarm Clock: Світанок",
+     "subtitle": "Будильник для міцного сну"
+    },
+    "pl": {
+     "id": "8da36382-f050-4c0c-80c9-a89a0c1a5182",
+     "name": "Sunrise Alarm Clock: Budzik",
+     "subtitle": "Łagodne światło, mocny sen"
+    },
+    "es-MX": {
+     "id": "b3e4916f-a189-4aec-a638-046309185cf5",
+     "name": "Sunrise Alarm Clock: Alarma",
+     "subtitle": "Despertador con Luz y Misión"
+    },
+    "en-AU": {
+     "id": "78e0982d-a660-4901-bb15-d5c3debb7dc8",
+     "name": "Sunrise Alarm Clock: Wake Up",
+     "subtitle": "Gentle Light, Heavy Sleepers"
+    },
+    "sv": {
+     "id": "4f0943a9-8c38-4e1f-b838-21cd97cbde3c",
+     "name": "Sunrise Alarm Clock: Väckning",
+     "subtitle": "Mjukt ljus för djupsovare"
+    },
+    "hi": {
+     "id": "c3b13d9f-93f0-4fb4-9085-5a1ca9bffdc6",
+     "name": "Sunrise Alarm Clock: अलार्म",
+     "subtitle": "सूर्योदय से कोमल जागरण"
+    },
+    "ms": {
+     "id": "227c7c2d-005a-429a-9797-ffb696e92eef",
+     "name": "Sunrise Alarm Clock: Bangun",
+     "subtitle": "Cahaya lembut, tidur lena"
+    },
+    "hr": {
+     "id": "b9001c2a-717f-4b18-bdb9-3ec90005b194",
+     "name": "Sunrise Alarm Clock: Budilica",
+     "subtitle": "Nježno svjetlo za čvrst san"
+    }
+   }
+  }
+ ],
+ "experiments": [
+  {
+   "id": "295b96b8-1777-4d45-a464-c4d24308e531",
+   "name": "Soninho Bold Print 2026-06-26",
+   "state": "STOPPED",
+   "startDate": "2026-06-27T17:55:23-07:00",
+   "endDate": "2026-06-27T17:57:00-07:00",
+   "started": null
+  },
+  {
+   "id": "1ce3cdfa-a1cd-4f7e-9cab-5e30278415e5",
+   "name": "Sunrise Code Prints v2 2026-09-02",
+   "state": "STOPPED",
+   "startDate": "2026-09-02T21:51:16-07:00",
+   "endDate": "2026-09-11T21:00:23-07:00",
+   "started": null
+  }
+ ]
+}

@@ -139,13 +139,13 @@
         "normalized": [
           "langschläfer→langschlafer"
         ],
-        "deploy": "opcional — recomendação do reporter: NÃO aplicar (ganho zero de ranking; mantém DE como controle limpo)"
+        "deploy": "NÃO aplicado (28/09) — controle limpo, live intocado"
       }
     }
   },
   "approach": "single-variable (keywords fr-FR) com controle interno (de-DE sem mudança)",
   "approach_rationale": "Rating-first: 0 ratings em fr/de (1 no app, br). Iteração conservadora: 2 apostas novas no fr-FR, nada com ranking sai, name/subtitle intocados (todo volume astro-only → regra 10 do composer não sobe token pra campo de peso maior). de-DE: os 10 tokens estão no mapa de proteção e sobram 4 chars sem token honesto ≤3 letras. Volume sem search terms do ASC nem Apple Ads → pop não confiável; métrica atribuível = rank por termo.",
-  "status": "proposed",
+  "status": "staged",
   "carrier_version": {
     "version": "1.4.0",
     "id": "64ed2a05-d40f-4e2d-b8c4-77cf5db9bc6e",
@@ -153,7 +153,14 @@
   },
   "carrier_note": "A 1.4.0 também carrega prints novos em 39 locales e o texto da iter-01 (en-US/pt-BR/es-ES/es-MX): efeito em downloads é conjunto; o sinal do texto é o rank por termo, e o DE (sem texto novo) é o controle dos prints.",
   "live_at": null,
-  "quarantine_override": null,
+  "quarantine_override": {
+    "by": "João",
+    "reason": "Pediu explicitamente em 28/09: só keywords, sem título/subtítulo; aceita que o efeito não é mensurável (tráfego abaixo do piso, entra junto com prints/paywall da 1.4.0)",
+    "at": "2026-09-28",
+    "blockers": [
+      "evento de loja em 2026-09-27 (-1d) dentro da quarentena de ±14d"
+    ]
+  },
   "started_at": "2026-09-28",
   "planned_close_at": "2026-10-28",
   "actual_closed_at": null,
@@ -415,31 +422,35 @@
     }
   ],
   "cadence": {
-    "d0_rule": "D0 = dia em que a 1.4.0 fica READY_FOR_SALE (não o dia do PATCH). Datas abaixo PROVISÓRIAS assumindo D0 = 2026-09-30 (mesmo D0 da iter-01); recalcular com pull_analytics.py d0 --write-meta.",
+    "d0_rule": "D0 = dia em que a 1.4.0 fica READY_FOR_SALE (não 28/09, o dia do PATCH). Datas abaixo PROVISÓRIAS (assumem D0 = 2026-09-30); recontar D7/14/21/28 = live_at + N quando a 1.4.0 ficar live.",
     "checkpoints": [
       {
         "day": 7,
         "date": "2026-10-07",
         "purpose": "defis/leger indexados; ≥2 alvos rankeados e ≥1 top 10; protegidas top 10 FR ±3 (se réveiller tôt #5, se lever tôt #7, réveil tôt #15 — acento); DE intacto",
-        "metrics_file": "metrics/2026-10-07_d07.json"
+        "metrics_file": "metrics/2026-10-07_d07.json",
+        "provisional": true
       },
       {
         "day": 14,
         "date": "2026-10-14",
         "purpose": "≥3 alvos top 10; impressões FR ≥5,5/dia; token sem rank em 14d → trocar (defis→anti, leger→soleil)",
-        "metrics_file": "metrics/2026-10-14_d14.json"
+        "metrics_file": "metrics/2026-10-14_d14.json",
+        "provisional": true
       },
       {
         "day": 21,
         "date": "2026-10-21",
         "purpose": "réveil avec défis / réveil à défis ≤ #5; RR installs FR ≥ RR DE",
-        "metrics_file": "metrics/2026-10-21_d21.json"
+        "metrics_file": "metrics/2026-10-21_d21.json",
+        "provisional": true
       },
       {
         "day": 28,
         "date": "2026-10-28",
         "purpose": "veredito vs conservador/bold (pull_analytics.py final --write-meta, FR alvo, DE controle); decidir teste isolado de-DE mission→aufgaben",
-        "metrics_file": "metrics/2026-10-28_d28.json"
+        "metrics_file": "metrics/2026-10-28_d28.json",
+        "provisional": true
       }
     ],
     "rollback_triggers": [
@@ -523,7 +534,9 @@
   "deployed": false,
   "deploy_commit": null,
   "metrics": {
-    "d00_baseline": null
+    "d00_baseline": null,
+    "patch_day_baseline": "metrics/2026-09-28_patch_day_baseline.json",
+    "d00_note": "d00_baseline.json só no dia READY_FOR_SALE da 1.4.0: pull_analytics.py d0 --iter <dir> --live-at <dia> --write-meta; aí status → live."
   },
   "results": {
     "baseline": {
@@ -552,10 +565,10 @@
       }
     }
   },
-  "notes": "Stage 1 (aso-extractor) 2026-09-28: Astro fr+de (105/88 termos), SERP fr/de, baselines de vendas, report de discovery do ASC. Stage 6 (reporter) 2026-09-28: keyword_candidates.md + meta.json canônico; research/locales.json gerado pelo reporter via top_locales.py (fr-FR 42 = top-2 #1; slot #2 vazio, de-DE 29 abaixo do piso). Nada deployado. Os campos podem ir na 1.4.0 (PREPARE_FOR_SUBMISSION) antes do João submeter; de-DE sem PATCH recomendado. fr-CA (loja CA) tem keywords idênticos ao fr-FR live e fica fora do escopo.",
+  "notes": "Stage 1 (aso-extractor) 2026-09-28: Astro fr+de (105/88 termos), SERP fr/de, baselines de vendas, report de discovery do ASC. Stage 6 (reporter) 2026-09-28: keyword_candidates.md + meta.json canônico; research/locales.json gerado pelo reporter via top_locales.py (fr-FR 42 = top-2 #1; slot #2 vazio, de-DE 29 abaixo do piso). Nada deployado. Os campos podem ir na 1.4.0 (PREPARE_FOR_SUBMISSION) antes do João submeter; de-DE sem PATCH recomendado. fr-CA (loja CA) tem keywords idênticos ao fr-FR live e fica fora do escopo. | DEPLOY 28/09 (2026-09-28T23:36:26Z): keywords fr-FR PATCH direto na 1.4.0, read-back OK. de-DE NÃO aplicado (controle; live continua com 'langschläfer'). Status staged até a 1.4.0 ficar READY_FOR_SALE.",
   "deploy_gate": {
     "checked_at": "2026-09-28",
-    "result": "RECUSADO — nenhum PATCH feito",
+    "result": "APLICADO (staged) em 2026-09-28 com autorização explícita do João — floor reconhecido, quarentena com override",
     "traffic_floor": {
       "piso": 100,
       "installs_1star_30d": {
@@ -563,22 +576,60 @@
         "BR": 15,
         "ES": 26,
         "MX": 1,
-        "FR": 35
+        "FR": 35,
+        "DE": 22
       },
       "ok": false,
-      "lever": "ratings/prints/produto"
+      "lever": "ratings/prints/produto",
+      "acknowledged_by": {
+        "by": "João",
+        "at": "2026-09-28",
+        "quote": "\"pode mudar, mudou só keyword, que é o menos agressivo, como nao mudou title e subtitle tá tudo certo, pode subir\"",
+        "meaning": "aceita deployar abaixo do piso sabendo que o efeito em installs não é mensurável"
+      },
+      "rechecked": "pull_analytics.py floor 28/09: US 17, BR 15, ES 26, MX 1, FR 35 — todos < 100"
     },
     "quarantine": {
       "ok": false,
       "blockers": [
         "release 2026-09-27 (-1d) dentro de ±14d (scan.py store_events)"
       ],
-      "override": null
+      "override": "meta.json.quarantine_override (pull_analytics.py quarantine --override, 28/09)"
     },
     "text_only_carrier": {
       "ok": false,
-      "why": "1.4.0 leva prints novos (39 idiomas), prompt nativo de review, paywall novo e 2 assinaturas — texto grudado em feature, não mensurável"
+      "why": "1.4.0 leva prints novos (39 idiomas), prompt nativo de review, paywall novo e 2 assinaturas — texto grudado em feature, não mensurável",
+      "acknowledged_by": "João 28/09 — efeito conjunto aceito"
     },
-    "authorization": "inferida pelo coordenador ('continua'), não pedido explícito do João"
+    "authorization": {
+      "by": "João",
+      "at": "2026-09-28",
+      "explicit": true,
+      "quote": "\"pode mudar, mudou só keyword, que é o menos agressivo, como nao mudou title e subtitle tá tudo certo, pode subir\"",
+      "question": "Aplico o ASO (keywords de en-US, pt-BR, es-ES/MX e fr-FR) na 1.4.0 mesmo sabendo que, com o tráfego atual, não dá pra medir o efeito?",
+      "relayed_by": "coordenador /start-aso-pipeline"
+    },
+    "previous_result": "RECUSADO 28/09 (autorização inferida, sem pedido explícito) — nenhum PATCH naquela rodada"
+  },
+  "deploy_timestamp": "2026-09-28T23:36:26Z",
+  "measurement_note": "Sinal atribuível = RANK por termo (Astro, por store). Efeito em downloads é CONJUNTO com os prints novos (39 idiomas), paywall/assinaturas e prompt nativo de review da 1.4.0 — não é separável do texto; e o tráfego está abaixo do piso de 100 installs 1*/30d em todos os países-alvo, então nenhum veredito de installs é legível. João aceitou isso explicitamente em 28/09.",
+  "deploy": {
+    "at": "2026-09-28T23:36:26Z",
+    "method": "PATCH /v1/appStoreVersionLocalizations/{id} (keywords only; nunca deliver)",
+    "readback": {
+      "fr-FR": {
+        "id": "2e6cb7c4-3b1f-43f3-8b96-06816df6f89c",
+        "http": 200,
+        "match": true,
+        "chars": 99,
+        "before": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller",
+        "after": "defis,leger,se lever,tot,reveiller,alarme,aube,matin,gros dormeur,fort,maths,cycle,sonnerie,mission"
+      }
+    },
+    "untouched": "name, subtitle, description, promotionalText, whatsNew, supportUrl, marketingUrl de todos os 39 locales; keywords dos outros 34 locales (incl. de-DE); versão live 1.3.0; appInfo READY_FOR_SALE",
+    "pre_snapshot": "iterations/2026-09-27_iter-01-text-en-US-keywords/research/asc_pre_deploy_2026-09-28.json",
+    "post_snapshot": "iterations/2026-09-27_iter-01-text-en-US-keywords/research/asc_post_deploy_2026-09-28.json",
+    "goes_public_when": "a 1.4.0 for submetida, aprovada e ficar READY_FOR_SALE",
+    "rollback": "PATCH keywords de volta para os valores 'before' (iguais a current/metadata/<locale>/keywords.txt)"
   }
 }

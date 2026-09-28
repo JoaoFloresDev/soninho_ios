@@ -1,0 +1,47 @@
+{
+ "en-US": {
+  "id": "896ff729-0421-4ee6-aa23-cda253bc91ac",
+  "patch": 200,
+  "before": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart",
+  "after_local": "gently,sunlight,fast,mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,sleep,cycle,smart",
+  "readback": "gently,sunlight,fast,mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,sleep,cycle,smart",
+  "match": true,
+  "chars": 99
+ },
+ "pt-BR": {
+  "id": "7575f8cb-6a38-41b1-816d-f55b6b7717ad",
+  "patch": 200,
+  "before": "acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer",
+  "after_local": "anti,acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer",
+  "readback": "anti,acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer",
+  "match": true,
+  "chars": 99
+ },
+ "es-ES": {
+  "id": "4db2d5b2-22dd-41b5-9d6b-e7fb665c909f",
+  "patch": 200,
+  "before": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+  "after_local": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+  "readback": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+  "match": true,
+  "chars": 98
+ },
+ "es-MX": {
+  "id": "33ad2693-72fe-4072-8fb5-b0ef479e5ba5",
+  "patch": 200,
+  "before": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+  "after_local": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+  "readback": "reto,despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave",
+  "match": true,
+  "chars": 98
+ },
+ "fr-FR": {
+  "id": "2e6cb7c4-3b1f-43f3-8b96-06816df6f89c",
+  "patch": 200,
+  "before": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller",
+  "after_local": "defis,leger,se lever,tot,reveiller,alarme,aube,matin,gros dormeur,fort,maths,cycle,sonnerie,mission",
+  "readback": "defis,leger,se lever,tot,reveiller,alarme,aube,matin,gros dormeur,fort,maths,cycle,sonnerie,mission",
+  "match": true,
+  "chars": 99
+ }
+}
