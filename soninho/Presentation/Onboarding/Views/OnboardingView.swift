@@ -164,6 +164,7 @@ struct OnboardingPageView: View {
                     .font(AppFonts.title())
                     .foregroundStyle(AppColors.textPrimary)
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 Text(String(localized: String.LocalizationValue(page.subtitle)))
                     .font(AppFonts.body())

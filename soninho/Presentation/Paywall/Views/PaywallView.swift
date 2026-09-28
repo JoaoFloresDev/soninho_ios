@@ -33,7 +33,7 @@ struct PaywallView: View {
     )
     private static let accent = Color(hex: "FF6E40")
     private static let badgeColor = Color(hex: "FFD54F")
-    private static let iconSize: CGFloat = 64
+    private static let mascotSize: CGFloat = 110
 
     // MARK: - Properties
     @Binding var isPresented: Bool
@@ -116,16 +116,10 @@ struct PaywallView: View {
     // MARK: - Header
     private var header: some View {
         VStack(spacing: 14) {
-            Image("paywallIcon")
+            Image("heroWake2")
                 .resizable()
                 .scaledToFit()
-                .frame(width: Self.iconSize, height: Self.iconSize)
-                .clipShape(RoundedRectangle(cornerRadius: Self.iconSize * 0.2237, style: .continuous))
-                .overlay(
-                    RoundedRectangle(cornerRadius: Self.iconSize * 0.2237, style: .continuous)
-                        .stroke(.white.opacity(0.18), lineWidth: 1)
-                )
-                .shadow(color: .black.opacity(0.3), radius: 18, y: 10)
+                .frame(width: Self.mascotSize, height: Self.mascotSize)
                 .scaleEffect(iconPulse ? 1.04 : 1.0)
                 // A few beats, then still: an endless animation keeps the UI from ever
                 // settling, which stalls UI test drivers on this screen.
@@ -134,7 +128,7 @@ struct PaywallView: View {
                 .padding(.top, 8)
 
             Text(String(localized: "paywall.headline"))
-                .font(.system(size: 30, weight: .heavy))
+                .font(AppFonts.display(30, weight: .heavy))
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
@@ -249,14 +243,14 @@ struct PaywallView: View {
 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(title)
-                        .font(.system(size: 18, weight: .bold))
+                        .font(AppFonts.title3(18, weight: .bold))
                         .foregroundStyle(.white)
                         .fixedSize(horizontal: false, vertical: true)
 
                     // Only the plan that really has a free trial gets a badge.
                     if let trial {
                         Text(String(localized: "paywall.badge.trial \(trial)"))
-                            .font(.system(size: 11, weight: .heavy))
+                            .font(.system(size: 11, weight: .heavy, design: .rounded))
                             .foregroundStyle(.black)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 3)
@@ -269,7 +263,7 @@ struct PaywallView: View {
                 // Charged amount is the most prominent price element (Guideline 3.1.2(c)).
                 VStack(alignment: .trailing, spacing: 2) {
                     Text(product.displayPrice)
-                        .font(.system(size: 22, weight: .bold))
+                        .font(AppFonts.title2(22, weight: .bold))
                         .foregroundStyle(.white)
                     Text(period)
                         .font(.system(size: 12))
@@ -310,7 +304,7 @@ struct PaywallView: View {
                         .tint(.white)
                 } else {
                     Text(ctaTitle)
-                        .font(.system(size: 17, weight: .bold))
+                        .font(AppFonts.headline(17, weight: .bold))
                         .foregroundStyle(.white)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
