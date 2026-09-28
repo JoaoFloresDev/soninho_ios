@@ -18123,205 +18123,205 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "**تحليل النوم** لكل ليلة، مع المراحل والنتيجة"
+            "value": "**تحليل عميق للنوم**"
           }
         },
         "ca": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Anàlisi del son** de cada nit, amb fases i puntuació"
+            "value": "**Anàlisi detallada del son**"
           }
         },
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analýza spánku** každé noci, s fázemi a skóre"
+            "value": "**Podrobná analýza spánku**"
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Søvnanalyse** hver nat, med faser og en score"
+            "value": "**Dybdegående søvnanalyse**"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Schlafanalyse** jeder Nacht, mit Phasen und einer Punktzahl"
+            "value": "**Detaillierte Schlafanalyse**"
           }
         },
         "el": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Ανάλυση ύπνου** κάθε βράδυ, με φάσεις και βαθμολογία"
+            "value": "**Λεπτομερής ανάλυση ύπνου**"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Sleep analysis** of every night, with phases and a score"
+            "value": "**In-depth sleep analysis**"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Análisis del sueño** de cada noche, con fases y puntuación"
+            "value": "**Análisis detallado del sueño**"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Unianalyysi** joka yöltä, vaiheineen ja pisteineen"
+            "value": "**Yksityiskohtainen unianalyysi**"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analyse du sommeil** chaque nuit, avec phases et score"
+            "value": "**Analyse approfondie du sommeil**"
           }
         },
         "he": {
           "stringUnit": {
             "state": "translated",
-            "value": "**ניתוח שינה** לכל לילה, עם שלבים וציון"
+            "value": "**ניתוח שינה מעמיק**"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "**नींद का विश्लेषण** हर रात का, चरणों और स्कोर के साथ"
+            "value": "**गहन नींद विश्लेषण**"
           }
         },
         "hr": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analiza sna** svake noći, s fazama i ocjenom"
+            "value": "**Detaljna analiza sna**"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Alvásanalízis** minden éjszakáról, fázisokkal és pontszámmal"
+            "value": "**Részletes alváselemzés**"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analisis tidur** setiap malam, dengan fase dan skor"
+            "value": "**Analisis tidur mendalam**"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analisi del sonno** di ogni notte, con fasi e punteggio"
+            "value": "**Analisi approfondita del sonno**"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "**睡眠分析**を毎晩、フェーズとスコアつきで"
+            "value": "**詳細な睡眠分析**"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "**수면 분석**을 매일 밤, 단계와 점수와 함께"
+            "value": "**심층 수면 분석**"
           }
         },
         "ms": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analisis tidur** setiap malam, dengan fasa dan skor"
+            "value": "**Analisis tidur mendalam**"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Slaapanalyse** van elke nacht, met fasen en een score"
+            "value": "**Diepgaande slaapanalyse**"
           }
         },
         "no": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Søvnanalyse** hver natt, med faser og en poengsum"
+            "value": "**Grundig søvnanalyse**"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analiza snu** każdej nocy, z fazami i wynikiem"
+            "value": "**Szczegółowa analiza snu**"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Análise do sono** de cada noite, com fases e nota"
+            "value": "**Análise detalhada do sono**"
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Análise do sono** de cada noite, com fases e pontuação"
+            "value": "**Análise detalhada do sono**"
           }
         },
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analiza somnului** în fiecare noapte, cu faze și scor"
+            "value": "**Analiză detaliată a somnului**"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Анализ сна** каждую ночь, с фазами и оценкой"
+            "value": "**Углублённый анализ сна**"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Analýza spánku** každú noc, s fázami a skóre"
+            "value": "**Podrobná analýza spánku**"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Sömnanalys** varje natt, med faser och poäng"
+            "value": "**Djupgående sömnanalys**"
           }
         },
         "th": {
           "stringUnit": {
             "state": "translated",
-            "value": "**การวิเคราะห์การนอน** ของทุกคืน พร้อมช่วงการนอนและคะแนน"
+            "value": "**การวิเคราะห์การนอนหลับเชิงลึก**"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Uyku analizi** her gece, evreler ve puanla"
+            "value": "**Derinlemesine uyku analizi**"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Аналіз сну** щоночі, з фазами та оцінкою"
+            "value": "**Поглиблений аналіз сну**"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "**Phân tích giấc ngủ** mỗi đêm, với các giai đoạn và điểm số"
+            "value": "**Phân tích giấc ngủ chuyên sâu**"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "**睡眠分析**，记录每晚的睡眠阶段和评分"
+            "value": "**深度睡眠分析**"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "**睡眠分析**，記錄每晚的睡眠階段與評分"
+            "value": "**深度睡眠分析**"
           }
         }
       }
@@ -18332,205 +18332,205 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "مراحل النوم ودرجة لكل ليلة"
+            "value": "المراحل، النتيجة، الكفاءة والاتجاهات لكل ليلة"
           }
         },
         "ca": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fases i puntuació de cada nit"
+            "value": "Fases, puntuació, eficiència i tendències de cada nit"
           }
         },
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fáze a skóre každou noc"
+            "value": "Fáze, skóre, efektivita a trendy každé noci"
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faser og en score hver nat"
+            "value": "Faser, score, effektivitet og tendenser for hver nat"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Phasen und eine Bewertung für jede Nacht"
+            "value": "Phasen, Score, Effizienz und Trends für jede Nacht"
           }
         },
         "el": {
           "stringUnit": {
             "state": "translated",
-            "value": "Φάσεις και βαθμολογία κάθε βράδυ"
+            "value": "Φάσεις, βαθμολογία, αποδοτικότητα και τάσεις για κάθε νύχτα"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Phases and a score for every night"
+            "value": "Phases, score, efficiency and trends for every night"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fases y puntuación de cada noche"
+            "value": "Fases, puntuación, eficiencia y evolución de cada noche"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vaiheet ja pisteet joka yö"
+            "value": "Vaiheet, pisteet, tehokkuus ja trendit joka yöltä"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Phases et un score chaque nuit"
+            "value": "Phases, score, efficacité et tendances pour chaque nuit"
           }
         },
         "he": {
           "stringUnit": {
             "state": "translated",
-            "value": "שלבים וציון לכל לילה"
+            "value": "שלבים, ציון, יעילות ומגמות לכל לילה"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "हर रात के चरण और स्कोर"
+            "value": "हर रात के चरण, स्कोर, दक्षता और रुझान"
           }
         },
         "hr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faze i ocjena svake noći"
+            "value": "Faze, ocjena, učinkovitost i trendovi za svaku noć"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fázisok és pontszám minden éjjel"
+            "value": "Fázisok, pontszám, hatékonyság és trendek minden éjszaka"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fase dan skor setiap malam"
+            "value": "Fase, skor, efisiensi, dan tren setiap malam"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fasi e un punteggio ogni notte"
+            "value": "Fasi, punteggio, efficienza e tendenze per ogni notte"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "毎晩の睡眠段階とスコア"
+            "value": "毎晩の睡眠段階、スコア、効率、傾向"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "매일 밤 수면 단계와 점수"
+            "value": "매일 밤의 수면 단계, 점수, 효율성 및 추세"
           }
         },
         "ms": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fasa dan skor setiap malam"
+            "value": "Fasa, skor, kecekapan dan trend setiap malam"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fasen en een score voor elke nacht"
+            "value": "Fasen, score, efficiëntie en trends voor elke nacht"
           }
         },
         "no": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faser og en poengsum hver natt"
+            "value": "Faser, poengsum, effektivitet og trender hver natt"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fazy i wynik każdej nocy"
+            "value": "Fazy, wynik, efektywność i trendy każdej nocy"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fases e nota de cada noite"
+            "value": "Fases, nota, eficiência e evolução de cada noite"
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fases e uma pontuação todas as noites"
+            "value": "Fases, pontuação, eficiência e evolução de cada noite"
           }
         },
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faze și un scor în fiecare noapte"
+            "value": "Faze, scor, eficiență și tendințe pentru fiecare noapte"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Фазы и оценка каждую ночь"
+            "value": "Фазы, оценка, эффективность и тренды за каждую ночь"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fázy a skóre každú noc"
+            "value": "Fázy, skóre, efektivita a trendy každú noc"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faser och poäng varje natt"
+            "value": "Faser, poäng, effektivitet och trender varje natt"
           }
         },
         "th": {
           "stringUnit": {
             "state": "translated",
-            "value": "ระยะการนอนและคะแนนทุกคืน"
+            "value": "ระยะการนอน คะแนน ประสิทธิภาพ และแนวโน้มในทุกคืน"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Her gece için evreler ve bir puan"
+            "value": "Her gece için evreler, puan, verimlilik ve eğilimler"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Фази та оцінка щоночі"
+            "value": "Фази, оцінка, ефективність і тенденції щоночі"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Các giai đoạn và điểm số mỗi đêm"
+            "value": "Giai đoạn, điểm số, hiệu quả và xu hướng mỗi đêm"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "每晚的睡眠阶段和评分"
+            "value": "每晚的睡眠阶段、评分、效率和趋势"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "每晚的睡眠階段和評分"
+            "value": "每晚的睡眠階段、評分、效率和趨勢"
           }
         }
       }
