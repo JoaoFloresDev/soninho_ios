@@ -24,13 +24,9 @@ final class OnboardingViewModel: ObservableObject {
 
     // MARK: - Published Properties
     @Published var currentPage = 0 {
-        didSet {
-            guard !isSkipping else { return }
-            Analytics.onboardingStepViewed(currentPage + 1)
-        }
+        didSet { Analytics.onboardingStepViewed(currentPage + 1) }
     }
     private let startedAt = Date()
-    private var isSkipping = false
 
     // MARK: - Properties
     let pages: [OnboardingPage] = [
@@ -78,15 +74,6 @@ final class OnboardingViewModel: ObservableObject {
                 currentPage -= 1
             }
         }
-    }
-
-    func skipToEnd() {
-        Analytics.onboardingSkipped(at: currentPage + 1)
-        isSkipping = true
-        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-            currentPage = pages.count - 1
-        }
-        isSkipping = false
     }
 
     func completeOnboarding() {

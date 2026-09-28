@@ -20,15 +20,16 @@ struct PremiumBadge: View {
             Image(systemName: "crown.fill")
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(Self.gold)
-            Text("Premium")
+            Text(String(localized: "premium_badge"))
                 .font(.system(size: 15, weight: .semibold, design: .rounded))
                 .foregroundStyle(AppColors.textPrimary)
+                .fixedSize()
         }
         .padding(.horizontal, 4)
         .frame(minHeight: 44)
         .contentShape(Rectangle())
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Premium"))
+        .accessibilityLabel(Text(String(localized: "premium_badge")))
     }
 }
 

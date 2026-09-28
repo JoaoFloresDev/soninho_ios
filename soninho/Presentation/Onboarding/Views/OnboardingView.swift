@@ -40,23 +40,11 @@ struct OnboardingView: View {
             GlassBackdrop()
 
             VStack(spacing: 0) {
-                // Skip Button
-                HStack {
-                    Spacer()
-
-                    if !viewModel.isLastPage {
-                        Button {
-                            viewModel.skipToEnd()
-                        } label: {
-                            Text(String(localized: "onboarding_skip"))
-                                .font(AppFonts.subheadline())
-                                .foregroundStyle(AppColors.textSecondary)
-                        }
-                    }
-                }
-                .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.top, 16)
-                .frame(height: 44)
+                // No skip: the three steps are short and lead into the paywall.
+                // The top band keeps the art and text where they were.
+                Color.clear
+                    .frame(height: 44)
+                    .padding(.top, 16)
 
                 // Page Content
                 TabView(selection: $viewModel.currentPage) {
