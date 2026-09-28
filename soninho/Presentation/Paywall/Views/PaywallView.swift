@@ -22,19 +22,15 @@ struct PaywallView: View {
 
     // MARK: - Constants
     private static let closeDelay: TimeInterval = 3.0
-    /// Near-black behind the headline and benefits (white text needs real
-    /// contrast), warming into sunrise orange behind the plans.
+    /// Orange only, from sunrise orange to deep burnt orange: deep enough that
+    /// white text keeps its contrast everywhere (a light orange top was unreadable).
     private static let gradient = LinearGradient(
-        stops: [
-            .init(color: Color(hex: "120804"), location: 0.0),
-            .init(color: Color(hex: "1E0D05"), location: 0.42),
-            .init(color: Color(hex: "B8400F"), location: 0.78),
-            .init(color: Color(hex: "E0541A"), location: 1.0)
-        ],
+        colors: [Color(hex: "E8531F"), Color(hex: "C8400F"), Color(hex: "9C300A")],
         startPoint: .top,
         endPoint: .bottom
     )
     private static let badgeColor = Color(hex: "FFD54F")
+    private static let iconSize: CGFloat = 96
 
     // MARK: - Properties
     @Binding var isPresented: Bool
@@ -107,20 +103,22 @@ struct PaywallView: View {
     // MARK: - Header
     private var header: some View {
         VStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(Self.badgeColor.opacity(0.22))
-                    .frame(width: 76, height: 76)
-                    .scaleEffect(iconPulse ? 1.08 : 1.0)
-                    // A few beats, then still: an endless animation keeps the UI from ever
-                    // settling, which stalls UI test drivers on this screen.
-                    .animation(.easeInOut(duration: 1.2).repeatCount(5, autoreverses: true), value: iconPulse)
-
-                Image(systemName: "sunrise.fill")
-                    .font(.system(size: 34))
-                    .foregroundStyle(Self.badgeColor)
-            }
-            .padding(.top, 48)
+            Image("paywallIcon")
+                .resizable()
+                .scaledToFit()
+                .frame(width: Self.iconSize, height: Self.iconSize)
+                .clipShape(RoundedRectangle(cornerRadius: Self.iconSize * 0.2237, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: Self.iconSize * 0.2237, style: .continuous)
+                        .stroke(.white.opacity(0.18), lineWidth: 1)
+                )
+                .shadow(color: .black.opacity(0.3), radius: 18, y: 10)
+                .scaleEffect(iconPulse ? 1.04 : 1.0)
+                // A few beats, then still: an endless animation keeps the UI from ever
+                // settling, which stalls UI test drivers on this screen.
+                .animation(.easeInOut(duration: 1.2).repeatCount(5, autoreverses: true), value: iconPulse)
+                .accessibilityHidden(true)
+                .padding(.top, 48)
 
             Text(String(localized: "paywall.headline"))
                 .font(.system(size: 30, weight: .heavy))
@@ -286,16 +284,11 @@ struct PaywallView: View {
 
     // MARK: - CTA
     private var ctaButton: some View {
-        VStack(spacing: 10) {
-            Text(String(localized: "paywall.cancelAnytime"))
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(.white.opacity(0.9))
-            purchaseButton
-        }
-        .padding(.horizontal, 20)
-        .padding(.bottom, 14)
-        .opacity(showButton ? 1 : 0)
-        .offset(y: showButton ? 0 : 20)
+        purchaseButton
+            .padding(.horizontal, 20)
+            .padding(.bottom, 14)
+            .opacity(showButton ? 1 : 0)
+            .offset(y: showButton ? 0 : 20)
     }
 
     private var purchaseButton: some View {
