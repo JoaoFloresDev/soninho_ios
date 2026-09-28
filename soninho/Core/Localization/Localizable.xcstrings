@@ -20213,205 +20213,205 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "لن يفوتك موعد الاستيقاظ بعد اليوم"
+            "value": "وداعًا لتأجيل المنبه"
           }
         },
         "ca": {
           "stringUnit": {
             "state": "translated",
-            "value": "No t'adormis mai més"
+            "value": "Prou d'ajornar l'alarma"
           }
         },
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Už nikdy nezaspíte"
+            "value": "Konec s odkládáním budíku"
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sov aldrig over dig igen"
+            "value": "Slut med snooze"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nie wieder verschlafen"
+            "value": "Schluss mit Schlummern"
           }
         },
         "el": {
           "stringUnit": {
             "state": "translated",
-            "value": "Μην ξαναπαρακοιμηθείτε ποτέ"
+            "value": "Τέλος η αναβολή του ξυπνητηριού"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Never oversleep again"
+            "value": "No more snoozing"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nunca más te quedes dormido"
+            "value": "Se acabó posponer"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Älä enää koskaan nuku pommiin"
+            "value": "Ei enää torkkua"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ne ratez plus jamais votre réveil"
+            "value": "Fini le snooze"
           }
         },
         "he": {
           "stringUnit": {
             "state": "translated",
-            "value": "לא תפספסו את ההשכמה יותר"
+            "value": "די לנודניק"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "अब कभी देर से न उठें"
+            "value": "अब स्नूज़ नहीं"
           }
         },
         "hr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nikad više ne prespavajte"
+            "value": "Kraj odgađanju alarma"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Soha többé ne aludj el"
+            "value": "Nincs több szundi"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tidak akan kesiangan lagi"
+            "value": "Berhenti menunda alarm"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Non perdere mai più la sveglia"
+            "value": "Basta posticipare la sveglia"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "もう寝坊しない"
+            "value": "スヌーズはもう終わり"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "이제 늦잠은 그만"
+            "value": "스누즈는 이제 그만"
           }
         },
         "ms": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tak akan terlajak tidur lagi"
+            "value": "Tiada lagi tunda penggera"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nooit meer verslapen"
+            "value": "Nooit meer snoozen"
           }
         },
         "no": {
           "stringUnit": {
             "state": "translated",
-            "value": "Forsov deg aldri igjen"
+            "value": "Slutt på snoozing"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Koniec z zaspywaniem"
+            "value": "Koniec z drzemką"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nunca mais perca a hora"
+            "value": "Chega de soneca"
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nunca mais adormeça"
+            "value": "Chega de adiar o despertador"
           }
         },
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nu mai rata alarma niciodată"
+            "value": "Gata cu amânarea alarmei"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Больше никогда не просыпайте"
+            "value": "Хватит откладывать будильник"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Už nikdy nezaspíte"
+            "value": "Koniec s odkladaním budíka"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "translated",
-            "value": "Försov dig aldrig igen"
+            "value": "Sluta snooza"
           }
         },
         "th": {
           "stringUnit": {
             "state": "translated",
-            "value": "ไม่ตื่นสายอีกต่อไป"
+            "value": "เลิกกดเลื่อนปลุก"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bir daha asla uyuya kalma"
+            "value": "Ertelemeye son"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Більше ніколи не просипайте"
+            "value": "Досить відкладати будильник"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Không bao giờ ngủ quên nữa"
+            "value": "Tạm biệt báo thức lại"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "再也不会睡过头"
+            "value": "告别贪睡"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "再也不會睡過頭"
+            "value": "告別貪睡"
           }
         }
       }
