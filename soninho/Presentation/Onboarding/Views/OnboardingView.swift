@@ -15,8 +15,26 @@ struct OnboardingView: View {
     @Binding var isOnboardingComplete: Bool
     @State private var showPaywall = false
 
+    // MARK: - Constants
+    /// One curve for every stage change: onboarding → paywall → app all push sideways.
+    private static let stageTransition: Animation = .easeInOut(duration: 0.35)
+
     // MARK: - View Body
     var body: some View {
+        ZStack {
+            if showPaywall {
+                PaywallView(isPresented: paywallPresented)
+                    .transition(.push(from: .trailing))
+            } else {
+                pages
+                    .transition(.push(from: .trailing))
+            }
+        }
+        .animation(Self.stageTransition, value: showPaywall)
+    }
+
+    // MARK: - Subviews
+    private var pages: some View {
         ZStack {
             // Background
             GlassBackdrop()
@@ -85,9 +103,17 @@ struct OnboardingView: View {
                 .padding(.bottom, 48)
             }
         }
-        .fullScreenCover(isPresented: $showPaywall, onDismiss: completeOnboarding) {
-            PaywallView(isPresented: $showPaywall)
-        }
+    }
+
+    /// The paywall closes itself (X, purchase or restore) by setting this to false;
+    /// that is the moment onboarding ends.
+    private var paywallPresented: Binding<Bool> {
+        Binding(
+            get: { showPaywall },
+            set: { presented in
+                if !presented { completeOnboarding() }
+            }
+        )
     }
 
     // MARK: - Actions
@@ -99,7 +125,7 @@ struct OnboardingView: View {
             return
         }
         PaywallAnalytics.source = "onboarding"
-        showPaywall = true
+        withAnimation(Self.stageTransition) { showPaywall = true }
     }
 
     private func completeOnboarding() {

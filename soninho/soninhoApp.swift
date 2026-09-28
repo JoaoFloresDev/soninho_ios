@@ -55,15 +55,16 @@ struct SoninhoApp: App {
                         MainTabView()
                             .environmentObject(storageService)
                             .environmentObject(notificationService)
-                            .transition(.move(edge: .trailing))
+                            .transition(.push(from: .trailing))
                     } else {
                         OnboardingView(isOnboardingComplete: $isOnboardingComplete)
                             .environmentObject(storageService)
-                            .transition(.move(edge: .leading))
+                            .transition(.push(from: .trailing))
                     }
                 }
-                // Leaving onboarding reads as a push forward, not a cross-fade.
-                .animation(.easeInOut(duration: 0.45), value: isOnboardingComplete)
+                // Onboarding → paywall → app is one sideways push, same curve as
+                // OnboardingView's stages, never a cross-fade.
+                .animation(.easeInOut(duration: 0.35), value: isOnboardingComplete)
 
                 // Full-screen alarm overlay
                 if notificationService.isAlarmRinging {
