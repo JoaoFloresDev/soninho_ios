@@ -1,0 +1,10 @@
+method,window_days,window_start,window_end,territory,installs_1x,updates_7x,installs_per_day
+sales_report_installs_only,30,2026-08-29,2026-09-27,FR,35,2,1.167
+sales_report_installs_only,30,2026-08-29,2026-09-27,DE,22,0,0.733
+sales_report_installs_only,30,2026-08-29,2026-09-27,ALL,235,72,7.833
+sales_report_installs_only,45,2026-08-14,2026-09-27,FR,37,2,0.822
+sales_report_installs_only,45,2026-08-14,2026-09-27,DE,23,0,0.511
+sales_report_installs_only,45,2026-08-14,2026-09-27,ALL,292,74,6.489
+sales_report_installs_only,60,2026-07-30,2026-09-27,FR,40,3,0.667
+sales_report_installs_only,60,2026-07-30,2026-09-27,DE,24,0,0.4
+sales_report_installs_only,60,2026-07-30,2026-09-27,ALL,337,105,5.617

@@ -1,0 +1,3 @@
+Neues Liquid-Glass-Design unter iOS 26 — leichter, klarer, gemacht fürs Schlafzimmer.
+Die Schlummerfunktion übersteht jetzt das erneute Öffnen der App, und die eingestellte Lautstärke gilt auch im Hintergrund.
+Sunrise Alarm spricht jetzt 39 Sprachen.

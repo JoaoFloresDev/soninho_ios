@@ -1,0 +1,132 @@
+Core Word,Long Tail,Source,Popularity,Difficulty,Our Ranking,Apps in Ranking,Composition
+sueño pesado,alarma para sueño pesado,stage2 NAT es: 'para <user>',5,5,11,29,FREE (all tokens in es-MX fields)
+sueño pesado,alarma sueno pesado,stage1/prior tracked: field: kw spelling 'sueno' (no tilde),5,5,11,29,FREE (all tokens in es-MX fields)
+sueño pesado,alarma sueño pesado,stage1/prior tracked: coordinator: niche term (mx #10 iTunes),5,5,11,29,FREE (all tokens in es-MX fields)
+sueño pesado,despertador para sueño pesado,stage2 NAT es: 'para <user>',5,5,11,27,FREE (all tokens in es-MX fields)
+sueño pesado,despertador sueño pesado,"stage1/prior tracked: natural: kw 'sueno','pesado' + subtitle",5,5,11,27,FREE (all tokens in es-MX fields)
+sueño pesado,sueño pesado,stage2 NAT es: core phrase alone,5,5,13,30,FREE (all tokens in es-MX fields)
+posponer/snooze,adios al snooze,stage2 COMP es: Wayk subtitle 'Adiós al snooze',5,13,OUT,5,"NEEDS: adios,snooze"
+posponer/snooze,alarma sin posponer,stage2 NAT es: 'alarma sin <x>',5,5,OUT,32,"NEEDS: sin,posponer"
+posponer/snooze,alarma sin snooze,stage2 NAT es: 'alarma sin <x>',5,5,OUT,17,"NEEDS: sin,snooze"
+posponer/snooze,anti posponer,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,5,OUT,1,"NEEDS: anti,posponer"
+posponer/snooze,despertador sin posponer,stage2 NAT es: 'despertador sin <x>' (tracked 'despertar sin posponer'),5,5,OUT,30,"NEEDS: sin,posponer"
+posponer/snooze,despertador sin snooze,stage1/prior tracked: competitor: Wayk subtitle 'No más snooze',5,5,OUT,16,"NEEDS: sin,snooze"
+posponer/snooze,despertar sin posponer,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,5,OUT,30,"NEEDS: sin,posponer"
+mision/reto,alarma con juegos,stage2 NAT es + EXT es 'juegos',5,23,OUT,13,NEEDS: juegos
+mision/reto,alarma con mision,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,9,25,44,FREE (all tokens in es-MX fields)
+mision/reto,alarma con misiones,stage1/prior tracked: natural: name 'alarma' + subtitle 'misión',5,9,OUT,24,FREE (all tokens in es-MX fields)
+mision/reto,alarma con misiones para despertar,stage2 COMP mx: Wayk 'Despertador con Misión' + NAT 'para <objetivo>',5,9,OUT,48,FREE (all tokens in es-MX fields)
+mision/reto,alarma con puzzles,stage2 NAT es + field-era token 'puzzle',5,13,OUT,13,NEEDS: puzzles
+mision/reto,alarma con reto,stage2 NAT es: 'alarma con <feature>',5,5,OUT,19,NEEDS: reto
+mision/reto,alarma con retos,stage2 NAT es + EXT es token 'retos',5,15,OUT,20,NEEDS: retos
+mision/reto,alarma con tareas,stage1/prior tracked: competitor: 'Alarma con 250 sonidos y tarea',5,23,OUT,20,NEEDS: tareas
+mision/reto,despertador con juegos,stage2 NAT es + EXT es 'juegos',5,39,OUT,231,NEEDS: juegos
+mision/reto,despertador con mision,stage1/prior tracked: competitor: 'Wayk: Despertador con Misión'; our subtitle,5,11,21,41,FREE (all tokens in es-MX fields)
+mision/reto,despertador con misiones,stage1/prior tracked: natural: plural of subtitle phrase,5,9,OUT,22,FREE (all tokens in es-MX fields)
+mision/reto,despertador con puzles,stage2 NAT es + EXT es 'puzles',5,17,OUT,5,NEEDS: puzles
+mision/reto,despertador con reto,stage2 NAT es: 'despertador con <feature>',5,5,OUT,19,NEEDS: reto
+mision/reto,despertador con retos,stage2 NAT es + EXT es token 'retos',5,15,OUT,18,NEEDS: retos
+mision/reto,despertador con tareas,stage2 NAT es + EXT es 'tarea' (RV subtitle 'Alarma con 250 sonidos y tarea'),5,17,OUT,12,NEEDS: tareas
+mision/reto,despertador mision,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,11,39,108,FREE (all tokens in es-MX fields)
+mision/reto,despertador puzzle,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,23,OUT,35,NEEDS: puzzle (covered by en-US secondary index)
+mision/reto,levantate ya,"stage2 COMP es: Wayk subtitle 'No más snooze, levántate ya'",5,15,OUT,4,"NEEDS: levantate,ya"
+matematicas,alarma con matemáticas,stage2 SUG es: suggestion 'alarma con matemáticas',5,7,8,26,FREE (all tokens in es-MX fields)
+matematicas,alarma matematica,stage2 SUG es: suggestion 'alarma matematica',5,15,51,94,FREE (all tokens in es-MX fields)
+matematicas,alarma matematicas,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,45,OUT,239,FREE (all tokens in es-MX fields)
+matematicas,alarma matemática,stage2 SUG es: suggestion 'alarma matemática',5,9,35,76,FREE (all tokens in es-MX fields)
+matematicas,despertador con matematicas,stage2 NAT es: 'despertador con <feature>',5,9,13,23,FREE (all tokens in es-MX fields)
+matematicas,despertador matematicas,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,43,175,233,FREE (all tokens in es-MX fields)
+matematicas,despertador matematico,stage2 NAT es: adjective form,5,23,155,231,NEEDS: matematico
+fuerte,alarma con 250 sonidos,stage2 COMP es: 'Despertador: Alarmas Fuertes ◎' subtitle,5,17,OUT,13,"NEEDS: 250,sonidos"
+fuerte,alarma fuerte,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,15,143,248,FREE (all tokens in es-MX fields)
+fuerte,alarma fuerte y reloj,stage2 COMP es: 'Alarmy - Alarma Fuerte y Reloj' name,5,44,96,230,FREE (all tokens in es-MX fields)
+fuerte,alarma muy fuerte,stage2 NAT es: intensifier,5,5,OUT,,NEEDS: muy
+fuerte,alarma ruidosa,stage2 NAT es: synonym of fuerte,5,58,OUT,246,NEEDS: ruidosa
+fuerte,alarma sonido fuerte,stage2 NAT mx: word order variant,5,13,OUT,23,NEEDS: sonido
+fuerte,alarmas fuertes,stage1/prior tracked: competitor: 'Despertador: Alarmas Fuertes',5,38,OUT,247,NEEDS: fuertes
+fuerte,alarmas fuertes despertador,stage2 COMP es: 'Despertador: Alarmas Fuertes ◎' name,5,17,OUT,5,NEEDS: fuertes
+fuerte,despertador fuerte,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,42,221,234,FREE (all tokens in es-MX fields)
+fuerte,despertador muy fuerte,stage2 NAT es: intensifier,5,5,OUT,,NEEDS: muy
+fuerte,despertador ruidoso,stage2 NAT es: synonym of fuerte,5,19,217,234,NEEDS: ruidoso
+fuerte,reloj despertador fuerte,"stage1/prior tracked: competitor: Alarmy name tokens; kw 'reloj','fuerte'",5,17,24,45,FREE (all tokens in es-MX fields)
+fuerte,sonido de alarma fuerte,stage2 NAT es: 'sonido de X',5,13,OUT,23,NEEDS: sonido
+fuerte,sonido para dormir,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,7,OUT,70,"NEEDS: sonido,dormir"
+fuerte,sonidos de alarma,stage2 NAT es + EXT es 'sonidos',5,49,OUT,188,NEEDS: sonidos
+fuerte,tonos de alarma,stage2 NAT es + EXT mx 'tonos',5,52,OUT,250,NEEDS: tonos
+amanecer,alarma amanecer,stage1/prior tracked: field: name + kw,5,7,18,45,FREE (all tokens in es-MX fields)
+amanecer,alarma salida del sol,stage2 NAT es: sunrise = 'salida del sol',5,5,OUT,3,"NEEDS: salida,sol"
+amanecer,despertador amanecer,stage1/prior tracked: field: kw 'amanecer',5,5,12,29,FREE (all tokens in es-MX fields)
+amanecer,despertador salida del sol,stage2 NAT es: sunrise = 'salida del sol',5,5,OUT,,"NEEDS: salida,sol"
+amanecer,despertador sol,stage2 NAT es: head + sol,5,5,OUT,9,NEEDS: sol
+amanecer,despertador sunrise,stage2 NAT es: head + EN name token,5,11,6,15,FREE (all tokens in es-MX fields)
+amanecer,luz de amanecer,stage2 NAT es: luz + amanecer,5,11,14,60,FREE (all tokens in es-MX fields)
+amanecer,simulador de amanecer,stage1/prior tracked: natural: kw 'amanecer' (dawn-simulator concept),5,5,OUT,4,NEEDS: simulador
+amanecer,sunrise alarm,stage1/prior tracked: field: name tokens,5,5,20,238,FREE (all tokens in es-MX fields)
+amanecer,sunrise alarm clock,stage1/prior tracked: field: our name (EN),5,11,7,204,FREE (all tokens in es-MX fields)
+luz,alarma con luz,stage1/prior tracked: natural: name+subtitle tokens,5,63,231,242,FREE (all tokens in es-MX fields)
+luz,alarma de luz,stage2 NAT es: 'alarma de <x>',5,7,10,37,FREE (all tokens in es-MX fields)
+luz,despertador con luz,stage1/prior tracked: field: our subtitle 'Despertador con Luz',5,23,128,231,FREE (all tokens in es-MX fields)
+luz,despertador de luz,stage2 NAT es: 'despertador de <x>',5,21,157,233,FREE (all tokens in es-MX fields)
+luz,despertar con luz,stage2 NAT es: despertar + field 'luz',5,5,2,3,FREE (all tokens in es-MX fields)
+luz,reloj despertador con luz,stage2 NAT es: tracked 'reloj despertador' + 'con luz',5,5,7,15,FREE (all tokens in es-MX fields)
+despertar,alarma para despertar,stage2 NAT es: 'alarma para <objetivo>',5,21,OUT,248,FREE (all tokens in es-MX fields)
+despertar,alarma para despertar temprano,stage2 NAT es: 'alarma para <objetivo>',5,7,12,34,FREE (all tokens in es-MX fields)
+despertar,alarma para despertarse,stage2 NAT mx: reflexive 'despertarse' (MX usage),5,62,OUT,242,NEEDS: despertarse
+despertar,app para despertar,stage2 NAT es: 'app para <objetivo>',5,41,OUT,127,NEEDS: app
+despertar,despertar al instante,stage2 COMP es: 'Mathe Alarm Clock -Despertador' subtitle,5,15,OUT,2,NEEDS: instante
+despertar,despertar gradual,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,5,OUT,5,NEEDS: gradual
+despertar,despertar mejor,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,9,OUT,28,NEEDS: mejor
+despertar,despertar suave,stage2 NAT es: despertar + field 'suave',5,5,8,24,FREE (all tokens in es-MX fields)
+despertar,despertar temprano,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,7,11,36,FREE (all tokens in es-MX fields)
+dormilon,alarma para dormilones,stage2 NAT es: 'para <user>',5,11,OUT,31,FREE (all tokens in es-MX fields)
+dormilon,despertador dormilon,stage1/prior tracked: field: kw 'dormilon',5,13,26,76,FREE (all tokens in es-MX fields)
+dormilon,despertador para dormilones,stage2 NAT es: 'para <user>' (field 'dormilon'),5,11,OUT,29,FREE (all tokens in es-MX fields)
+ciclo/sueño,monitor de sueño,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),44,44,OUT,249,NEEDS: monitor
+ciclo/sueño,alarma ciclo de sueño,stage2 NAT es: alarma + 'ciclo de sueño',5,19,23,42,FREE (all tokens in es-MX fields)
+ciclo/sueño,analisis del sueño,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,19,OUT,28,NEEDS: analisis
+ciclo/sueño,calidad del sueño,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,43,OUT,244,NEEDS: calidad
+ciclo/sueño,ciclo de sueño,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,23,OUT,250,FREE (all tokens in es-MX fields)
+ciclo/sueño,despertador ciclo de sueño,stage2 NAT es: head + tracked 'ciclo de sueño',5,19,18,34,FREE (all tokens in es-MX fields)
+ciclo/sueño,diario de sueño,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,17,OUT,249,NEEDS: diario
+ciclo/sueño,fase del sueño,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,5,OUT,1,NEEDS: fase
+ciclo/sueño,monitoreo del sueño,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,23,OUT,246,NEEDS: monitoreo
+ciclo/sueño,rastreador de sueño,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,15,OUT,201,NEEDS: rastreador
+ciclo/sueño,sueño ligero,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,7,OUT,10,NEEDS: ligero
+ciclo/sueño,sueño profundo,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,40,OUT,239,NEEDS: profundo
+ciclo/sueño,sueño rem,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,47,OUT,245,NEEDS: rem
+ciclo/sueño,sueño seguimiento,stage2 EXT es: 'sueño seguimiento',5,23,OUT,248,NEEDS: seguimiento
+reloj,reloj alarma,stage2 EXT es: token pair 'reloj alarma' (seed despertador/alarma),5,44,140,246,FREE (all tokens in es-MX fields)
+reloj,reloj despertador,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,41,OUT,246,FREE (all tokens in es-MX fields)
+reloj,reloj despertador gratis,stage2 NAT es: 'X gratis',5,37,89,243,NEEDS: gratis
+reloj,reloj despertador inteligente,stage2 COMP es: 'Alarma despertador con música.' subtitle 'Reloj despertador inteligente',5,36,OUT,41,NEEDS: inteligente
+temprano/mañana,alarma de la mañana,stage2 NAT es: field 'manana',5,21,61,198,FREE (all tokens in es-MX fields)
+temprano/mañana,alarma mañana,stage2 NAT es: field 'manana',5,19,53,198,FREE (all tokens in es-MX fields)
+temprano/mañana,alarma temprano,stage2 NAT es: alarma + field 'temprano',5,7,14,38,FREE (all tokens in es-MX fields)
+temprano/mañana,despertador temprano,stage2 NAT es: head + field 'temprano',5,7,11,36,FREE (all tokens in es-MX fields)
+temprano/mañana,rutina de mañana,stage2 NAT es: morning routine,5,11,OUT,209,NEEDS: rutina
+suave/gradual,alarma gradual,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,38,OUT,23,NEEDS: gradual
+suave/gradual,alarma suave,stage1/prior tracked: field: name + kw 'suave',5,66,OUT,246,FREE (all tokens in es-MX fields)
+suave/gradual,despertador progresivo,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,5,OUT,1,NEEDS: progresivo
+suave/gradual,despertador suave,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,21,172,232,FREE (all tokens in es-MX fields)
+alarma,alarma gratis,stage2 NAT es: 'X gratis',44,23,94,248,NEEDS: gratis
+alarma,alarma agitar telefono,stage2 NAT es: shake feature,5,5,OUT,,"NEEDS: agitar,telefono"
+alarma,alarma despertador,stage1/prior tracked: field: name+subtitle tokens,5,42,OUT,246,FREE (all tokens in es-MX fields)
+alarma,alarma inteligente,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,21,OUT,159,NEEDS: inteligente
+alarma,alarma para levantarse,stage2 NAT es: 'para <objetivo>',5,5,OUT,15,NEEDS: levantarse
+alarma,app alarma,stage2 NAT es: 'app X',5,45,OUT,246,NEEDS: app
+alarma,despertador inteligente alarma,stage2 COMP es: 'Alarma | Despertador Inteligente',5,19,OUT,69,NEEDS: inteligente
+despertador,app despertador,stage2 NAT es: 'app X',5,41,OUT,232,NEEDS: app
+despertador,despertador agitar,stage2 NAT es: shake feature (agitar),5,5,OUT,18,NEEDS: agitar
+despertador,despertador dificil,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,39,OUT,230,NEEDS: dificil
+despertador,despertador gratis,stage2 NAT es: 'X gratis',5,40,132,248,NEEDS: gratis
+despertador,despertador inteligente,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,45,OUT,247,NEEDS: inteligente
+despertador,despertador musica,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,40,OUT,230,NEEDS: musica
+despertador,despertador para levantarse,stage2 NAT es: 'para <objetivo>' (tracked 'levantarse de la cama'),5,5,OUT,13,NEEDS: levantarse
+despertador,despertador potente,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,23,OUT,231,NEEDS: potente
+despertador,despertador que no se apague,stage2 NAT mx: problem query,5,5,OUT,1,"NEEDS: no,se,apague"
+despertador,despertador vibracion,stage1/prior tracked: seed: es tracked pool mirrored (es-MX shares es-ES fields),5,5,OUT,8,NEEDS: vibracion
+EN: alarm/clock,alarm clock,stage1/prior tracked: field: name tokens (EN),5,23,OUT,244,FREE (all tokens in es-MX fields)
+EN: alarm/clock,alarm clock for heavy sleepers,stage2 NAT: EN head query checked in es/mx (LEARNINGS #36),5,21,182,242,"NEEDS: heavy,sleepers (covered by en-US secondary index)"
+EN: alarm/clock,loud alarm clock,stage2 SUG es: suggestion 'loud alarm clock' (EN query in es),5,15,OUT,244,NEEDS: loud (covered by en-US secondary index)
+EN: alarm/clock,math alarm clock,stage2 NAT: EN query checked in es/mx,5,23,145,245,NEEDS: math (covered by en-US secondary index)
+EN: alarm/clock,wake up alarm,stage2 NAT: EN query checked in es/mx,5,23,160,239,"NEEDS: wake,up (covered by en-US secondary index)"

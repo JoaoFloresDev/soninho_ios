@@ -1,0 +1,19 @@
+Source: baseline_pull_analytics_60d_sales.csv (ASC daily Sales Reports, SKU=soninho, parent empty), window ending 2026-09-27
+30d (2026-08-29..2026-09-27): installs(1*)=235 (7.83/day) updates(7*)=72 by_type={'1': 235, '3': 22, '7': 72}
+   installs FR=35 DE=22 | updates FR=2 DE=0 | installs us/br/es/mx=17/15/26/1
+   top installs: [('FR', 35), ('ES', 26), ('DE', 22), ('PL', 18), ('US', 17), ('BR', 15), ('NL', 10), ('IT', 10), ('SE', 6), ('AU', 6)]
+45d (2026-08-14..2026-09-27): installs(1*)=292 (6.49/day) updates(7*)=74 by_type={'1': 292, '3': 30, '7': 74}
+   installs FR=37 DE=23 | updates FR=2 DE=0 | installs us/br/es/mx=24/27/31/2
+   top installs: [('FR', 37), ('ES', 31), ('BR', 27), ('US', 24), ('DE', 23), ('PL', 18), ('NL', 10), ('IT', 10), ('SE', 9), ('CA', 9)]
+60d (2026-07-30..2026-09-27): installs(1*)=337 (5.62/day) updates(7*)=105 by_type={'1': 337, '3': 30, '7': 105}
+   installs FR=40 DE=24 | updates FR=3 DE=0 | installs us/br/es/mx=30/42/32/2
+   top installs: [('BR', 42), ('FR', 40), ('ES', 32), ('US', 30), ('DE', 24), ('PL', 18), ('CA', 12), ('SE', 11), ('GB', 11), ('NL', 10)]
+weekly installs FR / DE (7-day buckets ending on window end):
+   2026-08-03..2026-08-09: FR=1 DE=0 all=23
+   2026-08-10..2026-08-16: FR=1 DE=0 all=25
+   2026-08-17..2026-08-23: FR=1 DE=1 all=31
+   2026-08-24..2026-08-30: FR=2 DE=0 all=25
+   2026-08-31..2026-09-06: FR=5 DE=1 all=42
+   2026-09-07..2026-09-13: FR=16 DE=4 all=55
+   2026-09-14..2026-09-20: FR=8 DE=8 all=62
+   2026-09-21..2026-09-27: FR=5 DE=9 all=66

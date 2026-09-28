@@ -1,0 +1,267 @@
+{
+  "iter_id": "2026-09-27_iter-01-text-en-US-keywords",
+  "type": "text",
+  "locale": "en-US",
+  "status": "draft",
+  "started_at": "2026-09-27",
+  "planned_close_at": "2026-10-25",
+  "actual_closed_at": null,
+  "hypothesis": {
+    "if_we_change": "keywords en-US 'mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart' (94) → 'gently,sunlight,fast,mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,sleep,cycle,smart' (99); pt-BR +anti (94→99); es-ES e es-MX +reto (93→98). Name/subtitle intocados.",
+    "then_we_expect": "5 composições DOMINATE (wake up gently #13, sunlight alarm #38, anti soneca OUT, alarma/despertador con reto ES+MX OUT) entram top 10 até D28; impressões de busca 4 stores +≥15%; installs US+BR+ES+MX 1,9 → ≥2,3/dia.",
+    "because": "(a) todos FIT com SERP fraco (top3 0-75 ratings, exceto wake up gently 402-665); (b) routine/tracker saem de heads LOTTERY/UNWINNABLE (morning routine pop 9 OUT, sleep tracker pop 63 diff 71 OUT) sem composição rankeada; (c) mapa de proteção 100% coberto — 251 composições rankeadas (us 85, br 54, es 59, mx 53), 0 órfãs; (d) playbook §7: kw 1× ≈ +10-30% rank, rank move antes de downloads."
+  },
+  "success_criterion": {
+    "primary_metric": "installs_per_day_4_stores (US+BR+ES+MX, product type 1*)",
+    "secondary_metrics": [
+      "search_impressions_per_day_4_stores",
+      "rank_new_terms_top10",
+      "ratings_count"
+    ],
+    "measurement_window": "28 dias a partir do dia em que a 1.4.0 fica READY_FOR_SALE; últimos 14d vs baseline",
+    "baseline": {
+      "installs_per_day_4_stores": 1.9,
+      "installs_per_day_4_stores_source": "estágio 1 installs-only split (baseline_installs_by_type.txt, Sales Reports SKU soninho, 1* only) 30d até 2026-09-27: us 15 / br 15 / es 26 / mx 1 = 57 — SÉRIE DOS TARGETS",
+      "installs_per_day_all_stage1": 7.63,
+      "installs_per_day_all_stage1_source": "mesma fonte, 229 installs 1* em 30d (todos os territórios)",
+      "installs_per_day_all_dashboard": 4.37,
+      "installs_per_day_all_dashboard_source": "Lab dashboard (pull_data.py) ~131 installs/30d, também 1* — DIVERGE da série do estágio 1 (229); conciliar no D7 antes de qualquer veredito",
+      "search_impressions": "3.274 impressões de busca / 11 taps de busca entre 2026-08-01 e 2026-09-14 (~73/dia) — Discovery & Engagement; Search Terms report indisponível (sem volume por query)",
+      "ratings_count": 1,
+      "ratings_note": "1 rating total (BR). 1.3.0 pré-prompt 'Curtindo o app?': 122 exibições / 94 respostas / 1 rating em 30d; 1.4.0 troca pelo prompt nativo",
+      "keywords_ranking": "us 85 ranked (2 top10, 21 top30) · br 54 (9/21) · es 59 (19/33) · mx 53 (7/29) — serp_winnability_*.csv",
+      "captured_at": "2026-09-27"
+    },
+    "targets": {
+      "conservador": {
+        "installs_per_day_4_stores": 2.3,
+        "installs_delta_pct": 20,
+        "search_impressions_delta_pct": 15,
+        "new_terms_top10": "3 de 5",
+        "probability": 0.45
+      },
+      "bold": {
+        "installs_per_day_4_stores": 2.8,
+        "installs_delta_pct": 50,
+        "search_impressions_delta_pct": 40,
+        "new_terms_top10": "5 de 5",
+        "ratings_min": 5,
+        "probability": 0.2,
+        "is_official_target": true
+      },
+      "aspiracional_90d": {
+        "installs_per_day_4_stores": 4.0,
+        "installs_multiplier": 2.1,
+        "note": "90d, com iter-02 (subtitle) liberado por ≥10 ratings + CPP-1/2 — não é target desta iter"
+      }
+    },
+    "go_no_go_threshold": "installs 4 stores média 14d ≥ 2,3/dia no D28. Abaixo: próxima alavanca é conversão (CPP-1/2) + ratings, não texto."
+  },
+  "research_done": true,
+  "deployed": false,
+  "deploy_commit": null,
+  "results": {
+    "baseline": {
+      "date": "2026-09-27",
+      "metrics_file": "metrics/2026-09-27_baseline.csv"
+    },
+    "checkpoints": [],
+    "final": null
+  },
+  "verdict": null,
+  "promoted_to_current": false,
+  "notes": "Não deployado. Rating-first: 1 rating → iteração conservadora. Trade-offs: en-US `sounds` fica (protege sunrise alarm clock sounds #42) apesar de 'sleep sounds' MISMATCH; `fast` é a aposta mais fraca (#172) — cortar deixa 94 chars; pt-BR `anti` escolhido sobre `sol`. Divergências loja×app na description live (decisão do João): janela 'up to 30 min' vs 15-60 no app; 'take a few steps to turn the alarm off' mas passos só no check pós-desligar; string 'Sync with Apple Health' nunca exibida. Prints da 1.4.0 devem abrir com a missão. Baselines divergem (dashboard ~131/30d vs estágio 1 229/30d, ambos 1*) — conciliar no D7.",
+  "locales": [
+    "en-US",
+    "pt-BR",
+    "es-ES",
+    "es-MX"
+  ],
+  "stores": {
+    "us": "en-US",
+    "br": "pt-BR",
+    "es": "es-ES",
+    "mx": "es-MX"
+  },
+  "scope_note": "Folder name says en-US but scope is multi-locale (en-US primary; pt-BR, es-ES, es-MX).",
+  "asc_state_file": "research/asc_state.json",
+  "locales_all": [
+    "en-US",
+    "pt-BR",
+    "es-ES",
+    "es-MX"
+  ],
+  "fields_changed": [
+    "keywords"
+  ],
+  "fields_unchanged": [
+    "name",
+    "subtitle",
+    "description",
+    "promotional_text"
+  ],
+  "approach": "parallel",
+  "approach_rationale": "App rating-first (1 rating total, BR). Iteração conservadora: só keywords nos 4 locales, nenhum token do mapa de proteção sai, apostas novas só em chars livres/liberados. Rides a 1.4.0 (prints novos + prompt nativo) — atribuição por rank Astro por termo, downloads declarados como efeito conjunto.",
+  "cadence": {
+    "d0_rule": "D0 = dia em que a 1.4.0 fica READY_FOR_SALE. Datas abaixo PROVISÓRIAS assumindo D0 = 2026-09-30; recalcular no deploy.",
+    "checkpoints": [
+      {
+        "day": 7,
+        "date": "2026-10-07",
+        "purpose": "indexação: gently/sunlight/anti/reto com rank; wake up gently ≤ #10; nenhuma posição top10 protegida cai >5; conciliar baselines (131 vs 229)",
+        "metrics_file": "metrics/2026-10-07_d07.csv"
+      },
+      {
+        "day": 14,
+        "date": "2026-10-14",
+        "purpose": "3/5 termos-alvo ≤ #10; impressões +10%; fast > #100 → trocar token (ex. wakeup)",
+        "metrics_file": "metrics/2026-10-14_d14.csv"
+      },
+      {
+        "day": 21,
+        "date": "2026-10-21",
+        "purpose": "wake up gently ≤ #5; anti soneca e alarma con reto ≤ #10; installs 4 stores ≥ 2,1/dia (14d)",
+        "metrics_file": "metrics/2026-10-21_d21.csv"
+      },
+      {
+        "day": 28,
+        "date": "2026-10-28",
+        "purpose": "veredito vs conservador 2,3 / bold 2,8 + ratings ≥5; decidir iter-02 (subtitle) ou CPP",
+        "metrics_file": "metrics/2026-10-28_d28.csv"
+      }
+    ],
+    "rollback_triggers": [
+      "Installs 4 stores ↓ ≥30% sustentado por 14 dias (n pequeno — 7d é ruído)",
+      "Posição protegida top 10 sai do top 10 e fica (acordar com luz #2 BR, despertar con luz #2 MX/#3 ES, sunrise alarm clock #3 BR/#7 ES, alarma para despertar temprano #2 ES)",
+      "Termo novo sem rank após 14 dias no ar"
+    ],
+    "escalation_triggers": [
+      "Ratings ≥ 10 antes do D28 → abrir iter-02 com subtitle (wakeup/heavy sleepers)",
+      "wake up gently ≤ #3 antes do D14 → promover cluster gentle/light no CPP-3",
+      "Impressões de busca +40% antes do D14 → antecipar CPP-1 (missões en-US)"
+    ]
+  },
+  "cpp_candidates": [
+    {
+      "id": "CPP-1",
+      "locale": "en-US",
+      "cluster": "missions / heavy sleepers",
+      "terms": [
+        "alarm clock for heavy sleepers #30",
+        "heavy sleepers #15",
+        "wake up missions #128",
+        "stop snoozing OUT"
+      ],
+      "intent_gap": "página padrão abre com luz; busca heavy sleeper quer ver que não dá pra desligar dormindo",
+      "prints": [
+        "missão de matemática tocando",
+        "volume subindo",
+        "missão concluída / check pós-alarme"
+      ],
+      "expected_effect": "CVR ↑ no cluster missões en-US"
+    },
+    {
+      "id": "CPP-2",
+      "locale": "pt-BR",
+      "cluster": "missões / sono pesado",
+      "terms": [
+        "alarme com missoes #9",
+        "alarme com matematica #11",
+        "despertador sono pesado #30",
+        "anti soneca OUT"
+      ],
+      "intent_gap": "mesmo gap; cluster BR com mais comps top 30",
+      "prints": [
+        "missão de matemática",
+        "acabou a soneca",
+        "volume forte"
+      ],
+      "expected_effect": "CVR ↑ em BR (maior parte das impressões de busca)"
+    },
+    {
+      "id": "CPP-3",
+      "locale": "en-US+es-ES+es-MX",
+      "cluster": "light wake",
+      "terms": [
+        "sunrise wake up light #13",
+        "sunlight alarm #38",
+        "despertar con luz #3 ES/#2 MX",
+        "despertador con luz #4 ES"
+      ],
+      "intent_gap": "intenção de acordar suave; página padrão mistura com missões",
+      "prints": [
+        "amanhecer na tela",
+        "janela inteligente",
+        "fases do sono"
+      ],
+      "expected_effect": "CVR ↑ moderado; ES/MX já rankeiam alto"
+    }
+  ],
+  "delivery": {
+    "editable_version": "1.4.0",
+    "editable_version_id": "64ed2a05-d40f-4e2d-b8c4-77cf5db9bc6e",
+    "state": "PREPARE_FOR_SUBMISSION",
+    "localization_ids": {
+      "en-US": "896ff729-0421-4ee6-aa23-cda253bc91ac",
+      "pt-BR": "7575f8cb-6a38-41b1-816d-f55b6b7717ad",
+      "es-ES": "4db2d5b2-22dd-41b5-9d6b-e7fb665c909f",
+      "es-MX": "33ad2693-72fe-4072-8fb5-b0ef479e5ba5"
+    },
+    "field": "appStoreVersionLocalizations.keywords (PATCH direto, nunca deliver)"
+  },
+  "research_files": [
+    "research/asc_state.json",
+    "research/astro_us_2026-09-27.json",
+    "research/astro_br_2026-09-27.json",
+    "research/astro_es_2026-09-27.json",
+    "research/astro_mx_2026-09-27.json",
+    "research/longtails_us_2026-09-27.csv",
+    "research/longtails_br_2026-09-27.csv",
+    "research/longtails_es_2026-09-27.csv",
+    "research/longtails_mx_2026-09-27.csv",
+    "research/app_feature_inventory.md",
+    "research/term_fit_en-US.csv",
+    "research/term_fit_pt-BR.csv",
+    "research/term_fit_es-ES.csv",
+    "research/term_fit_es-MX.csv",
+    "research/serp_winnability_us.csv",
+    "research/serp_winnability_br.csv",
+    "research/serp_winnability_es.csv",
+    "research/serp_winnability_mx.csv",
+    "research/composition_rationale.md",
+    "research/keyword_candidates.md",
+    "research/baseline_installs_by_type.txt",
+    "research/baseline_kill_or_scale_2026-09-27.txt",
+    "research/baseline_pull_analytics_60d.md",
+    "research/discovery_engagement_detailed_2026-09-27.tsv",
+    "research/competitors.md"
+  ],
+  "deploy_gate": {
+    "checked_at": "2026-09-28",
+    "result": "RECUSADO — nenhum PATCH feito",
+    "traffic_floor": {
+      "piso": 100,
+      "installs_1star_30d": {
+        "US": 17,
+        "BR": 15,
+        "ES": 26,
+        "MX": 1,
+        "FR": 35
+      },
+      "ok": false,
+      "lever": "ratings/prints/produto"
+    },
+    "quarantine": {
+      "ok": false,
+      "blockers": [
+        "release 2026-09-27 (-1d) dentro de ±14d (scan.py store_events)"
+      ],
+      "override": null
+    },
+    "text_only_carrier": {
+      "ok": false,
+      "why": "1.4.0 leva prints novos (39 idiomas), prompt nativo de review, paywall novo e 2 assinaturas — texto grudado em feature, não mensurável"
+    },
+    "authorization": "inferida pelo coordenador ('continua'), não pedido explícito do João"
+  }
+}

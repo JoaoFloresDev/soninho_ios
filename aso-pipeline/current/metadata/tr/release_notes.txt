@@ -1,0 +1,3 @@
+iOS 26'da yeni Liquid Glass tasarımı — daha hafif, daha net, yatak odası için tasarlandı.
+Erteleme artık uygulama yeniden açıldığında kaybolmuyor ve ayarladığınız ses düzeyi arka planda korunuyor.
+Sunrise Alarm artık 39 dil konuşuyor.

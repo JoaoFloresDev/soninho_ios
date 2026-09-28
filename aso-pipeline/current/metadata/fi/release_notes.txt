@@ -1,0 +1,3 @@
+Uusi Liquid Glass -ulkoasu iOS 26:ssa — kevyempi, selkeämpi, tehty makuuhuoneeseen.
+Torkku ei enää katoa, kun appi avataan uudelleen, ja valittu äänenvoimakkuus säilyy taustalla.
+Sunrise Alarm puhuu nyt 39 kieltä.

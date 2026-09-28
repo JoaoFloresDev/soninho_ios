@@ -1,0 +1,3 @@
+Ny Liquid Glass-design på iOS 26 — lättare, klarare, gjord för sovrummet.
+Snoozen försvinner inte längre när appen öppnas igen, och vald volym respekteras i bakgrunden.
+Sunrise Alarm talar nu 39 språk.

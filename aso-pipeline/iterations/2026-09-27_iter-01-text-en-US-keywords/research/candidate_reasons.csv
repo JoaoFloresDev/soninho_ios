@@ -1,0 +1,157 @@
+store,keyword,reason
+us,sunrise alarm clock,field: our name
+us,sunrise,field: name token
+us,alarm,field: name token (head)
+us,wake up,field: name tokens
+us,heavy sleepers,field: subtitle; also Alarmy/Wayk/SuperAlarm/Loud subtitles
+us,heavy sleeper,field: singular variant of subtitle token
+us,alarm clock for heavy sleepers,competitor: Alarmy/SuperAlarm/Loud Alarm subtitles + coordinator niche term
+us,heavy sleeper alarm,natural: composes subtitle+name tokens
+us,gentle alarm clock,natural: subtitle 'gentle' + name
+us,gentle wake up,natural: subtitle + name tokens; 'Clock - Wake Up Gently' name
+us,sunrise wake up,natural: name tokens
+us,wake up alarm clock,"competitor: 'Alarm Clock to Wake Up' (Wayk), 'Alarm Clock for Me - Wake Up!'"
+us,alarm clock wake up,competitor: word-order variant of competitor names
+us,loud alarm clock,competitor: Alarmy/SuperAlarm/Loud Alarm Clock names; kw 'loud'
+us,loudest alarm clock,competitor: 'Loud Alarm Clock – the LOUDEST'
+us,math alarm clock,competitor: 'Mathe Alarm Clock - Math Alarm'; kw 'math'
+us,alarm with missions,coordinator: niche term; kw 'mission'
+us,alarm clock with missions,natural: kw 'mission' + name tokens
+us,mission alarm clock,natural: kw 'mission' + name
+us,alarm clock with tasks,competitor: 'Alarm with 250+ Sounds & Tasks' subtitle
+us,puzzle alarm clock,natural: kw 'puzzle' + name
+us,stop snoozing,competitor: Wayk subtitle; kw 'snooze'
+us,alarm clock no snooze,natural: kw 'snooze' + name
+us,snooze alarm,natural: kw 'snooze' + name
+us,dawn alarm,competitor: 'Dawn - Sunrise Alarm Lite'; kw 'dawn'
+us,dawn simulator,competitor: 'Simulate Dawn Sunlight at Home' subtitle
+us,sunrise clock,competitor: 'Sunrise Clock: Loud Alarm' name
+us,light alarm,competitor: 'Light Alarm — Wake-Up Light' name; subtitle 'Light'
+us,wake up light alarm,competitor: 'Wake Up Light – Sunrise Alarm' name
+us,sunrise lamp,"natural: kw 'sun','lamp' / name 'sunrise'"
+us,gentle light alarm,natural: subtitle tokens + name
+us,morning alarm,natural: kw 'morning' + name
+us,morning routine,field: kw pair
+us,alarm sounds,field: kw 'sounds' + name
+us,loud alarm sounds,natural: kw tokens
+us,sleep cycle tracker,field: kw tokens
+us,sleep tracker,field: kw tokens
+us,alarm clock loud,natural: word-order variant of competitor names
+br,sunrise alarm clock,field: our name (EN query in BR; LEARNINGS #36)
+br,sunrise alarm,field: name tokens
+br,sunrise,field: name token
+br,alarm clock,field: name tokens (EN)
+br,despertador sono pesado,"coordinator: niche term; kw 'sono','pesado'"
+br,alarme sono pesado,natural: name 'alarme' + kw
+br,despertador para sono pesado,natural: natural phrasing of kw
+br,despertador com missao,competitor: Kairo/Wayk subtitle 'Despertador com missão'; our subtitle
+br,despertador com missoes,field: our subtitle plural
+br,alarme com missoes,"competitor: 'Kairo: Alarme com missões', 'ByeBed - Alarme com missões'"
+br,alarme com missao,competitor: SmartClock subtitle 'Alarme com missão'
+br,despertador missoes,field: subtitle tokens
+br,despertador com luz,field: our subtitle 'Despertador com Luz'
+br,despertador luz,field: subtitle tokens
+br,alarme forte,competitor: 'Alarmy: Alarme Forte'; kw 'forte'
+br,despertador para acordar cedo,"natural: kw 'acordar','cedo'"
+br,acordar,field: kw token
+br,alarme despertador,field: name+subtitle tokens
+br,alarme alto,competitor: 'Despertador: Alarmes Altos'; kw 'alto'
+br,despertador dorminhoco,field: kw 'dorminhoco'
+br,despertador amanhecer,field: kw 'amanhecer' + subtitle
+br,simulador de amanhecer,natural: kw 'amanhecer' (dawn-simulator concept)
+br,despertador sem soneca,competitor: 'KUKO: Despertador sem Soneca'; kw 'soneca'
+br,alarme soneca,field: name + kw
+br,relogio despertador forte,"competitor: Alarmy name tokens; kw 'relogio','forte'"
+br,despertador matematica,field: kw 'matematica'
+br,despertador com tarefas,competitor: 'Alarme com 250+ Sons e Tarefas'
+br,pare de adiar,competitor: Wayk subtitle
+es,sunrise alarm clock,field: our name (EN)
+es,sunrise alarm,field: name tokens
+es,sunrise,field: name token
+es,alarm clock,field: name tokens (EN)
+es,alarma sueño pesado,coordinator: niche term (mx #10 iTunes)
+es,alarma sueno pesado,field: kw spelling 'sueno' (no tilde)
+es,despertador sueño pesado,"natural: kw 'sueno','pesado' + subtitle"
+es,despertador con mision,competitor: 'Wayk: Despertador con Misión'; our subtitle
+es,despertador con misiones,natural: plural of subtitle phrase
+es,alarma con misiones,natural: name 'alarma' + subtitle 'misión'
+es,despertador con luz,field: our subtitle 'Despertador con Luz'
+es,alarma con luz,natural: name+subtitle tokens
+es,despertador amanecer,field: kw 'amanecer'
+es,alarma amanecer,field: name + kw
+es,simulador de amanecer,natural: kw 'amanecer' (dawn-simulator concept)
+es,alarma fuerte,competitor: 'Alarmy - Alarma Fuerte'; kw 'fuerte'
+es,alarmas fuertes,competitor: 'Despertador: Alarmas Fuertes'
+es,reloj despertador fuerte,"competitor: Alarmy name tokens; kw 'reloj','fuerte'"
+es,alarma matematicas,field: kw 'matematicas'
+es,despertador matematicas,field: kw 'matematicas'
+es,despertar temprano,field: kw pair
+es,despertador dormilon,field: kw 'dormilon'
+es,despertador suave,field: kw 'suave'
+es,alarma suave,field: name + kw 'suave'
+es,alarma con tareas,competitor: 'Alarma con 250 sonidos y tarea'
+es,despertador sin snooze,competitor: Wayk subtitle 'No más snooze'
+es,alarma inteligente,competitor: Sleepwave es name
+es,alarma despertador,field: name+subtitle tokens
+mx,despertar temprano,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,alarma con mision,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador mision,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,alarma matematicas,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador matematicas,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador fuerte,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador suave,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,amanecer,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,reloj despertador,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador inteligente,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,alarma,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,alarma fuerte,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertar gradual,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,ciclo de sueño,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,monitor de sueño,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,rastreador de sueño,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,sueño profundo,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,calidad del sueño,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,dormir mejor,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,levantarse de la cama,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,fase del sueño,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,sueño ligero,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador progresivo,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,alarma gradual,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,posponer,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertar sin posponer,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,analisis del sueño,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador potente,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,sueño rem,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,diario de sueño,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador musica,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,alarma inteligente,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,anti posponer,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador dificil,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,monitoreo del sueño,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador puzzle,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,sonido para dormir,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertador vibracion,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,despertar mejor,seed: es tracked pool mirrored (es-MX shares es-ES fields)
+mx,sunrise alarm clock,field: our name (EN)
+mx,sunrise alarm,field: name tokens
+mx,sunrise,field: name token
+mx,alarm clock,field: name tokens (EN)
+mx,alarma sueño pesado,coordinator: niche term (mx #10 iTunes)
+mx,alarma sueno pesado,field: kw spelling 'sueno' (no tilde)
+mx,despertador sueño pesado,"natural: kw 'sueno','pesado' + subtitle"
+mx,despertador con mision,competitor: 'Wayk: Despertador con Misión'; our subtitle
+mx,despertador con misiones,natural: plural of subtitle phrase
+mx,alarma con misiones,natural: name 'alarma' + subtitle 'misión'
+mx,despertador con luz,field: our subtitle 'Despertador con Luz'
+mx,alarma con luz,natural: name+subtitle tokens
+mx,despertador amanecer,field: kw 'amanecer'
+mx,alarma amanecer,field: name + kw
+mx,simulador de amanecer,natural: kw 'amanecer' (dawn-simulator concept)
+mx,alarmas fuertes,competitor: 'Despertador: Alarmas Fuertes'
+mx,reloj despertador fuerte,"competitor: Alarmy name tokens; kw 'reloj','fuerte'"
+mx,despertador dormilon,field: kw 'dormilon'
+mx,alarma suave,field: name + kw 'suave'
+mx,alarma con tareas,competitor: 'Alarma con 250 sonidos y tarea'
+mx,despertador sin snooze,competitor: Wayk subtitle 'No más snooze'
+mx,alarma despertador,field: name+subtitle tokens

@@ -1,0 +1,962 @@
+{
+ "waking up": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 51,
+   "keyword": "waking up",
+   "popularity": 40,
+   "ranking": 69,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "puzzle alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 21,
+   "keyword": "puzzle alarm",
+   "popularity": 9,
+   "ranking": 43,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "puzzle alarm clock": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 40,
+   "keyword": "puzzle alarm clock",
+   "popularity": 20,
+   "ranking": 49,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "math alarm clock": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 23,
+   "keyword": "math alarm clock",
+   "popularity": 31,
+   "ranking": 50,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "miracle morning": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 46,
+   "keyword": "miracle morning",
+   "popularity": 6,
+   "ranking": 72,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "radiowecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 50,
+   "keyword": "radiowecker",
+   "popularity": 20,
+   "ranking": 67,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "morgen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 49,
+   "keyword": "morgen",
+   "popularity": 9,
+   "ranking": 104,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wake up": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 42,
+   "keyword": "wake up",
+   "popularity": 38,
+   "ranking": 25,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker iphone kostenlos": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 53,
+   "keyword": "wecker iphone kostenlos",
+   "popularity": 55,
+   "ranking": 69,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker mit spotify": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 53,
+   "keyword": "wecker mit spotify",
+   "popularity": 12,
+   "ranking": 121,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "bewegungs wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 38,
+   "keyword": "bewegungs wecker",
+   "popularity": 16,
+   "ranking": 106,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 40,
+   "keyword": "snooze",
+   "popularity": 30,
+   "ranking": 85,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker iphone": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 60,
+   "keyword": "wecker iphone",
+   "popularity": 11,
+   "ranking": 102,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "loud alarm clock": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 35,
+   "keyword": "loud alarm clock",
+   "popularity": 40,
+   "ranking": 55,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker extrem": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 42,
+   "keyword": "wecker extrem",
+   "popularity": 10,
+   "ranking": 79,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wake": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 46,
+   "keyword": "wake",
+   "popularity": 19,
+   "ranking": 16,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker app": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 51,
+   "keyword": "wecker app",
+   "popularity": 54,
+   "ranking": 166,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "uhr wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 48,
+   "keyword": "uhr wecker",
+   "popularity": 50,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker musik": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 55,
+   "keyword": "wecker musik",
+   "popularity": 7,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "barcode wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 42,
+   "keyword": "barcode wecker",
+   "popularity": 7,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "spotify wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 52,
+   "keyword": "spotify wecker",
+   "popularity": 6,
+   "ranking": 176,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "clock alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 52,
+   "keyword": "clock alarm",
+   "popularity": 6,
+   "ranking": 150,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "led wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 12,
+   "keyword": "led wecker",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker timer": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 48,
+   "keyword": "wecker timer",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker uhr": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 55,
+   "keyword": "wecker uhr",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "nfc wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 14,
+   "keyword": "nfc wecker",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "qr wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 46,
+   "keyword": "qr wecker",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker foto": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 42,
+   "keyword": "wecker foto",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker für mich": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 53,
+   "keyword": "wecker für mich",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker hd": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 62,
+   "keyword": "wecker hd",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker mit musik": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 49,
+   "keyword": "wecker mit musik",
+   "popularity": 7,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "musik wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 51,
+   "keyword": "musik wecker",
+   "popularity": 5,
+   "ranking": 212,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker kostenlos": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 50,
+   "keyword": "wecker kostenlos",
+   "popularity": 59,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker ohne werbung": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 56,
+   "keyword": "wecker ohne werbung",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "tiefschläfer-wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "tiefschläfer-wecker",
+   "popularity": 5,
+   "ranking": 11,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarm für tiefschläfer": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "alarm für tiefschläfer",
+   "popularity": 5,
+   "ranking": 23,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "lauter wecker für tiefschläfer": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "lauter wecker für tiefschläfer",
+   "popularity": 5,
+   "ranking": 20,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "laute alarme für tiefschläfer": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "laute alarme für tiefschläfer",
+   "popularity": 5,
+   "ranking": 26,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker für schlafmützen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "wecker für schlafmützen",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker missionen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "wecker missionen",
+   "popularity": 5,
+   "ranking": 44,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "aufwachmissionen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "aufwachmissionen",
+   "popularity": 5,
+   "ranking": 23,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "weck aufgaben": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 17,
+   "keyword": "weck aufgaben",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "mathe aufgaben wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 17,
+   "keyword": "mathe aufgaben wecker",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker mit mathe": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 39,
+   "keyword": "wecker mit mathe",
+   "popularity": 5,
+   "ranking": 50,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "mathe alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 23,
+   "keyword": "mathe alarm",
+   "popularity": 5,
+   "ranking": 27,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "mein mathe wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 50,
+   "keyword": "mein mathe wecker",
+   "popularity": 5,
+   "ranking": 54,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "rätsel wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 57,
+   "keyword": "rätsel wecker",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "kopfrechnen wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "kopfrechnen wecker",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "ohne snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 7,
+   "keyword": "ohne snooze",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "kein snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "kein snooze",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker kein snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "wecker kein snooze",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker ohne schlummerfunktion": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "wecker ohne schlummerfunktion",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "schlummerfunktion": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "schlummerfunktion",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "ohne schlummern": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 7,
+   "keyword": "ohne schlummern",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker gegen verschlafen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "wecker gegen verschlafen",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "besser aufwachen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 41,
+   "keyword": "besser aufwachen",
+   "popularity": 5,
+   "ranking": 76,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "leichter aufwachen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "leichter aufwachen",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "früh aufwachen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 7,
+   "keyword": "früh aufwachen",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "morgens aufwachen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 21,
+   "keyword": "morgens aufwachen",
+   "popularity": 5,
+   "ranking": 28,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker zum aufstehen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "wecker zum aufstehen",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "leichtes aufstehen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 42,
+   "keyword": "leichtes aufstehen",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "morgens aufstehen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 17,
+   "keyword": "morgens aufstehen",
+   "popularity": 5,
+   "ranking": 29,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "lichtwecker sonnenaufgang": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "lichtwecker sonnenaufgang",
+   "popularity": 5,
+   "ranking": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker mit sonnenaufgang": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "wecker mit sonnenaufgang",
+   "popularity": 5,
+   "ranking": 7,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sonnenaufgang simulation": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 12,
+   "keyword": "sonnenaufgang simulation",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sonnenaufgang licht": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 23,
+   "keyword": "sonnenaufgang licht",
+   "popularity": 5,
+   "ranking": 18,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "morgenlicht": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "morgenlicht",
+   "popularity": 5,
+   "ranking": 7,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "lichtwecker app": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 29,
+   "keyword": "lichtwecker app",
+   "popularity": 5,
+   "ranking": 21,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "licht aufwachen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "licht aufwachen",
+   "popularity": 5,
+   "ranking": 6,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "aufwachen mit licht": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "aufwachen mit licht",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sanft wecken": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "sanft wecken",
+   "popularity": 5,
+   "ranking": 11,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sanfter alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "sanfter alarm",
+   "popularity": 5,
+   "ranking": 9,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wecker sanft": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 53,
+   "keyword": "wecker sanft",
+   "popularity": 5,
+   "ranking": 24,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sehr lauter wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "sehr lauter wecker",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "schlaftracker wecker": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 55,
+   "keyword": "schlaftracker wecker",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "schlaf zyklus": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 51,
+   "keyword": "schlaf zyklus",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "schlafphasen": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 53,
+   "keyword": "schlafphasen",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarm clock for heavy sleepers": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 49,
+   "keyword": "alarm clock for heavy sleepers",
+   "popularity": 5,
+   "ranking": 108,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "heavy sleeper alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 40,
+   "keyword": "heavy sleeper alarm",
+   "popularity": 5,
+   "ranking": 87,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "mission alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 17,
+   "keyword": "mission alarm",
+   "popularity": 5,
+   "ranking": 41,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sunrise simulator": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 23,
+   "keyword": "sunrise simulator",
+   "popularity": 5,
+   "ranking": 13,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "gentle alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 40,
+   "keyword": "gentle alarm",
+   "popularity": 5,
+   "ranking": 88,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wake up alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 42,
+   "keyword": "wake up alarm",
+   "popularity": 5,
+   "ranking": 30,
+   "skipped": false,
+   "success": true
+  }
+ }
+}

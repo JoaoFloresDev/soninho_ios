@@ -1,0 +1,188 @@
+Term,Verdict,Reason,Inventory Feature (or NOT-list item)
+sommeil,PARTIAL,"bare head; SERP = trackers + sleep sounds/meditation, sounds not delivered",F6 / N6
+alarme,FIT,"SERP fr top10 = all alarm-clock apps (Apple Clock, Alarmy, Mosaic...)",F10
+clock,MISMATCH,bare EN token; SERP fr = clock faces/flip/standby widgets. Keep as name-token feeder only,N13 / N2
+sonnerie,MISMATCH,"SERP fr = ringtone makers/libraries (ZEDGE, RingTune...); 10 built-in tones only",N4
+cycle sommeil,FIT,sleep-cycle tracking + smart wake,F5 / F6
+réveil,FIT,SERP fr top10 = alarm-clock apps,F10
+alarm,PARTIAL,bare EN word; alarm clocks plus home-security alarms,F10
+alarm clock,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+sunrise,MISMATCH,"bare token; SERP fr = Swiss telecom (My Sunrise), resorts, sun times. Keep as name-token feeder only",N8
+sunrise alarm clock,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+sunrise alarm,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil matin,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+suivi sommeil,FIT,"nightly phases, cycles, score, efficiency, stats",F6 / F7
+alarme maths,FIT,"math mission (free), 3 difficulty levels",F1
+alarme matin,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+alarme mission,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+alarme réveil,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+alarme sommeil lourd,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+aube,MISMATCH,"bare ""dawn""; SERP fr = midwife notebook, Aube department, social/grocery apps. Keep as composition feeder only",N8
+gros dormeur,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+lever tôt,FIT,"SERP fr = mission/anti-snooze alarms, not habit coaches",F1 / F2
+lumière douce,MISMATCH,"SERP fr = nightlights and selfie-light apps (we are #7, 2/10 alarms). Subtitle phrase: keep tokens as feeders only",N13
+matin,MISMATCH,"bare ""morning""; SERP fr = newspapers (Le Matin, Var-Matin), routines. Keep as composition feeder only",N11
+réveil alarme,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+réveil alarme maths,FIT,"math mission (free), 3 difficulty levels",F1
+réveil aube,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil cycle,FIT,sleep-cycle tracking + smart wake,F5 / F6
+réveil fort,FIT,full-scale tones + system volume pushed to max,F3
+réveil gros dormeur,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+réveil lumière,FIT,"SERP fr mostly screen-light alarm apps (+2 lamp controllers); sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil lumière douce,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil maths,FIT,"math mission (free), 3 difficulty levels",F1
+réveil mission,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+réveil sommeil lourd,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+réveil sunrise,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil tôt,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+réveiller,FIT,SERP fr = alarm-clock apps,F10
+se lever,FIT,SERP fr 7/10 get-up alarms (3 stand-up reminders),F1 / F2
+se lever tôt,FIT,SERP fr = mission alarms (we are #7),F1 / F2
+se réveiller,FIT,SERP fr = get-up/mission alarm apps,F10 / F1
+sommeil lourd,FIT,SERP fr top10 = heavy-sleeper alarm apps (we are #4),F12
+sonnerie réveil,PARTIAL,ringtone-library intent; 10 built-in tones only,F3 / N4
+sunrise réveil,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+horloge,MISMATCH,"SERP fr = clock faces, flip/standby and desk-clock widgets",N13 / N2
+alarmy,PARTIAL,"navigational to Alarmy; same category (missions, loud) served",F1 / F3
+sleep cycle,FIT,also Sleep Cycle brand nav; sleep-cycle tracking + smart wake,F5 / F6
+reveil,FIT,no-accent spelling of réveil; alarm-clock apps,F10
+sleep tracker,FIT,"nightly phases, cycles, score, efficiency, stats",F6 / F7
+ronflement,MISMATCH,SERP fr = snore recorders/analysers; snoring is only detected internally,N9
+cycle de sommeil,FIT,sleep-cycle tracking + smart wake,F5 / F6
+réveil gratuit,FIT,"base app free (alarm, math, smart wake, tracking), no ads",F11 / F13
+math alarm,FIT,"math mission (free), 3 difficulty levels",F1
+alarme forte,FIT,full-scale tones + system volume pushed to max,F3
+alarme intelligente,FIT,"smart wake window 15-60 min, rings in light sleep",F5
+anti snooze,FIT,snooze control + mission to dismiss stops snoozing,F2
+cycle du sommeil,FIT,sleep-cycle tracking + smart wake,F5 / F6
+lever de soleil,MISMATCH,SERP fr = sunrise/sunset time apps,N8
+levez-vous tôt,FIT,mission to dismiss + step check that you got up,F1 / F2
+loud alarm,FIT,full-scale tones + system volume pushed to max,F3
+lumière du jour,MISMATCH,SERP fr = daylight/sun-path apps and puzzle games,N8
+reveil lumiere,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+reveil matin,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+reveil sommeil lourd,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+réveil aurore,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil avec mission,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+réveil calcul,FIT,"math mission (free), 3 difficulty levels",F1
+réveil calcul mental,FIT,"math mission (free), 3 difficulty levels",F1
+réveil casse tête,FIT,puzzle-type missions: math + memory sequence (memory Premium),F1
+réveil cycle de sommeil,FIT,sleep-cycle tracking + smart wake,F5 / F6
+réveil difficile,FIT,SERP fr = mission/anti-snooze alarms for hard-to-wake users,F12 / F1
+réveil doux,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+réveil défis,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+réveil en douceur,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+réveil et sommeil,FIT,alarm + sleep tracking in one app,F10 / F6
+réveil gros dormeurs,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+réveil horloge,PARTIAL,alarm + clock display; display/widget part not delivered,F10 / N13
+réveil intelligent,FIT,"smart wake window 15-60 min, rings in light sleep",F5
+réveil jeu,PARTIAL,"SERP fr mixes barcode/motion alarms with real games (otome, Star Wars); only math/memory missions",F1 / N5 / N14
+réveil lever de soleil,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil lever du soleil,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil lumineux,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil lève-tôt,FIT,mission to dismiss + step check that you got up,F1 / F2
+réveil léger,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+réveil math,FIT,"math mission (free), 3 difficulty levels",F1
+réveil mathématique,FIT,"math mission (free), 3 difficulty levels",F1
+réveil matin musique,MISMATCH,wants music as alarm; 10 built-in tones only,N4 / N16
+réveil missions,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+réveil naturel,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+réveil progressif,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+réveil puissant,FIT,full-scale tones + system volume pushed to max,F3
+réveil qui sonne fort,FIT,full-scale tones + system volume pushed to max,F3
+réveil sans snooze,FIT,snooze control + mission to dismiss stops snoozing,F2
+réveil soleil,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil sommeil léger,FIT,"smart wake window 15-60 min, rings in light sleep",F5
+réveil très fort,FIT,full-scale tones + system volume pushed to max,F3
+réveil à missions,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+réveille-matin,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+simulateur aube,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+simulateur d'aube,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+smart alarm,FIT,"smart wake window 15-60 min, rings in light sleep",F5
+sommeil et réveil,FIT,alarm + sleep tracking in one app,F10 / F6
+sommeil léger,PARTIAL,"mixed SERP (smart-wake apps + sleep sounds/binaural); ""I sleep lightly"" intent not served",F5 / N6
+sonnerie forte,PARTIAL,"loud ringtone: loud alarm served, ringtone library not",F3 / N4
+suivi du sommeil,FIT,"nightly phases, cycles, score, efficiency, stats",F6 / F7
+wake up light,FIT,"screen-light sunrise alarm; sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+alarm clock for heavy sleepers,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+alarme gros dormeur,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+gros dormeurs,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+heavy sleeper alarm,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+réveil anti-sommeil,FIT,snooze control + mission to dismiss stops snoozing,F2
+réveil pour gros dormeur,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+réveil pour sommeil lourd,FIT,core promise for heavy sleepers: missions + loud + anti-snooze,F12
+réveil sommeil profond,FIT,deep-sleeper alarm; core promise for heavy sleepers: missions + loud + anti-snooze,F12
+sommeil profond,MISMATCH,"SERP fr = white noise, sleep sounds, meditation, hypnosis; app plays none",N6
+puzzle alarm clock,FIT,puzzle-type missions: math + memory sequence (memory Premium),F1
+puzzle alarm,FIT,puzzle-type missions: math + memory sequence (memory Premium),F1
+alarme avec mission,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+alarme défi,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+alarme missions,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+mission alarm,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+réveil avec défis,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+réveil défi,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+réveil à défis,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+calcul mental,MISMATCH,"SERP fr = mental-math trainers/education apps, not alarms",N14
+math alarm clock,FIT,"math mission (free), 3 difficulty levels",F1
+alarme calcul,FIT,"math mission (free), 3 difficulty levels",F1
+alarme mathématique,FIT,"math mission (free), 3 difficulty levels",F1
+alarme snooze,FIT,snooze control + mission to dismiss stops snoozing,F2
+anti-snooze,FIT,snooze control + mission to dismiss stops snoozing,F2
+réveil anti snooze,FIT,snooze control + mission to dismiss stops snoozing,F2
+réveil sans répétition,FIT,snooze control + mission to dismiss stops snoozing,F2
+réveil snooze,FIT,snooze control + mission to dismiss stops snoozing,F2
+sans répétition,PARTIAL,"bare ""no repeat"" fragment; composition feeder only",F2
+stop snooze,FIT,snooze control + mission to dismiss stops snoozing,F2
+aurore,MISMATCH,SERP fr = aurora borealis forecasts,N8
+my sunrise,MISMATCH,"navigational to ""My Sunrise"" (Swiss telecom app)",N8
+sunrise app,MISMATCH,"SERP fr = telecom, sun-times, festival apps; 1/10 sleep",N8
+lever du soleil,MISMATCH,SERP fr = sunrise/sunset time apps,N8
+simulateur lever de soleil,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+sunrise lamp,PARTIAL,lamp-device intent; app light is screen only,F4 / N1
+sunrise simulator,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+lampe réveil,PARTIAL,SERP fr mixes dawn-sim apps with baby nightlights and lamp devices,F4 / N1 / N13
+lumière réveil,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil lumière du jour,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+réveil lumière naturelle,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+alarme douce,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+alarme progressive,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+gentle alarm,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+réveil naturel doux,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+réveil phase sommeil léger,FIT,"smart wake window 15-60 min, rings in light sleep",F5
+réveil tout doux,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+se réveiller en douceur,FIT,"gradual wake: volume + screen light ramp 1-5 min, soft tones",F4 / F3
+sonnerie douce,MISMATCH,SERP fr = ringtone makers/libraries (6/10); 10 built-in tones only,N4
+loud alarm clock,FIT,full-scale tones + system volume pushed to max,F3
+alarmes fortes,FIT,full-scale tones + system volume pushed to max,F3
+réveil alarme forte,FIT,full-scale tones + system volume pushed to max,F3
+sonnerie alarme,PARTIAL,ringtone-library intent; 10 built-in tones only,F3 / N4
+sonnerie de réveil,PARTIAL,ringtone-library intent (RingTune); 10 built-in tones only,F3 / N4
+suivi de sommeil,FIT,"nightly phases, cycles, score, efficiency, stats",F6 / F7
+analyse sommeil,FIT,"nightly phases, cycles, score, efficiency, stats",F6 / F7
+suivi cycle,MISMATCH,"FR reading = menstrual cycle tracker (SERP 10/10 Flo, Clue...)",N12 / N17
+tracker sommeil,FIT,"nightly phases, cycles, score, efficiency, stats",F6 / F7
+phase de sommeil,FIT,"nightly phases, cycles, score, efficiency, stats",F6 / F7
+réveil cycle sommeil,FIT,sleep-cycle tracking + smart wake,F5 / F6
+suivi du ronflement,MISMATCH,snore tracking/recording not surfaced,N9
+tracker de sommeil,FIT,"nightly phases, cycles, score, efficiency, stats",F6 / F7
+bien se lever,PARTIAL,"""get up well"": wake + morning-routine overlap",F2 / N11
+réveil debout,FIT,mission to dismiss + step check that you got up,F1 / F2
+réveil du matin,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+réveil matin gratuit,FIT,"base app free (alarm, math, smart wake, tracking), no ads",F11 / F13
+réveil pour se lever,FIT,mission to dismiss + step check that you got up,F1 / F2
+réveille matin,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+se lever le matin,PARTIAL,morning wake/routine overlap; alarm serves the wake part,F10 / N11
+se réveiller le matin,PARTIAL,morning wake/routine overlap; alarm serves the wake part,F10 / N11
+se réveiller tôt,PARTIAL,wake-early habit overlap; alarm serves part,F10 / N11
+wake up,FIT,"SERP fr 6/10 anti-snooze/mission alarms (+meditation, wake-on-LAN)",F2 / F10
+réveille-toi,PARTIAL,imperative fragment; composition feeder,F10
+wake up alarm,FIT,"alarm clock: multiple alarms, weekday repeat, AlarmKit on iOS 26",F10
+réveil pour moi,PARTIAL,"navigational to ""Réveil pour moi."" (Mosaic); generic alarm intent served",F10
+musique de réveil,MISMATCH,wants own music/ringtones,N4 / N16
+radio réveil,MISMATCH,wants radio alarm,N16
+réveil ia,MISMATCH,SERP fr = AI talking/voice alarms; no voice/AI,N15
+réveil musique,MISMATCH,wants music as alarm,N4 / N16
+réveil radio,MISMATCH,wants radio alarm,N16
+alarme musique,MISMATCH,wants music as alarm,N4 / N16
+alarme horloge,PARTIAL,alarm + clock display; display/widget part not delivered,F10 / N13
+alarme minuteur,PARTIAL,alarm + timer; timer not delivered,F10 / N8

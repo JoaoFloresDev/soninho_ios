@@ -1,0 +1,135 @@
+Term,Verdict,Reason,Inventory Feature (or NOT-list item)
+alarma,PARTIAL,bare word; security-alarm overlap (Alarm.com in es SERP),F10
+despertador,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+sunrise,PARTIAL,bare token; SERP = sunrise/sunset times; brand token for compositions only,F4 / N8
+alarm clock,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+reloj despertador,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+sunrise alarm clock,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+amanecer,PARTIAL,bare noun (dawn/sunrise); composition feeder only,F4
+sunrise alarm,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+despertador matematicas,FIT,"math mission (free), 3 difficulty levels",F1
+alarma despertador,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+despertador amanecer,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+alarma fuerte,FIT,full-scale tones + system volume pushed to max,F3
+despertador con luz,FIT,SERP = alarm/sunrise-light apps; we rank #4,F4
+alarma sueño pesado,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+alarma sueno pesado,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+despertar temprano,PARTIAL,"habit ""wake early"" coaching overlap; alarm serves part",F10 / N11
+despertador sueño pesado,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+alarma con mision,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+alarma amanecer,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+reloj despertador fuerte,FIT,full-scale tones + system volume pushed to max,F3
+despertador con mision,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+despertador dormilon,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+alarma con luz,FIT,"on-screen sunrise light alarm (screen, not lamp)",F4
+despertador mision,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+alarma matematicas,FIT,"math mission (free), 3 difficulty levels",F1
+despertador fuerte,FIT,full-scale tones + system volume pushed to max,F3
+despertador suave,FIT,gradual wake + soft nature tones,F4 / F3
+alarma suave,FIT,gradual wake + soft nature tones,F4 / F3
+alarma inteligente,FIT,smart wake window 15-60 min in light sleep,F5
+monitor de sueño,FIT,nightly motion+sound sleep monitoring,F6
+despertador inteligente,FIT,smart wake window 15-60 min in light sleep,F5
+despertar gradual,FIT,volume + screen light ramp 1-5 min,F4
+ciclo de sueño,FIT,sleep-cycle tracking + smart wake,F5 / F6
+rastreador de sueño,FIT,"nightly phases, score, efficiency, stats",F6 / F7
+sueño profundo,PARTIAL,deep phase shown; query mixes sleep-sound/meditation seekers,F6 / N6
+calidad del sueño,FIT,"nightly phases, score, efficiency, stats",F6 / F7
+dormir mejor,PARTIAL,broad sleep-wellness (meditation/sounds); tips + tracking partly serve,F9 / N6
+levantarse de la cama,FIT,mission to dismiss + post-dismiss step check,F1 / F2
+fase del sueño,FIT,"nightly phases, score, efficiency, stats",F6 / F7
+sueño ligero,PARTIAL,light-sleep phase concept; composition feeder,F5 / F6
+despertador progresivo,FIT,volume + screen light ramp 1-5 min,F4
+alarma gradual,FIT,volume + screen light ramp 1-5 min,F4
+posponer,PARTIAL,bare verb (postpone); composition feeder only,F2
+despertar sin posponer,FIT,snooze control + mission-to-dismiss stops snoozing,F2
+analisis del sueño,FIT,"nightly phases, score, efficiency, stats",F6 / F7
+despertador potente,FIT,full-scale tones + system volume pushed to max,F3
+sueño rem,PARTIAL,REM phase shown; informational query,F6
+diario de sueño,PARTIAL,sleep diary = manual journaling; app auto-records nights,F6 / F7
+despertador musica,MISMATCH,wants own music as alarm,N4
+anti posponer,FIT,snooze control + mission-to-dismiss stops snoozing,F2
+despertador dificil,FIT,mission difficulty levels,F1
+monitoreo del sueño,FIT,"nightly phases, score, efficiency, stats",F6 / F7
+despertador puzzle,FIT,math + memory-sequence missions (memory is Premium),F1
+sonido para dormir,MISMATCH,wants sleep sounds playback,N6
+despertador vibracion,PARTIAL,vibration toggle exists; vibrate-only silent alarm seekers partly served,F10
+despertar mejor,FIT,smart wake in light sleep + missions,F5 / F1
+despertador con misiones,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+alarma con misiones,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+simulador de amanecer,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+alarmas fuertes,FIT,full-scale tones + system volume pushed to max,F3
+alarma con tareas,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+despertador sin snooze,FIT,snooze control + mission-to-dismiss stops snoozing,F2
+alarma para sueño pesado,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+despertador para sueño pesado,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+sueño pesado,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+adios al snooze,FIT,snooze control + mission-to-dismiss stops snoozing,F2
+alarma sin posponer,FIT,snooze control + mission-to-dismiss stops snoozing,F2
+alarma sin snooze,FIT,snooze control + mission-to-dismiss stops snoozing,F2
+despertador sin posponer,FIT,snooze control + mission-to-dismiss stops snoozing,F2
+alarma con juegos,PARTIAL,only memory-sequence (Premium) is game-like,F1p / N14
+alarma con puzzles,FIT,math + memory-sequence missions (memory is Premium),F1
+alarma con reto,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+alarma con retos,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+despertador con juegos,PARTIAL,only memory-sequence (Premium) is game-like,F1p / N14
+despertador con puzles,FIT,math + memory-sequence missions (memory is Premium),F1
+despertador con reto,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+despertador con retos,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+despertador con tareas,FIT,wake-up missions (math free; shake/typing/memory Premium),F1
+levantate ya,FIT,mission to dismiss + post-dismiss step check,F1 / F2
+alarma con matemáticas,FIT,"math mission (free), 3 difficulty levels",F1
+alarma matemática,FIT,"math mission (free), 3 difficulty levels",F1
+alarma matematica,FIT,"math mission (free), 3 difficulty levels",F1
+despertador con matematicas,FIT,"math mission (free), 3 difficulty levels",F1
+despertador matematico,FIT,"math mission (free), 3 difficulty levels",F1
+alarma con 250 sonidos,MISMATCH,competitor claim (250 sounds); app has 10 tones,N4
+alarma fuerte y reloj,PARTIAL,Alarmy name fragment (navigational); loud alarm intent served,F3
+alarma muy fuerte,FIT,full-scale tones + system volume pushed to max,F3
+alarma ruidosa,FIT,full-scale tones + system volume pushed to max,F3
+alarmas fuertes despertador,FIT,full-scale tones + system volume pushed to max,F3
+despertador muy fuerte,FIT,full-scale tones + system volume pushed to max,F3
+despertador ruidoso,FIT,full-scale tones + system volume pushed to max,F3
+sonido de alarma fuerte,PARTIAL,loud-tone library seekers; 10 tones at max volume,F3 / N4
+sonidos de alarma,PARTIAL,ringtone-library seekers; 10 built-in tones only,F3 / N4
+tonos de alarma,PARTIAL,ringtone-library seekers; 10 built-in tones only,F3 / N4
+alarma salida del sol,PARTIAL,"""salida del sol"" = solar sunrise time; app only simulates sunrise",F4 / N8
+despertador salida del sol,PARTIAL,"""salida del sol"" = solar sunrise time; app only simulates sunrise",F4 / N8
+despertador sol,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+despertador sunrise,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+luz de amanecer,FIT,"sunrise-style on-screen light + volume fade (screen, not lamp)",F4
+alarma de luz,FIT,"on-screen sunrise light alarm (screen, not lamp)",F4
+despertador de luz,FIT,"on-screen sunrise light alarm (screen, not lamp)",F4
+despertar con luz,FIT,"on-screen sunrise light alarm (screen, not lamp)",F4
+reloj despertador con luz,FIT,"on-screen sunrise light alarm (screen, not lamp)",F4
+alarma para despertar,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+alarma para despertar temprano,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+app para despertar,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+despertar al instante,FIT,smart wake in light sleep + missions,F5 / F1
+despertar suave,FIT,gradual wake + soft nature tones,F4 / F3
+alarma para dormilones,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+despertador para dormilones,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+sueño seguimiento,FIT,"nightly phases, score, efficiency, stats",F6 / F7
+alarma ciclo de sueño,FIT,sleep-cycle tracking + smart wake,F5 / F6
+despertador ciclo de sueño,FIT,sleep-cycle tracking + smart wake,F5 / F6
+reloj alarma,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+reloj despertador gratis,FIT,"base app free (alarm, math mission, smart wake, tracking)",F11
+reloj despertador inteligente,FIT,smart wake window 15-60 min in light sleep,F5
+alarma de la mañana,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+alarma mañana,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+alarma temprano,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+despertador temprano,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+rutina de mañana,PARTIAL,routine/habit planners; app only wakes you,F10 / N11
+alarma agitar telefono,PARTIAL,shake mission exists but is Premium-only,F1p
+alarma gratis,FIT,"base app free (alarm, math mission, smart wake, tracking)",F11
+alarma para levantarse,FIT,mission to dismiss + post-dismiss step check,F1 / F2
+app alarma,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+despertador inteligente alarma,FIT,smart wake window 15-60 min in light sleep,F5
+despertador gratis,FIT,"base app free (alarm, math mission, smart wake, tracking)",F11
+app despertador,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10
+despertador agitar,PARTIAL,shake mission exists but is Premium-only,F1p
+despertador para levantarse,FIT,mission to dismiss + post-dismiss step check,F1 / F2
+loud alarm clock,FIT,full-scale tones + system volume pushed to max,F3
+alarm clock for heavy sleepers,FIT,core promise: missions + loud + anti-snooze for heavy sleepers,F12
+math alarm clock,FIT,"math mission (free), 3 difficulty levels",F1
+wake up alarm,FIT,"alarm clock: multiple alarms, repeat, AlarmKit on iOS 26",F10

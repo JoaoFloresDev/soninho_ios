@@ -1,0 +1,1626 @@
+{
+ "despertador": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "despertador",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 68,
+     "text": "tiempo"
+    },
+    {
+     "popularity": 63,
+     "text": "radio"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 55,
+     "text": "clock"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 52,
+     "text": "mi"
+    },
+    {
+     "popularity": 50,
+     "text": "temporizador"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 39,
+     "text": "hd"
+    },
+    {
+     "popularity": 38,
+     "text": "habits"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 32,
+     "text": "wayk"
+    },
+    {
+     "popularity": 32,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 24,
+     "text": "tarea"
+    },
+    {
+     "popularity": 23,
+     "text": "sueño seguimiento"
+    },
+    {
+     "popularity": 23,
+     "text": "gestiona"
+    },
+    {
+     "popularity": 12,
+     "text": "seguimiento"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    },
+    {
+     "popularity": 6,
+     "text": "mathe"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:44:15Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 104
+  },
+  "err": null
+ },
+ "alarma": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "alarma",
+   "keywords": [
+    {
+     "popularity": 69,
+     "text": "musica"
+    },
+    {
+     "popularity": 68,
+     "text": "tiempo"
+    },
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 63,
+     "text": "radio"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 55,
+     "text": "clock"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 52,
+     "text": "mi"
+    },
+    {
+     "popularity": 50,
+     "text": "temporizador"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 39,
+     "text": "hd"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 32,
+     "text": "reloj despertador"
+    },
+    {
+     "popularity": 32,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 32,
+     "text": "wayk"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 23,
+     "text": "gestiona"
+    },
+    {
+     "popularity": 9,
+     "text": "alarmify"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    },
+    {
+     "popularity": 6,
+     "text": "mathe"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:44:18Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 95
+  },
+  "err": null
+ },
+ "reloj despertador": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "reloj despertador",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "tiempo"
+    },
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 45,
+     "text": "super"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 38,
+     "text": "habits"
+    },
+    {
+     "popularity": 37,
+     "text": "luz"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 35,
+     "text": "light"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 23,
+     "text": "gestiona"
+    },
+    {
+     "popularity": 23,
+     "text": "sueño seguimiento"
+    },
+    {
+     "popularity": 13,
+     "text": "hogar"
+    },
+    {
+     "popularity": 12,
+     "text": "seguimiento"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:44:59Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 81
+  },
+  "err": null
+ },
+ "alarma despertador": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "alarma despertador",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 68,
+     "text": "tiempo"
+    },
+    {
+     "popularity": 63,
+     "text": "radio"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 56,
+     "text": "video"
+    },
+    {
+     "popularity": 55,
+     "text": "clock"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 52,
+     "text": "mi"
+    },
+    {
+     "popularity": 51,
+     "text": "videos"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 50,
+     "text": "temporizador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 39,
+     "text": "hd"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 24,
+     "text": "tarea"
+    },
+    {
+     "popularity": 24,
+     "text": "retos"
+    },
+    {
+     "popularity": 23,
+     "text": "gestiona"
+    },
+    {
+     "popularity": 12,
+     "text": "alarma despertador"
+    },
+    {
+     "popularity": 9,
+     "text": "misiones"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    },
+    {
+     "popularity": 6,
+     "text": "wakenow"
+    }
+   ],
+   "lastUpdate": "2026-09-28T00:19:02Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 92
+  },
+  "err": null
+ },
+ "despertador fuerte": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "despertador fuerte",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "recordatorios"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 61,
+     "text": "agenda"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 32,
+     "text": "wayk"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 24,
+     "text": "tarea"
+    },
+    {
+     "popularity": 24,
+     "text": "retos"
+    },
+    {
+     "popularity": 9,
+     "text": "recordatorio"
+    },
+    {
+     "popularity": 9,
+     "text": "misiones"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    },
+    {
+     "popularity": 6,
+     "text": "wakenow"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:44:24Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 101
+  },
+  "err": null
+ },
+ "alarma fuerte": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "alarma fuerte",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 63,
+     "text": "radio"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 52,
+     "text": "mi"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 39,
+     "text": "hd"
+    },
+    {
+     "popularity": 36,
+     "text": "pushclock"
+    },
+    {
+     "popularity": 34,
+     "text": "pro"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 32,
+     "text": "reloj despertador"
+    },
+    {
+     "popularity": 30,
+     "text": "snooze"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 24,
+     "text": "retos"
+    },
+    {
+     "popularity": 24,
+     "text": "tarea"
+    },
+    {
+     "popularity": 9,
+     "text": "misiones"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:44:23Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 64
+  },
+  "err": null
+ },
+ "despertador sueño pesado": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "despertador sueño pesado",
+   "keywords": [
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 61,
+     "text": "juego"
+    },
+    {
+     "popularity": 57,
+     "text": "games"
+    },
+    {
+     "popularity": 57,
+     "text": "qr"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 50,
+     "text": "rise"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 39,
+     "text": "coop"
+    },
+    {
+     "popularity": 35,
+     "text": "easy"
+    },
+    {
+     "popularity": 32,
+     "text": "sunrise"
+    },
+    {
+     "popularity": 32,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 23,
+     "text": "matemáticas"
+    },
+    {
+     "popularity": 12,
+     "text": "alarma despertador"
+    },
+    {
+     "popularity": 6,
+     "text": "hábitos"
+    }
+   ],
+   "lastUpdate": "2026-09-28T00:18:53Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 137
+  },
+  "err": null
+ },
+ "alarma sueño pesado": {
+  "data": "Error: Invalid parameters: Keyword 'alarma sueño pesado' matches 2 tracked entries (Slumber: Sleep Cycle Tracker [iphone] / es; Slumber: Sleep Cycle Tracker [iphone] / es). Narrow it down with 'platform'.",
+  "err": null
+ },
+ "despertador con mision": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "despertador con mision",
+   "keywords": [
+    {
+     "popularity": 79,
+     "text": "juegos"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 36,
+     "text": "pushclock"
+    },
+    {
+     "popularity": 32,
+     "text": "wayk"
+    },
+    {
+     "popularity": 32,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 30,
+     "text": "snooze"
+    },
+    {
+     "popularity": 24,
+     "text": "retos"
+    },
+    {
+     "popularity": 15,
+     "text": "sin"
+    },
+    {
+     "popularity": 9,
+     "text": "alarma fuerte"
+    },
+    {
+     "popularity": 9,
+     "text": "misiones"
+    },
+    {
+     "popularity": 6,
+     "text": "mathe"
+    },
+    {
+     "popularity": 6,
+     "text": "reveil"
+    },
+    {
+     "popularity": 6,
+     "text": "fuerte"
+    },
+    {
+     "popularity": 6,
+     "text": "wakenow"
+    }
+   ],
+   "lastUpdate": "2026-09-28T00:18:54Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 111
+  },
+  "err": null
+ },
+ "alarma con mision": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "alarma con mision",
+   "keywords": [
+    {
+     "popularity": 79,
+     "text": "juegos"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 32,
+     "text": "wayk"
+    },
+    {
+     "popularity": 30,
+     "text": "snooze"
+    },
+    {
+     "popularity": 24,
+     "text": "retos"
+    },
+    {
+     "popularity": 21,
+     "text": "puzles"
+    },
+    {
+     "popularity": 15,
+     "text": "sin"
+    },
+    {
+     "popularity": 9,
+     "text": "alarma fuerte"
+    },
+    {
+     "popularity": 9,
+     "text": "misiones"
+    },
+    {
+     "popularity": 6,
+     "text": "mathe"
+    },
+    {
+     "popularity": 6,
+     "text": "fuerte"
+    },
+    {
+     "popularity": 6,
+     "text": "wakenow"
+    },
+    {
+     "popularity": 6,
+     "text": "reveil"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:46:02Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 128
+  },
+  "err": null
+ },
+ "despertador matematicas": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "despertador matematicas",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 63,
+     "text": "radio"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "recordatorios"
+    },
+    {
+     "popularity": 61,
+     "text": "agenda"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 55,
+     "text": "clock"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 52,
+     "text": "mi"
+    },
+    {
+     "popularity": 51,
+     "text": "control"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 39,
+     "text": "hd"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 32,
+     "text": "ciclo"
+    },
+    {
+     "popularity": 32,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 24,
+     "text": "tarea"
+    },
+    {
+     "popularity": 9,
+     "text": "recordatorio"
+    },
+    {
+     "popularity": 6,
+     "text": "mathe"
+    },
+    {
+     "popularity": 6,
+     "text": "sleepzy"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:44:25Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 106
+  },
+  "err": null
+ },
+ "alarma matematicas": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "alarma matematicas",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 63,
+     "text": "radio"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 55,
+     "text": "clock"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 52,
+     "text": "mi"
+    },
+    {
+     "popularity": 52,
+     "text": "smart"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 50,
+     "text": "temporizador"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 39,
+     "text": "hd"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 32,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 6,
+     "text": "mathe"
+    },
+    {
+     "popularity": 6,
+     "text": "challenge"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:44:31Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 65
+  },
+  "err": null
+ },
+ "despertar temprano": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "despertar temprano",
+   "keywords": [
+    {
+     "popularity": 79,
+     "text": "juegos"
+    },
+    {
+     "popularity": 63,
+     "text": "fitness"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 55,
+     "text": "clock"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 37,
+     "text": "luz"
+    },
+    {
+     "popularity": 36,
+     "text": "pushclock"
+    },
+    {
+     "popularity": 32,
+     "text": "sunrise"
+    },
+    {
+     "popularity": 30,
+     "text": "snooze"
+    },
+    {
+     "popularity": 24,
+     "text": "retos"
+    },
+    {
+     "popularity": 15,
+     "text": "sin"
+    },
+    {
+     "popularity": 13,
+     "text": "partida"
+    },
+    {
+     "popularity": 10,
+     "text": "sentadillas"
+    },
+    {
+     "popularity": 9,
+     "text": "misiones"
+    },
+    {
+     "popularity": 9,
+     "text": "alarma fuerte"
+    },
+    {
+     "popularity": 9,
+     "text": "squat"
+    },
+    {
+     "popularity": 6,
+     "text": "reveil"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:45:54Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 112
+  },
+  "err": null
+ },
+ "despertador amanecer": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "despertador amanecer",
+   "keywords": [
+    {
+     "popularity": 69,
+     "text": "musica"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 61,
+     "text": "agenda"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 53,
+     "text": "zen"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 51,
+     "text": "control"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 46,
+     "text": "glow"
+    },
+    {
+     "popularity": 38,
+     "text": "habits"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 35,
+     "text": "light"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 32,
+     "text": "ciclo"
+    },
+    {
+     "popularity": 32,
+     "text": "reloj despertador"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 13,
+     "text": "hogar"
+    },
+    {
+     "popularity": 12,
+     "text": "seguimiento"
+    },
+    {
+     "popularity": 11,
+     "text": "ciencia"
+    },
+    {
+     "popularity": 9,
+     "text": "inteligente"
+    },
+    {
+     "popularity": 9,
+     "text": "alarmify"
+    },
+    {
+     "popularity": 9,
+     "text": "recordatorio"
+    },
+    {
+     "popularity": 6,
+     "text": "sleepzy"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    }
+   ],
+   "lastUpdate": "2026-09-28T00:18:57Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 128
+  },
+  "err": null
+ },
+ "sunrise alarm clock": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "sunrise alarm clock",
+   "keywords": [
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 47,
+     "text": "lite"
+    },
+    {
+     "popularity": 46,
+     "text": "glow"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 37,
+     "text": "luz"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 35,
+     "text": "light"
+    },
+    {
+     "popularity": 32,
+     "text": "sunrise"
+    },
+    {
+     "popularity": 14,
+     "text": "sunrise alarm"
+    },
+    {
+     "popularity": 13,
+     "text": "hogar"
+    },
+    {
+     "popularity": 9,
+     "text": "dawn"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    },
+    {
+     "popularity": 6,
+     "text": "amanecer"
+    }
+   ],
+   "lastUpdate": "2026-09-28T00:18:49Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 135
+  },
+  "err": null
+ },
+ "despertador inteligente": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "despertador inteligente",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "tiempo"
+    },
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 63,
+     "text": "radio"
+    },
+    {
+     "popularity": 62,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 59,
+     "text": "diario"
+    },
+    {
+     "popularity": 56,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 55,
+     "text": "clock"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 52,
+     "text": "mi"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 49,
+     "text": "sleep"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 41,
+     "text": "música"
+    },
+    {
+     "popularity": 39,
+     "text": "hd"
+    },
+    {
+     "popularity": 36,
+     "text": "monitor"
+    },
+    {
+     "popularity": 34,
+     "text": "reloj alarma"
+    },
+    {
+     "popularity": 32,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 32,
+     "text": "wayk"
+    },
+    {
+     "popularity": 28,
+     "text": "sonidos"
+    },
+    {
+     "popularity": 25,
+     "text": "pantalla"
+    },
+    {
+     "popularity": 12,
+     "text": "seguimiento"
+    },
+    {
+     "popularity": 11,
+     "text": "ciencia"
+    },
+    {
+     "popularity": 6,
+     "text": "cycle"
+    },
+    {
+     "popularity": 6,
+     "text": "mathe"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:44:20Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 90
+  },
+  "err": null
+ },
+ "posponer": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "posponer",
+   "keywords": [
+    {
+     "popularity": 68,
+     "text": "reloj"
+    },
+    {
+     "popularity": 63,
+     "text": "radio"
+    },
+    {
+     "popularity": 62,
+     "text": "alarma"
+    },
+    {
+     "popularity": 53,
+     "text": "sueño"
+    },
+    {
+     "popularity": 50,
+     "text": "ejercicio"
+    },
+    {
+     "popularity": 50,
+     "text": "tarjeta"
+    },
+    {
+     "popularity": 50,
+     "text": "despertador"
+    },
+    {
+     "popularity": 48,
+     "text": "me"
+    },
+    {
+     "popularity": 46,
+     "text": "alarmas"
+    },
+    {
+     "popularity": 46,
+     "text": "alarm"
+    },
+    {
+     "popularity": 41,
+     "text": "beep"
+    },
+    {
+     "popularity": 40,
+     "text": "tools"
+    },
+    {
+     "popularity": 32,
+     "text": "tag"
+    },
+    {
+     "popularity": 30,
+     "text": "snooze"
+    },
+    {
+     "popularity": 24,
+     "text": "retos"
+    },
+    {
+     "popularity": 14,
+     "text": "creador"
+    },
+    {
+     "popularity": 12,
+     "text": "alarma despertador"
+    },
+    {
+     "popularity": 9,
+     "text": "wakeuply"
+    },
+    {
+     "popularity": 9,
+     "text": "misiones"
+    },
+    {
+     "popularity": 8,
+     "text": "escanea"
+    }
+   ],
+   "lastUpdate": "2026-09-27T17:45:23Z",
+   "platform": "iphone",
+   "store": "es",
+   "totalCombinations": 137
+  },
+  "err": null
+ }
+}

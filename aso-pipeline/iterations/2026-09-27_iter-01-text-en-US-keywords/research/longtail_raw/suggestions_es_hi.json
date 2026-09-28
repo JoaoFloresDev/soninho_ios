@@ -1,0 +1,75 @@
+{
+ "data": [
+  {
+   "appsCount": 177,
+   "difficulty": 15,
+   "popularity": 14,
+   "store": "es",
+   "text": "sunrise alarm"
+  },
+  {
+   "appsCount": 83,
+   "difficulty": 21,
+   "popularity": 11,
+   "store": "es",
+   "text": "alarma matemática"
+  },
+  {
+   "appsCount": 208,
+   "difficulty": 46,
+   "popularity": 11,
+   "store": "es",
+   "text": "despertador matematicas"
+  },
+  {
+   "appsCount": 12,
+   "difficulty": 7,
+   "popularity": 11,
+   "store": "es",
+   "text": "alarma con matemáticas"
+  },
+  {
+   "appsCount": 213,
+   "difficulty": 38,
+   "popularity": 10,
+   "store": "es",
+   "text": "despertador amanecer"
+  },
+  {
+   "appsCount": 180,
+   "difficulty": 11,
+   "popularity": 27,
+   "store": "es",
+   "text": "sunrise alarm clock"
+  },
+  {
+   "appsCount": 86,
+   "difficulty": 21,
+   "popularity": 9,
+   "store": "es",
+   "text": "alarma matematica"
+  },
+  {
+   "appsCount": 200,
+   "difficulty": 13,
+   "popularity": 6,
+   "store": "es",
+   "text": "amanecer"
+  },
+  {
+   "appsCount": 210,
+   "difficulty": 21,
+   "popularity": 40,
+   "store": "es",
+   "text": "loud alarm clock"
+  },
+  {
+   "appsCount": 212,
+   "difficulty": 17,
+   "popularity": 32,
+   "store": "es",
+   "text": "sunrise"
+  }
+ ],
+ "err": null
+}

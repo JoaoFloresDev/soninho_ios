@@ -1,0 +1,82 @@
+{
+ "data": [
+  {
+   "appsCount": 226,
+   "difficulty": 35,
+   "popularity": 20,
+   "store": "fr",
+   "text": "puzzle alarm clock"
+  },
+  {
+   "appsCount": 197,
+   "difficulty": 41,
+   "popularity": 49,
+   "store": "fr",
+   "text": "my sunrise"
+  },
+  {
+   "appsCount": 210,
+   "difficulty": 15,
+   "popularity": 38,
+   "store": "fr",
+   "text": "flores"
+  },
+  {
+   "appsCount": 190,
+   "difficulty": 23,
+   "popularity": 7,
+   "store": "fr",
+   "text": "math alarm"
+  },
+  {
+   "appsCount": 231,
+   "difficulty": 19,
+   "popularity": 31,
+   "store": "fr",
+   "text": "math alarm clock"
+  },
+  {
+   "appsCount": 213,
+   "difficulty": 17,
+   "popularity": 9,
+   "store": "fr",
+   "text": "puzzle alarm"
+  },
+  {
+   "appsCount": 215,
+   "difficulty": 15,
+   "popularity": 8,
+   "store": "fr",
+   "text": "sunrise app"
+  },
+  {
+   "appsCount": 206,
+   "difficulty": 21,
+   "popularity": 35,
+   "store": "fr",
+   "text": "sunrise"
+  },
+  {
+   "appsCount": 182,
+   "difficulty": 11,
+   "popularity": 27,
+   "store": "fr",
+   "text": "sunrise alarm clock"
+  },
+  {
+   "appsCount": 223,
+   "difficulty": 19,
+   "popularity": 34,
+   "store": "fr",
+   "text": "wake up"
+  },
+  {
+   "appsCount": 168,
+   "difficulty": 11,
+   "popularity": 9,
+   "store": "fr",
+   "text": "sunrise alarm"
+  }
+ ],
+ "err": null
+}

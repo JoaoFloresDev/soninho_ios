@@ -1,0 +1,165 @@
+Core Word,Long Tail,Source,Popularity,Difficulty,Our Ranking,Apps in Ranking,Composition
+heavy sleeper,alarm for heavy sleepers,stage2 COMP us: 'Alarm for Heavy Sleepers: Loud' name,19,52,146,250,FREE (all tokens in en-US fields)
+heavy sleeper,deep sleep,stage1/prior tracked,17,65,OUT,248,NEEDS: deep
+heavy sleeper,alarm clock for heavy sleepers,stage1/prior tracked: competitor: Alarmy/SuperAlarm/Loud Alarm subtitles + coordinator niche term | also SUG us suggestion 2026-09-27,6,62,30,248,FREE (all tokens in en-US fields)
+heavy sleeper,alarm clock heavy sleeper,stage2 NAT us: word-order variant,5,49,17,250,FREE (all tokens in en-US fields)
+heavy sleeper,alarm for deep sleepers,stage2 NAT us: 'alarm for <user>' (deep sleeper synonym of heavy sleeper),5,52,63,250,NEEDS: deep
+heavy sleeper,deep sleeper alarm,stage2 NAT us: synonym of 'heavy sleeper alarm',5,43,69,249,NEEDS: deep
+heavy sleeper,heavy sleeper,stage1/prior tracked: field: singular variant of subtitle token,5,23,24,250,FREE (all tokens in en-US fields)
+heavy sleeper,heavy sleeper alarm,stage1/prior tracked: natural: composes subtitle+name tokens,5,21,59,250,FREE (all tokens in en-US fields)
+heavy sleeper,heavy sleeper alarm clock,stage2 NAT us: 'heavy sleeper' + head,5,37,24,239,FREE (all tokens in en-US fields)
+heavy sleeper,heavy sleepers,stage1/prior tracked: field: subtitle; also Alarmy/Wayk/SuperAlarm/Loud subtitles,5,17,15,250,FREE (all tokens in en-US fields)
+heavy sleeper,wake up heavy sleepers,"stage2 COMP us: SuperAlarm subtitle 'Wake Up Heavy Sleepers, Snooze'",5,11,19,243,FREE (all tokens in en-US fields)
+mission,alarm clock with missions,stage1/prior tracked: natural: kw 'mission' + name tokens,5,15,OUT,239,FREE (all tokens in en-US fields)
+mission,alarm missions,stage2 NAT us: head + feature,5,17,OUT,247,FREE (all tokens in en-US fields)
+mission,alarm with missions,stage1/prior tracked: coordinator: niche term; kw 'mission',5,15,OUT,248,FREE (all tokens in en-US fields)
+mission,mission alarm,stage1/prior tracked,5,13,OUT,246,FREE (all tokens in en-US fields)
+mission,mission alarm app,stage2 NAT us: 'X app',5,13,OUT,248,NEEDS: app
+mission,mission alarm clock,stage1/prior tracked: natural: kw 'mission' + name,5,11,149,247,FREE (all tokens in en-US fields)
+mission,wake up mission,stage1/prior tracked,5,9,131,244,FREE (all tokens in en-US fields)
+mission,wake up missions,stage2 NAT us: wake + feature,5,9,128,244,FREE (all tokens in en-US fields)
+math,alarm math,stage1/prior tracked | also SUG us suggestion 2026-09-27,11,41,82,248,FREE (all tokens in en-US fields)
+math,math puzzle,stage2 EXT us: seed 'math alarm clock',9,54,OUT,248,FREE (all tokens in en-US fields)
+math,fast math,stage2 EXT us: seed 'heavy sleepers',7,21,OUT,245,NEEDS: fast
+math,math alarm clock,stage1/prior tracked: competitor: 'Mathe Alarm Clock - Math Alarm'; kw 'math' | also SUG us suggestion 2026-09-27,7,45,92,247,FREE (all tokens in en-US fields)
+math,mathe alarm clock,stage2 SUG us: suggestion 'mathe alarm clock',7,21,83,245,NEEDS: mathe
+math,alarm mathe,"stage2 EXT us: seeds 'math alarm clock','puzzle alarm clock'",6,17,141,244,NEEDS: mathe
+math,math alarm,stage1/prior tracked,6,45,201,249,FREE (all tokens in en-US fields)
+math,mathe alarm,stage2 SUG us: suggestion 'mathe alarm' (pop6) - Mathe Alarm Clock brand variant,6,23,79,245,NEEDS: mathe
+math,alarm clock with math,stage2 NAT us: 'X with <feature>',5,19,76,240,FREE (all tokens in en-US fields)
+math,alarm with math problems,stage2 NAT us: 'X with <feature>',5,39,OUT,250,NEEDS: problems
+math,math alarm app,stage2 NAT us: 'X app',5,43,OUT,249,NEEDS: app
+math,math problem alarm,stage2 NAT us: feature + head,5,43,OUT,250,NEEDS: problem
+puzzle,puzzle alarm clock,stage1/prior tracked: natural: kw 'puzzle' + name,29,45,167,249,FREE (all tokens in en-US fields)
+puzzle,alarm puzzle,"stage2 EXT us: seeds 'math alarm clock','puzzle alarm clock'",12,42,OUT,248,FREE (all tokens in en-US fields)
+puzzle,puzzle alarm,stage1/prior tracked,11,42,178,248,FREE (all tokens in en-US fields)
+puzzle,alarm with puzzles,stage2 NAT us: 'X with <feature>',5,17,OUT,242,NEEDS: puzzles
+puzzle,puzzle alarm app,stage2 NAT us: 'X app',5,46,OUT,248,NEEDS: app
+snooze,snooze alarm,stage1/prior tracked: natural: kw 'snooze' + name,6,41,182,249,FREE (all tokens in en-US fields)
+snooze,alarm clock no snooze,stage1/prior tracked: natural: kw 'snooze' + name,5,49,57,250,NEEDS: no
+snooze,alarm without snooze,stage2 NAT us: 'X without <feature>',5,19,OUT,248,NEEDS: without
+snooze,anti snooze,stage1/prior tracked,5,42,197,246,NEEDS: anti
+snooze,anti snooze alarm,stage2 NAT us: feature + head,5,41,139,250,NEEDS: anti
+snooze,cant snooze,stage1/prior tracked,5,17,OUT,245,NEEDS: cant
+snooze,no snooze,stage1/prior tracked,5,11,OUT,249,NEEDS: no
+snooze,no snooze alarm,stage2 NAT us: feature + head,5,45,189,250,NEEDS: no
+snooze,snooze proof alarm,stage2 NAT us: from 'snoozeproof' (EXT us seed 'no snooze'),5,37,223,250,NEEDS: proof
+snooze,stop snoozing,stage1/prior tracked: competitor: Wayk subtitle; kw 'snooze',5,15,OUT,250,"NEEDS: stop,snoozing"
+challenge,challenge tracker,stage2 EXT us: seed 'no snooze',17,19,OUT,247,NEEDS: challenge
+loud,loud alarm clock,stage1/prior tracked: competitor: Alarmy/SuperAlarm/Loud Alarm Clock names; kw 'loud',50,54,OUT,250,FREE (all tokens in en-US fields)
+loud,loud music,stage2 EXT us: seed 'alarm clock',25,43,OUT,250,NEEDS: music
+loud,siren sounds,stage2 EXT us: seed 'alarm sounds',24,38,OUT,250,NEEDS: siren
+loud,loudest alarm clock,stage1/prior tracked: competitor: 'Loud Alarm Clock – the LOUDEST' | also SUG us suggestion 2026-09-27,17,47,131,249,NEEDS: loudest
+loud,max volume,"stage2 EXT us: seeds 'alarm clock','loud alarm clock' (Loud Alarm Clock subtitle 'Max volume')",8,36,OUT,248,"NEEDS: max,volume"
+loud,loud alarm,stage1/prior tracked,7,50,OUT,248,FREE (all tokens in en-US fields)
+loud,alarm clock loud,stage1/prior tracked: natural: word-order variant of competitor names,5,41,68,248,FREE (all tokens in en-US fields)
+loud,annoying alarm,stage2 COMP us: subtitle 'Loudest ANNOYING Alarm Clock +',5,45,OUT,249,NEEDS: annoying
+loud,annoying alarm clock,stage2 COMP us: subtitle 'Loudest ANNOYING Alarm Clock +',5,46,107,250,NEEDS: annoying
+loud,extra loud alarm,stage2 NAT us: intensifier + head,5,40,165,249,NEEDS: extra
+loud,loud alarm app,stage2 NAT us: 'X app',5,44,OUT,248,NEEDS: app
+loud,loud alarm sounds,stage1/prior tracked: natural: kw tokens,5,41,OUT,249,FREE (all tokens in en-US fields)
+loud,loud alarms,"stage2 COMP us: 'Alarm Clock HD' subtitle 'Loud Alarms, Music & Sounds'",5,49,OUT,250,FREE (all tokens in en-US fields)
+loud,loud wake up alarm,stage2 NAT us: loud + wake up alarm,5,38,OUT,247,FREE (all tokens in en-US fields)
+loud,loudest alarm,stage2 COMP us: 'Loud Alarm Clock – the LOUDEST' name,5,42,OUT,249,NEEDS: loudest
+loud,loudest alarm clock app,stage2 COMP us: 'Loud Alarm Clock LOUDEST Sleep' name + NAT 'X app',5,61,OUT,243,"NEEDS: loudest,app"
+loud,super loud alarm clock,stage2 NAT us: intensifier + head,5,42,45,249,NEEDS: super
+loud,very loud alarm,stage2 NAT us: intensifier + head,5,39,217,249,NEEDS: very
+sunrise,sunrise sleep,stage2 SUG us: suggestion 'sunrise sleep',25,9,21,250,FREE (all tokens in en-US fields)
+sunrise,sunrise alarm,stage1/prior tracked | also SUG us suggestion 2026-09-27,23,9,16,244,FREE (all tokens in en-US fields)
+sunrise,sunrise app,stage2 SUG us: suggestion 'sunrise app',14,39,90,239,NEEDS: app
+sunrise,my sunrise,stage2 SUG us: suggestion 'my sunrise',9,9,35,240,FREE (all tokens in en-US fields)
+sunrise,sunrise alarm clock,stage1/prior tracked: field: our name | also SUG us suggestion 2026-09-27,8,15,50,249,FREE (all tokens in en-US fields)
+sunrise,sunrise sunset,stage2 EXT us: seed 'sunrise lamp',6,41,OUT,243,NEEDS: sunset
+sunrise,gentle sunrise alarm,stage2 COMP us: WakeRight subtitle 'Gentle Sunrise Alarm Clock',5,7,14,243,FREE (all tokens in en-US fields)
+sunrise,sunrise alarm app,stage2 NAT us: 'X app',5,9,100,249,NEEDS: app
+sunrise,sunrise alarm clock sounds,stage2 COMP us: 'Sunrise Alarm Clock & Sounds' name,5,46,42,231,FREE (all tokens in en-US fields)
+sunrise,sunrise alarm free,stage2 NAT us: 'X free',5,11,34,247,NEEDS: free
+sunrise,sunrise alarm lite,stage2 COMP us: 'Dawn - Sunrise Alarm Lite' name,5,7,14,241,NEEDS: lite
+sunrise,sunrise clock,stage1/prior tracked: competitor: 'Sunrise Clock: Loud Alarm' name,5,9,7,248,FREE (all tokens in en-US fields)
+sunrise,sunrise lamp,"stage1/prior tracked: natural: kw 'sun','lamp' / name 'sunrise'",5,37,36,250,FREE (all tokens in en-US fields)
+sunrise,sunrise light alarm,stage2 NAT us: sunrise + light alarm,5,15,17,242,FREE (all tokens in en-US fields)
+sunrise,sunrise simulation,stage2 NAT us: sunrise + simulation (cf 'dawn simulator' tracked),5,17,OUT,242,NEEDS: simulation
+sunrise,sunrise wake up,stage1/prior tracked: natural: name tokens,5,5,7,239,FREE (all tokens in en-US fields)
+sunrise,sunrise wake up light,stage2 NAT us: sunrise + wake up light,5,5,13,239,FREE (all tokens in en-US fields)
+sunrise,wake up at sunrise,stage2 COMP us: 'Sunrise Alarm Clock -' subtitle 'Wake up at sunrise',5,5,20,240,FREE (all tokens in en-US fields)
+morning,morning routine,stage1/prior tracked: field: kw pair,9,57,OUT,248,FREE (all tokens in en-US fields)
+morning,morning alarm,stage1/prior tracked: natural: kw 'morning' + name,5,47,180,249,FREE (all tokens in en-US fields)
+morning,morning music,stage2 COMP us: 'Alarm Clock for Me' subtitle 'Sleep Timer & Morning Music',5,47,OUT,242,NEEDS: music
+wake,waking up,stage2 SUG us: suggestion 'waking up',46,60,42,246,NEEDS: waking
+wake,wakeup,stage2 SUG us: suggestion 'wakeup',25,13,27,246,NEEDS: wakeup
+wake,i cant wake up,stage2 SUG us: suggestion 'i cant wake up',9,50,71,245,NEEDS: cant
+wake,wake up,stage1/prior tracked: field: name tokens,9,50,171,248,FREE (all tokens in en-US fields)
+wake,wake up alarm,stage1/prior tracked,6,52,OUT,248,FREE (all tokens in en-US fields)
+wake,alarm clock wake up,stage1/prior tracked: competitor: word-order variant of competitor names,5,53,38,243,FREE (all tokens in en-US fields)
+wake,alarm to wake up,stage1/prior tracked,5,41,163,249,FREE (all tokens in en-US fields)
+wake,gentle wake up,stage1/prior tracked: natural: subtitle + name tokens; 'Clock - Wake Up Gently' name,5,21,27,247,FREE (all tokens in en-US fields)
+wake,smart wake,stage1/prior tracked,5,19,98,249,FREE (all tokens in en-US fields)
+wake,wake up alarm clock,"stage1/prior tracked: competitor: 'Alarm Clock to Wake Up' (Wayk), 'Alarm Clock for Me - Wake Up!'",5,50,67,245,FREE (all tokens in en-US fields)
+wake,wake up clock,stage2 COMP us: Sleepwave subtitle 'Sleep Monitor & Wake Up Clock',5,39,25,240,FREE (all tokens in en-US fields)
+wake,wake up early,stage1/prior tracked,5,39,62,248,NEEDS: early
+wake,wake up fast,stage2 COMP us: subtitle 'Math Wake Up Fast Clock Alarms',5,13,172,248,NEEDS: fast
+wake,wake up gently,stage2 COMP us: 'Clock - Wake Up Gently' (NeonApps) name,5,17,13,240,NEEDS: gently
+wake,wake up light,stage1/prior tracked,5,11,18,246,FREE (all tokens in en-US fields)
+wake,wake up light alarm,stage1/prior tracked: competitor: 'Wake Up Light – Sunrise Alarm' name,5,23,62,244,FREE (all tokens in en-US fields)
+wake,wake up music,stage2 COMP us: 'Alarm Clock - Wake up Music' name,5,17,151,246,NEEDS: music
+wake,wake up refreshed,stage2 COMP us: 'Sunrise Clock: Loud Alarm' subtitle 'WakeUp Refreshed Every Morning',5,11,124,246,NEEDS: refreshed
+wake,wide awake,stage2 COMP us: Mathe subtitle 'Instantly Wide Awake' / Light Alarm 'wide awake',5,13,OUT,250,"NEEDS: wide,awake"
+gentle,gentle alarm,stage1/prior tracked | also SUG us suggestion 2026-09-27,18,23,51,248,FREE (all tokens in en-US fields)
+gentle,gentle alarm clock,stage1/prior tracked: natural: subtitle 'gentle' + name | also SUG us suggestion 2026-09-27,9,45,63,248,FREE (all tokens in en-US fields)
+gentle,gentle light alarm,stage1/prior tracked: natural: subtitle tokens + name,5,11,59,248,FREE (all tokens in en-US fields)
+light,led lamp,stage2 EXT us: seed 'sunrise lamp',52,48,OUT,250,NEEDS: led
+light,night light,stage2 EXT us: seed 'sunrise lamp',7,50,OUT,248,NEEDS: night
+light,light alarm,stage1/prior tracked: competitor: 'Light Alarm — Wake-Up Light' name; subtitle 'Light' | also SUG us suggestion 2026-09-27,6,17,88,246,FREE (all tokens in en-US fields)
+light,screen light,stage2 EXT us: seed 'sunrise lamp',6,37,OUT,250,NEEDS: screen
+light,alarm clock with light,stage2 NAT us: 'X with <feature>',5,51,103,233,FREE (all tokens in en-US fields)
+light,glow alarm,stage2 COMP us: 'Glow Alarm - Wake Up Light' name,5,17,OUT,246,NEEDS: glow
+light,light alarm clock,stage2 NAT us: 'light alarm' + clock,5,42,107,247,FREE (all tokens in en-US fields)
+light,light based alarm,stage2 COMP us: Dawn subtitle 'Gentle light-based alarm clock',5,37,OUT,240,NEEDS: based
+light,sunlight alarm,"stage2 NAT us: from EXT us 'sunlight' (seeds 'wake up light','sunrise lamp') + alarm",5,11,38,248,NEEDS: sunlight
+dawn/sun,dawn alarm,stage1/prior tracked: competitor: 'Dawn - Sunrise Alarm Lite'; kw 'dawn',5,5,38,249,FREE (all tokens in en-US fields)
+dawn/sun,dawn alarm clock,stage2 NAT us: field 'dawn' + head,5,17,97,234,FREE (all tokens in en-US fields)
+dawn/sun,dawn simulation,stage2 COMP us: 'Wake Up Light – Sunrise Alarm' subtitle 'Simulate Dawn Sunlight',5,21,OUT,229,NEEDS: simulation
+dawn/sun,dawn simulator,stage1/prior tracked: competitor: 'Simulate Dawn Sunlight at Home' subtitle,5,17,OUT,243,NEEDS: simulator
+dawn/sun,sun alarm,stage2 NAT us: field token 'sun' + alarm,5,13,71,245,FREE (all tokens in en-US fields)
+sounds,sleep sounds,stage1/prior tracked,55,78,OUT,248,FREE (all tokens in en-US fields)
+sounds,alarm music,"stage2 EXT us: seeds 'alarm clock','wake up alarm clock'",16,43,OUT,243,NEEDS: music
+sounds,sleep music,"stage2 EXT us: seeds 'alarm clock','loud alarm clock'",9,66,OUT,247,NEEDS: music
+sounds,music alarm,"stage2 EXT us: seeds 'alarm clock','wake up alarm clock'",7,50,OUT,241,NEEDS: music
+sounds,alarm sounds,stage1/prior tracked: field: kw 'sounds' + name,6,53,OUT,246,FREE (all tokens in en-US fields)
+sleep/cycle/tracker,sleep tracker,stage1/prior tracked: field: kw tokens,63,71,OUT,247,FREE (all tokens in en-US fields)
+sleep/cycle/tracker,sleep cycle,stage1/prior tracked,59,62,OUT,247,FREE (all tokens in en-US fields)
+sleep/cycle/tracker,cycle tracker,"stage2 EXT us: seeds 'sleep tracker','sleep cycle alarm'",55,77,OUT,248,FREE (all tokens in en-US fields)
+sleep/cycle/tracker,sleep alarm,"stage2 EXT us: seeds 'loud alarm clock','alarm clock for heavy sleepers'",19,62,133,247,FREE (all tokens in en-US fields)
+sleep/cycle/tracker,sleep monitor,"stage2 EXT us: seeds 'morning alarm','wake up light'",9,71,OUT,247,NEEDS: monitor
+sleep/cycle/tracker,sleep time,stage2 EXT us: seed 'sleep cycle alarm',9,39,OUT,248,NEEDS: time
+sleep/cycle/tracker,sleep timer,"stage2 EXT us: seeds 'alarm clock','loud alarm clock'",7,46,OUT,247,NEEDS: timer
+sleep/cycle/tracker,snore tracker,"stage2 EXT us: seeds 'mission alarm clock','sleep tracker'",7,47,OUT,247,NEEDS: snore
+sleep/cycle/tracker,sleep tracker free,stage1/prior tracked,6,61,OUT,247,NEEDS: free
+sleep/cycle/tracker,sleep cycle alarm,stage1/prior tracked,5,45,116,245,FREE (all tokens in en-US fields)
+sleep/cycle/tracker,sleep cycle tracker,stage1/prior tracked: field: kw tokens,5,52,OUT,246,FREE (all tokens in en-US fields)
+smart,smart recorder,stage2 EXT us: seed 'sleep cycle alarm',9,23,OUT,246,NEEDS: recorder
+smart,smart alarm,stage1/prior tracked,7,51,OUT,245,FREE (all tokens in en-US fields)
+smart,smart alarm clock,stage1/prior tracked,5,47,142,249,FREE (all tokens in en-US fields)
+clock,alarm clock,stage1/prior tracked,63,71,233,246,FREE (all tokens in en-US fields)
+clock,alarm clock for me,stage2 COMP us: 'Alarm Clock for Me - Wake Up!' name,30,62,206,250,FREE (all tokens in en-US fields)
+clock,clock app,"stage2 EXT us: seeds 'puzzle alarm clock','morning alarm'",29,56,OUT,249,NEEDS: app
+clock,alarm clock hd,stage2 COMP us: 'Alarm Clock HD' (Impala) name,17,56,134,240,NEEDS: hd
+clock,iphone clock,stage2 EXT us: seed 'alarm sounds',9,53,OUT,228,NEEDS: iphone
+clock,night clock,stage2 EXT us: seed 'sunrise lamp',9,43,OUT,247,NEEDS: night
+clock,free alarm clock,stage2 NAT us: 'free X',7,66,OUT,249,NEEDS: free
+clock,alarm clock free,stage2 NAT us: 'X free',6,71,OUT,247,NEEDS: free
+clock,clock alarm,"stage2 EXT us: seeds 'alarm clock','heavy sleepers'",6,68,OUT,248,FREE (all tokens in en-US fields)
+clock,alarm clock app,stage2 NAT us: 'X app',5,65,65,250,NEEDS: app
+clock,alarm clock with tasks,stage1/prior tracked: competitor: 'Alarm with 250+ Sounds & Tasks' subtitle,5,42,OUT,248,NEEDS: tasks
+clock,best alarm clock,stage2 NAT us: 'best X',5,67,49,250,NEEDS: best
+clock,one touch alarm clock,stage2 COMP us: 'One Touch Alarm Clock' name,5,45,144,248,"NEEDS: one,touch"
+alarm,alarm app,"stage2 EXT us: seeds 'puzzle alarm clock','morning alarm'",36,74,OUT,249,NEEDS: app
+alarm,alarm that makes you get up,stage1/prior tracked,34,44,147,250,"NEEDS: makes,get"
+alarm,barcode alarm,"stage2 EXT us: seeds 'alarm clock for heavy sleepers','puzzle alarm clock'",6,21,OUT,248,NEEDS: barcode
+alarm,custom alarm,stage2 EXT us: seed 'alarm sounds',6,61,OUT,248,NEEDS: custom
+alarm,alarm that wont turn off,stage2 NAT us: problem query,5,39,OUT,248,"NEEDS: wont,turn,off"
+alarm,alarm with tasks,stage2 COMP us: 'Alarm Clock ◎' subtitle 'Alarm with 250+ Sounds & Tasks',5,39,OUT,248,NEEDS: tasks
+alarm,best alarm app,stage2 NAT us: 'best X',5,52,OUT,249,"NEEDS: best,app"
+alarm,gradual alarm,stage1/prior tracked,5,44,OUT,248,NEEDS: gradual
+alarm,hard alarm,stage1/prior tracked,5,48,OUT,248,NEEDS: hard
+alarm,progressive alarm,stage1/prior tracked,5,41,OUT,248,NEEDS: progressive

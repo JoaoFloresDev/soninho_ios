@@ -1,0 +1,3 @@
+Nuovo design Liquid Glass su iOS 26 — più leggero, più chiaro, pensato per la camera da letto.
+Il posticipo ora sopravvive alla riapertura dell'app e il volume impostato viene rispettato in background.
+Sunrise Alarm ora parla 39 lingue.

@@ -1,0 +1,11 @@
+Source: discovery_engagement_detailed_2026-09-28.tsv (ASC Analytics "App Store Discovery and Engagement Detailed", ONGOING). Sums of Counts; no per-query dimension exists in this report.
+DAILY dates covered: 2026-08-21 .. 2026-09-27
+== FR DAILY sum by (Event, Source Type):
+   ('Impression', 'App Store search') 198
+   ('Tap', 'App Store browse') 87
+   ('Page view', 'App referrer') 30
+   ('Page view', 'Web referrer') 15
+== DE DAILY sum by (Event, Source Type):
+   ('Impression', 'App Store search') 212
+   ('Page view', 'App referrer') 18
+App Store search impressions by territory (DAILY sum): [('BR', 4168), ('US', 924), ('JP', 248), ('DE', 212), ('FR', 198), ('IT', 163), ('ES', 135), ('RU', 99), ('CA', 87), ('MX', 86), ('SA', 70), ('CN', 69)]

@@ -1,0 +1,61 @@
+{
+ "data": [
+  {
+   "appsCount": 242,
+   "difficulty": 13,
+   "popularity": 8,
+   "store": "br",
+   "text": "sunrise alarm"
+  },
+  {
+   "appsCount": 246,
+   "difficulty": 45,
+   "popularity": 62,
+   "store": "br",
+   "text": "despertador"
+  },
+  {
+   "appsCount": 245,
+   "difficulty": 50,
+   "popularity": 66,
+   "store": "br",
+   "text": "relógio digital"
+  },
+  {
+   "appsCount": 245,
+   "difficulty": 45,
+   "popularity": 49,
+   "store": "br",
+   "text": "despertador iphone"
+  },
+  {
+   "appsCount": 197,
+   "difficulty": 21,
+   "popularity": 58,
+   "store": "br",
+   "text": "relogio despertador"
+  },
+  {
+   "appsCount": 248,
+   "difficulty": 45,
+   "popularity": 66,
+   "store": "br",
+   "text": "hevy"
+  },
+  {
+   "appsCount": 246,
+   "difficulty": 44,
+   "popularity": 53,
+   "store": "br",
+   "text": "alarme despertador"
+  },
+  {
+   "appsCount": 200,
+   "difficulty": 15,
+   "popularity": 26,
+   "store": "br",
+   "text": "sunrise alarm clock"
+  }
+ ],
+ "err": null
+}

@@ -1,0 +1,141 @@
+Composition,Our Rank,Fit,Protecting Tokens (field),Ranked without token
+langschläfer,4,FIT,langschlafer[keywords],
+lichtwecker sonnenaufgang,5,FIT,"licht[subtitle]+wecker[name], sonnenaufgang[keywords]",
+sunrise alarm clock,5,FIT,"sunrise[name], alarm[name], clock[name]",
+wecker für langschläfer,5,FIT,"wecker[name], langschlafer[keywords]",
+licht aufwachen,6,FIT,"licht[subtitle], aufwachen[keywords]",
+langschlafer,7,FIT,langschlafer[keywords],
+morgenlicht,7,FIT,morgen[keywords]+licht[subtitle],
+sonnenaufgang-wecker,7,FIT,"sonnenaufgang[keywords], wecker[name]",
+wecker langschläfer,7,FIT,"wecker[name], langschlafer[keywords]",
+wecker mit sonnenaufgang,7,FIT,"wecker[name], sonnenaufgang[keywords]",
+aufwachlicht,9,FIT,aufwachen~aufwach[keywords]+licht[subtitle],
+sanfter alarm,9,FIT,"sanftes~sanfter[subtitle], alarm[name]",
+sanft aufwachen,10,FIT,"sanftes~sanft[subtitle], aufwachen[keywords]",
+sanft wecken,11,FIT,"sanftes~sanft[subtitle], wecker~wecken[name]",
+tiefschläfer,11,FIT,tiefschlafer[subtitle],
+tiefschläfer wecker,11,FIT,"tiefschlafer[subtitle], wecker[name]",
+tiefschläfer-wecker,11,FIT,"tiefschlafer[subtitle], wecker[name]",
+wecker tiefschläfer,11,FIT,"wecker[name], tiefschlafer[subtitle]",
+sanftes licht,12,PARTIAL,"sanftes[subtitle], licht[subtitle]",
+sunrise simulator,13,FIT,sunrise[name],simulator
+tiefschlafer,13,FIT,tiefschlafer[subtitle],
+sunrise alarm,14,FIT,"sunrise[name], alarm[name]",
+wake,16,PARTIAL,wake[name]@en-GB,
+schlafzyklus wecker,18,FIT,"schlafzyklus[keywords], wecker[name]",
+sonnenaufgang licht,18,PARTIAL,"sonnenaufgang[keywords], licht[subtitle]",
+sunrise,18,MISMATCH,sunrise[name],
+lauter wecker für tiefschläfer,20,FIT,"laut~lauter[keywords], wecker[name], tiefschlafer[subtitle]",
+wecker sonnenaufgang,20,FIT,"wecker[name], sonnenaufgang[keywords]",
+lichtwecker app,21,FIT,licht[subtitle]+wecker[name],app
+wecker schlafzyklus,21,FIT,"wecker[name], schlafzyklus[keywords]",
+alarm für tiefschläfer,23,FIT,"alarm[name], tiefschlafer[subtitle]",
+aufwachmissionen,23,FIT,aufwachen~aufwach[keywords]+mission~missionen[keywords],
+wecker für tiefschläfer,23,FIT,"wecker[name], tiefschlafer[subtitle]",
+wake up light,24,FIT,"wake[name]@en-GB, up[name]@en-GB, light[subtitle]@en-GB",
+wecker sanft,24,FIT,"wecker[name], sanftes~sanft[subtitle]",
+wake up,25,FIT,"wake[name]@en-GB, up[name]@en-GB",
+laute alarme für tiefschläfer,26,FIT,"laut~laute[keywords], alarm~alarme[name], tiefschlafer[subtitle]",
+mathe alarm,27,FIT,"mathe[keywords], alarm[name]",
+schlummern,27,PARTIAL,schlummern[keywords],
+licht wecker,28,FIT,"licht[subtitle], wecker[name]",
+morgens aufwachen,28,FIT,"morgen~morgens[keywords], aufwachen[keywords]",
+morgens aufstehen,29,FIT,"morgen~morgens[keywords], aufstehen[keywords]",
+wecker licht,29,FIT,"wecker[name], licht[subtitle]",
+wake up alarm,30,FIT,"wake[name]@en-GB, up[name]@en-GB, alarm[name]",
+sanfter wecker,32,FIT,"sanftes~sanfter[subtitle], wecker[name]",
+wecker rechenaufgaben,36,FIT,wecker[name],rechenaufgaben
+wecker mission,39,FIT,"wecker[name], mission[keywords]",
+mission wecker,40,FIT,"mission[keywords], wecker[name]",
+wecker extrem laut,40,FIT,"wecker[name], laut[keywords]",extrem
+mission alarm,41,FIT,"mission[keywords], alarm[name]",
+morgen wecker,42,FIT,"morgen[keywords], wecker[name]",
+wecker mathe,42,FIT,"wecker[name], mathe[keywords]",
+puzzle alarm,43,FIT,"puzzle[keywords]@en-GB, alarm[name]",
+wecker missionen,44,FIT,"wecker[name], mission~missionen[keywords]",
+mathe wecker,49,FIT,"mathe[keywords], wecker[name]",
+puzzle alarm clock,49,FIT,"puzzle[keywords]@en-GB, alarm[name], clock[name]",
+math alarm clock,50,FIT,"math[keywords]@en-GB, alarm[name], clock[name]",
+wecker mit mathe,50,FIT,"wecker[name], mathe[keywords]",
+wecker mit aufgaben,51,FIT,wecker[name],aufgaben
+lichtwecker,54,FIT,licht[subtitle]+wecker[name],
+mein mathe wecker,54,PARTIAL,"mathe[keywords], wecker[name]",mein
+loud alarm clock,55,FIT,"loud[keywords]@en-GB, alarm[name], clock[name]",
+math alarm,55,FIT,"math[keywords]@en-GB, alarm[name]",
+aufstehen,57,FIT,aufstehen[keywords],
+wecker laut,57,FIT,"wecker[name], laut[keywords]",
+wecker aufwachen,65,FIT,"wecker[name], aufwachen[keywords]",
+laute alarme,67,FIT,"laut~laute[keywords], alarm~alarme[name]",
+radiowecker,67,MISMATCH,,radiowecker
+loud alarm,68,FIT,"loud[keywords]@en-GB, alarm[name]",
+waking up,69,MISMATCH,up[name]@en-GB,waking
+wecker iphone kostenlos,69,FIT,wecker[name],"iphone, kostenlos"
+lauter alarm,71,FIT,"laut~lauter[keywords], alarm[name]",
+extrem lauter wecker,72,FIT,"laut~lauter[keywords], wecker[name]",extrem
+miracle morning,72,MISMATCH,morning[keywords]@en-GB,miracle
+besser aufwachen,76,FIT,aufwachen[keywords],besser
+wecker alarm,79,FIT,"wecker[name], alarm[name]",
+wecker extrem,79,FIT,wecker[name],extrem
+aufwach wecker,80,FIT,"aufwachen~aufwach[keywords], wecker[name]",
+lauter wecker,80,FIT,"laut~lauter[keywords], wecker[name]",
+snooze,85,PARTIAL,snooze[keywords]@en-GB,
+heavy sleeper alarm,87,FIT,"heavy[subtitle]@en-GB, sleepers~sleeper[subtitle]@en-GB, alarm[name]",
+sonnenaufgang,87,MISMATCH,sonnenaufgang[keywords],
+gentle alarm,88,FIT,"gentle[subtitle]@en-GB, alarm[name]",
+sonnenaufgang wecker,94,FIT,"sonnenaufgang[keywords], wecker[name]",
+sonnenaufgangswecker,94,FIT,sonnenaufgang[keywords]+wecker[name],
+laute wecker,95,FIT,"laut~laute[keywords], wecker[name]",
+aufwachen,96,FIT,aufwachen[keywords],
+sleep cycle,98,FIT,"sleep[keywords]@en-GB, cycle[keywords]@en-GB",
+wecker iphone,102,FIT,wecker[name],iphone
+morgen,104,MISMATCH,morgen[keywords],
+bewegungs wecker,106,FIT,wecker[name],bewegungs
+alarm clock for heavy sleepers,108,FIT,"alarm[name], clock[name], heavy[subtitle]@en-GB, sleepers[subtitle]@en-GB",for
+smart alarm,117,FIT,"smart[keywords]@en-GB, alarm[name]",
+tageslichtwecker,120,FIT,,tageslichtwecker
+wecker mit spotify,121,MISMATCH,wecker[name],spotify
+wecker und schlaf,122,FIT,wecker[name],schlaf
+wecker aufgaben,143,FIT,wecker[name],aufgaben
+alarm wecker,148,FIT,"alarm[name], wecker[name]",
+clock alarm,150,FIT,"clock[name], alarm[name]",
+wecker app,166,FIT,wecker[name],app
+spotify wecker,176,MISMATCH,wecker[name],spotify
+schlafzyklus,179,FIT,schlafzyklus[keywords],
+wecker schlafphase,183,FIT,wecker[name],schlafphase
+wecker mit licht,202,FIT,"wecker[name], licht[subtitle]",
+musik wecker,212,MISMATCH,wecker[name],musik
+
+Token (field),Status,Best FIT/PARTIAL rank,# FIT/PARTIAL comps <=30,# <=50,# ranked total,Top compositions
+langschlafer[keywords],MUST-STAY,4,4,4,4,"langschläfer #4, wecker für langschläfer #5, langschlafer #7, wecker langschläfer #7"
+licht[subtitle],MUST-STAY,5,9,9,11,"lichtwecker sonnenaufgang #5, licht aufwachen #6, morgenlicht #7, aufwachlicht #9, sanftes licht #12, sonnenaufgang licht #18"
+wecker[name],MUST-STAY,5,18,28,53,"lichtwecker sonnenaufgang #5, wecker für langschläfer #5, sonnenaufgang-wecker #7, wecker langschläfer #7, wecker mit sonnenaufgang #7, sanft wecken #11"
+sonnenaufgang[keywords],MUST-STAY,5,5,5,8,"lichtwecker sonnenaufgang #5, sonnenaufgang-wecker #7, wecker mit sonnenaufgang #7, sonnenaufgang licht #18, wecker sonnenaufgang #20, sonnenaufgang wecker #94"
+sunrise[name],MUST-STAY,5,3,3,4,"sunrise alarm clock #5, sunrise simulator #13, sunrise alarm #14"
+alarm[name],MUST-STAY,5,7,11,23,"sunrise alarm clock #5, sanfter alarm #9, sunrise alarm #14, alarm für tiefschläfer #23, laute alarme für tiefschläfer #26, mathe alarm #27"
+clock[name],MUST-STAY,5,1,3,6,"sunrise alarm clock #5, puzzle alarm clock #49, math alarm clock #50, loud alarm clock #55, alarm clock for heavy sleepers #108, clock alarm #150"
+aufwachen[keywords],MUST-STAY,6,5,5,9,"licht aufwachen #6, aufwachlicht #9, sanft aufwachen #10, aufwachmissionen #23, morgens aufwachen #28, wecker aufwachen #65"
+morgen[keywords],MUST-STAY,7,3,4,5,"morgenlicht #7, morgens aufwachen #28, morgens aufstehen #29, morgen wecker #42"
+sanftes[subtitle],MUST-STAY,9,5,6,6,"sanfter alarm #9, sanft aufwachen #10, sanft wecken #11, sanftes licht #12, wecker sanft #24, sanfter wecker #32"
+tiefschlafer[subtitle],MUST-STAY,11,9,9,9,"tiefschläfer #11, tiefschläfer wecker #11, tiefschläfer-wecker #11, wecker tiefschläfer #11, tiefschlafer #13, lauter wecker für tiefschläfer #20"
+wake[name]@en-GB,MUST-STAY,16,4,4,4,"wake #16, wake up light #24, wake up #25, wake up alarm #30"
+schlafzyklus[keywords],MUST-STAY,18,2,2,3,"schlafzyklus wecker #18, wecker schlafzyklus #21, schlafzyklus #179"
+laut[keywords],MUST-STAY,20,2,3,9,"lauter wecker für tiefschläfer #20, laute alarme für tiefschläfer #26, wecker extrem laut #40, wecker laut #57, laute alarme #67, lauter alarm #71"
+mission[keywords],MUST-STAY,23,1,5,5,"aufwachmissionen #23, wecker mission #39, mission wecker #40, mission alarm #41, wecker missionen #44"
+up[name]@en-GB,MUST-STAY,24,3,3,4,"wake up light #24, wake up #25, wake up alarm #30"
+light[subtitle]@en-GB,MUST-STAY,24,1,1,1,wake up light #24
+mathe[keywords],MUST-STAY,27,1,4,5,"mathe alarm #27, wecker mathe #42, mathe wecker #49, wecker mit mathe #50, mein mathe wecker #54"
+schlummern[keywords],MUST-STAY,27,1,1,1,schlummern #27
+aufstehen[keywords],MUST-STAY,29,1,1,2,"morgens aufstehen #29, aufstehen #57"
+puzzle[keywords]@en-GB,MUST-STAY,43,0,2,2,"puzzle alarm #43, puzzle alarm clock #49"
+math[keywords]@en-GB,MUST-STAY,50,0,1,2,"math alarm clock #50, math alarm #55"
+loud[keywords]@en-GB,SOFT,55,0,0,2,"loud alarm clock #55, loud alarm #68"
+snooze[keywords]@en-GB,SOFT,85,0,0,1,snooze #85
+heavy[subtitle]@en-GB,SOFT,87,0,0,2,"heavy sleeper alarm #87, alarm clock for heavy sleepers #108"
+sleepers[subtitle]@en-GB,SOFT,87,0,0,2,"heavy sleeper alarm #87, alarm clock for heavy sleepers #108"
+gentle[subtitle]@en-GB,SOFT,88,0,0,1,gentle alarm #88
+sleep[keywords]@en-GB,SOFT,98,0,0,1,sleep cycle #98
+cycle[keywords]@en-GB,SOFT,98,0,0,1,sleep cycle #98
+smart[keywords]@en-GB,SOFT,117,0,0,1,smart alarm #117
+morning[keywords]@en-GB,MISMATCH-only,,0,0,1,miracle morning #72
+
+Field tokens (this locale) with NO ranked composition,(none)

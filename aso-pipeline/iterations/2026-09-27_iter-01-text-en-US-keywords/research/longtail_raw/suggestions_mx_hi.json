@@ -1,0 +1,19 @@
+{
+ "data": [
+  {
+   "appsCount": 250,
+   "difficulty": 49,
+   "popularity": 47,
+   "store": "mx",
+   "text": "despertador"
+  },
+  {
+   "appsCount": 247,
+   "difficulty": 13,
+   "popularity": 40,
+   "store": "mx",
+   "text": "sunset"
+  }
+ ],
+ "err": null
+}

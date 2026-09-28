@@ -1,0 +1,787 @@
+{
+ "réveil": {
+  "data": "Error: Invalid parameters: Keyword 'réveil' matches 2 tracked entries (Slumber: Sleep Cycle Tracker [iphone] / fr; Slumber: Sleep Cycle Tracker [iphone] / fr). Narrow it down with 'platform'.",
+  "err": null
+ },
+ "alarme": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "alarme",
+   "keywords": [
+    {
+     "popularity": 75,
+     "text": "musique"
+    },
+    {
+     "popularity": 70,
+     "text": "horloge"
+    },
+    {
+     "popularity": 66,
+     "text": "radio"
+    },
+    {
+     "popularity": 63,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "sommeil"
+    },
+    {
+     "popularity": 60,
+     "text": "alarme"
+    },
+    {
+     "popularity": 59,
+     "text": "app"
+    },
+    {
+     "popularity": 57,
+     "text": "clock"
+    },
+    {
+     "popularity": 55,
+     "text": "de"
+    },
+    {
+     "popularity": 54,
+     "text": "minuteur"
+    },
+    {
+     "popularity": 53,
+     "text": "sleep"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 44,
+     "text": "alarm"
+    },
+    {
+     "popularity": 43,
+     "text": "super"
+    },
+    {
+     "popularity": 29,
+     "text": "temps"
+    },
+    {
+     "popularity": 29,
+     "text": "mon"
+    },
+    {
+     "popularity": 10,
+     "text": "nuit"
+    },
+    {
+     "popularity": 10,
+     "text": "suivi cycle"
+    },
+    {
+     "popularity": 7,
+     "text": "réveil matin"
+    },
+    {
+     "popularity": 7,
+     "text": "alarmify"
+    },
+    {
+     "popularity": 7,
+     "text": "suivi sommeil"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:29:24Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 119
+  },
+  "err": null
+ },
+ "réveil maths": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "réveil maths",
+   "keywords": [
+    {
+     "popularity": 75,
+     "text": "musique"
+    },
+    {
+     "popularity": 70,
+     "text": "horloge"
+    },
+    {
+     "popularity": 66,
+     "text": "radio"
+    },
+    {
+     "popularity": 63,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "sommeil"
+    },
+    {
+     "popularity": 61,
+     "text": "reveil"
+    },
+    {
+     "popularity": 60,
+     "text": "alarme"
+    },
+    {
+     "popularity": 55,
+     "text": "sonnerie"
+    },
+    {
+     "popularity": 53,
+     "text": "maths"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 50,
+     "text": "mathematique"
+    },
+    {
+     "popularity": 48,
+     "text": "e"
+    },
+    {
+     "popularity": 36,
+     "text": "pushclock"
+    },
+    {
+     "popularity": 36,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 29,
+     "text": "mon"
+    },
+    {
+     "popularity": 18,
+     "text": "ronflement"
+    },
+    {
+     "popularity": 7,
+     "text": "math alarm"
+    },
+    {
+     "popularity": 6,
+     "text": "mathe"
+    },
+    {
+     "popularity": 6,
+     "text": "intelligent"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:29:28Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 114
+  },
+  "err": null
+ },
+ "réveil mission": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "réveil mission",
+   "keywords": [
+    {
+     "popularity": 62,
+     "text": "sommeil"
+    },
+    {
+     "popularity": 60,
+     "text": "alarme"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 42,
+     "text": "wayk"
+    },
+    {
+     "popularity": 36,
+     "text": "pushclock"
+    },
+    {
+     "popularity": 35,
+     "text": "pub"
+    },
+    {
+     "popularity": 35,
+     "text": "lit"
+    },
+    {
+     "popularity": 30,
+     "text": "snooze"
+    },
+    {
+     "popularity": 29,
+     "text": "mission"
+    },
+    {
+     "popularity": 28,
+     "text": "reveille"
+    },
+    {
+     "popularity": 28,
+     "text": "debout"
+    },
+    {
+     "popularity": 27,
+     "text": "qui"
+    },
+    {
+     "popularity": 13,
+     "text": "coup"
+    },
+    {
+     "popularity": 10,
+     "text": "vous"
+    },
+    {
+     "popularity": 9,
+     "text": "rappels"
+    },
+    {
+     "popularity": 7,
+     "text": "wonup"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:29:27Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 112
+  },
+  "err": null
+ },
+ "réveil gros dormeur": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "réveil gros dormeur",
+   "keywords": [
+    {
+     "popularity": 63,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "sommeil"
+    },
+    {
+     "popularity": 60,
+     "text": "alarme"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 36,
+     "text": "pushclock"
+    },
+    {
+     "popularity": 35,
+     "text": "lit"
+    },
+    {
+     "popularity": 34,
+     "text": "fort"
+    },
+    {
+     "popularity": 30,
+     "text": "snooze"
+    },
+    {
+     "popularity": 28,
+     "text": "reveille"
+    },
+    {
+     "popularity": 18,
+     "text": "ronflement"
+    },
+    {
+     "popularity": 18,
+     "text": "sons"
+    },
+    {
+     "popularity": 14,
+     "text": "wakey"
+    },
+    {
+     "popularity": 9,
+     "text": "rappels"
+    },
+    {
+     "popularity": 7,
+     "text": "réveil matin"
+    },
+    {
+     "popularity": 7,
+     "text": "wonup"
+    },
+    {
+     "popularity": 6,
+     "text": "alarmes"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:29:27Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 104
+  },
+  "err": null
+ },
+ "sommeil lourd": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "sommeil lourd",
+   "keywords": [
+    {
+     "popularity": 70,
+     "text": "horloge"
+    },
+    {
+     "popularity": 63,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 55,
+     "text": "sonnerie"
+    },
+    {
+     "popularity": 53,
+     "text": "maths"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 44,
+     "text": "alarm"
+    },
+    {
+     "popularity": 35,
+     "text": "sunrise"
+    },
+    {
+     "popularity": 29,
+     "text": "mission"
+    },
+    {
+     "popularity": 25,
+     "text": "enregistreur"
+    },
+    {
+     "popularity": 25,
+     "text": "bouton"
+    },
+    {
+     "popularity": 18,
+     "text": "ronflement"
+    },
+    {
+     "popularity": 10,
+     "text": "nuit"
+    },
+    {
+     "popularity": 9,
+     "text": "vocal"
+    },
+    {
+     "popularity": 9,
+     "text": "perso"
+    },
+    {
+     "popularity": 9,
+     "text": "sunrise alarm"
+    },
+    {
+     "popularity": 7,
+     "text": "barcode"
+    },
+    {
+     "popularity": 6,
+     "text": "erly"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:29:26Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 146
+  },
+  "err": null
+ },
+ "sunrise alarm clock": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "sunrise alarm clock",
+   "keywords": [
+    {
+     "popularity": 64,
+     "text": "simulator"
+    },
+    {
+     "popularity": 63,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 62,
+     "text": "sommeil"
+    },
+    {
+     "popularity": 60,
+     "text": "alarme"
+    },
+    {
+     "popularity": 59,
+     "text": "app"
+    },
+    {
+     "popularity": 53,
+     "text": "sleep"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 51,
+     "text": "up"
+    },
+    {
+     "popularity": 44,
+     "text": "alarm"
+    },
+    {
+     "popularity": 40,
+     "text": "cycle"
+    },
+    {
+     "popularity": 35,
+     "text": "sunrise"
+    },
+    {
+     "popularity": 35,
+     "text": "simulateur"
+    },
+    {
+     "popularity": 18,
+     "text": "jour"
+    },
+    {
+     "popularity": 11,
+     "text": "lumière"
+    },
+    {
+     "popularity": 10,
+     "text": "suivi cycle"
+    },
+    {
+     "popularity": 9,
+     "text": "sunrise alarm"
+    },
+    {
+     "popularity": 7,
+     "text": "suivi sommeil"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:29:20Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 159
+  },
+  "err": null
+ },
+ "réveil lumière": {
+  "data": "Error: Invalid parameters: Keyword 'réveil lumière' matches 2 tracked entries (Slumber: Sleep Cycle Tracker [iphone] / fr; Slumber: Sleep Cycle Tracker [iphone] / fr). Narrow it down with 'platform'.",
+  "err": null
+ },
+ "anti snooze": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "anti snooze",
+   "keywords": [
+    {
+     "popularity": 63,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "sommeil"
+    },
+    {
+     "popularity": 57,
+     "text": "clock"
+    },
+    {
+     "popularity": 53,
+     "text": "rise"
+    },
+    {
+     "popularity": 53,
+     "text": "sleep"
+    },
+    {
+     "popularity": 51,
+     "text": "up"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 45,
+     "text": "tracker"
+    },
+    {
+     "popularity": 44,
+     "text": "alarm"
+    },
+    {
+     "popularity": 42,
+     "text": "wayk"
+    },
+    {
+     "popularity": 42,
+     "text": "apps"
+    },
+    {
+     "popularity": 36,
+     "text": "alarm clock"
+    },
+    {
+     "popularity": 29,
+     "text": "temps"
+    },
+    {
+     "popularity": 29,
+     "text": "mission"
+    },
+    {
+     "popularity": 28,
+     "text": "debout"
+    },
+    {
+     "popularity": 18,
+     "text": "ronflement"
+    },
+    {
+     "popularity": 9,
+     "text": "discipline"
+    },
+    {
+     "popularity": 8,
+     "text": "noozr"
+    },
+    {
+     "popularity": 6,
+     "text": "rizely"
+    },
+    {
+     "popularity": 6,
+     "text": "tracker sommeil"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:38:40Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 99
+  },
+  "err": null
+ },
+ "simulateur d'aube": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "simulateur d'aube",
+   "keywords": [
+    {
+     "popularity": 63,
+     "text": "sleep cycle"
+    },
+    {
+     "popularity": 63,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "sommeil"
+    },
+    {
+     "popularity": 59,
+     "text": "app"
+    },
+    {
+     "popularity": 55,
+     "text": "de"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 51,
+     "text": "cycle sommeil"
+    },
+    {
+     "popularity": 46,
+     "text": "pro"
+    },
+    {
+     "popularity": 45,
+     "text": "tracker"
+    },
+    {
+     "popularity": 40,
+     "text": "light"
+    },
+    {
+     "popularity": 40,
+     "text": "cycle"
+    },
+    {
+     "popularity": 35,
+     "text": "sunrise"
+    },
+    {
+     "popularity": 35,
+     "text": "simulateur"
+    },
+    {
+     "popularity": 34,
+     "text": "wake up"
+    },
+    {
+     "popularity": 27,
+     "text": "musique pro"
+    },
+    {
+     "popularity": 18,
+     "text": "facile"
+    },
+    {
+     "popularity": 10,
+     "text": "suivi cycle"
+    },
+    {
+     "popularity": 9,
+     "text": "sunrise alarm"
+    },
+    {
+     "popularity": 6,
+     "text": "tracker sommeil"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:34:59Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 161
+  },
+  "err": null
+ },
+ "réveil intelligent": {
+  "data": {
+   "app": "Slumber: Sleep Cycle Tracker",
+   "keyword": "réveil intelligent",
+   "keywords": [
+    {
+     "popularity": 75,
+     "text": "musique"
+    },
+    {
+     "popularity": 73,
+     "text": "ia"
+    },
+    {
+     "popularity": 70,
+     "text": "horloge"
+    },
+    {
+     "popularity": 66,
+     "text": "radio"
+    },
+    {
+     "popularity": 63,
+     "text": "alarmy"
+    },
+    {
+     "popularity": 62,
+     "text": "sommeil"
+    },
+    {
+     "popularity": 60,
+     "text": "alarme"
+    },
+    {
+     "popularity": 56,
+     "text": "actualités"
+    },
+    {
+     "popularity": 53,
+     "text": "météo"
+    },
+    {
+     "popularity": 51,
+     "text": "réveil"
+    },
+    {
+     "popularity": 51,
+     "text": "cycle sommeil"
+    },
+    {
+     "popularity": 40,
+     "text": "cycle"
+    },
+    {
+     "popularity": 29,
+     "text": "mon"
+    },
+    {
+     "popularity": 18,
+     "text": "ronflement"
+    },
+    {
+     "popularity": 12,
+     "text": "sleepzy"
+    },
+    {
+     "popularity": 12,
+     "text": "analyse sommeil"
+    },
+    {
+     "popularity": 7,
+     "text": "réveil matin"
+    },
+    {
+     "popularity": 7,
+     "text": "belle"
+    },
+    {
+     "popularity": 6,
+     "text": "intelligent"
+    }
+   ],
+   "lastUpdate": "2026-09-28T20:36:49Z",
+   "platform": "iphone",
+   "store": "fr",
+   "totalCombinations": 87
+  },
+  "err": null
+ },
+ "reveil": {
+  "data": "Error: Invalid parameters: Keyword 'reveil' matches 2 tracked entries (Slumber: Sleep Cycle Tracker [iphone] / fr; Slumber: Sleep Cycle Tracker [iphone] / fr). Every available filter is already set, so the identifier itself matches several entries: pick one from the list above.",
+  "err": null
+ }
+}

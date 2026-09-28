@@ -1,0 +1,3 @@
+Új Liquid Glass dizájn iOS 26-on — könnyedebb, letisztultabb, a hálószobába tervezve.
+A szundi már nem vész el az app újranyitásakor, és a beállított hangerő a háttérben is érvényes.
+A Sunrise Alarm mostantól 39 nyelven beszél.

@@ -1,0 +1,936 @@
+{
+ "puzzle alarm clock": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 35,
+   "keyword": "puzzle alarm clock",
+   "popularity": 20,
+   "ranking": 85,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "puzzle alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 17,
+   "keyword": "puzzle alarm",
+   "popularity": 9,
+   "ranking": 48,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "math alarm clock": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 19,
+   "keyword": "math alarm clock",
+   "popularity": 31,
+   "ranking": 75,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sunrise app": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 15,
+   "keyword": "sunrise app",
+   "popularity": 8,
+   "ranking": 48,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "my sunrise": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 41,
+   "keyword": "my sunrise",
+   "popularity": 49,
+   "ranking": 108,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wake up": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 19,
+   "keyword": "wake up",
+   "popularity": 34,
+   "ranking": 66,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil musique": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 53,
+   "keyword": "réveil musique",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil radio": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 52,
+   "keyword": "réveil radio",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "radio réveil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 50,
+   "keyword": "radio réveil",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme musique": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 55,
+   "keyword": "alarme musique",
+   "popularity": 10,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme horloge": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 57,
+   "keyword": "alarme horloge",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme minuteur": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 39,
+   "keyword": "alarme minuteur",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil ia": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "réveil ia",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil debout": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "réveil debout",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "réveil snooze",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 23,
+   "keyword": "alarme snooze",
+   "popularity": 5,
+   "ranking": 153,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sunrise simulator": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "sunrise simulator",
+   "popularity": 5,
+   "ranking": 14,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "suivi cycle": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 68,
+   "keyword": "suivi cycle",
+   "popularity": 10,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "tracker sommeil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 54,
+   "keyword": "tracker sommeil",
+   "popularity": 6,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "analyse sommeil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 55,
+   "keyword": "analyse sommeil",
+   "popularity": 12,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "tracker de sommeil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 57,
+   "keyword": "tracker de sommeil",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "suivi de sommeil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 53,
+   "keyword": "suivi de sommeil",
+   "popularity": 26,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "suivi du ronflement": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 48,
+   "keyword": "suivi du ronflement",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil pour moi": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 49,
+   "keyword": "réveil pour moi",
+   "popularity": 6,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil avec défis": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil avec défis",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil à défis": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil à défis",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil défi": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "réveil défi",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme défi": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "alarme défi",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme avec mission": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 7,
+   "keyword": "alarme avec mission",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme missions": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "alarme missions",
+   "popularity": 5,
+   "ranking": 75,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil anti snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "réveil anti snooze",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "anti-snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "anti-snooze",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "stop snooze": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "stop snooze",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil anti-sommeil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "réveil anti-sommeil",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sans répétition": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "sans répétition",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil sans répétition": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil sans répétition",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "gros dormeurs": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "gros dormeurs",
+   "popularity": 5,
+   "ranking": 40,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil pour gros dormeur": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "réveil pour gros dormeur",
+   "popularity": 5,
+   "ranking": 40,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme gros dormeur": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "alarme gros dormeur",
+   "popularity": 5,
+   "ranking": 43,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil pour sommeil lourd": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil pour sommeil lourd",
+   "popularity": 5,
+   "ranking": 4,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sommeil profond": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 49,
+   "keyword": "sommeil profond",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil sommeil profond": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 7,
+   "keyword": "réveil sommeil profond",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarmes fortes": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 15,
+   "keyword": "alarmes fortes",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil alarme forte": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "réveil alarme forte",
+   "popularity": 5,
+   "ranking": 36,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil pour se lever": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 11,
+   "keyword": "réveil pour se lever",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "bien se lever": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "bien se lever",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "se lever le matin": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "se lever le matin",
+   "popularity": 5,
+   "ranking": 12,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "se réveiller le matin": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 13,
+   "keyword": "se réveiller le matin",
+   "popularity": 5,
+   "ranking": 13,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "se réveiller tôt": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 7,
+   "keyword": "se réveiller tôt",
+   "popularity": 5,
+   "ranking": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveille-toi": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 15,
+   "keyword": "réveille-toi",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveille matin": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 44,
+   "keyword": "réveille matin",
+   "popularity": 5,
+   "ranking": 95,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil du matin": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 44,
+   "keyword": "réveil du matin",
+   "popularity": 5,
+   "ranking": 101,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil matin gratuit": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 47,
+   "keyword": "réveil matin gratuit",
+   "popularity": 5,
+   "ranking": 115,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme calcul": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 48,
+   "keyword": "alarme calcul",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "calcul mental": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 38,
+   "keyword": "calcul mental",
+   "popularity": 54,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme mathématique": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "alarme mathématique",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil tout doux": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil tout doux",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme douce": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 9,
+   "keyword": "alarme douce",
+   "popularity": 5,
+   "ranking": 7,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarme progressive": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 51,
+   "keyword": "alarme progressive",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sonnerie douce": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 46,
+   "keyword": "sonnerie douce",
+   "popularity": 5,
+   "ranking": 17,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "se réveiller en douceur": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "se réveiller en douceur",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil naturel doux": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil naturel doux",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "lever du soleil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 19,
+   "keyword": "lever du soleil",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "simulateur lever de soleil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "simulateur lever de soleil",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil lumière du jour": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil lumière du jour",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil lumière naturelle": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil lumière naturelle",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "lumière réveil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 7,
+   "keyword": "lumière réveil",
+   "popularity": 5,
+   "ranking": 3,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "lampe réveil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "lampe réveil",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "aurore": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 15,
+   "keyword": "aurore",
+   "popularity": 49,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sonnerie alarme": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 58,
+   "keyword": "sonnerie alarme",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sonnerie de réveil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 54,
+   "keyword": "sonnerie de réveil",
+   "popularity": 5,
+   "ranking": 47,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "musique de réveil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 52,
+   "keyword": "musique de réveil",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "phase de sommeil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 54,
+   "keyword": "phase de sommeil",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil phase sommeil léger": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 5,
+   "keyword": "réveil phase sommeil léger",
+   "popularity": 5,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "réveil cycle sommeil": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 54,
+   "keyword": "réveil cycle sommeil",
+   "popularity": 5,
+   "ranking": 50,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "alarm clock for heavy sleepers": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 45,
+   "keyword": "alarm clock for heavy sleepers",
+   "popularity": 5,
+   "ranking": 148,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "loud alarm clock": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 21,
+   "keyword": "loud alarm clock",
+   "popularity": 40,
+   "ranking": 136,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "heavy sleeper alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 19,
+   "keyword": "heavy sleeper alarm",
+   "popularity": 5,
+   "ranking": 75,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "mission alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 15,
+   "keyword": "mission alarm",
+   "popularity": 5,
+   "ranking": 73,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "gentle alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 40,
+   "keyword": "gentle alarm",
+   "popularity": 5,
+   "ranking": 139,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "sunrise lamp": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 8,
+   "keyword": "sunrise lamp",
+   "popularity": 5,
+   "ranking": 4,
+   "skipped": false,
+   "success": true
+  }
+ },
+ "wake up alarm": {
+  "ok": true,
+  "err": null,
+  "r": {
+   "difficulty": 40,
+   "keyword": "wake up alarm",
+   "popularity": 5,
+   "ranking": 59,
+   "skipped": false,
+   "success": true
+  }
+ }
+}

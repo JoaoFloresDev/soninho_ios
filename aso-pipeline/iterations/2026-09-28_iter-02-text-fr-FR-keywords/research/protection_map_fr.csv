@@ -1,0 +1,119 @@
+Composition,Our Rank,Fit,Protecting Tokens (field),Ranked without token
+réveil lumière douce,2,FIT,"reveil[name], lumiere[subtitle], douce[subtitle]",
+lumière réveil,3,FIT,"lumiere[subtitle], reveil[name]",
+alarme sommeil lourd,4,FIT,"alarme[keywords], sommeil[subtitle], lourd[subtitle]",
+reveil sommeil lourd,4,FIT,"reveil[name], sommeil[subtitle], lourd[subtitle]",
+réveil pour sommeil lourd,4,FIT,"reveil[name], sommeil[subtitle], lourd[subtitle]",
+réveil sommeil lourd,4,FIT,"reveil[name], sommeil[subtitle], lourd[subtitle]",
+réveil sunrise,4,FIT,"reveil[name], sunrise[name]",
+sommeil lourd,4,FIT,"sommeil[subtitle], lourd[subtitle]",
+sunrise lamp,4,PARTIAL,"sunrise[name], lamp[keywords]@en-GB",
+sunrise réveil,4,FIT,"sunrise[name], reveil[name]",
+se réveiller tôt,5,PARTIAL,"se[keywords], reveiller[keywords], tot[keywords]",
+alarme douce,7,FIT,"alarme[keywords], douce[subtitle]",
+lumière douce,7,MISMATCH,"lumiere[subtitle], douce[subtitle]",
+se lever tôt,7,FIT,"se[keywords], lever[keywords], tot[keywords]",
+sunrise alarm clock,7,FIT,"sunrise[name], alarm[name], clock[name]",
+réveil aube,9,FIT,"reveil[name], aube[keywords]",
+réveil lumière,12,FIT,"reveil[name], lumiere[subtitle]",
+se lever le matin,12,PARTIAL,"se[keywords], lever[keywords], matin[keywords]",
+lever tôt,13,FIT,"lever[keywords], tot[keywords]",
+se réveiller le matin,13,PARTIAL,"se[keywords], reveiller[keywords], matin[keywords]",
+sunrise simulator,14,FIT,sunrise[name],simulator
+reveil lumiere,15,FIT,"reveil[name], lumiere[subtitle]",
+réveil tôt,15,FIT,"reveil[name], tot[keywords]",
+wake up light,16,FIT,"wake[name]@en-GB, up[name]@en-GB, light[subtitle]@en-GB",
+sonnerie douce,17,MISMATCH,"sonnerie[keywords], douce[subtitle]",
+se réveiller,18,FIT,"se[keywords], reveiller[keywords]",
+se lever,19,FIT,"se[keywords], lever[keywords]",
+sunrise alarm,26,FIT,"sunrise[name], alarm[name]",
+réveil gros dormeurs,32,FIT,"reveil[name], gros[keywords], dormeur~dormeurs[keywords]",
+réveil alarme forte,36,FIT,"reveil[name], alarme[keywords], fort~forte[keywords]",
+réveil gros dormeur,37,FIT,"reveil[name], gros[keywords], dormeur[keywords]",
+réveil maths,39,FIT,"reveil[name], maths[keywords]",
+gros dormeurs,40,FIT,"gros[keywords], dormeur~dormeurs[keywords]",
+réveil pour gros dormeur,40,FIT,"reveil[name], gros[keywords], dormeur[keywords]",
+réveil alarme maths,41,FIT,"reveil[name], alarme[keywords], maths[keywords]",
+gros dormeur,42,FIT,"gros[keywords], dormeur[keywords]",
+alarme gros dormeur,43,FIT,"alarme[keywords], gros[keywords], dormeur[keywords]",
+réveil cycle de sommeil,43,FIT,"reveil[name], cycle[keywords], sommeil[subtitle]",
+sonnerie de réveil,47,PARTIAL,"sonnerie[keywords], reveil[name]",
+puzzle alarm,48,FIT,"puzzle[keywords]@en-GB, alarm[name]",
+sonnerie réveil,48,PARTIAL,"sonnerie[keywords], reveil[name]",
+sunrise app,48,MISMATCH,sunrise[name],app
+réveil cycle sommeil,50,FIT,"reveil[name], cycle[keywords], sommeil[subtitle]",
+réveil fort,51,FIT,"reveil[name], fort[keywords]",
+alarme maths,52,FIT,"alarme[keywords], maths[keywords]",
+réveil cycle,54,FIT,"reveil[name], cycle[keywords]",
+sunrise,55,MISMATCH,sunrise[name],
+réveil mission,58,FIT,"reveil[name], mission[keywords]",
+wake up alarm,59,FIT,"wake[name]@en-GB, up[name]@en-GB, alarm[name]",
+réveil math,60,FIT,"reveil[name], math[keywords]@en-GB",
+aube,64,MISMATCH,aube[keywords],
+réveil missions,64,FIT,"reveil[name], mission~missions[keywords]",
+wake up,66,FIT,"wake[name]@en-GB, up[name]@en-GB",
+réveiller,67,FIT,reveiller[keywords],
+mission alarm,73,FIT,"mission[keywords], alarm[name]",
+alarme mission,75,FIT,"alarme[keywords], mission[keywords]",
+alarme missions,75,FIT,"alarme[keywords], mission~missions[keywords]",
+heavy sleeper alarm,75,FIT,"heavy[subtitle]@en-GB, sleepers~sleeper[subtitle]@en-GB, alarm[name]",
+math alarm clock,75,FIT,"math[keywords]@en-GB, alarm[name], clock[name]",
+puzzle alarm clock,85,FIT,"puzzle[keywords]@en-GB, alarm[name], clock[name]",
+alarme matin,95,FIT,"alarme[keywords], matin[keywords]",
+réveille matin,95,FIT,"reveil~reveille[name], matin[keywords]",
+loud alarm,100,FIT,"loud[keywords]@en-GB, alarm[name]",
+réveil du matin,101,FIT,"reveil[name], matin[keywords]",
+my sunrise,108,MISMATCH,sunrise[name],my
+réveille-matin,110,FIT,"reveil~reveille[name], matin[keywords]",
+math alarm,114,FIT,"math[keywords]@en-GB, alarm[name]",
+réveil matin gratuit,115,FIT,"reveil[name], matin[keywords]",gratuit
+sommeil et réveil,123,FIT,"sommeil[subtitle], reveil[name]",
+réveil et sommeil,124,FIT,"reveil[name], sommeil[subtitle]",
+loud alarm clock,136,FIT,"loud[keywords]@en-GB, alarm[name], clock[name]",
+gentle alarm,139,FIT,"gentle[subtitle]@en-GB, alarm[name]",
+alarm clock for heavy sleepers,148,FIT,"alarm[name], clock[name], heavy[subtitle]@en-GB, sleepers[subtitle]@en-GB",for
+alarme snooze,153,FIT,"alarme[keywords], snooze[keywords]@en-GB",
+réveil matin,155,FIT,"reveil[name], matin[keywords]",
+cycle sommeil,177,FIT,"cycle[keywords], sommeil[subtitle]",
+réveil alarme,184,FIT,"reveil[name], alarme[keywords]",
+anti snooze,186,FIT,snooze[keywords]@en-GB,anti
+reveil matin,194,FIT,"reveil[name], matin[keywords]",
+smart alarm,211,FIT,"smart[keywords]@en-GB, alarm[name]",
+
+Token (field),Status,Best FIT/PARTIAL rank,# FIT/PARTIAL comps <=30,# <=50,# ranked total,Top compositions
+reveil[name],MUST-STAY,2,11,21,35,"réveil lumière douce #2, lumière réveil #3, reveil sommeil lourd #4, réveil pour sommeil lourd #4, réveil sommeil lourd #4, réveil sunrise #4"
+lumiere[subtitle],MUST-STAY,2,4,4,5,"réveil lumière douce #2, lumière réveil #3, réveil lumière #12, reveil lumiere #15"
+douce[subtitle],MUST-STAY,2,2,2,4,"réveil lumière douce #2, alarme douce #7"
+alarme[keywords],MUST-STAY,4,2,5,11,"alarme sommeil lourd #4, alarme douce #7, réveil alarme forte #36, réveil alarme maths #41, alarme gros dormeur #43, alarme maths #52"
+sommeil[subtitle],MUST-STAY,4,5,7,10,"alarme sommeil lourd #4, reveil sommeil lourd #4, réveil pour sommeil lourd #4, réveil sommeil lourd #4, sommeil lourd #4, réveil cycle de sommeil #43"
+lourd[subtitle],MUST-STAY,4,5,5,5,"alarme sommeil lourd #4, reveil sommeil lourd #4, réveil pour sommeil lourd #4, réveil sommeil lourd #4, sommeil lourd #4"
+sunrise[name],MUST-STAY,4,6,6,9,"réveil sunrise #4, sunrise lamp #4, sunrise réveil #4, sunrise alarm clock #7, sunrise simulator #14, sunrise alarm #26"
+lamp[keywords]@en-GB,MUST-STAY,4,1,1,1,sunrise lamp #4
+se[keywords],MUST-STAY,5,6,6,6,"se réveiller tôt #5, se lever tôt #7, se lever le matin #12, se réveiller le matin #13, se réveiller #18, se lever #19"
+reveiller[keywords],MUST-STAY,5,3,3,4,"se réveiller tôt #5, se réveiller le matin #13, se réveiller #18, réveiller #67"
+tot[keywords],MUST-STAY,5,4,4,4,"se réveiller tôt #5, se lever tôt #7, lever tôt #13, réveil tôt #15"
+lever[keywords],MUST-STAY,7,4,4,4,"se lever tôt #7, se lever le matin #12, lever tôt #13, se lever #19"
+alarm[name],MUST-STAY,7,2,3,14,"sunrise alarm clock #7, sunrise alarm #26, puzzle alarm #48, wake up alarm #59, mission alarm #73, heavy sleeper alarm #75"
+clock[name],MUST-STAY,7,1,1,5,"sunrise alarm clock #7, math alarm clock #75, puzzle alarm clock #85, loud alarm clock #136, alarm clock for heavy sleepers #148"
+aube[keywords],MUST-STAY,9,1,1,2,réveil aube #9
+matin[keywords],MUST-STAY,12,2,2,9,"se lever le matin #12, se réveiller le matin #13, alarme matin #95, réveille matin #95, réveil du matin #101, réveille-matin #110"
+wake[name]@en-GB,MUST-STAY,16,1,1,3,"wake up light #16, wake up alarm #59, wake up #66"
+up[name]@en-GB,MUST-STAY,16,1,1,3,"wake up light #16, wake up alarm #59, wake up #66"
+light[subtitle]@en-GB,MUST-STAY,16,1,1,1,wake up light #16
+gros[keywords],MUST-STAY,32,0,6,6,"réveil gros dormeurs #32, réveil gros dormeur #37, gros dormeurs #40, réveil pour gros dormeur #40, gros dormeur #42, alarme gros dormeur #43"
+dormeur[keywords],MUST-STAY,32,0,6,6,"réveil gros dormeurs #32, réveil gros dormeur #37, gros dormeurs #40, réveil pour gros dormeur #40, gros dormeur #42, alarme gros dormeur #43"
+fort[keywords],MUST-STAY,36,0,1,2,"réveil alarme forte #36, réveil fort #51"
+maths[keywords],MUST-STAY,39,0,2,3,"réveil maths #39, réveil alarme maths #41, alarme maths #52"
+cycle[keywords],MUST-STAY,43,0,2,4,"réveil cycle de sommeil #43, réveil cycle sommeil #50, réveil cycle #54, cycle sommeil #177"
+sonnerie[keywords],MUST-STAY,47,0,2,3,"sonnerie de réveil #47, sonnerie réveil #48"
+puzzle[keywords]@en-GB,MUST-STAY,48,0,1,2,"puzzle alarm #48, puzzle alarm clock #85"
+mission[keywords],SOFT,58,0,0,5,"réveil mission #58, réveil missions #64, mission alarm #73, alarme mission #75, alarme missions #75"
+math[keywords]@en-GB,SOFT,60,0,0,3,"réveil math #60, math alarm clock #75, math alarm #114"
+heavy[subtitle]@en-GB,SOFT,75,0,0,2,"heavy sleeper alarm #75, alarm clock for heavy sleepers #148"
+sleepers[subtitle]@en-GB,SOFT,75,0,0,2,"heavy sleeper alarm #75, alarm clock for heavy sleepers #148"
+loud[keywords]@en-GB,SOFT,100,0,0,2,"loud alarm #100, loud alarm clock #136"
+gentle[subtitle]@en-GB,SOFT,139,0,0,1,gentle alarm #139
+snooze[keywords]@en-GB,SOFT,153,0,0,2,"alarme snooze #153, anti snooze #186"
+smart[keywords]@en-GB,SOFT,211,0,0,1,smart alarm #211
+
+Field tokens (this locale) with NO ranked composition,suivi[keywords]

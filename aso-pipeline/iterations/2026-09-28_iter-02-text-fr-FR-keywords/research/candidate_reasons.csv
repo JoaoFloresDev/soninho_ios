@@ -1,0 +1,194 @@
+store,keyword,reason
+fr,sunrise alarm clock,field: our name (fr-FR)
+fr,sunrise alarm,field: name tokens
+fr,alarm clock,field: name tokens
+fr,sunrise,field: name token
+fr,alarm,field: name token
+fr,clock,field: name token
+fr,réveil,field: name token (head)
+fr,alarme,field: keywords token (head)
+fr,réveil matin,field: name+keywords tokens
+fr,réveil fort,field: name+keywords tokens
+fr,réveil sommeil lourd,field: name+subtitle tokens; coordinator list
+fr,sommeil lourd,field: subtitle tokens
+fr,réveil gros dormeur,field: name+keywords tokens
+fr,gros dormeur,field: keywords token
+fr,réveil mission,field: name+keywords tokens; coordinator list
+fr,alarme mission,field: keywords tokens
+fr,réveil maths,field: name+keywords tokens; coordinator list
+fr,alarme maths,field: keywords tokens
+fr,réveil lumière,field: name+subtitle tokens; coordinator list
+fr,lumière douce,field: subtitle tokens
+fr,réveil lumière douce,field: name+subtitle tokens
+fr,réveil aube,field: name+keywords tokens
+fr,aube,field: keywords token
+fr,réveil cycle,field: name+keywords tokens
+fr,cycle sommeil,field: keywords+subtitle tokens
+fr,suivi sommeil,field: keywords+subtitle tokens
+fr,sommeil,field: subtitle token
+fr,sonnerie,field: keywords token
+fr,sonnerie réveil,field: keywords+name tokens
+fr,se lever tôt,field: keywords tokens
+fr,se lever,field: keywords token
+fr,réveiller,field: keywords token
+fr,réveil tôt,field: name+keywords tokens
+fr,alarme réveil,field: keywords+name tokens
+fr,réveil alarme,field: name+keywords tokens
+fr,alarme matin,field: keywords tokens
+fr,matin,field: keywords token
+fr,sunrise réveil,field: name tokens
+fr,réveil sunrise,field: name tokens
+fr,sleep cycle,field: en-GB keywords tokens; competitor name 'Sleep Cycle'
+fr,sleep tracker,field: en-GB keywords tokens
+fr,smart alarm,field: en-GB keywords+name tokens
+fr,math alarm,field: en-GB keywords+name tokens
+fr,loud alarm,field: en-GB keywords+name tokens
+fr,wake up light,field: en-GB name tokens + lamp; competitor name 'Wake Up Light'
+fr,réveil calcul,coordinator list: réveil calcul/mission
+fr,réveil calcul mental,natural query composing réveil + calcul
+fr,réveil lever du soleil,coordinator list: réveil lumière/lever du soleil
+fr,réveil lever de soleil,"spelling variant of 'lever du soleil'; competitor subtitle 'Lever de soleil, lumière douce' (Simulateur d'aube)"
+fr,lever de soleil,competitor subtitle: Simulateur d'aube : Réveil / Wake Up Light FR
+fr,réveil soleil,competitor name: Zenrise: Réveil Soleil
+fr,simulateur d'aube,competitor name: Simulateur d'aube : Réveil
+fr,simulateur aube,spelling variant of simulateur d'aube
+fr,réveil aurore,competitor subtitle: Glow Alarm 'Réveil aurore'
+fr,réveil lumineux,natural query: light alarm in French (adjective form of our 'lumière')
+fr,lumière du jour,competitor subtitle: Zenrise 'Lumière du jour'
+fr,réveil léger,competitor name: Wake Up Light - Réveil léger
+fr,réveil intelligent,"coordinator list; competitor names AppMind 'Réveil Intelligent', Appenvision 'Réveil intelligent du matin'"
+fr,alarme intelligente,natural query: gendered variant of 'réveil intelligent' with alarme
+fr,suivi du sommeil,coordinator list; competitor subtitle Draunt 'Suivi du Sommeil et Réveil'
+fr,cycle de sommeil,natural query composing cycle + sommeil
+fr,cycle du sommeil,spelling variant of 'cycle de sommeil'
+fr,réveil cycle de sommeil,natural query composing our tokens
+fr,réveil sommeil léger,natural query: our light-sleep wake feature
+fr,sommeil léger,natural query: our light-sleep wake feature
+fr,réveil et sommeil,competitor name: Alarmy – Réveil et sommeil
+fr,sommeil et réveil,competitor subtitle: Draunt 'Suivi du Sommeil et Réveil'
+fr,alarmy,competitor name (SERP #1 réveil)
+fr,réveil avec mission,competitor name: Wayk: Réveil avec Mission
+fr,réveil missions,competitor names: BedOut - Réveil & Missions / Risen
+fr,réveil à missions,competitor name: Risen : Réveil à Missions
+fr,réveil gros dormeurs,competitor subtitles: Risen/WakeBolt 'gros dormeurs' (plural variant)
+fr,réveil défis,competitor name: WakeBolt: Réveil avec Défis
+fr,anti snooze,competitor subtitle: WakeBolt 'Anti-snooze'
+fr,réveil sans snooze,natural query composing réveil + snooze (en-GB token)
+fr,réveil alarme maths,competitor name: MathWake: Réveil Alarme Maths
+fr,réveil math,spelling variant of 'maths'
+fr,réveil mathématique,spelling variant of 'maths'
+fr,sonnerie forte,competitor subtitle: MathWake 'Sonnerie forte'
+fr,alarme forte,competitor subtitle: Rooster 'Alarme forte'
+fr,réveil très fort,natural query composing réveil + fort
+fr,réveil puissant,natural query: loud alarm synonym
+fr,réveil qui sonne fort,natural query composing réveil + fort
+fr,alarme sommeil lourd,natural query composing our tokens
+fr,réveil difficile,natural query: hard-to-wake intent
+fr,réveil casse tête,natural query: puzzle alarm (en-GB token puzzle)
+fr,réveil jeu,natural query: game/puzzle alarm
+fr,réveil progressif,natural query: gradual wake (our gentle sunrise)
+fr,réveil en douceur,natural query composing réveil + douce
+fr,réveil doux,spelling variant of subtitle token 'douce'
+fr,réveil naturel,natural query: natural wake (sunrise)
+fr,réveille-matin,competitor subtitle: Mosaic 'Réveille-matin avec horloge'
+fr,réveil matin musique,competitor subtitle: AppMind 'Réveil Matin: Musique et Radio'
+fr,horloge,"competitor subtitles (Mosaic, Alarme & Minuteur, Super Alarm)"
+fr,réveil horloge,competitor subtitles 'réveil'+'horloge'
+fr,se réveiller,natural query: verb form of our 'réveiller'
+fr,lever tôt,natural query composing lever + tôt
+fr,levez-vous tôt,competitor subtitle: Wayk 'levez-vous tôt'
+fr,réveil lève-tôt,natural query composing lever + tôt
+fr,reveil,spelling variant: no accent
+fr,reveil matin,spelling variant: no accent
+fr,reveil sommeil lourd,spelling variant: no accent
+fr,reveil lumiere,spelling variant: no accent
+fr,ronflement,competitor subtitle: Alarmy 'Suivi du ronflement' / Snorec
+fr,réveil gratuit,natural query: free alarm
+de,sunrise alarm clock,field: our name (de-DE)
+de,sunrise alarm,field: name tokens
+de,alarm clock,field: name tokens
+de,sunrise,field: name token
+de,alarm,field: name token
+de,clock,field: name token
+de,wecker,field: name token (head); coordinator list
+de,tiefschläfer,field: subtitle token
+de,wecker tiefschläfer,field: name+subtitle tokens
+de,tiefschläfer wecker,field: subtitle+name tokens
+de,langschläfer,field: keywords token
+de,wecker langschläfer,field: name+keywords tokens
+de,mathe wecker,field: keywords+name tokens; competitor name 'Mathe Wecker'
+de,wecker mathe,field: name+keywords tokens
+de,wecker mission,field: name+keywords tokens
+de,mission wecker,field: keywords+name tokens; competitor name 'Mission Wecker & Aufwachen'
+de,wecker laut,field: name+keywords tokens
+de,wecker sonnenaufgang,field: name+keywords tokens
+de,sonnenaufgang wecker,field: keywords+name tokens; coordinator list
+de,sonnenaufgang,field: keywords token
+de,wecker licht,field: name+subtitle tokens
+de,licht wecker,field: subtitle+name tokens
+de,sanftes licht,field: subtitle tokens
+de,schlafzyklus,field: keywords token
+de,schlafzyklus wecker,field: keywords+name tokens
+de,wecker schlafzyklus,field: name+keywords tokens
+de,aufwachen,field: keywords token
+de,aufstehen,field: keywords token
+de,wecker aufwachen,field: name+keywords tokens
+de,morgen wecker,field: keywords+name tokens
+de,schlummern,field: keywords token
+de,alarm wecker,field: name tokens
+de,wecker alarm,field: name tokens
+de,sleep cycle,field: en-GB keywords tokens; competitor name 'Sleep Cycle - Schlaftracker'
+de,sleep tracker,field: en-GB keywords tokens
+de,smart alarm,field: en-GB tokens; competitor subtitle Sleepwave 'Smart Alarm'
+de,math alarm,field: en-GB tokens
+de,loud alarm,field: en-GB tokens
+de,wake up light,field: en-GB tokens + lamp; competitor name 'Wake Up Light – Lichtwecker'
+de,wecker für tiefschläfer,coordinator list; competitor subtitles Waiki/Wakely 'Wecker für Tiefschläfer'
+de,wecker mit aufgaben,coordinator list; competitor name Awake: Wecker mit Aufgaben
+de,wecker aufgaben,coordinator list (SERP query)
+de,aufgaben wecker,competitor name: Mornsy: Aufgaben-Wecker
+de,wecker rechenaufgaben,coordinator list
+de,wecker mit rechenaufgaben,coordinator list
+de,rechenaufgaben wecker,coordinator list (word order variant)
+de,wecker mathe aufgaben,natural query composing wecker + mathe + aufgaben
+de,lichtwecker,coordinator list; competitor name Wake Up Light – Lichtwecker
+de,sonnenaufgangswecker,compound spelling of 'sonnenaufgang wecker'
+de,sonnenaufgang-wecker,competitor subtitle: Glow Alarm 'Sonnenaufgang-Wecker'
+de,aufwachlicht,competitor name: Glow Alarm - Aufwachlicht
+de,wecker mit licht,natural query composing wecker + licht
+de,tageslichtwecker,natural query: daylight alarm compound
+de,sanfter wecker,competitor name: Sanfter Wecker – Wonderwake (variant of our 'sanftes')
+de,sanft aufwachen,natural query composing sanft + aufwachen
+de,natürlich aufwachen,natural query: natural wake
+de,intelligenter wecker,coordinator list
+de,smart wecker,natural query: English 'smart' + wecker (en-GB token)
+de,schlaftracker,coordinator list; competitor names Sleep Cycle/Sleepwave 'Schlaftracker'
+de,schlaf tracker,spelling variant of schlaftracker
+de,schlafphasenwecker,natural query: sleep-phase alarm compound (our light-sleep wake)
+de,schlafphasen wecker,spelling variant of schlafphasenwecker
+de,wecker schlafphase,natural query composing wecker + schlafphase
+de,schlafanalyse,natural query: sleep analysis
+de,alarmy,competitor name (SERP #1 wecker)
+de,wecker mit mission,competitor name: Wayk: Wecker mit Mission
+de,wecker mit missionen,competitor names: RiseUp/WonUp 'Wecker mit Missionen'
+de,wecker ohne schlummern,competitor name: Waiki: Wecker ohne Schlummern
+de,wecker ohne snooze,competitor subtitle WonUp 'Ohne Snooze' + wecker
+de,snooze stoppen,competitor subtitle: Mission Wecker 'Snooze stoppen'
+de,lauter wecker,natural query: inflected 'laut' + wecker
+de,laute wecker,competitor name: Laute Wecker: RISER
+de,lauter alarm,competitor subtitle: Rooster 'Lauter Alarm mit Missionen'
+de,laute alarme,competitor name/subtitle: Wecker: Laute Alarme ◎
+de,extrem lauter wecker,natural query composing laut + wecker
+de,wecker extrem laut,natural query composing wecker + laut
+de,wecker für langschläfer,natural query composing our tokens
+de,wecker zum aufwachen,competitor names: Wakely / 'Wecker - Wecker zum Aufwachen'
+de,früh aufstehen,competitor subtitle: RISER 'Früh aufstehen täglich'
+de,wecker rätsel,natural query: puzzle alarm (en-GB token puzzle)
+de,wecker spiel,natural query: game alarm
+de,wecker und schlaf,competitor name: Alarmy – Wecker und Schlaf
+de,schlaf,natural query: sleep head term
+de,tiefschlafer,spelling variant: no umlaut
+de,wecker fur tiefschlafer,spelling variant: no umlaut
+de,langschlafer,spelling variant: no umlaut
+de,aufwach wecker,natural query composing aufwachen + wecker
+de,morgenroutine,natural query: morning routine (en-GB token routine)

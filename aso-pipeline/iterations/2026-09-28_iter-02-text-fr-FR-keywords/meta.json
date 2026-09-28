@@ -1,0 +1,584 @@
+{
+  "iter_id": "2026-09-28_iter-02-text-fr-FR-keywords",
+  "type": "text",
+  "locale": "fr-FR",
+  "locales_all": [
+    "en-US",
+    "es-ES",
+    "pt-BR",
+    "fr-FR",
+    "de-DE"
+  ],
+  "locales": {
+    "base": [
+      "en-US",
+      "es-ES",
+      "pt-BR"
+    ],
+    "base_covered_by": "2026-09-27_iter-01-text-en-US-keywords (mesma versão portadora 1.4.0)",
+    "top2_by_installs_90d": {
+      "rule": "João 28/09/2026: toda iteração cobre a base 3 + os 2 locales com mais instalações NOVAS (Sales Report Product Type 1*, nunca 7* — LEARNINGS #53) nos últimos 90 dias; país → locale que a storefront indexa (playbook §10.1); piso 30 instalações por locale",
+      "source": "_GambitStudio/scripts/asc/top_locales.py --app-id 6758740138 --days 90 --json → research/locales.json (rodado pelo reporter em 2026-09-28; o extractor não tinha gravado o arquivo)",
+      "window": {
+        "start": "2026-06-30",
+        "end": "2026-09-27",
+        "days": 90
+      },
+      "total_installs_1star": 364,
+      "picks": [
+        {
+          "locale": "fr-FR",
+          "countries": [
+            {
+              "cc": "FR",
+              "installs": 42
+            }
+          ],
+          "installs": 42,
+          "share_pct": 11.5,
+          "also_indexed": [
+            "en-GB"
+          ],
+          "role": "alvo"
+        },
+        {
+          "locale": null,
+          "value": "sem tráfego suficiente",
+          "best_below_floor": {
+            "locale": "de-DE",
+            "countries": [
+              {
+                "cc": "DE",
+                "installs": 25
+              },
+              {
+                "cc": "CH",
+                "installs": 3
+              },
+              {
+                "cc": "AT",
+                "installs": 1
+              }
+            ],
+            "installs": 29,
+            "share_pct": 8.0,
+            "also_indexed": [
+              "en-GB",
+              "fr-FR",
+              "it"
+            ]
+          },
+          "note": "de-DE ficou 1 instalação abaixo do piso de 30; entrou na iteração a pedido do coordenador, sem troca de token — papel de CONTROLE dos prints da 1.4.0 (texto intocado)"
+        }
+      ],
+      "base_reference": [
+        {
+          "locale": "en-US",
+          "installs": 39,
+          "share_pct": 10.7
+        },
+        {
+          "locale": "es-ES",
+          "installs": 33,
+          "share_pct": 9.1
+        },
+        {
+          "locale": "pt-BR",
+          "installs": 48,
+          "share_pct": 13.2
+        }
+      ],
+      "empty_slot_value": "sem tráfego suficiente — slot fica vazio (nunca chutar um locale)"
+    }
+  },
+  "stores": {
+    "fr-FR": "fr",
+    "de-DE": "de"
+  },
+  "target_countries": [
+    "FR"
+  ],
+  "target_countries_note": "Só FR recebe mudança de texto. BE/CH/LU leem fr-FR como índice secundário (fora do alvo). DE (+CH/AT) sem mudança = controle.",
+  "control_countries": [
+    "DE"
+  ],
+  "fields_changed": [
+    "keywords"
+  ],
+  "fields_unchanged": [
+    "name",
+    "subtitle",
+    "description",
+    "promotional_text"
+  ],
+  "fields_changed_detail": {
+    "fr-FR": {
+      "keywords": {
+        "before": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller",
+        "before_chars": 93,
+        "after": "defis,leger,se lever,tot,reveiller,alarme,aube,matin,gros dormeur,fort,maths,cycle,sonnerie,mission",
+        "after_chars": 99,
+        "out": [
+          "suivi"
+        ],
+        "in": [
+          "defis",
+          "leger"
+        ],
+        "normalized": [
+          "tôt→tot",
+          "réveiller→reveiller"
+        ]
+      }
+    },
+    "de-DE": {
+      "keywords": {
+        "before": "aufwachen,aufstehen,schlummern,mathe,mission,laut,morgen,langschläfer,schlafzyklus,sonnenaufgang",
+        "after": "aufwachen,aufstehen,schlummern,mathe,mission,laut,morgen,langschlafer,schlafzyklus,sonnenaufgang",
+        "chars": 96,
+        "normalized": [
+          "langschläfer→langschlafer"
+        ],
+        "deploy": "opcional — recomendação do reporter: NÃO aplicar (ganho zero de ranking; mantém DE como controle limpo)"
+      }
+    }
+  },
+  "approach": "single-variable (keywords fr-FR) com controle interno (de-DE sem mudança)",
+  "approach_rationale": "Rating-first: 0 ratings em fr/de (1 no app, br). Iteração conservadora: 2 apostas novas no fr-FR, nada com ranking sai, name/subtitle intocados (todo volume astro-only → regra 10 do composer não sobe token pra campo de peso maior). de-DE: os 10 tokens estão no mapa de proteção e sobram 4 chars sem token honesto ≤3 letras. Volume sem search terms do ASC nem Apple Ads → pop não confiável; métrica atribuível = rank por termo.",
+  "status": "proposed",
+  "carrier_version": {
+    "version": "1.4.0",
+    "id": "64ed2a05-d40f-4e2d-b8c4-77cf5db9bc6e",
+    "state": "PREPARE_FOR_SUBMISSION"
+  },
+  "carrier_note": "A 1.4.0 também carrega prints novos em 39 locales e o texto da iter-01 (en-US/pt-BR/es-ES/es-MX): efeito em downloads é conjunto; o sinal do texto é o rank por termo, e o DE (sem texto novo) é o controle dos prints.",
+  "live_at": null,
+  "quarantine_override": null,
+  "started_at": "2026-09-28",
+  "planned_close_at": "2026-10-28",
+  "actual_closed_at": null,
+  "hypothesis": {
+    "if_we_change": "keywords fr-FR 'matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller' (93) → 'defis,leger,se lever,tot,reveiller,alarme,aube,matin,gros dormeur,fort,maths,cycle,sonnerie,mission' (99): sai suivi, entram defis + leger, tôt/réveiller sem acento. Name/subtitle intocados; de-DE sem mudança.",
+    "then_we_expect": "Até D28: ≥3 de 5 composições-alvo FR no top 10 (réveil avec défis, réveil à défis, réveil défis, réveil léger, réveil sommeil léger — todas OUT hoje); impressões de busca FR 5,2 → ≥5,7/dia; nenhuma posição protegida top 10 FR sai do top 10; installs FR ≥ 1,17/dia.",
+    "because": "(a) as 5 composições são FIT (F1 missões, F4 rampa, F5 janela inteligente) em SERPs de 5-9 apps com top 3 de 0-11 ratings; (b) suivi não protege nenhuma composição e seu único alvo (suivi de sommeil, pop 26) é LOTTERY contra 4k-38k ratings; (c) mapa de proteção 100% coberto — 80 composições FR rankeadas, 0 órfãs; (d) playbook §7: token novo no campo 1× move rank em dias, antes de downloads. Volume astro-only = ganho de impressões incerto."
+  },
+  "bets": [
+    {
+      "locale": "fr-FR",
+      "token": "defis",
+      "score": "DOMINATE",
+      "fit": "FIT (F1)",
+      "volume_source": "astro-only",
+      "volume_note": "pop não confiável",
+      "compositions": [
+        {
+          "term": "réveil avec défis",
+          "pop": 5,
+          "diff": 5,
+          "rank_now": "OUT",
+          "serp_apps": 9,
+          "top3_ratings": "0 / 0 / 1",
+          "target_d28": "#1-5"
+        },
+        {
+          "term": "réveil à défis",
+          "pop": 5,
+          "diff": 5,
+          "rank_now": "OUT",
+          "serp_apps": 6,
+          "top3_ratings": "0 / 1 / 0",
+          "target_d28": "#1-5"
+        },
+        {
+          "term": "réveil défis",
+          "pop": 5,
+          "diff": 5,
+          "rank_now": "OUT",
+          "top3_ratings": "1 / 0 / 0",
+          "target_d28": "#3-10"
+        }
+      ],
+      "cpp": "default page",
+      "fallback": "anti (réveil anti snooze OUT → #3-10) se sem rank após 14 dias no ar"
+    },
+    {
+      "locale": "fr-FR",
+      "token": "leger",
+      "score": "DOMINATE",
+      "fit": "FIT (F4/F5)",
+      "volume_source": "astro-only",
+      "volume_note": "pop não confiável",
+      "compositions": [
+        {
+          "term": "réveil léger",
+          "pop": 5,
+          "diff": 5,
+          "rank_now": "OUT",
+          "serp_apps": 5,
+          "top3_ratings": "11 / 0 / 0",
+          "target_d28": "#1-5"
+        },
+        {
+          "term": "réveil sommeil léger",
+          "pop": 5,
+          "diff": 5,
+          "rank_now": "OUT",
+          "serp_apps": 5,
+          "top3_ratings": "11 / 0 / 0",
+          "target_d28": "#1-5"
+        }
+      ],
+      "cpp": "CPP-FR \"Réveil lumière\"",
+      "fallback": "soleil (réveil lever de soleil OUT → #1-5) se sem rank após 14 dias no ar"
+    }
+  ],
+  "protected_positions": {
+    "fr-FR": [
+      "réveil lumière douce #2",
+      "lumière réveil #3",
+      "sommeil lourd cluster #4 (5 composições)",
+      "réveil sunrise #4",
+      "sunrise lamp #4 (lamp@en-GB)",
+      "se réveiller tôt #5",
+      "sunrise alarm clock #7 (pop 27)",
+      "alarme douce #7",
+      "se lever tôt #7",
+      "réveil aube #9"
+    ],
+    "de-DE": [
+      "langschläfer #4",
+      "sunrise alarm clock #5 (pop 27)",
+      "lichtwecker sonnenaufgang #5",
+      "wecker für langschläfer #5",
+      "licht aufwachen #6",
+      "morgenlicht #7",
+      "sonnenaufgang-wecker #7",
+      "aufwachlicht #9",
+      "sanfter alarm #9",
+      "sanft aufwachen #10",
+      "tiefschläfer cluster #11"
+    ],
+    "mismatch_tokens_kept_for_compositions_only": {
+      "fr-FR": [
+        "lumière douce",
+        "sonnerie",
+        "aube",
+        "matin",
+        "sunrise",
+        "clock"
+      ],
+      "de-DE": [
+        "sonnenaufgang",
+        "sunrise",
+        "clock"
+      ]
+    },
+    "orphans": 0
+  },
+  "success_criterion": {
+    "primary_metric": "rank_fr_target_compositions (5 termos-alvo, Astro store fr)",
+    "secondary_metrics": [
+      "search_impressions_per_day_FR",
+      "installs_per_day_FR (1*)",
+      "installs_RR_FR_vs_DE",
+      "ratings_count_fr_de"
+    ],
+    "measurement_window": "28 dias a partir do dia em que a 1.4.0 fica READY_FOR_SALE; últimos 14d vs baseline 30d",
+    "baseline": {
+      "installs_per_day_FR": 1.17,
+      "installs_per_day_FR_source": "MÉTODO 1 — Sales Report installs-only (1*), territory FR, 30d 2026-08-29..2026-09-27: 35 installs (metrics/2026-09-28_baseline.csv) — SÉRIE DOS TARGETS",
+      "installs_per_day_DE": 0.73,
+      "installs_per_day_DE_source": "MÉTODO 1 — idem, territory DE: 22 installs em 30d (controle)",
+      "installs_90d_by_locale": {
+        "fr-FR": 42,
+        "de-DE": 29
+      },
+      "installs_90d_by_locale_source": "MÉTODO 2 — top_locales.py, 1* agregado por locale indexado, 90d 2026-06-30..2026-09-27 (de-DE = DE 25 + CH 3 + AT 1)",
+      "installs_per_day_all_1star": 7.83,
+      "installs_per_day_all_1star_source": "Sales Report 1* todos os territórios, 30d: 235 (72 updates 7* excluídos)",
+      "weekly_installs_FR_DE": {
+        "2026-08-03": "1/0",
+        "2026-08-10": "1/0",
+        "2026-08-17": "1/1",
+        "2026-08-24": "2/0",
+        "2026-08-31": "5/1",
+        "2026-09-07": "16/4",
+        "2026-09-14": "8/8",
+        "2026-09-21": "5/9"
+      },
+      "weekly_note": "FR fez pico em 07-13/09 e vem caindo (16→8→5); DE subindo (4→8→9)",
+      "search_impressions": {
+        "FR": 198,
+        "DE": 212,
+        "window": "2026-08-21..2026-09-27 (38 dias)",
+        "FR_per_day": 5.2,
+        "DE_per_day": 5.6,
+        "source": "ASC Analytics 'App Store Discovery and Engagement Detailed' (sem dimensão por query)"
+      },
+      "fr_other_sources_same_window": "Tap App Store browse 87 · Page view app referrer 30 · web referrer 15 — busca é minoria das instalações FR",
+      "ratings": {
+        "fr": 0,
+        "de": 0,
+        "app_total": 1,
+        "note": "1 rating total (br)"
+      },
+      "keywords_ranking": "fr 80 composições rankeadas · de 105 (protection_map_*.csv); snapshots research/astro_{fr,de}_2026-09-28.json",
+      "captured_at": "2026-09-28"
+    },
+    "targets": {
+      "conservador": {
+        "new_terms_top10": "3 de 5",
+        "search_impressions_FR_per_day": 5.7,
+        "search_impressions_delta_pct": 10,
+        "installs_per_day_FR": 1.17,
+        "installs_delta_pct": 0,
+        "protected_top10_lost": 0,
+        "probability": 0.5
+      },
+      "bold": {
+        "new_terms_top10": "5 de 5, ≥3 no top 5",
+        "search_impressions_FR_per_day": 6.8,
+        "search_impressions_delta_pct": 30,
+        "installs_per_day_FR": 1.4,
+        "installs_delta_pct": 20,
+        "protected_top10_lost": 0,
+        "probability": 0.2,
+        "is_official_target": true
+      },
+      "aspiracional_90d": {
+        "installs_per_day_FR": 2.0,
+        "installs_multiplier": 1.7,
+        "search_impressions_FR_per_day": 10,
+        "note": "90d, depende de ratings ≥10 em FR (subtitle liberado) + CPP-FR 'Réveil lumière' acima do piso — não é target desta iter"
+      }
+    },
+    "go_no_go_threshold": "D28: ≥3 de 5 alvos FR no top 10 e impressões FR ≥ 5,7/dia sem perda de protegida. Abaixo: alavanca FR passa a ser ratings + conversão, não texto."
+  },
+  "projection": {
+    "assumptions": "playbook §7: token novo no keywords (1×) indexa em 1-3 dias e move rank em SERP pequena antes de downloads; pop 5 = piso Astro (volume real desconhecido); 0 ratings limita #1-2 mas não top 5 em SERP com top 3 de 0-11 ratings",
+    "scenarios": [
+      {
+        "name": "pessimista",
+        "probability": 0.3,
+        "new_terms_top10": "0-2 de 5",
+        "search_impressions_FR_per_day": 5.2,
+        "installs_per_day_FR": 0.9
+      },
+      {
+        "name": "realista",
+        "probability": 0.5,
+        "new_terms_top10": "3-4 de 5",
+        "search_impressions_FR_per_day": 6.5,
+        "installs_per_day_FR": 1.2
+      },
+      {
+        "name": "otimista",
+        "probability": 0.2,
+        "new_terms_top10": "5 de 5 (≥3 top 5)",
+        "search_impressions_FR_per_day": 8.0,
+        "installs_per_day_FR": 1.5
+      }
+    ],
+    "p_conservador": 0.5,
+    "p_bold": 0.2
+  },
+  "confidence": [
+    {
+      "assumption": "Apple casa defis/leger sem acento com 'défis'/'léger'",
+      "confidence": 0.9,
+      "impact": "0 de 5 alvos"
+    },
+    {
+      "assumption": "SERP de 5-9 apps (top3 0-11 ratings) aceita app com 0 ratings no top 5",
+      "confidence": 0.65,
+      "impact": "alvos param em #6-10"
+    },
+    {
+      "assumption": "composições pop 5 têm volume real",
+      "confidence": 0.4,
+      "impact": "rank sobe, impressões não"
+    },
+    {
+      "assumption": "tirar suivi não custa posição",
+      "confidence": 0.95,
+      "impact": "nenhuma composição depende"
+    },
+    {
+      "assumption": "protegidas seguram com reordenação e sem acento",
+      "confidence": 0.9,
+      "impact": "se réveiller tôt #5 / se lever tôt #7 caem; rollback 1 PATCH"
+    },
+    {
+      "assumption": "download FR atribuível ao texto no D28",
+      "confidence": 0.2,
+      "impact": "efeito conjunto com prints; veredito de texto = rank"
+    }
+  ],
+  "cadence": {
+    "d0_rule": "D0 = dia em que a 1.4.0 fica READY_FOR_SALE (não o dia do PATCH). Datas abaixo PROVISÓRIAS assumindo D0 = 2026-09-30 (mesmo D0 da iter-01); recalcular com pull_analytics.py d0 --write-meta.",
+    "checkpoints": [
+      {
+        "day": 7,
+        "date": "2026-10-07",
+        "purpose": "defis/leger indexados; ≥2 alvos rankeados e ≥1 top 10; protegidas top 10 FR ±3 (se réveiller tôt #5, se lever tôt #7, réveil tôt #15 — acento); DE intacto",
+        "metrics_file": "metrics/2026-10-07_d07.json"
+      },
+      {
+        "day": 14,
+        "date": "2026-10-14",
+        "purpose": "≥3 alvos top 10; impressões FR ≥5,5/dia; token sem rank em 14d → trocar (defis→anti, leger→soleil)",
+        "metrics_file": "metrics/2026-10-14_d14.json"
+      },
+      {
+        "day": 21,
+        "date": "2026-10-21",
+        "purpose": "réveil avec défis / réveil à défis ≤ #5; RR installs FR ≥ RR DE",
+        "metrics_file": "metrics/2026-10-21_d21.json"
+      },
+      {
+        "day": 28,
+        "date": "2026-10-28",
+        "purpose": "veredito vs conservador/bold (pull_analytics.py final --write-meta, FR alvo, DE controle); decidir teste isolado de-DE mission→aufgaben",
+        "metrics_file": "metrics/2026-10-28_d28.json"
+      }
+    ],
+    "rollback_triggers": [
+      "Posição protegida top 10 FR (réveil lumière douce #2, lumière réveil #3, sommeil lourd #4, réveil sunrise #4, se réveiller tôt #5, sunrise alarm clock #7, alarme douce #7, se lever tôt #7, réveil aube #9) sai do top 10 e fica 7 dias",
+      "Composição com tot/reveiller cai >5 posições no D7 → volta tôt/réveiller acentuados (1 PATCH)",
+      "Installs FR ↓ ≥30% vs DE sustentado por 14 dias"
+    ],
+    "escalation_triggers": [
+      "Ratings FR ≥10 antes do D28 → iteração de subtitle fr-FR (missões/défis no peso 3×)",
+      "≥3 alvos no top 5 antes do D14 → iteração en-GB com 'anti' (alimenta UK+FR+DE)",
+      "Impressões de busca FR ≥ +40% antes do D14 → reavaliar CPP-FR 'Réveil lumière' contra o piso de medição",
+      "D28 com rank FR confirmado → teste isolado de-DE mission→aufgaben (wecker mit aufgaben pop 33, #51 → #25-35)"
+    ]
+  },
+  "cpp_candidates": [
+    {
+      "id": "CPP-FR",
+      "name": "Réveil lumière",
+      "locale": "fr-FR",
+      "cluster": "réveil lumière douce #2, lumière réveil #3, réveil aube #9, réveil léger (alvo)",
+      "linked_kw_tokens": [
+        "aube",
+        "leger"
+      ],
+      "intent_gap": "busca de luz quer ver o simulador de aurora; página padrão divide o topo com missões e sono pesado",
+      "prints_needed": [
+        "rampa de luz na tela",
+        "janela de despertar no sono leve",
+        "alarme ao amanhecer"
+      ],
+      "expected_effect": "CVR do cluster luz FR",
+      "status": "registrado — abaixo do piso de medição (~5 impressões busca/dia); não abrir agora"
+    },
+    {
+      "id": "CPP-DE",
+      "name": "Lichtwecker",
+      "locale": "de-DE",
+      "cluster": "lichtwecker sonnenaufgang #5, licht aufwachen #6, morgenlicht #7, aufwachlicht #9",
+      "linked_kw_tokens": [
+        "sonnenaufgang"
+      ],
+      "intent_gap": "busca 'Lichtwecker' pede wake-up light",
+      "prints_needed": [
+        "rampa de luz na tela",
+        "janela de despertar no sono leve",
+        "alarme ao amanhecer"
+      ],
+      "expected_effect": "CVR do cluster licht DE",
+      "status": "registrado — abaixo do piso de medição (~5,6 impressões busca/dia); não abrir agora"
+    }
+  ],
+  "decisions_for_joao": [
+    "Duplicados com en-GB (índice secundário FR/DE): fr-FR mission+cycle (14 chars), de-DE mission (8 chars). Possível teste isolado depois do D28: de-DE mission→aufgaben (wecker mit aufgaben pop 33, #51 → #25-35; risco aufwachmissionen #23).",
+    "en-GB fora do escopo: mexer nele alimenta o índice secundário de FR/DE; candidato 'anti' (réveil anti snooze, anti-snooze, ohne/kein snooze).",
+    "de-DE langschläfer→langschlafer é opcional; recomendação: não aplicar (DE vira controle)."
+  ],
+  "research_done": true,
+  "research_files": [
+    "research/locales.json",
+    "research/app_feature_inventory.md",
+    "research/asc_state.json",
+    "research/competitors.md",
+    "research/astro_fr_2026-09-28.json",
+    "research/astro_de_2026-09-28.json",
+    "research/serp_2026-09-28.json",
+    "research/longtails_fr_2026-09-28.csv",
+    "research/longtails_de_2026-09-28.csv",
+    "research/term_fit_fr-FR.csv",
+    "research/term_fit_de-DE.csv",
+    "research/serp_winnability_fr.csv",
+    "research/serp_winnability_de.csv",
+    "research/protection_map_fr.csv",
+    "research/protection_map_de.csv",
+    "research/composition_rationale.md",
+    "research/keyword_candidates.md",
+    "research/baseline_installs_by_type.txt",
+    "research/baseline_kill_or_scale_2026-09-28.txt",
+    "research/discovery_fr_de_summary_2026-09-28.txt",
+    "metrics/2026-09-28_baseline.csv"
+  ],
+  "deployed": false,
+  "deploy_commit": null,
+  "metrics": {
+    "d00_baseline": null
+  },
+  "results": {
+    "baseline": {
+      "date": "2026-09-28",
+      "metrics_file": "metrics/2026-09-28_baseline.csv",
+      "status": "pré-D0; d00_baseline.json é escrito pelo pull_analytics.py d0 no dia live"
+    },
+    "checkpoints": [],
+    "final": null
+  },
+  "verdict": null,
+  "promoted_to_current": false,
+  "asc": {
+    "app_id": "6758740138",
+    "editable_version_id": "64ed2a05-d40f-4e2d-b8c4-77cf5db9bc6e",
+    "editable_version": "1.4.0",
+    "editable_appInfo_id": "eb0696b9-640a-463c-b842-e8595fee25ad",
+    "localization_ids": {
+      "fr-FR": {
+        "appStoreVersionLocalization": "2e6cb7c4-3b1f-43f3-8b96-06816df6f89c",
+        "appInfoLocalization": "60e9faa3-af63-4300-b9fe-f42e6b3d7dad"
+      },
+      "de-DE": {
+        "appStoreVersionLocalization": "13d9ccf6-a7f7-4600-914c-ab238b165b4b",
+        "appInfoLocalization": "d5456e74-6f04-4cdd-85ed-17b77c3c91dd"
+      }
+    }
+  },
+  "notes": "Stage 1 (aso-extractor) 2026-09-28: Astro fr+de (105/88 termos), SERP fr/de, baselines de vendas, report de discovery do ASC. Stage 6 (reporter) 2026-09-28: keyword_candidates.md + meta.json canônico; research/locales.json gerado pelo reporter via top_locales.py (fr-FR 42 = top-2 #1; slot #2 vazio, de-DE 29 abaixo do piso). Nada deployado. Os campos podem ir na 1.4.0 (PREPARE_FOR_SUBMISSION) antes do João submeter; de-DE sem PATCH recomendado. fr-CA (loja CA) tem keywords idênticos ao fr-FR live e fica fora do escopo.",
+  "deploy_gate": {
+    "checked_at": "2026-09-28",
+    "result": "RECUSADO — nenhum PATCH feito",
+    "traffic_floor": {
+      "piso": 100,
+      "installs_1star_30d": {
+        "US": 17,
+        "BR": 15,
+        "ES": 26,
+        "MX": 1,
+        "FR": 35
+      },
+      "ok": false,
+      "lever": "ratings/prints/produto"
+    },
+    "quarantine": {
+      "ok": false,
+      "blockers": [
+        "release 2026-09-27 (-1d) dentro de ±14d (scan.py store_events)"
+      ],
+      "override": null
+    },
+    "text_only_carrier": {
+      "ok": false,
+      "why": "1.4.0 leva prints novos (39 idiomas), prompt nativo de review, paywall novo e 2 assinaturas — texto grudado em feature, não mensurável"
+    },
+    "authorization": "inferida pelo coordenador ('continua'), não pedido explícito do João"
+  }
+}

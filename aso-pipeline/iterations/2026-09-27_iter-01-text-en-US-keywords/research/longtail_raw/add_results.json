@@ -1,0 +1,2490 @@
+{
+ "us": {
+  "data": {
+   "added": 99,
+   "app": "Slumber: Sleep Cycle Tracker",
+   "failed": 0,
+   "platform": "iphone",
+   "results": [
+    {
+     "difficulty": 23,
+     "keyword": "mathe alarm",
+     "popularity": 6,
+     "ranking": 79,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "mathe alarm clock",
+     "popularity": 7,
+     "ranking": 83,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "sunrise sleep",
+     "popularity": 25,
+     "ranking": 21,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 50,
+     "keyword": "i cant wake up",
+     "popularity": 9,
+     "ranking": 71,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "sunrise app",
+     "popularity": 14,
+     "ranking": 90,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "my sunrise",
+     "popularity": 9,
+     "ranking": 35,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "wakeup",
+     "popularity": 25,
+     "ranking": 27,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 60,
+     "keyword": "waking up",
+     "popularity": 46,
+     "ranking": 42,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 62,
+     "keyword": "sleep alarm",
+     "popularity": 19,
+     "ranking": 133,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "alarm music",
+     "popularity": 16,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 50,
+     "keyword": "music alarm",
+     "popularity": 7,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 42,
+     "keyword": "alarm puzzle",
+     "popularity": 12,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 54,
+     "keyword": "math puzzle",
+     "popularity": 9,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "alarm mathe",
+     "popularity": 6,
+     "ranking": 141,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "fast math",
+     "popularity": 7,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "barcode alarm",
+     "popularity": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 61,
+     "keyword": "custom alarm",
+     "popularity": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 74,
+     "keyword": "alarm app",
+     "popularity": 36,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 56,
+     "keyword": "clock app",
+     "popularity": 29,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 68,
+     "keyword": "clock alarm",
+     "popularity": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 53,
+     "keyword": "iphone clock",
+     "popularity": 9,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "night clock",
+     "popularity": 9,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 41,
+     "keyword": "sunrise sunset",
+     "popularity": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "challenge tracker",
+     "popularity": 17,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 0,
+     "error": "Already tracked",
+     "keyword": "sleep monitor",
+     "popularity": 0,
+     "skipped": true,
+     "success": false
+    },
+    {
+     "difficulty": 46,
+     "keyword": "sleep timer",
+     "popularity": 7,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 66,
+     "keyword": "sleep music",
+     "popularity": 9,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "sleep time",
+     "popularity": 9,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 77,
+     "keyword": "cycle tracker",
+     "popularity": 55,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 47,
+     "keyword": "snore tracker",
+     "popularity": 7,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "smart recorder",
+     "popularity": 9,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 36,
+     "keyword": "max volume",
+     "popularity": 8,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "loud music",
+     "popularity": 25,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 37,
+     "keyword": "screen light",
+     "popularity": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 50,
+     "keyword": "night light",
+     "popularity": 7,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 48,
+     "keyword": "led lamp",
+     "popularity": 52,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 38,
+     "keyword": "siren sounds",
+     "popularity": 24,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "wake up gently",
+     "popularity": 5,
+     "ranking": 13,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 56,
+     "keyword": "alarm clock hd",
+     "popularity": 17,
+     "ranking": 134,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 49,
+     "keyword": "loud alarms",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 62,
+     "keyword": "alarm clock for me",
+     "popularity": 30,
+     "ranking": 206,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 45,
+     "keyword": "one touch alarm clock",
+     "popularity": 5,
+     "ranking": 144,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "wake up music",
+     "popularity": 5,
+     "ranking": 151,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 47,
+     "keyword": "morning music",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 42,
+     "keyword": "loudest alarm",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "wake up heavy sleepers",
+     "popularity": 5,
+     "ranking": 19,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 52,
+     "keyword": "alarm for heavy sleepers",
+     "popularity": 19,
+     "ranking": 146,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 61,
+     "keyword": "loudest alarm clock app",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 45,
+     "keyword": "annoying alarm",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 46,
+     "keyword": "annoying alarm clock",
+     "popularity": 5,
+     "ranking": 107,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "alarm with tasks",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "wake up fast",
+     "popularity": 5,
+     "ranking": 172,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "wide awake",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "glow alarm",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "wake up at sunrise",
+     "popularity": 5,
+     "ranking": 20,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "sunrise alarm lite",
+     "popularity": 5,
+     "ranking": 14,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 37,
+     "keyword": "light based alarm",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "gentle sunrise alarm",
+     "popularity": 5,
+     "ranking": 14,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "dawn simulation",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "wake up clock",
+     "popularity": 5,
+     "ranking": 25,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 46,
+     "keyword": "sunrise alarm clock sounds",
+     "popularity": 5,
+     "ranking": 42,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "wake up refreshed",
+     "popularity": 5,
+     "ranking": 124,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 65,
+     "keyword": "alarm clock app",
+     "popularity": 5,
+     "ranking": 65,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 67,
+     "keyword": "best alarm clock",
+     "popularity": 5,
+     "ranking": 49,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 52,
+     "keyword": "best alarm app",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 66,
+     "keyword": "free alarm clock",
+     "popularity": 7,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 71,
+     "keyword": "alarm clock free",
+     "popularity": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 52,
+     "keyword": "alarm for deep sleepers",
+     "popularity": 5,
+     "ranking": 63,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "deep sleeper alarm",
+     "popularity": 5,
+     "ranking": 69,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 37,
+     "keyword": "heavy sleeper alarm clock",
+     "popularity": 5,
+     "ranking": 24,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 49,
+     "keyword": "alarm clock heavy sleeper",
+     "popularity": 5,
+     "ranking": 17,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "alarm that wont turn off",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "alarm clock with math",
+     "popularity": 5,
+     "ranking": 76,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "alarm with math problems",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "math problem alarm",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "math alarm app",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 46,
+     "keyword": "puzzle alarm app",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "alarm with puzzles",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "mission alarm app",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "alarm missions",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "wake up missions",
+     "popularity": 5,
+     "ranking": 128,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 45,
+     "keyword": "no snooze alarm",
+     "popularity": 5,
+     "ranking": 189,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 41,
+     "keyword": "anti snooze alarm",
+     "popularity": 5,
+     "ranking": 139,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "alarm without snooze",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 37,
+     "keyword": "snooze proof alarm",
+     "popularity": 5,
+     "ranking": 223,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 44,
+     "keyword": "loud alarm app",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 40,
+     "keyword": "extra loud alarm",
+     "popularity": 5,
+     "ranking": 165,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "very loud alarm",
+     "popularity": 5,
+     "ranking": 217,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 42,
+     "keyword": "super loud alarm clock",
+     "popularity": 5,
+     "ranking": 45,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 38,
+     "keyword": "loud wake up alarm",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "sunrise alarm app",
+     "popularity": 5,
+     "ranking": 100,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "sunrise light alarm",
+     "popularity": 5,
+     "ranking": 17,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "sunrise wake up light",
+     "popularity": 5,
+     "ranking": 13,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "sunrise simulation",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "sunrise alarm free",
+     "popularity": 5,
+     "ranking": 34,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "sun alarm",
+     "popularity": 5,
+     "ranking": 71,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "sunlight alarm",
+     "popularity": 5,
+     "ranking": 38,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "dawn alarm clock",
+     "popularity": 5,
+     "ranking": 97,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 42,
+     "keyword": "light alarm clock",
+     "popularity": 5,
+     "ranking": 107,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 51,
+     "keyword": "alarm clock with light",
+     "popularity": 5,
+     "ranking": 103,
+     "skipped": false,
+     "success": true
+    }
+   ],
+   "skipped": 1,
+   "store": "us",
+   "total": 100
+  },
+  "err": null
+ },
+ "br": {
+  "data": {
+   "added": 78,
+   "app": "Slumber: Sleep Cycle Tracker",
+   "failed": 0,
+   "platform": "iphone",
+   "results": [
+    {
+     "difficulty": 45,
+     "keyword": "despertador iphone",
+     "popularity": 49,
+     "ranking": 42,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 47,
+     "keyword": "relogio digital",
+     "popularity": 5,
+     "ranking": 195,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "despertador com desafios",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "despertador com desafio",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "alarme com desafio",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "alarme desafio",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "despertador desafio",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador com jogo",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 60,
+     "keyword": "despertador com conta",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 46,
+     "keyword": "alarme com conta",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "despertador matematico",
+     "popularity": 5,
+     "ranking": 183,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarme matematico",
+     "popularity": 5,
+     "ranking": 35,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "despertador com matematica",
+     "popularity": 5,
+     "ranking": 16,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarme com matematica",
+     "popularity": 5,
+     "ranking": 11,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "despertador com missao para acordar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarme com missao para acordar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 30,
+     "keyword": "despertador com missao diaria",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 0,
+     "error": "Already tracked",
+     "keyword": "despertador sem soneca",
+     "popularity": 0,
+     "skipped": true,
+     "success": false
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarme sem soneca",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "chega de soneca",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "alarme para sono pesado",
+     "popularity": 5,
+     "ranking": 32,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 58,
+     "keyword": "sono pesado",
+     "popularity": 5,
+     "ranking": 94,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador para quem tem sono pesado",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador para dorminhoco",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarme para dorminhoco",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador que nao desliga",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador muito alto",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador muito forte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarme muito alto",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarme muito forte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "despertador barulhento",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarme barulhento",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 38,
+     "keyword": "som de despertador",
+     "popularity": 5,
+     "ranking": 228,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 47,
+     "keyword": "som de alarme",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "toque de despertador",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 49,
+     "keyword": "sons de alarme",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 32,
+     "keyword": "alarmes altos",
+     "popularity": 5,
+     "ranking": 104,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 55,
+     "keyword": "alarme com 250 sons",
+     "popularity": 5,
+     "ranking": 39,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 32,
+     "keyword": "alarme com tarefas",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 44,
+     "keyword": "despertador gratis",
+     "popularity": 5,
+     "ranking": 162,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "alarme gratis",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "app despertador",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 45,
+     "keyword": "app de despertador",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "app alarme",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "app para acordar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "app para acordar cedo",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "alarme para acordar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "alarme para acordar cedo",
+     "popularity": 5,
+     "ranking": 35,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "acordar com luz",
+     "popularity": 5,
+     "ranking": 2,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "acordar de manha",
+     "popularity": 5,
+     "ranking": 76,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "acordar no horario",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "acordar disposto",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "pare de adiar o despertador",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "acorde cedo",
+     "popularity": 5,
+     "ranking": 43,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 38,
+     "keyword": "despertador de luz",
+     "popularity": 5,
+     "ranking": 125,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarme com luz",
+     "popularity": 5,
+     "ranking": 2,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador luz do sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador nascer do sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarme nascer do sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "luz do amanhecer",
+     "popularity": 5,
+     "ranking": 9,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarme amanhecer",
+     "popularity": 5,
+     "ranking": 4,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "despertador sunrise",
+     "popularity": 5,
+     "ranking": 2,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "alarme inteligente",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 27,
+     "keyword": "alarme dificil",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "relogio despertador alto",
+     "popularity": 5,
+     "ranking": 28,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 41,
+     "keyword": "relogio alarme",
+     "popularity": 5,
+     "ranking": 70,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 36,
+     "keyword": "relogio despertador gratis",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "despertador de manha",
+     "popularity": 5,
+     "ranking": 71,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 45,
+     "keyword": "alarme ciclo do sono",
+     "popularity": 5,
+     "ranking": 34,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 37,
+     "keyword": "despertador ciclo do sono",
+     "popularity": 5,
+     "ranking": 28,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador chacoalhar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarme sacudir celular",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "rotina matinal",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "despertador rotina",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "loud alarm clock",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "alarm clock for heavy sleepers",
+     "popularity": 5,
+     "ranking": 149,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "math alarm clock",
+     "popularity": 5,
+     "ranking": 141,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "wake up alarm",
+     "popularity": 5,
+     "ranking": 225,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "smart alarm clock",
+     "popularity": 5,
+     "ranking": 118,
+     "skipped": false,
+     "success": true
+    }
+   ],
+   "skipped": 1,
+   "store": "br",
+   "total": 79
+  },
+  "err": null
+ },
+ "es": {
+  "data": {
+   "added": 72,
+   "app": "Slumber: Sleep Cycle Tracker",
+   "failed": 0,
+   "platform": "iphone",
+   "results": [
+    {
+     "difficulty": 21,
+     "keyword": "alarma matemática",
+     "popularity": 11,
+     "ranking": 29,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarma con matemáticas",
+     "popularity": 11,
+     "ranking": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "alarma matematica",
+     "popularity": 9,
+     "ranking": 27,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "loud alarm clock",
+     "popularity": 40,
+     "ranking": 97,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 37,
+     "keyword": "reloj alarma",
+     "popularity": 34,
+     "ranking": 119,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 50,
+     "keyword": "sueño seguimiento",
+     "popularity": 23,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador con retos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "alarma con retos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador con reto",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma con reto",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 8,
+     "keyword": "despertador con juegos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 32,
+     "keyword": "alarma con juegos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador con puzles",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarma con puzzles",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "despertador con matematicas",
+     "popularity": 5,
+     "ranking": 9,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 40,
+     "keyword": "despertador matematico",
+     "popularity": 5,
+     "ranking": 126,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador con tareas",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "alarma con 250 sonidos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 35,
+     "keyword": "alarmas fuertes despertador",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 45,
+     "keyword": "alarma fuerte y reloj",
+     "popularity": 5,
+     "ranking": 49,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 38,
+     "keyword": "despertador inteligente alarma",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 35,
+     "keyword": "reloj despertador inteligente",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 30,
+     "keyword": "despertar al instante",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "levantate ya",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "adios al snooze",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador sin posponer",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma sin posponer",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma sin snooze",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador para dormilones",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma para dormilones",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador para sueño pesado",
+     "popularity": 5,
+     "ranking": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma para sueño pesado",
+     "popularity": 5,
+     "ranking": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "sueño pesado",
+     "popularity": 5,
+     "ranking": 7,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador muy fuerte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma muy fuerte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 50,
+     "keyword": "despertador ruidoso",
+     "popularity": 5,
+     "ranking": 188,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 48,
+     "keyword": "alarma ruidosa",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "sonido de alarma fuerte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 48,
+     "keyword": "sonidos de alarma",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 53,
+     "keyword": "tonos de alarma",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 40,
+     "keyword": "despertador gratis",
+     "popularity": 47,
+     "ranking": 118,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "alarma gratis",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 43,
+     "keyword": "app despertador",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 47,
+     "keyword": "app alarma",
+     "popularity": 5,
+     "ranking": 228,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 40,
+     "keyword": "app para despertar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "alarma para despertar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma para despertar temprano",
+     "popularity": 5,
+     "ranking": 2,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador para levantarse",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma para levantarse",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertar con luz",
+     "popularity": 5,
+     "ranking": 3,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertar suave",
+     "popularity": 5,
+     "ranking": 8,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 41,
+     "keyword": "despertador de luz",
+     "popularity": 5,
+     "ranking": 108,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarma de luz",
+     "popularity": 5,
+     "ranking": 10,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "luz de amanecer",
+     "popularity": 5,
+     "ranking": 17,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador salida del sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 12,
+     "keyword": "alarma salida del sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "despertador sunrise",
+     "popularity": 5,
+     "ranking": 3,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "alarma de la mañana",
+     "popularity": 5,
+     "ranking": 25,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "alarma mañana",
+     "popularity": 5,
+     "ranking": 25,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "despertador ciclo de sueño",
+     "popularity": 5,
+     "ranking": 21,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "alarma ciclo de sueño",
+     "popularity": 5,
+     "ranking": 20,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador agitar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma agitar telefono",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "reloj despertador con luz",
+     "popularity": 5,
+     "ranking": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 44,
+     "keyword": "reloj despertador gratis",
+     "popularity": 5,
+     "ranking": 106,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma temprano",
+     "popularity": 5,
+     "ranking": 3,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador temprano",
+     "popularity": 5,
+     "ranking": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "rutina de mañana",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 40,
+     "keyword": "alarm clock for heavy sleepers",
+     "popularity": 5,
+     "ranking": 102,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "math alarm clock",
+     "popularity": 5,
+     "ranking": 84,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "wake up alarm",
+     "popularity": 5,
+     "ranking": 43,
+     "skipped": false,
+     "success": true
+    }
+   ],
+   "skipped": 0,
+   "store": "es",
+   "total": 72
+  },
+  "err": null
+ },
+ "mx": {
+  "data": {
+   "added": 76,
+   "app": "Slumber: Sleep Cycle Tracker",
+   "failed": 0,
+   "platform": "iphone",
+   "results": [
+    {
+     "difficulty": 9,
+     "keyword": "alarma matemática",
+     "popularity": 5,
+     "ranking": 35,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarma con matemáticas",
+     "popularity": 5,
+     "ranking": 8,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "alarma matematica",
+     "popularity": 5,
+     "ranking": 51,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "loud alarm clock",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 44,
+     "keyword": "reloj alarma",
+     "popularity": 5,
+     "ranking": 140,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "sueño seguimiento",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "despertador con retos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "alarma con retos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador con reto",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma con reto",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 39,
+     "keyword": "despertador con juegos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "alarma con juegos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "despertador con puzles",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "alarma con puzzles",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "despertador con matematicas",
+     "popularity": 5,
+     "ranking": 13,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "despertador matematico",
+     "popularity": 5,
+     "ranking": 155,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "despertador con tareas",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "alarma con 250 sonidos",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 17,
+     "keyword": "alarmas fuertes despertador",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 44,
+     "keyword": "alarma fuerte y reloj",
+     "popularity": 5,
+     "ranking": 96,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "despertador inteligente alarma",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 36,
+     "keyword": "reloj despertador inteligente",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "despertar al instante",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 15,
+     "keyword": "levantate ya",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "adios al snooze",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador sin posponer",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma sin posponer",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma sin snooze",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "despertador para dormilones",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "alarma para dormilones",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador para sueño pesado",
+     "popularity": 5,
+     "ranking": 11,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma para sueño pesado",
+     "popularity": 5,
+     "ranking": 11,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "sueño pesado",
+     "popularity": 5,
+     "ranking": 13,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador muy fuerte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma muy fuerte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "despertador ruidoso",
+     "popularity": 5,
+     "ranking": 217,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 58,
+     "keyword": "alarma ruidosa",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "sonido de alarma fuerte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 49,
+     "keyword": "sonidos de alarma",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 52,
+     "keyword": "tonos de alarma",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 40,
+     "keyword": "despertador gratis",
+     "popularity": 5,
+     "ranking": 132,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "alarma gratis",
+     "popularity": 44,
+     "ranking": 94,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 41,
+     "keyword": "app despertador",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 45,
+     "keyword": "app alarma",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 41,
+     "keyword": "app para despertar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "alarma para despertar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarma para despertar temprano",
+     "popularity": 5,
+     "ranking": 12,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador para levantarse",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma para levantarse",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertar con luz",
+     "popularity": 5,
+     "ranking": 2,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertar suave",
+     "popularity": 5,
+     "ranking": 8,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "despertador de luz",
+     "popularity": 5,
+     "ranking": 157,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarma de luz",
+     "popularity": 5,
+     "ranking": 10,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "luz de amanecer",
+     "popularity": 5,
+     "ranking": 14,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador salida del sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma salida del sol",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "despertador sunrise",
+     "popularity": 5,
+     "ranking": 6,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "alarma de la mañana",
+     "popularity": 5,
+     "ranking": 61,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "alarma mañana",
+     "popularity": 5,
+     "ranking": 53,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "despertador ciclo de sueño",
+     "popularity": 5,
+     "ranking": 18,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 19,
+     "keyword": "alarma ciclo de sueño",
+     "popularity": 5,
+     "ranking": 23,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador agitar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "alarma agitar telefono",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "reloj despertador con luz",
+     "popularity": 5,
+     "ranking": 7,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 37,
+     "keyword": "reloj despertador gratis",
+     "popularity": 5,
+     "ranking": 89,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "alarma temprano",
+     "popularity": 5,
+     "ranking": 14,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 7,
+     "keyword": "despertador temprano",
+     "popularity": 5,
+     "ranking": 11,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 11,
+     "keyword": "rutina de mañana",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 21,
+     "keyword": "alarm clock for heavy sleepers",
+     "popularity": 5,
+     "ranking": 182,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "math alarm clock",
+     "popularity": 5,
+     "ranking": 145,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 23,
+     "keyword": "wake up alarm",
+     "popularity": 5,
+     "ranking": 160,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 62,
+     "keyword": "alarma para despertarse",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 5,
+     "keyword": "despertador que no se apague",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 9,
+     "keyword": "alarma con misiones para despertar",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    },
+    {
+     "difficulty": 13,
+     "keyword": "alarma sonido fuerte",
+     "popularity": 5,
+     "skipped": false,
+     "success": true
+    }
+   ],
+   "skipped": 0,
+   "store": "mx",
+   "total": 76
+  },
+  "err": null
+ }
+}

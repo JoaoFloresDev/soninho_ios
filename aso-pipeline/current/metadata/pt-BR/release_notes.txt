@@ -1,0 +1,3 @@
+Novo visual Liquid Glass no iOS 26 — mais leve, mais claro, feito pro quarto.
+A soneca não se perde mais ao reabrir o app, e o volume do alarme é respeitado em segundo plano.
+O Sunrise Alarm agora fala 39 idiomas.

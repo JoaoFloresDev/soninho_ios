@@ -1,0 +1,4 @@
+Source: baseline_pull_analytics_60d_sales.csv (ASC daily Sales Reports, SKU=soninho, parent empty), window ending 2026-09-27
+30d: installs(1*)=229 (7.63/day) updates(7*)=72 by_type={'1': 229, '3': 21, '7': 72} installs us/br/es/mx=15/15/26/1 top=[('FR', 35), ('ES', 26), ('DE', 21), ('PL', 18), ('US', 15), ('BR', 15)]
+45d: installs(1*)=286 (6.36/day) updates(7*)=74 by_type={'1': 286, '3': 29, '7': 74} installs us/br/es/mx=22/27/31/2 top=[('FR', 37), ('ES', 31), ('BR', 27), ('US', 22), ('DE', 22), ('PL', 18)]
+60d: installs(1*)=331 (5.52/day) updates(7*)=105 by_type={'1': 331, '3': 29, '7': 105} installs us/br/es/mx=28/42/32/2 top=[('BR', 42), ('FR', 40), ('ES', 32), ('US', 28), ('DE', 23), ('PL', 18)]

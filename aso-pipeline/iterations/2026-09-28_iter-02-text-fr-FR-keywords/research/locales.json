@@ -1,0 +1,708 @@
+{
+  "total_installs": 364,
+  "top2": [
+    {
+      "locale": "fr-FR",
+      "installs": 42,
+      "countries": [
+        {
+          "cc": "FR",
+          "installs": 42
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 11.5,
+      "excluded": false
+    },
+    {
+      "locale": null,
+      "reason": "sem tráfego suficiente",
+      "best_below_floor": {
+        "locale": "de-DE",
+        "installs": 29
+      }
+    }
+  ],
+  "ranking": [
+    {
+      "locale": "pt-BR",
+      "installs": 48,
+      "countries": [
+        {
+          "cc": "BR",
+          "installs": 48
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 13.2,
+      "excluded": true
+    },
+    {
+      "locale": "fr-FR",
+      "installs": 42,
+      "countries": [
+        {
+          "cc": "FR",
+          "installs": 42
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 11.5,
+      "excluded": false
+    },
+    {
+      "locale": "en-US",
+      "installs": 39,
+      "countries": [
+        {
+          "cc": "US",
+          "installs": 36
+        },
+        {
+          "cc": "PH",
+          "installs": 3
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 10.7,
+      "excluded": true
+    },
+    {
+      "locale": "es-ES",
+      "installs": 33,
+      "countries": [
+        {
+          "cc": "ES",
+          "installs": 33
+        }
+      ],
+      "also_indexed": [
+        "ca",
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 9.1,
+      "excluded": true
+    },
+    {
+      "locale": "de-DE",
+      "installs": 29,
+      "countries": [
+        {
+          "cc": "DE",
+          "installs": 25
+        },
+        {
+          "cc": "CH",
+          "installs": 3
+        },
+        {
+          "cc": "AT",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [
+        "en-GB",
+        "fr-FR",
+        "it"
+      ],
+      "notes": [
+        "CH lê de + fr + it + en-GB; default de-DE"
+      ],
+      "share_pct": 8.0,
+      "excluded": false
+    },
+    {
+      "locale": "en-GB",
+      "installs": 21,
+      "countries": [
+        {
+          "cc": "GB",
+          "installs": 13
+        },
+        {
+          "cc": "NP",
+          "installs": 2
+        },
+        {
+          "cc": "PK",
+          "installs": 2
+        },
+        {
+          "cc": "IE",
+          "installs": 1
+        },
+        {
+          "cc": "KH",
+          "installs": 1
+        },
+        {
+          "cc": "RS",
+          "installs": 1
+        },
+        {
+          "cc": "ZA",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [
+        "en-AU"
+      ],
+      "notes": [],
+      "share_pct": 5.8,
+      "excluded": false
+    },
+    {
+      "locale": "pl",
+      "installs": 18,
+      "countries": [
+        {
+          "cc": "PL",
+          "installs": 18
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 4.9,
+      "excluded": false
+    },
+    {
+      "locale": "nl-NL",
+      "installs": 17,
+      "countries": [
+        {
+          "cc": "NL",
+          "installs": 10
+        },
+        {
+          "cc": "BE",
+          "installs": 7
+        }
+      ],
+      "also_indexed": [
+        "en-GB",
+        "fr-FR"
+      ],
+      "notes": [
+        "BE lê nl + fr + en-GB; default nl-NL"
+      ],
+      "share_pct": 4.7,
+      "excluded": false
+    },
+    {
+      "locale": "es-MX",
+      "installs": 15,
+      "countries": [
+        {
+          "cc": "MX",
+          "installs": 4
+        },
+        {
+          "cc": "CO",
+          "installs": 3
+        },
+        {
+          "cc": "AR",
+          "installs": 2
+        },
+        {
+          "cc": "CR",
+          "installs": 2
+        },
+        {
+          "cc": "EC",
+          "installs": 2
+        },
+        {
+          "cc": "PE",
+          "installs": 1
+        },
+        {
+          "cc": "UY",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 4.1,
+      "excluded": false
+    },
+    {
+      "locale": "en-CA",
+      "installs": 12,
+      "countries": [
+        {
+          "cc": "CA",
+          "installs": 12
+        }
+      ],
+      "also_indexed": [
+        "fr-CA"
+      ],
+      "notes": [
+        "CA lê en-CA + fr-CA; o Sales Report não traz idioma — default en-CA"
+      ],
+      "share_pct": 3.3,
+      "excluded": false
+    },
+    {
+      "locale": "ar-SA",
+      "installs": 11,
+      "countries": [
+        {
+          "cc": "MA",
+          "installs": 4
+        },
+        {
+          "cc": "SA",
+          "installs": 3
+        },
+        {
+          "cc": "IQ",
+          "installs": 2
+        },
+        {
+          "cc": "DZ",
+          "installs": 1
+        },
+        {
+          "cc": "KW",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 3.0,
+      "excluded": false
+    },
+    {
+      "locale": "sv",
+      "installs": 11,
+      "countries": [
+        {
+          "cc": "SE",
+          "installs": 11
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 3.0,
+      "excluded": false
+    },
+    {
+      "locale": "it",
+      "installs": 10,
+      "countries": [
+        {
+          "cc": "IT",
+          "installs": 10
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 2.7,
+      "excluded": false
+    },
+    {
+      "locale": "en-AU",
+      "installs": 9,
+      "countries": [
+        {
+          "cc": "AU",
+          "installs": 9
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 2.5,
+      "excluded": false
+    },
+    {
+      "locale": "fi",
+      "installs": 4,
+      "countries": [
+        {
+          "cc": "FI",
+          "installs": 4
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 1.1,
+      "excluded": false
+    },
+    {
+      "locale": "ja",
+      "installs": 4,
+      "countries": [
+        {
+          "cc": "JP",
+          "installs": 4
+        }
+      ],
+      "also_indexed": [
+        "en-US"
+      ],
+      "notes": [],
+      "share_pct": 1.1,
+      "excluded": false
+    },
+    {
+      "locale": "ko",
+      "installs": 4,
+      "countries": [
+        {
+          "cc": "KR",
+          "installs": 4
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 1.1,
+      "excluded": false
+    },
+    {
+      "locale": "ro",
+      "installs": 4,
+      "countries": [
+        {
+          "cc": "RO",
+          "installs": 3
+        },
+        {
+          "cc": "MD",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 1.1,
+      "excluded": false
+    },
+    {
+      "locale": "zh-Hans",
+      "installs": 4,
+      "countries": [
+        {
+          "cc": "CN",
+          "installs": 4
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 1.1,
+      "excluded": false
+    },
+    {
+      "locale": "no",
+      "installs": 3,
+      "countries": [
+        {
+          "cc": "NO",
+          "installs": 3
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.8,
+      "excluded": false
+    },
+    {
+      "locale": "cs",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "CZ",
+          "installs": 2
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "he",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "IL",
+          "installs": 2
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "hu",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "HU",
+          "installs": 2
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "id",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "ID",
+          "installs": 2
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "pt-PT",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "PT",
+          "installs": 2
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "ru",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "KG",
+          "installs": 1
+        },
+        {
+          "cc": "RU",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "tr",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "TR",
+          "installs": 2
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "vi",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "VN",
+          "installs": 2
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "zh-Hant",
+      "installs": 2,
+      "countries": [
+        {
+          "cc": "TW",
+          "installs": 2
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.5,
+      "excluded": false
+    },
+    {
+      "locale": "hi",
+      "installs": 1,
+      "countries": [
+        {
+          "cc": "IN",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [
+        "en-IN não é locale de storefront; a Índia indexa hi + en-GB"
+      ],
+      "share_pct": 0.3,
+      "excluded": false
+    },
+    {
+      "locale": "hr",
+      "installs": 1,
+      "countries": [
+        {
+          "cc": "HR",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.3,
+      "excluded": false
+    },
+    {
+      "locale": "ms",
+      "installs": 1,
+      "countries": [
+        {
+          "cc": "MY",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.3,
+      "excluded": false
+    },
+    {
+      "locale": "sk",
+      "installs": 1,
+      "countries": [
+        {
+          "cc": "SK",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.3,
+      "excluded": false
+    },
+    {
+      "locale": "th",
+      "installs": 1,
+      "countries": [
+        {
+          "cc": "TH",
+          "installs": 1
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 0.3,
+      "excluded": false
+    }
+  ],
+  "base": [
+    {
+      "locale": "en-US",
+      "installs": 39,
+      "countries": [
+        {
+          "cc": "US",
+          "installs": 36
+        },
+        {
+          "cc": "PH",
+          "installs": 3
+        }
+      ],
+      "also_indexed": [],
+      "notes": [],
+      "share_pct": 10.7,
+      "excluded": true
+    },
+    {
+      "locale": "es-ES",
+      "installs": 33,
+      "countries": [
+        {
+          "cc": "ES",
+          "installs": 33
+        }
+      ],
+      "also_indexed": [
+        "ca",
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 9.1,
+      "excluded": true
+    },
+    {
+      "locale": "pt-BR",
+      "installs": 48,
+      "countries": [
+        {
+          "cc": "BR",
+          "installs": 48
+        }
+      ],
+      "also_indexed": [
+        "en-GB"
+      ],
+      "notes": [],
+      "share_pct": 13.2,
+      "excluded": true
+    }
+  ],
+  "unmapped": {
+    "FJ": 2,
+    "MR": 1
+  },
+  "floor": 30,
+  "app_id": "6758740138",
+  "days": 90,
+  "window": {
+    "start": "2026-06-30",
+    "end": "2026-09-27",
+    "days_with_data": 90
+  },
+  "method": "Sales Report SALES/SUMMARY/DAILY, Product Type 1* only (LEARNINGS #53), por Country Code",
+  "exclude": [
+    "en-US",
+    "es-ES",
+    "pt-BR"
+  ],
+  "requests_made": 0,
+  "computed_at": "2026-09-28"
+}

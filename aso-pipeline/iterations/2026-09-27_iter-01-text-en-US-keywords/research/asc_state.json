@@ -1,0 +1,822 @@
+{
+  "app_id": "6758740138",
+  "bundle_id": "com.gambitstudio.soninho",
+  "pulled_at": "2026-09-27T21:14:08-0300",
+  "versions": [
+    {
+      "id": "64ed2a05-d40f-4e2d-b8c4-77cf5db9bc6e",
+      "versionString": "1.4.0",
+      "appStoreState": "PREPARE_FOR_SUBMISSION",
+      "platform": "IOS",
+      "createdDate": "2026-09-27T16:24:32-07:00",
+      "localizations": {
+        "ro": {
+          "id": "60bd80ff-67cd-4127-b2b3-c12be3d85422",
+          "keywords": "alarmă,devreme,dimineață,amânare,misiune,calcul,tare,deșteptător,ciclu de somn,răsărit,somnoros"
+        },
+        "hu": {
+          "id": "6aa78764-a648-4532-9f6e-5faac88e1271",
+          "keywords": "ébredés,felkelni,korán,reggel,szundi,küldetés,számolás,hangos,ébresztőóra,alvási ciklus,napkelte"
+        },
+        "ja": {
+          "id": "6529b668-4958-479d-ad5b-d902d2fecec7",
+          "keywords": "起床,朝,早起き,スヌーズ,計算,ミッション,大音量,アラーム,睡眠サイクル,朝日,二度寝,睡眠記録,めざまし,寝坊防止,快眠,爆音,朝活,すっきり,睡眠アプリ,アラーム音,起こして"
+        },
+        "fi": {
+          "id": "00a842be-e36a-40bd-9e8f-37a95a110527",
+          "keywords": "herätä,nousta,aikaisin,aamu,torkku,tehtävä,lasku,kova,herätyskello,unisykli,auringonnousu,uni"
+        },
+        "es-MX": {
+          "id": "33ad2693-72fe-4072-8fb5-b0ef479e5ba5",
+          "keywords": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave"
+        },
+        "sv": {
+          "id": "eedd3a88-870c-4b46-92de-19b1b8420755",
+          "keywords": "vakna,gå upp,tidigt,morgon,snooze,uppdrag,matte,högt,väckarklocka,sömncykel,soluppgång,sova"
+        },
+        "it": {
+          "id": "12897086-e20a-46ba-9553-89417cafe0a3",
+          "keywords": "svegliarsi,alzarsi,presto,mattina,missione,calcoli,forte,suoneria,ciclo,alba,dormiglione,allarme"
+        },
+        "th": {
+          "id": "e4d8195d-29a3-400d-affa-fbf6307f970b",
+          "keywords": "นาฬิกาปลุก,ตื่นเช้า,เสียงดัง,เลื่อนปลุก,ภารกิจ,คณิต,หลับลึก,วงจรนอน,ติดตามการนอน,ตื่นยาก,เช้า"
+        },
+        "vi": {
+          "id": "c7812910-bdaa-4098-9b8d-9a67f4372052",
+          "keywords": "dậy sớm,buổi sáng,báo lại,nhiệm vụ,toán,to,ngủ sâu,chu kỳ ngủ,theo dõi giấc ngủ,khó dậy,chuông"
+        },
+        "en-US": {
+          "id": "896ff729-0421-4ee6-aa23-cda253bc91ac",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        },
+        "de-DE": {
+          "id": "13d9ccf6-a7f7-4600-914c-ab238b165b4b",
+          "keywords": "aufwachen,aufstehen,schlummern,mathe,mission,laut,morgen,langschläfer,schlafzyklus,sonnenaufgang"
+        },
+        "pt-PT": {
+          "id": "7f3c5420-e6e1-4a0d-a0c9-58f5dcc56276",
+          "keywords": "acordar,cedo,levantar,soneca,sono pesado,matemática,relógio,alto,manhã,dorminhoco,ciclo,amanhecer"
+        },
+        "pl": {
+          "id": "fbe88e4b-41aa-4b5e-ab14-71aa67636cb6",
+          "keywords": "obudzić,wstawać,rano,wcześnie,drzemka,misja,matematyka,głośny,śpioch,cykl snu,wschód,pobudka"
+        },
+        "en-GB": {
+          "id": "0f2d585c-d5eb-4946-9e40-5b29016d4c64",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        },
+        "no": {
+          "id": "b483c0ea-5cac-4cf3-826d-b2f8dae7c99a",
+          "keywords": "våkne,stå opp,tidlig,morgen,slumre,oppdrag,regning,høy,vekkerklokke,søvnsyklus,soloppgang,sove"
+        },
+        "en-CA": {
+          "id": "48a1f09a-2d80-4f1b-9140-b2e021c07a6c",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        },
+        "fr-CA": {
+          "id": "8e94f3d8-e5eb-4949-a069-bc5722bf484c",
+          "keywords": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller"
+        },
+        "id": {
+          "id": "f66ba072-9a9a-4830-9fd9-eaaf1c031c71",
+          "keywords": "bangun pagi,jam weker,tunda,misi,hitung,keras,susah bangun,siklus tidur,matahari terbit,weker"
+        },
+        "sk": {
+          "id": "dc052554-196e-4d30-913b-37a99a1add40",
+          "keywords": "zobudiť,vstávať,skoro,ráno,odklad,misia,počty,hlasný,spáč,spánkový cyklus,východ slnka"
+        },
+        "cs": {
+          "id": "2e1f0f62-0817-46cb-8082-84e8fd36bf45",
+          "keywords": "probudit,vstávat,brzy,ráno,odklad,mise,počty,hlasitý,spáč,spánkový cyklus,východ slunce"
+        },
+        "es-ES": {
+          "id": "4db2d5b2-22dd-41b5-9d6b-e7fb665c909f",
+          "keywords": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave"
+        },
+        "zh-Hant": {
+          "id": "ae912bb5-6081-4c8d-9137-0c73af885ed5",
+          "keywords": "起床,早起,叫醒,睡過頭,爬不起來,睡眠,週期,追蹤,記錄,深眠,淺眠,自然醒,作息,失眠,早晨,清晨,數學,任務,大聲,鬧鈴,鈴聲,漸強,溫和,打盹,晨型人,懶人"
+        },
+        "pt-BR": {
+          "id": "7575f8cb-6a38-41b1-816d-f55b6b7717ad",
+          "keywords": "acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer"
+        },
+        "en-AU": {
+          "id": "53a59c0a-4381-436d-a4bc-302ba5db5480",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        },
+        "ko": {
+          "id": "f1fda387-0b66-427b-92d8-df2fe7e70384",
+          "keywords": "기상,아침,일찍,일어나기,다시알림,계산,미션,큰소리,수면주기,일출,늦잠,잠꾸러기,수면기록,알람앱,모닝콜,알람소리,잠,기상알람,새벽,무거운잠,깊은잠,수면분석,아침기상,시끄러운알람"
+        },
+        "da": {
+          "id": "89dc4237-cf7e-413c-8bc4-7876e4782c2d",
+          "keywords": "vågne,stå op,tidligt,morgen,udsæt,mission,regning,højt,søvncyklus,solopgang,vækning,sove"
+        },
+        "zh-Hans": {
+          "id": "95af15fa-db2a-4d4c-ba1e-6eb486a8e907",
+          "keywords": "起床,早起,叫醒,睡过头,起不来,睡眠,周期,监测,记录,深睡,浅睡,自然醒,作息,失眠,早晨,清晨,数学,任务,大声,闹铃,铃声,渐强,温和,打盹,晨型人,懒人,追踪"
+        },
+        "el": {
+          "id": "dc88c5aa-d551-43c0-abf0-9544c1a2efcd",
+          "keywords": "ξυπνητήρι,πρωί,νωρίς,αναβολή,αποστολή,μαθηματικά,δυνατό,κύκλος ύπνου,ανατολή,υπναράς,ξύπνα"
+        },
+        "ca": {
+          "id": "f38bb54f-aac4-463b-a50f-e510f11e5e6a",
+          "keywords": "despertar,llevar-se,aviat,matí,posposar,missió,càlcul,fort,despertador,cicle de son,albada"
+        },
+        "he": {
+          "id": "0c28e8c9-0db5-4b1c-a1c2-60cb363f928c",
+          "keywords": "בוקר,לקום,נודניק,משימה,חשבון,רם,חזק,כבד,שינה,מחזורי,מעקב,עמוקה,צלצול,קימה,מוקדם,ער,טיימר,לילה"
+        },
+        "fr-FR": {
+          "id": "2e6cb7c4-3b1f-43f3-8b96-06816df6f89c",
+          "keywords": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller"
+        },
+        "nl-NL": {
+          "id": "83feb797-0c05-4137-bd39-a9a22d4349a6",
+          "keywords": "wakker worden,opstaan,vroeg,sluimeren,missie,rekenen,luid,ochtend,slaapcyclus,zonsopgang,slaap"
+        },
+        "uk": {
+          "id": "aec5e4f3-7deb-4205-b128-d2c9af0a732b",
+          "keywords": "прокинутися,встати,рано,ранок,місія,задача,гучний,відкласти,цикл сну,соня,підйом,трекер сну"
+        },
+        "ms": {
+          "id": "f75e753a-c630-4583-b20d-d3a6f3ee6761",
+          "keywords": "bangun pagi,jam loceng,tangguh,misi,kira,kuat,susah bangun,kitaran tidur,matahari terbit,penggera"
+        },
+        "ru": {
+          "id": "5cfb3375-0f6a-4a62-ad32-5aa1bb7a4930",
+          "keywords": "проснуться,встать,рано,утро,миссия,задача,громкий,отложить,цикл сна,соня,подъём,трекер сна"
+        },
+        "hr": {
+          "id": "4689af58-085a-4808-ad9c-b3cacdb5bf7b",
+          "keywords": "probuditi,ustati,rano,jutro,odgoda,misija,računanje,glasno,ciklus sna,izlazak sunca,spavalica"
+        },
+        "tr": {
+          "id": "b3202f88-fd66-4cb5-9fc6-50f534b300e4",
+          "keywords": "uyanmak,kalkmak,erken,sabah,erteleme,görev,matematik,yüksek ses,uyku döngüsü,gün doğumu,çalar saat"
+        },
+        "hi": {
+          "id": "eeb0a16a-c84c-43a1-91da-5265946d35f5",
+          "keywords": "सुबह उठना,घड़ी,नींद,स्नूज़,मिशन,तेज,गहरी,चक्र,ट्रैकर,जागो,जल्दी,रिंगटोन,टाइमर,भारी,अलार्म्स"
+        },
+        "ar-SA": {
+          "id": "df5d212c-ec9d-464c-aef9-d727ac1a10a8",
+          "keywords": "ساعة,تنبيه,صباح,نوم,غفوة,مهمة,حساب,عالي,ثقيل,دورة,تتبع,فجر,نغمات,ايقاظ,رنين,مبكر,عميق,هز,صعب,باكر"
+        }
+      }
+    },
+    {
+      "id": "9de82a70-6e16-4cc7-92bd-009327388d89",
+      "versionString": "1.3.0",
+      "appStoreState": "READY_FOR_SALE",
+      "platform": "IOS",
+      "createdDate": "2026-08-30T11:39:51-07:00",
+      "localizations": {
+        "it": {
+          "id": "2ecb88d3-4b82-4604-ae26-94a0644ace1b",
+          "keywords": "svegliarsi,alzarsi,presto,mattina,missione,calcoli,forte,suoneria,ciclo,alba,dormiglione,allarme"
+        },
+        "ar-SA": {
+          "id": "c7795b8d-9b8b-4972-8133-e24ba0db16a2",
+          "keywords": "ساعة,تنبيه,صباح,نوم,غفوة,مهمة,حساب,عالي,ثقيل,دورة,تتبع,فجر,نغمات,ايقاظ,رنين,مبكر,عميق,هز,صعب,باكر"
+        },
+        "el": {
+          "id": "e904b865-0440-459d-aac4-e5ffa3bcfe91",
+          "keywords": "ξυπνητήρι,πρωί,νωρίς,αναβολή,αποστολή,μαθηματικά,δυνατό,κύκλος ύπνου,ανατολή,υπναράς,ξύπνα"
+        },
+        "hr": {
+          "id": "b32fde07-ff66-4bf1-96ba-987755a5d995",
+          "keywords": "probuditi,ustati,rano,jutro,odgoda,misija,računanje,glasno,ciklus sna,izlazak sunca,spavalica"
+        },
+        "hi": {
+          "id": "072b3b75-5c8e-418f-90a5-df27ebf31742",
+          "keywords": "सुबह उठना,घड़ी,नींद,स्नूज़,मिशन,तेज,गहरी,चक्र,ट्रैकर,जागो,जल्दी,रिंगटोन,टाइमर,भारी,अलार्म्स"
+        },
+        "de-DE": {
+          "id": "9f11937a-2124-41de-a352-7e07caa5feb3",
+          "keywords": "aufwachen,aufstehen,schlummern,mathe,mission,laut,morgen,langschläfer,schlafzyklus,sonnenaufgang"
+        },
+        "en-AU": {
+          "id": "57c3b8c8-5807-4747-8671-866c02329a1d",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        },
+        "sk": {
+          "id": "af34b11c-ebf9-4939-beba-9f6f2b1c61de",
+          "keywords": "zobudiť,vstávať,skoro,ráno,odklad,misia,počty,hlasný,spáč,spánkový cyklus,východ slnka"
+        },
+        "he": {
+          "id": "c5e86a0e-25fb-4617-b957-2d111695c8c6",
+          "keywords": "בוקר,לקום,נודניק,משימה,חשבון,רם,חזק,כבד,שינה,מחזורי,מעקב,עמוקה,צלצול,קימה,מוקדם,ער,טיימר,לילה"
+        },
+        "ko": {
+          "id": "207a3fe0-53e3-4cea-9871-593147185d24",
+          "keywords": "기상,아침,일찍,일어나기,다시알림,계산,미션,큰소리,수면주기,일출,늦잠,잠꾸러기,수면기록,알람앱,모닝콜,알람소리,잠,기상알람,새벽,무거운잠,깊은잠,수면분석,아침기상,시끄러운알람"
+        },
+        "da": {
+          "id": "e08c57a5-922c-4b86-b0c0-41b911589cef",
+          "keywords": "vågne,stå op,tidligt,morgen,udsæt,mission,regning,højt,søvncyklus,solopgang,vækning,sove"
+        },
+        "pt-PT": {
+          "id": "a018b86f-fb58-4c30-bf79-a937e9fa5777",
+          "keywords": "acordar,cedo,levantar,soneca,sono pesado,matemática,relógio,alto,manhã,dorminhoco,ciclo,amanhecer"
+        },
+        "hu": {
+          "id": "081a3302-edbe-4b4f-a30c-10417fbdd3c1",
+          "keywords": "ébredés,felkelni,korán,reggel,szundi,küldetés,számolás,hangos,ébresztőóra,alvási ciklus,napkelte"
+        },
+        "cs": {
+          "id": "e02c3767-2567-473c-9b6f-24b02ba8b290",
+          "keywords": "probudit,vstávat,brzy,ráno,odklad,mise,počty,hlasitý,spáč,spánkový cyklus,východ slunce"
+        },
+        "fr-FR": {
+          "id": "f65276f1-32f4-4f0d-b811-1fd8f528c2b9",
+          "keywords": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller"
+        },
+        "ca": {
+          "id": "0a63e8d8-7e34-4d53-8541-a8b0b08c9f54",
+          "keywords": "despertar,llevar-se,aviat,matí,posposar,missió,càlcul,fort,despertador,cicle de son,albada"
+        },
+        "nl-NL": {
+          "id": "08da250f-c2e3-4acc-87cd-9f52818b3862",
+          "keywords": "wakker worden,opstaan,vroeg,sluimeren,missie,rekenen,luid,ochtend,slaapcyclus,zonsopgang,slaap"
+        },
+        "en-GB": {
+          "id": "f078646b-cced-43c1-89af-96378135d83d",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        },
+        "pl": {
+          "id": "dd078416-ccb5-4622-b3ca-9ab4cc4a6c80",
+          "keywords": "obudzić,wstawać,rano,wcześnie,drzemka,misja,matematyka,głośny,śpioch,cykl snu,wschód,pobudka"
+        },
+        "no": {
+          "id": "7475868f-f4b4-4650-a7de-cdb23913b2b1",
+          "keywords": "våkne,stå opp,tidlig,morgen,slumre,oppdrag,regning,høy,vekkerklokke,søvnsyklus,soloppgang,sove"
+        },
+        "ro": {
+          "id": "bd5ef292-fa61-4253-a74b-56b890f0de3c",
+          "keywords": "alarmă,devreme,dimineață,amânare,misiune,calcul,tare,deșteptător,ciclu de somn,răsărit,somnoros"
+        },
+        "zh-Hant": {
+          "id": "3e94f7de-6287-493c-b4b1-0d0dae37fe8a",
+          "keywords": "起床,早起,叫醒,睡過頭,爬不起來,睡眠,週期,追蹤,記錄,深眠,淺眠,自然醒,作息,失眠,早晨,清晨,數學,任務,大聲,鬧鈴,鈴聲,漸強,溫和,打盹,晨型人,懶人"
+        },
+        "id": {
+          "id": "415e9bcd-c54b-4464-a06e-e1fa54b27b70",
+          "keywords": "bangun pagi,jam weker,tunda,misi,hitung,keras,susah bangun,siklus tidur,matahari terbit,weker"
+        },
+        "ms": {
+          "id": "4ed34611-5247-4375-97ea-b559c6231cdd",
+          "keywords": "bangun pagi,jam loceng,tangguh,misi,kira,kuat,susah bangun,kitaran tidur,matahari terbit,penggera"
+        },
+        "zh-Hans": {
+          "id": "5716758e-0009-4c5f-8971-9c65f9d8e008",
+          "keywords": "起床,早起,叫醒,睡过头,起不来,睡眠,周期,监测,记录,深睡,浅睡,自然醒,作息,失眠,早晨,清晨,数学,任务,大声,闹铃,铃声,渐强,温和,打盹,晨型人,懒人,追踪"
+        },
+        "sv": {
+          "id": "19d2ffc3-c1ae-4554-bc1b-0817ffdc92a3",
+          "keywords": "vakna,gå upp,tidigt,morgon,snooze,uppdrag,matte,högt,väckarklocka,sömncykel,soluppgång,sova"
+        },
+        "es-ES": {
+          "id": "9037c8ed-c68a-4be4-991f-2c828626f046",
+          "keywords": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave"
+        },
+        "en-US": {
+          "id": "9c21cf0a-2c14-4cf8-b545-c7045bf54d42",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        },
+        "pt-BR": {
+          "id": "9a22d7d7-a5dd-4270-8f6c-460194649012",
+          "keywords": "acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer"
+        },
+        "es-MX": {
+          "id": "ab4d363a-7a2f-41be-a082-a783cf91cfd7",
+          "keywords": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave"
+        },
+        "th": {
+          "id": "a31f60a6-b3b5-42a9-baed-21afc0d0fcad",
+          "keywords": "นาฬิกาปลุก,ตื่นเช้า,เสียงดัง,เลื่อนปลุก,ภารกิจ,คณิต,หลับลึก,วงจรนอน,ติดตามการนอน,ตื่นยาก,เช้า"
+        },
+        "ja": {
+          "id": "bfd7849c-934c-4f8d-a778-5bb18394d1a9",
+          "keywords": "起床,朝,早起き,スヌーズ,計算,ミッション,大音量,アラーム,睡眠サイクル,朝日,二度寝,睡眠記録,めざまし,寝坊防止,快眠,爆音,朝活,すっきり,睡眠アプリ,アラーム音,起こして"
+        },
+        "uk": {
+          "id": "540c5e1f-a405-4dbb-91b6-d0c07855f0af",
+          "keywords": "прокинутися,встати,рано,ранок,місія,задача,гучний,відкласти,цикл сну,соня,підйом,трекер сну"
+        },
+        "fr-CA": {
+          "id": "85a8a27f-ccbf-4386-9240-f81536623638",
+          "keywords": "matin,se lever,tôt,alarme,mission,maths,fort,sonnerie,cycle,aube,gros dormeur,suivi,réveiller"
+        },
+        "vi": {
+          "id": "0680f646-b6a6-41ee-a1a3-d5c4ca84e4bb",
+          "keywords": "dậy sớm,buổi sáng,báo lại,nhiệm vụ,toán,to,ngủ sâu,chu kỳ ngủ,theo dõi giấc ngủ,khó dậy,chuông"
+        },
+        "tr": {
+          "id": "9903126c-2683-42dc-bfb6-1358353266ac",
+          "keywords": "uyanmak,kalkmak,erken,sabah,erteleme,görev,matematik,yüksek ses,uyku döngüsü,gün doğumu,çalar saat"
+        },
+        "ru": {
+          "id": "e0804669-56bd-43a2-b267-36395e01a22c",
+          "keywords": "проснуться,встать,рано,утро,миссия,задача,громкий,отложить,цикл сна,соня,подъём,трекер сна"
+        },
+        "en-CA": {
+          "id": "42a8e9f9-bd51-4194-ba94-1d69cac06aeb",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        },
+        "fi": {
+          "id": "b84e5a05-4e74-4f60-94fc-886c6dc6ada5",
+          "keywords": "herätä,nousta,aikaisin,aamu,torkku,tehtävä,lasku,kova,herätyskello,unisykli,auringonnousu,uni"
+        }
+      }
+    },
+    {
+      "id": "7afb50c7-960f-440f-870a-b839b0b0f96e",
+      "versionString": "1.2.0",
+      "appStoreState": "READY_FOR_SALE",
+      "platform": "IOS",
+      "createdDate": "2026-08-03T17:09:05-07:00",
+      "localizations": {
+        "es-MX": {
+          "id": "095f49bb-15d9-468f-badb-e8891cc271d1",
+          "keywords": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave"
+        },
+        "es-ES": {
+          "id": "f02a256b-1716-484e-a182-bcd155999a67",
+          "keywords": "despertar,temprano,sueno,pesado,matematicas,reloj,fuerte,manana,dormilon,ciclo,amanecer,suave"
+        },
+        "pt-BR": {
+          "id": "1c744393-f6f1-468e-91e5-70ea9950309a",
+          "keywords": "acordar,cedo,sono,pesado,soneca,matematica,relogio,forte,alto,manha,dorminhoco,ciclo,amanhecer"
+        },
+        "en-US": {
+          "id": "03a4f23e-df47-433a-a210-22f4737a137a",
+          "keywords": "mission,math,puzzle,snooze,loud,sounds,dawn,sun,lamp,morning,routine,sleep,cycle,tracker,smart"
+        }
+      }
+    },
+    {
+      "id": "aa107ff1-0831-412b-b8c5-2fe3a36f0187",
+      "versionString": "1.1.0",
+      "appStoreState": "READY_FOR_SALE",
+      "platform": "IOS",
+      "createdDate": "2026-06-27T19:14:40-07:00",
+      "localizations": {
+        "es-ES": {
+          "id": "b717976b-7d55-41f2-96e2-81990bc9d57e",
+          "keywords": "mision,gradual,fuerte,posponer,anti,levantarse,ligero,profundo,monitor,rastreador,reloj,puzzle"
+        },
+        "es-MX": {
+          "id": "6e87eb3f-90b7-45a2-8c06-5e871e675b9f",
+          "keywords": "mision,gradual,fuerte,posponer,anti,levantarse,ligero,profundo,monitor,rastreador,reloj,puzzle"
+        },
+        "en-US": {
+          "id": "1f1ab980-ac52-4eac-9245-2ec042eb1c43",
+          "keywords": "smart,gradual,gentle,progressive,puzzle,snooze,light,monitor,cycle,deep,recorder,early,loud"
+        },
+        "pt-BR": {
+          "id": "f25ff704-b632-4a87-89ad-666df5579639",
+          "keywords": "matematica,forte,soneca,anti,gradual,levantar,puzzle,monitor,rastreador,fase,leve,profundo,relogio"
+        }
+      }
+    },
+    {
+      "id": "17b195d1-274b-4e23-9e1a-013087eb860f",
+      "versionString": "1.0",
+      "appStoreState": "READY_FOR_SALE",
+      "platform": "IOS",
+      "createdDate": "2026-02-04T14:48:12-08:00",
+      "localizations": {
+        "es-MX": {
+          "id": "7e3cf576-03fd-421e-a4e4-8180a09c1135",
+          "keywords": "insomnio,despertar cansado,dormir rápido,siesta,rutina nocturna,rem,fases,diario,profundo,descanso"
+        },
+        "pt-BR": {
+          "id": "72ac2498-c4f1-430f-b350-f238e777bf35",
+          "keywords": "insônia,acordar cansado,dormir rápido,cochilo,rotina noturna,rem,fases,diário,profundo,descanso,leve"
+        },
+        "es-ES": {
+          "id": "090b011c-686b-4808-9cf2-7b6061ef7eb5",
+          "keywords": "insomnio,despertar cansado,dormir rápido,siesta,rutina nocturna,rem,fases,diario,profundo,descanso"
+        },
+        "en-US": {
+          "id": "3982dd39-54bf-497d-a8bb-f5315b7272f9",
+          "keywords": "cant sleep,wake tired,bedtime routine,nap timer,insomnia,rem phases,night owl,hygiene,diary,deep"
+        }
+      }
+    }
+  ],
+  "appInfos": [
+    {
+      "id": "1dc33c78-c152-4398-bed2-ae85a5939059",
+      "appStoreState": "READY_FOR_SALE",
+      "state": "READY_FOR_DISTRIBUTION",
+      "localizations": {
+        "de-DE": {
+          "id": "fbca1ba4-7963-4c5d-9a0f-4ec43056f049",
+          "name": "Sunrise Alarm Clock: Wecker",
+          "subtitle": "Sanftes Licht, Tiefschläfer"
+        },
+        "vi": {
+          "id": "bd5aaf77-06fc-4fb6-903f-349bb4a1d4e0",
+          "name": "Sunrise Alarm Clock: Báo thức",
+          "subtitle": "Dậy êm ái cùng bình minh"
+        },
+        "zh-Hant": {
+          "id": "651e5e16-52fa-4f5f-ad99-cac49bfdee9b",
+          "name": "Sunrise Alarm Clock: 智慧鬧鐘",
+          "subtitle": "日出喚醒，專治賴床貪睡"
+        },
+        "ca": {
+          "id": "9f3e3be5-8a39-4071-944c-6469742d09b6",
+          "name": "Sunrise Alarm Clock: Alarma",
+          "subtitle": "Llum suau per a son profund"
+        },
+        "it": {
+          "id": "d3838267-003b-4058-84f8-bc76f17a619d",
+          "name": "Sunrise Alarm Clock: Sveglia",
+          "subtitle": "Luce dolce, sonno pesante"
+        },
+        "no": {
+          "id": "6ca6b925-d78f-4e96-9378-e74296a0199c",
+          "name": "Sunrise Alarm Clock: Vekking",
+          "subtitle": "Mykt lys for tunge sovere"
+        },
+        "pl": {
+          "id": "e72410e9-dcf0-4910-a10e-ffe03145d498",
+          "name": "Sunrise Alarm Clock: Budzik",
+          "subtitle": "Łagodne światło, mocny sen"
+        },
+        "pt-PT": {
+          "id": "a3ad913a-ea51-4198-a258-0c816a8bc94b",
+          "name": "Sunrise Alarm Clock Alarme",
+          "subtitle": "Despertador com luz e missões"
+        },
+        "fr-FR": {
+          "id": "d9b46181-dd78-4285-ba4b-a6472ed61637",
+          "name": "Sunrise Alarm Clock : Réveil",
+          "subtitle": "Lumière douce, sommeil lourd"
+        },
+        "he": {
+          "id": "5dc65b45-c91f-4a85-90bf-7ccf4d48f610",
+          "name": "Sunrise Alarm: שעון מעורר",
+          "subtitle": "השכמה עדינה עם זריחה"
+        },
+        "sk": {
+          "id": "380eca4a-2810-40ea-acdd-2a7de72b35a5",
+          "name": "Sunrise Alarm Clock: Budík",
+          "subtitle": "Jemné svetlo, tvrdý spánok"
+        },
+        "da": {
+          "id": "67363779-5e5e-44a9-9f86-6dc881d5c7ca",
+          "name": "Sunrise Alarm Clock: Vækkeur",
+          "subtitle": "Blidt lys til tunge sovere"
+        },
+        "ko": {
+          "id": "a8cbd2c6-431f-4fb7-a11b-4393725fbc3f",
+          "name": "Sunrise Alarm Clock: 알람시계",
+          "subtitle": "부드러운 빛으로 깨우는 기상 알람"
+        },
+        "nl-NL": {
+          "id": "a2a088a8-fa0e-4427-a8e7-264fe214a972",
+          "name": "Sunrise Alarm Clock: Wekker",
+          "subtitle": "Zacht licht, diepe slapers"
+        },
+        "hu": {
+          "id": "47fd6b7a-6a20-4276-a737-36ce82e097f5",
+          "name": "Sunrise Alarm Clock: Keltő",
+          "subtitle": "Lágy fény mély alvóknak"
+        },
+        "cs": {
+          "id": "ee25a97e-c9fe-4c96-af7d-f0db303dfa51",
+          "name": "Sunrise Alarm Clock: Budík",
+          "subtitle": "Jemné světlo, tvrdý spánek"
+        },
+        "el": {
+          "id": "8d3369d0-f4c8-4572-9e89-f8820c6da412",
+          "name": "Sunrise Alarm Clock: Ξύπνημα",
+          "subtitle": "Απαλό φως για βαρύ ύπνο"
+        },
+        "ar-SA": {
+          "id": "c7074704-4b46-4700-a708-d8fe608f5043",
+          "name": "Sunrise Alarm: منبّه الاستيقاظ",
+          "subtitle": "استيقظ بلطف مع شروق الشمس"
+        },
+        "hr": {
+          "id": "c3a49ca5-b437-4f2d-bd60-7aa96bbbea50",
+          "name": "Sunrise Alarm Clock: Budilica",
+          "subtitle": "Nježno svjetlo za čvrst san"
+        },
+        "hi": {
+          "id": "a8f78209-7617-4eae-a3ed-67bdd703b88a",
+          "name": "Sunrise Alarm Clock: अलार्म",
+          "subtitle": "सूर्योदय से कोमल जागरण"
+        },
+        "en-AU": {
+          "id": "ff3289fc-c565-4932-add4-6102f4534f72",
+          "name": "Sunrise Alarm Clock: Wake Up",
+          "subtitle": "Gentle Light, Heavy Sleepers"
+        },
+        "es-ES": {
+          "id": "f1890ef7-2fdb-4b2e-b628-ebc4b900bee9",
+          "name": "Sunrise Alarm Clock: Alarma",
+          "subtitle": "Despertador con Luz y Misión"
+        },
+        "pt-BR": {
+          "id": "e54ffe8e-4bfa-4f5e-bd64-1f874c5c774b",
+          "name": "Sunrise Alarm Clock Alarme",
+          "subtitle": "Despertador com Luz e Missões"
+        },
+        "es-MX": {
+          "id": "5dc85f00-bf2d-4ff1-a389-414aa10dac1c",
+          "name": "Sunrise Alarm Clock: Alarma",
+          "subtitle": "Despertador con Luz y Misión"
+        },
+        "en-US": {
+          "id": "4528b159-3cb8-4ae4-84e7-d7cbdb1e0be4",
+          "name": "Sunrise Alarm Clock: Wake Up",
+          "subtitle": "Gentle Light, Heavy Sleepers"
+        },
+        "sv": {
+          "id": "db02e72e-9a69-44e3-b3b9-436bbf2024bf",
+          "name": "Sunrise Alarm Clock: Väckning",
+          "subtitle": "Mjukt ljus för djupsovare"
+        },
+        "ro": {
+          "id": "ea02cd1a-f5ec-4964-b0e8-d9b481499c1c",
+          "name": "Sunrise Alarm Clock: Trezire",
+          "subtitle": "Lumină blândă, somn adânc"
+        },
+        "fi": {
+          "id": "1e9f4eb3-47c3-4072-bc28-38dbe8b8a2d2",
+          "name": "Sunrise Alarm Clock: Herätys",
+          "subtitle": "Pehmeä valo sikeäuniselle"
+        },
+        "ru": {
+          "id": "d2d3970b-03dc-41fc-ba49-4d9838823f8b",
+          "name": "Sunrise Alarm Clock: Рассвет",
+          "subtitle": "Будильник для крепкого сна"
+        },
+        "en-CA": {
+          "id": "e2ff816e-c283-4e3b-a452-ed90c9808aed",
+          "name": "Sunrise Alarm Clock: Wake Up",
+          "subtitle": "Gentle Light, Heavy Sleepers"
+        },
+        "uk": {
+          "id": "555d9ca2-0218-4e4a-8b2a-2798cc95353b",
+          "name": "Sunrise Alarm Clock: Світанок",
+          "subtitle": "Будильник для міцного сну"
+        },
+        "fr-CA": {
+          "id": "0556cc17-1a79-4341-bc95-4850b548f85e",
+          "name": "Sunrise Alarm Clock : Réveil",
+          "subtitle": "Lumière douce, sommeil lourd"
+        },
+        "tr": {
+          "id": "efe22cdb-8474-4270-aae2-4ed1ffe02a90",
+          "name": "Sunrise Alarm Clock: Uyandır",
+          "subtitle": "Ağır uyuyanlara nazik ışık"
+        },
+        "id": {
+          "id": "c8552e97-78f9-4474-b40d-5efbdf55bb23",
+          "name": "Sunrise Alarm Clock: Bangun",
+          "subtitle": "Cahaya lembut, tidur pulas"
+        },
+        "ms": {
+          "id": "e87c0160-00fd-4ff2-99a3-3ac99667c9c5",
+          "name": "Sunrise Alarm Clock: Bangun",
+          "subtitle": "Cahaya lembut, tidur lena"
+        },
+        "zh-Hans": {
+          "id": "f6a74955-ca7f-4e26-bcd2-50e064558e59",
+          "name": "Sunrise Alarm Clock: 智能闹钟",
+          "subtitle": "日出唤醒，专治赖床贪睡"
+        },
+        "en-GB": {
+          "id": "44c1a34b-13e7-43ef-8005-be6ba773171a",
+          "name": "Sunrise Alarm Clock: Wake Up",
+          "subtitle": "Gentle Light, Heavy Sleepers"
+        },
+        "th": {
+          "id": "90c3fee0-1786-4f6f-b0bf-96c4564b7d3a",
+          "name": "Sunrise Alarm Clock ปลุกตื่น",
+          "subtitle": "ตื่นนุ่มนวลด้วยแสงอรุณ"
+        },
+        "ja": {
+          "id": "c146342b-d5e5-4858-963d-cae97e41e894",
+          "name": "Sunrise Alarm Clock: 目覚まし",
+          "subtitle": "やさしい光で起きられる目覚まし時計"
+        }
+      }
+    },
+    {
+      "id": "eb0696b9-640a-463c-b842-e8595fee25ad",
+      "appStoreState": "PREPARE_FOR_SUBMISSION",
+      "state": "PREPARE_FOR_SUBMISSION",
+      "localizations": {
+        "fr-FR": {
+          "id": "60e9faa3-af63-4300-b9fe-f42e6b3d7dad",
+          "name": "Sunrise Alarm Clock : Réveil",
+          "subtitle": "Lumière douce, sommeil lourd"
+        },
+        "zh-Hans": {
+          "id": "176d72d7-b215-4332-9473-0636330a9aa6",
+          "name": "Sunrise Alarm Clock: 智能闹钟",
+          "subtitle": "日出唤醒，专治赖床贪睡"
+        },
+        "tr": {
+          "id": "cc475198-4b90-4780-b4fe-28216df11bcd",
+          "name": "Sunrise Alarm Clock: Uyandır",
+          "subtitle": "Ağır uyuyanlara nazik ışık"
+        },
+        "sk": {
+          "id": "4f62b1da-822e-4a76-98b1-31854e88c733",
+          "name": "Sunrise Alarm Clock: Budík",
+          "subtitle": "Jemné svetlo, tvrdý spánok"
+        },
+        "ar-SA": {
+          "id": "1e9816ac-efce-464c-b448-5bc5d07cf8d6",
+          "name": "Sunrise Alarm: منبّه الاستيقاظ",
+          "subtitle": "استيقظ بلطف مع شروق الشمس"
+        },
+        "pt-PT": {
+          "id": "42949b2c-3653-4c4a-b79e-f9971d98161c",
+          "name": "Sunrise Alarm Clock Alarme",
+          "subtitle": "Despertador com luz e missões"
+        },
+        "en-CA": {
+          "id": "72d76c70-3109-41f5-acc5-17c5f10cfffa",
+          "name": "Sunrise Alarm Clock: Wake Up",
+          "subtitle": "Gentle Light, Heavy Sleepers"
+        },
+        "nl-NL": {
+          "id": "b266e93f-5191-43ec-b44d-16e8c80a9501",
+          "name": "Sunrise Alarm Clock: Wekker",
+          "subtitle": "Zacht licht, diepe slapers"
+        },
+        "fi": {
+          "id": "56353a5e-a7b7-4a27-b187-69f3742fc355",
+          "name": "Sunrise Alarm Clock: Herätys",
+          "subtitle": "Pehmeä valo sikeäuniselle"
+        },
+        "da": {
+          "id": "1ea67dbb-bab8-456a-9dc4-29d4b89a4137",
+          "name": "Sunrise Alarm Clock: Vækkeur",
+          "subtitle": "Blidt lys til tunge sovere"
+        },
+        "ca": {
+          "id": "e7d1098a-8d09-4aee-b004-1014aa8b4d29",
+          "name": "Sunrise Alarm Clock: Alarma",
+          "subtitle": "Llum suau per a son profund"
+        },
+        "de-DE": {
+          "id": "d5456e74-6f04-4cdd-85ed-17b77c3c91dd",
+          "name": "Sunrise Alarm Clock: Wecker",
+          "subtitle": "Sanftes Licht, Tiefschläfer"
+        },
+        "zh-Hant": {
+          "id": "5d160278-a00b-4363-a3ef-3d86b101f6e6",
+          "name": "Sunrise Alarm Clock: 智慧鬧鐘",
+          "subtitle": "日出喚醒，專治賴床貪睡"
+        },
+        "hu": {
+          "id": "250a79d2-cb5b-45a8-8900-092d34179c80",
+          "name": "Sunrise Alarm Clock: Keltő",
+          "subtitle": "Lágy fény mély alvóknak"
+        },
+        "he": {
+          "id": "d04ab5c2-71be-43e6-8665-82387b9069fb",
+          "name": "Sunrise Alarm: שעון מעורר",
+          "subtitle": "השכמה עדינה עם זריחה"
+        },
+        "it": {
+          "id": "1befb3dd-8bde-48dd-8052-30929d6fefdc",
+          "name": "Sunrise Alarm Clock: Sveglia",
+          "subtitle": "Luce dolce, sonno pesante"
+        },
+        "ko": {
+          "id": "65f558ea-aa60-43e7-a96e-b6bda1e6e0ba",
+          "name": "Sunrise Alarm Clock: 알람시계",
+          "subtitle": "부드러운 빛으로 깨우는 기상 알람"
+        },
+        "el": {
+          "id": "bc79fa76-cc6b-461e-8bbc-8db29f9a8e27",
+          "name": "Sunrise Alarm Clock: Ξύπνημα",
+          "subtitle": "Απαλό φως για βαρύ ύπνο"
+        },
+        "ru": {
+          "id": "b70afbf5-3e20-4fc7-99ab-ad9542532f38",
+          "name": "Sunrise Alarm Clock: Рассвет",
+          "subtitle": "Будильник для крепкого сна"
+        },
+        "en-GB": {
+          "id": "401bc6cc-22b1-46dd-9469-aecff7c032f1",
+          "name": "Sunrise Alarm Clock: Wake Up",
+          "subtitle": "Gentle Light, Heavy Sleepers"
+        },
+        "no": {
+          "id": "b64dcce8-698e-4f15-b2a6-649d864e032f",
+          "name": "Sunrise Alarm Clock: Vekking",
+          "subtitle": "Mykt lys for tunge sovere"
+        },
+        "vi": {
+          "id": "f6bbeac6-899a-479b-99fa-f4a93e95a982",
+          "name": "Sunrise Alarm Clock: Báo thức",
+          "subtitle": "Dậy êm ái cùng bình minh"
+        },
+        "es-ES": {
+          "id": "2662abe3-b837-4c70-8c5d-3a34828473fb",
+          "name": "Sunrise Alarm Clock: Alarma",
+          "subtitle": "Despertador con Luz y Misión"
+        },
+        "pt-BR": {
+          "id": "5c6dc2cb-1766-4067-970f-7a82af909d4b",
+          "name": "Sunrise Alarm Clock Alarme",
+          "subtitle": "Despertador com Luz e Missões"
+        },
+        "cs": {
+          "id": "c947c09f-8476-4b59-a500-89fc4f8b8fa4",
+          "name": "Sunrise Alarm Clock: Budík",
+          "subtitle": "Jemné světlo, tvrdý spánek"
+        },
+        "en-US": {
+          "id": "bd642cdf-94b0-4d06-8bbb-a3e23956409e",
+          "name": "Sunrise Alarm Clock: Wake Up",
+          "subtitle": "Gentle Light, Heavy Sleepers"
+        },
+        "ro": {
+          "id": "3fac268a-766f-4586-9b36-8b6d044fc93f",
+          "name": "Sunrise Alarm Clock: Trezire",
+          "subtitle": "Lumină blândă, somn adânc"
+        },
+        "fr-CA": {
+          "id": "376f0f6f-d71e-472e-91c9-c24b36d54058",
+          "name": "Sunrise Alarm Clock : Réveil",
+          "subtitle": "Lumière douce, sommeil lourd"
+        },
+        "id": {
+          "id": "1880f9cd-f511-41c0-b1a1-a7935ff4a09c",
+          "name": "Sunrise Alarm Clock: Bangun",
+          "subtitle": "Cahaya lembut, tidur pulas"
+        },
+        "ja": {
+          "id": "d5138799-f423-464d-8426-bdb28ecbe584",
+          "name": "Sunrise Alarm Clock: 目覚まし",
+          "subtitle": "やさしい光で起きられる目覚まし時計"
+        },
+        "th": {
+          "id": "66e826bf-1b6a-435d-b1c3-b011adf7ce16",
+          "name": "Sunrise Alarm Clock ปลุกตื่น",
+          "subtitle": "ตื่นนุ่มนวลด้วยแสงอรุณ"
+        },
+        "uk": {
+          "id": "281021ed-2e9f-41cc-88ba-737a9d150c8a",
+          "name": "Sunrise Alarm Clock: Світанок",
+          "subtitle": "Будильник для міцного сну"
+        },
+        "pl": {
+          "id": "8da36382-f050-4c0c-80c9-a89a0c1a5182",
+          "name": "Sunrise Alarm Clock: Budzik",
+          "subtitle": "Łagodne światło, mocny sen"
+        },
+        "es-MX": {
+          "id": "b3e4916f-a189-4aec-a638-046309185cf5",
+          "name": "Sunrise Alarm Clock: Alarma",
+          "subtitle": "Despertador con Luz y Misión"
+        },
+        "en-AU": {
+          "id": "78e0982d-a660-4901-bb15-d5c3debb7dc8",
+          "name": "Sunrise Alarm Clock: Wake Up",
+          "subtitle": "Gentle Light, Heavy Sleepers"
+        },
+        "sv": {
+          "id": "4f0943a9-8c38-4e1f-b838-21cd97cbde3c",
+          "name": "Sunrise Alarm Clock: Väckning",
+          "subtitle": "Mjukt ljus för djupsovare"
+        },
+        "hi": {
+          "id": "c3b13d9f-93f0-4fb4-9085-5a1ca9bffdc6",
+          "name": "Sunrise Alarm Clock: अलार्म",
+          "subtitle": "सूर्योदय से कोमल जागरण"
+        },
+        "ms": {
+          "id": "227c7c2d-005a-429a-9797-ffb696e92eef",
+          "name": "Sunrise Alarm Clock: Bangun",
+          "subtitle": "Cahaya lembut, tidur lena"
+        },
+        "hr": {
+          "id": "b9001c2a-717f-4b18-bdb9-3ec90005b194",
+          "name": "Sunrise Alarm Clock: Budilica",
+          "subtitle": "Nježno svjetlo za čvrst san"
+        }
+      }
+    }
+  ],
+  "editable_version_id": "64ed2a05-d40f-4e2d-b8c4-77cf5db9bc6e",
+  "live_version_id": "9de82a70-6e16-4cc7-92bd-009327388d89",
+  "editable_appInfo_id": "eb0696b9-640a-463c-b842-e8595fee25ad",
+  "live_appInfo_id": "1dc33c78-c152-4398-bed2-ae85a5939059"
+}
