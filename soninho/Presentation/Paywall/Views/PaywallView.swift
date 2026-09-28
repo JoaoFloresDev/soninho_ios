@@ -27,13 +27,13 @@ struct PaywallView: View {
     private static let background = Color(hex: "0B0907")
     private static let sunriseGlow = RadialGradient(
         colors: [Color(hex: "F4511E").opacity(0.38), Color(hex: "F4511E").opacity(0.10), .clear],
-        center: UnitPoint(x: 0.5, y: 0.14),
+        center: UnitPoint(x: 0.5, y: 0.07),
         startRadius: 10,
-        endRadius: 360
+        endRadius: 320
     )
     private static let accent = Color(hex: "FF6E40")
     private static let badgeColor = Color(hex: "FFD54F")
-    private static let iconSize: CGFloat = 96
+    private static let iconSize: CGFloat = 64
 
     // MARK: - Properties
     @Binding var isPresented: Bool
@@ -122,7 +122,7 @@ struct PaywallView: View {
                 // settling, which stalls UI test drivers on this screen.
                 .animation(.easeInOut(duration: 1.2).repeatCount(5, autoreverses: true), value: iconPulse)
                 .accessibilityHidden(true)
-                .padding(.top, 48)
+                .padding(.top, 8)
 
             Text(String(localized: "paywall.headline"))
                 .font(.system(size: 30, weight: .heavy))
@@ -358,7 +358,7 @@ struct PaywallView: View {
         } label: {
             Image(systemName: "xmark")
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(.white.opacity(0.6))
+                .foregroundStyle(.white.opacity(0.5))
                 .frame(width: 44, height: 44)
         }
         .padding(.leading, 8)

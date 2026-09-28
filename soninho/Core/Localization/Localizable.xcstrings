@@ -19586,205 +19586,205 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "استيقظ فعلاً كل يوم"
+            "value": "لن يفوتك موعد الاستيقاظ بعد اليوم"
           }
         },
         "ca": {
           "stringUnit": {
             "state": "translated",
-            "value": "Desperta't de veritat, cada dia"
+            "value": "No t'adormis mai més"
           }
         },
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Probuď se doopravdy, každý den"
+            "value": "Už nikdy nezaspíte"
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vågn rigtigt op, hver dag"
+            "value": "Sov aldrig over dig igen"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wach wirklich auf, jeden Tag"
+            "value": "Nie wieder verschlafen"
           }
         },
         "el": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ξύπνα πραγματικά, κάθε μέρα"
+            "value": "Μην ξαναπαρακοιμηθείτε ποτέ"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wake up for real, every day"
+            "value": "Never oversleep again"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Despierta de verdad, cada día"
+            "value": "Nunca más te quedes dormido"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Herää oikeasti joka päivä"
+            "value": "Älä enää koskaan nuku pommiin"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Réveille-toi pour de vrai, chaque jour"
+            "value": "Ne ratez plus jamais votre réveil"
           }
         },
         "he": {
           "stringUnit": {
             "state": "translated",
-            "value": "תתעורר באמת, כל יום"
+            "value": "לא תפספסו את ההשכמה יותר"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "हर दिन सच में जागो"
+            "value": "अब कभी देर से न उठें"
           }
         },
         "hr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Probudi se stvarno, svaki dan"
+            "value": "Nikad više ne prespavajte"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ébredj fel igazán, minden nap"
+            "value": "Soha többé ne aludj el"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bangun sungguhan, setiap hari"
+            "value": "Tidak akan kesiangan lagi"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Svegliati per davvero, ogni giorno"
+            "value": "Non perdere mai più la sveglia"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "毎日、本当に目覚める"
+            "value": "もう寝坊しない"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "매일 진짜로 잠에서 깨어나요"
+            "value": "이제 늦잠은 그만"
           }
         },
         "ms": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bangun sebenar, setiap hari"
+            "value": "Tak akan terlajak tidur lagi"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Word echt wakker, elke dag"
+            "value": "Nooit meer verslapen"
           }
         },
         "no": {
           "stringUnit": {
             "state": "translated",
-            "value": "Våkn virkelig opp, hver dag"
+            "value": "Forsov deg aldri igjen"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Budź się naprawdę, każdego dnia"
+            "value": "Koniec z zaspywaniem"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Acorde de verdade, todo dia"
+            "value": "Nunca mais perca a hora"
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "translated",
-            "value": "Acorda a sério, todos os dias"
+            "value": "Nunca mais adormeça"
           }
         },
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trezește-te cu adevărat, în fiecare zi"
+            "value": "Nu mai rata alarma niciodată"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Просыпайся по-настоящему, каждый день"
+            "value": "Больше никогда не просыпайте"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zobuď sa naozaj, každý deň"
+            "value": "Už nikdy nezaspíte"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vakna på riktigt, varje dag"
+            "value": "Försov dig aldrig igen"
           }
         },
         "th": {
           "stringUnit": {
             "state": "translated",
-            "value": "ตื่นจริง ๆ ทุกวัน"
+            "value": "ไม่ตื่นสายอีกต่อไป"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Her gün gerçekten uyan"
+            "value": "Bir daha asla uyuya kalma"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Прокидайся по-справжньому, щодня"
+            "value": "Більше ніколи не просипайте"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Thức dậy thật sự, mỗi ngày"
+            "value": "Không bao giờ ngủ quên nữa"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "每天真正醒来"
+            "value": "再也不会睡过头"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "每天真正醒來"
+            "value": "再也不會睡過頭"
           }
         }
       }
