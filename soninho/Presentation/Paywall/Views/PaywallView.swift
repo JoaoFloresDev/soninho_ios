@@ -412,7 +412,7 @@ struct PaywallView: View {
     }
 
     // MARK: - Owned Footer
-    /// Subscriber state: rating is the main action, managing the plan the secondary one.
+    /// Subscriber state: rating is the main action; managing the plan sits with the legal links.
     private var ownedFooter: some View {
         VStack(spacing: 0) {
             Button(action: openWriteReview) {
@@ -433,33 +433,38 @@ struct PaywallView: View {
             .accessibilityIdentifier("paywall.rate")
             .accessibilityLabel(String(localized: "paywall.rate"))
             .padding(.horizontal, 20)
-            .padding(.bottom, 6)
+            .padding(.bottom, 14)
 
-            Button(action: openManageSubscriptions) {
-                Text(String(localized: "paywall.manage"))
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.85))
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, minHeight: 44)
-                    .contentShape(Rectangle())
+            // One row when it fits; long locales (ro, ru) put "manage" on its own line.
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 10) {
+                    manageLink
+                    dot
+                    legalLinks
+                }
+                VStack(spacing: 0) {
+                    manageLink
+                    legalLinks
+                }
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("paywall.manage")
-            .accessibilityLabel(String(localized: "paywall.manage"))
             .padding(.horizontal, 20)
-            .padding(.bottom, 8)
-
-            HStack(spacing: 10) {
-                footerLink(String(localized: "paywall.privacy"), id: "paywall.privacy") {
-                    if let url = URL(string: AppConstants.privacyPolicyURL) { openURL(url) }
-                }
-                dot
-                footerLink(String(localized: "paywall.termsOfUse"), id: "paywall.terms") {
-                    if let url = URL(string: AppConstants.termsOfUseURL) { openURL(url) }
-                }
-            }
             .padding(.bottom, 24)
+        }
+    }
+
+    private var manageLink: some View {
+        footerLink(String(localized: "paywall.manage"), id: "paywall.manage", action: openManageSubscriptions)
+    }
+
+    private var legalLinks: some View {
+        HStack(spacing: 10) {
+            footerLink(String(localized: "paywall.privacy"), id: "paywall.privacy") {
+                if let url = URL(string: AppConstants.privacyPolicyURL) { openURL(url) }
+            }
+            dot
+            footerLink(String(localized: "paywall.termsOfUse"), id: "paywall.terms") {
+                if let url = URL(string: AppConstants.termsOfUseURL) { openURL(url) }
+            }
         }
     }
 
