@@ -18,7 +18,11 @@
           "familyShareable": false,
           "groupNumber": 1,
           "internalID": "30000002",
-          "introductoryOffer": null,
+          "introductoryOffer": {
+            "internalID": "30000013",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P3D"
+          },
           "localizations": [
             {
               "description": "Every wake-up challenge: shake, typing and memory missions.",
@@ -39,11 +43,7 @@
           "familyShareable": false,
           "groupNumber": 1,
           "internalID": "30000003",
-          "introductoryOffer": {
-            "internalID": "30000013",
-            "paymentMode": "free",
-            "subscriptionPeriod": "P3D"
-          },
+          "introductoryOffer": null,
           "localizations": [
             {
               "description": "Every wake-up challenge: shake, typing and memory missions.",
