@@ -45,6 +45,8 @@ struct PaywallView: View {
     // MARK: - Properties
     @Binding var isPresented: Bool
     var mode: Mode = .offer
+    /// Shown as the last onboarding step: after buying, the main action leads into the app.
+    var isOnboarding = false
     @ObservedObject private var store = StoreKitManager.shared
     @Environment(\.openURL) private var openURL
 
@@ -83,7 +85,7 @@ struct PaywallView: View {
     }
 
     private var ctaTitle: String {
-        guard let product = selectedProduct, Self.trialDays(of: product) != nil else {
+        guard let product = selectedProduct, PaywallContent.trialDays(of: product) != nil else {
             return String(localized: "paywall.continue")
         }
         return String(localized: "paywall.startTrial")
@@ -283,7 +285,7 @@ struct PaywallView: View {
 
     private func planCard(plan: Plan, title: String, product: Product, period: String) -> some View {
         let isSelected = selectedPlan == plan
-        let trial = Self.trialDays(of: product)
+        let trial = PaywallContent.trialDays(of: product)
         return Button {
             HapticManager.selection()
             selectedPlan = plan
@@ -412,14 +414,17 @@ struct PaywallView: View {
     }
 
     // MARK: - Owned Footer
-    /// Subscriber state: rating is the main action; managing the plan sits with the legal links.
+    /// Subscriber state: rating is the main action ("Get started" right after buying in the
+    /// onboarding); managing the plan sits with the legal links.
     private var ownedFooter: some View {
         VStack(spacing: 0) {
-            Button(action: openWriteReview) {
+            Button(action: startsApp ? startApp : openWriteReview) {
                 HStack(spacing: 8) {
-                    Image(systemName: "star.fill")
-                        .font(.system(size: 15, weight: .bold))
-                    Text(String(localized: "paywall.rate"))
+                    if !startsApp {
+                        Image(systemName: "star.fill")
+                            .font(.system(size: 15, weight: .bold))
+                    }
+                    Text(primaryOwnedTitle)
                         .font(AppFonts.headline(17, weight: .bold))
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
@@ -430,8 +435,8 @@ struct PaywallView: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityIdentifier("paywall.rate")
-            .accessibilityLabel(String(localized: "paywall.rate"))
+            .accessibilityIdentifier(startsApp ? "paywall.start" : "paywall.rate")
+            .accessibilityLabel(primaryOwnedTitle)
             .padding(.horizontal, 20)
             .padding(.bottom, 14)
 
@@ -450,6 +455,13 @@ struct PaywallView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 24)
         }
+    }
+
+    /// Just bought from the onboarding: the next step is the app, not a review.
+    private var startsApp: Bool { isOnboarding && isCelebrating }
+
+    private var primaryOwnedTitle: String {
+        startsApp ? String(localized: "onboarding_get_started") : String(localized: "paywall.rate")
     }
 
     private var manageLink: some View {
@@ -552,6 +564,12 @@ struct PaywallView: View {
         }
     }
 
+    private func startApp() {
+        HapticManager.selection()
+        Analytics.featureUsed("premium_welcome_start", source: PaywallAnalytics.source)
+        isPresented = false
+    }
+
     private func openWriteReview() {
         HapticManager.selection()
         Analytics.featureUsed("rate_app", source: "paywall_owned")
@@ -567,21 +585,6 @@ struct PaywallView: View {
         Task {
             await store.restorePurchases()
             if !store.isPremium { showNothingRestored = true }
-        }
-    }
-
-    // MARK: - Helpers
-    /// Free-trial length in days, or nil when the product has no free trial.
-    private static func trialDays(of product: Product) -> Int? {
-        guard let offer = product.subscription?.introductoryOffer,
-              offer.paymentMode == .freeTrial else { return nil }
-        let value = offer.period.value
-        switch offer.period.unit {
-        case .day: return value
-        case .week: return value * 7
-        case .month: return value * 30
-        case .year: return value * 365
-        @unknown default: return nil
         }
     }
 }

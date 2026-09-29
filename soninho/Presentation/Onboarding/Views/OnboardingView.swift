@@ -23,7 +23,7 @@ struct OnboardingView: View {
     var body: some View {
         ZStack {
             if showPaywall {
-                PaywallView(isPresented: paywallPresented)
+                PaywallView(isPresented: paywallPresented, isOnboarding: true)
                     .transition(.push(from: .trailing))
             } else {
                 pages
