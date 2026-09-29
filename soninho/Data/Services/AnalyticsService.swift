@@ -74,15 +74,7 @@ enum Analytics {
         log("onboarding_completed", ["steps": steps, "seconds": seconds])
     }
 
-    static func onboardingSkipped(at step: Int) {
-        log("onboarding_skipped", ["step": step])
-    }
-
     static func tabViewed(_ tab: String) {
         log("tab_viewed", ["tab": tab])
-    }
-
-    static func emptyStateViewed(_ screen: String) {
-        log("empty_state_viewed", ["screen": screen])
     }
 }

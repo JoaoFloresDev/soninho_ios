@@ -435,7 +435,7 @@ struct PaywallView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 14)
 
-            // One row when it fits; long locales (ro, ru) put "manage" on its own line.
+            // One row when it fits; a very long locale puts "manage" on its own line.
             ViewThatFits(in: .horizontal) {
                 HStack(spacing: 10) {
                     manageLink
@@ -453,7 +453,8 @@ struct PaywallView: View {
     }
 
     private var manageLink: some View {
-        footerLink(String(localized: "paywall.manage"), id: "paywall.manage", action: openManageSubscriptions)
+        footerLink(String(localized: "paywall.manage.short"), id: "paywall.manage", action: openManageSubscriptions)
+            .accessibilityLabel(String(localized: "paywall.manage"))
     }
 
     private var legalLinks: some View {
