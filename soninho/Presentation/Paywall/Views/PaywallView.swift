@@ -27,7 +27,7 @@ struct PaywallView: View {
     }
 
     // MARK: - Constants
-    private static let closeDelay: TimeInterval = 3.0
+    private static let closeDelay: TimeInterval = 1.0
     /// Black dominant, like the app and its icon. Orange is only an accent: a soft
     /// sunrise glow behind the icon, the selected plan and the CTA.
     private static let background = Color(hex: "0B0907")
@@ -412,22 +412,43 @@ struct PaywallView: View {
     }
 
     // MARK: - Owned Footer
-    /// Right after buying: continue into the app. Opened from Settings: manage the plan.
+    /// Subscriber state: rating is the main action, managing the plan the secondary one.
     private var ownedFooter: some View {
         VStack(spacing: 0) {
-            Button(action: isCelebrating ? finishCelebration : openManageSubscriptions) {
-                Text(isCelebrating ? String(localized: "paywall.continue") : String(localized: "paywall.manage"))
-                    .font(AppFonts.headline(17, weight: .bold))
-                    .foregroundStyle(.white)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, minHeight: 52)
-                    .background(RoundedRectangle(cornerRadius: 14).fill(AppColors.primaryButtonGradient))
+            Button(action: openWriteReview) {
+                HStack(spacing: 8) {
+                    Image(systemName: "star.fill")
+                        .font(.system(size: 15, weight: .bold))
+                    Text(String(localized: "paywall.rate"))
+                        .font(AppFonts.headline(17, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, minHeight: 52)
+                .background(RoundedRectangle(cornerRadius: 14).fill(AppColors.primaryButtonGradient))
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityIdentifier(isCelebrating ? "paywall.welcome.continue" : "paywall.manage")
+            .accessibilityIdentifier("paywall.rate")
+            .accessibilityLabel(String(localized: "paywall.rate"))
             .padding(.horizontal, 20)
-            .padding(.bottom, 14)
+            .padding(.bottom, 6)
+
+            Button(action: openManageSubscriptions) {
+                Text(String(localized: "paywall.manage"))
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.85))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("paywall.manage")
+            .accessibilityLabel(String(localized: "paywall.manage"))
+            .padding(.horizontal, 20)
+            .padding(.bottom, 8)
 
             HStack(spacing: 10) {
                 footerLink(String(localized: "paywall.privacy"), id: "paywall.privacy") {
@@ -519,12 +540,16 @@ struct PaywallView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { celebratePop = false }
         }
+        // No "Continue" in the subscriber state, so the X is the way back into the app.
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.closeDelay) {
+            withAnimation(.easeIn(duration: 0.3)) { showClose = true }
+        }
     }
 
-    private func finishCelebration() {
+    private func openWriteReview() {
         HapticManager.selection()
-        Analytics.featureUsed("premium_welcome_continue", source: PaywallAnalytics.source)
-        isPresented = false
+        Analytics.featureUsed("rate_app", source: "paywall_owned")
+        ReviewService.shared.openWriteReview()
     }
 
     private func openManageSubscriptions() {
@@ -552,39 +577,5 @@ struct PaywallView: View {
         case .year: return value * 365
         @unknown default: return nil
         }
-    }
-}
-
-// MARK: - Paywall Content
-enum PaywallContent {
-    // MARK: - Types
-    struct Benefit: Identifiable {
-        let id: String
-        let title: String
-        let detail: String
-    }
-
-    // MARK: - Computed Properties
-    /// Outcome first, three rows, one line about the wake-up challenges.
-    static var benefits: [Benefit] {
-        [
-            Benefit(id: "challenges",
-                    title: boldName(String(localized: "paywall.benefit.challenges")),
-                    detail: String(localized: "paywall.benefit.challenges.detail")),
-            Benefit(id: "sleep",
-                    title: boldName(String(localized: "paywall.benefit.sleep")),
-                    detail: String(localized: "paywall.benefit.sleep.detail")),
-            Benefit(id: "smart",
-                    title: boldName(String(localized: "paywall.benefit.smart")),
-                    detail: String(localized: "paywall.benefit.smart.detail"))
-        ]
-    }
-
-    // MARK: - Private Methods
-    /// The benefit name is the **bold** span every locale already has in its
-    /// one-line sentence; the detail line has its own key.
-    private static func boldName(_ raw: String) -> String {
-        let parts = raw.components(separatedBy: "**")
-        return parts.count >= 3 ? parts[1].trimmingCharacters(in: .whitespaces) : raw
     }
 }

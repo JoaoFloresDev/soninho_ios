@@ -23,21 +23,23 @@ struct SmartAlarmView: View {
 
                 ScrollView {
                     VStack(spacing: 24) {
+                        header
+
                         // Next Alarm Card
                         nextAlarmCard
 
                         // Alarms List
                         alarmsSection
                     }
-                    // Same inset as the system large title, so title and cards line up.
-                    .padding(.horizontal, AppSpacing.md)
+                    // Title and cards share the screen inset.
+                    .padding(.horizontal, AppSpacing.screenHorizontal)
                     .padding(.bottom, AppSpacing.lg)
                 }
                 .softScrollEdge()
             }
             .onAppear { Analytics.screen("alarm") }
-            .navigationTitle(String(localized: "alarm_title"))
-            .navigationBarTitleDisplayMode(.large)
+            // Own header instead of the system large title, whose inset sits too close to the edge.
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 // Subscriber status sits in the bar, balancing "+" on the other side,
                 // and opens the premium screen.
@@ -74,6 +76,17 @@ struct SmartAlarmView: View {
                 AlarmEditSheet(viewModel: viewModel)
             }
         }
+    }
+
+    // MARK: - Header
+    private var header: some View {
+        Text(String(localized: "alarm_title"))
+            .font(AppFonts.display(32, weight: .bold))
+            .foregroundStyle(AppColors.textPrimary)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityAddTraits(.isHeader)
+            .padding(.top, AppSpacing.xxs)
     }
 
     // MARK: - Next Alarm Card
