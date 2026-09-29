@@ -45,8 +45,6 @@ struct PaywallView: View {
     // MARK: - Properties
     @Binding var isPresented: Bool
     var mode: Mode = .offer
-    /// Shown as the last onboarding step: after buying, the main action leads into the app.
-    var isOnboarding = false
     @ObservedObject private var store = StoreKitManager.shared
     @Environment(\.openURL) private var openURL
 
@@ -414,8 +412,8 @@ struct PaywallView: View {
     }
 
     // MARK: - Owned Footer
-    /// Subscriber state: rating is the main action ("Get started" right after buying in the
-    /// onboarding); managing the plan sits with the legal links.
+    /// Subscriber state: "Get started" right after buying, rating on later visits;
+    /// managing the plan sits with the legal links.
     private var ownedFooter: some View {
         VStack(spacing: 0) {
             Button(action: startsApp ? startApp : openWriteReview) {
@@ -457,8 +455,8 @@ struct PaywallView: View {
         }
     }
 
-    /// Just bought from the onboarding: the next step is the app, not a review.
-    private var startsApp: Bool { isOnboarding && isCelebrating }
+    /// Just bought: the next step is the app. Rating is for a later visit, once premium.
+    private var startsApp: Bool { isCelebrating }
 
     private var primaryOwnedTitle: String {
         startsApp ? String(localized: "onboarding_get_started") : String(localized: "paywall.rate")
