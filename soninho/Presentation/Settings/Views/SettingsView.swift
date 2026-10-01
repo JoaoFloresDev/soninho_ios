@@ -126,48 +126,26 @@ struct SettingsView: View {
     private var sleepSettingsSection: some View {
         Section(header: Text(String(localized: "settings_sleep"))) {
             // Bedtime Reminder
-            Toggle(isOn: $viewModel.bedtimeReminderEnabled) {
-                settingsRowLabel("moon.zzz.fill", String(localized: "settings_bedtime_reminder"))
-            }
-            .tint(AppColors.primary)
-            .glassListRow()
+            toggleWithTime(
+                isOn: $viewModel.bedtimeReminderEnabled,
+                time: $viewModel.bedtimeReminderTime,
+                icon: "moon.zzz.fill",
+                title: String(localized: "settings_bedtime_reminder"),
+                detail: nil,
+                timeTitle: String(localized: "settings_bedtime_time"),
+                id: "settings.reminder"
+            )
 
-            // Bedtime Reminder Time
-            if viewModel.bedtimeReminderEnabled {
-                DatePicker(selection: $viewModel.bedtimeReminderTime, displayedComponents: .hourAndMinute) {
-                    settingsRowLabel("clock", String(localized: "settings_bedtime_time"))
-                        .foregroundStyle(AppColors.textPrimary)
-                }
-                .tint(AppColors.primary)
-                .glassListRow()
-            }
-
-            // Auto-start — a single cell that expands to reveal its time picker.
-            VStack(alignment: .leading, spacing: 0) {
-                Toggle(isOn: $viewModel.autoStartSleepEnabled) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        settingsRowLabel("powersleep", String(localized: "settings_autostart_sleep"))
-                        Text(String(localized: "settings_autostart_sleep_desc"))
-                            .font(AppFonts.caption())
-                            .foregroundStyle(AppColors.textSecondary)
-                            .padding(.leading, 34)
-                    }
-                }
-                .tint(AppColors.primary)
-
-                if viewModel.autoStartSleepEnabled {
-                    Divider()
-                        .padding(.vertical, 12)
-
-                    DatePicker(selection: $viewModel.autoStartSleepTime, displayedComponents: .hourAndMinute) {
-                        Text(String(localized: "settings_autostart_time"))
-                            .foregroundStyle(AppColors.textPrimary)
-                    }
-                    .tint(AppColors.primary)
-                }
-            }
-            .glassListRow()
-            .animation(.easeInOut(duration: 0.25), value: viewModel.autoStartSleepEnabled)
+            // Auto-start
+            toggleWithTime(
+                isOn: $viewModel.autoStartSleepEnabled,
+                time: $viewModel.autoStartSleepTime,
+                icon: "powersleep",
+                title: String(localized: "settings_autostart_sleep"),
+                detail: String(localized: "settings_autostart_sleep_desc"),
+                timeTitle: String(localized: "settings_autostart_time"),
+                id: "settings.autostart"
+            )
 
             // Sleep Tips
             NavigationLink {
@@ -178,6 +156,56 @@ struct SettingsView: View {
             }
             .glassListRow()
         }
+    }
+
+    /// A toggle and its time as one card: switching on slides the time picker out of
+    /// the toggle inside the same cell. The animation rides on the binding, so List
+    /// resizes the row in the same transaction instead of jumping after the content.
+    private func toggleWithTime(
+        isOn: Binding<Bool>,
+        time: Binding<Date>,
+        icon: String,
+        title: String,
+        detail: String?,
+        timeTitle: String,
+        id: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Toggle(isOn: isOn.animation(.spring(response: 0.38, dampingFraction: 0.88))) {
+                VStack(alignment: .leading, spacing: 2) {
+                    settingsRowLabel(icon, title)
+                    if let detail {
+                        Text(detail)
+                            .font(AppFonts.caption())
+                            .foregroundStyle(AppColors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.leading, 34)
+                    }
+                }
+            }
+            .tint(AppColors.primary)
+            .accessibilityIdentifier("\(id).toggle")
+
+            if isOn.wrappedValue {
+                VStack(spacing: 0) {
+                    Divider()
+                        .padding(.vertical, 12)
+                    DatePicker(selection: time, displayedComponents: .hourAndMinute) {
+                        Text(timeTitle)
+                            .foregroundStyle(AppColors.textPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .tint(AppColors.primary)
+                    .accessibilityIdentifier("\(id).time")
+                }
+                .transition(.opacity)
+            }
+        }
+        // Pinned to the top: while List animates the row's height, centring would make the
+        // toggle drift down and snap back.
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .clipped()
+        .glassListRow()
     }
 
     // MARK: - Support Section

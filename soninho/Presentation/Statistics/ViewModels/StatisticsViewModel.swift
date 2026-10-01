@@ -13,6 +13,8 @@ enum TimePeriod: String, CaseIterable, Identifiable {
     case week = "week"
     case month = "month"
     case year = "year"
+    /// Every tracked night, newest first, instead of charts for a time window.
+    case history = "history"
 
     var id: String { rawValue }
 
@@ -21,6 +23,7 @@ enum TimePeriod: String, CaseIterable, Identifiable {
         case .week: return String(localized: "period_week")
         case .month: return String(localized: "period_month")
         case .year: return String(localized: "period_year")
+        case .history: return String(localized: "stats_history")
         }
     }
 
@@ -29,6 +32,7 @@ enum TimePeriod: String, CaseIterable, Identifiable {
         case .week: return 7
         case .month: return 30
         case .year: return 365
+        case .history: return 36_500
         }
     }
 }

@@ -32,6 +32,8 @@ struct StatisticsView: View {
                                 .frame(height: 400)
                         } else if viewModel.records.isEmpty {
                             trackerEmptyState
+                        } else if viewModel.selectedPeriod == .history {
+                            nightsHistory
                         } else {
                             // Overview Card
                             overviewCard
@@ -47,9 +49,6 @@ struct StatisticsView: View {
 
                             // Sleep Schedule
                             scheduleSection
-
-                            // Sleep History
-                            historySection
                         }
                     }
                     .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -417,33 +416,56 @@ struct StatisticsView: View {
         .cardStyle()
     }
 
-    // MARK: - History Section
-    private var historySection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(String(localized: "stats_history"))
-                .font(AppFonts.headline())
-                .foregroundStyle(AppColors.textPrimary)
+    // MARK: - Nights History
+    /// Every tracked night, grouped by month, newest first. Each row opens the night's analysis.
+    private var nightsHistory: some View {
+        LazyVStack(alignment: .leading, spacing: 24) {
+            ForEach(nightsByMonth, id: \.month) { group in
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(Self.sentenceCase(group.month.formatted(.dateTime.month(.wide).year())))
+                        .font(AppFonts.headline())
+                        .foregroundStyle(AppColors.textPrimary)
+                        .accessibilityAddTraits(.isHeader)
 
-            GlassContainer(spacing: 12) {
-                LazyVStack(spacing: 12) {
-                    ForEach(viewModel.records) { record in
-                        NavigationLink {
-                            SleepDetailView(record: record)
-                        } label: {
-                            historyRow(record)
+                    GlassContainer(spacing: 12) {
+                        LazyVStack(spacing: 12) {
+                            ForEach(group.records) { record in
+                                NavigationLink {
+                                    SleepDetailView(record: record)
+                                } label: {
+                                    historyRow(record)
+                                }
+                                .buttonStyle(.plain)
+                                .glassSurface(cornerRadius: 12, interactive: true)
+                                .accessibilityIdentifier("stats.history.night")
+                            }
                         }
-                        .buttonStyle(.plain)
-                        .glassSurface(cornerRadius: 12, interactive: true)
                     }
                 }
             }
         }
     }
 
+    /// "setembro de 2026" -> "Setembro de 2026": only the first letter, so "de" stays lowercase.
+    private static func sentenceCase(_ text: String) -> String {
+        text.prefix(1).uppercased() + text.dropFirst()
+    }
+
+    private var nightsByMonth: [(month: Date, records: [SleepRecord])] {
+        let calendar = Calendar.current
+        let groups = Dictionary(grouping: viewModel.records) { record in
+            calendar.dateInterval(of: .month, for: record.startTime)?.start ?? record.startTime
+        }
+        return groups
+            .map { (month: $0.key, records: $0.value.sorted { $0.startTime > $1.startTime }) }
+            .sorted { $0.month > $1.month }
+    }
+
     private func historyRow(_ record: SleepRecord) -> some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(record.startTime.mediumDateString)
+                // The month is already the section title: the row names the day.
+                Text(Self.sentenceCase(record.startTime.formatted(.dateTime.weekday(.wide).day())))
                     .font(AppFonts.body())
                     .foregroundStyle(AppColors.textPrimary)
 
