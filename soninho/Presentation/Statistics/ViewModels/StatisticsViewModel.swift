@@ -44,7 +44,7 @@ final class StatisticsViewModel: ObservableObject {
     private let storageService: StorageService
 
     // MARK: - Published Properties
-    @Published var selectedPeriod: TimePeriod = .week
+    @Published var selectedPeriod: TimePeriod = .history
     @Published var records: [SleepRecord] = []
     @Published var statistics: SleepStatistics?
     @Published var isLoading = false
