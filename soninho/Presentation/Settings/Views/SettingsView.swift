@@ -158,9 +158,8 @@ struct SettingsView: View {
         }
     }
 
-    /// A toggle and its time as one card: switching on slides the time picker out of
-    /// the toggle inside the same cell. The animation rides on the binding, so List
-    /// resizes the row in the same transaction instead of jumping after the content.
+    /// A toggle and its time as one card. Switching on opens the card at once and fades the
+    /// time in; animating List's row height made the content drift and snap back.
     private func toggleWithTime(
         isOn: Binding<Bool>,
         time: Binding<Date>,
@@ -170,41 +169,18 @@ struct SettingsView: View {
         timeTitle: String,
         id: String
     ) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Toggle(isOn: isOn.animation(.spring(response: 0.38, dampingFraction: 0.88))) {
-                VStack(alignment: .leading, spacing: 2) {
-                    settingsRowLabel(icon, title)
-                    if let detail {
-                        Text(detail)
-                            .font(AppFonts.caption())
-                            .foregroundStyle(AppColors.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.leading, 34)
-                    }
+        ToggleTimeCard(isOn: isOn, time: time, id: id, timeTitle: timeTitle) {
+            VStack(alignment: .leading, spacing: 2) {
+                settingsRowLabel(icon, title)
+                if let detail {
+                    Text(detail)
+                        .font(AppFonts.caption())
+                        .foregroundStyle(AppColors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.leading, 34)
                 }
-            }
-            .tint(AppColors.primary)
-            .accessibilityIdentifier("\(id).toggle")
-
-            if isOn.wrappedValue {
-                VStack(spacing: 0) {
-                    Divider()
-                        .padding(.vertical, 12)
-                    DatePicker(selection: time, displayedComponents: .hourAndMinute) {
-                        Text(timeTitle)
-                            .foregroundStyle(AppColors.textPrimary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .tint(AppColors.primary)
-                    .accessibilityIdentifier("\(id).time")
-                }
-                .transition(.opacity)
             }
         }
-        // Pinned to the top: while List animates the row's height, centring would make the
-        // toggle drift down and snap back.
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .clipped()
         .glassListRow()
     }
 
@@ -267,6 +243,62 @@ private struct SettingsRowLabelStyle: LabelStyle {
                 .font(.system(size: 14))
                 .frame(width: 22, alignment: .center)
             configuration.title
+        }
+    }
+}
+
+// MARK: - Toggle Time Card
+/// Toggle + time picker in one cell. The row resizes without animation and only the
+/// picker fades, so nothing in the cell moves while List settles the new height.
+private struct ToggleTimeCard<Label: View>: View {
+    // MARK: - Properties
+    @Binding var isOn: Bool
+    @Binding var time: Date
+    let id: String
+    let timeTitle: String
+    @ViewBuilder let label: () -> Label
+
+    // MARK: - State
+    @State private var showsTime = false
+    @State private var timeOpacity: Double = 0
+
+    // MARK: - View Body
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Toggle(isOn: $isOn) { label() }
+                .tint(AppColors.primary)
+                .accessibilityIdentifier("\(id).toggle")
+
+            if showsTime {
+                VStack(spacing: 0) {
+                    Divider()
+                        .padding(.vertical, 12)
+                    DatePicker(selection: $time, displayedComponents: .hourAndMinute) {
+                        Text(timeTitle)
+                            .foregroundStyle(AppColors.textPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .tint(AppColors.primary)
+                    .accessibilityIdentifier("\(id).time")
+                }
+                .opacity(timeOpacity)
+            }
+        }
+        .onAppear {
+            showsTime = isOn
+            timeOpacity = isOn ? 1 : 0
+        }
+        .onChange(of: isOn) { _, on in
+            if on {
+                showsTime = true
+                timeOpacity = 0
+                withAnimation(.easeOut(duration: 0.25).delay(0.05)) { timeOpacity = 1 }
+            } else {
+                withAnimation(.easeIn(duration: 0.12)) { timeOpacity = 0 }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.12) {
+                    if !isOn { showsTime = false }
+                }
+            }
         }
     }
 }
