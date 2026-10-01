@@ -10,11 +10,11 @@ import Combine
 
 // MARK: - Time Period
 enum TimePeriod: String, CaseIterable, Identifiable {
+    /// Every tracked night, newest first, instead of charts for a time window.
+    case history = "history"
     case week = "week"
     case month = "month"
     case year = "year"
-    /// Every tracked night, newest first, instead of charts for a time window.
-    case history = "history"
 
     var id: String { rawValue }
 
