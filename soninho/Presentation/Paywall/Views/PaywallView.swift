@@ -49,7 +49,7 @@ struct PaywallView: View {
     @Environment(\.openURL) private var openURL
 
     // MARK: - State
-    @State private var selectedPlan: Plan = .yearly
+    @State private var selectedPlan: Plan = .weekly
     @State private var showClose = false
     @State private var showHeader = false
     @State private var showBenefits = false
